@@ -3,7 +3,7 @@ title: "Modern LLM Architectures"
 tags: [moe, mixture-of-experts, gqa, rope, flash-attention, architecture, genai]
 type: concept
 difficulty: advanced
-status: learning
+status: published
 parent: "[[../genai]]"
 related: ["[[transformers]]", "[[attention-mechanism]]", "[[../llms/llms-overview]]", "[[../inference/inference-optimization]]"]
 source: "Multiple papers — see Sources"
@@ -47,14 +47,14 @@ Covers: MoE, GQA, RoPE, Flash Attention, normalization choices, and how they com
 
 ### What Changed from the Original Transformer
 
-| Component | Original (2017) | Modern (2025) | Why |
-|-----------|-----------------|---------------|-----|
-| **Experts** | Dense (all params active) | **MoE** (sparse, subset active) | More capacity, less compute |
-| **Attention heads** | Multi-Head (MHA) | **GQA** (grouped-query) | Less memory for KV cache |
-| **Position encoding** | Sinusoidal (absolute) | **RoPE** (rotary) | Better at long sequences |
-| **Attention algorithm** | Standard O(n²) | **Flash Attention** | 2-4x faster, less memory |
-| **Normalization** | Post-LayerNorm | **Pre-RMSNorm** | Stable training |
-| **Activation** | ReLU | **SiLU/SwiGLU** | Smoother, better performance |
+| Component               | Original (2017)           | Modern (2025)                   | Why                          |
+| ----------------------- | ------------------------- | ------------------------------- | ---------------------------- |
+| **Experts**             | Dense (all params active) | **MoE** (sparse, subset active) | More capacity, less compute  |
+| **Attention heads**     | Multi-Head (MHA)          | **GQA** (grouped-query)         | Less memory for KV cache     |
+| **Position encoding**   | Sinusoidal (absolute)     | **RoPE** (rotary)               | Better at long sequences     |
+| **Attention algorithm** | Standard O(n²)            | **Flash Attention**             | 2-4x faster, less memory     |
+| **Normalization**       | Post-LayerNorm            | **Pre-RMSNorm**                 | Stable training              |
+| **Activation**          | ReLU                      | **SiLU/SwiGLU**                 | Smoother, better performance |
 
 ### 1. Mixture of Experts (MoE)
 
@@ -98,13 +98,13 @@ RESULT:
   Best of both worlds: capacity of 600B, cost of ~37B
 ```
 
-| Model | Total Params | Active Params | Experts | Top-K |
-|-------|-------------|---------------|---------|-------|
-| **Mixtral 8x7B** | 47B | 13B | 8 | 2 |
-| **LLaMA 4 Scout** | 109B | 17B | 16 | 1 |
-| **LLaMA 4 Maverick** | 400B | 17B | 128 | 1 |
-| **DeepSeek-V3** | 671B | 37B | 256 | 8 |
-| **GPT-5** (estimated) | ~1T+ | ~200-300B | MoE | Unknown |
+| Model                 | Total Params | Active Params | Experts | Top-K   |
+| --------------------- | ------------ | ------------- | ------- | ------- |
+| **Mixtral 8x7B**      | 47B          | 13B           | 8       | 2       |
+| **LLaMA 4 Scout**     | 109B         | 17B           | 16      | 1       |
+| **LLaMA 4 Maverick**  | 400B         | 17B           | 128     | 1       |
+| **DeepSeek-V3**       | 671B         | 37B           | 256     | 8       |
+| **GPT-5** (estimated) | ~1T+         | ~200-300B     | MoE     | Unknown |
 
 ### 2. Grouped-Query Attention (GQA)
 
@@ -292,12 +292,12 @@ WHICH MODELS USE WHAT:
 
 ## ★ Connections
 
-| Relationship | Topics |
-|-------------|--------|
-| Builds on | [[transformers]], [[attention-mechanism]], [[../prerequisites/linear-algebra-for-ai]] |
-| Leads to | [[../llms/llms-overview]], [[../inference/inference-optimization]] |
-| Compare with | Original Transformer (2017), RNNs (sequential) |
-| Cross-domain | Computer architecture (memory hierarchy), Sparse computation |
+| Relationship | Topics                                                                                |
+| ------------ | ------------------------------------------------------------------------------------- |
+| Builds on    | [[transformers]], [[attention-mechanism]], [[../prerequisites/linear-algebra-for-ai]] |
+| Leads to     | [[../llms/llms-overview]], [[../inference/inference-optimization]]                    |
+| Compare with | Original Transformer (2017), RNNs (sequential)                                        |
+| Cross-domain | Computer architecture (memory hierarchy), Sparse computation                          |
 
 ---
 

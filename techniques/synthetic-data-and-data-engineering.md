@@ -3,7 +3,7 @@ title: "Synthetic Data & Data Engineering for LLMs"
 tags: [synthetic-data, data-engineering, self-instruct, data-curation, training-data, genai]
 type: concept
 difficulty: intermediate
-status: learning
+status: published
 parent: "[[../genai]]"
 related: ["[[fine-tuning]]", "[[distillation-and-compression]]", "[[../llms/llms-overview]]"]
 source: "Multiple — see Sources"
@@ -64,15 +64,15 @@ EVIDENCE:
 
 ### Synthetic Data Generation Methods
 
-| Method | How It Works | Example |
-|--------|-------------|---------|
-| **Self-Instruct** | Model generates instructions + answers from seeds | Stanford Alpaca |
-| **Evol-Instruct** | Iteratively make instructions more complex | WizardLM |
-| **Distillation** | Larger model generates high-quality outputs | Phi-3, Orca-2 |
-| **Persona-based** | Assign personas for diverse responses | Persona Hub |
-| **Back-translation** | Generate code → describe it, or vice versa | Code training |
-| **Rejection sampling** | Generate many, keep only the best | DeepSeek-Math |
-| **Constitutional AI** | Model critiques and revises its own outputs | Anthropic's Claude |
+| Method                 | How It Works                                      | Example            |
+| ---------------------- | ------------------------------------------------- | ------------------ |
+| **Self-Instruct**      | Model generates instructions + answers from seeds | Stanford Alpaca    |
+| **Evol-Instruct**      | Iteratively make instructions more complex        | WizardLM           |
+| **Distillation**       | Larger model generates high-quality outputs       | Phi-3, Orca-2      |
+| **Persona-based**      | Assign personas for diverse responses             | Persona Hub        |
+| **Back-translation**   | Generate code → describe it, or vice versa        | Code training      |
+| **Rejection sampling** | Generate many, keep only the best                 | DeepSeek-Math      |
+| **Constitutional AI**  | Model critiques and revises its own outputs       | Anthropic's Claude |
 
 ```
 SELF-INSTRUCT PIPELINE:
@@ -259,12 +259,12 @@ QUALITY > QUANTITY:
 
 ## ★ Connections
 
-| Relationship | Topics |
-|-------------|--------|
-| Builds on | [[fine-tuning]], [[../foundations/tokenization]] |
-| Leads to | [[distillation-and-compression]], Better models |
-| Compare with | Traditional ML data pipelines, Human annotation |
-| Cross-domain | Data engineering, ETL pipelines, Data quality |
+| Relationship | Topics                                           |
+| ------------ | ------------------------------------------------ |
+| Builds on    | [[fine-tuning]], [[../foundations/tokenization]] |
+| Leads to     | [[distillation-and-compression]], Better models  |
+| Compare with | Traditional ML data pipelines, Human annotation  |
+| Cross-domain | Data engineering, ETL pipelines, Data quality    |
 
 ---
 

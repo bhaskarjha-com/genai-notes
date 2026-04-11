@@ -3,7 +3,7 @@ title: "Ethics, Safety & Alignment"
 tags: [ethics, safety, alignment, rlhf, hallucination, bias, responsible-ai, genai]
 type: concept
 difficulty: intermediate
-status: learning
+status: published
 parent: "[[../genai]]"
 related: ["[[../llms/llms-overview]]", "[[../evaluation/evaluation-and-benchmarks]]"]
 source: "Multiple - see Sources"
@@ -186,24 +186,24 @@ TOOLS:
 
 ### Regulatory Landscape (2026)
 
-| Regulation | Region | Key Requirements |
-|-----------|--------|-----------------|
-| **EU AI Act** | EU | Risk classification, transparency, conformity assessment |
-| **Executive Order 14110** | US | Safety testing for powerful models, reporting requirements |
-| **China AI Regulations** | China | Algorithm registration, content labeling |
-| **UK AI Safety Institute** | UK | Pre-release safety testing for frontier models |
+| Regulation                 | Region | Key Requirements                                           |
+| -------------------------- | ------ | ---------------------------------------------------------- |
+| **EU AI Act**              | EU     | Risk classification, transparency, conformity assessment   |
+| **Executive Order 14110**  | US     | Safety testing for powerful models, reporting requirements |
+| **China AI Regulations**   | China  | Algorithm registration, content labeling                   |
+| **UK AI Safety Institute** | UK     | Pre-release safety testing for frontier models             |
 
 ---
 
 ## ◆ Comparison
 
-| Technique | What It Does | Pros | Cons |
-|-----------|-------------|------|------|
-| **RLHF** | Train on human preference rankings | Captures nuanced preferences | Complex, expensive, reward hacking |
-| **DPO** | Direct optimization on preference pairs | Simpler than RLHF, no reward model | Less flexible |
-| **Constitutional AI** | Model self-critiques using principles | Scalable, less human labeling | Principles must be well-defined |
-| **GRPO** | Group-relative policy optimization | Best for reasoning models | Newer, less battle-tested |
-| **Red Teaming** | Adversarial testing | Catches real vulnerabilities | Labor-intensive, never complete |
+| Technique             | What It Does                            | Pros                               | Cons                               |
+| --------------------- | --------------------------------------- | ---------------------------------- | ---------------------------------- |
+| **RLHF**              | Train on human preference rankings      | Captures nuanced preferences       | Complex, expensive, reward hacking |
+| **DPO**               | Direct optimization on preference pairs | Simpler than RLHF, no reward model | Less flexible                      |
+| **Constitutional AI** | Model self-critiques using principles   | Scalable, less human labeling      | Principles must be well-defined    |
+| **GRPO**              | Group-relative policy optimization      | Best for reasoning models          | Newer, less battle-tested          |
+| **Red Teaming**       | Adversarial testing                     | Catches real vulnerabilities       | Labor-intensive, never complete    |
 
 ---
 
@@ -254,12 +254,12 @@ PRODUCTION SAFETY CHECKLIST:
 
 ## ★ Connections
 
-| Relationship | Topics |
-|-------------|--------|
-| Builds on | [[../llms/llms-overview]], [[../techniques/fine-tuning]] |
-| Leads to | Responsible AI policies, AI governance, Regulatory compliance |
-| Compare with | Traditional software testing, Security engineering |
-| Cross-domain | Philosophy (ethics), Law (regulation), Psychology (bias) |
+| Relationship | Topics                                                        |
+| ------------ | ------------------------------------------------------------- |
+| Builds on    | [[../llms/llms-overview]], [[../techniques/fine-tuning]]      |
+| Leads to     | Responsible AI policies, AI governance, Regulatory compliance |
+| Compare with | Traditional software testing, Security engineering            |
+| Cross-domain | Philosophy (ethics), Law (regulation), Psychology (bias)      |
 
 ---
 

@@ -3,7 +3,7 @@ title: "Linear Algebra for AI"
 tags: [linear-algebra, vectors, matrices, dot-product, tensors, genai-prerequisite]
 type: concept
 difficulty: beginner
-status: learning
+status: published
 parent: "[[../genai]]"
 related: ["[[neural-networks]]", "[[../foundations/embeddings]]", "[[../foundations/attention-mechanism]]"]
 source: "3Blue1Brown, Khan Academy, Deep Learning Book"
@@ -275,12 +275,12 @@ PYTORCH CHEAT SHEET:
 
 ## ★ Connections
 
-| Relationship | Topics |
-|-------------|--------|
-| Builds on | High school math |
-| Leads to | [[neural-networks]], [[../foundations/transformers]], [[../foundations/attention-mechanism]], [[../foundations/embeddings]] |
-| Compare with | Calculus (for backprop), Statistics (for distributions) |
-| Cross-domain | Physics (vector spaces), Computer graphics (transformations) |
+| Relationship | Topics                                                                                                                      |
+| ------------ | --------------------------------------------------------------------------------------------------------------------------- |
+| Builds on    | High school math                                                                                                            |
+| Leads to     | [[neural-networks]], [[../foundations/transformers]], [[../foundations/attention-mechanism]], [[../foundations/embeddings]] |
+| Compare with | Calculus (for backprop), Statistics (for distributions)                                                                     |
+| Cross-domain | Physics (vector spaces), Computer graphics (transformations)                                                                |
 
 ---
 

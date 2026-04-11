@@ -3,7 +3,7 @@ title: "Python for AI"
 tags: [python, numpy, pytorch, huggingface, environment, genai-prerequisite]
 type: procedure
 difficulty: beginner
-status: learning
+status: published
 parent: "[[../genai]]"
 related: ["[[neural-networks]]", "[[linear-algebra-for-ai]]", "[[deep-learning-fundamentals]]"]
 source: "PyTorch docs, NumPy docs, HuggingFace docs"
@@ -225,12 +225,12 @@ GPU QUICK CHECK:
 
 ## ★ Connections
 
-| Relationship | Topics |
-|-------------|--------|
-| Builds on | Python basics, [[linear-algebra-for-ai]] |
-| Leads to | [[neural-networks]], [[deep-learning-fundamentals]], all GenAI topics |
-| Compare with | JavaScript (emerging for AI), Rust (for performance-critical tools) |
-| Cross-domain | Software engineering, DevOps (deployment), Data engineering |
+| Relationship | Topics                                                                |
+| ------------ | --------------------------------------------------------------------- |
+| Builds on    | Python basics, [[linear-algebra-for-ai]]                              |
+| Leads to     | [[neural-networks]], [[deep-learning-fundamentals]], all GenAI topics |
+| Compare with | JavaScript (emerging for AI), Rust (for performance-critical tools)   |
+| Cross-domain | Software engineering, DevOps (deployment), Data engineering           |
 
 ---
 

@@ -3,7 +3,7 @@ title: "Mechanistic Interpretability"
 tags: [interpretability, mech-interp, superposition, sparse-autoencoders, circuits, genai]
 type: concept
 difficulty: expert
-status: learning
+status: published
 parent: "[[../genai]]"
 related: ["[[../ethics-and-safety/ethics-safety-alignment]]", "[[../foundations/transformers]]", "[[../llms/llms-overview]]"]
 source: "Anthropic, OpenAI — see Sources"
@@ -138,24 +138,24 @@ HOW TO EXTRACT FEATURES FROM SUPERPOSITION:
 
 ### Research Techniques
 
-| Technique | What It Does | How |
-|-----------|-------------|-----|
-| **Activation patching** | Test if a component is necessary for a behavior | Replace its output, see if behavior changes |
-| **Probing** | Check if information exists in a layer | Train a linear classifier on activations |
-| **Ablation** | Remove a component and measure impact | Zero out neurons/heads, check output |
-| **Logit lens** | See what each layer "thinks" the next token is | Project hidden states directly to vocabulary |
-| **Sparse autoencoders** | Extract interpretable features | Overcomplete autoencoder with sparsity |
-| **Causal tracing** | Find where a fact is stored | Corrupt inputs, restore at each layer |
+| Technique               | What It Does                                    | How                                          |
+| ----------------------- | ----------------------------------------------- | -------------------------------------------- |
+| **Activation patching** | Test if a component is necessary for a behavior | Replace its output, see if behavior changes  |
+| **Probing**             | Check if information exists in a layer          | Train a linear classifier on activations     |
+| **Ablation**            | Remove a component and measure impact           | Zero out neurons/heads, check output         |
+| **Logit lens**          | See what each layer "thinks" the next token is  | Project hidden states directly to vocabulary |
+| **Sparse autoencoders** | Extract interpretable features                  | Overcomplete autoencoder with sparsity       |
+| **Causal tracing**      | Find where a fact is stored                     | Corrupt inputs, restore at each layer        |
 
 ### Notable Discoveries
 
-| Discovery | Who | What |
-|-----------|-----|------|
-| **Induction heads** | Anthropic (2022) | Attention heads that implement in-context learning ("A B ... A → B") |
-| **Golden Gate Claude** | Anthropic (2024) | Amplifying the "Golden Gate Bridge" feature made Claude obsessed with it |
-| **10M features** | Anthropic (2024) | Extracted 10M interpretable features from Claude 3 Sonnet via SAEs |
-| **ROME** | Meng et al. (2022) | Located and edited specific facts in GPT models |
-| **Deception features** | Anthropic (2024) | Found features that activate when model is being "deceptive" |
+| Discovery              | Who                | What                                                                     |
+| ---------------------- | ------------------ | ------------------------------------------------------------------------ |
+| **Induction heads**    | Anthropic (2022)   | Attention heads that implement in-context learning ("A B ... A → B")     |
+| **Golden Gate Claude** | Anthropic (2024)   | Amplifying the "Golden Gate Bridge" feature made Claude obsessed with it |
+| **10M features**       | Anthropic (2024)   | Extracted 10M interpretable features from Claude 3 Sonnet via SAEs       |
+| **ROME**               | Meng et al. (2022) | Located and edited specific facts in GPT models                          |
+| **Deception features** | Anthropic (2024)   | Found features that activate when model is being "deceptive"             |
 
 ---
 
@@ -199,12 +199,12 @@ RESEARCH GROUPS:
 
 ## ★ Connections
 
-| Relationship | Topics |
-|-------------|--------|
-| Builds on | [[../foundations/transformers]], [[../prerequisites/neural-networks]], [[../prerequisites/linear-algebra-for-ai]] |
-| Leads to | AI safety, [[../ethics-and-safety/ethics-safety-alignment]], Trustworthy AI |
-| Compare with | Behavioral evaluation (external), Explainable AI (XAI, surface-level) |
-| Cross-domain | Neuroscience, Reverse engineering, Complex systems |
+| Relationship | Topics                                                                                                            |
+| ------------ | ----------------------------------------------------------------------------------------------------------------- |
+| Builds on    | [[../foundations/transformers]], [[../prerequisites/neural-networks]], [[../prerequisites/linear-algebra-for-ai]] |
+| Leads to     | AI safety, [[../ethics-and-safety/ethics-safety-alignment]], Trustworthy AI                                       |
+| Compare with | Behavioral evaluation (external), Explainable AI (XAI, surface-level)                                             |
+| Cross-domain | Neuroscience, Reverse engineering, Complex systems                                                                |
 
 ---
 

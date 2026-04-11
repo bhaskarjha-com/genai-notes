@@ -3,7 +3,7 @@ title: "Context Engineering & Long Context"
 tags: [context-window, long-context, context-caching, prompt-caching, rag-vs-context, genai]
 type: concept
 difficulty: intermediate
-status: learning
+status: published
 parent: "[[../genai]]"
 related: ["[[rag]]", "[[prompt-engineering]]", "[[../llms/llms-overview]]", "[[../inference/inference-optimization]]"]
 source: "Multiple — see Sources"
@@ -243,12 +243,12 @@ COST COMPARISON (per 1M input tokens, approximate):
 
 ## ★ Connections
 
-| Relationship | Topics |
-|-------------|--------|
-| Builds on | [[rag]], [[prompt-engineering]], [[../foundations/tokenization]] |
-| Leads to | [[../production/llmops]] (cost management), Better AI applications |
-| Compare with | Traditional search, Knowledge bases |
-| Cross-domain | Information retrieval, Memory management, Caching systems |
+| Relationship | Topics                                                             |
+| ------------ | ------------------------------------------------------------------ |
+| Builds on    | [[rag]], [[prompt-engineering]], [[../foundations/tokenization]]   |
+| Leads to     | [[../production/llmops]] (cost management), Better AI applications |
+| Compare with | Traditional search, Knowledge bases                                |
+| Cross-domain | Information retrieval, Memory management, Caching systems          |
 
 ---
 

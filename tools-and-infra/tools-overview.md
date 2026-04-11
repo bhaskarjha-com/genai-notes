@@ -3,7 +3,7 @@ title: "GenAI Tools & Infrastructure"
 tags: [tools, infrastructure, langchain, llamaindex, vector-db, serving, genai]
 type: reference
 difficulty: intermediate
-status: learning
+status: published
 parent: "[[../genai]]"
 related: ["[[../techniques/rag]]", "[[../techniques/ai-agents]]", "[[../llms/llms-overview]]"]
 source: "Multiple - see Sources"
@@ -85,13 +85,13 @@ This is the overview/index document. Deep dives on individual tools are in sub-d
 
 #### 1. Orchestration Frameworks
 
-| Framework | Language | Strengths | Best For |
-|-----------|----------|-----------|----------|
-| **LangChain** | Python/JS | Largest ecosystem, most integrations | General purpose, RAG, chains |
-| **LlamaIndex** | Python | Best for data/RAG, structured indexing | Data-heavy apps, enterprise search |
-| **LangGraph** | Python | Stateful agent graphs (by LangChain) | Complex agents, workflows |
-| **Semantic Kernel** | C#/Python | Microsoft ecosystem, enterprise | .NET shops, Azure-first |
-| **Haystack** | Python | Clean API, production-focused | Search/RAG pipelines |
+| Framework           | Language  | Strengths                              | Best For                           |
+| ------------------- | --------- | -------------------------------------- | ---------------------------------- |
+| **LangChain**       | Python/JS | Largest ecosystem, most integrations   | General purpose, RAG, chains       |
+| **LlamaIndex**      | Python    | Best for data/RAG, structured indexing | Data-heavy apps, enterprise search |
+| **LangGraph**       | Python    | Stateful agent graphs (by LangChain)   | Complex agents, workflows          |
+| **Semantic Kernel** | C#/Python | Microsoft ecosystem, enterprise        | .NET shops, Azure-first            |
+| **Haystack**        | Python    | Clean API, production-focused          | Search/RAG pipelines               |
 
 **When to use what:**
 ```
@@ -104,14 +104,14 @@ This is the overview/index document. Deep dives on individual tools are in sub-d
 
 #### 2. Model Serving & Inference
 
-| Engine | Use Case | Key Feature |
-|--------|----------|-------------|
-| **vLLM** | Self-host LLMs | PagedAttention, fastest open-source inference |
-| **Ollama** | Local development | Run LLMs locally with one command |
-| **TGI** (HuggingFace) | Production serving | Docker-ready, HF integration |
-| **TensorRT-LLM** | NVIDIA GPUs | Best NVIDIA optimization |
-| **llama.cpp** | CPU / Edge | Run quantized models on CPU |
-| **SGLang** | High throughput | RadixAttention, constrained decoding |
+| Engine                | Use Case           | Key Feature                                   |
+| --------------------- | ------------------ | --------------------------------------------- |
+| **vLLM**              | Self-host LLMs     | PagedAttention, fastest open-source inference |
+| **Ollama**            | Local development  | Run LLMs locally with one command             |
+| **TGI** (HuggingFace) | Production serving | Docker-ready, HF integration                  |
+| **TensorRT-LLM**      | NVIDIA GPUs        | Best NVIDIA optimization                      |
+| **llama.cpp**         | CPU / Edge         | Run quantized models on CPU                   |
+| **SGLang**            | High throughput    | RadixAttention, constrained decoding          |
 
 ```bash
 # Run LLaMA locally with Ollama (simplest start)
@@ -125,26 +125,26 @@ python -m vllm.entrypoints.openai.api_server \
 
 #### 3. Evaluation & Observability
 
-| Tool | Purpose | Key Feature |
-|------|---------|-------------|
-| **LangSmith** | Tracing, eval, monitoring | LangChain native, best debugging |
-| **RAGAS** | RAG evaluation | Automated faithfulness/relevance metrics |
-| **DeepEval** | LLM testing | Unit tests for LLM outputs |
-| **Phoenix** (Arize) | Observability | Open-source tracing |
-| **Weights & Biases** | Experiment tracking | ML experiment management |
-| **Braintrust** | Eval + logging | Prompt playground + eval |
+| Tool                 | Purpose                   | Key Feature                              |
+| -------------------- | ------------------------- | ---------------------------------------- |
+| **LangSmith**        | Tracing, eval, monitoring | LangChain native, best debugging         |
+| **RAGAS**            | RAG evaluation            | Automated faithfulness/relevance metrics |
+| **DeepEval**         | LLM testing               | Unit tests for LLM outputs               |
+| **Phoenix** (Arize)  | Observability             | Open-source tracing                      |
+| **Weights & Biases** | Experiment tracking       | ML experiment management                 |
+| **Braintrust**       | Eval + logging            | Prompt playground + eval                 |
 
 #### 4. Platforms (Managed)
 
-| Platform | What It Provides |
-|----------|-----------------|
-| **Hugging Face** | Model hub, Spaces, Inference API, datasets |
-| **Replicate** | One-click model deployment |
-| **Together AI** | Fast API for open models |
-| **Fireworks AI** | Fastest open model serving |
-| **AWS Bedrock** | Managed access to multiple models |
-| **Google Vertex AI** | Gemini + model garden + fine-tuning |
-| **Azure AI Studio** | OpenAI models + enterprise features |
+| Platform             | What It Provides                           |
+| -------------------- | ------------------------------------------ |
+| **Hugging Face**     | Model hub, Spaces, Inference API, datasets |
+| **Replicate**        | One-click model deployment                 |
+| **Together AI**      | Fast API for open models                   |
+| **Fireworks AI**     | Fastest open model serving                 |
+| **AWS Bedrock**      | Managed access to multiple models          |
+| **Google Vertex AI** | Gemini + model garden + fine-tuning        |
+| **Azure AI Studio**  | OpenAI models + enterprise features        |
 
 ---
 
@@ -170,14 +170,14 @@ How to Serve LLMs
 
 ### Cost Decision Matrix
 
-| Scenario | Best Choice | Why |
-|----------|------------|-----|
-| Prototyping | API (OpenAI/Claude) | Fast start, no infra |
-| < 100K tokens/day | API | Cheaper than running a GPU |
-| 100K-1M tokens/day | Evaluate both | Crossover point |
-| > 1M tokens/day | Self-host (vLLM) | API costs explode |
-| Privacy-critical | Self-host | Data stays on your infra |
-| Latency-critical | Self-host + optimize | Control over serving |
+| Scenario           | Best Choice          | Why                        |
+| ------------------ | -------------------- | -------------------------- |
+| Prototyping        | API (OpenAI/Claude)  | Fast start, no infra       |
+| < 100K tokens/day  | API                  | Cheaper than running a GPU |
+| 100K-1M tokens/day | Evaluate both        | Crossover point            |
+| > 1M tokens/day    | Self-host (vLLM)     | API costs explode          |
+| Privacy-critical   | Self-host            | Data stays on your infra   |
+| Latency-critical   | Self-host + optimize | Control over serving       |
 
 ---
 
@@ -229,12 +229,12 @@ BUDGET STACK (learning / hobby):
 
 ## ★ Connections
 
-| Relationship | Topics |
-|-------------|--------|
-| Builds on | [[../llms/llms-overview]], [[../techniques/rag]] |
-| Leads to | Production GenAI systems, MLOps |
-| Compare with | Traditional ML infra (MLflow, Kubeflow) |
-| Cross-domain | DevOps, Cloud architecture, Systems design |
+| Relationship | Topics                                           |
+| ------------ | ------------------------------------------------ |
+| Builds on    | [[../llms/llms-overview]], [[../techniques/rag]] |
+| Leads to     | Production GenAI systems, MLOps                  |
+| Compare with | Traditional ML infra (MLflow, Kubeflow)          |
+| Cross-domain | DevOps, Cloud architecture, Systems design       |
 
 ---
 

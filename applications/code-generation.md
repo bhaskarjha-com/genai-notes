@@ -3,7 +3,7 @@ title: "Code Generation & AI-Assisted Development"
 tags: [code-generation, copilot, cursor, antigravity, gemini-cli, claude-code, windsurf, devin, coding-agents, genai]
 type: concept
 difficulty: intermediate
-status: learning
+status: published
 parent: "[[../genai]]"
 related: ["[[../techniques/ai-agents]]", "[[../techniques/agentic-protocols]]", "[[../llms/llms-overview]]"]
 source: "Multiple — see Sources"
@@ -209,15 +209,15 @@ BEST FOR: Delegating complete tasks/tickets
 
 ### Tool Comparison (March 2026)
 
-| Tool | Type | Multi-Agent | MCP | Terminal | Free? | Best For |
-|------|------|------------|-----|----------|-------|----------|
-| **Antigravity** | IDE | ✅ Manager View | ✅ | Via agent | ✅ (preview) | Agent-first development |
-| **Gemini CLI** | Terminal | ❌ | ✅ | ✅ Native | ✅ (free tier) | Terminal-native devs |
-| **Claude Code** | Terminal/IDE | ❌ | ✅ | ✅ Native | ❌ (API costs) | Large codebase refactoring |
-| **Cursor** | IDE | ❌ | ✅ | Via agent | Freemium | AI-enhanced VS Code |
-| **Copilot** | Extension/Platform | ✅ | ✅ | Via agent | Free student | GitHub ecosystem |
-| **Windsurf** | IDE | ❌ | ✅ | Via agent | Freemium | Budget-conscious devs |
-| **Devin** | Autonomous agent | ❌ | ❌ | ✅ Own env | ❌ | Full task delegation |
+| Tool            | Type               | Multi-Agent    | MCP | Terminal  | Free?         | Best For                   |
+| --------------- | ------------------ | -------------- | --- | --------- | ------------- | -------------------------- |
+| **Antigravity** | IDE                | ✅ Manager View | ✅   | Via agent | ✅ (preview)   | Agent-first development    |
+| **Gemini CLI**  | Terminal           | ❌              | ✅   | ✅ Native  | ✅ (free tier) | Terminal-native devs       |
+| **Claude Code** | Terminal/IDE       | ❌              | ✅   | ✅ Native  | ❌ (API costs) | Large codebase refactoring |
+| **Cursor**      | IDE                | ❌              | ✅   | Via agent | Freemium      | AI-enhanced VS Code        |
+| **Copilot**     | Extension/Platform | ✅              | ✅   | Via agent | Free student  | GitHub ecosystem           |
+| **Windsurf**    | IDE                | ❌              | ✅   | Via agent | Freemium      | Budget-conscious devs      |
+| **Devin**       | Autonomous agent   | ❌              | ❌   | ✅ Own env | ❌             | Full task delegation       |
 
 ### Coding Model Benchmarks
 
@@ -326,12 +326,12 @@ KEY TREND (2026):
 
 ## ★ Connections
 
-| Relationship | Topics |
-|-------------|--------|
-| Builds on | [[../llms/llms-overview]], [[../techniques/ai-agents]], [[../techniques/agentic-protocols]] |
-| Leads to | Autonomous software engineering, AI DevOps |
-| Compare with | Traditional IDEs (VS Code, JetBrains), Manual coding |
-| Cross-domain | Software engineering, DevOps, Testing |
+| Relationship | Topics                                                                                      |
+| ------------ | ------------------------------------------------------------------------------------------- |
+| Builds on    | [[../llms/llms-overview]], [[../techniques/ai-agents]], [[../techniques/agentic-protocols]] |
+| Leads to     | Autonomous software engineering, AI DevOps                                                  |
+| Compare with | Traditional IDEs (VS Code, JetBrains), Manual coding                                        |
+| Cross-domain | Software engineering, DevOps, Testing                                                       |
 
 ---
 

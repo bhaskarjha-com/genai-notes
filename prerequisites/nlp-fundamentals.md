@@ -3,7 +3,7 @@ title: "NLP Fundamentals"
 tags: [nlp, natural-language-processing, ner, sentiment, text-classification, bert, genai-prerequisite]
 type: concept
 difficulty: beginner
-status: learning
+status: published
 parent: "[[../genai]]"
 related: ["[[../foundations/transformers]]", "[[../foundations/embeddings]]", "[[../foundations/tokenization]]", "[[../llms/llms-overview]]"]
 source: "Multiple — see Sources"
@@ -41,16 +41,16 @@ Covers classical NLP tasks, the BERT vs GPT paradigm, and how LLMs changed every
 
 ### NLP Task Landscape
 
-| Task | What It Does | Classical Approach | Modern (LLM) Approach |
-|------|-------------|-------------------|----------------------|
-| **Text Classification** | Categorize text (spam/not spam) | TF-IDF + SVM/Naive Bayes | LLM zero-shot or fine-tuned |
-| **Sentiment Analysis** | Detect emotion (positive/negative) | Lexicon-based + ML classifiers | LLM prompt: "Is this positive?" |
-| **Named Entity Recognition** | Find names, places, dates | CRF / BiLSTM-CRF | LLM extraction + JSON output |
-| **Machine Translation** | English → French | Seq2seq + attention | LLM prompt or specialized model |
-| **Summarization** | Condense text | Extractive (select sentences) | LLM abstractive summarization |
-| **Question Answering** | Answer from context | BERT fine-tuned on SQuAD | LLM + RAG |
-| **Text Generation** | Write new text | RNNs, Markov chains | GPT, Claude, LLaMA |
-| **POS Tagging** | Label parts of speech | HMM, CRF | Mostly replaced by LLMs |
+| Task                         | What It Does                       | Classical Approach             | Modern (LLM) Approach           |
+| ---------------------------- | ---------------------------------- | ------------------------------ | ------------------------------- |
+| **Text Classification**      | Categorize text (spam/not spam)    | TF-IDF + SVM/Naive Bayes       | LLM zero-shot or fine-tuned     |
+| **Sentiment Analysis**       | Detect emotion (positive/negative) | Lexicon-based + ML classifiers | LLM prompt: "Is this positive?" |
+| **Named Entity Recognition** | Find names, places, dates          | CRF / BiLSTM-CRF               | LLM extraction + JSON output    |
+| **Machine Translation**      | English → French                   | Seq2seq + attention            | LLM prompt or specialized model |
+| **Summarization**            | Condense text                      | Extractive (select sentences)  | LLM abstractive summarization   |
+| **Question Answering**       | Answer from context                | BERT fine-tuned on SQuAD       | LLM + RAG                       |
+| **Text Generation**          | Write new text                     | RNNs, Markov chains            | GPT, Claude, LLaMA              |
+| **POS Tagging**              | Label parts of speech              | HMM, CRF                       | Mostly replaced by LLMs         |
 
 ### The Pre-Transformer Era (Know This for Interviews)
 
@@ -205,12 +205,12 @@ MOSTLY OBSOLETE:
 
 ## ★ Connections
 
-| Relationship | Topics |
-|-------------|--------|
-| Builds on | [[../prerequisites/neural-networks]], [[../prerequisites/python-for-ai]] |
-| Leads to | [[../foundations/transformers]], [[../foundations/embeddings]], [[../llms/llms-overview]] |
-| Compare with | Rule-based NLP (regex, grammars), Classical ML (SVM, CRF) |
-| Cross-domain | Linguistics, Information retrieval, Search engines |
+| Relationship | Topics                                                                                    |
+| ------------ | ----------------------------------------------------------------------------------------- |
+| Builds on    | [[../prerequisites/neural-networks]], [[../prerequisites/python-for-ai]]                  |
+| Leads to     | [[../foundations/transformers]], [[../foundations/embeddings]], [[../llms/llms-overview]] |
+| Compare with | Rule-based NLP (regex, grammars), Classical ML (SVM, CRF)                                 |
+| Cross-domain | Linguistics, Information retrieval, Search engines                                        |
 
 ---
 

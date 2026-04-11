@@ -3,7 +3,7 @@ title: "Agentic Protocols & Frameworks"
 tags: [mcp, a2a, adk, agent-protocols, langraph, crewai, autogen, agentic-infra, genai]
 type: concept
 difficulty: intermediate
-status: learning
+status: published
 parent: "[[../genai]]"
 related: ["[[ai-agents]]", "[[function-calling-and-structured-output]]", "[[../tools-and-infra/tools-overview]]"]
 source: "Multiple — see Sources"
@@ -225,14 +225,14 @@ AGENT HIERARCHY IN ADK:
 
 ### Framework Comparison (March 2026)
 
-| Framework | By | Best For | Multi-Agent | MCP | A2A | Graph Workflow |
-|-----------|-----|---------|-------------|-----|-----|---------------|
-| **ADK** | Google | Google ecosystem, full lifecycle | ✅ Hierarchical | ✅ | ✅ | ✅ (2.0) |
-| **LangGraph** | LangChain | Complex stateful agents | ✅ Graph-based | ✅ | ❌ | ✅ |
-| **CrewAI** | Community | Role-based agent teams | ✅ Role-based | ✅ | ❌ | ⚠️ Limited |
-| **AutoGen** | Microsoft | Research, conversational | ✅ Chat-based | ✅ | ❌ | ❌ |
-| **Semantic Kernel** | Microsoft | Enterprise .NET/Python | ⚠️ Basic | ✅ | ❌ | ❌ |
-| **Mastra** | Community | TypeScript-first | ✅ | ✅ | ❌ | ✅ |
+| Framework           | By        | Best For                         | Multi-Agent    | MCP | A2A | Graph Workflow |
+| ------------------- | --------- | -------------------------------- | -------------- | --- | --- | -------------- |
+| **ADK**             | Google    | Google ecosystem, full lifecycle | ✅ Hierarchical | ✅   | ✅   | ✅ (2.0)        |
+| **LangGraph**       | LangChain | Complex stateful agents          | ✅ Graph-based  | ✅   | ❌   | ✅              |
+| **CrewAI**          | Community | Role-based agent teams           | ✅ Role-based   | ✅   | ❌   | ⚠️ Limited      |
+| **AutoGen**         | Microsoft | Research, conversational         | ✅ Chat-based   | ✅   | ❌   | ❌              |
+| **Semantic Kernel** | Microsoft | Enterprise .NET/Python           | ⚠️ Basic        | ✅   | ❌   | ❌              |
+| **Mastra**          | Community | TypeScript-first                 | ✅              | ✅   | ❌   | ✅              |
 
 ---
 
@@ -316,12 +316,12 @@ MCP PRIMITIVES:
 
 ## ★ Connections
 
-| Relationship | Topics |
-|-------------|--------|
-| Builds on | [[function-calling-and-structured-output]], [[ai-agents]] |
-| Leads to | Production multi-agent systems, Enterprise AI |
-| Compare with | REST APIs (static), GraphQL (query), gRPC (binary) |
-| Cross-domain | Microservices architecture, API gateways, Service mesh |
+| Relationship | Topics                                                    |
+| ------------ | --------------------------------------------------------- |
+| Builds on    | [[function-calling-and-structured-output]], [[ai-agents]] |
+| Leads to     | Production multi-agent systems, Enterprise AI             |
+| Compare with | REST APIs (static), GraphQL (query), gRPC (binary)        |
+| Cross-domain | Microservices architecture, API gateways, Service mesh    |
 
 ---
 

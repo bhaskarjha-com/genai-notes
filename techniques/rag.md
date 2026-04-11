@@ -3,7 +3,7 @@ title: "Retrieval-Augmented Generation (RAG)"
 tags: [rag, retrieval, embeddings, vector-db, genai-techniques]
 type: concept
 difficulty: intermediate
-status: learning
+status: published
 parent: "[[../genai]]"
 related: ["[[fine-tuning]]", "[[../llms/llms-overview]]", "[[ai-agents]]"]
 source: "Lewis et al., 2020 + latest hybrid RAG techniques"
@@ -115,36 +115,36 @@ Sentence-level      | 1-3 sents  | N/A     | Q&A, precise retrieval
 
 Convert text chunks and queries into high-dimensional vectors for similarity search.
 
-| Model | Dimensions | Strengths |
-|-------|-----------|-----------|
-| OpenAI `text-embedding-3-large` | 3072 | Best quality, API, Matryoshka dims |
-| **Gemini Embedding 2** | Flexible | Multimodal! (text+image+video+audio) |
-| Cohere `embed-v4` | 1024 | Best multilingual (100+ languages) |
-| Voyage AI `voyage-3-large` | — | Best for code & technical docs |
-| `bge-m3` (BAAI) | 1024 | Best open-source, hybrid retrieval |
-| `nomic-embed-v2` | 768 | Best for local/edge deployment |
+| Model                           | Dimensions | Strengths                            |
+| ------------------------------- | ---------- | ------------------------------------ |
+| OpenAI `text-embedding-3-large` | 3072       | Best quality, API, Matryoshka dims   |
+| **Gemini Embedding 2**          | Flexible   | Multimodal! (text+image+video+audio) |
+| Cohere `embed-v4`               | 1024       | Best multilingual (100+ languages)   |
+| Voyage AI `voyage-3-large`      | —          | Best for code & technical docs       |
+| `bge-m3` (BAAI)                 | 1024       | Best open-source, hybrid retrieval   |
+| `nomic-embed-v2`                | 768        | Best for local/edge deployment       |
 
 #### 4. Vector Database
 
-| Database | Type | Key Feature |
-|----------|------|-------------|
-| **Pinecone** | Managed | Serverless, easiest to start |
-| **Weaviate** | Self-host/Managed | Hybrid search (vector + keyword) |
-| **Qdrant** | Self-host/Managed | Best Rust performance |
-| **Chroma** | Embedded | Simplest for prototyping |
-| **pgvector** | Postgres extension | Use existing Postgres |
-| **FAISS** | Library (Meta) | Fast local search, no server |
+| Database     | Type               | Key Feature                      |
+| ------------ | ------------------ | -------------------------------- |
+| **Pinecone** | Managed            | Serverless, easiest to start     |
+| **Weaviate** | Self-host/Managed  | Hybrid search (vector + keyword) |
+| **Qdrant**   | Self-host/Managed  | Best Rust performance            |
+| **Chroma**   | Embedded           | Simplest for prototyping         |
+| **pgvector** | Postgres extension | Use existing Postgres            |
+| **FAISS**    | Library (Meta)     | Fast local search, no server     |
 
 #### 5. Retrieval Strategies
 
-| Strategy | How | When |
-|----------|-----|------|
-| **Semantic search** | Cosine similarity on embeddings | Default |
-| **Keyword (BM25)** | Traditional text matching | Technical terms, names |
-| **Hybrid** | Combine semantic + keyword | Best overall performance |
-| **Re-ranking** | Retrieve broadly, then re-rank with cross-encoder | Quality-critical apps |
-| **HyDE** | Generate hypothetical answer, search with that | Vague queries |
-| **Multi-query** | Generate multiple query variants, merge results | Complex questions |
+| Strategy            | How                                               | When                     |
+| ------------------- | ------------------------------------------------- | ------------------------ |
+| **Semantic search** | Cosine similarity on embeddings                   | Default                  |
+| **Keyword (BM25)**  | Traditional text matching                         | Technical terms, names   |
+| **Hybrid**          | Combine semantic + keyword                        | Best overall performance |
+| **Re-ranking**      | Retrieve broadly, then re-rank with cross-encoder | Quality-critical apps    |
+| **HyDE**            | Generate hypothetical answer, search with that    | Vague queries            |
+| **Multi-query**     | Generate multiple query variants, merge results   | Complex questions        |
 
 ### Advanced RAG Patterns (2025-2026)
 
@@ -164,13 +164,13 @@ Basic RAG
 
 ### RAG vs Fine-tuning vs Long Context
 
-| Aspect | RAG | Fine-tuning | Long Context |
-|--------|-----|-------------|-------------|
-| **When** | Need up-to-date/private data | Need changed behavior/style | All info fits in context |
-| **Cost** | Low (retrieval infra) | Medium (training compute) | High (per-token cost) |
-| **Latency** | +retrieval time | Same as base model | Increases with context |
-| **Knowledge** | Dynamic, updatable | Static (baked in) | Dynamic (in prompt) |
-| **Best for** | Enterprise docs, knowledge bases | Domain-specific models | Small document sets |
+| Aspect        | RAG                              | Fine-tuning                 | Long Context             |
+| ------------- | -------------------------------- | --------------------------- | ------------------------ |
+| **When**      | Need up-to-date/private data     | Need changed behavior/style | All info fits in context |
+| **Cost**      | Low (retrieval infra)            | Medium (training compute)   | High (per-token cost)    |
+| **Latency**   | +retrieval time                  | Same as base model          | Increases with context   |
+| **Knowledge** | Dynamic, updatable               | Static (baked in)           | Dynamic (in prompt)      |
+| **Best for**  | Enterprise docs, knowledge bases | Domain-specific models      | Small document sets      |
 
 **2025-2026 consensus**: Hybrid RAG + LoRA fine-tuning is the gold standard. RAG for facts, fine-tuning for behavior.
 
@@ -225,13 +225,13 @@ print(result["result"])
 
 ## ◆ Strengths vs Limitations
 
-| ✅ Strengths | ❌ Limitations |
-|-------------|---------------|
-| No model retraining needed | Retrieval quality bottleneck |
-| Always up-to-date (update docs, not model) | Chunking is hard to get right |
-| Cites sources (traceable) | Adds latency (retrieval step) |
-| Works with private/proprietary data | Context window limits how much retrieved context fits |
-| Cheaper than fine-tuning | Can't change model behavior, only provide info |
+| ✅ Strengths                                | ❌ Limitations                                         |
+| ------------------------------------------ | ----------------------------------------------------- |
+| No model retraining needed                 | Retrieval quality bottleneck                          |
+| Always up-to-date (update docs, not model) | Chunking is hard to get right                         |
+| Cites sources (traceable)                  | Adds latency (retrieval step)                         |
+| Works with private/proprietary data        | Context window limits how much retrieved context fits |
+| Cheaper than fine-tuning                   | Can't change model behavior, only provide info        |
 
 ---
 
@@ -321,12 +321,12 @@ EVALUATION TOOLS:
 
 ## ★ Connections
 
-| Relationship | Topics |
-|-------------|--------|
-| Builds on | [[../llms/llms-overview]], Embeddings, Vector Search |
-| Leads to | [[ai-agents]] (Agentic RAG), [[../tools-and-infra/vector-databases]] |
+| Relationship | Topics                                                                         |
+| ------------ | ------------------------------------------------------------------------------ |
+| Builds on    | [[../llms/llms-overview]], Embeddings, Vector Search                           |
+| Leads to     | [[ai-agents]] (Agentic RAG), [[../tools-and-infra/vector-databases]]           |
 | Compare with | [[fine-tuning]] (changes model), Long-context (no retrieval), Knowledge graphs |
-| Cross-domain | Information retrieval (IR), Search engines |
+| Cross-domain | Information retrieval (IR), Search engines                                     |
 
 ---
 

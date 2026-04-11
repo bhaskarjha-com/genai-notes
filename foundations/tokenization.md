@@ -3,7 +3,7 @@ title: "Tokenization"
 tags: [tokenization, bpe, wordpiece, sentencepiece, llm-internals, genai-foundations]
 type: concept
 difficulty: intermediate
-status: learning
+status: published
 parent: "[[../genai]]"
 related: ["[[transformers]]", "[[embeddings]]", "[[../../llms/llms-overview]]"]
 source: "Sennrich et al. (BPE, 2016), SentencePiece, tiktoken"
@@ -98,12 +98,12 @@ STEP 4: ('low', 'er') is frequent
 
 ### Tokenization Algorithms Compared
 
-| Algorithm | Used By | Key Difference |
-|-----------|---------|---------------|
-| **BPE** | GPT-2/3/4/5, LLaMA, Mistral | Merge most frequent byte pairs bottom-up |
-| **WordPiece** | BERT, DistilBERT | Like BPE but maximizes likelihood of training data |
-| **Unigram** | T5, ALBERT (via SentencePiece) | Starts with large vocab, prunes least useful tokens |
-| **SentencePiece** | LLaMA, Gemma, T5 | Language-agnostic, treats input as raw bytes (no pre-tokenization) |
+| Algorithm         | Used By                        | Key Difference                                                     |
+| ----------------- | ------------------------------ | ------------------------------------------------------------------ |
+| **BPE**           | GPT-2/3/4/5, LLaMA, Mistral    | Merge most frequent byte pairs bottom-up                           |
+| **WordPiece**     | BERT, DistilBERT               | Like BPE but maximizes likelihood of training data                 |
+| **Unigram**       | T5, ALBERT (via SentencePiece) | Starts with large vocab, prunes least useful tokens                |
+| **SentencePiece** | LLaMA, Gemma, T5               | Language-agnostic, treats input as raw bytes (no pre-tokenization) |
 
 ### Practical Impact
 
@@ -130,15 +130,15 @@ print(len(tokens))         # 20+ tokens for same meaning!
 
 ### Vocabulary Sizes Across Models
 
-| Model | Vocab Size | Tokenizer |
-|-------|-----------|-----------|
-| GPT-2 | 50,257 | BPE (tiktoken) |
-| GPT-4 / GPT-4o | 100,277 | BPE (tiktoken, cl100k_base) |
-| GPT-5 | ~200,000 | BPE (tiktoken, o200k_base) |
-| LLaMA 2 | 32,000 | SentencePiece (BPE) |
-| LLaMA 3/4 | 128,256 | SentencePiece (BPE) |
-| Gemini | 256,000 | SentencePiece |
-| Claude | ~100,000 | BPE variant |
+| Model          | Vocab Size | Tokenizer                   |
+| -------------- | ---------- | --------------------------- |
+| GPT-2          | 50,257     | BPE (tiktoken)              |
+| GPT-4 / GPT-4o | 100,277    | BPE (tiktoken, cl100k_base) |
+| GPT-5          | ~200,000   | BPE (tiktoken, o200k_base)  |
+| LLaMA 2        | 32,000     | SentencePiece (BPE)         |
+| LLaMA 3/4      | 128,256    | SentencePiece (BPE)         |
+| Gemini         | 256,000    | SentencePiece               |
+| Claude         | ~100,000   | BPE variant                 |
 
 **Trend**: Vocab sizes are GROWING. Larger vocab = fewer tokens per text = faster inference but larger embedding table.
 
@@ -161,12 +161,12 @@ Different models use different special tokens (not compatible).
 
 ## ◆ Strengths vs Limitations
 
-| ✅ Strengths | ❌ Limitations |
-|-------------|---------------|
+| ✅ Strengths                                      | ❌ Limitations                                             |
+| ------------------------------------------------ | --------------------------------------------------------- |
 | Sub-word = handles any text (even made-up words) | Non-English languages get more tokens per word = inequity |
-| Fixed vocabulary = predictable model size | Arithmetic is hard (numbers split unpredictably) |
-| BPE is fast and deterministic | Character-level tasks (counting letters, reversal) fail |
-| Tokenizers are model-specific and well-tested | Can't easily swap tokenizers between models |
+| Fixed vocabulary = predictable model size        | Arithmetic is hard (numbers split unpredictably)          |
+| BPE is fast and deterministic                    | Character-level tasks (counting letters, reversal) fail   |
+| Tokenizers are model-specific and well-tested    | Can't easily swap tokenizers between models               |
 
 ---
 
@@ -213,12 +213,12 @@ TOOLS:
 
 ## ★ Connections
 
-| Relationship | Topics |
-|-------------|--------|
-| Builds on | String processing, Compression algorithms (BPE originated in compression) |
-| Leads to | [[embeddings]] (tokens → vectors), [[../../llms/llms-overview]] |
-| Compare with | Character encoding (ASCII/UTF-8), Word-level parsing |
-| Cross-domain | Linguistic morphology, Data compression |
+| Relationship | Topics                                                                    |
+| ------------ | ------------------------------------------------------------------------- |
+| Builds on    | String processing, Compression algorithms (BPE originated in compression) |
+| Leads to     | [[embeddings]] (tokens → vectors), [[../../llms/llms-overview]]           |
+| Compare with | Character encoding (ASCII/UTF-8), Word-level parsing                      |
+| Cross-domain | Linguistic morphology, Data compression                                   |
 
 ---
 

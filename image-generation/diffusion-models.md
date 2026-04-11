@@ -3,7 +3,7 @@ title: "Diffusion Models"
 tags: [diffusion, image-generation, stable-diffusion, dall-e, genai]
 type: concept
 difficulty: advanced
-status: learning
+status: published
 parent: "[[../genai]]"
 related: ["[[../foundations/transformers]]", "[[../llms/llms-overview]]"]
 source: "Ho et al., 2020 (DDPM) + latest developments"
@@ -120,60 +120,60 @@ U-Net Structure:
 
 ### Key Concepts
 
-| Concept | Explanation |
-|---------|-------------|
-| **Noise Schedule** | How quickly noise is added (linear, cosine, etc.). Affects image quality. |
+| Concept                  | Explanation                                                                             |
+| ------------------------ | --------------------------------------------------------------------------------------- |
+| **Noise Schedule**       | How quickly noise is added (linear, cosine, etc.). Affects image quality.               |
 | **Guidance Scale (CFG)** | How strongly to follow the text prompt. Higher = more prompt-adherent but less diverse. |
-| **Sampling Steps** | Number of denoising steps. More = better quality, slower. 20-50 is typical. |
-| **Negative Prompt** | What to avoid: "blurry, low quality, distorted" |
-| **Inpainting** | Replace part of an image (mask + prompt for new content) |
-| **ControlNet** | Add spatial control (pose, edges, depth maps) to guide generation |
-| **LoRA (for images)** | Train small adapters to add specific styles/characters to Stable Diffusion |
+| **Sampling Steps**       | Number of denoising steps. More = better quality, slower. 20-50 is typical.             |
+| **Negative Prompt**      | What to avoid: "blurry, low quality, distorted"                                         |
+| **Inpainting**           | Replace part of an image (mask + prompt for new content)                                |
+| **ControlNet**           | Add spatial control (pose, edges, depth maps) to guide generation                       |
+| **LoRA (for images)**    | Train small adapters to add specific styles/characters to Stable Diffusion              |
 
 ### Major Models
 
-| Model | Company | Key Feature |
-|-------|---------|-------------|
-| **Stable Diffusion XL/3** | Stability AI | Open-source, customizable, LoRA ecosystem |
-| **DALL-E 3** | OpenAI | Integrated with ChatGPT, best prompt following |
-| **Midjourney v6+** | Midjourney | Highest aesthetic quality, artistic |
-| **Imagen 3** | Google | Google's best, integrated in Gemini |
-| **Flux** | Black Forest Labs | Open, high quality, by ex-Stability AI team |
+| Model                     | Company           | Key Feature                                    |
+| ------------------------- | ----------------- | ---------------------------------------------- |
+| **Stable Diffusion XL/3** | Stability AI      | Open-source, customizable, LoRA ecosystem      |
+| **DALL-E 3**              | OpenAI            | Integrated with ChatGPT, best prompt following |
+| **Midjourney v6+**        | Midjourney        | Highest aesthetic quality, artistic            |
+| **Imagen 3**              | Google            | Google's best, integrated in Gemini            |
+| **Flux**                  | Black Forest Labs | Open, high quality, by ex-Stability AI team    |
 
 ---
 
 ## ◆ Formulas & Equations
 
-| Name | Formula | Variables | Use |
-|------|---------|-----------|-----|
-| Forward Process | $$q(x_t \mid x_{t-1}) = \mathcal{N}(x_t; \sqrt{\alpha_t}x_{t-1}, (1-\alpha_t)I)$$ | αₜ = noise schedule, I = identity | Add noise at step t |
-| Training Objective | $$L = \mathbb{E}_{t,x_0,\epsilon}\left[\|\epsilon - \epsilon_\theta(x_t, t)\|^2\right]$$ | ε = actual noise, ε_θ = predicted noise | Train the denoiser |
-| Classifier-Free Guidance | $$\hat{\epsilon} = \epsilon_{uncond} + s(\epsilon_{cond} - \epsilon_{uncond})$$ | s = guidance scale (typically 7-15) | Control prompt adherence |
+| Name                     | Formula                                                                                  | Variables                               | Use                      |
+| ------------------------ | ---------------------------------------------------------------------------------------- | --------------------------------------- | ------------------------ |
+| Forward Process          | $$q(x_t \mid x_{t-1}) = \mathcal{N}(x_t; \sqrt{\alpha_t}x_{t-1}, (1-\alpha_t)I)$$        | αₜ = noise schedule, I = identity       | Add noise at step t      |
+| Training Objective       | $$L = \mathbb{E}_{t,x_0,\epsilon}\left[\|\epsilon - \epsilon_\theta(x_t, t)\|^2\right]$$ | ε = actual noise, ε_θ = predicted noise | Train the denoiser       |
+| Classifier-Free Guidance | $$\hat{\epsilon} = \epsilon_{uncond} + s(\epsilon_{cond} - \epsilon_{uncond})$$          | s = guidance scale (typically 7-15)     | Control prompt adherence |
 
 ---
 
 ## ◆ Comparison
 
-| Aspect | Diffusion Models | GANs | VAEs |
-|--------|-----------------|------|------|
-| **Training** | Stable (MSE loss) | Unstable (adversarial) | Stable (ELBO) |
-| **Quality** | Excellent | Excellent (when it works) | Blurry |
-| **Diversity** | High (no mode collapse) | Mode collapse risk | High |
-| **Speed** | Slow (many steps) | Fast (one forward pass) | Fast |
-| **Controllability** | High (CFG, ControlNet) | Limited | Limited |
-| **Status (2026)** | **Dominant** | Declining for images | Niche |
+| Aspect              | Diffusion Models        | GANs                      | VAEs          |
+| ------------------- | ----------------------- | ------------------------- | ------------- |
+| **Training**        | Stable (MSE loss)       | Unstable (adversarial)    | Stable (ELBO) |
+| **Quality**         | Excellent               | Excellent (when it works) | Blurry        |
+| **Diversity**       | High (no mode collapse) | Mode collapse risk        | High          |
+| **Speed**           | Slow (many steps)       | Fast (one forward pass)   | Fast          |
+| **Controllability** | High (CFG, ControlNet)  | Limited                   | Limited       |
+| **Status (2026)**   | **Dominant**            | Declining for images      | Niche         |
 
 ---
 
 ## ◆ Strengths vs Limitations
 
-| ✅ Strengths | ❌ Limitations |
-|-------------|---------------|
-| Best image quality currently | Slow generation (20-50 steps) |
-| Stable training (no mode collapse) | High compute for training |
-| Highly controllable (CFG, ControlNet, LoRA) | Memory-intensive |
-| Works in multiple domains (image, video, audio, 3D) | Theory is mathematically complex |
-| Strong open-source ecosystem (Stable Diffusion) | Can reproduce copyrighted styles (legal issues) |
+| ✅ Strengths                                         | ❌ Limitations                                   |
+| --------------------------------------------------- | ----------------------------------------------- |
+| Best image quality currently                        | Slow generation (20-50 steps)                   |
+| Stable training (no mode collapse)                  | High compute for training                       |
+| Highly controllable (CFG, ControlNet, LoRA)         | Memory-intensive                                |
+| Works in multiple domains (image, video, audio, 3D) | Theory is mathematically complex                |
+| Strong open-source ecosystem (Stable Diffusion)     | Can reproduce copyrighted styles (legal issues) |
 
 ---
 
@@ -192,12 +192,12 @@ U-Net Structure:
 
 ## ★ Connections
 
-| Relationship | Topics |
-|-------------|--------|
-| Builds on | [[../foundations/transformers]] (attention in U-Net), VAEs (latent space) |
-| Leads to | Video generation (Sora), 3D generation, Audio diffusion |
-| Compare with | GANs (adversarial), VAEs (variational), Autoregressive image models |
-| Cross-domain | Physics (thermodynamic diffusion), Stochastic processes |
+| Relationship | Topics                                                                    |
+| ------------ | ------------------------------------------------------------------------- |
+| Builds on    | [[../foundations/transformers]] (attention in U-Net), VAEs (latent space) |
+| Leads to     | Video generation (Sora), 3D generation, Audio diffusion                   |
+| Compare with | GANs (adversarial), VAEs (variational), Autoregressive image models       |
+| Cross-domain | Physics (thermodynamic diffusion), Stochastic processes                   |
 
 ---
 

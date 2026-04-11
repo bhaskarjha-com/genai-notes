@@ -3,7 +3,7 @@ title: "AI Agents"
 tags: [agents, agentic-ai, tool-use, function-calling, autonomy, genai-techniques]
 type: concept
 difficulty: intermediate
-status: learning
+status: published
 parent: "[[../genai]]"
 related: ["[[rag]]", "[[../llms/llms-overview]]", "[[prompt-engineering]]"]
 source: "Multiple - see Sources"
@@ -143,41 +143,41 @@ ACT:   respond_to_user(summary + table)
 
 #### 2. Planning Strategies
 
-| Strategy | How | When |
-|----------|-----|------|
-| **ReAct** | Think → Act → Observe loop | General-purpose agent tasks |
-| **Plan-and-Execute** | Create full plan first, then execute | Complex multi-step tasks |
-| **Tree of Thoughts** | Explore multiple reasoning paths | Hard reasoning problems |
-| **Reflexion** | Self-reflect on failures, retry | Tasks needing self-correction |
+| Strategy             | How                                  | When                          |
+| -------------------- | ------------------------------------ | ----------------------------- |
+| **ReAct**            | Think → Act → Observe loop           | General-purpose agent tasks   |
+| **Plan-and-Execute** | Create full plan first, then execute | Complex multi-step tasks      |
+| **Tree of Thoughts** | Explore multiple reasoning paths     | Hard reasoning problems       |
+| **Reflexion**        | Self-reflect on failures, retry      | Tasks needing self-correction |
 
 #### 3. Memory Systems
 
-| Type | Implementation | Use |
-|------|---------------|-----|
-| **Short-term** | Conversation history in context | Current task state |
-| **Long-term** | Vector DB / embeddings | Past interactions, knowledge |
-| **Episodic** | Stored successful strategies | Learn from past tasks |
-| **Working** | Scratchpad / notes during task | Complex reasoning steps |
+| Type           | Implementation                  | Use                          |
+| -------------- | ------------------------------- | ---------------------------- |
+| **Short-term** | Conversation history in context | Current task state           |
+| **Long-term**  | Vector DB / embeddings          | Past interactions, knowledge |
+| **Episodic**   | Stored successful strategies    | Learn from past tasks        |
+| **Working**    | Scratchpad / notes during task  | Complex reasoning steps      |
 
 ### Agent Types
 
-| Type | Description | Example |
-|------|-------------|---------|
-| **Single Agent** | One LLM with tools | ChatGPT with web browsing |
-| **Multi-Agent** | Multiple specialized agents collaborating | CrewAI, AutoGen |
-| **Hierarchical** | Manager agent delegates to worker agents | Complex workflows |
-| **Competitive** | Agents debate/challenge each other | Red team / verification |
+| Type             | Description                               | Example                   |
+| ---------------- | ----------------------------------------- | ------------------------- |
+| **Single Agent** | One LLM with tools                        | ChatGPT with web browsing |
+| **Multi-Agent**  | Multiple specialized agents collaborating | CrewAI, AutoGen           |
+| **Hierarchical** | Manager agent delegates to worker agents  | Complex workflows         |
+| **Competitive**  | Agents debate/challenge each other        | Red team / verification   |
 
 ### Popular Frameworks (2025-2026)
 
-| Framework | Strengths | Use Case |
-|-----------|-----------|----------|
-| **LangGraph** (LangChain) | Flexible graph-based workflows, stateful | Complex custom agents |
-| **CrewAI** | Multi-agent, role-based collaboration | Team of specialized agents |
-| **AutoGen** (Microsoft) | Multi-agent conversations | Research, code generation |
-| **OpenAI Assistants API** | Managed, easy to start | Simple agents with tools |
-| **Anthropic Tool Use** | Strong coding agents | Developer tools |
-| **Semantic Kernel** | Enterprise .NET/Python | Enterprise integration |
+| Framework                 | Strengths                                | Use Case                   |
+| ------------------------- | ---------------------------------------- | -------------------------- |
+| **LangGraph** (LangChain) | Flexible graph-based workflows, stateful | Complex custom agents      |
+| **CrewAI**                | Multi-agent, role-based collaboration    | Team of specialized agents |
+| **AutoGen** (Microsoft)   | Multi-agent conversations                | Research, code generation  |
+| **OpenAI Assistants API** | Managed, easy to start                   | Simple agents with tools   |
+| **Anthropic Tool Use**    | Strong coding agents                     | Developer tools            |
+| **Semantic Kernel**       | Enterprise .NET/Python                   | Enterprise integration     |
 
 ---
 
@@ -242,13 +242,13 @@ result = app.invoke({"messages": [("user", "What is 25 * 47?")]})
 
 ## ◆ Strengths vs Limitations
 
-| ✅ Strengths | ❌ Limitations |
-|-------------|---------------|
-| Can complete complex multi-step tasks | Unreliable — can get stuck in loops |
-| Adapts approach based on observations | Expensive (many LLM calls per task) |
+| ✅ Strengths                           | ❌ Limitations                             |
+| ------------------------------------- | ----------------------------------------- |
+| Can complete complex multi-step tasks | Unreliable — can get stuck in loops       |
+| Adapts approach based on observations | Expensive (many LLM calls per task)       |
 | Can use any tool via function calling | Security risk (executing code, API calls) |
-| Handles ambiguous, open-ended goals | Hard to debug and test |
-| Multi-agent enables specialization | Latency (multiple reasoning steps) |
+| Handles ambiguous, open-ended goals   | Hard to debug and test                    |
+| Multi-agent enables specialization    | Latency (multiple reasoning steps)        |
 
 ---
 
@@ -290,14 +290,14 @@ IMPLEMENTATION:
 
 ## ◆ Framework Comparison (March 2026)
 
-| Framework | By | Orchestration | Multi-Agent | Best For |
-|-----------|-----|--------------|-------------|----------|
-| **LangGraph** | LangChain | Graph-based stateful | ✅ | Complex workflows with state |
-| **CrewAI** | Community | Role-based teams | ✅ | Business process automation |
-| **AutoGen** | Microsoft | Chat-based | ✅ | Research, conversational agents |
-| **ADK** | Google | Hierarchical + graph | ✅ | Google ecosystem, production |
-| **Semantic Kernel** | Microsoft | Plugin-based | ⚠️ Basic | Enterprise .NET/Python |
-| **Mastra** | Community | TypeScript-first | ✅ | JS/TS developers |
+| Framework           | By        | Orchestration        | Multi-Agent | Best For                        |
+| ------------------- | --------- | -------------------- | ----------- | ------------------------------- |
+| **LangGraph**       | LangChain | Graph-based stateful | ✅           | Complex workflows with state    |
+| **CrewAI**          | Community | Role-based teams     | ✅           | Business process automation     |
+| **AutoGen**         | Microsoft | Chat-based           | ✅           | Research, conversational agents |
+| **ADK**             | Google    | Hierarchical + graph | ✅           | Google ecosystem, production    |
+| **Semantic Kernel** | Microsoft | Plugin-based         | ⚠️ Basic     | Enterprise .NET/Python          |
+| **Mastra**          | Community | TypeScript-first     | ✅           | JS/TS developers                |
 
 For protocols connecting agents (MCP, A2A), see [[agentic-protocols]].
 
@@ -332,12 +332,12 @@ For protocols connecting agents (MCP, A2A), see [[agentic-protocols]].
 
 ## ★ Connections
 
-| Relationship | Topics |
-|-------------|--------|
-| Builds on | [[../llms/llms-overview]], [[rag]], [[prompt-engineering]], [[function-calling-and-structured-output]] |
-| Leads to | [[agentic-protocols]] (MCP/A2A/ADK), [[../applications/code-generation]] (coding agents) |
-| Compare with | Simple chains (no autonomy), Chatbots (reactive only) |
-| Cross-domain | Robotics (embodied agents), Game AI, Control theory |
+| Relationship | Topics                                                                                                 |
+| ------------ | ------------------------------------------------------------------------------------------------------ |
+| Builds on    | [[../llms/llms-overview]], [[rag]], [[prompt-engineering]], [[function-calling-and-structured-output]] |
+| Leads to     | [[agentic-protocols]] (MCP/A2A/ADK), [[../applications/code-generation]] (coding agents)               |
+| Compare with | Simple chains (no autonomy), Chatbots (reactive only)                                                  |
+| Cross-domain | Robotics (embodied agents), Game AI, Control theory                                                    |
 
 ---
 

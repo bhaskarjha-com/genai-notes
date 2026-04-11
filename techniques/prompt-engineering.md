@@ -3,7 +3,7 @@ title: "Prompt Engineering"
 tags: [prompt-engineering, prompting, few-shot, chain-of-thought, genai-techniques]
 type: procedure
 difficulty: beginner
-status: learning
+status: published
 parent: "[[../genai]]"
 related: ["[[ai-agents]]", "[[rag]]", "[[../llms/llms-overview]]"]
 source: "OpenAI Prompt Engineering Guide, Anthropic Prompting Guide"
@@ -117,32 +117,32 @@ Model output with CoT:
 
 #### 5. The META Framework
 
-| Element | Description | Example |
-|---------|-------------|---------|
-| **M**ission | What's the overall goal? | "You are a code reviewer" |
-| **E**xpectations | What format/quality? | "Be concise, cite line numbers" |
-| **T**ask | Specific action | "Review this Python function" |
-| **A**rtifacts | Examples/reference | "Here's an example review..." |
+| Element          | Description              | Example                         |
+| ---------------- | ------------------------ | ------------------------------- |
+| **M**ission      | What's the overall goal? | "You are a code reviewer"       |
+| **E**xpectations | What format/quality?     | "Be concise, cite line numbers" |
+| **T**ask         | Specific action          | "Review this Python function"   |
+| **A**rtifacts    | Examples/reference       | "Here's an example review..."   |
 
 ### Advanced Patterns
 
-| Pattern | How | Use Case |
-|---------|-----|----------|
-| **Self-Consistency** | Generate N responses, majority vote | Math, factual questions |
-| **Tree of Thought** | Explore multiple reasoning branches | Complex problem-solving |
-| **Least-to-Most** | Break complex problem into sub-problems | Problems requiring decomposition |
-| **Generated Knowledge** | "First, tell me facts about X. Then, answer Y" | Knowledge-intensive questions |
-| **Prompt Chaining** | Output of prompt A → Input of prompt B | Multi-stage pipelines |
+| Pattern                 | How                                            | Use Case                         |
+| ----------------------- | ---------------------------------------------- | -------------------------------- |
+| **Self-Consistency**    | Generate N responses, majority vote            | Math, factual questions          |
+| **Tree of Thought**     | Explore multiple reasoning branches            | Complex problem-solving          |
+| **Least-to-Most**       | Break complex problem into sub-problems        | Problems requiring decomposition |
+| **Generated Knowledge** | "First, tell me facts about X. Then, answer Y" | Knowledge-intensive questions    |
+| **Prompt Chaining**     | Output of prompt A → Input of prompt B         | Multi-stage pipelines            |
 
 ### The Prompting Mistake Matrix
 
-| ❌ Common Mistake | ✅ Better Approach |
-|---|---|
-| "Write good code" | "Write Python 3.12 code that handles edge cases. Include type hints, docstrings, and error handling." |
-| "Summarize this" | "Summarize in 3 bullet points for a technical audience. Each bullet max 20 words." |
-| "Be creative" | "Generate 5 alternative approaches, ranked by feasibility. For each, explain trade-offs." |
-| "Fix the bug" | "Identify the root cause. Explain why it fails. Provide corrected code with comments on changes." |
-| Dumping entire codebase | Provide only the relevant function + error message + expected behavior |
+| ❌ Common Mistake        | ✅ Better Approach                                                                                     |
+| ----------------------- | ----------------------------------------------------------------------------------------------------- |
+| "Write good code"       | "Write Python 3.12 code that handles edge cases. Include type hints, docstrings, and error handling." |
+| "Summarize this"        | "Summarize in 3 bullet points for a technical audience. Each bullet max 20 words."                    |
+| "Be creative"           | "Generate 5 alternative approaches, ranked by feasibility. For each, explain trade-offs."             |
+| "Fix the bug"           | "Identify the root cause. Explain why it fails. Provide corrected code with comments on changes."     |
+| Dumping entire codebase | Provide only the relevant function + error message + expected behavior                                |
 
 ---
 
@@ -169,13 +169,13 @@ TEMPERATURE GUIDE:
 
 ## ◆ Strengths vs Limitations
 
-| ✅ Strengths | ❌ Limitations |
-|-------------|---------------|
-| Zero cost (no training/infra) | Can't add new knowledge |
-| Instant iteration | Fragile — small changes = different results |
-| Works with any model | Context window limits complexity |
-| Easy to A/B test | Can't change model behavior permanently |
-| Good starting point always | Diminishing returns at some point → need RAG/fine-tuning |
+| ✅ Strengths                   | ❌ Limitations                                            |
+| ----------------------------- | -------------------------------------------------------- |
+| Zero cost (no training/infra) | Can't add new knowledge                                  |
+| Instant iteration             | Fragile — small changes = different results              |
+| Works with any model          | Context window limits complexity                         |
+| Easy to A/B test              | Can't change model behavior permanently                  |
+| Good starting point always    | Diminishing returns at some point → need RAG/fine-tuning |
 
 ---
 
@@ -201,12 +201,12 @@ TEMPERATURE GUIDE:
 
 ## ★ Connections
 
-| Relationship | Topics |
-|-------------|--------|
-| Builds on | [[../llms/llms-overview]] |
-| Leads to | [[ai-agents]], [[rag]] (prompt is key in RAG too) |
+| Relationship | Topics                                                                |
+| ------------ | --------------------------------------------------------------------- |
+| Builds on    | [[../llms/llms-overview]]                                             |
+| Leads to     | [[ai-agents]], [[rag]] (prompt is key in RAG too)                     |
 | Compare with | [[fine-tuning]] (permanent behavior change), [[rag]] (adds knowledge) |
-| Cross-domain | UX writing, Human communication, Psychology (framing effects) |
+| Cross-domain | UX writing, Human communication, Psychology (framing effects)         |
 
 ---
 

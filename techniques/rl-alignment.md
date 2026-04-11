@@ -3,7 +3,7 @@ title: "Reinforcement Learning for LLM Alignment"
 tags: [rlhf, dpo, ppo, grpo, alignment, reward-model, preference-optimization, genai]
 type: concept
 difficulty: advanced
-status: learning
+status: published
 parent: "[[../genai]]"
 related: ["[[../ethics-and-safety/ethics-safety-alignment]]", "[[../llms/llms-overview]]", "[[../llms/reasoning-models]]", "[[fine-tuning]]"]
 source: "Multiple — see Sources"
@@ -253,30 +253,30 @@ REWARD TYPES:
 
 ### 5. Emerging Alternatives
 
-| Technique | Key Idea | Status |
-|-----------|---------|--------|
-| **ORPO** (Odds Ratio Preference) | Combines SFT + alignment in one step, no reference model | Growing adoption |
-| **KTO** (Kahneman-Tversky) | Works with binary feedback (good/bad) instead of pairs | Research |
-| **SimPO** | Simplified preference, length-normalized | Research |
-| **IPO** (Identity Preference) | Fixes DPO's overfitting issue | Research |
-| **Self-Play** | Model debates itself, no human labels | Research (Google) |
+| Technique                        | Key Idea                                                 | Status            |
+| -------------------------------- | -------------------------------------------------------- | ----------------- |
+| **ORPO** (Odds Ratio Preference) | Combines SFT + alignment in one step, no reference model | Growing adoption  |
+| **KTO** (Kahneman-Tversky)       | Works with binary feedback (good/bad) instead of pairs   | Research          |
+| **SimPO**                        | Simplified preference, length-normalized                 | Research          |
+| **IPO** (Identity Preference)    | Fixes DPO's overfitting issue                            | Research          |
+| **Self-Play**                    | Model debates itself, no human labels                    | Research (Google) |
 
 ---
 
 ## ◆ The Complete Comparison
 
-| Feature | RLHF+PPO | DPO | GRPO |
-|---------|----------|-----|------|
-| **Reward model** | ✅ Required | ❌ Not needed | ⚠️ Optional (can use verifiable rewards) |
-| **Value/Critic model** | ✅ Required | ❌ Not needed | ❌ Not needed |
-| **Models in memory** | 4 (policy, ref, reward, value) | 2 (policy, ref) | 2-3 (policy, ref, +optional reward) |
-| **Complexity** | Very high | Low | Medium |
-| **Stability** | ⚠️ Can be unstable | ✅ Stable | ✅ Stable |
-| **Data needed** | Preference pairs + RL rollouts | Preference pairs only | Prompts + reward signal |
-| **Memory usage** | Highest | Lowest | ~50% of PPO |
-| **Best for** | Complex alignment | Simple alignment, open-source | Reasoning, math, code |
-| **Used by** | GPT-4, early Claude | LLaMA-Chat, Zephyr, open models | DeepSeek-R1, DeepSeek-Math |
-| **Year introduced** | 2022 (InstructGPT) | 2023 (Stanford) | 2024 (DeepSeek) |
+| Feature                | RLHF+PPO                       | DPO                             | GRPO                                    |
+| ---------------------- | ------------------------------ | ------------------------------- | --------------------------------------- |
+| **Reward model**       | ✅ Required                     | ❌ Not needed                    | ⚠️ Optional (can use verifiable rewards) |
+| **Value/Critic model** | ✅ Required                     | ❌ Not needed                    | ❌ Not needed                            |
+| **Models in memory**   | 4 (policy, ref, reward, value) | 2 (policy, ref)                 | 2-3 (policy, ref, +optional reward)     |
+| **Complexity**         | Very high                      | Low                             | Medium                                  |
+| **Stability**          | ⚠️ Can be unstable              | ✅ Stable                        | ✅ Stable                                |
+| **Data needed**        | Preference pairs + RL rollouts | Preference pairs only           | Prompts + reward signal                 |
+| **Memory usage**       | Highest                        | Lowest                          | ~50% of PPO                             |
+| **Best for**           | Complex alignment              | Simple alignment, open-source   | Reasoning, math, code                   |
+| **Used by**            | GPT-4, early Claude            | LLaMA-Chat, Zephyr, open models | DeepSeek-R1, DeepSeek-Math              |
+| **Year introduced**    | 2022 (InstructGPT)             | 2023 (Stanford)                 | 2024 (DeepSeek)                         |
 
 ---
 
@@ -330,12 +330,12 @@ KEY FORMULAS:
 
 ## ★ Connections
 
-| Relationship | Topics |
-|-------------|--------|
-| Builds on | [[fine-tuning]] (SFT stage), [[../prerequisites/deep-learning-fundamentals]] (optimization) |
-| Leads to | [[../llms/reasoning-models]] (GRPO → R1), [[../ethics-and-safety/ethics-safety-alignment]] (safety layer) |
-| Compare with | Constitutional AI (Anthropic's approach), Self-play |
-| Cross-domain | Game theory, Behavioural economics (KTO), Curriculum learning |
+| Relationship | Topics                                                                                                    |
+| ------------ | --------------------------------------------------------------------------------------------------------- |
+| Builds on    | [[fine-tuning]] (SFT stage), [[../prerequisites/deep-learning-fundamentals]] (optimization)               |
+| Leads to     | [[../llms/reasoning-models]] (GRPO → R1), [[../ethics-and-safety/ethics-safety-alignment]] (safety layer) |
+| Compare with | Constitutional AI (Anthropic's approach), Self-play                                                       |
+| Cross-domain | Game theory, Behavioural economics (KTO), Curriculum learning                                             |
 
 ---
 

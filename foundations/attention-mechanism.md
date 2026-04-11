@@ -3,7 +3,7 @@ title: "Attention Mechanism"
 tags: [attention, self-attention, multi-head, transformers, genai-foundations]
 type: concept
 difficulty: intermediate
-status: learning
+status: published
 parent: "[[transformers]]"
 related: ["[[transformers]]", "[[../../llms/llms-overview]]"]
 source: "Attention Is All You Need (Vaswani et al., 2017)"
@@ -121,11 +121,11 @@ MultiHead(X) = Concat(head_1, ..., head_h) · W_O
 
 ### Types of Attention
 
-| Type | Q from | K,V from | Use Case |
-|------|--------|----------|----------|
-| **Self-Attention** | Same sequence | Same sequence | Token-to-token within input |
-| **Cross-Attention** | Decoder | Encoder output | Decoder attending to encoder (translation) |
-| **Causal/Masked** | Same sequence | Same sequence (masked) | Autoregressive generation (can't see future) |
+| Type                | Q from        | K,V from               | Use Case                                     |
+| ------------------- | ------------- | ---------------------- | -------------------------------------------- |
+| **Self-Attention**  | Same sequence | Same sequence          | Token-to-token within input                  |
+| **Cross-Attention** | Decoder       | Encoder output         | Decoder attending to encoder (translation)   |
+| **Causal/Masked**   | Same sequence | Same sequence (masked) | Autoregressive generation (can't see future) |
 
 ### Causal Masking (Critical for LLMs)
 
@@ -143,35 +143,35 @@ Applied BEFORE softmax: e^(-∞) = 0, so masked positions get zero weight
 
 ### Modern Variants
 
-| Variant | What It Does | Why |
-|---------|-------------|-----|
-| **MHA** (Multi-Head) | Full Q,K,V per head | Original, most expressive |
-| **MQA** (Multi-Query) | Shared K,V across heads, unique Q | 10x faster inference, slight quality drop |
-| **GQA** (Grouped Query) | Groups of heads share K,V | Best of both: fast + quality. Used by LLaMA 2+ |
-| **Flash Attention** | Tiling + recomputation to avoid materializing full attention matrix | 2-4x faster, way less memory |
-| **RoPE** | Rotary Position Embeddings baked into Q,K | Better extrapolation to unseen lengths |
-| **Sliding Window** | Only attend to nearby tokens within a window | Handles very long sequences (Mistral) |
+| Variant                 | What It Does                                                        | Why                                            |
+| ----------------------- | ------------------------------------------------------------------- | ---------------------------------------------- |
+| **MHA** (Multi-Head)    | Full Q,K,V per head                                                 | Original, most expressive                      |
+| **MQA** (Multi-Query)   | Shared K,V across heads, unique Q                                   | 10x faster inference, slight quality drop      |
+| **GQA** (Grouped Query) | Groups of heads share K,V                                           | Best of both: fast + quality. Used by LLaMA 2+ |
+| **Flash Attention**     | Tiling + recomputation to avoid materializing full attention matrix | 2-4x faster, way less memory                   |
+| **RoPE**                | Rotary Position Embeddings baked into Q,K                           | Better extrapolation to unseen lengths         |
+| **Sliding Window**      | Only attend to nearby tokens within a window                        | Handles very long sequences (Mistral)          |
 
 ---
 
 ## ◆ Formulas & Equations
 
-| Name | Formula | Variables | Use |
-|------|---------|-----------|-----|
-| Scaled Dot-Product | $$\text{Attention}(Q,K,V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V$$ | Q,K,V matrices ; d_k = key dimension | Core attention |
-| Multi-Head | $$\text{MultiHead}(Q,K,V) = \text{Concat}(\text{head}_1,...,\text{head}_h)W^O$$ | h=num heads, W^O=output projection | Parallel attention |
-| Complexity | $$O(n^2 \cdot d)$$ | n=sequence length, d=dimension | Time & memory cost |
+| Name               | Formula                                                                           | Variables                            | Use                |
+| ------------------ | --------------------------------------------------------------------------------- | ------------------------------------ | ------------------ |
+| Scaled Dot-Product | $$\text{Attention}(Q,K,V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V$$ | Q,K,V matrices ; d_k = key dimension | Core attention     |
+| Multi-Head         | $$\text{MultiHead}(Q,K,V) = \text{Concat}(\text{head}_1,...,\text{head}_h)W^O$$   | h=num heads, W^O=output projection   | Parallel attention |
+| Complexity         | $$O(n^2 \cdot d)$$                                                                | n=sequence length, d=dimension       | Time & memory cost |
 
 ---
 
 ## ◆ Strengths vs Limitations
 
-| ✅ Strengths | ❌ Limitations |
-|-------------|---------------|
-| Captures long-range dependencies | O(n²) — quadratic with sequence length |
-| Fully parallelizable | Large memory footprint for long sequences |
+| ✅ Strengths                                                  | ❌ Limitations                                        |
+| ------------------------------------------------------------ | ---------------------------------------------------- |
+| Captures long-range dependencies                             | O(n²) — quadratic with sequence length               |
+| Fully parallelizable                                         | Large memory footprint for long sequences            |
 | Interpretable (attention weights show what model "looks at") | Attention maps don't always reflect causal reasoning |
-| Works across modalities (text, image, audio) | Still needs positional encoding (no inherent order) |
+| Works across modalities (text, image, audio)                 | Still needs positional encoding (no inherent order)  |
 
 ---
 
@@ -210,12 +210,12 @@ Modern defaults:
 
 ## ★ Connections
 
-| Relationship | Topics |
-|-------------|--------|
-| Builds on | [[../prerequisites/linear-algebra-for-ai]], [[../prerequisites/neural-networks]] |
-| Leads to | [[transformers]], [[../../llms/llms-overview]] |
-| Compare with | Recurrence (RNNs), Convolution (CNNs) |
-| Cross-domain | Vision Transformers (ViT), Graph Attention Networks |
+| Relationship | Topics                                                                           |
+| ------------ | -------------------------------------------------------------------------------- |
+| Builds on    | [[../prerequisites/linear-algebra-for-ai]], [[../prerequisites/neural-networks]] |
+| Leads to     | [[transformers]], [[../../llms/llms-overview]]                                   |
+| Compare with | Recurrence (RNNs), Convolution (CNNs)                                            |
+| Cross-domain | Vision Transformers (ViT), Graph Attention Networks                              |
 
 ---
 

@@ -3,7 +3,7 @@ title: "Voice AI & Speech"
 tags: [voice-ai, tts, stt, text-to-speech, speech-to-text, realtime-api, whisper, genai]
 type: concept
 difficulty: intermediate
-status: learning
+status: published
 parent: "[[../genai]]"
 related: ["[[../multimodal/multimodal-ai]]", "[[../techniques/ai-agents]]", "[[../techniques/agentic-protocols]]"]
 source: "Multiple — see Sources"
@@ -73,14 +73,14 @@ MODERN END-TO-END (speech-to-speech):
 
 ### STT (Speech-to-Text) Models
 
-| Model | By | Languages | Key Feature |
-|-------|----|-----------|-------------|
-| **Whisper** (V4) | OpenAI | 100+ | Open-source, diarization, real-time streaming |
-| **Deepgram Nova-3** | Deepgram | 40+ | 5.26% WER, real-time, speaker diarization |
-| **Deepgram Flux** | Deepgram | Multi | Conversational AI, turn detection, ultra-low latency |
-| **Google Chirp 3** | Google | 100+ | Multilingual champion, diarization |
-| **Azure Speech** | Microsoft | 100+ | Enterprise, custom models |
-| **AssemblyAI** | AssemblyAI | Multi | Summarization built-in |
+| Model               | By         | Languages | Key Feature                                          |
+| ------------------- | ---------- | --------- | ---------------------------------------------------- |
+| **Whisper** (V4)    | OpenAI     | 100+      | Open-source, diarization, real-time streaming        |
+| **Deepgram Nova-3** | Deepgram   | 40+       | 5.26% WER, real-time, speaker diarization            |
+| **Deepgram Flux**   | Deepgram   | Multi     | Conversational AI, turn detection, ultra-low latency |
+| **Google Chirp 3**  | Google     | 100+      | Multilingual champion, diarization                   |
+| **Azure Speech**    | Microsoft  | 100+      | Enterprise, custom models                            |
+| **AssemblyAI**      | AssemblyAI | Multi     | Summarization built-in                               |
 
 ```
 STT KEY CONCEPTS:
@@ -93,14 +93,14 @@ STT KEY CONCEPTS:
 
 ### TTS (Text-to-Speech) Models
 
-| Model | By | Latency | Key Feature |
-|-------|----|---------|-------------|
-| **ElevenLabs** | ElevenLabs | ~100ms | Best quality, voice cloning, emotional |
-| **OpenAI TTS** | OpenAI | ~200ms | Simple API, good quality |
-| **Google Cloud TTS** | Google | ~150ms | Neural2 voices, SSML |
-| **Cartesia Sonic** | Cartesia | ~50ms | Ultra-low latency |
-| **Fish Speech** | Open-source | Varies | Open, voice cloning |
-| **XTTS** (Coqui) | Open-source | Varies | Open, multilingual |
+| Model                | By          | Latency | Key Feature                            |
+| -------------------- | ----------- | ------- | -------------------------------------- |
+| **ElevenLabs**       | ElevenLabs  | ~100ms  | Best quality, voice cloning, emotional |
+| **OpenAI TTS**       | OpenAI      | ~200ms  | Simple API, good quality               |
+| **Google Cloud TTS** | Google      | ~150ms  | Neural2 voices, SSML                   |
+| **Cartesia Sonic**   | Cartesia    | ~50ms   | Ultra-low latency                      |
+| **Fish Speech**      | Open-source | Varies  | Open, voice cloning                    |
+| **XTTS** (Coqui)     | Open-source | Varies  | Open, multilingual                     |
 
 ```
 TTS KEY CONCEPTS:
@@ -153,15 +153,15 @@ VOICE AGENT ARCHITECTURE:
 
 ### Applications (2026)
 
-| Application | Example | Stack |
-|-------------|---------|-------|
-| **Customer support** | AI handles tier-1 calls | STT + LLM + TTS + CRM tools |
-| **Voice assistants** | Next-gen Siri/Alexa | End-to-end multimodal |
-| **Interview bots** | Screening candidates | Voice agent + scoring |
-| **Healthcare** | Patient intake, symptom checker | Voice + medical knowledge |
-| **Language learning** | Conversational practice | TTS + pronunciation scoring |
-| **Accessibility** | Screen readers, voice control | STT + TTS |
-| **Podcasting** | AI-generated podcasts (NotebookLM) | TTS from text content |
+| Application           | Example                            | Stack                       |
+| --------------------- | ---------------------------------- | --------------------------- |
+| **Customer support**  | AI handles tier-1 calls            | STT + LLM + TTS + CRM tools |
+| **Voice assistants**  | Next-gen Siri/Alexa                | End-to-end multimodal       |
+| **Interview bots**    | Screening candidates               | Voice agent + scoring       |
+| **Healthcare**        | Patient intake, symptom checker    | Voice + medical knowledge   |
+| **Language learning** | Conversational practice            | TTS + pronunciation scoring |
+| **Accessibility**     | Screen readers, voice control      | STT + TTS                   |
+| **Podcasting**        | AI-generated podcasts (NotebookLM) | TTS from text content       |
 
 ---
 
@@ -205,12 +205,12 @@ KEY METRICS:
 
 ## ★ Connections
 
-| Relationship | Topics |
-|-------------|--------|
-| Builds on | [[../multimodal/multimodal-ai]], [[../techniques/ai-agents]] |
-| Leads to | Conversational AI, Accessibility, IoT/Edge AI |
-| Compare with | Text-based chatbots, Screen-based UI |
-| Cross-domain | Signal processing, Linguistics, UX design |
+| Relationship | Topics                                                       |
+| ------------ | ------------------------------------------------------------ |
+| Builds on    | [[../multimodal/multimodal-ai]], [[../techniques/ai-agents]] |
+| Leads to     | Conversational AI, Accessibility, IoT/Edge AI                |
+| Compare with | Text-based chatbots, Screen-based UI                         |
+| Cross-domain | Signal processing, Linguistics, UX design                    |
 
 ---
 

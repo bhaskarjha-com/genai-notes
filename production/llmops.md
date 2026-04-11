@@ -3,7 +3,7 @@ title: "LLMOps & Production Deployment"
 tags: [llmops, production, monitoring, observability, deployment, ci-cd, genai]
 type: procedure
 difficulty: intermediate
-status: learning
+status: published
 parent: "[[../genai]]"
 related: ["[[../tools-and-infra/tools-overview]]", "[[../evaluation/evaluation-and-benchmarks]]", "[[../ethics-and-safety/ethics-safety-alignment]]", "[[../inference/inference-optimization]]"]
 source: "Multiple — see Sources"
@@ -105,16 +105,16 @@ TOOLS:
 
 ### Monitoring & Observability
 
-| What to Monitor | Why | Tool |
-|-----------------|-----|------|
-| **Latency** (TTFT, total) | User experience | Langfuse, LangSmith |
-| **Token usage** | Cost control | Portkey, custom logging |
-| **Error rates** | Reliability | Any APM + custom |
-| **Quality scores** | Hallucination, relevance | RAGAS, DeepEval |
-| **Cost per query** | Budget management | Portkey, custom |
-| **Guardrail triggers** | Safety monitoring | NeMo, Lakera |
-| **User feedback** | Ground truth | Custom (👍/👎 buttons) |
-| **Drift** | Performance degradation over time | Arize Phoenix |
+| What to Monitor           | Why                               | Tool                    |
+| ------------------------- | --------------------------------- | ----------------------- |
+| **Latency** (TTFT, total) | User experience                   | Langfuse, LangSmith     |
+| **Token usage**           | Cost control                      | Portkey, custom logging |
+| **Error rates**           | Reliability                       | Any APM + custom        |
+| **Quality scores**        | Hallucination, relevance          | RAGAS, DeepEval         |
+| **Cost per query**        | Budget management                 | Portkey, custom         |
+| **Guardrail triggers**    | Safety monitoring                 | NeMo, Lakera            |
+| **User feedback**         | Ground truth                      | Custom (👍/👎 buttons)    |
+| **Drift**                 | Performance degradation over time | Arize Phoenix           |
 
 ```python
 # ═══ Basic LLM Observability with Langfuse ═══
@@ -137,12 +137,12 @@ cache.init()  # Initialize semantic cache
 
 ### Deployment Patterns
 
-| Pattern | When | Pros | Cons |
-|---------|------|------|------|
-| **API-only** (OpenAI, Anthropic) | Fast start, simple | Easy, no infra | Cost at scale, vendor lock |
-| **API + Gateway** (Portkey, LiteLLM) | Multi-model, production | Fallbacks, load balancing | Extra layer |
-| **Self-hosted** (vLLM + open model) | Data privacy, cost control | Full control, no vendor | GPU infra needed |
-| **Hybrid** (API for hard, self-host for easy) | Cost optimization | Best of both | Complex routing |
+| Pattern                                       | When                       | Pros                      | Cons                       |
+| --------------------------------------------- | -------------------------- | ------------------------- | -------------------------- |
+| **API-only** (OpenAI, Anthropic)              | Fast start, simple         | Easy, no infra            | Cost at scale, vendor lock |
+| **API + Gateway** (Portkey, LiteLLM)          | Multi-model, production    | Fallbacks, load balancing | Extra layer                |
+| **Self-hosted** (vLLM + open model)           | Data privacy, cost control | Full control, no vendor   | GPU infra needed           |
+| **Hybrid** (API for hard, self-host for easy) | Cost optimization          | Best of both              | Complex routing            |
 
 ```
 DEPLOYMENT CHECKLIST:
@@ -198,15 +198,15 @@ LLM CI/CD (additional steps):
 
 ### Observability Platforms (2026)
 
-| Platform | Type | Best For |
-|----------|------|----------|
-| **LangSmith** | SaaS | LangChain users, full lifecycle |
-| **Langfuse** | Open-source | Self-hosted, privacy-first |
-| **Arize Phoenix** | Open-source | Drift monitoring, traces |
-| **Portkey** | AI Gateway | Multi-model routing, cost tracking |
-| **Braintrust** | SaaS | Eval + prompt management |
-| **Maxim AI** | SaaS | Enterprise observability |
-| **Helicone** | SaaS | Simple logging + analytics |
+| Platform          | Type        | Best For                           |
+| ----------------- | ----------- | ---------------------------------- |
+| **LangSmith**     | SaaS        | LangChain users, full lifecycle    |
+| **Langfuse**      | Open-source | Self-hosted, privacy-first         |
+| **Arize Phoenix** | Open-source | Drift monitoring, traces           |
+| **Portkey**       | AI Gateway  | Multi-model routing, cost tracking |
+| **Braintrust**    | SaaS        | Eval + prompt management           |
+| **Maxim AI**      | SaaS        | Enterprise observability           |
+| **Helicone**      | SaaS        | Simple logging + analytics         |
 
 ---
 
@@ -258,12 +258,12 @@ KEY METRICS:
 
 ## ★ Connections
 
-| Relationship | Topics |
-|-------------|--------|
-| Builds on | [[../llms/llms-overview]], [[../evaluation/evaluation-and-benchmarks]], [[../ethics-and-safety/ethics-safety-alignment]] |
-| Leads to | Enterprise AI deployment, Scalable AI systems |
-| Compare with | Traditional MLOps (ML models), DevOps (software) |
-| Cross-domain | Site Reliability Engineering, Platform engineering |
+| Relationship | Topics                                                                                                                   |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| Builds on    | [[../llms/llms-overview]], [[../evaluation/evaluation-and-benchmarks]], [[../ethics-and-safety/ethics-safety-alignment]] |
+| Leads to     | Enterprise AI deployment, Scalable AI systems                                                                            |
+| Compare with | Traditional MLOps (ML models), DevOps (software)                                                                         |
+| Cross-domain | Site Reliability Engineering, Platform engineering                                                                       |
 
 ---
 

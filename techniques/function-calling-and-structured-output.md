@@ -3,7 +3,7 @@ title: "Function Calling, Structured Output & Tool Use"
 tags: [function-calling, tool-use, structured-output, json-mode, mcp, grounding, genai]
 type: concept
 difficulty: intermediate
-status: learning
+status: published
 parent: "[[../genai]]"
 related: ["[[ai-agents]]", "[[../llms/llms-overview]]", "[[rag]]", "[[prompt-engineering]]"]
 source: "Multiple — see Sources"
@@ -257,12 +257,12 @@ GROUNDING METHODS (from simple to complex):
 
 ## ◆ Comparison
 
-| Feature | JSON Mode | Structured Output | Function Calling |
-|---------|-----------|-------------------|-----------------|
-| **What** | Valid JSON output | Schema-enforced output | Call external functions |
-| **Schema guaranteed?** | ❌ (valid JSON, not schema) | ✅ (100% schema compliance) | ✅ (function signature) |
-| **Use case** | Simple extraction | Data pipelines, APIs | Tool use, agents |
-| **Hallucinated fields?** | Possible | No | No (args validated) |
+| Feature                  | JSON Mode                  | Structured Output          | Function Calling        |
+| ------------------------ | -------------------------- | -------------------------- | ----------------------- |
+| **What**                 | Valid JSON output          | Schema-enforced output     | Call external functions |
+| **Schema guaranteed?**   | ❌ (valid JSON, not schema) | ✅ (100% schema compliance) | ✅ (function signature)  |
+| **Use case**             | Simple extraction          | Data pipelines, APIs       | Tool use, agents        |
+| **Hallucinated fields?** | Possible                   | No                         | No (args validated)     |
 
 ---
 
@@ -313,12 +313,12 @@ LIBRARIES:
 
 ## ★ Connections
 
-| Relationship | Topics |
-|-------------|--------|
-| Builds on | [[../llms/llms-overview]], [[prompt-engineering]] |
-| Leads to | [[ai-agents]] (agents = function calling + planning loops), [[rag]] (retrieval as a tool) |
-| Compare with | Direct prompting (text-only), Fine-tuning (embedding knowledge) |
-| Cross-domain | API design, RPC protocols, Software architecture |
+| Relationship | Topics                                                                                    |
+| ------------ | ----------------------------------------------------------------------------------------- |
+| Builds on    | [[../llms/llms-overview]], [[prompt-engineering]]                                         |
+| Leads to     | [[ai-agents]] (agents = function calling + planning loops), [[rag]] (retrieval as a tool) |
+| Compare with | Direct prompting (text-only), Fine-tuning (embedding knowledge)                           |
+| Cross-domain | API design, RPC protocols, Software architecture                                          |
 
 ---
 

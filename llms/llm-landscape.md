@@ -3,7 +3,7 @@ title: "LLM Landscape & Model Selection"
 tags: [llm-comparison, gpt-5, gemini-3, claude-4, llama-4, model-selection, open-vs-closed, genai]
 type: reference
 difficulty: intermediate
-status: learning
+status: published
 parent: "[[../genai]]"
 related: ["[[llms-overview]]", "[[reasoning-models]]", "[[../foundations/modern-architectures]]"]
 source: "Web research — March 2026"
@@ -29,52 +29,52 @@ updated: 2026-03-22
 
 ### OpenAI — GPT-5 Family
 
-| Model | Released | Context | Best For |
-|-------|----------|---------|----------|
-| **GPT-5.4** | Mar 5, 2026 | 1M tokens | General work: spreadsheets, presentations, tool use |
-| **GPT-5.4 Thinking** | Mar 2026 | 1M | Analytical tasks, shows reasoning steps |
-| **GPT-5.4 Pro** | Mar 2026 | 1M | Highest accuracy (slower, expensive) |
-| **GPT-5.4 mini** | Mar 17, 2026 | 1M | High-volume, cost-efficient, near GPT-5.4 quality |
-| **GPT-5.4 nano** | Mar 17, 2026 | — | Cheapest, fastest: classification, extraction |
-| **GPT-5.3 Instant** | Mar 3, 2026 | — | Rapid conversational responses |
-| **GPT-5.3-Codex** | Feb 5, 2026 | — | Coding agent (Copilot default) |
+| Model                | Released     | Context   | Best For                                            |
+| -------------------- | ------------ | --------- | --------------------------------------------------- |
+| **GPT-5.4**          | Mar 5, 2026  | 1M tokens | General work: spreadsheets, presentations, tool use |
+| **GPT-5.4 Thinking** | Mar 2026     | 1M        | Analytical tasks, shows reasoning steps             |
+| **GPT-5.4 Pro**      | Mar 2026     | 1M        | Highest accuracy (slower, expensive)                |
+| **GPT-5.4 mini**     | Mar 17, 2026 | 1M        | High-volume, cost-efficient, near GPT-5.4 quality   |
+| **GPT-5.4 nano**     | Mar 17, 2026 | —         | Cheapest, fastest: classification, extraction       |
+| **GPT-5.3 Instant**  | Mar 3, 2026  | —         | Rapid conversational responses                      |
+| **GPT-5.3-Codex**    | Feb 5, 2026  | —         | Coding agent (Copilot default)                      |
 
 ### Google — Gemini 3 Family
 
-| Model | Released | Context | Best For |
-|-------|----------|---------|----------|
-| **Gemini 3.1 Pro** | Feb 19, 2026 | 1M+ | Advanced reasoning (3-tier thinking), multimodal |
-| **Gemini 3.1 Flash-Lite** | Mar 3, 2026 | — | Cost-efficient, high throughput, Pro-level quality |
-| **Gemini 3.1 Deep Think** | 2026 | — | Complex technical problems (AI Ultra subscribers) |
-| **Gemini 3.1 Flash Image** | Feb 26, 2026 | — | High-efficiency image generation |
+| Model                      | Released     | Context | Best For                                           |
+| -------------------------- | ------------ | ------- | -------------------------------------------------- |
+| **Gemini 3.1 Pro**         | Feb 19, 2026 | 1M+     | Advanced reasoning (3-tier thinking), multimodal   |
+| **Gemini 3.1 Flash-Lite**  | Mar 3, 2026  | —       | Cost-efficient, high throughput, Pro-level quality |
+| **Gemini 3.1 Deep Think**  | 2026         | —       | Complex technical problems (AI Ultra subscribers)  |
+| **Gemini 3.1 Flash Image** | Feb 26, 2026 | —       | High-efficiency image generation                   |
 
 Available in: Gemini API, AI Studio, **Gemini CLI**, **Antigravity**, Vertex AI, NotebookLM
 
 ### Anthropic — Claude 4.x Family
 
-| Model | Released | Context | Best For |
-|-------|----------|---------|----------|
-| **Claude Opus 4.6** | Feb 5, 2026 | 1M tokens | Most capable: code, analysis, long-doc reasoning |
-| **Claude Sonnet 4.6** | Feb 17, 2026 | 1M tokens | Balanced: default for claude.ai, Claude Cowork |
+| Model                 | Released     | Context   | Best For                                         |
+| --------------------- | ------------ | --------- | ------------------------------------------------ |
+| **Claude Opus 4.6**   | Feb 5, 2026  | 1M tokens | Most capable: code, analysis, long-doc reasoning |
+| **Claude Sonnet 4.6** | Feb 17, 2026 | 1M tokens | Balanced: default for claude.ai, Claude Cowork   |
 
 ### Meta — LLaMA 4 Family (Open-Source)
 
-| Model | Params | Context | Best For |
-|-------|--------|---------|----------|
-| **LLaMA 4 Scout** | 17B active / 109B total (MoE, 16 experts) | 10M tokens | Efficiency, single H100, huge context |
-| **LLaMA 4 Maverick** | 17B active / 400B total (MoE, 128 experts) | 1M tokens | Performance, multimodal, open-weight flagship |
-| **LLaMA 4 Behemoth** | 288B active / 2T total | — | Teacher model (still training, not released) |
+| Model                | Params                                     | Context    | Best For                                      |
+| -------------------- | ------------------------------------------ | ---------- | --------------------------------------------- |
+| **LLaMA 4 Scout**    | 17B active / 109B total (MoE, 16 experts)  | 10M tokens | Efficiency, single H100, huge context         |
+| **LLaMA 4 Maverick** | 17B active / 400B total (MoE, 128 experts) | 1M tokens  | Performance, multimodal, open-weight flagship |
+| **LLaMA 4 Behemoth** | 288B active / 2T total                     | —          | Teacher model (still training, not released)  |
 
 Meta 2026 roadmap: **Mango** (generative video) + **Avocado** (reasoning LLM)
 
 ### Other Notable Models
 
-| Model | By | Key Feature |
-|-------|----|-------------|
-| **DeepSeek-V3 / R1** | DeepSeek | Cost-efficient reasoning, GRPO training, open-source |
-| **Mistral Large 2** | Mistral AI | European, strong multilingual, 128K context |
-| **Qwen 2.5** | Alibaba | Leading Chinese LLM, strong code + math |
-| **Grok-3** | xAI | Real-time X/Twitter data, humor-capable |
+| Model                | By         | Key Feature                                          |
+| -------------------- | ---------- | ---------------------------------------------------- |
+| **DeepSeek-V3 / R1** | DeepSeek   | Cost-efficient reasoning, GRPO training, open-source |
+| **Mistral Large 2**  | Mistral AI | European, strong multilingual, 128K context          |
+| **Qwen 2.5**         | Alibaba    | Leading Chinese LLM, strong code + math              |
+| **Grok-3**           | xAI        | Real-time X/Twitter data, humor-capable              |
 
 ---
 
@@ -82,16 +82,16 @@ Meta 2026 roadmap: **Mango** (generative video) + **Avocado** (reasoning LLM)
 
 ### By Capability (March 2026)
 
-| Capability | Best Model(s) | Runner-Up |
-|-----------|--------------|-----------|
-| **General intelligence** | GPT-5.4, Claude Opus 4.6 | Gemini 3.1 Pro |
-| **Coding** | GPT-5.3-Codex, Claude Opus 4.6 | Gemini 3.1 Pro |
-| **Reasoning / Math** | GPT-5.4 Thinking, Gemini 3.1 Deep Think | DeepSeek-R1 |
-| **Multimodal (vision)** | Gemini 3.1 Pro (native) | GPT-5.4 |
-| **Long document** | Claude Opus 4.6 (1M, reliable) | LLaMA 4 Scout (10M) |
-| **Cost efficiency** | GPT-5.4 mini/nano, Gemini Flash-Lite | LLaMA 4 Scout (self-host) |
-| **Open-source** | LLaMA 4 Maverick | DeepSeek-V3, Qwen 2.5 |
-| **Self-hosting** | LLaMA 4 Scout (1 GPU!), Qwen | Mistral |
+| Capability               | Best Model(s)                           | Runner-Up                 |
+| ------------------------ | --------------------------------------- | ------------------------- |
+| **General intelligence** | GPT-5.4, Claude Opus 4.6                | Gemini 3.1 Pro            |
+| **Coding**               | GPT-5.3-Codex, Claude Opus 4.6          | Gemini 3.1 Pro            |
+| **Reasoning / Math**     | GPT-5.4 Thinking, Gemini 3.1 Deep Think | DeepSeek-R1               |
+| **Multimodal (vision)**  | Gemini 3.1 Pro (native)                 | GPT-5.4                   |
+| **Long document**        | Claude Opus 4.6 (1M, reliable)          | LLaMA 4 Scout (10M)       |
+| **Cost efficiency**      | GPT-5.4 mini/nano, Gemini Flash-Lite    | LLaMA 4 Scout (self-host) |
+| **Open-source**          | LLaMA 4 Maverick                        | DeepSeek-V3, Qwen 2.5     |
+| **Self-hosting**         | LLaMA 4 Scout (1 GPU!), Qwen            | Mistral                   |
 
 ### Open vs Closed Models
 

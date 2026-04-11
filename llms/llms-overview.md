@@ -3,7 +3,7 @@ title: "Large Language Models (LLMs)"
 tags: [llm, gpt, claude, gemini, llama, language-models, genai]
 type: concept
 difficulty: intermediate
-status: learning
+status: published
 parent: "[[../genai]]"
 related: ["[[../foundations/transformers]]", "[[../techniques/rag]]", "[[../techniques/fine-tuning]]"]
 source: "Multiple - see Sources"
@@ -89,21 +89,21 @@ Phase 3: DEPLOYMENT
 
 #### Closed-Source
 
-| Model | Company | Latest | Key Strengths | Context |
-|-------|---------|--------|---------------|---------|
-| **GPT** | OpenAI | GPT-5.4 Pro | Unified reasoning + multimodal, reduced hallucinations | Large |
-| **Claude** | Anthropic | Opus 4.6, Sonnet 4.6 | Best coding + agents, extended thinking | 200K |
-| **Gemini** | Google | 3.1 Pro, 3 Deep Think | Massive context (2M tokens), science/research | 2M |
+| Model      | Company   | Latest                | Key Strengths                                          | Context |
+| ---------- | --------- | --------------------- | ------------------------------------------------------ | ------- |
+| **GPT**    | OpenAI    | GPT-5.4 Pro           | Unified reasoning + multimodal, reduced hallucinations | Large   |
+| **Claude** | Anthropic | Opus 4.6, Sonnet 4.6  | Best coding + agents, extended thinking                | 200K    |
+| **Gemini** | Google    | 3.1 Pro, 3 Deep Think | Massive context (2M tokens), science/research          | 2M      |
 
 #### Open-Weight
 
-| Model | Company | Latest | Key Strengths | Architecture |
-|-------|---------|--------|---------------|-------------|
-| **LLaMA** | Meta | LLaMA 4 (Scout/Maverick/Behemoth) | First multimodal LLaMA, MoE | MoE, 10M context (Scout) |
-| **Qwen** | Alibaba | Qwen 2.5+ | Surpassed LLaMA in open-source popularity | Dense & MoE |
-| **Mistral** | Mistral AI | Mistral Large 2 | Strong European alternative | Dense & MoE |
-| **DeepSeek** | DeepSeek | DeepSeek-V3, R1 | Competitive at fraction of cost | MoE |
-| **Gemma** | Google | Gemma 2 | Small but powerful (2B-27B) | Dense |
+| Model        | Company    | Latest                            | Key Strengths                             | Architecture             |
+| ------------ | ---------- | --------------------------------- | ----------------------------------------- | ------------------------ |
+| **LLaMA**    | Meta       | LLaMA 4 (Scout/Maverick/Behemoth) | First multimodal LLaMA, MoE               | MoE, 10M context (Scout) |
+| **Qwen**     | Alibaba    | Qwen 2.5+                         | Surpassed LLaMA in open-source popularity | Dense & MoE              |
+| **Mistral**  | Mistral AI | Mistral Large 2                   | Strong European alternative               | Dense & MoE              |
+| **DeepSeek** | DeepSeek   | DeepSeek-V3, R1                   | Competitive at fraction of cost           | MoE                      |
+| **Gemma**    | Google     | Gemma 2                           | Small but powerful (2B-27B)               | Dense                    |
 
 ### Scaling Laws (Chinchilla)
 
@@ -169,27 +169,27 @@ Top-k: Only sample from the k most likely tokens
 
 ## ◆ Comparison
 
-| Aspect | GPT-5.x | Claude 4.x | Gemini 3.x | LLaMA 4 |
-|--------|---------|------------|------------|---------|
-| **Best at** | General reasoning | Coding + agents | Long context + science | Open-weight flexibility |
-| **Context** | Large | 200K | Up to 2M | 10M (Scout) |
-| **Access** | API only | API only | API + Cloud | Downloadable weights |
-| **Cost** | $$$ | $$ | $$ | Free (compute costs) |
-| **Fine-tuning** | Limited | Limited | Via Vertex AI | Full control |
-| **Architecture** | Dense (rumored MoE) | Dense | Dense variants | MoE |
+| Aspect           | GPT-5.x             | Claude 4.x      | Gemini 3.x             | LLaMA 4                 |
+| ---------------- | ------------------- | --------------- | ---------------------- | ----------------------- |
+| **Best at**      | General reasoning   | Coding + agents | Long context + science | Open-weight flexibility |
+| **Context**      | Large               | 200K            | Up to 2M               | 10M (Scout)             |
+| **Access**       | API only            | API only        | API + Cloud            | Downloadable weights    |
+| **Cost**         | $$$                 | $$              | $$                     | Free (compute costs)    |
+| **Fine-tuning**  | Limited             | Limited         | Via Vertex AI          | Full control            |
+| **Architecture** | Dense (rumored MoE) | Dense           | Dense variants         | MoE                     |
 
 ---
 
 ## ◆ Use Cases & Applications
 
-| Use Case | How LLMs Are Used | Key Challenge |
-|----------|-------------------|---------------|
-| **Chat assistants** | Direct conversation (ChatGPT, Claude) | Hallucination |
-| **Code generation** | Copilot, Cursor, Devin | Correctness verification |
-| **Search** | Perplexity, Google AI Overviews | Up-to-date knowledge |
-| **Document processing** | Summarization, extraction, Q&A | Long document handling |
-| **Translation** | Near-human quality across languages | Nuance, cultural context |
-| **Agents** | Autonomous task execution with tools | Reliability, safety |
+| Use Case                | How LLMs Are Used                     | Key Challenge            |
+| ----------------------- | ------------------------------------- | ------------------------ |
+| **Chat assistants**     | Direct conversation (ChatGPT, Claude) | Hallucination            |
+| **Code generation**     | Copilot, Cursor, Devin                | Correctness verification |
+| **Search**              | Perplexity, Google AI Overviews       | Up-to-date knowledge     |
+| **Document processing** | Summarization, extraction, Q&A        | Long document handling   |
+| **Translation**         | Near-human quality across languages   | Nuance, cultural context |
+| **Agents**              | Autonomous task execution with tools  | Reliability, safety      |
 
 ---
 
@@ -218,12 +218,12 @@ Top-k: Only sample from the k most likely tokens
 
 ## ★ Connections
 
-| Relationship | Topics |
-|-------------|--------|
-| Builds on | [[../foundations/transformers]], [[../foundations/attention-mechanism]] |
-| Leads to | [[../techniques/rag]], [[../techniques/fine-tuning]], [[../techniques/ai-agents]], [[../techniques/prompt-engineering]] |
-| Compare with | Traditional NLP (rule-based), Smaller language models (BERT-era) |
-| Cross-domain | Cognitive science (language understanding), Linguistics |
+| Relationship | Topics                                                                                                                  |
+| ------------ | ----------------------------------------------------------------------------------------------------------------------- |
+| Builds on    | [[../foundations/transformers]], [[../foundations/attention-mechanism]]                                                 |
+| Leads to     | [[../techniques/rag]], [[../techniques/fine-tuning]], [[../techniques/ai-agents]], [[../techniques/prompt-engineering]] |
+| Compare with | Traditional NLP (rule-based), Smaller language models (BERT-era)                                                        |
+| Cross-domain | Cognitive science (language understanding), Linguistics                                                                 |
 
 ---
 

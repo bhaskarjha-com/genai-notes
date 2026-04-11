@@ -3,7 +3,7 @@ title: "Generative AI"
 tags: [genai, ai, machine-learning, deep-learning]
 type: concept
 difficulty: beginner
-status: learning
+status: published
 parent: ""
 related: ["[[../machine-learning]]", "[[../deep-learning]]"]
 source: "Multiple sources - see References"
@@ -35,26 +35,26 @@ updated: 2026-03-18
 
 This document covers the GenAI landscape at a high level. Each major sub-area has its own dedicated document:
 
-| Area | Document |
-|------|----------|
-| **Start here** | [[./prerequisites/neural-networks]], [[./prerequisites/linear-algebra-for-ai]], [[./prerequisites/python-for-ai]], [[./prerequisites/probability-and-statistics]], [[./prerequisites/deep-learning-fundamentals]], [[./prerequisites/nlp-fundamentals]] |
-| How it all works | [[./foundations/transformers]], [[./foundations/attention-mechanism]], [[./foundations/modern-architectures]], [[./foundations/scaling-laws-and-pretraining]] |
-| How text becomes numbers | [[./foundations/embeddings]], [[./foundations/tokenization]] |
-| Text generation | [[./llms/llms-overview]], [[./llms/reasoning-models]], [[./llms/llm-landscape]] |
-| Image generation | [[./image-generation/diffusion-models]] |
-| Beyond text | [[./multimodal/multimodal-ai]] |
-| Making models work for you | [[./techniques/rag]], [[./techniques/graph-rag]], [[./techniques/fine-tuning]], [[./techniques/ai-agents]], [[./techniques/prompt-engineering]], [[./techniques/function-calling-and-structured-output]], [[./techniques/context-engineering]] |
-| Alignment & training | [[./techniques/rl-alignment]], [[./techniques/synthetic-data-and-data-engineering]], [[./techniques/distillation-and-compression]], [[./techniques/continual-learning]] |
-| Agentic infrastructure | [[./techniques/agentic-protocols]] |
-| Building with GenAI | [[./tools-and-infra/tools-overview]], [[./tools-and-infra/vector-databases]] |
-| AI for code | [[./applications/code-generation]] |
-| Voice & speech | [[./applications/voice-ai]] |
-| Going to production | [[./production/llmops]] |
-| Measuring quality | [[./evaluation/evaluation-and-benchmarks]] |
-| Making it fast & cheap | [[./inference/inference-optimization]] |
-| Keeping it safe | [[./ethics-and-safety/ethics-safety-alignment]] |
-| Research frontiers | [[./research-frontiers/interpretability]] |
-| **Career & job readiness** | [[./career/genai-career-roles]] |
+| Area                       | Document                                                                                                                                                                                                                                                |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Start here**             | [[./prerequisites/neural-networks]], [[./prerequisites/linear-algebra-for-ai]], [[./prerequisites/python-for-ai]], [[./prerequisites/probability-and-statistics]], [[./prerequisites/deep-learning-fundamentals]], [[./prerequisites/nlp-fundamentals]] |
+| How it all works           | [[./foundations/transformers]], [[./foundations/attention-mechanism]], [[./foundations/modern-architectures]], [[./foundations/scaling-laws-and-pretraining]]                                                                                           |
+| How text becomes numbers   | [[./foundations/embeddings]], [[./foundations/tokenization]]                                                                                                                                                                                            |
+| Text generation            | [[./llms/llms-overview]], [[./llms/reasoning-models]], [[./llms/llm-landscape]]                                                                                                                                                                         |
+| Image generation           | [[./image-generation/diffusion-models]]                                                                                                                                                                                                                 |
+| Beyond text                | [[./multimodal/multimodal-ai]]                                                                                                                                                                                                                          |
+| Making models work for you | [[./techniques/rag]], [[./techniques/graph-rag]], [[./techniques/fine-tuning]], [[./techniques/ai-agents]], [[./techniques/prompt-engineering]], [[./techniques/function-calling-and-structured-output]], [[./techniques/context-engineering]]          |
+| Alignment & training       | [[./techniques/rl-alignment]], [[./techniques/synthetic-data-and-data-engineering]], [[./techniques/distillation-and-compression]], [[./techniques/continual-learning]]                                                                                 |
+| Agentic infrastructure     | [[./techniques/agentic-protocols]]                                                                                                                                                                                                                      |
+| Building with GenAI        | [[./tools-and-infra/tools-overview]], [[./tools-and-infra/vector-databases]]                                                                                                                                                                            |
+| AI for code                | [[./applications/code-generation]]                                                                                                                                                                                                                      |
+| Voice & speech             | [[./applications/voice-ai]]                                                                                                                                                                                                                             |
+| Going to production        | [[./production/llmops]]                                                                                                                                                                                                                                 |
+| Measuring quality          | [[./evaluation/evaluation-and-benchmarks]]                                                                                                                                                                                                              |
+| Making it fast & cheap     | [[./inference/inference-optimization]]                                                                                                                                                                                                                  |
+| Keeping it safe            | [[./ethics-and-safety/ethics-safety-alignment]]                                                                                                                                                                                                         |
+| Research frontiers         | [[./research-frontiers/interpretability]]                                                                                                                                                                                                               |
+| **Career & job readiness** | [[./career/genai-career-roles]]                                                                                                                                                                                                                         |
 
 ### Significance
 
@@ -114,14 +114,14 @@ Generative AI
 
 ### The Key Paradigm Shifts
 
-| Era | Paradigm | Example |
-|-----|----------|---------|
-| Pre-2017 | Rule-based / Statistical | N-grams, RNNs, LSTMs |
-| 2017 | Transformer architecture | "Attention Is All You Need" paper |
-| 2018-2020 | Pre-training + Fine-tuning | BERT, GPT-2 |
-| 2020-2022 | Scale is all you need | GPT-3 (175B params), scaling laws |
-| 2022-2023 | RLHF + Chat interface | ChatGPT, making AI accessible |
-| 2023-2024 | Multimodal + Reasoning | GPT-4, Gemini, image understanding |
+| Era       | Paradigm                           | Example                            |
+| --------- | ---------------------------------- | ---------------------------------- |
+| Pre-2017  | Rule-based / Statistical           | N-grams, RNNs, LSTMs               |
+| 2017      | Transformer architecture           | "Attention Is All You Need" paper  |
+| 2018-2020 | Pre-training + Fine-tuning         | BERT, GPT-2                        |
+| 2020-2022 | Scale is all you need              | GPT-3 (175B params), scaling laws  |
+| 2022-2023 | RLHF + Chat interface              | ChatGPT, making AI accessible      |
+| 2023-2024 | Multimodal + Reasoning             | GPT-4, Gemini, image understanding |
 | 2025-2026 | **Agentic AI + Hybrid techniques** | Autonomous agents, RAG+LoRA combos |
 
 ### How Generative AI Actually Works (Simplified)
@@ -140,48 +140,48 @@ The core insight: **Next-token prediction at scale produces emergent capabilitie
 
 ### By Output Modality
 
-| Type | What It Generates | Key Models |
-|------|-------------------|------------|
-| Text/Language | Text, code, structured data | GPT-5, Claude 4, Gemini 3, LLaMA 4 |
-| Image | Images from text descriptions | Stable Diffusion, DALL-E, Midjourney |
-| Video | Video clips from text/image | Sora, Veo, Runway Gen-3 |
-| Audio/Speech | Voice, music, sound effects | ElevenLabs, Suno, Bark |
-| 3D | 3D models and scenes | Point-E, Shap-E, Meshy |
-| Code | Working software code | Codex, Copilot, Cursor, Devin |
-| Multimodal | Multiple modalities at once | GPT-5 (omni), Gemini 3 |
+| Type          | What It Generates             | Key Models                           |
+| ------------- | ----------------------------- | ------------------------------------ |
+| Text/Language | Text, code, structured data   | GPT-5, Claude 4, Gemini 3, LLaMA 4   |
+| Image         | Images from text descriptions | Stable Diffusion, DALL-E, Midjourney |
+| Video         | Video clips from text/image   | Sora, Veo, Runway Gen-3              |
+| Audio/Speech  | Voice, music, sound effects   | ElevenLabs, Suno, Bark               |
+| 3D            | 3D models and scenes          | Point-E, Shap-E, Meshy               |
+| Code          | Working software code         | Codex, Copilot, Cursor, Devin        |
+| Multimodal    | Multiple modalities at once   | GPT-5 (omni), Gemini 3               |
 
 ### By Architecture
 
-| Architecture | How It Works | Used For |
-|-------------|--------------|----------|
-| **Transformer** (Autoregressive) | Predicts next token sequentially | LLMs (GPT, Claude, LLaMA) |
-| **Diffusion Models** | Iteratively denoises random noise | Image/video generation |
-| **GANs** | Generator vs Discriminator competition | Image synthesis (declining) |
-| **VAEs** | Encode to latent space, decode back | Image generation, anomaly detection |
-| **MoE** (Mixture of Experts) | Route to specialized sub-networks | Efficient large models (LLaMA 4, Mixtral) |
+| Architecture                     | How It Works                           | Used For                                  |
+| -------------------------------- | -------------------------------------- | ----------------------------------------- |
+| **Transformer** (Autoregressive) | Predicts next token sequentially       | LLMs (GPT, Claude, LLaMA)                 |
+| **Diffusion Models**             | Iteratively denoises random noise      | Image/video generation                    |
+| **GANs**                         | Generator vs Discriminator competition | Image synthesis (declining)               |
+| **VAEs**                         | Encode to latent space, decode back    | Image generation, anomaly detection       |
+| **MoE** (Mixture of Experts)     | Route to specialized sub-networks      | Efficient large models (LLaMA 4, Mixtral) |
 
 ### By Access Model
 
-| Type | Examples | Pros | Cons |
-|------|----------|------|------|
+| Type                  | Examples                | Pros                          | Cons                               |
+| --------------------- | ----------------------- | ----------------------------- | ---------------------------------- |
 | **Closed-Source API** | GPT-5, Claude 4, Gemini | Best performance, easy to use | Costly, no control, vendor lock-in |
-| **Open-Weight** | LLaMA 4, Mistral, Qwen | Free, customizable, self-host | Need GPU infra, less polished |
-| **Open-Source** | Some smaller models | Full transparency | Often smaller/weaker |
+| **Open-Weight**       | LLaMA 4, Mistral, Qwen  | Free, customizable, self-host | Need GPU infra, less polished      |
+| **Open-Source**       | Some smaller models     | Full transparency             | Often smaller/weaker               |
 
 ---
 
 ## ◆ Use Cases & Applications
 
-| Domain | Application | Impact |
-|--------|-------------|--------|
-| **Software Dev** | Code generation, debugging, review | 30-50% productivity boost (reported) |
-| **Content** | Writing, marketing, design, video | Democratizing creative work |
-| **Enterprise** | Document processing, customer support | Cost reduction, 24/7 availability |
-| **Healthcare** | Drug discovery, medical imaging, clinical notes | Accelerating research timelines |
-| **Finance** | Risk analysis, report generation, fraud detection | Speed + accuracy |
-| **Education** | Personalized tutoring, content creation | Scaling quality education |
-| **Science** | Protein folding, materials discovery, simulation | AlphaFold-level breakthroughs |
-| **Legal** | Contract review, research, drafting | Hours → minutes for document review |
+| Domain           | Application                                       | Impact                               |
+| ---------------- | ------------------------------------------------- | ------------------------------------ |
+| **Software Dev** | Code generation, debugging, review                | 30-50% productivity boost (reported) |
+| **Content**      | Writing, marketing, design, video                 | Democratizing creative work          |
+| **Enterprise**   | Document processing, customer support             | Cost reduction, 24/7 availability    |
+| **Healthcare**   | Drug discovery, medical imaging, clinical notes   | Accelerating research timelines      |
+| **Finance**      | Risk analysis, report generation, fraud detection | Speed + accuracy                     |
+| **Education**    | Personalized tutoring, content creation           | Scaling quality education            |
+| **Science**      | Protein folding, materials discovery, simulation  | AlphaFold-level breakthroughs        |
+| **Legal**        | Contract review, research, drafting               | Hours → minutes for document review  |
 
 ---
 
@@ -210,12 +210,12 @@ The core insight: **Next-token prediction at scale produces emergent capabilitie
 
 ## ★ Connections
 
-| Relationship | Topics |
-|-------------|--------|
-| Builds on | [[./foundations/transformers]], [[./foundations/attention-mechanism]] |
-| Leads to | [[./llms/llms-overview]], [[./image-generation/diffusion-models]], [[./techniques/rag]], [[./techniques/ai-agents]] |
-| Compare with | Traditional ML (discriminative models), Rule-based AI |
-| Cross-domain | Neuroscience (how brains generate), Information Theory |
+| Relationship | Topics                                                                                                              |
+| ------------ | ------------------------------------------------------------------------------------------------------------------- |
+| Builds on    | [[./foundations/transformers]], [[./foundations/attention-mechanism]]                                               |
+| Leads to     | [[./llms/llms-overview]], [[./image-generation/diffusion-models]], [[./techniques/rag]], [[./techniques/ai-agents]] |
+| Compare with | Traditional ML (discriminative models), Rule-based AI                                                               |
+| Cross-domain | Neuroscience (how brains generate), Information Theory                                                              |
 
 ---
 
@@ -223,14 +223,14 @@ The core insight: **Next-token prediction at scale produces emergent capabilitie
 
 ### The Current Competitive Landscape (March 2026)
 
-| Company | Latest Model | Strength |
-|---------|-------------|----------|
-| **OpenAI** | GPT-5.4 Pro | Unified reasoning + multimodal |
-| **Anthropic** | Claude Opus 4.6 | Best for coding + agents |
-| **Google** | Gemini 3.1 Pro | Largest context (2M tokens), science |
-| **Meta** | LLaMA 4 (Scout/Maverick) | Best open-weight, MoE architecture |
-| **Mistral** | Mistral Large | Strong European open alternative |
-| **Alibaba** | Qwen 2.5+ | Surpassed LLaMA in open-source popularity |
+| Company       | Latest Model             | Strength                                  |
+| ------------- | ------------------------ | ----------------------------------------- |
+| **OpenAI**    | GPT-5.4 Pro              | Unified reasoning + multimodal            |
+| **Anthropic** | Claude Opus 4.6          | Best for coding + agents                  |
+| **Google**    | Gemini 3.1 Pro           | Largest context (2M tokens), science      |
+| **Meta**      | LLaMA 4 (Scout/Maverick) | Best open-weight, MoE architecture        |
+| **Mistral**   | Mistral Large            | Strong European open alternative          |
+| **Alibaba**   | Qwen 2.5+                | Surpassed LLaMA in open-source popularity |
 
 ### Key Trend: 2025-2026 = Year of Agents
 The industry has shifted from "chatbots that respond" to "agents that act." AI systems now plan multi-step tasks, use tools, execute code, browse the web, and complete workflows autonomously.

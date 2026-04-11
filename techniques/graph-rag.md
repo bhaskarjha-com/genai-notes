@@ -3,7 +3,7 @@ title: "Graph RAG & Advanced Retrieval"
 tags: [graph-rag, knowledge-graph, multi-hop-reasoning, graphrag, agentic-rag, genai]
 type: concept
 difficulty: advanced
-status: learning
+status: published
 parent: "[[../genai]]"
 related: ["[[rag]]", "[[ai-agents]]", "[[context-engineering]]", "[[../tools-and-infra/vector-databases]]"]
 source: "Multiple — see Sources"
@@ -165,14 +165,14 @@ AGENTIC RAG = RAG + Agent autonomy
 
 ### When to Use What
 
-| Approach | Best For | Complexity |
-|----------|---------|-----------|
-| **Basic RAG** | Simple Q&A over documents | Low |
-| **Hybrid RAG** (vector + BM25) | Most production use cases | Medium |
-| **Graph RAG** | Multi-hop reasoning, entity-heavy data, aggregation | High |
-| **Agentic RAG** | Complex queries needing dynamic strategy | High |
-| **Long Context** (no retrieval) | Small doc sets, full cross-referencing | Low (but expensive) |
-| **Graph + Agentic** | Enterprise knowledge systems | Highest (but most capable) |
+| Approach                        | Best For                                            | Complexity                 |
+| ------------------------------- | --------------------------------------------------- | -------------------------- |
+| **Basic RAG**                   | Simple Q&A over documents                           | Low                        |
+| **Hybrid RAG** (vector + BM25)  | Most production use cases                           | Medium                     |
+| **Graph RAG**                   | Multi-hop reasoning, entity-heavy data, aggregation | High                       |
+| **Agentic RAG**                 | Complex queries needing dynamic strategy            | High                       |
+| **Long Context** (no retrieval) | Small doc sets, full cross-referencing              | Low (but expensive)        |
+| **Graph + Agentic**             | Enterprise knowledge systems                        | Highest (but most capable) |
 
 ---
 
@@ -208,12 +208,12 @@ KNOWLEDGE GRAPH TOOLS:
 
 ## ★ Connections
 
-| Relationship | Topics |
-|-------------|--------|
-| Builds on | [[rag]], [[../tools-and-infra/vector-databases]], [[ai-agents]] |
-| Leads to | Enterprise knowledge systems, Compliance AI |
-| Compare with | Standard RAG (similarity only), Long context (no retrieval) |
-| Cross-domain | Graph databases, Knowledge management, Information retrieval |
+| Relationship | Topics                                                          |
+| ------------ | --------------------------------------------------------------- |
+| Builds on    | [[rag]], [[../tools-and-infra/vector-databases]], [[ai-agents]] |
+| Leads to     | Enterprise knowledge systems, Compliance AI                     |
+| Compare with | Standard RAG (similarity only), Long context (no retrieval)     |
+| Cross-domain | Graph databases, Knowledge management, Information retrieval    |
 
 ---
 

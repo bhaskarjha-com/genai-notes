@@ -3,7 +3,7 @@ title: "Probability & Statistics for AI"
 tags: [probability, statistics, bayes, distributions, loss-functions, sampling, genai-prerequisite]
 type: concept
 difficulty: beginner
-status: learning
+status: published
 parent: "[[../genai]]"
 related: ["[[neural-networks]]", "[[deep-learning-fundamentals]]", "[[../llms/llms-overview]]"]
 source: "Multiple - see Sources"
@@ -65,12 +65,12 @@ FUNDAMENTAL IDEA:
 
 ### Key Distributions
 
-| Distribution | Shape | Where in GenAI |
-|-------------|-------|---------------|
-| **Uniform** | All outcomes equally likely | Random initialization of weights |
-| **Normal/Gaussian** | Bell curve (μ = mean, σ = std) | Weight initialization, diffusion (noise is Gaussian!), embeddings |
-| **Categorical** | Probability over discrete options | LLM output: probability over vocab tokens |
-| **Bernoulli** | Binary (yes/no) | Dropout (randomly disable neurons) |
+| Distribution        | Shape                             | Where in GenAI                                                    |
+| ------------------- | --------------------------------- | ----------------------------------------------------------------- |
+| **Uniform**         | All outcomes equally likely       | Random initialization of weights                                  |
+| **Normal/Gaussian** | Bell curve (μ = mean, σ = std)    | Weight initialization, diffusion (noise is Gaussian!), embeddings |
+| **Categorical**     | Probability over discrete options | LLM output: probability over vocab tokens                         |
+| **Bernoulli**       | Binary (yes/no)                   | Dropout (randomly disable neurons)                                |
 
 ```
 Normal (Gaussian) Distribution:
@@ -116,12 +116,12 @@ Loss = "How wrong is the model?" (lower = better)
 TRAINING GOAL: Minimize the loss function by adjusting weights.
 ```
 
-| Loss Function | Formula Intuition | Used For |
-|---|---|---|
-| **Cross-Entropy** | -Σ y·log(ŷ) | LLM pre-training (next-token prediction), classification |
-| **MSE** | Σ(y - ŷ)² / n | Diffusion (predict noise), regression |
-| **KL Divergence** | How different are two distributions | VAEs, RLHF (keep model close to original) |
-| **Binary Cross-Entropy** | Cross-entropy for yes/no | Binary classification, DPO |
+| Loss Function            | Formula Intuition                   | Used For                                                 |
+| ------------------------ | ----------------------------------- | -------------------------------------------------------- |
+| **Cross-Entropy**        | -Σ y·log(ŷ)                         | LLM pre-training (next-token prediction), classification |
+| **MSE**                  | Σ(y - ŷ)² / n                       | Diffusion (predict noise), regression                    |
+| **KL Divergence**        | How different are two distributions | VAEs, RLHF (keep model close to original)                |
+| **Binary Cross-Entropy** | Cross-entropy for yes/no            | Binary classification, DPO                               |
 
 ```
 CROSS-ENTROPY EXAMPLE (LLM training):
@@ -162,13 +162,13 @@ TEMPERATURE SAMPLING:
   High temp → Flattens distribution (all tokens more equal)
 ```
 
-| Strategy | How It Works | When to Use |
-|----------|-------------|-------------|
-| **Greedy** | Pick highest P every time | Factual/deterministic tasks |
-| **Temperature** | Scale logits before softmax | General creativity control |
-| **Top-K** | Only consider top K tokens | Prevent very rare token selection |
-| **Top-P (Nucleus)** | Consider smallest set of tokens whose P sums to P | Adaptive — good default |
-| **Top-K + Top-P** | Apply both filters | Production default for most APIs |
+| Strategy            | How It Works                                      | When to Use                       |
+| ------------------- | ------------------------------------------------- | --------------------------------- |
+| **Greedy**          | Pick highest P every time                         | Factual/deterministic tasks       |
+| **Temperature**     | Scale logits before softmax                       | General creativity control        |
+| **Top-K**           | Only consider top K tokens                        | Prevent very rare token selection |
+| **Top-P (Nucleus)** | Consider smallest set of tokens whose P sums to P | Adaptive — good default           |
+| **Top-K + Top-P**   | Apply both filters                                | Production default for most APIs  |
 
 ```python
 # OpenAI API example — these ARE sampling strategies
@@ -230,12 +230,12 @@ KEY DISTRIBUTIONS:
 
 ## ★ Connections
 
-| Relationship | Topics |
-|-------------|--------|
-| Builds on | Basic math |
-| Leads to | [[neural-networks]], [[deep-learning-fundamentals]], [[../llms/llms-overview]] |
-| Compare with | Deterministic programming (no randomness), Rule-based systems |
-| Cross-domain | Information theory (entropy), Bayesian statistics, Signal processing |
+| Relationship | Topics                                                                         |
+| ------------ | ------------------------------------------------------------------------------ |
+| Builds on    | Basic math                                                                     |
+| Leads to     | [[neural-networks]], [[deep-learning-fundamentals]], [[../llms/llms-overview]] |
+| Compare with | Deterministic programming (no randomness), Rule-based systems                  |
+| Cross-domain | Information theory (entropy), Bayesian statistics, Signal processing           |
 
 ---
 

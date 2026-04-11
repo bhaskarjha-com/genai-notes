@@ -3,7 +3,7 @@ title: "Reasoning Models & Test-Time Compute"
 tags: [reasoning, o1, o3, chain-of-thought, test-time-compute, deepseek-r1, thinking, genai]
 type: concept
 difficulty: advanced
-status: learning
+status: published
 parent: "[[../genai]]"
 related: ["[[llms-overview]]", "[[../foundations/transformers]]", "[[../techniques/prompt-engineering]]"]
 source: "Multiple — see Sources"
@@ -136,40 +136,40 @@ REASONING MODEL:
 
 ### Major Reasoning Models (March 2026)
 
-| Model | Company | Key Feature | Access |
-|-------|---------|-------------|--------|
-| **o1** | OpenAI | First reasoning model, PhD-level science | API |
-| **o3** | OpenAI | Stronger reasoning, variable compute | API |
-| **o4-mini** | OpenAI | Cost-effective reasoning, fast | API |
-| **DeepSeek-R1** | DeepSeek | Open-weight, competitive with o1 | Open |
-| **QwQ** | Alibaba | Open reasoning model | Open |
-| **Gemini 3.1 Deep Think** | Google | Complex technical reasoning, multimodal | API |
-| **Claude with extended thinking** | Anthropic | Toggleable thinking mode | API |
+| Model                             | Company   | Key Feature                              | Access |
+| --------------------------------- | --------- | ---------------------------------------- | ------ |
+| **o1**                            | OpenAI    | First reasoning model, PhD-level science | API    |
+| **o3**                            | OpenAI    | Stronger reasoning, variable compute     | API    |
+| **o4-mini**                       | OpenAI    | Cost-effective reasoning, fast           | API    |
+| **DeepSeek-R1**                   | DeepSeek  | Open-weight, competitive with o1         | Open   |
+| **QwQ**                           | Alibaba   | Open reasoning model                     | Open   |
+| **Gemini 3.1 Deep Think**         | Google    | Complex technical reasoning, multimodal  | API    |
+| **Claude with extended thinking** | Anthropic | Toggleable thinking mode                 | API    |
 
 ### Standard vs Reasoning: When to Use What
 
-| Scenario | Use Standard LLM | Use Reasoning Model |
-|----------|------------------|---------------------|
-| Simple Q&A, chat | ✅ Fast, cheap | ❌ Overkill |
-| Translation, summarization | ✅ | ❌ |
-| Complex math problems | ❌ Often wrong | ✅ Step-by-step verification |
-| Multi-step logic/planning | ❌ | ✅ |
-| Code debugging (complex) | ⚠️ Sometimes | ✅ Better at tracing issues |
-| Creative writing | ✅ | ❌ Unnecessary reasoning |
-| PhD-level science | ❌ | ✅ Designed for this |
-| Real-time chat (low latency) | ✅ | ❌ Thinking adds latency |
-| Cost-sensitive applications | ✅ | ⚠️ Thinking tokens cost money |
+| Scenario                     | Use Standard LLM | Use Reasoning Model          |
+| ---------------------------- | ---------------- | ---------------------------- |
+| Simple Q&A, chat             | ✅ Fast, cheap    | ❌ Overkill                   |
+| Translation, summarization   | ✅                | ❌                            |
+| Complex math problems        | ❌ Often wrong    | ✅ Step-by-step verification  |
+| Multi-step logic/planning    | ❌                | ✅                            |
+| Code debugging (complex)     | ⚠️ Sometimes      | ✅ Better at tracing issues   |
+| Creative writing             | ✅                | ❌ Unnecessary reasoning      |
+| PhD-level science            | ❌                | ✅ Designed for this          |
+| Real-time chat (low latency) | ✅                | ❌ Thinking adds latency      |
+| Cost-sensitive applications  | ✅                | ⚠️ Thinking tokens cost money |
 
 ### Test-Time Compute Techniques
 
-| Technique | How It Works | Used In |
-|-----------|-------------|---------|
-| **Extended CoT** | Model generates long reasoning chains | o1, o3, DeepSeek-R1 |
-| **Self-consistency** | Generate N answers, take majority vote | Any LLM |
-| **Best-of-N** | Generate N answers, pick best (via reward model) | Any LLM |
-| **Monte Carlo Tree Search** | Explore reasoning paths like a chess engine | Research |
-| **Process Reward Models** | Score each reasoning step, not just final answer | o1, o3 |
-| **Iterative refinement** | Model critiques and improves its own answer | Claude, GPT |
+| Technique                   | How It Works                                     | Used In             |
+| --------------------------- | ------------------------------------------------ | ------------------- |
+| **Extended CoT**            | Model generates long reasoning chains            | o1, o3, DeepSeek-R1 |
+| **Self-consistency**        | Generate N answers, take majority vote           | Any LLM             |
+| **Best-of-N**               | Generate N answers, pick best (via reward model) | Any LLM             |
+| **Monte Carlo Tree Search** | Explore reasoning paths like a chess engine      | Research            |
+| **Process Reward Models**   | Score each reasoning step, not just final answer | o1, o3              |
+| **Iterative refinement**    | Model critiques and improves its own answer      | Claude, GPT         |
 
 ### DeepSeek-R1: The Open-Source Breakthrough
 
@@ -278,12 +278,12 @@ KEY NUMBERS:
 
 ## ★ Connections
 
-| Relationship | Topics |
-|-------------|--------|
-| Builds on | [[llms-overview]], [[../techniques/prompt-engineering]] (CoT), [[../prerequisites/deep-learning-fundamentals]] (RL) |
-| Leads to | [[../ethics-and-safety/ethics-safety-alignment]] (alignment via RL), [[../inference/inference-optimization]] (serving reasoning models) |
-| Compare with | Standard LLMs (direct generation), [[../techniques/ai-agents]] (multi-step but external planning) |
-| Cross-domain | Formal verification, Theorem proving, Game AI (MCTS) |
+| Relationship | Topics                                                                                                                                  |
+| ------------ | --------------------------------------------------------------------------------------------------------------------------------------- |
+| Builds on    | [[llms-overview]], [[../techniques/prompt-engineering]] (CoT), [[../prerequisites/deep-learning-fundamentals]] (RL)                     |
+| Leads to     | [[../ethics-and-safety/ethics-safety-alignment]] (alignment via RL), [[../inference/inference-optimization]] (serving reasoning models) |
+| Compare with | Standard LLMs (direct generation), [[../techniques/ai-agents]] (multi-step but external planning)                                       |
+| Cross-domain | Formal verification, Theorem proving, Game AI (MCTS)                                                                                    |
 
 ---
 

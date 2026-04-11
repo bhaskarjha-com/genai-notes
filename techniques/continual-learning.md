@@ -3,7 +3,7 @@ title: "Continual Learning & Lifelong AI"
 tags: [continual-learning, catastrophic-forgetting, lifelong-learning, knowledge-update, genai]
 type: concept
 difficulty: advanced
-status: learning
+status: published
 parent: "[[../genai]]"
 related: ["[[fine-tuning]]", "[[../llms/llms-overview]]", "[[../ethics-and-safety/ethics-safety-alignment]]"]
 source: "Multiple — see Sources"
@@ -99,15 +99,15 @@ STAGE 3: CONTINUAL ALIGNMENT
 
 ### Methods to Prevent Forgetting
 
-| Category | Method | How It Works | Pros/Cons |
-|----------|--------|-------------|-----------|
-| **Rehearsal** | **Experience Replay** | Store some old training data, mix with new data | ✅ Simple, effective. ❌ Storage + privacy |
-| | **Pseudo-Rehearsal** | Generate synthetic old-task data using the model itself | ✅ No old data needed. ❌ Quality degrades |
-| **Regularization** | **EWC (Elastic Weight Consolidation)** | Identify important weights, penalize changing them | ✅ No old data. ❌ Compute overhead |
-| | **L2 Regularization** | Penalize distance from old weights | ✅ Simple. ❌ Too rigid |
-| **Architecture** | **Progressive Networks** | Add new modules for new tasks, freeze old ones | ✅ Zero forgetting. ❌ Model keeps growing |
-| | **LoRA per task** | Train separate adapter for each task | ✅ Modular. ❌ Need to select adapter |
-| **Data mixing** | **Replay buffer** | Keep 5-10% of old data in each training batch | ✅ Industry standard. ❌ Data management |
+| Category           | Method                                 | How It Works                                            | Pros/Cons                                |
+| ------------------ | -------------------------------------- | ------------------------------------------------------- | ---------------------------------------- |
+| **Rehearsal**      | **Experience Replay**                  | Store some old training data, mix with new data         | ✅ Simple, effective. ❌ Storage + privacy |
+|                    | **Pseudo-Rehearsal**                   | Generate synthetic old-task data using the model itself | ✅ No old data needed. ❌ Quality degrades |
+| **Regularization** | **EWC (Elastic Weight Consolidation)** | Identify important weights, penalize changing them      | ✅ No old data. ❌ Compute overhead        |
+|                    | **L2 Regularization**                  | Penalize distance from old weights                      | ✅ Simple. ❌ Too rigid                    |
+| **Architecture**   | **Progressive Networks**               | Add new modules for new tasks, freeze old ones          | ✅ Zero forgetting. ❌ Model keeps growing |
+|                    | **LoRA per task**                      | Train separate adapter for each task                    | ✅ Modular. ❌ Need to select adapter      |
+| **Data mixing**    | **Replay buffer**                      | Keep 5-10% of old data in each training batch           | ✅ Industry standard. ❌ Data management   |
 
 ```
 PRACTICAL SOLUTION (most common in 2025-2026):
@@ -195,12 +195,12 @@ KEY PAPERS:
 
 ## ★ Connections
 
-| Relationship | Topics |
-|-------------|--------|
-| Builds on | [[fine-tuning]], [[../prerequisites/deep-learning-fundamentals]] |
-| Leads to | Lifelong AI agents, [[../techniques/ai-agents]], Self-improving AI |
-| Compare with | [[rag]] (retrieval-based updates), Full retraining |
-| Cross-domain | Cognitive science (human memory), Neuroscience |
+| Relationship | Topics                                                             |
+| ------------ | ------------------------------------------------------------------ |
+| Builds on    | [[fine-tuning]], [[../prerequisites/deep-learning-fundamentals]]   |
+| Leads to     | Lifelong AI agents, [[../techniques/ai-agents]], Self-improving AI |
+| Compare with | [[rag]] (retrieval-based updates), Full retraining                 |
+| Cross-domain | Cognitive science (human memory), Neuroscience                     |
 
 ---
 

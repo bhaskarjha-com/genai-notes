@@ -3,7 +3,7 @@ title: "Multimodal AI"
 tags: [multimodal, vision-language, text-to-video, text-to-audio, sora, veo, genai]
 type: concept
 difficulty: intermediate
-status: learning
+status: published
 parent: "[[../genai]]"
 related: ["[[../llms/llms-overview]]", "[[../image-generation/diffusion-models]]", "[[../foundations/transformers]]"]
 source: "Multiple - see Sources"
@@ -102,13 +102,13 @@ Transformer backbone, decode to target modality.
 
 The most mature multimodal capability — models that understand images:
 
-| Model | Vision Capabilities | Context |
-|-------|-------------------|---------|
-| **GPT-5** | Image understanding, chart analysis, OCR, visual reasoning | Integrated |
-| **Gemini 3.1 Pro** | Native multimodal, visual reasoning, document understanding | 1M+ tokens |
-| **Claude Opus 4.6 / Sonnet 4.6** | Image analysis, chart reading, code from screenshots | 1M |
-| **LLaMA 4 Scout** | First natively multimodal LLaMA, image understanding | 10M tokens |
-| **Gemma 3** | Lightweight VLM, efficient image processing | Open-weight |
+| Model                            | Vision Capabilities                                         | Context     |
+| -------------------------------- | ----------------------------------------------------------- | ----------- |
+| **GPT-5**                        | Image understanding, chart analysis, OCR, visual reasoning  | Integrated  |
+| **Gemini 3.1 Pro**               | Native multimodal, visual reasoning, document understanding | 1M+ tokens  |
+| **Claude Opus 4.6 / Sonnet 4.6** | Image analysis, chart reading, code from screenshots        | 1M          |
+| **LLaMA 4 Scout**                | First natively multimodal LLaMA, image understanding        | 10M tokens  |
+| **Gemma 3**                      | Lightweight VLM, efficient image processing                 | Open-weight |
 
 **Common use cases:**
 - Document/receipt understanding (OCR + reasoning)
@@ -119,13 +119,13 @@ The most mature multimodal capability — models that understand images:
 
 ### Text-to-Video (The 2025-2026 Frontier)
 
-| Model | Company | Key Feature | Status |
-|-------|---------|-------------|--------|
-| **Sora 2** | OpenAI | Enhanced realism, synchronized dialogue, iOS app | Released Sep 2025 |
-| **Veo 3.1** | Google | 4K output, native audio, 3 reference images for direction | Available on Vertex AI |
-| **Runway Gen-3 Alpha** | Runway | Creator-focused, controlability | Production |
-| **Kling** | Kuaishou | Strong motion, Chinese market leader | Available |
-| **Pika 2.0** | Pika Labs | Style transfer, effects | Consumer-focused |
+| Model                  | Company   | Key Feature                                               | Status                 |
+| ---------------------- | --------- | --------------------------------------------------------- | ---------------------- |
+| **Sora 2**             | OpenAI    | Enhanced realism, synchronized dialogue, iOS app          | Released Sep 2025      |
+| **Veo 3.1**            | Google    | 4K output, native audio, 3 reference images for direction | Available on Vertex AI |
+| **Runway Gen-3 Alpha** | Runway    | Creator-focused, controlability                           | Production             |
+| **Kling**              | Kuaishou  | Strong motion, Chinese market leader                      | Available              |
+| **Pika 2.0**           | Pika Labs | Style transfer, effects                                   | Consumer-focused       |
 
 **What changed in 2025-2026:**
 - Video generation went from "toy demos" to "legitimate production tool"
@@ -135,13 +135,13 @@ The most mature multimodal capability — models that understand images:
 
 ### Text-to-Audio & Music
 
-| Model | Type | Key Feature |
-|-------|------|-------------|
-| **ElevenLabs** | Text-to-Speech | Most natural voice cloning |
-| **Suno** | Text-to-Music | Full song generation from text |
-| **Udio** | Text-to-Music | High-quality music, various genres |
-| **Bark** | Text-to-Speech | Open-source, multilingual |
-| **MusicLM / MusicFX** | Text-to-Music | Google's music generation |
+| Model                 | Type           | Key Feature                        |
+| --------------------- | -------------- | ---------------------------------- |
+| **ElevenLabs**        | Text-to-Speech | Most natural voice cloning         |
+| **Suno**              | Text-to-Music  | Full song generation from text     |
+| **Udio**              | Text-to-Music  | High-quality music, various genres |
+| **Bark**              | Text-to-Speech | Open-source, multilingual          |
+| **MusicLM / MusicFX** | Text-to-Music  | Google's music generation          |
 
 ### The CLIP Model (Foundational for Multimodal)
 
@@ -166,27 +166,27 @@ CLIP (Contrastive Language-Image Pre-training):
 
 ## ◆ Types & Classifications
 
-| Type | Input → Output | Example Models | Key Challenge |
-|------|---------------|----------------|---------------|
-| **Image Understanding** | Image+Text → Text | GPT-5, Gemini 3, Claude 4 | Fine-grained visual reasoning |
-| **Image Generation** | Text → Image | DALL-E 3, SD, Midjourney | Prompt adherence, consistency |
-| **Video Generation** | Text/Image → Video | Sora 2, Veo 3.1 | Physics, temporal consistency |
-| **Voice/TTS** | Text → Speech | ElevenLabs, Bark | Natural prosody, emotion |
-| **Music Generation** | Text → Music | Suno, Udio | Musical structure, lyrics |
-| **Document AI** | Document → Structured Data | GPT-5, Gemini (document mode) | Table extraction, layout |
-| **Omni** | Any → Any | GPT-5 (omni mode) | Maintaining quality across all |
+| Type                    | Input → Output             | Example Models                | Key Challenge                  |
+| ----------------------- | -------------------------- | ----------------------------- | ------------------------------ |
+| **Image Understanding** | Image+Text → Text          | GPT-5, Gemini 3, Claude 4     | Fine-grained visual reasoning  |
+| **Image Generation**    | Text → Image               | DALL-E 3, SD, Midjourney      | Prompt adherence, consistency  |
+| **Video Generation**    | Text/Image → Video         | Sora 2, Veo 3.1               | Physics, temporal consistency  |
+| **Voice/TTS**           | Text → Speech              | ElevenLabs, Bark              | Natural prosody, emotion       |
+| **Music Generation**    | Text → Music               | Suno, Udio                    | Musical structure, lyrics      |
+| **Document AI**         | Document → Structured Data | GPT-5, Gemini (document mode) | Table extraction, layout       |
+| **Omni**                | Any → Any                  | GPT-5 (omni mode)             | Maintaining quality across all |
 
 ---
 
 ## ◆ Strengths vs Limitations
 
-| ✅ Strengths | ❌ Limitations |
-|-------------|---------------|
-| More natural interaction (like humans do) | Much more compute-intensive than text-only |
-| Richer understanding (see + read + hear) | Video generation still has artifacts |
-| New creative possibilities | Copyright/deepfake concerns |
-| Enables visual reasoning, document understanding | Hallucination extends to visual modalities |
-| Single model for multiple tasks | Prompt engineering is harder across modalities |
+| ✅ Strengths                                      | ❌ Limitations                                  |
+| ------------------------------------------------ | ---------------------------------------------- |
+| More natural interaction (like humans do)        | Much more compute-intensive than text-only     |
+| Richer understanding (see + read + hear)         | Video generation still has artifacts           |
+| New creative possibilities                       | Copyright/deepfake concerns                    |
+| Enables visual reasoning, document understanding | Hallucination extends to visual modalities     |
+| Single model for multiple tasks                  | Prompt engineering is harder across modalities |
 
 ---
 
@@ -234,12 +234,12 @@ WHAT'S EARLY (research/demos):
 
 ## ★ Connections
 
-| Relationship | Topics |
-|-------------|--------|
-| Builds on | [[../foundations/transformers]], [[../llms/llms-overview]], [[../image-generation/diffusion-models]] |
-| Leads to | AR/VR AI, Robotics (visual+language understanding), Video AI |
-| Compare with | Single-modality models (text-only, image-only) |
-| Cross-domain | Computer vision, Audio signal processing, HCI |
+| Relationship | Topics                                                                                               |
+| ------------ | ---------------------------------------------------------------------------------------------------- |
+| Builds on    | [[../foundations/transformers]], [[../llms/llms-overview]], [[../image-generation/diffusion-models]] |
+| Leads to     | AR/VR AI, Robotics (visual+language understanding), Video AI                                         |
+| Compare with | Single-modality models (text-only, image-only)                                                       |
+| Cross-domain | Computer vision, Audio signal processing, HCI                                                        |
 
 ---
 

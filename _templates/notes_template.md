@@ -3,7 +3,7 @@ title: ""
 tags: []
 type: concept|tool|theory|procedure|entity|reference
 difficulty: beginner|intermediate|advanced|expert
-status: stub|learning|solid
+status: draft|published
 parent: ""
 related: []
 source: ""

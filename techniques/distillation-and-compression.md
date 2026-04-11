@@ -3,7 +3,7 @@ title: "Knowledge Distillation & Model Compression"
 tags: [distillation, compression, pruning, teacher-student, efficiency, genai]
 type: concept
 difficulty: advanced
-status: learning
+status: published
 parent: "[[../genai]]"
 related: ["[[fine-tuning]]", "[[../inference/inference-optimization]]", "[[../foundations/modern-architectures]]"]
 source: "Multiple — see Sources"
@@ -87,14 +87,14 @@ Covers distillation and pruning. For quantization (INT4/INT8/FP8), see [[../infe
 
 ### Types of Distillation
 
-| Type | How It Works | Example |
-|------|-------------|---------|
-| **Response-based** | Student mimics teacher's output distribution | Classic: soft label matching |
-| **Feature-based** | Student mimics teacher's intermediate representations | Match hidden layer activations |
-| **Relation-based** | Student learns relationships between samples | Contrastive distillation |
-| **Rationale-based** | Teacher generates step-by-step reasoning as training data | DeepSeek-R1 → R1-Distill-Qwen |
-| **Multi-teacher** | Multiple teachers guide one student | Ensemble knowledge transfer |
-| **Self-distillation** | Model teaches itself (larger layers → smaller) | Born-again networks |
+| Type                  | How It Works                                              | Example                        |
+| --------------------- | --------------------------------------------------------- | ------------------------------ |
+| **Response-based**    | Student mimics teacher's output distribution              | Classic: soft label matching   |
+| **Feature-based**     | Student mimics teacher's intermediate representations     | Match hidden layer activations |
+| **Relation-based**    | Student learns relationships between samples              | Contrastive distillation       |
+| **Rationale-based**   | Teacher generates step-by-step reasoning as training data | DeepSeek-R1 → R1-Distill-Qwen  |
+| **Multi-teacher**     | Multiple teachers guide one student                       | Ensemble knowledge transfer    |
+| **Self-distillation** | Model teaches itself (larger layers → smaller)            | Born-again networks            |
 
 ### Rationale Distillation (Modern LLM Pattern)
 
@@ -148,22 +148,22 @@ ARCHITECTURE CHANGES:
 
 ### Compression Comparison
 
-| Technique | Size Reduction | Speed Gain | Quality Loss | Effort |
-|-----------|---------------|------------|--------------|--------|
-| **Distillation** | 10-50x | 10-50x | 5-20% | High (need teacher data) |
-| **Pruning** | 2-5x | 2-3x | 2-10% | Medium |
-| **Quantization** (INT4) | 4x | 2-3x | 1-5% | Low (post-hoc) |
-| **LoRA/QLoRA** | ~same size | ~same | Tuned for task | Low |
-| **Combined** | 50-200x | 20-100x | 10-25% | High |
+| Technique               | Size Reduction | Speed Gain | Quality Loss   | Effort                   |
+| ----------------------- | -------------- | ---------- | -------------- | ------------------------ |
+| **Distillation**        | 10-50x         | 10-50x     | 5-20%          | High (need teacher data) |
+| **Pruning**             | 2-5x           | 2-3x       | 2-10%          | Medium                   |
+| **Quantization** (INT4) | 4x             | 2-3x       | 1-5%           | Low (post-hoc)           |
+| **LoRA/QLoRA**          | ~same size     | ~same      | Tuned for task | Low                      |
+| **Combined**            | 50-200x        | 20-100x    | 10-25%         | High                     |
 
 ### Real-World Distillation Examples
 
-| Teacher | Student | Size Ratio | Quality Retained |
-|---------|---------|-----------|------------------|
-| DeepSeek-R1 (671B) | R1-Distill-Qwen-32B | 21x smaller | ~85-90% on reasoning |
-| DeepSeek-R1 (671B) | R1-Distill-Qwen-7B | 96x smaller | ~70-80% on reasoning |
-| GPT-4 (1.8T est.) | Phi-3 (3.8B) | ~470x smaller | ~75-85% on benchmarks |
-| Claude/GPT-4 | Orca-2 (13B) | ~140x smaller | Strong step-by-step reasoning |
+| Teacher            | Student             | Size Ratio    | Quality Retained              |
+| ------------------ | ------------------- | ------------- | ----------------------------- |
+| DeepSeek-R1 (671B) | R1-Distill-Qwen-32B | 21x smaller   | ~85-90% on reasoning          |
+| DeepSeek-R1 (671B) | R1-Distill-Qwen-7B  | 96x smaller   | ~70-80% on reasoning          |
+| GPT-4 (1.8T est.)  | Phi-3 (3.8B)        | ~470x smaller | ~75-85% on benchmarks         |
+| Claude/GPT-4       | Orca-2 (13B)        | ~140x smaller | Strong step-by-step reasoning |
 
 ---
 
@@ -213,12 +213,12 @@ KEY INSIGHT:
 
 ## ★ Connections
 
-| Relationship | Topics |
-|-------------|--------|
-| Builds on | [[fine-tuning]], [[../prerequisites/deep-learning-fundamentals]] |
-| Leads to | Edge AI deployment, [[../inference/inference-optimization]] |
-| Compare with | Quantization (number precision), Pruning (removing weights) |
-| Cross-domain | Transfer learning, Curriculum learning |
+| Relationship | Topics                                                           |
+| ------------ | ---------------------------------------------------------------- |
+| Builds on    | [[fine-tuning]], [[../prerequisites/deep-learning-fundamentals]] |
+| Leads to     | Edge AI deployment, [[../inference/inference-optimization]]      |
+| Compare with | Quantization (number precision), Pruning (removing weights)      |
+| Cross-domain | Transfer learning, Curriculum learning                           |
 
 ---
 

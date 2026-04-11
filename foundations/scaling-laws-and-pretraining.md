@@ -3,7 +3,7 @@ title: "Scaling Laws & Pre-training"
 tags: [scaling-laws, pre-training, chinchilla, compute, training, data-mix, genai]
 type: concept
 difficulty: advanced
-status: learning
+status: published
 parent: "[[../genai]]"
 related: ["[[transformers]]", "[[../llms/llms-overview]]", "[[modern-architectures]]"]
 source: "Multiple — see Sources"
@@ -222,12 +222,12 @@ PRE-TRAINING OBJECTIVE:
 
 ## ★ Connections
 
-| Relationship | Topics |
-|-------------|--------|
-| Builds on | [[transformers]], [[../prerequisites/deep-learning-fundamentals]] |
-| Leads to | [[../llms/llms-overview]], [[../techniques/fine-tuning]] (SFT stage) |
-| Compare with | Fine-tuning (adaptation), Few-shot (no training) |
-| Cross-domain | Distributed systems, HPC, Data engineering |
+| Relationship | Topics                                                               |
+| ------------ | -------------------------------------------------------------------- |
+| Builds on    | [[transformers]], [[../prerequisites/deep-learning-fundamentals]]    |
+| Leads to     | [[../llms/llms-overview]], [[../techniques/fine-tuning]] (SFT stage) |
+| Compare with | Fine-tuning (adaptation), Few-shot (no training)                     |
+| Cross-domain | Distributed systems, HPC, Data engineering                           |
 
 ---
 

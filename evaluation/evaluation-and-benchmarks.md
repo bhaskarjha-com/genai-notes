@@ -3,7 +3,7 @@ title: "LLM Evaluation & Benchmarks"
 tags: [evaluation, benchmarks, mmlu, humaneval, ragas, testing, genai]
 type: reference
 difficulty: intermediate
-status: learning
+status: published
 parent: "[[../genai]]"
 related: ["[[../llms/llms-overview]]", "[[../techniques/rag]]"]
 source: "Multiple benchmarks and frameworks - see Sources"
@@ -71,35 +71,35 @@ Covers: Major benchmarks, RAG-specific evaluation, evaluation tools, and emergin
 
 #### Knowledge & Reasoning
 
-| Benchmark | What It Tests | Saturated? | Top Score (Mar 2026) |
-|-----------|--------------|------------|---------------------|
-| **MMLU** | 57 subject knowledge (high school → professional) | ⚠️ YES (>90%) | GPT-5.3: 93% |
-| **MMLU-Pro** | Harder MMLU: 12K grad-level, 10 options per question | Approaching | Gemini 3 Pro: 89.8% |
-| **GPQA-Diamond** | PhD-level science (physics, chemistry, biology) | No (60-90% range) | ~87% (frontier models) |
-| **ARC-AGI-2** | Abstract reasoning (pattern completion) | No (LLMs score ~0%) | Below human average |
-| **LiveBench** | Dynamic monthly questions (no contamination) | No (<70%) | Rotates monthly |
+| Benchmark        | What It Tests                                        | Saturated?          | Top Score (Mar 2026)   |
+| ---------------- | ---------------------------------------------------- | ------------------- | ---------------------- |
+| **MMLU**         | 57 subject knowledge (high school → professional)    | ⚠️ YES (>90%)        | GPT-5.3: 93%           |
+| **MMLU-Pro**     | Harder MMLU: 12K grad-level, 10 options per question | Approaching         | Gemini 3 Pro: 89.8%    |
+| **GPQA-Diamond** | PhD-level science (physics, chemistry, biology)      | No (60-90% range)   | ~87% (frontier models) |
+| **ARC-AGI-2**    | Abstract reasoning (pattern completion)              | No (LLMs score ~0%) | Below human average    |
+| **LiveBench**    | Dynamic monthly questions (no contamination)         | No (<70%)           | Rotates monthly        |
 
 #### Coding
 
-| Benchmark | What It Tests | Saturated? | Top Score |
-|-----------|--------------|------------|-----------|
-| **HumanEval** | 164 Python problems (pass@1) | ⚠️ YES (>95%) | Claude Sonnet 4.5: 97.6% |
-| **SWE-bench Verified** | Real GitHub issues in real codebases | No (very hard) | ~50% (frontier) |
-| **BigCodeBench** | Complex coding with library usage | No | Moderate |
+| Benchmark              | What It Tests                        | Saturated?     | Top Score                |
+| ---------------------- | ------------------------------------ | -------------- | ------------------------ |
+| **HumanEval**          | 164 Python problems (pass@1)         | ⚠️ YES (>95%)   | Claude Sonnet 4.5: 97.6% |
+| **SWE-bench Verified** | Real GitHub issues in real codebases | No (very hard) | ~50% (frontier)          |
+| **BigCodeBench**       | Complex coding with library usage    | No             | Moderate                 |
 
 #### Math
 
-| Benchmark | What It Tests | Saturated? | Top Score |
-|-----------|--------------|------------|-----------|
-| **GSM8K** | Grade school math word problems | ⚠️ YES (>95%) | Near-perfect |
-| **MATH-500** | Competition-level math | Approaching | ~90%+ (reasoning models) |
-| **AIME 2025/2026** | American math competition problems | No | Varies |
+| Benchmark          | What It Tests                      | Saturated?   | Top Score                |
+| ------------------ | ---------------------------------- | ------------ | ------------------------ |
+| **GSM8K**          | Grade school math word problems    | ⚠️ YES (>95%) | Near-perfect             |
+| **MATH-500**       | Competition-level math             | Approaching  | ~90%+ (reasoning models) |
+| **AIME 2025/2026** | American math competition problems | No           | Varies                   |
 
 #### Multimodal
 
-| Benchmark | What It Tests |
-|-----------|--------------|
-| **MMMU** | Visual understanding + reasoning |
+| Benchmark     | What It Tests                       |
+| ------------- | ----------------------------------- |
+| **MMMU**      | Visual understanding + reasoning    |
 | **MathVista** | Math reasoning with visual elements |
 
 ### RAG-Specific Evaluation (RAGAS Framework)
@@ -128,36 +128,36 @@ RAG Evaluation = Separate what went wrong WHERE
 └───────────────────────────────────────────────────────┘
 ```
 
-| RAGAS Metric | What It Measures | Why It Matters |
-|---|---|---|
-| **Faithfulness** | Is the answer grounded in retrieved context? | Catches hallucinations |
-| **Answer Relevancy** | Does the answer address the actual question? | Catches off-topic responses |
-| **Context Precision** | Were retrieved chunks relevant? | Evaluates retrieval quality |
-| **Context Recall** | Did retrieval find all needed info? | Catches missing information |
-| **Answer Correctness** | Is the answer factually correct? | Ground truth comparison |
+| RAGAS Metric           | What It Measures                             | Why It Matters              |
+| ---------------------- | -------------------------------------------- | --------------------------- |
+| **Faithfulness**       | Is the answer grounded in retrieved context? | Catches hallucinations      |
+| **Answer Relevancy**   | Does the answer address the actual question? | Catches off-topic responses |
+| **Context Precision**  | Were retrieved chunks relevant?              | Evaluates retrieval quality |
+| **Context Recall**     | Did retrieval find all needed info?          | Catches missing information |
+| **Answer Correctness** | Is the answer factually correct?             | Ground truth comparison     |
 
 ### Evaluation Methods
 
-| Method | How | Pros | Cons |
-|--------|-----|------|------|
-| **Benchmarks** | Run standardized test sets | Reproducible, comparable | Saturated, gameable |
-| **Human evaluation** | Humans rate outputs | Gold standard | Expensive, slow, subjective |
-| **LLM-as-Judge** | Use GPT-5.4/Claude to judge outputs | Scalable, cheap | Self-preference bias, inconsistent |
-| **A/B Testing** | Real users compare variants | Real-world signal | Need traffic, slow |
-| **Automated metrics** | BLEU, ROUGE, perplexity | Fast, cheap | Don't capture quality well |
-| **Red teaming** | Adversarial testing for safety | Catches edge cases | Requires expertise |
+| Method                | How                                 | Pros                     | Cons                               |
+| --------------------- | ----------------------------------- | ------------------------ | ---------------------------------- |
+| **Benchmarks**        | Run standardized test sets          | Reproducible, comparable | Saturated, gameable                |
+| **Human evaluation**  | Humans rate outputs                 | Gold standard            | Expensive, slow, subjective        |
+| **LLM-as-Judge**      | Use GPT-5.4/Claude to judge outputs | Scalable, cheap          | Self-preference bias, inconsistent |
+| **A/B Testing**       | Real users compare variants         | Real-world signal        | Need traffic, slow                 |
+| **Automated metrics** | BLEU, ROUGE, perplexity             | Fast, cheap              | Don't capture quality well         |
+| **Red teaming**       | Adversarial testing for safety      | Catches edge cases       | Requires expertise                 |
 
 ### Evaluation Tools & Platforms
 
-| Tool | Type | Best For |
-|------|------|----------|
-| **RAGAS** | Open-source framework | RAG pipeline evaluation |
-| **DeepEval** | Open-source framework | Unit tests for LLM outputs |
-| **LangSmith** | Platform (LangChain) | Tracing + evaluation + monitoring |
-| **Braintrust** | Platform | Eval + prompt playground |
-| **Phoenix** (Arize) | Open-source | Observability + tracing |
-| **Promptfoo** | Open-source CLI | Prompt testing & comparison |
-| **lm-evaluation-harness** | Open-source (EleutherAI) | Running academic benchmarks |
+| Tool                      | Type                     | Best For                          |
+| ------------------------- | ------------------------ | --------------------------------- |
+| **RAGAS**                 | Open-source framework    | RAG pipeline evaluation           |
+| **DeepEval**              | Open-source framework    | Unit tests for LLM outputs        |
+| **LangSmith**             | Platform (LangChain)     | Tracing + evaluation + monitoring |
+| **Braintrust**            | Platform                 | Eval + prompt playground          |
+| **Phoenix** (Arize)       | Open-source              | Observability + tracing           |
+| **Promptfoo**             | Open-source CLI          | Prompt testing & comparison       |
+| **lm-evaluation-harness** | Open-source (EleutherAI) | Running academic benchmarks       |
 
 ---
 
@@ -239,11 +239,11 @@ BENCHMARK SATURATION WARNING:
 
 ## ★ Connections
 
-| Relationship | Topics |
-|-------------|--------|
-| Builds on | [[../llms/llms-overview]], [[../techniques/rag]] |
-| Leads to | Production monitoring, Model selection, Quality assurance |
-| Compare with | Traditional ML metrics (accuracy, F1), Software testing |
+| Relationship | Topics                                                            |
+| ------------ | ----------------------------------------------------------------- |
+| Builds on    | [[../llms/llms-overview]], [[../techniques/rag]]                  |
+| Leads to     | Production monitoring, Model selection, Quality assurance         |
+| Compare with | Traditional ML metrics (accuracy, F1), Software testing           |
 | Cross-domain | Psychometrics (test design), Statistics (inter-rater reliability) |
 
 ---

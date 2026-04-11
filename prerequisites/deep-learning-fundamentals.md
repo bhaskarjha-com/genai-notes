@@ -3,7 +3,7 @@ title: "Deep Learning Fundamentals"
 tags: [deep-learning, training, optimizer, regularization, gpu, genai-prerequisite]
 type: concept
 difficulty: intermediate
-status: learning
+status: published
 parent: "[[../genai]]"
 related: ["[[neural-networks]]", "[[python-for-ai]]", "[[../foundations/transformers]]", "[[../techniques/fine-tuning]]"]
 source: "Multiple - see Sources"
@@ -93,14 +93,14 @@ BASIC GRADIENT DESCENT:
            Noisy updates. Gets stuck in local minima.
 ```
 
-| Optimizer | How It Improves | Used In | Status |
-|-----------|----------------|---------|--------|
-| **SGD** | Random mini-batches → faster iterations | Classic ML | Still used with momentum |
-| **SGD + Momentum** | Accumulates past gradient direction | CNNs | Image models |
-| **Adam** | Adaptive LR per-parameter + momentum | General | Most popular default |
-| **AdamW** | Adam + proper weight decay regularization | **Transformers** | **Standard for LLMs** |
-| **Adafactor** | Memory-efficient Adam variant | Large models | When memory-constrained |
-| **LION** | Simple sign-based updates | Emerging | Research, sometimes beats Adam |
+| Optimizer          | How It Improves                           | Used In          | Status                         |
+| ------------------ | ----------------------------------------- | ---------------- | ------------------------------ |
+| **SGD**            | Random mini-batches → faster iterations   | Classic ML       | Still used with momentum       |
+| **SGD + Momentum** | Accumulates past gradient direction       | CNNs             | Image models                   |
+| **Adam**           | Adaptive LR per-parameter + momentum      | General          | Most popular default           |
+| **AdamW**          | Adam + proper weight decay regularization | **Transformers** | **Standard for LLMs**          |
+| **Adafactor**      | Memory-efficient Adam variant             | Large models     | When memory-constrained        |
+| **LION**           | Simple sign-based updates                 | Emerging         | Research, sometimes beats Adam |
 
 > **For GenAI**: AdamW is the standard. Almost every LLM/Transformer uses AdamW.
 
@@ -127,12 +127,12 @@ JUST RIGHT:
 
 **Learning Rate Schedules:**
 
-| Schedule | How It Works | Use |
-|----------|-------------|-----|
-| **Constant** | lr stays the same | Simple experiments |
-| **Linear Warmup + Decay** | Increase LR from 0 → peak, then decrease | **Standard for LLMs** |
-| **Cosine Annealing** | LR follows cosine curve: high → low → high | Longer training |
-| **OneCycleLR** | Warmup → peak → decay in one cycle | Efficient training |
+| Schedule                  | How It Works                               | Use                   |
+| ------------------------- | ------------------------------------------ | --------------------- |
+| **Constant**              | lr stays the same                          | Simple experiments    |
+| **Linear Warmup + Decay** | Increase LR from 0 → peak, then decrease   | **Standard for LLMs** |
+| **Cosine Annealing**      | LR follows cosine curve: high → low → high | Longer training       |
+| **OneCycleLR**            | Warmup → peak → decay in one cycle         | Efficient training    |
 
 ```
 TYPICAL LLM LEARNING RATE SCHEDULE:
@@ -162,14 +162,14 @@ OVERFITTING:
   but doesn't understand the subject.
 ```
 
-| Technique | How It Works | Where Used |
-|-----------|-------------|------------|
-| **Dropout** | Randomly disable neurons during training (e.g., 10%) | Transformer attention, FFN |
-| **Weight Decay** | Add penalty for large weights: Loss + λ·‖w‖² | AdamW (built-in) |
-| **Batch Normalization** | Normalize layer inputs to mean=0, std=1 | CNNs (less in Transformers) |
-| **Layer Normalization** | Normalize across features per sample | **Transformers** (standard) |
-| **Data Augmentation** | Create variations of training data | Image models |
-| **Early Stopping** | Stop when validation loss starts increasing | All models |
+| Technique               | How It Works                                         | Where Used                  |
+| ----------------------- | ---------------------------------------------------- | --------------------------- |
+| **Dropout**             | Randomly disable neurons during training (e.g., 10%) | Transformer attention, FFN  |
+| **Weight Decay**        | Add penalty for large weights: Loss + λ·‖w‖²         | AdamW (built-in)            |
+| **Batch Normalization** | Normalize layer inputs to mean=0, std=1              | CNNs (less in Transformers) |
+| **Layer Normalization** | Normalize across features per sample                 | **Transformers** (standard) |
+| **Data Augmentation**   | Create variations of training data                   | Image models                |
+| **Early Stopping**      | Stop when validation loss starts increasing          | All models                  |
 
 > **For Transformers**: Layer Normalization + Dropout + Weight Decay (via AdamW) is the standard combo.
 
@@ -219,14 +219,14 @@ scaler.update()
 
 ### Common Training Problems & Fixes
 
-| Problem | Symptom | Fix |
-|---------|---------|-----|
-| **Loss not decreasing** | Loss stays flat or increases | Lower LR, check data, check loss function |
-| **Loss explodes (NaN)** | Loss = inf or NaN | Lower LR, gradient clipping, check data |
-| **Overfitting** | Train loss ↓, val loss ↑ | More data, dropout, weight decay, early stopping |
-| **Underfitting** | Both losses stay high | Bigger model, more training, higher LR |
-| **OOM (Out of Memory)** | CUDA out of memory error | Smaller batch size, gradient accumulation, quantization |
-| **Slow training** | Each step takes too long | Mixed precision, compiled model, better data loading |
+| Problem                 | Symptom                      | Fix                                                     |
+| ----------------------- | ---------------------------- | ------------------------------------------------------- |
+| **Loss not decreasing** | Loss stays flat or increases | Lower LR, check data, check loss function               |
+| **Loss explodes (NaN)** | Loss = inf or NaN            | Lower LR, gradient clipping, check data                 |
+| **Overfitting**         | Train loss ↓, val loss ↑     | More data, dropout, weight decay, early stopping        |
+| **Underfitting**        | Both losses stay high        | Bigger model, more training, higher LR                  |
+| **OOM (Out of Memory)** | CUDA out of memory error     | Smaller batch size, gradient accumulation, quantization |
+| **Slow training**       | Each step takes too long     | Mixed precision, compiled model, better data loading    |
 
 ---
 
@@ -281,12 +281,12 @@ METRICS TO MONITOR:
 
 ## ★ Connections
 
-| Relationship | Topics |
-|-------------|--------|
-| Builds on | [[neural-networks]], [[linear-algebra-for-ai]], [[probability-and-statistics]] |
-| Leads to | [[../foundations/transformers]], [[../techniques/fine-tuning]], [[../inference/inference-optimization]] |
-| Compare with | Classical ML training (scikit-learn — much simpler) |
-| Cross-domain | Optimization theory, Numerical methods, Systems engineering |
+| Relationship | Topics                                                                                                  |
+| ------------ | ------------------------------------------------------------------------------------------------------- |
+| Builds on    | [[neural-networks]], [[linear-algebra-for-ai]], [[probability-and-statistics]]                          |
+| Leads to     | [[../foundations/transformers]], [[../techniques/fine-tuning]], [[../inference/inference-optimization]] |
+| Compare with | Classical ML training (scikit-learn — much simpler)                                                     |
+| Cross-domain | Optimization theory, Numerical methods, Systems engineering                                             |
 
 ---
 

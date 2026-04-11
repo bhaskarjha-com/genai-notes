@@ -3,7 +3,7 @@ title: "Transformers"
 tags: [transformers, architecture, deep-learning, attention, genai-foundations]
 type: concept
 difficulty: intermediate
-status: learning
+status: published
 parent: "[[../genai]]"
 related: ["[[attention-mechanism]]", "[[../../llms/llms-overview]]"]
 source: "Attention Is All You Need (Vaswani et al., 2017)"
@@ -132,62 +132,62 @@ This prevents vanishing gradients and enables training very deep networks (100+ 
 
 ### Encoder vs Decoder vs Both
 
-| Variant | Architecture | Models | Use Case |
-|---------|-------------|--------|----------|
-| **Encoder-only** | Just the encoder stack | BERT, RoBERTa | Understanding: classification, NER, embeddings |
-| **Decoder-only** | Just the decoder stack | GPT, LLaMA, Claude | Generation: text completion, chat |
-| **Encoder-Decoder** | Both stacks | T5, BART, original Transformer | Seq2seq: translation, summarization |
+| Variant             | Architecture           | Models                         | Use Case                                       |
+| ------------------- | ---------------------- | ------------------------------ | ---------------------------------------------- |
+| **Encoder-only**    | Just the encoder stack | BERT, RoBERTa                  | Understanding: classification, NER, embeddings |
+| **Decoder-only**    | Just the decoder stack | GPT, LLaMA, Claude             | Generation: text completion, chat              |
+| **Encoder-Decoder** | Both stacks            | T5, BART, original Transformer | Seq2seq: translation, summarization            |
 
 **Modern trend**: Decoder-only dominates for GenAI because generation IS the task.
 
 ### Modern Improvements Over Original
 
-| Improvement | What Changed | Used In |
-|-------------|-------------|---------|
-| **RoPE** | Rotary position embeddings (better than sinusoidal) | LLaMA, Qwen, Mistral |
-| **GQA** | Grouped Query Attention (efficiency) | LLaMA 2+, Gemini |
-| **MoE** | Mixture of Experts (sparse activation) | LLaMA 4, Mixtral, GPT-4 (rumored) |
-| **SwiGLU** | Better activation function in FFN | LLaMA, PaLM |
-| **RMSNorm** | Simpler normalization (pre-norm) | LLaMA, Gemma |
-| **Flash Attention** | Memory-efficient attention computation | Nearly all modern models |
-| **KV Cache** | Cache key/value for faster inference | All autoregressive models |
+| Improvement         | What Changed                                        | Used In                           |
+| ------------------- | --------------------------------------------------- | --------------------------------- |
+| **RoPE**            | Rotary position embeddings (better than sinusoidal) | LLaMA, Qwen, Mistral              |
+| **GQA**             | Grouped Query Attention (efficiency)                | LLaMA 2+, Gemini                  |
+| **MoE**             | Mixture of Experts (sparse activation)              | LLaMA 4, Mixtral, GPT-4 (rumored) |
+| **SwiGLU**          | Better activation function in FFN                   | LLaMA, PaLM                       |
+| **RMSNorm**         | Simpler normalization (pre-norm)                    | LLaMA, Gemma                      |
+| **Flash Attention** | Memory-efficient attention computation              | Nearly all modern models          |
+| **KV Cache**        | Cache key/value for faster inference                | All autoregressive models         |
 
 ---
 
 ## ◆ Terminology
 
-| Term | Meaning |
-|------|---------|
-| **Token** | Smallest unit of text the model processes (word piece, ~4 chars in English) |
-| **Embedding** | Dense vector representation of a token |
-| **Attention Score** | How much one token should "pay attention to" another |
-| **Head** | One parallel attention computation |
-| **Layer** | One complete block (attention + FFN + norms) |
-| **Context Window** | Maximum number of tokens the model can process at once |
-| **KV Cache** | Stored key-value pairs from previous tokens to speed up generation |
-| **MoE** | Mixture of Experts — only activates a subset of parameters per token |
+| Term                | Meaning                                                                     |
+| ------------------- | --------------------------------------------------------------------------- |
+| **Token**           | Smallest unit of text the model processes (word piece, ~4 chars in English) |
+| **Embedding**       | Dense vector representation of a token                                      |
+| **Attention Score** | How much one token should "pay attention to" another                        |
+| **Head**            | One parallel attention computation                                          |
+| **Layer**           | One complete block (attention + FFN + norms)                                |
+| **Context Window**  | Maximum number of tokens the model can process at once                      |
+| **KV Cache**        | Stored key-value pairs from previous tokens to speed up generation          |
+| **MoE**             | Mixture of Experts — only activates a subset of parameters per token        |
 
 ---
 
 ## ◆ Formulas & Equations
 
-| Name | Formula | Variables | Use |
-|------|---------|-----------|-----|
-| Attention | $$\text{Attention}(Q,K,V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V$$ | Q=queries, K=keys, V=values, d_k=key dimension | Core attention computation |
-| Positional Encoding | $$PE_{(pos,2i)} = \sin(pos/10000^{2i/d})$$ | pos=position, i=dimension index, d=model dimension | Inject position info |
-| FFN | $$FFN(x) = \text{ReLU}(xW_1 + b_1)W_2 + b_2$$ | W₁, W₂=weight matrices | Process each position independently |
+| Name                | Formula                                                                           | Variables                                          | Use                                 |
+| ------------------- | --------------------------------------------------------------------------------- | -------------------------------------------------- | ----------------------------------- |
+| Attention           | $$\text{Attention}(Q,K,V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V$$ | Q=queries, K=keys, V=values, d_k=key dimension     | Core attention computation          |
+| Positional Encoding | $$PE_{(pos,2i)} = \sin(pos/10000^{2i/d})$$                                        | pos=position, i=dimension index, d=model dimension | Inject position info                |
+| FFN                 | $$FFN(x) = \text{ReLU}(xW_1 + b_1)W_2 + b_2$$                                     | W₁, W₂=weight matrices                             | Process each position independently |
 
 ---
 
 ## ◆ Strengths vs Limitations
 
-| ✅ Strengths | ❌ Limitations |
-|-------------|---------------|
-| Parallelizable (unlike RNNs) → fast training | Quadratic memory/compute with sequence length (O(n²)) |
-| Captures long-range dependencies via attention | Fixed context window (though growing: 1M-10M tokens) |
-| Scales predictably with more data/compute | Massive compute requirements for training |
-| Transfer learning works incredibly well | Positional encoding schemes still imperfect |
-| Architecture is simple and modular | No inherent understanding of time/causality |
+| ✅ Strengths                                    | ❌ Limitations                                         |
+| ---------------------------------------------- | ----------------------------------------------------- |
+| Parallelizable (unlike RNNs) → fast training   | Quadratic memory/compute with sequence length (O(n²)) |
+| Captures long-range dependencies via attention | Fixed context window (though growing: 1M-10M tokens)  |
+| Scales predictably with more data/compute      | Massive compute requirements for training             |
+| Transfer learning works incredibly well        | Positional encoding schemes still imperfect           |
+| Architecture is simple and modular             | No inherent understanding of time/causality           |
 
 ---
 
@@ -226,12 +226,12 @@ Modern Scaling (LLaMA 4 Behemoth):
 
 ## ★ Connections
 
-| Relationship | Topics |
-|-------------|--------|
-| Builds on | [[../prerequisites/neural-networks]], [[embeddings]], [[attention-mechanism]] |
-| Leads to | [[../../llms/llms-overview]], [[../../image-generation/diffusion-models]] |
-| Compare with | RNNs (sequential), LSTMs (gated sequential), CNNs (local patterns) |
-| Cross-domain | Graph attention networks (GNNs), Vision Transformers (ViT) |
+| Relationship | Topics                                                                        |
+| ------------ | ----------------------------------------------------------------------------- |
+| Builds on    | [[../prerequisites/neural-networks]], [[embeddings]], [[attention-mechanism]] |
+| Leads to     | [[../../llms/llms-overview]], [[../../image-generation/diffusion-models]]     |
+| Compare with | RNNs (sequential), LSTMs (gated sequential), CNNs (local patterns)            |
+| Cross-domain | Graph attention networks (GNNs), Vision Transformers (ViT)                    |
 
 ---
 

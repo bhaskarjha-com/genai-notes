@@ -3,7 +3,7 @@ title: "Embeddings"
 tags: [embeddings, vectors, representation, similarity, genai-foundations]
 type: concept
 difficulty: intermediate
-status: learning
+status: published
 parent: "[[../genai]]"
 related: ["[[transformers]]", "[[../../techniques/rag]]", "[[../../tools-and-infra/vector-databases]]"]
 source: "Multiple - see Sources"
@@ -90,38 +90,38 @@ EMBEDDING REPRESENTATION (dense, captures meaning):
 
 ### Types of Embeddings
 
-| Type | What It Embeds | Dimension | Use Case |
-|------|---------------|-----------|----------|
-| **Word embeddings** | Individual words | 100-300 | Legacy (Word2Vec, GloVe) |
-| **Sentence/Document** | Entire text chunks | 768-3072 | RAG, semantic search |
-| **Code embeddings** | Source code | 768-1536 | Code search, deduplication |
-| **Image embeddings** | Images | 512-2048 | Image search, CLIP |
-| **Multimodal** | Text AND images in same space | 512-1024 | Cross-modal search (CLIP) |
-| **Token embeddings** | Individual tokens (inside LLMs) | Model-dependent | Internal LLM processing |
+| Type                  | What It Embeds                  | Dimension       | Use Case                   |
+| --------------------- | ------------------------------- | --------------- | -------------------------- |
+| **Word embeddings**   | Individual words                | 100-300         | Legacy (Word2Vec, GloVe)   |
+| **Sentence/Document** | Entire text chunks              | 768-3072        | RAG, semantic search       |
+| **Code embeddings**   | Source code                     | 768-1536        | Code search, deduplication |
+| **Image embeddings**  | Images                          | 512-2048        | Image search, CLIP         |
+| **Multimodal**        | Text AND images in same space   | 512-1024        | Cross-modal search (CLIP)  |
+| **Token embeddings**  | Individual tokens (inside LLMs) | Model-dependent | Internal LLM processing    |
 
 ### Evolution of Text Embeddings
 
-| Era | Method | Key Model | How It Works |
-|-----|--------|-----------|--------------|
-| 2013 | Word2Vec | Word2Vec | Predict context words (skip-gram) or target from context (CBOW) |
-| 2014 | GloVe | GloVe | Global word co-occurrence statistics |
-| 2018 | Contextual | ELMo, BERT | Same word gets different embeddings based on context |
-| 2020+ | Sentence Transformers | SBERT | Fine-tuned BERT for sentence-level similarity |
-| 2024+ | Instruction-tuned | text-embedding-3, e5-instruct | Follow instructions like "Represent this for retrieval" |
+| Era   | Method                | Key Model                     | How It Works                                                    |
+| ----- | --------------------- | ----------------------------- | --------------------------------------------------------------- |
+| 2013  | Word2Vec              | Word2Vec                      | Predict context words (skip-gram) or target from context (CBOW) |
+| 2014  | GloVe                 | GloVe                         | Global word co-occurrence statistics                            |
+| 2018  | Contextual            | ELMo, BERT                    | Same word gets different embeddings based on context            |
+| 2020+ | Sentence Transformers | SBERT                         | Fine-tuned BERT for sentence-level similarity                   |
+| 2024+ | Instruction-tuned     | text-embedding-3, e5-instruct | Follow instructions like "Represent this for retrieval"         |
 
 **Key breakthrough**: Contextual embeddings. "Bank" in "river bank" vs "bank account" gets DIFFERENT vectors. Pre-contextual embeddings gave it the same vector.
 
 ### Current Best Embedding Models (March 2026)
 
-| Model | Provider | Dimensions | Best For |
-|-------|----------|-----------|----------|
-| `text-embedding-3-large` | OpenAI | 3072 | Highest quality (API) |
-| `text-embedding-3-small` | OpenAI | 1536 | Best budget option (API) |
-| `embed-v4` | Cohere | 1024 | Multilingual |
-| `bge-m3` | BAAI | 1024 | Best open-source, multilingual |
-| `e5-mistral-7b-instruct` | Microsoft | 4096 | Highest quality open-source |
-| `nomic-embed-text-v1.5` | Nomic | 768 | Good small open-source |
-| `jina-embeddings-v3` | Jina AI | 1024 | Task-specific dimensions |
+| Model                    | Provider  | Dimensions | Best For                       |
+| ------------------------ | --------- | ---------- | ------------------------------ |
+| `text-embedding-3-large` | OpenAI    | 3072       | Highest quality (API)          |
+| `text-embedding-3-small` | OpenAI    | 1536       | Best budget option (API)       |
+| `embed-v4`               | Cohere    | 1024       | Multilingual                   |
+| `bge-m3`                 | BAAI      | 1024       | Best open-source, multilingual |
+| `e5-mistral-7b-instruct` | Microsoft | 4096       | Highest quality open-source    |
+| `nomic-embed-text-v1.5`  | Nomic     | 768        | Good small open-source         |
+| `jina-embeddings-v3`     | Jina AI   | 1024       | Task-specific dimensions       |
 
 ### Similarity Measurement
 
@@ -141,11 +141,11 @@ cosine_similarity(embed_cat, embed_dog)  # → 0.99 (very similar!)
 cosine_similarity(embed_cat, embed_car)  # → 0.12 (very different)
 ```
 
-| Metric | When to Use | Range |
-|--------|-------------|-------|
-| **Cosine Similarity** | Normalized text embeddings (most common) | -1 to 1 |
-| **Euclidean Distance** | When magnitude matters | 0 to ∞ |
-| **Dot Product** | Already-normalized vectors, fast | -∞ to ∞ |
+| Metric                 | When to Use                              | Range   |
+| ---------------------- | ---------------------------------------- | ------- |
+| **Cosine Similarity**  | Normalized text embeddings (most common) | -1 to 1 |
+| **Euclidean Distance** | When magnitude matters                   | 0 to ∞  |
+| **Dot Product**        | Already-normalized vectors, fast         | -∞ to ∞ |
 
 ---
 
@@ -186,13 +186,13 @@ vector = response["embedding"]  # 768 dimensions
 
 ## ◆ Strengths vs Limitations
 
-| ✅ Strengths | ❌ Limitations |
-|-------------|---------------|
+| ✅ Strengths                                   | ❌ Limitations                                                     |
+| --------------------------------------------- | ----------------------------------------------------------------- |
 | Capture semantic meaning (synonyms, concepts) | Fixed-size: long documents squeezed into same dimensions as short |
-| Enable similarity search at scale | Black box: hard to interpret what each dimension means |
-| Work across languages (multilingual models) | Quality depends heavily on model choice |
-| Cheap to compute and store | Domain-specific text may need fine-tuned embeddings |
-| Foundation for RAG, search, recommendations | Can encode biases from training data |
+| Enable similarity search at scale             | Black box: hard to interpret what each dimension means            |
+| Work across languages (multilingual models)   | Quality depends heavily on model choice                           |
+| Cheap to compute and store                    | Domain-specific text may need fine-tuned embeddings               |
+| Foundation for RAG, search, recommendations   | Can encode biases from training data                              |
 
 ---
 
@@ -242,12 +242,12 @@ SIMILARITY THRESHOLDS (cosine, rough guide):
 
 ## ★ Connections
 
-| Relationship | Topics |
-|-------------|--------|
-| Builds on | [[../prerequisites/linear-algebra-for-ai]], Neural network representations |
-| Leads to | [[../../techniques/rag]], [[../../tools-and-infra/vector-databases]], Semantic search |
-| Compare with | One-hot encoding (sparse), TF-IDF (sparse, frequency-based), Knowledge graphs |
-| Cross-domain | Recommendation systems, Computer vision (image embeddings), Bioinformatics |
+| Relationship | Topics                                                                                |
+| ------------ | ------------------------------------------------------------------------------------- |
+| Builds on    | [[../prerequisites/linear-algebra-for-ai]], Neural network representations            |
+| Leads to     | [[../../techniques/rag]], [[../../tools-and-infra/vector-databases]], Semantic search |
+| Compare with | One-hot encoding (sparse), TF-IDF (sparse, frequency-based), Knowledge graphs         |
+| Cross-domain | Recommendation systems, Computer vision (image embeddings), Bioinformatics            |
 
 ---
 

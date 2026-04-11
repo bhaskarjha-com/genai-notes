@@ -3,7 +3,7 @@ title: "Neural Networks"
 tags: [neural-networks, perceptron, backpropagation, activation, cnn, rnn, genai-prerequisite]
 type: concept
 difficulty: beginner
-status: learning
+status: published
 parent: "[[../genai]]"
 related: ["[[../foundations/transformers]]", "[[deep-learning-fundamentals]]", "[[linear-algebra-for-ai]]"]
 source: "Multiple - see Sources"
@@ -105,14 +105,14 @@ WITHOUT activation: Each layer is just W·x + b
 WITH activation: Non-linearity lets the network learn ANY function.
 ```
 
-| Function | Formula | Graph Shape | When to Use |
-|----------|---------|-------------|-------------|
-| **ReLU** | max(0, x) | `___/` | Default for hidden layers (fast, simple) |
-| **GELU** | x · Φ(x) | Smooth `___/` | Transformers (GPT, BERT) — smoother than ReLU |
-| **Sigmoid** | 1/(1+e⁻ˣ) | S-curve [0,1] | Output layer for binary classification |
-| **Tanh** | (eˣ-e⁻ˣ)/(eˣ+e⁻ˣ) | S-curve [-1,1] | When you need centered outputs |
-| **Softmax** | eˣⁱ/Σeˣʲ | Probabilities | Output layer for multi-class (next-token prediction!) |
-| **SiLU/Swish** | x · sigmoid(x) | Smooth `___/` | Modern architectures (LLaMA, Mistral) |
+| Function       | Formula           | Graph Shape    | When to Use                                           |
+| -------------- | ----------------- | -------------- | ----------------------------------------------------- |
+| **ReLU**       | max(0, x)         | `___/`         | Default for hidden layers (fast, simple)              |
+| **GELU**       | x · Φ(x)          | Smooth `___/`  | Transformers (GPT, BERT) — smoother than ReLU         |
+| **Sigmoid**    | 1/(1+e⁻ˣ)         | S-curve [0,1]  | Output layer for binary classification                |
+| **Tanh**       | (eˣ-e⁻ˣ)/(eˣ+e⁻ˣ) | S-curve [-1,1] | When you need centered outputs                        |
+| **Softmax**    | eˣⁱ/Σeˣʲ          | Probabilities  | Output layer for multi-class (next-token prediction!) |
+| **SiLU/Swish** | x · sigmoid(x)    | Smooth `___/`  | Modern architectures (LLaMA, Mistral)                 |
 
 > **For GenAI**: GELU is used in GPT/BERT. SiLU/Swish is used in LLaMA/Mistral. Softmax is the output for every LLM (probability over vocabulary).
 
@@ -155,12 +155,12 @@ THE TRAINING LOOP:
 
 ### Network Types (Building Blocks for GenAI)
 
-| Type | Architecture | What It's Good At | GenAI Relevance |
-|------|-------------|-------------------|-----------------|
-| **Feed-Forward (FFN)** | Input → Hidden → Output | Simple classification/regression | Used INSIDE Transformers (the MLP block) |
-| **CNN** | Convolutional filters + pooling | Images, spatial patterns | Vision encoders (ViT combines CNN ideas + attention) |
-| **RNN/LSTM** | Sequential processing, hidden state | Sequential data (text, time series) | **Replaced by Transformers** (RNNs can't parallelize) |
-| **Transformer** | Self-attention + FFN | Everything (text, image, video) | THE architecture of modern GenAI |
+| Type                   | Architecture                        | What It's Good At                   | GenAI Relevance                                       |
+| ---------------------- | ----------------------------------- | ----------------------------------- | ----------------------------------------------------- |
+| **Feed-Forward (FFN)** | Input → Hidden → Output             | Simple classification/regression    | Used INSIDE Transformers (the MLP block)              |
+| **CNN**                | Convolutional filters + pooling     | Images, spatial patterns            | Vision encoders (ViT combines CNN ideas + attention)  |
+| **RNN/LSTM**           | Sequential processing, hidden state | Sequential data (text, time series) | **Replaced by Transformers** (RNNs can't parallelize) |
+| **Transformer**        | Self-attention + FFN                | Everything (text, image, video)     | THE architecture of modern GenAI                      |
 
 ```
 Evolution:  FFN (1980s) → CNN (1998) → RNN/LSTM (2014) → Transformer (2017)
@@ -261,12 +261,12 @@ ACTIVATION CHOICE:
 
 ## ★ Connections
 
-| Relationship | Topics |
-|-------------|--------|
-| Builds on | [[linear-algebra-for-ai]], [[probability-and-statistics]] |
-| Leads to | [[../foundations/transformers]], [[deep-learning-fundamentals]] |
-| Compare with | Decision trees, SVMs (simpler ML models) |
-| Cross-domain | Neuroscience (loose inspiration), Control theory |
+| Relationship | Topics                                                          |
+| ------------ | --------------------------------------------------------------- |
+| Builds on    | [[linear-algebra-for-ai]], [[probability-and-statistics]]       |
+| Leads to     | [[../foundations/transformers]], [[deep-learning-fundamentals]] |
+| Compare with | Decision trees, SVMs (simpler ML models)                        |
+| Cross-domain | Neuroscience (loose inspiration), Control theory                |
 
 ---
 

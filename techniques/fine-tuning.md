@@ -3,7 +3,7 @@ title: "Fine-Tuning LLMs"
 tags: [fine-tuning, lora, qlora, peft, training, genai-techniques]
 type: procedure
 difficulty: advanced
-status: learning
+status: published
 parent: "[[../genai]]"
 related: ["[[rag]]", "[[../llms/llms-overview]]", "[[prompt-engineering]]"]
 source: "Hu et al. LoRA (2021), QLoRA (2023), latest hybrid techniques"
@@ -142,15 +142,15 @@ Performance: Within 1-2% of full fine-tuning
 
 ### Key Hyperparameters
 
-| Parameter | Typical Value | What It Does |
-|-----------|--------------|--------------|
-| `r` (LoRA rank) | 8-64 | Higher = more capacity, more memory |
-| `lora_alpha` | 16-32 | Scaling factor (usually = 2×r) |
-| `lora_dropout` | 0.05-0.1 | Regularization |
-| `target_modules` | q_proj, v_proj, k_proj, o_proj | Which layers to apply LoRA to |
-| `learning_rate` | 1e-4 to 2e-4 | Lower than pre-training |
-| `epochs` | 1-5 | Often just 1-3 is enough |
-| `batch_size` | 4-16 | Limited by GPU memory |
+| Parameter        | Typical Value                  | What It Does                        |
+| ---------------- | ------------------------------ | ----------------------------------- |
+| `r` (LoRA rank)  | 8-64                           | Higher = more capacity, more memory |
+| `lora_alpha`     | 16-32                          | Scaling factor (usually = 2×r)      |
+| `lora_dropout`   | 0.05-0.1                       | Regularization                      |
+| `target_modules` | q_proj, v_proj, k_proj, o_proj | Which layers to apply LoRA to       |
+| `learning_rate`  | 1e-4 to 2e-4                   | Lower than pre-training             |
+| `epochs`         | 1-5                            | Often just 1-3 is enough            |
+| `batch_size`     | 4-16                           | Limited by GPU memory               |
 
 ---
 
@@ -223,26 +223,26 @@ model.save_pretrained("./my-fine-tuned-model")
 
 ## ◆ Comparison
 
-| Aspect | Full Fine-Tuning | LoRA | QLoRA | RAG (alternative) |
-|--------|-----------------|------|-------|-----|
-| **Params updated** | All | 0.1-1% | 0.1-1% | None |
-| **GPU memory** | Very high | Medium | Low (1 GPU) | N/A |
-| **Training data** | >10K examples | 100-10K | 100-10K | Documents (no training) |
-| **Changes** | Everything | Behavior/style | Behavior/style | Adds knowledge |
-| **Knowledge** | Baked in (static) | Baked in (static) | Baked in (static) | Dynamic (updatable) |
-| **Cost** | $$$$$ | $$ | $ | $ (infra only) |
+| Aspect             | Full Fine-Tuning  | LoRA              | QLoRA             | RAG (alternative)       |
+| ------------------ | ----------------- | ----------------- | ----------------- | ----------------------- |
+| **Params updated** | All               | 0.1-1%            | 0.1-1%            | None                    |
+| **GPU memory**     | Very high         | Medium            | Low (1 GPU)       | N/A                     |
+| **Training data**  | >10K examples     | 100-10K           | 100-10K           | Documents (no training) |
+| **Changes**        | Everything        | Behavior/style    | Behavior/style    | Adds knowledge          |
+| **Knowledge**      | Baked in (static) | Baked in (static) | Baked in (static) | Dynamic (updatable)     |
+| **Cost**           | $$$$$             | $$                | $                 | $ (infra only)          |
 
 ---
 
 ## ◆ Strengths vs Limitations
 
-| ✅ Strengths | ❌ Limitations |
-|-------------|---------------|
-| Permanently changes model behavior | Requires training data curation |
-| Consistent output style/format | Risk of catastrophic forgetting |
-| Lower inference cost (no retrieval) | Knowledge is static (vs RAG's dynamic) |
-| Can improve reasoning for specific domains | Overfitting on small datasets |
-| LoRA adapters are tiny (~10-100 MB) | Still needs GPU for training |
+| ✅ Strengths                                | ❌ Limitations                          |
+| ------------------------------------------ | -------------------------------------- |
+| Permanently changes model behavior         | Requires training data curation        |
+| Consistent output style/format             | Risk of catastrophic forgetting        |
+| Lower inference cost (no retrieval)        | Knowledge is static (vs RAG's dynamic) |
+| Can improve reasoning for specific domains | Overfitting on small datasets          |
+| LoRA adapters are tiny (~10-100 MB)        | Still needs GPU for training           |
 
 ---
 
@@ -268,24 +268,24 @@ model.save_pretrained("./my-fine-tuned-model")
 
 ## ★ Connections
 
-| Relationship | Topics |
-|-------------|--------|
-| Builds on | [[../llms/llms-overview]], [[../foundations/transformers]] |
-| Leads to | Domain-specific models, Hybrid RAG systems |
+| Relationship | Topics                                                          |
+| ------------ | --------------------------------------------------------------- |
+| Builds on    | [[../llms/llms-overview]], [[../foundations/transformers]]      |
+| Leads to     | Domain-specific models, Hybrid RAG systems                      |
 | Compare with | [[rag]] (knowledge injection), Prompt engineering (no training) |
-| Cross-domain | Transfer learning (CV), Adapter methods |
+| Cross-domain | Transfer learning (CV), Adapter methods                         |
 
 ---
 
 ## ★ Fine-Tuning Tooling (2026)
 
-| Tool | Key Feature | When to Use |
-|------|-------------|-------------|
-| **Unsloth** | 2x faster, 70% less memory, free tier | Default choice for LoRA/QLoRA fine-tuning in 2026. Massive open-source adoption. |
-| **Axolotl** | YAML-based config, multi-GPU, many methods | Complex multi-dataset training, advanced configs |
-| **HuggingFace TRL** | Official SFTTrainer, RLHF support | When you need RLHF/DPO integration or HF ecosystem |
-| **LLaMA Factory** | 100+ models, WebUI, no code needed | Quick experiments, non-engineers |
-| **torchtune** | PyTorch-native, Meta official | LLaMA models, when you want low-level control |
+| Tool                | Key Feature                                | When to Use                                                                      |
+| ------------------- | ------------------------------------------ | -------------------------------------------------------------------------------- |
+| **Unsloth**         | 2x faster, 70% less memory, free tier      | Default choice for LoRA/QLoRA fine-tuning in 2026. Massive open-source adoption. |
+| **Axolotl**         | YAML-based config, multi-GPU, many methods | Complex multi-dataset training, advanced configs                                 |
+| **HuggingFace TRL** | Official SFTTrainer, RLHF support          | When you need RLHF/DPO integration or HF ecosystem                               |
+| **LLaMA Factory**   | 100+ models, WebUI, no code needed         | Quick experiments, non-engineers                                                 |
+| **torchtune**       | PyTorch-native, Meta official              | LLaMA models, when you want low-level control                                    |
 
 ```
 # ═══ Unsloth Example (2x faster QLoRA) ═══

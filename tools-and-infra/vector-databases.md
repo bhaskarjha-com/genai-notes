@@ -3,7 +3,7 @@ title: "Vector Databases"
 tags: [vector-db, embeddings, similarity-search, pinecone, qdrant, chroma, genai-infra]
 type: tool
 difficulty: intermediate
-status: learning
+status: published
 parent: "[[tools-overview]]"
 related: ["[[../techniques/rag]]", "[[../llms/llms-overview]]"]
 source: "Multiple - see Sources"
@@ -70,11 +70,11 @@ HOW:
 
 ### Similarity Metrics
 
-| Metric | Formula Intuition | Best For |
-|--------|-------------------|----------|
+| Metric                | Formula Intuition                          | Best For                      |
+| --------------------- | ------------------------------------------ | ----------------------------- |
 | **Cosine Similarity** | Angle between vectors (ignoring magnitude) | Text embeddings (most common) |
-| **Euclidean (L2)** | Straight-line distance | Image embeddings |
-| **Dot Product** | Magnitude-aware similarity | Normalized embeddings |
+| **Euclidean (L2)**    | Straight-line distance                     | Image embeddings              |
+| **Dot Product**       | Magnitude-aware similarity                 | Normalized embeddings         |
 
 ```
 Cosine Similarity: 
@@ -88,12 +88,12 @@ Cosine Similarity:
 
 Brute-force search (compare query against ALL vectors) is O(n). At millions of vectors, this is too slow. ANN (Approximate Nearest Neighbor) algorithms trade tiny accuracy loss for massive speed gain.
 
-| Algorithm | How It Works | Used By | Speed vs Accuracy |
-|-----------|-------------|---------|-------------------|
-| **HNSW** | Hierarchical graph navigation | Qdrant, Weaviate, pgvector | Best accuracy, more memory |
-| **IVF** | Cluster vectors, search nearest clusters | FAISS, Pinecone | Good balance |
-| **ScaNN** | Quantize + search | Google | Very fast, slight accuracy loss |
-| **Annoy** | Random projection trees | Spotify | Fast build, OK accuracy |
+| Algorithm | How It Works                             | Used By                    | Speed vs Accuracy               |
+| --------- | ---------------------------------------- | -------------------------- | ------------------------------- |
+| **HNSW**  | Hierarchical graph navigation            | Qdrant, Weaviate, pgvector | Best accuracy, more memory      |
+| **IVF**   | Cluster vectors, search nearest clusters | FAISS, Pinecone            | Good balance                    |
+| **ScaNN** | Quantize + search                        | Google                     | Very fast, slight accuracy loss |
+| **Annoy** | Random projection trees                  | Spotify                    | Fast build, OK accuracy         |
 
 **HNSW** (Hierarchical Navigable Small World) is the most popular — think of it as:
 
@@ -108,15 +108,15 @@ Search: Start at top layer, navigate to approximate area,
 
 ### Major Vector Databases Compared
 
-| Database | Type | Strengths | Weaknesses | Best For |
-|----------|------|-----------|------------|----------|
-| **Pinecone** | Managed (cloud) | Serverless, zero ops, fast start | Cost at scale, vendor lock-in | Startups, prototypes, managed preference |
-| **Qdrant** | Self-host + Cloud | Fast (Rust), rich filtering, best API | Newer, smaller community | Production self-host, performance-critical |
-| **Weaviate** | Self-host + Cloud | Hybrid search built-in, modules | Heavier resource use | When you need keyword + vector search |
-| **Chroma** | Embedded (in-process) | Simplest setup, great for dev | Not for large-scale production | Prototyping, small datasets, local dev |
-| **Milvus** | Self-host | Massive scale, battle-tested | Complex to operate | Very large datasets (billions) |
-| **pgvector** | Postgres extension | Use existing Postgres! | Limited scale, basic features | When you already have Postgres, < 1M docs |
-| **FAISS** | Library (not DB) | Fastest ANN, library-level control | No persistence, no API, just a library | Research, custom pipelines |
+| Database     | Type                  | Strengths                             | Weaknesses                             | Best For                                   |
+| ------------ | --------------------- | ------------------------------------- | -------------------------------------- | ------------------------------------------ |
+| **Pinecone** | Managed (cloud)       | Serverless, zero ops, fast start      | Cost at scale, vendor lock-in          | Startups, prototypes, managed preference   |
+| **Qdrant**   | Self-host + Cloud     | Fast (Rust), rich filtering, best API | Newer, smaller community               | Production self-host, performance-critical |
+| **Weaviate** | Self-host + Cloud     | Hybrid search built-in, modules       | Heavier resource use                   | When you need keyword + vector search      |
+| **Chroma**   | Embedded (in-process) | Simplest setup, great for dev         | Not for large-scale production         | Prototyping, small datasets, local dev     |
+| **Milvus**   | Self-host             | Massive scale, battle-tested          | Complex to operate                     | Very large datasets (billions)             |
+| **pgvector** | Postgres extension    | Use existing Postgres!                | Limited scale, basic features          | When you already have Postgres, < 1M docs  |
+| **FAISS**    | Library (not DB)      | Fastest ANN, library-level control    | No persistence, no API, just a library | Research, custom pipelines                 |
 
 ### Decision Flowchart
 
@@ -202,13 +202,13 @@ docker run -p 8080:8080 semitechnologies/weaviate
 
 ## ◆ Strengths vs Limitations
 
-| ✅ Strengths | ❌ Limitations |
-|-------------|---------------|
-| Semantic search ("find similar" not "find exact") | Approximate — may miss some results |
-| Sub-millisecond search at million-scale | Embedding quality determines search quality |
-| Rich metadata filtering + vector search | Additional infra to manage |
-| Growing ecosystem and tooling | Each DB has different APIs (no standard) |
-| Critical for RAG, recommendations, anomaly detection | Memory-intensive (vectors are large) |
+| ✅ Strengths                                          | ❌ Limitations                               |
+| ---------------------------------------------------- | ------------------------------------------- |
+| Semantic search ("find similar" not "find exact")    | Approximate — may miss some results         |
+| Sub-millisecond search at million-scale              | Embedding quality determines search quality |
+| Rich metadata filtering + vector search              | Additional infra to manage                  |
+| Growing ecosystem and tooling                        | Each DB has different APIs (no standard)    |
+| Critical for RAG, recommendations, anomaly detection | Memory-intensive (vectors are large)        |
 
 ---
 
@@ -260,12 +260,12 @@ EMBEDDING DIMENSIONS:
 
 ## ★ Connections
 
-| Relationship | Topics |
-|-------------|--------|
-| Builds on | Embeddings, Similarity search, [[../llms/llms-overview]] |
-| Leads to | [[../techniques/rag]], Semantic search engines, Recommendation systems |
+| Relationship | Topics                                                                        |
+| ------------ | ----------------------------------------------------------------------------- |
+| Builds on    | Embeddings, Similarity search, [[../llms/llms-overview]]                      |
+| Leads to     | [[../techniques/rag]], Semantic search engines, Recommendation systems        |
 | Compare with | Traditional databases (SQL), Search engines (Elasticsearch), Knowledge graphs |
-| Cross-domain | Information retrieval, Computational geometry (nearest neighbor) |
+| Cross-domain | Information retrieval, Computational geometry (nearest neighbor)              |
 
 ---
 

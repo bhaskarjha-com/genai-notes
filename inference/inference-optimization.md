@@ -3,7 +3,7 @@ title: "Inference Optimization"
 tags: [inference, quantization, speculative-decoding, kv-cache, serving, performance, genai]
 type: concept
 difficulty: advanced
-status: learning
+status: published
 parent: "[[../genai]]"
 related: ["[[../llms/llms-overview]]", "[[../tools-and-infra/tools-overview]]", "[[../foundations/transformers]]"]
 source: "Multiple papers and frameworks - see Sources"
@@ -95,13 +95,13 @@ MEMORY IMPACT (LLaMA 70B):
   INT4:   35 GB  (1× RTX 4090 or A100 40GB!)  ← This is why quantization matters
 ```
 
-| Method | Type | How It Works | Quality Loss |
-|--------|------|-------------|-------------|
-| **GPTQ** | PTQ (post-training) | Layer-by-layer quantization using calibration data | Low (< 1%) |
-| **AWQ** | PTQ | Protects "salient" weights from quantization | Very low |
-| **GGUF** | PTQ | CPU-friendly format used by llama.cpp | Varies by bits |
-| **QLoRA** | QAT (quantize + train) | 4-bit base + LoRA adapters in 16-bit | Minimal |
-| **FP8** | Native hardware | Supported on Blackwell/Rubin GPUs (2025+) | Very low |
+| Method    | Type                   | How It Works                                       | Quality Loss   |
+| --------- | ---------------------- | -------------------------------------------------- | -------------- |
+| **GPTQ**  | PTQ (post-training)    | Layer-by-layer quantization using calibration data | Low (< 1%)     |
+| **AWQ**   | PTQ                    | Protects "salient" weights from quantization       | Very low       |
+| **GGUF**  | PTQ                    | CPU-friendly format used by llama.cpp              | Varies by bits |
+| **QLoRA** | QAT (quantize + train) | 4-bit base + LoRA adapters in 16-bit               | Minimal        |
+| **FP8**   | Native hardware        | Supported on Blackwell/Rubin GPUs (2025+)          | Very low       |
 
 ```
 QUICK DECISION:
@@ -129,12 +129,12 @@ PROBLEM: KV cache grows with sequence length × batch size:
     KV cache = ~40 GB of GPU memory just for the cache!
 ```
 
-| KV Cache Technique | What It Does | Impact |
-|---|---|---|
-| **PagedAttention** (vLLM) | Paging like OS memory management | 2-4x more throughput |
-| **KV Cache Quantization** | Compress cache to FP8/INT4 | 50-75% less cache memory |
-| **Prefix Caching** | Share cache for common prefixes | Fewer recomputations |
-| **Sliding Window** | Only cache recent N tokens | Bounded memory (Mistral) |
+| KV Cache Technique         | What It Does                        | Impact                    |
+| -------------------------- | ----------------------------------- | ------------------------- |
+| **PagedAttention** (vLLM)  | Paging like OS memory management    | 2-4x more throughput      |
+| **KV Cache Quantization**  | Compress cache to FP8/INT4          | 50-75% less cache memory  |
+| **Prefix Caching**         | Share cache for common prefixes     | Fewer recomputations      |
+| **Sliding Window**         | Only cache recent N tokens          | Bounded memory (Mistral)  |
 | **Token Pruning/Eviction** | Remove less important cached tokens | More capacity per request |
 
 #### 3. Speculative Decoding (Predict + Verify in Parallel)
@@ -170,15 +170,15 @@ SPECULATIVE DECODING (fast):
 
 ### Other Key Techniques
 
-| Technique | What | Impact |
-|-----------|------|--------|
-| **Continuous Batching** | Dynamically add/remove requests from a batch | Better GPU utilization |
-| **Tensor Parallelism** | Split model across multiple GPUs | Run models too large for 1 GPU |
-| **Pipeline Parallelism** | Different layers on different GPUs | Reduce per-GPU memory |
-| **Flash Attention** | Tiled attention computation | 2-4x faster attention |
-| **Knowledge Distillation** | Train smaller model to mimic larger | Smaller, faster model |
-| **Pruning** | Remove unimportant weights | Smaller model, some quality loss |
-| **MoE (Mixture of Experts)** | Only activate subset of params per token | More capacity, less compute |
+| Technique                    | What                                         | Impact                           |
+| ---------------------------- | -------------------------------------------- | -------------------------------- |
+| **Continuous Batching**      | Dynamically add/remove requests from a batch | Better GPU utilization           |
+| **Tensor Parallelism**       | Split model across multiple GPUs             | Run models too large for 1 GPU   |
+| **Pipeline Parallelism**     | Different layers on different GPUs           | Reduce per-GPU memory            |
+| **Flash Attention**          | Tiled attention computation                  | 2-4x faster attention            |
+| **Knowledge Distillation**   | Train smaller model to mimic larger          | Smaller, faster model            |
+| **Pruning**                  | Remove unimportant weights                   | Smaller model, some quality loss |
+| **MoE (Mixture of Experts)** | Only activate subset of params per token     | More capacity, less compute      |
 
 ### The Optimization Stack (Layer Them)
 
@@ -199,11 +199,11 @@ Stack them: 4-bit quant + vLLM + speculative decoding
 
 ## ◆ Formulas & Equations
 
-| Name | Formula/Concept | Use |
-|------|----------------|-----|
-| Memory (model weights) | $$\text{Memory} = \text{Params} \times \text{Bytes per param}$$ | FP16: 2 bytes, INT4: 0.5 bytes |
-| KV cache size | $$\text{KV} = 2 \times L \times H \times D \times S \times B \times \text{precision}$$ | L=layers, H=heads, D=dim, S=seq_len, B=batch |
-| Throughput | $$\text{tokens/second} = \frac{\text{batch\_size}}{\text{latency\_per\_token}}$$ | What you optimize for at scale |
+| Name                   | Formula/Concept                                                                        | Use                                          |
+| ---------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------- |
+| Memory (model weights) | $$\text{Memory} = \text{Params} \times \text{Bytes per param}$$                        | FP16: 2 bytes, INT4: 0.5 bytes               |
+| KV cache size          | $$\text{KV} = 2 \times L \times H \times D \times S \times B \times \text{precision}$$ | L=layers, H=heads, D=dim, S=seq_len, B=batch |
+| Throughput             | $$\text{tokens/second} = \frac{\text{batch\_size}}{\text{latency\_per\_token}}$$       | What you optimize for at scale               |
 
 ---
 
@@ -256,11 +256,11 @@ LATENCY TARGETS (typical):
 
 ## ★ Connections
 
-| Relationship | Topics |
-|-------------|--------|
-| Builds on | [[../foundations/transformers]], [[../llms/llms-overview]] |
-| Leads to | Production LLM deployment, Cost optimization, Edge AI |
-| Compare with | Training optimization (different phase), Model compression (overlapping) |
+| Relationship | Topics                                                                       |
+| ------------ | ---------------------------------------------------------------------------- |
+| Builds on    | [[../foundations/transformers]], [[../llms/llms-overview]]                   |
+| Leads to     | Production LLM deployment, Cost optimization, Edge AI                        |
+| Compare with | Training optimization (different phase), Model compression (overlapping)     |
 | Cross-domain | Computer architecture (memory hierarchy), OS (paging), Compiler optimization |
 
 ---

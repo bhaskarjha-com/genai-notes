@@ -5,19 +5,19 @@ type: reference
 difficulty: intermediate
 status: published
 parent: "[[../genai]]"
-related: ["[[../techniques/rag]]", "[[../techniques/ai-agents]]", "[[../llms/llms-overview]]"]
+related: ["[[../techniques/rag]]", "[[../techniques/ai-agents]]", "[[../llms/llms-overview]]", "[[cloud-ml-services]]", "[[distributed-systems-for-ai]]", "[[ml-experiment-tracking]]", "[[data-versioning-for-ml]]"]
 source: "Multiple - see Sources"
 created: 2026-03-18
-updated: 2026-03-18
+updated: 2026-04-12
 ---
 
 # GenAI Tools & Infrastructure
 
-> ✨ **Bit**: The model is 10% of the work. The infrastructure around it is the other 90%. Welcome to production.
+> âœ¨ **Bit**: The model is 10% of the work. The infrastructure around it is the other 90%. Welcome to production.
 
 ---
 
-## ★ TL;DR
+## â˜… TL;DR
 
 - **What**: The ecosystem of frameworks, databases, serving engines, and platforms used to build GenAI applications
 - **Why**: Knowing models is theory. Knowing the tooling is what gets you hired and makes things work in production.
@@ -25,17 +25,21 @@ updated: 2026-03-18
 
 ---
 
-## ★ Overview
+## â˜… Overview
 
 ### Definition
 
-GenAI infrastructure encompasses everything between "I have a model" and "I have a production application" — orchestration frameworks, vector databases, model serving engines, evaluation tools, and observability platforms.
+GenAI infrastructure encompasses everything between "I have a model" and "I have a production application" â€” orchestration frameworks, vector databases, model serving engines, evaluation tools, and observability platforms.
 
 ### Scope
 
 This is the overview/index document. Deep dives on individual tools are in sub-documents:
-- [[vector-databases]] — Pinecone, Weaviate, Qdrant, Chroma, pgvector
-- For orchestration + RAG code, also see [[../techniques/rag]]
+- [Vector Databases](./vector-databases.md) - Pinecone, Weaviate, Qdrant, Chroma, pgvector
+- [Cloud ML Services & Managed AI Platforms](./cloud-ml-services.md)
+- [Distributed Systems Fundamentals for AI](./distributed-systems-for-ai.md)
+- [ML Experiment Tracking](./ml-experiment-tracking.md)
+- [Data Versioning for ML](./data-versioning-for-ml.md)
+- For orchestration + RAG code, also see [Rag](../techniques/rag.md)
 
 ### Significance
 
@@ -45,40 +49,40 @@ This is the overview/index document. Deep dives on individual tools are in sub-d
 
 ### Prerequisites
 
-- [[../llms/llms-overview]] — what you're serving/orchestrating
-- [[../techniques/rag]] — primary use case for most tools
+- [Llms Overview](../llms/llms-overview.md) â€” what you're serving/orchestrating
+- [Rag](../techniques/rag.md) â€” primary use case for most tools
 
 ---
 
-## ★ Deep Dive
+## â˜… Deep Dive
 
 ### The GenAI Application Stack
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                    APPLICATION LAYER                         │
-│  Chat UI │ API Endpoints │ Slack/Teams Bot │ Internal Tools  │
-├─────────────────────────────────────────────────────────────┤
-│                    ORCHESTRATION LAYER                       │
-│  LangChain │ LlamaIndex │ Semantic Kernel │ Custom Code     │
-├──────────────────────┬──────────────────────────────────────┤
-│   RETRIEVAL          │         GENERATION                    │
-│  ┌────────────────┐  │  ┌────────────────────────────────┐  │
-│  │ Vector DB      │  │  │ Model API / Self-hosted LLM    │  │
-│  │ (Pinecone,     │  │  │ (OpenAI, Anthropic, vLLM,      │  │
-│  │  Weaviate,     │  │  │  Ollama, TGI)                  │  │
-│  │  Qdrant)       │  │  │                                │  │
-│  ├────────────────┤  │  ├────────────────────────────────┤  │
-│  │ Embedding      │  │  │ Guardrails / Safety            │  │
-│  │ Models         │  │  │ (NeMo, Guardrails AI)          │  │
-│  └────────────────┘  │  └────────────────────────────────┘  │
-├──────────────────────┴──────────────────────────────────────┤
-│                    OBSERVABILITY & EVAL                      │
-│  LangSmith │ Weights & Biases │ Phoenix │ RAGAS │ DeepEval  │
-├─────────────────────────────────────────────────────────────┤
-│                    COMPUTE / INFRA                           │
-│  GPU Cloud (AWS, GCP, Azure) │ Serverless │ On-prem         │
-└─────────────────────────────────────────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚                    APPLICATION LAYER                         â”‚
+â”‚  Chat UI â”‚ API Endpoints â”‚ Slack/Teams Bot â”‚ Internal Tools  â”‚
+â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+â”‚                    ORCHESTRATION LAYER                       â”‚
+â”‚  LangChain â”‚ LlamaIndex â”‚ Semantic Kernel â”‚ Custom Code     â”‚
+â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+â”‚   RETRIEVAL          â”‚         GENERATION                    â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”‚
+â”‚  â”‚ Vector DB      â”‚  â”‚  â”‚ Model API / Self-hosted LLM    â”‚  â”‚
+â”‚  â”‚ (Pinecone,     â”‚  â”‚  â”‚ (OpenAI, Anthropic, vLLM,      â”‚  â”‚
+â”‚  â”‚  Weaviate,     â”‚  â”‚  â”‚  Ollama, TGI)                  â”‚  â”‚
+â”‚  â”‚  Qdrant)       â”‚  â”‚  â”‚                                â”‚  â”‚
+â”‚  â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤  â”‚  â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤  â”‚
+â”‚  â”‚ Embedding      â”‚  â”‚  â”‚ Guardrails / Safety            â”‚  â”‚
+â”‚  â”‚ Models         â”‚  â”‚  â”‚ (NeMo, Guardrails AI)          â”‚  â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â”‚
+â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”´â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+â”‚                    OBSERVABILITY & EVAL                      â”‚
+â”‚  LangSmith â”‚ Weights & Biases â”‚ Phoenix â”‚ RAGAS â”‚ DeepEval  â”‚
+â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+â”‚                    COMPUTE / INFRA                           â”‚
+â”‚  GPU Cloud (AWS, GCP, Azure) â”‚ Serverless â”‚ On-prem         â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ### Tool Categories & Top Picks
@@ -95,11 +99,11 @@ This is the overview/index document. Deep dives on individual tools are in sub-d
 
 **When to use what:**
 ```
-"I need a quick RAG prototype"       → LlamaIndex
-"I need complex agent workflows"     → LangGraph
-"I need maximum flexibility/control" → LangChain
-"I'm in the Microsoft ecosystem"     → Semantic Kernel
-"I want minimal abstraction"         → Direct API calls + custom code
+"I need a quick RAG prototype"       â†’ LlamaIndex
+"I need complex agent workflows"     â†’ LangGraph
+"I need maximum flexibility/control" â†’ LangChain
+"I'm in the Microsoft ecosystem"     â†’ Semantic Kernel
+"I want minimal abstraction"         â†’ Direct API calls + custom code
 ```
 
 #### 2. Model Serving & Inference
@@ -148,24 +152,24 @@ python -m vllm.entrypoints.openai.api_server \
 
 ---
 
-## ◆ Types & Classifications
+## â—† Types & Classifications
 
 ### By Deployment Pattern
 
 ```
 How to Serve LLMs
-├── API (Managed)
-│   ├── Direct: OpenAI, Anthropic, Google APIs
-│   └── Aggregator: Together AI, Fireworks, Replicate
-│
-├── Self-Hosted (Your Infra)
-│   ├── vLLM / TGI (GPU server)
-│   ├── Ollama (local dev)
-│   └── llama.cpp (CPU/edge)
-│
-└── Hybrid
-    ├── Cloud GPU (RunPod, Lambda, AWS)
-    └── On-prem + cloud burst
+â”œâ”€â”€ API (Managed)
+â”‚   â”œâ”€â”€ Direct: OpenAI, Anthropic, Google APIs
+â”‚   â””â”€â”€ Aggregator: Together AI, Fireworks, Replicate
+â”‚
+â”œâ”€â”€ Self-Hosted (Your Infra)
+â”‚   â”œâ”€â”€ vLLM / TGI (GPU server)
+â”‚   â”œâ”€â”€ Ollama (local dev)
+â”‚   â””â”€â”€ llama.cpp (CPU/edge)
+â”‚
+â””â”€â”€ Hybrid
+    â”œâ”€â”€ Cloud GPU (RunPod, Lambda, AWS)
+    â””â”€â”€ On-prem + cloud burst
 ```
 
 ### Cost Decision Matrix
@@ -181,7 +185,7 @@ How to Serve LLMs
 
 ---
 
-## ◆ Quick Reference
+## â—† Quick Reference
 
 ```
 STARTER STACK (prototype):
@@ -207,17 +211,17 @@ BUDGET STACK (learning / hobby):
 
 ---
 
-## ○ Gotchas & Common Mistakes
+## â—‹ Gotchas & Common Mistakes
 
-- ⚠️ **Framework lock-in**: LangChain abstractions are convenient but can hide important details. Understand what's happening underneath.
-- ⚠️ **"Just use the API" at scale**: At 1M+ tokens/day, API costs can be $1000+/month. Do the math before committing.
-- ⚠️ **Ignoring evaluation**: Most teams ship GenAI without measuring quality. Build eval into your pipeline from day 1.
-- ⚠️ **Ollama in production**: Ollama is for dev, not production serving. Use vLLM or TGI for production workloads.
-- ⚠️ **Vector DB hype**: For < 100K documents, pgvector (Postgres extension) is probably enough. Don't over-architect.
+- âš ï¸ **Framework lock-in**: LangChain abstractions are convenient but can hide important details. Understand what's happening underneath.
+- âš ï¸ **"Just use the API" at scale**: At 1M+ tokens/day, API costs can be $1000+/month. Do the math before committing.
+- âš ï¸ **Ignoring evaluation**: Most teams ship GenAI without measuring quality. Build eval into your pipeline from day 1.
+- âš ï¸ **Ollama in production**: Ollama is for dev, not production serving. Use vLLM or TGI for production workloads.
+- âš ï¸ **Vector DB hype**: For < 100K documents, pgvector (Postgres extension) is probably enough. Don't over-architect.
 
 ---
 
-## ○ Interview Angles
+## â—‹ Interview Angles
 
 - **Q**: How would you architect a production RAG system?
 - **A**: LLM via API (with fallback), vector DB (Qdrant/Pinecone) with hybrid search, LangChain/LlamaIndex for orchestration, LangSmith for tracing, RAGAS for eval. Add caching layer for repeated queries, rate limiting, and graceful degradation when LLM is unavailable.
@@ -227,21 +231,21 @@ BUDGET STACK (learning / hobby):
 
 ---
 
-## ★ Connections
+## â˜… Connections
 
 | Relationship | Topics                                           |
 | ------------ | ------------------------------------------------ |
-| Builds on    | [[../llms/llms-overview]], [[../techniques/rag]] |
+| Builds on    | [Llms Overview](../llms/llms-overview.md), [Rag](../techniques/rag.md) |
 | Leads to     | Production GenAI systems, MLOps                  |
 | Compare with | Traditional ML infra (MLflow, Kubeflow)          |
 | Cross-domain | DevOps, Cloud architecture, Systems design       |
 
 ---
 
-## ★ Sources
+## â˜… Sources
 
-- LangChain documentation — https://docs.langchain.com
-- LlamaIndex documentation — https://docs.llamaindex.ai
-- vLLM documentation — https://docs.vllm.ai
-- Ollama — https://ollama.com
-- Hugging Face Hub — https://huggingface.co
+- LangChain documentation â€” https://docs.langchain.com
+- LlamaIndex documentation â€” https://docs.llamaindex.ai
+- vLLM documentation â€” https://docs.vllm.ai
+- Ollama â€” https://ollama.com
+- Hugging Face Hub â€” https://huggingface.co

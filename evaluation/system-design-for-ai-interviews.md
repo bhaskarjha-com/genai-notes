@@ -1,0 +1,170 @@
+---
+title: "System Design for AI Interviews"
+tags: [system-design, interviews, ai-architecture, mlops, evaluation]
+type: reference
+difficulty: advanced
+status: published
+parent: "[[evaluation-and-benchmarks]]"
+related: ["[[../production/ai-system-design]]", "[[../production/model-serving]]", "[[../production/monitoring-observability]]", "[[../tools-and-infra/distributed-systems-for-ai]]"]
+source: "Repo synthesis - see Sources"
+created: 2026-04-12
+updated: 2026-04-12
+---
+
+# System Design for AI Interviews
+
+> AI system-design interviews are usually testing whether you can reason about trade-offs, failure modes, and operating constraints, not whether you can recite brand names.
+
+---
+
+## TL;DR
+
+- **What**: A framework for answering AI and GenAI system-design interview questions clearly.
+- **Why**: These interviews often feel broad and ambiguous unless you structure the problem aggressively.
+- **Key point**: Clarify the task, define success metrics, choose the right interaction pattern, then walk through reliability, cost, safety, and evaluation.
+
+---
+
+## Overview
+
+### Definition
+
+This note is a practical interview-prep guide for designing AI assistants, RAG systems, agent workflows, recommendation services, and ML platforms in interviews.
+
+### Scope
+
+It focuses on answer structure and trade-off language rather than implementation detail.
+
+### Significance
+
+- AI system-design interviews appear across AI engineer, ML engineer, MLOps, and platform roles.
+- Clear structure often matters more than maximum breadth.
+- This note turns many repo concepts into a reusable interview pattern.
+
+### Prerequisites
+
+- [AI System Design for GenAI Applications](../production/ai-system-design.md)
+- [Model Serving for LLM Applications](../production/model-serving.md)
+- [Monitoring & Observability for GenAI Systems](../production/monitoring-observability.md)
+
+---
+
+## Deep Dive
+
+### A Reliable Answer Structure
+
+1. Clarify the user, task, and scale.
+2. Define success metrics and unacceptable failures.
+3. Pick the system pattern: prompt-only, RAG, agent, classical ML, or hybrid.
+4. Walk the request path.
+5. Add storage, serving, and scaling choices.
+6. Cover safety, observability, and evaluation.
+7. Close with bottlenecks, trade-offs, and future improvements.
+
+### Questions To Clarify Early
+
+| Question | Why It Matters |
+|---|---|
+| Who are the users? | changes UX and safety bar |
+| What accuracy is required? | determines whether human review is needed |
+| Is latency interactive? | shapes serving and model choice |
+| What data is private or dynamic? | drives RAG, governance, and storage |
+| What is the budget? | affects routing and infra choices |
+
+### Common AI Design Scenarios
+
+| Scenario | Likely Pattern |
+|---|---|
+| internal knowledge assistant | RAG + citations + observability |
+| coding copilot | retrieval + tool use + policy checks |
+| support automation | conversational system + workflow tools + escalation |
+| large-scale inference platform | serving, autoscaling, caching, cost control |
+| fraud or ranking service | classical ML or hybrid stack |
+
+### Trade-Off Buckets To Always Mention
+
+- quality
+- latency
+- safety
+- cost
+- maintainability
+- evaluation maturity
+
+### Good Closing Language
+
+End answers with:
+
+- main bottleneck
+- rollout path
+- what you would measure after launch
+- one or two likely future improvements
+
+### Example: Baseline Interview Flow
+
+```mermaid
+flowchart LR
+    A[User Request] --> B[API Layer]
+    B --> C[Retriever or Feature Store]
+    C --> D[Model or Rules Router]
+    D --> E[Inference Service]
+    E --> F[Guardrails and Policy Checks]
+    F --> G[Response to User]
+    E --> H[Tracing and Metrics]
+    F --> H
+```
+
+### Common Mistakes
+
+- jumping into tools without clarifying requirements
+- using agents when a simpler design is enough
+- ignoring evaluation and monitoring
+- never mentioning fallback or escalation
+- treating scale as only QPS, not data freshness or workflow complexity
+
+---
+
+## Quick Reference
+
+| If Asked To Design... | Mention Early |
+|---|---|
+| RAG assistant | data freshness, retrieval quality, groundedness |
+| agent workflow | tool permissions, observability, task success |
+| model-serving platform | latency, throughput, autoscaling, GPU economics |
+| enterprise AI feature | auth, tenancy, compliance, fallback behavior |
+
+---
+
+## Gotchas
+
+- Fancy architecture without requirement clarity usually scores worse.
+- Interviewers care about trade-off reasoning more than product-brand trivia.
+- A clean baseline architecture is often better than an overbuilt "future-proof" one.
+
+---
+
+## Interview Angles
+
+- **Q**: What is the most common mistake in AI system-design interviews?
+- **A**: Skipping clarification and jumping straight into tools. Good answers start with requirements, success metrics, and failure tolerance before architecture.
+
+- **Q**: What should you always mention in a GenAI system design?
+- **A**: Evaluation, observability, safety boundaries, and cost. Those are the recurring points that separate prototypes from real systems.
+
+---
+
+## Connections
+
+| Relationship | Topics |
+|---|---|
+| Builds on | [AI System Design for GenAI Applications](../production/ai-system-design.md), [Model Serving for LLM Applications](../production/model-serving.md), [Monitoring & Observability for GenAI Systems](../production/monitoring-observability.md) |
+| Leads to | role-specific interview prep, architecture reviews |
+| Compare with | generic distributed-systems interviews |
+| Cross-domain | communication, product reasoning, platform thinking |
+
+---
+
+## Sources
+
+- [AI System Design for GenAI Applications](../production/ai-system-design.md)
+- [Monitoring & Observability for GenAI Systems](../production/monitoring-observability.md)
+- [Distributed Systems Fundamentals for AI](../tools-and-infra/distributed-systems-for-ai.md)

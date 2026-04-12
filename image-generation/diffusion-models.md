@@ -8,16 +8,16 @@ parent: "[[../genai]]"
 related: ["[[../foundations/transformers]]", "[[../llms/llms-overview]]"]
 source: "Ho et al., 2020 (DDPM) + latest developments"
 created: 2026-03-18
-updated: 2026-03-18
+updated: 2026-04-11
 ---
 
 # Diffusion Models
 
-> ✨ **Bit**: Diffusion models literally learn to un-destroy images — start with pure noise, progressively denoise until an image emerges. It's like teaching AI to reverse entropy.
+> âœ¨ **Bit**: Diffusion models literally learn to un-destroy images â€” start with pure noise, progressively denoise until an image emerges. It's like teaching AI to reverse entropy.
 
 ---
 
-## ★ TL;DR
+## â˜… TL;DR
 
 - **What**: Generative models that create images by learning to reverse a gradual noise-addition process
 - **Why**: Surpassed GANs in image quality and stability. Power Stable Diffusion, DALL-E, Midjourney
@@ -25,11 +25,11 @@ updated: 2026-03-18
 
 ---
 
-## ★ Overview
+## â˜… Overview
 
 ### Definition
 
-**Diffusion Models** (specifically Denoising Diffusion Probabilistic Models — DDPMs) are generative models that learn to generate data by reversing a gradual noising process. Training teaches the model to denoise slightly noisy images at each step; generation starts from pure noise and iteratively denoises.
+**Diffusion Models** (specifically Denoising Diffusion Probabilistic Models â€” DDPMs) are generative models that learn to generate data by reversing a gradual noising process. Training teaches the model to denoise slightly noisy images at each step; generation starts from pure noise and iteratively denoises.
 
 ### Scope
 
@@ -44,37 +44,37 @@ Covers diffusion model theory, architecture, and key models. For practical image
 
 ### Prerequisites
 
-- [[../foundations/transformers]] — U-Net and attention are used inside diffusion models
+- [Transformers](../foundations/transformers.md) â€” U-Net and attention are used inside diffusion models
 - Basic probability concepts
 
 ---
 
-## ★ Deep Dive
+## â˜… Deep Dive
 
 ### The Core Idea
 
 ```
-FORWARD PROCESS (Training — add noise):
+FORWARD PROCESS (Training â€” add noise):
 
-  Clean Image → Slightly Noisy → More Noisy → ... → Pure Gaussian Noise
-  x₀           x₁               x₂              xₜ
-  
-  Each step: xₜ = √(αₜ)·xₜ₋₁ + √(1-αₜ)·ε    (ε ~ Normal(0,1))
+  Clean Image â†’ Slightly Noisy â†’ More Noisy â†’ ... â†’ Pure Gaussian Noise
+  xâ‚€           xâ‚               xâ‚‚              xâ‚œ
 
-REVERSE PROCESS (Generation — remove noise):
+  Each step: xâ‚œ = âˆš(Î±â‚œ)Â·xâ‚œâ‚‹â‚ + âˆš(1-Î±â‚œ)Â·Îµ    (Îµ ~ Normal(0,1))
 
-  Pure Noise → Slightly Less Noisy → ... → Clean Image!
-  xₜ          xₜ₋₁                    x₀
-  
-  The model learns: "Given noisy image xₜ, predict the noise ε"
-  Then subtract that predicted noise to get xₜ₋₁
+REVERSE PROCESS (Generation â€” remove noise):
 
-                      ┌──────── FORWARD (destroy) ────────┐
-                      │                                    │
-  [Clean Image] → [Noisy] → [Noisier] → ... → [Pure Noise]
-  [Clean Image] ← [Noisy] ← [Noisier] ← ... ← [Pure Noise]
-                      │                                    │
-                      └──────── REVERSE (create) ─────────┘
+  Pure Noise â†’ Slightly Less Noisy â†’ ... â†’ Clean Image!
+  xâ‚œ          xâ‚œâ‚‹â‚                    xâ‚€
+
+  The model learns: "Given noisy image xâ‚œ, predict the noise Îµ"
+  Then subtract that predicted noise to get xâ‚œâ‚‹â‚
+
+                      â”Œâ”€â”€â”€â”€â”€â”€â”€â”€ FORWARD (destroy) â”€â”€â”€â”€â”€â”€â”€â”€â”
+                      â”‚                                    â”‚
+  [Clean Image] â†’ [Noisy] â†’ [Noisier] â†’ ... â†’ [Pure Noise]
+  [Clean Image] â† [Noisy] â† [Noisier] â† ... â† [Pure Noise]
+                      â”‚                                    â”‚
+                      â””â”€â”€â”€â”€â”€â”€â”€â”€ REVERSE (create) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ### Architecture: U-Net + Attention
@@ -82,41 +82,41 @@ REVERSE PROCESS (Generation — remove noise):
 ```
 Diffusion Model Architecture:
 
-  Noisy Image ──► [U-Net with Attention] ──► Predicted Noise
+  Noisy Image â”€â”€â–º [U-Net with Attention] â”€â”€â–º Predicted Noise
        +
-  Time Step t  ──► (embedded and injected)
+  Time Step t  â”€â”€â–º (embedded and injected)
        +
-  Text Prompt  ──► (cross-attention with text encoder output)
+  Text Prompt  â”€â”€â–º (cross-attention with text encoder output)
 
 U-Net Structure:
-  ┌───────────────────────────────────┐
-  │ Encoder                           │
-  │  ↓ Downsample + Attention blocks  │
-  ├───────────────────────────────────┤
-  │ Bottleneck (Attention)            │
-  ├───────────────────────────────────┤
-  │ Decoder                           │
-  │  ↑ Upsample + Skip connections    │
-  └───────────────────────────────────┘
+  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+  â”‚ Encoder                           â”‚
+  â”‚  â†“ Downsample + Attention blocks  â”‚
+  â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+  â”‚ Bottleneck (Attention)            â”‚
+  â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+  â”‚ Decoder                           â”‚
+  â”‚  â†‘ Upsample + Skip connections    â”‚
+  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ### Text-to-Image Pipeline (Stable Diffusion)
 
 ```
-"A cat astronaut on Mars" 
-    │
-    ▼
-┌────────────┐    ┌───────────────┐    ┌──────────┐
-│ Text       │    │ Diffusion     │    │ VAE      │
-│ Encoder    │ →  │ U-Net         │ →  │ Decoder  │ → Image!
-│ (CLIP)     │    │ (in latent    │    │ (latent  │
-│            │    │  space, not   │    │  → pixel)│
-└────────────┘    │  pixel space) │    └──────────┘
-                  └───────────────┘
+"A cat astronaut on Mars"
+    â”‚
+    â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”    â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”    â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚ Text       â”‚    â”‚ Diffusion     â”‚    â”‚ VAE      â”‚
+â”‚ Encoder    â”‚ â†’  â”‚ U-Net         â”‚ â†’  â”‚ Decoder  â”‚ â†’ Image!
+â”‚ (CLIP)     â”‚    â”‚ (in latent    â”‚    â”‚ (latent  â”‚
+â”‚            â”‚    â”‚  space, not   â”‚    â”‚  â†’ pixel)â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜    â”‚  pixel space) â”‚    â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
                   Runs ~20-50 denoising steps
 ```
 
-**Latent Diffusion** (the key innovation in Stable Diffusion): Instead of denoising in pixel space (512×512×3 = huge), work in a compressed latent space (64×64×4 = much smaller). Massively reduces compute.
+**Latent Diffusion** (the key innovation in Stable Diffusion): Instead of denoising in pixel space (512Ã—512Ã—3 = huge), work in a compressed latent space (64Ã—64Ã—4 = much smaller). Massively reduces compute.
 
 ### Key Concepts
 
@@ -142,17 +142,17 @@ U-Net Structure:
 
 ---
 
-## ◆ Formulas & Equations
+## â—† Formulas & Equations
 
 | Name                     | Formula                                                                                  | Variables                               | Use                      |
 | ------------------------ | ---------------------------------------------------------------------------------------- | --------------------------------------- | ------------------------ |
-| Forward Process          | $$q(x_t \mid x_{t-1}) = \mathcal{N}(x_t; \sqrt{\alpha_t}x_{t-1}, (1-\alpha_t)I)$$        | αₜ = noise schedule, I = identity       | Add noise at step t      |
-| Training Objective       | $$L = \mathbb{E}_{t,x_0,\epsilon}\left[\|\epsilon - \epsilon_\theta(x_t, t)\|^2\right]$$ | ε = actual noise, ε_θ = predicted noise | Train the denoiser       |
+| Forward Process          | $$q(x_t \mid x_{t-1}) = \mathcal{N}(x_t; \sqrt{\alpha_t}x_{t-1}, (1-\alpha_t)I)$$        | Î±â‚œ = noise schedule, I = identity       | Add noise at step t      |
+| Training Objective       | $$L = \mathbb{E}_{t,x_0,\epsilon}\left[\|\epsilon - \epsilon_\theta(x_t, t)\|^2\right]$$ | Îµ = actual noise, Îµ_Î¸ = predicted noise | Train the denoiser       |
 | Classifier-Free Guidance | $$\hat{\epsilon} = \epsilon_{uncond} + s(\epsilon_{cond} - \epsilon_{uncond})$$          | s = guidance scale (typically 7-15)     | Control prompt adherence |
 
 ---
 
-## ◆ Comparison
+## â—† Comparison
 
 | Aspect              | Diffusion Models        | GANs                      | VAEs          |
 | ------------------- | ----------------------- | ------------------------- | ------------- |
@@ -165,9 +165,9 @@ U-Net Structure:
 
 ---
 
-## ◆ Strengths vs Limitations
+## â—† Strengths vs Limitations
 
-| ✅ Strengths                                         | ❌ Limitations                                   |
+| âœ… Strengths                                         | âŒ Limitations                                   |
 | --------------------------------------------------- | ----------------------------------------------- |
 | Best image quality currently                        | Slow generation (20-50 steps)                   |
 | Stable training (no mode collapse)                  | High compute for training                       |
@@ -177,7 +177,7 @@ U-Net Structure:
 
 ---
 
-## ○ Interview Angles
+## â—‹ Interview Angles
 
 - **Q**: How do diffusion models generate images?
 - **A**: During training, the model learns to predict noise added to images at various levels. During generation, start from pure noise and iteratively denoise over many steps, guided by a text prompt using classifier-free guidance.
@@ -190,20 +190,20 @@ U-Net Structure:
 
 ---
 
-## ★ Connections
+## â˜… Connections
 
 | Relationship | Topics                                                                    |
 | ------------ | ------------------------------------------------------------------------- |
-| Builds on    | [[../foundations/transformers]] (attention in U-Net), VAEs (latent space) |
+| Builds on    | [Transformers](../foundations/transformers.md) (attention in U-Net), VAEs (latent space) |
 | Leads to     | Video generation (Sora), 3D generation, Audio diffusion                   |
 | Compare with | GANs (adversarial), VAEs (variational), Autoregressive image models       |
 | Cross-domain | Physics (thermodynamic diffusion), Stochastic processes                   |
 
 ---
 
-## ★ Sources
+## â˜… Sources
 
 - Ho et al., "Denoising Diffusion Probabilistic Models" (DDPM, 2020)
-- Rombach et al., "High-Resolution Image Synthesis with Latent Diffusion Models" (2022) — Stable Diffusion paper
+- Rombach et al., "High-Resolution Image Synthesis with Latent Diffusion Models" (2022) â€” Stable Diffusion paper
 - "The Illustrated Stable Diffusion" by Jay Alammar
-- Stability AI documentation — https://stability.ai
+- Stability AI documentation â€” https://stability.ai

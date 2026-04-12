@@ -1,0 +1,17 @@
+name: Link Check
+
+on:
+  pull_request:
+  push:
+
+jobs:
+  links:
+    runs-on: windows-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Run internal link checks
+        shell: pwsh
+        run: powershell -ExecutionPolicy Bypass -File scripts/check_links.ps1

@@ -6,74 +6,74 @@ difficulty: advanced
 status: published
 parent: "[[../genai]]"
 related: ["[[../ethics-and-safety/ethics-safety-alignment]]", "[[../llms/llms-overview]]", "[[../llms/reasoning-models]]", "[[fine-tuning]]"]
-source: "Multiple — see Sources"
+source: "Multiple â€” see Sources"
 created: 2026-03-22
-updated: 2026-03-22
+updated: 2026-04-11
 ---
 
 # Reinforcement Learning for LLM Alignment
 
-> ✨ **Bit**: Pre-training gives the model knowledge. SFT gives it manners. RL alignment gives it values. Without this step, GPT would be a Wikipedia-quoting sociopath — brilliant but unsafe. RLHF, DPO, and GRPO are HOW we teach models to be helpful, harmless, and honest.
+> âœ¨ **Bit**: Pre-training gives the model knowledge. SFT gives it manners. RL alignment gives it values. Without this step, GPT would be a Wikipedia-quoting sociopath â€” brilliant but unsafe. RLHF, DPO, and GRPO are HOW we teach models to be helpful, harmless, and honest.
 
 ---
 
-## ★ TL;DR
+## â˜… TL;DR
 
 - **What**: Techniques that align LLM behavior with human preferences using reinforcement learning or preference optimization
 - **Why**: Pre-trained LLMs know a lot but don't know WHAT to say. Alignment makes them helpful, honest, and harmless.
-- **Key point**: The field has rapidly evolved: RLHF (complex, expensive) → DPO (simpler, no reward model) → GRPO (no critic, efficient, powers DeepSeek-R1). Each generation trades complexity for efficiency.
+- **Key point**: The field has rapidly evolved: RLHF (complex, expensive) â†’ DPO (simpler, no reward model) â†’ GRPO (no critic, efficient, powers DeepSeek-R1). Each generation trades complexity for efficiency.
 
 ---
 
-## ★ Overview
+## â˜… Overview
 
 ### Definition
 
-**Alignment** is the process of ensuring an LLM's outputs are helpful, honest, and harmless — matching human intent and values. RL-based alignment techniques fine-tune model behavior using human preferences rather than just demonstration data.
+**Alignment** is the process of ensuring an LLM's outputs are helpful, honest, and harmless â€” matching human intent and values. RL-based alignment techniques fine-tune model behavior using human preferences rather than just demonstration data.
 
 ### Scope
 
-Covers the full alignment technique landscape: RLHF, DPO, PPO, GRPO, ORPO, KTO. For the safety/policy layer (guardrails, bias, regulations), see [[../ethics-and-safety/ethics-safety-alignment]]. For basic fine-tuning (LoRA/QLoRA), see [[fine-tuning]].
+Covers the full alignment technique landscape: RLHF, DPO, PPO, GRPO, ORPO, KTO. For the safety/policy layer (guardrails, bias, regulations), see [Ethics Safety Alignment](../ethics-and-safety/ethics-safety-alignment.md). For basic fine-tuning (LoRA/QLoRA), see [Fine Tuning](./fine-tuning.md).
 
 ### Significance
 
 - Every commercial LLM (GPT-4, Claude, Gemini) uses alignment training
-- GRPO is how DeepSeek-R1 achieves reasoning — the user asked about this specifically
+- GRPO is how DeepSeek-R1 achieves reasoning â€” the user asked about this specifically
 - Understanding this is required for ML Engineer / GenAI Researcher roles
 - Active research frontier: new techniques every 6 months
 
 ---
 
-## ★ Deep Dive
+## â˜… Deep Dive
 
 ### The LLM Training Pipeline
 
 ```
-┌─────────────────────────────────────────────────────┐
-│         COMPLETE LLM TRAINING PIPELINE               │
-│                                                     │
-│  STAGE 1: PRE-TRAINING                              │
-│  Train on internet text → predict next token        │
-│  Result: knows a lot, but no conversational skills  │
-│  Cost: $10M-$100M+                                  │
-│                │                                    │
-│                ▼                                    │
-│  STAGE 2: SUPERVISED FINE-TUNING (SFT)              │
-│  Train on (instruction, response) pairs              │
-│  "How to be helpful" — demonstration data           │
-│  Result: can follow instructions, chat format       │
-│  Cost: $1K-$100K                                    │
-│                │                                    │
-│                ▼                                    │
-│  STAGE 3: ALIGNMENT / PREFERENCE OPTIMIZATION       │
-│  ┌─────────────────────────────────────────────┐    │
-│  │  RLHF  │  DPO  │  GRPO  │  ORPO  │  KTO   │    │
-│  │        Choose one (or combine)              │    │
-│  └─────────────────────────────────────────────┘    │
-│  "How to be GOOD" — preference data                 │
-│  Result: helpful, harmless, honest                  │
-│  Cost: $10K-$1M                                     │
-└─────────────────────────────────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚         COMPLETE LLM TRAINING PIPELINE               â”‚
+â”‚                                                     â”‚
+â”‚  STAGE 1: PRE-TRAINING                              â”‚
+â”‚  Train on internet text â†’ predict next token        â”‚
+â”‚  Result: knows a lot, but no conversational skills  â”‚
+â”‚  Cost: $10M-$100M+                                  â”‚
+â”‚                â”‚                                    â”‚
+â”‚                â–¼                                    â”‚
+â”‚  STAGE 2: SUPERVISED FINE-TUNING (SFT)              â”‚
+â”‚  Train on (instruction, response) pairs              â”‚
+â”‚  "How to be helpful" â€” demonstration data           â”‚
+â”‚  Result: can follow instructions, chat format       â”‚
+â”‚  Cost: $1K-$100K                                    â”‚
+â”‚                â”‚                                    â”‚
+â”‚                â–¼                                    â”‚
+â”‚  STAGE 3: ALIGNMENT / PREFERENCE OPTIMIZATION       â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”    â”‚
+â”‚  â”‚  RLHF  â”‚  DPO  â”‚  GRPO  â”‚  ORPO  â”‚  KTO   â”‚    â”‚
+â”‚  â”‚        Choose one (or combine)              â”‚    â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜    â”‚
+â”‚  "How to be GOOD" â€” preference data                 â”‚
+â”‚  Result: helpful, harmless, honest                  â”‚
+â”‚  Cost: $10K-$1M                                     â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ### 1. RLHF (Reinforcement Learning from Human Feedback)
@@ -85,31 +85,31 @@ THE CLASSIC 3-STAGE PIPELINE:
     Prompt: "Explain quantum computing"
     Response A: [technical, complete, accurate]
     Response B: [vague, wrong, harmful]
-    Human annotator: A > B  ✓
+    Human annotator: A > B  âœ“
 
   STEP 2: Train Reward Model
-    Input: (prompt, response) → Output: scalar score
+    Input: (prompt, response) â†’ Output: scalar score
     The reward model LEARNS what humans prefer
     Trained on 100K+ comparison pairs
 
   STEP 3: Optimize Policy with PPO
-    ┌───────────────────────────────────────────┐
-    │  LLM generates response                   │
-    │       │                                   │
-    │       ▼                                   │
-    │  Reward model scores response             │
-    │       │                                   │
-    │       ▼                                   │
-    │  PPO updates LLM weights to increase      │
-    │  probability of high-reward responses     │
-    │       │                                   │
-    │       ▼                                   │
-    │  KL penalty prevents drifting too far     │
-    │  from the SFT model (avoid reward hacking)│
-    │       │                                   │
-    │       ▼                                   │
-    │  Repeat thousands of times                │
-    └───────────────────────────────────────────┘
+    â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+    â”‚  LLM generates response                   â”‚
+    â”‚       â”‚                                   â”‚
+    â”‚       â–¼                                   â”‚
+    â”‚  Reward model scores response             â”‚
+    â”‚       â”‚                                   â”‚
+    â”‚       â–¼                                   â”‚
+    â”‚  PPO updates LLM weights to increase      â”‚
+    â”‚  probability of high-reward responses     â”‚
+    â”‚       â”‚                                   â”‚
+    â”‚       â–¼                                   â”‚
+    â”‚  KL penalty prevents drifting too far     â”‚
+    â”‚  from the SFT model (avoid reward hacking)â”‚
+    â”‚       â”‚                                   â”‚
+    â”‚       â–¼                                   â”‚
+    â”‚  Repeat thousands of times                â”‚
+    â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 
 USED BY: OpenAI (GPT-4), early Claude models
 PROS: Powerful, handles complex preferences
@@ -126,15 +126,15 @@ KEY IDEA: Update the model, but not TOO much at once.
   "Take small, careful steps in parameter space"
 
 HOW:
-  ratio = π_new(action) / π_old(action)
-  
+  ratio = Ï€_new(action) / Ï€_old(action)
+
   Clipped objective:
-    L = min(ratio × advantage,
-            clip(ratio, 1-ε, 1+ε) × advantage)
-  
-  If ratio > 1+ε → clip it (prevent too-large updates)
-  If ratio < 1-ε → clip it (prevent too-large updates)
-  ε typically = 0.2
+    L = min(ratio Ã— advantage,
+            clip(ratio, 1-Îµ, 1+Îµ) Ã— advantage)
+
+  If ratio > 1+Îµ â†’ clip it (prevent too-large updates)
+  If ratio < 1-Îµ â†’ clip it (prevent too-large updates)
+  Îµ typically = 0.2
 
 REQUIRES:
   - Policy model (the LLM being trained)
@@ -150,38 +150,38 @@ CONS: Memory-heavy (4 models), complex hyperparameters
 ### 3. DPO (Direct Preference Optimization)
 
 ```
-DPO = "Skip the reward model, skip the RL — just optimize directly"
+DPO = "Skip the reward model, skip the RL â€” just optimize directly"
 
 KEY INSIGHT (Rafailov et al., 2023):
   The RLHF objective can be MATHEMATICALLY REARRANGED
   into a simple classification loss!
 
-  Instead of: train reward model → run PPO
+  Instead of: train reward model â†’ run PPO
   Do:         directly optimize on preference pairs
 
-  Loss = -log σ(β × (log π(y_w|x) - log π(y_l|x)
-                     - log π_ref(y_w|x) + log π_ref(y_l|x)))
+  Loss = -log Ïƒ(Î² Ã— (log Ï€(y_w|x) - log Ï€(y_l|x)
+                     - log Ï€_ref(y_w|x) + log Ï€_ref(y_l|x)))
 
   Where:
     y_w = preferred (winning) response
     y_l = dispreferred (losing) response
-    π    = current policy
-    π_ref = reference (SFT) model
-    β    = temperature controlling deviation from ref
+    Ï€    = current policy
+    Ï€_ref = reference (SFT) model
+    Î²    = temperature controlling deviation from ref
 
 IN PLAIN ENGLISH:
   "Increase the probability of good responses,
    decrease the probability of bad responses,
    but don't stray too far from the starting model."
 
-  ┌─────────────────────────────────────────────┐
-  │  RLHF:  SFT → Reward Model → PPO training  │
-  │         3 stages, 4 models, complex          │
-  │                                             │
-  │  DPO:   SFT → Direct optimization           │
-  │         1 stage, 2 models (policy + ref),    │
-  │         simple as fine-tuning!               │
-  └─────────────────────────────────────────────┘
+  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+  â”‚  RLHF:  SFT â†’ Reward Model â†’ PPO training  â”‚
+  â”‚         3 stages, 4 models, complex          â”‚
+  â”‚                                             â”‚
+  â”‚  DPO:   SFT â†’ Direct optimization           â”‚
+  â”‚         1 stage, 2 models (policy + ref),    â”‚
+  â”‚         simple as fine-tuning!               â”‚
+  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 
 USED BY: LLaMA 2-Chat, Zephyr, many open-source models
 PROS: Simple, stable, cheap, easy to implement
@@ -189,7 +189,7 @@ CONS: Quality depends heavily on preference data quality,
       may underperform PPO on hardest tasks
 ```
 
-### 4. GRPO (Group Relative Policy Optimization) ⭐
+### 4. GRPO (Group Relative Policy Optimization) â­
 
 ```
 GRPO = "PPO WITHOUT the critic/value model"
@@ -198,48 +198,48 @@ GRPO = "PPO WITHOUT the critic/value model"
 THE KEY INNOVATION:
   PPO needs a value model to estimate "advantage"
   (how much better is this response than expected?)
-  
+
   GRPO says: "Don't estimate. MEASURE DIRECTLY."
-  
+
   For each prompt, generate G responses (a group).
   Score each with the reward model.
   Use the GROUP MEAN as the baseline.
 
   advantage_i = (reward_i - mean(group_rewards)) / std(group_rewards)
 
-  ┌───────────────────────────────────────────────┐
-  │  GRPO TRAINING LOOP                           │
-  │                                               │
-  │  1. Sample prompt                             │
-  │  2. Generate G responses (e.g., G=16)         │
-  │     Response 1: "Let me think... answer: 42"  │
-  │     Response 2: "The answer is 43"            │
-  │     ...                                       │
-  │     Response 16: "Hmm, 27 × 3 = 81... no..."  │
-  │                                               │
-  │  3. Score each with reward (e.g., correctness)│
-  │     R1=1.0, R2=0.0, R3=0.5, ... R16=0.0     │
-  │                                               │
-  │  4. Compute group advantage                   │
-  │     mean = 0.35, std = 0.4                    │
-  │     adv_1 = (1.0 - 0.35) / 0.4 = 1.625      │
-  │     adv_2 = (0.0 - 0.35) / 0.4 = -0.875     │
-  │                                               │
-  │  5. Update policy:                            │
-  │     - Increase prob of response 1 (adv > 0)  │
-  │     - Decrease prob of response 2 (adv < 0)  │
-  │     + KL penalty to stay near reference       │
-  │     + Clipped objective (like PPO)            │
-  │                                               │
-  │  6. Repeat for thousands of prompts           │
-  └───────────────────────────────────────────────┘
+  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+  â”‚  GRPO TRAINING LOOP                           â”‚
+  â”‚                                               â”‚
+  â”‚  1. Sample prompt                             â”‚
+  â”‚  2. Generate G responses (e.g., G=16)         â”‚
+  â”‚     Response 1: "Let me think... answer: 42"  â”‚
+  â”‚     Response 2: "The answer is 43"            â”‚
+  â”‚     ...                                       â”‚
+  â”‚     Response 16: "Hmm, 27 Ã— 3 = 81... no..."  â”‚
+  â”‚                                               â”‚
+  â”‚  3. Score each with reward (e.g., correctness)â”‚
+  â”‚     R1=1.0, R2=0.0, R3=0.5, ... R16=0.0     â”‚
+  â”‚                                               â”‚
+  â”‚  4. Compute group advantage                   â”‚
+  â”‚     mean = 0.35, std = 0.4                    â”‚
+  â”‚     adv_1 = (1.0 - 0.35) / 0.4 = 1.625      â”‚
+  â”‚     adv_2 = (0.0 - 0.35) / 0.4 = -0.875     â”‚
+  â”‚                                               â”‚
+  â”‚  5. Update policy:                            â”‚
+  â”‚     - Increase prob of response 1 (adv > 0)  â”‚
+  â”‚     - Decrease prob of response 2 (adv < 0)  â”‚
+  â”‚     + KL penalty to stay near reference       â”‚
+  â”‚     + Clipped objective (like PPO)            â”‚
+  â”‚                                               â”‚
+  â”‚  6. Repeat for thousands of prompts           â”‚
+  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 
 WHY IT MATTERS:
   Memory: ~50% less than PPO (no value model!)
   Stability: Group baseline has lower variance
   Reasoning: Particularly effective for math/code
-  
-  DeepSeek-R1-Zero: Pure GRPO (no SFT!) →
+
+  DeepSeek-R1-Zero: Pure GRPO (no SFT!) â†’
     Model SPONTANEOUSLY developed chain-of-thought,
     self-correction, and "aha moment" behaviors.
     Reasoning emerged from RL alone!
@@ -247,7 +247,7 @@ WHY IT MATTERS:
 REWARD TYPES:
   RLHF: Learned reward model (human preferences)
   RLVR: Verifiable rewards (math = check answer,
-         code = run tests) ← What DeepSeek-R1 uses!
+         code = run tests) â† What DeepSeek-R1 uses!
          No human labels needed for verifiable tasks.
 ```
 
@@ -263,15 +263,15 @@ REWARD TYPES:
 
 ---
 
-## ◆ The Complete Comparison
+## â—† The Complete Comparison
 
 | Feature                | RLHF+PPO                       | DPO                             | GRPO                                    |
 | ---------------------- | ------------------------------ | ------------------------------- | --------------------------------------- |
-| **Reward model**       | ✅ Required                     | ❌ Not needed                    | ⚠️ Optional (can use verifiable rewards) |
-| **Value/Critic model** | ✅ Required                     | ❌ Not needed                    | ❌ Not needed                            |
+| **Reward model**       | âœ… Required                     | âŒ Not needed                    | âš ï¸ Optional (can use verifiable rewards) |
+| **Value/Critic model** | âœ… Required                     | âŒ Not needed                    | âŒ Not needed                            |
 | **Models in memory**   | 4 (policy, ref, reward, value) | 2 (policy, ref)                 | 2-3 (policy, ref, +optional reward)     |
 | **Complexity**         | Very high                      | Low                             | Medium                                  |
-| **Stability**          | ⚠️ Can be unstable              | ✅ Stable                        | ✅ Stable                                |
+| **Stability**          | âš ï¸ Can be unstable              | âœ… Stable                        | âœ… Stable                                |
 | **Data needed**        | Preference pairs + RL rollouts | Preference pairs only           | Prompts + reward signal                 |
 | **Memory usage**       | Highest                        | Lowest                          | ~50% of PPO                             |
 | **Best for**           | Complex alignment              | Simple alignment, open-source   | Reasoning, math, code                   |
@@ -280,66 +280,66 @@ REWARD TYPES:
 
 ---
 
-## ◆ Quick Reference
+## â—† Quick Reference
 
 ```
 DECISION TREE:
   Building a chat model with general alignment?
-    Budget high → RLHF+PPO (most proven)
-    Budget low  → DPO (simplest, cheapest)
-  
+    Budget high â†’ RLHF+PPO (most proven)
+    Budget low  â†’ DPO (simplest, cheapest)
+
   Building a reasoning model (math, code)?
-    → GRPO + verifiable rewards (RLVR)
-    
-  Have only binary feedback (👍/👎)?
-    → KTO (works without paired comparisons)
-    
+    â†’ GRPO + verifiable rewards (RLVR)
+
+  Have only binary feedback (ðŸ‘/ðŸ‘Ž)?
+    â†’ KTO (works without paired comparisons)
+
   Want SFT + alignment in one step?
-    → ORPO (saves training time)
+    â†’ ORPO (saves training time)
 
 KEY FORMULAS:
-  PPO:  L = min(r·A, clip(r, 1±ε)·A 
-  DPO:  L = -log σ(β(log π/π_ref on chosen - log π/π_ref on rejected))
+  PPO:  L = min(rÂ·A, clip(r, 1Â±Îµ)Â·A
+  DPO:  L = -log Ïƒ(Î²(log Ï€/Ï€_ref on chosen - log Ï€/Ï€_ref on rejected))
   GRPO: advantage = (reward_i - mean(rewards)) / std(rewards)
 ```
 
 ---
 
-## ○ Gotchas & Common Mistakes
+## â—‹ Gotchas & Common Mistakes
 
-- ⚠️ **Reward hacking**: In RLHF, models learn to exploit the reward model's weaknesses rather than genuinely improving. KL penalty helps but doesn't eliminate this.
-- ⚠️ **DPO data quality**: DPO is only as good as its preference pairs. Noisy or biased data = poorly aligned model.
-- ⚠️ **GRPO needs multiple samples**: Generating G=16 responses per prompt during training is compute-intensive. Trade-off: more samples = better gradient estimate.
-- ⚠️ **Alignment tax**: All alignment techniques slightly reduce raw capability. The model gets "safer" but may lose some edge-case knowledge.
-- ⚠️ **RLHF ≠ RLVR**: For math/code, verifiable rewards (check answer correctness) are BETTER than learned reward models. GRPO + RLVR is the DeepSeek recipe.
+- âš ï¸ **Reward hacking**: In RLHF, models learn to exploit the reward model's weaknesses rather than genuinely improving. KL penalty helps but doesn't eliminate this.
+- âš ï¸ **DPO data quality**: DPO is only as good as its preference pairs. Noisy or biased data = poorly aligned model.
+- âš ï¸ **GRPO needs multiple samples**: Generating G=16 responses per prompt during training is compute-intensive. Trade-off: more samples = better gradient estimate.
+- âš ï¸ **Alignment tax**: All alignment techniques slightly reduce raw capability. The model gets "safer" but may lose some edge-case knowledge.
+- âš ï¸ **RLHF â‰  RLVR**: For math/code, verifiable rewards (check answer correctness) are BETTER than learned reward models. GRPO + RLVR is the DeepSeek recipe.
 
 ---
 
-## ○ Interview Angles
+## â—‹ Interview Angles
 
 - **Q**: What is GRPO and how is it different from PPO?
 - **A**: GRPO eliminates the value/critic network that PPO requires. Instead of estimating expected rewards, GRPO generates multiple responses per prompt and uses the group mean reward as a baseline. This cuts memory by ~50% and provides lower-variance advantage estimates. DeepSeek-R1 used GRPO to achieve state-of-the-art reasoning by rewarding correct final answers (RLVR) rather than training a separate reward model.
 
 - **Q**: Compare RLHF and DPO.
-- **A**: RLHF trains a separate reward model on human preferences, then uses PPO to optimize the LLM against it — complex (4 models in memory), expensive, but powerful. DPO mathematically rearranges the RLHF objective into a direct classification loss on preference pairs — simpler (2 models), cheaper, more stable, and achieves comparable results on many tasks. DPO is the go-to for open-source model alignment.
+- **A**: RLHF trains a separate reward model on human preferences, then uses PPO to optimize the LLM against it â€” complex (4 models in memory), expensive, but powerful. DPO mathematically rearranges the RLHF objective into a direct classification loss on preference pairs â€” simpler (2 models), cheaper, more stable, and achieves comparable results on many tasks. DPO is the go-to for open-source model alignment.
 
 - **Q**: What is RLVR?
 - **A**: Reinforcement Learning from Verifiable Rewards. Instead of using a learned reward model (which can be gamed), use objectively verifiable rewards: does the code pass tests? Does the math answer match? This is more robust for reasoning tasks and is what powers DeepSeek-R1's math capabilities.
 
 ---
 
-## ★ Connections
+## â˜… Connections
 
 | Relationship | Topics                                                                                                    |
 | ------------ | --------------------------------------------------------------------------------------------------------- |
-| Builds on    | [[fine-tuning]] (SFT stage), [[../prerequisites/deep-learning-fundamentals]] (optimization)               |
-| Leads to     | [[../llms/reasoning-models]] (GRPO → R1), [[../ethics-and-safety/ethics-safety-alignment]] (safety layer) |
+| Builds on    | [Fine Tuning](./fine-tuning.md) (SFT stage), [Deep Learning Fundamentals](../prerequisites/deep-learning-fundamentals.md) (optimization)               |
+| Leads to     | [Reasoning Models](../llms/reasoning-models.md) (GRPO â†’ R1), [Ethics Safety Alignment](../ethics-and-safety/ethics-safety-alignment.md) (safety layer) |
 | Compare with | Constitutional AI (Anthropic's approach), Self-play                                                       |
 | Cross-domain | Game theory, Behavioural economics (KTO), Curriculum learning                                             |
 
 ---
 
-## ★ Sources
+## â˜… Sources
 
 - Ouyang et al., "Training Language Models to Follow Instructions with Human Feedback" (InstructGPT/RLHF, 2022)
 - Rafailov et al., "Direct Preference Optimization" (DPO, 2023)

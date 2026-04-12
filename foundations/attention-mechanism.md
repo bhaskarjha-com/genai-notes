@@ -5,19 +5,19 @@ type: concept
 difficulty: intermediate
 status: published
 parent: "[[transformers]]"
-related: ["[[transformers]]", "[[../../llms/llms-overview]]"]
+related: ["[[transformers]]", "[[../llms/llms-overview]]"]
 source: "Attention Is All You Need (Vaswani et al., 2017)"
 created: 2026-03-18
-updated: 2026-03-18
+updated: 2026-04-11
 ---
 
 # Attention Mechanism
 
-> ✨ **Bit**: Attention in AI is like attention in humans — you don't read every word equally; you focus on what matters for understanding the current thing.
+> âœ¨ **Bit**: Attention in AI is like attention in humans â€” you don't read every word equally; you focus on what matters for understanding the current thing.
 
 ---
 
-## ★ TL;DR
+## â˜… TL;DR
 
 - **What**: A mechanism that lets each element in a sequence dynamically focus on relevant parts of the entire input
 - **Why**: Solves the bottleneck of fixed-size representations in sequence models. THE key innovation behind Transformers
@@ -25,7 +25,7 @@ updated: 2026-03-18
 
 ---
 
-## ★ Overview
+## â˜… Overview
 
 ### Definition
 
@@ -33,36 +33,36 @@ updated: 2026-03-18
 
 ### Scope
 
-Covers: Self-attention, cross-attention, multi-head attention, and modern variants (GQA, Flash Attention, MQA). For the full Transformer architecture, see [[transformers]].
+Covers: Self-attention, cross-attention, multi-head attention, and modern variants (GQA, Flash Attention, MQA). For the full Transformer architecture, see [Transformers](./transformers.md).
 
 ### Significance
 
-- Before attention: Encoder compressed entire sequence into ONE fixed vector → information bottleneck
-- After attention: Every output position can directly access any input position → no bottleneck
+- Before attention: Encoder compressed entire sequence into ONE fixed vector â†’ information bottleneck
+- After attention: Every output position can directly access any input position â†’ no bottleneck
 
 ### Prerequisites
 
-- [[../prerequisites/linear-algebra-for-ai]] — matrix multiplication, dot products
-- [[../prerequisites/neural-networks]] — basic concepts
+- [Linear Algebra For Ai](../prerequisites/linear-algebra-for-ai.md) â€” matrix multiplication, dot products
+- [Neural Networks](../prerequisites/neural-networks.md) â€” basic concepts
 
 ---
 
-## ★ Deep Dive
+## â˜… Deep Dive
 
 ### The QKV Intuition
 
 Think of attention as a **search engine**:
 
 ```
-You have a QUERY    → "What information do I need?"
-Matched against KEYS  → "What does each position contain?"  
-Retrieves VALUES      → "Here's the actual content"
+You have a QUERY    â†’ "What information do I need?"
+Matched against KEYS  â†’ "What does each position contain?"
+Retrieves VALUES      â†’ "Here's the actual content"
 
 Example: Parsing "The cat sat because it was tired"
 When processing "it":
-  Query("it") · Key("cat") = HIGH score → "it" refers to "cat"
-  Query("it") · Key("sat") = LOW score  → "it" doesn't refer to "sat"
-  
+  Query("it") Â· Key("cat") = HIGH score â†’ "it" refers to "cat"
+  Query("it") Â· Key("sat") = LOW score  â†’ "it" doesn't refer to "sat"
+
 Result: "it" attends strongly to "cat" and gets its information
 ```
 
@@ -72,21 +72,21 @@ Result: "it" attends strongly to "cat" and gets its information
 Input: X (sequence of token embeddings, shape: [seq_len, d_model])
 
 Step 1: Project into Q, K, V
-  Q = X · W_Q    (shape: [seq_len, d_k])
-  K = X · W_K    (shape: [seq_len, d_k])  
-  V = X · W_V    (shape: [seq_len, d_v])
+  Q = X Â· W_Q    (shape: [seq_len, d_k])
+  K = X Â· W_K    (shape: [seq_len, d_k])
+  V = X Â· W_V    (shape: [seq_len, d_v])
 
 Step 2: Compute attention scores
-  scores = Q · K^T          (shape: [seq_len, seq_len])
+  scores = Q Â· K^T          (shape: [seq_len, seq_len])
 
 Step 3: Scale
-  scores = scores / √d_k    (prevent exploding gradients)
+  scores = scores / âˆšd_k    (prevent exploding gradients)
 
 Step 4: Softmax (normalize to probabilities)
   weights = softmax(scores)  (each row sums to 1)
 
 Step 5: Weighted sum of values
-  output = weights · V       (shape: [seq_len, d_v])
+  output = weights Â· V       (shape: [seq_len, d_v])
 ```
 
 ### Visual Example
@@ -97,7 +97,7 @@ Step 5: Weighted sum of values
   "cat"    [ 0.1    0.7    0.1    0.05   0.05 ]
   "sat"    [ 0.05   0.3    0.5    0.1    0.05 ]
   "on"     [ 0.05   0.1    0.2    0.6    0.05 ]
-  "it"     [ 0.05   0.6    0.1    0.05   0.2  ]  ← "it" attends most to "cat"
+  "it"     [ 0.05   0.6    0.1    0.05   0.2  ]  â† "it" attends most to "cat"
 
   ^ Each row shows WHERE that token is "looking"
   ^ Values sum to 1.0 (softmax)
@@ -108,9 +108,9 @@ Step 5: Weighted sum of values
 Instead of one attention, compute `h` parallel attentions with different learned projections:
 
 ```
-head_i = Attention(X·W_Q_i, X·W_K_i, X·W_V_i)
+head_i = Attention(XÂ·W_Q_i, XÂ·W_K_i, XÂ·W_V_i)
 
-MultiHead(X) = Concat(head_1, ..., head_h) · W_O
+MultiHead(X) = Concat(head_1, ..., head_h) Â· W_O
 ```
 
 **Why multiple heads?**
@@ -129,16 +129,16 @@ MultiHead(X) = Concat(head_1, ..., head_h) · W_O
 
 ### Causal Masking (Critical for LLMs)
 
-In generation, token at position `i` should only attend to positions `≤ i` (can't see the future):
+In generation, token at position `i` should only attend to positions `â‰¤ i` (can't see the future):
 
 ```
 Mask:
-  [1, -∞, -∞, -∞]     "The" can only see "The"
-  [1,  1, -∞, -∞]     "cat" can see "The", "cat"  
-  [1,  1,  1, -∞]     "sat" can see "The", "cat", "sat"
+  [1, -âˆž, -âˆž, -âˆž]     "The" can only see "The"
+  [1,  1, -âˆž, -âˆž]     "cat" can see "The", "cat"
+  [1,  1,  1, -âˆž]     "sat" can see "The", "cat", "sat"
   [1,  1,  1,  1]     "on" can see everything before it
 
-Applied BEFORE softmax: e^(-∞) = 0, so masked positions get zero weight
+Applied BEFORE softmax: e^(-âˆž) = 0, so masked positions get zero weight
 ```
 
 ### Modern Variants
@@ -154,7 +154,7 @@ Applied BEFORE softmax: e^(-∞) = 0, so masked positions get zero weight
 
 ---
 
-## ◆ Formulas & Equations
+## â—† Formulas & Equations
 
 | Name               | Formula                                                                           | Variables                            | Use                |
 | ------------------ | --------------------------------------------------------------------------------- | ------------------------------------ | ------------------ |
@@ -164,27 +164,27 @@ Applied BEFORE softmax: e^(-∞) = 0, so masked positions get zero weight
 
 ---
 
-## ◆ Strengths vs Limitations
+## â—† Strengths vs Limitations
 
-| ✅ Strengths                                                  | ❌ Limitations                                        |
+| âœ… Strengths                                                  | âŒ Limitations                                        |
 | ------------------------------------------------------------ | ---------------------------------------------------- |
-| Captures long-range dependencies                             | O(n²) — quadratic with sequence length               |
+| Captures long-range dependencies                             | O(nÂ²) â€” quadratic with sequence length               |
 | Fully parallelizable                                         | Large memory footprint for long sequences            |
 | Interpretable (attention weights show what model "looks at") | Attention maps don't always reflect causal reasoning |
 | Works across modalities (text, image, audio)                 | Still needs positional encoding (no inherent order)  |
 
 ---
 
-## ◆ Quick Reference
+## â—† Quick Reference
 
 ```
-Attention(Q,K,V) = softmax(QKᵀ/√d_k) · V
+Attention(Q,K,V) = softmax(QKáµ€/âˆšd_k) Â· V
 
 Multi-Head: Run h parallel attentions, concat, project
 
-Causal mask: Upper triangle = -∞ (can't see future)
+Causal mask: Upper triangle = -âˆž (can't see future)
 
-Complexity: O(n²·d) per layer
+Complexity: O(nÂ²Â·d) per layer
 
 Modern defaults:
   - GQA (not full MHA) for efficiency
@@ -195,33 +195,33 @@ Modern defaults:
 
 ---
 
-## ○ Interview Angles
+## â—‹ Interview Angles
 
-- **Q**: Why divide by √d_k in attention?
-- **A**: Without it, for large d_k, dot products become huge → softmax saturates → near-zero gradients. Scaling keeps variance at ~1.
+- **Q**: Why divide by âˆšd_k in attention?
+- **A**: Without it, for large d_k, dot products become huge â†’ softmax saturates â†’ near-zero gradients. Scaling keeps variance at ~1.
 
 - **Q**: What's the difference between MHA, MQA, and GQA?
 - **A**: MHA: separate K,V per head (most expressive, slowest). MQA: one shared K,V (fastest, some quality loss). GQA: groups of heads share K,V (good balance). LLaMA 2+ uses GQA.
 
 - **Q**: How does Flash Attention improve efficiency without changing the math?
-- **A**: It tiles the computation to fit in SRAM (fast cache), avoiding materialization of the full n×n attention matrix in slow HBM (GPU memory). Same result, ~2-4x faster.
+- **A**: It tiles the computation to fit in SRAM (fast cache), avoiding materialization of the full nÃ—n attention matrix in slow HBM (GPU memory). Same result, ~2-4x faster.
 
 ---
 
-## ★ Connections
+## â˜… Connections
 
 | Relationship | Topics                                                                           |
 | ------------ | -------------------------------------------------------------------------------- |
-| Builds on    | [[../prerequisites/linear-algebra-for-ai]], [[../prerequisites/neural-networks]] |
-| Leads to     | [[transformers]], [[../../llms/llms-overview]]                                   |
+| Builds on    | [Linear Algebra For Ai](../prerequisites/linear-algebra-for-ai.md), [Neural Networks](../prerequisites/neural-networks.md) |
+| Leads to     | [Transformers](./transformers.md), [Large Language Models (LLMs)](../llms/llms-overview.md)                                   |
 | Compare with | Recurrence (RNNs), Convolution (CNNs)                                            |
 | Cross-domain | Vision Transformers (ViT), Graph Attention Networks                              |
 
 ---
 
-## ★ Sources
+## â˜… Sources
 
-- Vaswani et al., "Attention Is All You Need" (2017) — https://arxiv.org/abs/1706.03762
-- Bahdanau et al., "Neural Machine Translation by Jointly Learning to Align and Translate" (2014) — Original attention paper
-- Jay Alammar, "The Illustrated Transformer" — https://jalammar.github.io/illustrated-transformer/
-- Tri Dao, "Flash Attention" (2022) — https://arxiv.org/abs/2205.14135
+- Vaswani et al., "Attention Is All You Need" (2017) â€” https://arxiv.org/abs/1706.03762
+- Bahdanau et al., "Neural Machine Translation by Jointly Learning to Align and Translate" (2014) â€” Original attention paper
+- Jay Alammar, "The Illustrated Transformer" â€” https://jalammar.github.io/illustrated-transformer/
+- Tri Dao, "Flash Attention" (2022) â€” https://arxiv.org/abs/2205.14135

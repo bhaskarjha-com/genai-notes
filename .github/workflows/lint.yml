@@ -1,0 +1,29 @@
+name: Repo Quality
+
+on:
+  pull_request:
+  push:
+
+jobs:
+  repo-quality:
+    runs-on: windows-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Regenerate learner assets
+        shell: pwsh
+        run: powershell -ExecutionPolicy Bypass -File scripts/generate_learning_assets.ps1
+
+      - name: Ensure generated assets are committed
+        shell: pwsh
+        run: git diff --exit-code -- assets/data downloads generated
+
+      - name: Verify repo structure and content standards
+        shell: pwsh
+        run: powershell -ExecutionPolicy Bypass -File scripts/verify_repo.ps1
+
+      - name: Run markdown quality checks
+        shell: pwsh
+        run: powershell -ExecutionPolicy Bypass -File scripts/markdown_quality_check.ps1

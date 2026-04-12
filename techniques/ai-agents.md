@@ -5,19 +5,19 @@ type: concept
 difficulty: intermediate
 status: published
 parent: "[[../genai]]"
-related: ["[[rag]]", "[[../llms/llms-overview]]", "[[prompt-engineering]]"]
+related: ["[[rag]]", "[[../llms/llms-overview]]", "[[prompt-engineering]]", "[[multi-agent-architectures]]", "[[agent-evaluation]]"]
 source: "Multiple - see Sources"
 created: 2026-03-18
-updated: 2026-03-18
+updated: 2026-04-12
 ---
 
 # AI Agents
 
-> ✨ **Bit**: 2024 was "year of the chatbot." 2025-2026 is "year of the agent." The difference? Chatbots answer. Agents do.
+> âœ¨ **Bit**: 2024 was "year of the chatbot." 2025-2026 is "year of the agent." The difference? Chatbots answer. Agents do.
 
 ---
 
-## ★ TL;DR
+## â˜… TL;DR
 
 - **What**: AI systems that autonomously plan, reason, use tools, and take multi-step actions to achieve goals
 - **Why**: The biggest paradigm shift in GenAI since ChatGPT. Moves AI from "answer questions" to "complete tasks"
@@ -25,15 +25,15 @@ updated: 2026-03-18
 
 ---
 
-## ★ Overview
+## â˜… Overview
 
 ### Definition
 
-An **AI Agent** is a system where an LLM acts as a reasoning engine that can: (1) understand goals, (2) break them into sub-tasks, (3) decide which tools to use, (4) execute actions, (5) observe results, and (6) iterate until the goal is achieved — with minimal human intervention.
+An **AI Agent** is a system where an LLM acts as a reasoning engine that can: (1) understand goals, (2) break them into sub-tasks, (3) decide which tools to use, (4) execute actions, (5) observe results, and (6) iterate until the goal is achieved â€” with minimal human intervention.
 
 ### Scope
 
-Covers: Agent architecture, tool use, planning patterns, multi-agent systems, and frameworks. For the underlying LLM, see [[../llms/llms-overview]]. For RAG as a tool agents use, see [[rag]].
+Covers: Agent architecture, tool use, planning patterns, multi-agent systems, and frameworks. For the underlying LLM, see [Llms Overview](../llms/llms-overview.md). For RAG as a tool agents use, see [Rag](./rag.md). For specialized coordination patterns, see [Multi-Agent Architectures](./multi-agent-architectures.md). For tracing and scoring agent runs, see [Agent Evaluation & Observability](./agent-evaluation.md).
 
 ### Significance
 
@@ -44,43 +44,43 @@ Covers: Agent architecture, tool use, planning patterns, multi-agent systems, an
 
 ### Prerequisites
 
-- [[../llms/llms-overview]] — the brain of the agent
-- [[prompt-engineering]] — how to instruct agents
-- [[rag]] — agents often use RAG as a tool
+- [Llms Overview](../llms/llms-overview.md) â€” the brain of the agent
+- [Prompt Engineering](./prompt-engineering.md) â€” how to instruct agents
+- [Rag](./rag.md) â€” agents often use RAG as a tool
 
 ---
 
-## ★ Deep Dive
+## â˜… Deep Dive
 
 ### Agent Architecture
 
 ```
-┌─────────────────────────────────────────────────────┐
-│                    AI AGENT                          │
-│                                                     │
-│  ┌───────────────────────────────────────────┐      │
-│  │           LLM (the brain)                 │      │
-│  │  - Understands goals                      │      │
-│  │  - Reasons about next steps               │      │
-│  │  - Generates tool calls                   │      │
-│  └───────────────────────────────────────────┘      │
-│       │              │              │                │
-│       ▼              ▼              ▼                │
-│  ┌─────────┐   ┌──────────┐   ┌──────────┐         │
-│  │ PLANNING│   │  MEMORY  │   │  TOOLS   │         │
-│  │         │   │          │   │          │         │
-│  │ - Task  │   │ - Short  │   │ - Search │         │
-│  │   decomp│   │   (conv) │   │ - Code   │         │
-│  │ - Step  │   │ - Long   │   │ - APIs   │         │
-│  │   by    │   │   (RAG/  │   │ - Files  │         │
-│  │   step  │   │   DB)    │   │ - Browse │         │
-│  └─────────┘   └──────────┘   └──────────┘         │
-│                                                     │
-│  ┌───────────────────────────────────────────┐      │
-│  │         OBSERVATION & FEEDBACK LOOP       │      │
-│  │  Tool result → Reason → Next action → ... │      │
-│  └───────────────────────────────────────────┘      │
-└─────────────────────────────────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚                    AI AGENT                          â”‚
+â”‚                                                     â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”      â”‚
+â”‚  â”‚           LLM (the brain)                 â”‚      â”‚
+â”‚  â”‚  - Understands goals                      â”‚      â”‚
+â”‚  â”‚  - Reasons about next steps               â”‚      â”‚
+â”‚  â”‚  - Generates tool calls                   â”‚      â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜      â”‚
+â”‚       â”‚              â”‚              â”‚                â”‚
+â”‚       â–¼              â–¼              â–¼                â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”   â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”   â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”         â”‚
+â”‚  â”‚ PLANNINGâ”‚   â”‚  MEMORY  â”‚   â”‚  TOOLS   â”‚         â”‚
+â”‚  â”‚         â”‚   â”‚          â”‚   â”‚          â”‚         â”‚
+â”‚  â”‚ - Task  â”‚   â”‚ - Short  â”‚   â”‚ - Search â”‚         â”‚
+â”‚  â”‚   decompâ”‚   â”‚   (conv) â”‚   â”‚ - Code   â”‚         â”‚
+â”‚  â”‚ - Step  â”‚   â”‚ - Long   â”‚   â”‚ - APIs   â”‚         â”‚
+â”‚  â”‚   by    â”‚   â”‚   (RAG/  â”‚   â”‚ - Files  â”‚         â”‚
+â”‚  â”‚   step  â”‚   â”‚   DB)    â”‚   â”‚ - Browse â”‚         â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜   â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜   â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜         â”‚
+â”‚                                                     â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”      â”‚
+â”‚  â”‚         OBSERVATION & FEEDBACK LOOP       â”‚      â”‚
+â”‚  â”‚  Tool result â†’ Reason â†’ Next action â†’ ... â”‚      â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜      â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ### The Agent Loop (ReAct Pattern)
@@ -145,7 +145,7 @@ ACT:   respond_to_user(summary + table)
 
 | Strategy             | How                                  | When                          |
 | -------------------- | ------------------------------------ | ----------------------------- |
-| **ReAct**            | Think → Act → Observe loop           | General-purpose agent tasks   |
+| **ReAct**            | Think â†’ Act â†’ Observe loop           | General-purpose agent tasks   |
 | **Plan-and-Execute** | Create full plan first, then execute | Complex multi-step tasks      |
 | **Tree of Thoughts** | Explore multiple reasoning paths     | Hard reasoning problems       |
 | **Reflexion**        | Self-reflect on failures, retry      | Tasks needing self-correction |
@@ -181,7 +181,7 @@ ACT:   respond_to_user(summary + table)
 
 ---
 
-## ◆ Code & Implementation
+## â—† Code & Implementation
 
 ### Simple Agent with LangGraph
 
@@ -197,7 +197,7 @@ def search_web(query: str) -> str:
     # Implementation here
     return f"Results for: {query}"
 
-@tool  
+@tool
 def calculator(expression: str) -> str:
     """Evaluate a math expression."""
     return str(eval(expression))
@@ -240,11 +240,11 @@ result = app.invoke({"messages": [("user", "What is 25 * 47?")]})
 
 ---
 
-## ◆ Strengths vs Limitations
+## â—† Strengths vs Limitations
 
-| ✅ Strengths                           | ❌ Limitations                             |
+| âœ… Strengths                           | âŒ Limitations                             |
 | ------------------------------------- | ----------------------------------------- |
-| Can complete complex multi-step tasks | Unreliable — can get stuck in loops       |
+| Can complete complex multi-step tasks | Unreliable â€” can get stuck in loops       |
 | Adapts approach based on observations | Expensive (many LLM calls per task)       |
 | Can use any tool via function calling | Security risk (executing code, API calls) |
 | Handles ambiguous, open-ended goals   | Hard to debug and test                    |
@@ -252,69 +252,69 @@ result = app.invoke({"messages": [("user", "What is 25 * 47?")]})
 
 ---
 
-## ◆ Agent Memory
+## â—† Agent Memory
 
 ```
 MEMORY TYPES:
-  ┌──────────────────────────────────────────────────────┐
-  │  SHORT-TERM (Working Memory)                         │
-  │  = Conversation context window                       │
-  │  The messages in the current session.                │
-  │  Lost when session ends.                             │
-  ├──────────────────────────────────────────────────────┤
-  │  LONG-TERM (Persistent Memory)                       │
-  │  = External storage (vector DB, key-value store)     │
-  │  Facts, preferences, past interactions.              │
-  │  Persists across sessions.                           │
-  │  "You told me last week you prefer Python."          │
-  ├──────────────────────────────────────────────────────┤
-  │  EPISODIC (Experience Memory)                        │
-  │  = Records of past task executions                   │
-  │  "Last time I solved this type of problem, I..."     │
-  │  Enables learning from experience.                   │
-  ├──────────────────────────────────────────────────────┤
-  │  PROCEDURAL (How-to Memory)                          │
-  │  = Tool usage patterns, successful strategies        │
-  │  "When user asks for data analysis, use Python tool  │
-  │   first, then visualization tool."                   │
-  └──────────────────────────────────────────────────────┘
+  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+  â”‚  SHORT-TERM (Working Memory)                         â”‚
+  â”‚  = Conversation context window                       â”‚
+  â”‚  The messages in the current session.                â”‚
+  â”‚  Lost when session ends.                             â”‚
+  â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+  â”‚  LONG-TERM (Persistent Memory)                       â”‚
+  â”‚  = External storage (vector DB, key-value store)     â”‚
+  â”‚  Facts, preferences, past interactions.              â”‚
+  â”‚  Persists across sessions.                           â”‚
+  â”‚  "You told me last week you prefer Python."          â”‚
+  â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+  â”‚  EPISODIC (Experience Memory)                        â”‚
+  â”‚  = Records of past task executions                   â”‚
+  â”‚  "Last time I solved this type of problem, I..."     â”‚
+  â”‚  Enables learning from experience.                   â”‚
+  â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+  â”‚  PROCEDURAL (How-to Memory)                          â”‚
+  â”‚  = Tool usage patterns, successful strategies        â”‚
+  â”‚  "When user asks for data analysis, use Python tool  â”‚
+  â”‚   first, then visualization tool."                   â”‚
+  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 
 IMPLEMENTATION:
-  Short-term  → Sliding window on conversation history
-  Long-term   → Vector DB (Chroma, Pinecone) + retrieval
-  Episodic    → Summarize and store past task outcomes
-  Procedural  → Fine-tuned behaviors or prompt templates
+  Short-term  â†’ Sliding window on conversation history
+  Long-term   â†’ Vector DB (Chroma, Pinecone) + retrieval
+  Episodic    â†’ Summarize and store past task outcomes
+  Procedural  â†’ Fine-tuned behaviors or prompt templates
 ```
 
 ---
 
-## ◆ Framework Comparison (March 2026)
+## â—† Framework Comparison (March 2026)
 
 | Framework           | By        | Orchestration        | Multi-Agent | Best For                        |
 | ------------------- | --------- | -------------------- | ----------- | ------------------------------- |
-| **LangGraph**       | LangChain | Graph-based stateful | ✅           | Complex workflows with state    |
-| **CrewAI**          | Community | Role-based teams     | ✅           | Business process automation     |
-| **AutoGen**         | Microsoft | Chat-based           | ✅           | Research, conversational agents |
-| **ADK**             | Google    | Hierarchical + graph | ✅           | Google ecosystem, production    |
-| **Semantic Kernel** | Microsoft | Plugin-based         | ⚠️ Basic     | Enterprise .NET/Python          |
-| **Mastra**          | Community | TypeScript-first     | ✅           | JS/TS developers                |
+| **LangGraph**       | LangChain | Graph-based stateful | âœ…           | Complex workflows with state    |
+| **CrewAI**          | Community | Role-based teams     | âœ…           | Business process automation     |
+| **AutoGen**         | Microsoft | Chat-based           | âœ…           | Research, conversational agents |
+| **ADK**             | Google    | Hierarchical + graph | âœ…           | Google ecosystem, production    |
+| **Semantic Kernel** | Microsoft | Plugin-based         | âš ï¸ Basic     | Enterprise .NET/Python          |
+| **Mastra**          | Community | TypeScript-first     | âœ…           | JS/TS developers                |
 
-For protocols connecting agents (MCP, A2A), see [[agentic-protocols]].
-
----
-
-## ○ Gotchas & Common Mistakes
-
-- ⚠️ **Agent ≠ Chatbot with tools**: A chatbot uses tools reactively. An agent plans proactively. Don't call everything an "agent."
-- ⚠️ **Infinite loops**: Agents can get stuck retrying failed actions. Always set max iterations.
-- ⚠️ **Tool description quality**: Agents are only as good as their tool descriptions. Bad descriptions = wrong tool choices.
-- ⚠️ **Over-engineering**: Most problems don't need agents. Start with simple chains; add agent complexity only when needed.
-- ⚠️ **Security**: Agents executing code or calling APIs can cause real damage. Always sandbox and add human-in-the-loop for critical actions.
-- ⚠️ **Memory overflow**: Long-term memory without curation becomes noisy. Implement summarization and relevance filtering.
+For protocols connecting agents (MCP, A2A), see [Agentic Protocols](./agentic-protocols.md).
 
 ---
 
-## ○ Interview Angles
+## â—‹ Gotchas & Common Mistakes
+
+- âš ï¸ **Agent â‰  Chatbot with tools**: A chatbot uses tools reactively. An agent plans proactively. Don't call everything an "agent."
+- âš ï¸ **Infinite loops**: Agents can get stuck retrying failed actions. Always set max iterations.
+- âš ï¸ **Tool description quality**: Agents are only as good as their tool descriptions. Bad descriptions = wrong tool choices.
+- âš ï¸ **Over-engineering**: Most problems don't need agents. Start with simple chains; add agent complexity only when needed.
+- âš ï¸ **Security**: Agents executing code or calling APIs can cause real damage. Always sandbox and add human-in-the-loop for critical actions.
+- âš ï¸ **Memory overflow**: Long-term memory without curation becomes noisy. Implement summarization and relevance filtering.
+
+---
+
+## â—‹ Interview Angles
 
 - **Q**: What makes an AI agent different from a chatbot?
 - **A**: A chatbot responds to messages. An agent sets goals, plans multi-step approaches, uses tools, observes results, and iterates. Agents are autonomous; chatbots are reactive.
@@ -330,24 +330,24 @@ For protocols connecting agents (MCP, A2A), see [[agentic-protocols]].
 
 ---
 
-## ★ Connections
+## â˜… Connections
 
 | Relationship | Topics                                                                                                 |
 | ------------ | ------------------------------------------------------------------------------------------------------ |
-| Builds on    | [[../llms/llms-overview]], [[rag]], [[prompt-engineering]], [[function-calling-and-structured-output]] |
-| Leads to     | [[agentic-protocols]] (MCP/A2A/ADK), [[../applications/code-generation]] (coding agents)               |
+| Builds on    | [Llms Overview](../llms/llms-overview.md), [Rag](./rag.md), [Prompt Engineering](./prompt-engineering.md), [Function Calling And Structured Output](./function-calling-and-structured-output.md) |
+| Leads to     | [Agentic Protocols](./agentic-protocols.md) (MCP/A2A/ADK), [Code Generation](../applications/code-generation.md) (coding agents)               |
 | Compare with | Simple chains (no autonomy), Chatbots (reactive only)                                                  |
 | Cross-domain | Robotics (embodied agents), Game AI, Control theory                                                    |
 
 ---
 
-## ★ Sources
+## â˜… Sources
 
-- LangGraph documentation — https://langchain-ai.github.io/langgraph/
+- LangGraph documentation â€” https://langchain-ai.github.io/langgraph/
 - Anthropic "Building Effective Agents" guide (2025)
 - Yao et al., "ReAct: Synergizing Reasoning and Acting in Language Models" (2022)
-- CrewAI documentation — https://docs.crewai.com
-- AutoGen documentation — https://microsoft.github.io/autogen/
-- Google ADK documentation — https://google.github.io/adk-docs/
+- CrewAI documentation â€” https://docs.crewai.com
+- AutoGen documentation â€” https://microsoft.github.io/autogen/
+- Google ADK documentation â€” https://google.github.io/adk-docs/
 - deeplearning.ai, "Agent Memory: Building Memory-Aware Agents" (2025)
 

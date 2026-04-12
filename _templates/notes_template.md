@@ -27,7 +27,7 @@ updated:
 ║  3. Delete empty sections. The template adapts by subtraction.              ║
 ║                                                                             ║
 ║  4. If any section grows large, extract to a sub-document and link:         ║
-║     → "See [[./subtopic/Detailed Topic]]"                                   ║
+║     → "See [Detailed Topic](./subtopic/detailed-topic.md)"                  ║
 ║                                                                             ║
 ║  5. Delete this instruction block in actual documents.                      ║
 ╚═══════════════════════════════════════════════════════════════════════════════╝
@@ -66,7 +66,7 @@ updated:
 ### Prerequisites
 <!-- What should someone already understand? Link to those documents. -->
 
-- [[Prerequisite Topic]]
+- [Prerequisite Topic](./prerequisite-topic.md)
 
 ---
 
@@ -219,9 +219,9 @@ Include: diagrams, formulas, pseudocode, architecture, proofs — whatever fits.
 
 | Relationship | Topics |
 |-------------|--------|
-| Builds on | [[]] |
-| Leads to | [[]] |
-| Compare with | [[]] |
+| Builds on | [Related Topic](./related-topic.md) |
+| Leads to | [Next Topic](./next-topic.md) |
+| Compare with | [Alternative Topic](./alternative-topic.md) |
 | Cross-domain | |
 
 ---
@@ -251,9 +251,9 @@ Include: diagrams, formulas, pseudocode, architecture, proofs — whatever fits.
 
 <!--
 LINKING:
-  Same directory:  [[Topic Name]]
-  Sub-document:    [[./subdir/Topic Name]]
-  Parent:          [[../Topic Name]]
-  Specific section: [[Topic Name#Section Name]]
-  Display text:    [[Topic Name|Text to Show]]
+  Frontmatter parent/related: [[../genai]]
+  Body text same directory:   [Topic Name](./topic-name.md)
+  Sub-document:               [Detailed Topic](./subdir/detailed-topic.md)
+  Parent topic:               [Topic Name](../topic-name.md)
+  Specific section:           [Topic Name](./topic-name.md#section-name)
 -->

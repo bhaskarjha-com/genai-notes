@@ -1,0 +1,216 @@
+site_name: GenAI Study Notes
+site_description: Structured GenAI study notes from prerequisites to frontier research.
+site_url: https://bhaskarjha-com.github.io/genai-notes/
+repo_url: https://github.com/bhaskarjha-com/genai-notes
+repo_name: bhaskarjha-com/genai-notes
+edit_uri: edit/master/
+docs_dir: .
+site_dir: site
+use_directory_urls: false
+
+validation:
+  nav:
+    omitted_files: ignore
+    not_found: warn
+    absolute_links: relative_to_docs
+
+exclude_docs: |
+  drafts/**
+  scripts/**
+  _templates/**
+  .github/**
+  link_converter.py
+  site/**
+  .gitignore
+
+theme:
+  name: material
+  language: en
+  icon:
+    logo: material/notebook-multiple-outline
+    repo: fontawesome/brands/github
+  features:
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.tabs.link
+    - content.action.edit
+    - content.action.view
+    - toc.follow
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: teal
+      accent: amber
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: blue grey
+      accent: amber
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+
+plugins:
+  - search
+  - tags:
+      tags_file: tags.md
+  - social
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+
+extra_css:
+  - assets/stylesheets/extra.css
+
+extra_javascript:
+  - assets/javascripts/knowledge-graph.js
+  - assets/javascripts/role-matrix.js
+  - assets/javascripts/progress-tracker.js
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/bhaskarjha-com/genai-notes
+
+nav:
+  - Home:
+      - Welcome: index.md
+      - GitHub README: README.md
+      - Learning Path: LEARNING_PATH.md
+      - Root Overview: genai.md
+      - Browse By Tag: tags.md
+  - Learner Tools:
+      - Anki and Spaced Repetition: learner-tools/anki-and-spaced-repetition.md
+      - Interactive Knowledge Graph: learner-tools/knowledge-graph.md
+      - Topic x Role Matrix: learner-tools/topic-role-matrix.md
+      - Progress Tracker: learner-tools/progress-tracker.md
+      - Downloadable Decks: downloads/anki/README.md
+      - Downloadable Checklists: downloads/progress/README.md
+      - Static Role Matrix: generated/topic-role-relevance-matrix.md
+  - Learning Path:
+      - Universal Foundation:
+          - Level 1 - Prerequisites: LEARNING_PATH.md#level-1-prerequisites-15-hours
+          - Level 2 - GenAI Foundations: LEARNING_PATH.md#level-2-genai-foundations-20-hours
+          - Level 3 - Core GenAI Techniques: LEARNING_PATH.md#level-3-core-genai-techniques-25-hours
+      - Role Cluster Tracks:
+          - Track A - Application and Integration Builder: LEARNING_PATH.md#track-a---application-and-integration-builder
+          - Track B - AI Systems and Orchestration Engineer: LEARNING_PATH.md#track-b---ai-systems-and-orchestration-engineer
+          - Track C - ML and Production Engineer: LEARNING_PATH.md#track-c---ml-and-production-engineer
+          - Track D - Research and Foundation Model: LEARNING_PATH.md#track-d---research-and-foundation-model
+          - Track E - Safety, Ethics and Governance: LEARNING_PATH.md#track-e---safety-ethics-and-governance
+  - Topic Library:
+      - Prerequisites:
+          - Python for AI: prerequisites/python-for-ai.md
+          - Linear Algebra for AI: prerequisites/linear-algebra-for-ai.md
+          - Probability and Statistics for AI: prerequisites/probability-and-statistics.md
+          - Neural Networks: prerequisites/neural-networks.md
+          - Deep Learning Fundamentals: prerequisites/deep-learning-fundamentals.md
+          - NLP Fundamentals: prerequisites/nlp-fundamentals.md
+      - Foundations:
+          - Transformers: foundations/transformers.md
+          - Attention Mechanism: foundations/attention-mechanism.md
+          - Tokenization: foundations/tokenization.md
+          - Embeddings: foundations/embeddings.md
+          - Modern Architectures: foundations/modern-architectures.md
+          - Scaling Laws and Pretraining: foundations/scaling-laws-and-pretraining.md
+      - LLMs:
+          - LLMs Overview: llms/llms-overview.md
+          - LLM Landscape: llms/llm-landscape.md
+          - Reasoning Models: llms/reasoning-models.md
+          - Hallucination Detection: llms/hallucination-detection.md
+      - Techniques:
+          - Prompt Engineering: techniques/prompt-engineering.md
+          - Context Engineering: techniques/context-engineering.md
+          - Function Calling and Structured Output: techniques/function-calling-and-structured-output.md
+          - RAG: techniques/rag.md
+          - Graph RAG: techniques/graph-rag.md
+          - Fine-Tuning: techniques/fine-tuning.md
+          - Advanced Fine-Tuning: techniques/advanced-fine-tuning.md
+          - AI Agents: techniques/ai-agents.md
+          - Multi-Agent Architectures: techniques/multi-agent-architectures.md
+          - Agent Evaluation: techniques/agent-evaluation.md
+          - Agentic Protocols: techniques/agentic-protocols.md
+          - RL Alignment: techniques/rl-alignment.md
+          - Distillation and Compression: techniques/distillation-and-compression.md
+          - Synthetic Data and Data Engineering: techniques/synthetic-data-and-data-engineering.md
+          - Continual Learning: techniques/continual-learning.md
+      - Applications:
+          - API Design for AI: applications/api-design-for-ai.md
+          - AI Product Management Fundamentals: applications/ai-product-management-fundamentals.md
+          - Code Generation: applications/code-generation.md
+          - Conversational AI: applications/conversational-ai.md
+          - Voice AI: applications/voice-ai.md
+      - Tools and Infra:
+          - Tools Overview: tools-and-infra/tools-overview.md
+          - Vector Databases: tools-and-infra/vector-databases.md
+          - Cloud ML Services: tools-and-infra/cloud-ml-services.md
+          - Distributed Systems for AI: tools-and-infra/distributed-systems-for-ai.md
+          - ML Experiment Tracking: tools-and-infra/ml-experiment-tracking.md
+          - Data Versioning for ML: tools-and-infra/data-versioning-for-ml.md
+      - Production:
+          - AI System Design: production/ai-system-design.md
+          - Docker and Kubernetes: production/docker-and-kubernetes.md
+          - Model Serving: production/model-serving.md
+          - Monitoring and Observability: production/monitoring-observability.md
+          - CI/CD for ML: production/cicd-for-ml.md
+          - LLMOps: production/llmops.md
+          - Cost Optimization: production/cost-optimization.md
+          - Classical ML for GenAI: production/classical-ml-for-genai.md
+          - Latency and Throughput Engineering: production/latency-and-throughput-engineering.md
+      - Evaluation:
+          - Evaluation and Benchmarks: evaluation/evaluation-and-benchmarks.md
+          - LLM Evaluation Deep Dive: evaluation/llm-evaluation-deep-dive.md
+          - System Design for AI Interviews: evaluation/system-design-for-ai-interviews.md
+      - Inference:
+          - Inference Optimization: inference/inference-optimization.md
+          - GPU and CUDA Programming: inference/gpu-cuda-programming.md
+          - Distributed Inference and Serving Architecture: inference/distributed-inference-and-serving-architecture.md
+      - Ethics and Safety:
+          - Ethics, Safety and Alignment: ethics-and-safety/ethics-safety-alignment.md
+          - AI Regulation: ethics-and-safety/ai-regulation.md
+          - Adversarial ML and AI Security: ethics-and-safety/adversarial-ml-and-ai-security.md
+          - OWASP LLM Top 10: ethics-and-safety/owasp-llm-top-10.md
+      - Multimodal:
+          - Multimodal AI: multimodal/multimodal-ai.md
+          - Computer Vision Fundamentals: multimodal/computer-vision-fundamentals.md
+      - Image Generation:
+          - Diffusion Models: image-generation/diffusion-models.md
+      - Research Frontiers:
+          - Distributed Training: research-frontiers/distributed-training.md
+          - Training Infrastructure: research-frontiers/training-infrastructure.md
+          - Interpretability: research-frontiers/interpretability.md
+          - Research Methodology and Paper Reading: research-frontiers/research-methodology-and-paper-reading.md
+  - Career Guides:
+      - Role Reference: career/genai-career-roles-universal.md
+      - AI Engineer: career/roles/ai-engineer.md
+      - Generative AI Engineer: career/roles/genai-engineer.md
+      - LLM Engineer: career/roles/llm-engineer.md
+      - RAG Engineer: career/roles/rag-engineer.md
+      - Agentic AI Engineer: career/roles/agentic-ai-engineer.md
+      - ML Engineer: career/roles/ml-engineer.md
+      - MLOps / LLMOps Engineer: career/roles/mlops-engineer.md
+      - Application and Strategy Roles: career/application-and-strategy-roles.md
+      - Applied ML and Domain Roles: career/applied-ml-and-domain-roles.md
+      - Research and Infrastructure Roles: career/research-and-infrastructure-roles.md
+      - Safety and Governance Roles: career/safety-and-governance-roles.md
+  - Repo Docs:
+      - Contributing: CONTRIBUTING.md
+      - Changelog: CHANGELOG.md

@@ -1,0 +1,209 @@
+---
+title: "LLM Evaluation Deep Dive"
+tags: [evaluation, llm-as-judge, ragas, deepeval, judges, regression]
+type: reference
+difficulty: advanced
+status: published
+parent: "[[evaluation-and-benchmarks]]"
+related: ["[[../llms/hallucination-detection]]", "[[../techniques/agent-evaluation]]", "[[../techniques/rag]]", "[[../production/monitoring-observability]]"]
+source: "Multiple - see Sources"
+created: 2026-04-12
+updated: 2026-04-12
+---
+
+# LLM Evaluation Deep Dive
+
+> Benchmark awareness is useful. Evaluation design is what actually keeps production systems honest.
+
+---
+
+## TL;DR
+
+- **What**: A deeper framework for designing offline and online evaluation loops for LLM apps, RAG systems, and agents.
+- **Why**: Generic benchmark literacy is not enough for shipping a domain-specific system.
+- **Key point**: Build task-specific evaluation sets, measure failure modes directly, and combine automation with targeted human review.
+
+---
+
+## Overview
+
+### Definition
+
+This note focuses on **application-level evaluation**: whether a real GenAI system is correct, grounded, safe, and useful for the task it was built to solve.
+
+### Scope
+
+The note goes beyond benchmark names and covers evaluation design, judge usage, dataset construction, online feedback, and production regressions.
+
+### Significance
+
+- Strong evaluation is the difference between disciplined iteration and prompt tinkering.
+- RAG and agent systems need multi-stage evaluation, not just final-answer scoring.
+- Evaluation maturity is one of the clearest markers of a senior GenAI team.
+
+### Prerequisites
+
+- [LLM Evaluation & Benchmarks](./evaluation-and-benchmarks.md)
+- [Hallucination Detection & Mitigation](../llms/hallucination-detection.md)
+- [Agent Evaluation & Observability](../techniques/agent-evaluation.md)
+
+---
+
+## Deep Dive
+
+### Start With The Task, Not The Tool
+
+The evaluation design should begin with:
+
+1. What user task are we trying to help with?
+2. What does a good answer actually look like?
+3. What failure modes are unacceptable?
+4. What is the business impact of each failure type?
+
+### Evaluation Layers
+
+| Layer | What You Check | Example |
+|---|---|---|
+| **Component** | Does one stage work? | retrieval precision, schema validity |
+| **Task** | Did the workflow solve the task? | final answer correctness |
+| **System** | Is the product usable at scale? | latency, escalation rate, cost |
+| **Safety** | Did the system stay within policy? | refusal quality, data leakage checks |
+
+### Offline vs Online Evaluation
+
+| Mode | Strength | Limitation |
+|---|---|---|
+| **Offline evals** | Fast iteration, comparable baselines | Can drift away from real usage |
+| **Online evals** | Real behavior under real traffic | Harder to control and diagnose |
+
+You usually need both.
+
+### Building An Eval Dataset
+
+A useful dataset should include:
+
+- representative real tasks
+- hard edge cases
+- known failure modes
+- policy-sensitive examples
+- diverse lengths and contexts
+
+Split the dataset into:
+
+- smoke checks for pull requests
+- regression set for release gates
+- exploratory or adversarial set for deeper review
+
+### Common Scoring Methods
+
+| Method | Good For | Risk |
+|---|---|---|
+| **Exact match / rule-based** | Structured outputs | Too brittle for natural language |
+| **Rubric-based human review** | High-value quality signals | Slower and expensive |
+| **LLM-as-judge** | Scalable comparative review | Judge bias and instability |
+| **Reference-based metrics** | Narrow answer spaces | Weak for open-ended tasks |
+| **Task outcome metric** | Most realistic product view | Often harder to instrument |
+
+### LLM-As-Judge Best Practices
+
+Use judges for:
+
+- pairwise comparison
+- rubric scoring
+- classification of failure type
+
+Do not use judge scores blindly. Spot-check them with humans, keep prompts versioned, and prefer pairwise ranking over pretending the judge is an oracle.
+
+### RAG Evaluation
+
+RAG systems need at least three views:
+
+| Stage | Sample Questions |
+|---|---|
+| **Retrieval** | Did we fetch the right evidence? |
+| **Grounding** | Did the answer actually use the retrieved evidence? |
+| **Answer quality** | Was the final response helpful and complete? |
+
+Representative tools and methods in this space were spot-checked for naming/currency in 2026-04, but the evaluation principles are more durable than any single framework.
+
+### Agent Evaluation
+
+For agents, score more than the final text:
+
+- task completion
+- tool selection quality
+- error recovery
+- unnecessary loop count
+- latency and cost per successful task
+
+### Example Lightweight Eval Record
+
+```json
+{
+  "input": "Summarize the refund policy for annual plans.",
+  "expected_behavior": "mentions annual refund window and exceptions",
+  "retrieval_ok": true,
+  "judge_score": 4,
+  "hallucinated": false,
+  "notes": "missed cancellation timing detail"
+}
+```
+
+### Practical Evaluation Workflow
+
+1. Define a task taxonomy.
+2. Collect representative examples.
+3. Add a few explicit failure labels.
+4. Score offline before every meaningful release.
+5. Review production traces to refresh the dataset.
+
+---
+
+## Quick Reference
+
+| Question | Better Eval Choice |
+|---|---|
+| Is JSON shape valid? | rule-based check |
+| Is this answer better than baseline? | pairwise judge or human review |
+| Is the answer grounded? | citation/grounding rubric + retrieval inspection |
+| Did the agent solve the workflow? | task-completion metric + trace review |
+| Is the product improving? | combine online outcome metrics with offline regressions |
+
+---
+
+## Gotchas
+
+- Teams often optimize what is easy to score rather than what matters.
+- Judge prompts drift just like application prompts do.
+- Over-clean eval datasets create fake confidence.
+- A single aggregate score hides important failure clusters.
+
+---
+
+## Interview Angles
+
+- **Q**: Why are benchmarks not enough for production LLM evaluation?
+- **A**: Benchmarks measure generic capability, but production systems depend on domain data, UX constraints, retrieval quality, safety needs, and business outcomes. You need task-specific evaluation tied to real failure modes.
+
+- **Q**: What would you measure in a RAG eval suite?
+- **A**: Retrieval quality, groundedness, answer usefulness, latency, and cost. I would also include adversarial and ambiguous queries because those reveal brittle behavior quickly.
+
+---
+
+## Connections
+
+| Relationship | Topics |
+|---|---|
+| Builds on | [LLM Evaluation & Benchmarks](./evaluation-and-benchmarks.md), [Hallucination Detection & Mitigation](../llms/hallucination-detection.md), [Agent Evaluation & Observability](../techniques/agent-evaluation.md) |
+| Leads to | [Monitoring & Observability for GenAI Systems](../production/monitoring-observability.md), [CI/CD for ML and LLM Systems](../production/cicd-for-ml.md) |
+| Compare with | Static benchmark tracking, ad hoc manual testing |
+| Cross-domain | Experiment design, analytics, QA |
+
+---
+
+## Sources
+
+- RAGAS documentation
+- DeepEval documentation
+- LangSmith evaluation documentation
+- [LLM Evaluation & Benchmarks](./evaluation-and-benchmarks.md)

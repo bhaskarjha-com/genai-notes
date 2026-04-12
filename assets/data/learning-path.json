@@ -1,0 +1,853 @@
+{
+    "GeneratedAt":  "2026-04-12",
+    "Foundation":  [
+                       {
+                           "Id":  "foundation-level-1",
+                           "Title":  "Level 1: Prerequisites (~15 hours)",
+                           "Notes":  [
+                                         {
+                                             "Path":  "prerequisites/python-for-ai.md",
+                                             "Title":  "Python for AI",
+                                             "Label":  "python-for-ai",
+                                             "Folder":  "prerequisites",
+                                             "Difficulty":  "beginner",
+                                             "EstTime":  "3h",
+                                             "SitePath":  "prerequisites/python-for-ai.html",
+                                             "MarkdownLink":  "../prerequisites/python-for-ai.md"
+                                         },
+                                         {
+                                             "Path":  "prerequisites/linear-algebra-for-ai.md",
+                                             "Title":  "Linear Algebra for AI",
+                                             "Label":  "linear-algebra-for-ai",
+                                             "Folder":  "prerequisites",
+                                             "Difficulty":  "beginner",
+                                             "EstTime":  "3h",
+                                             "SitePath":  "prerequisites/linear-algebra-for-ai.html",
+                                             "MarkdownLink":  "../prerequisites/linear-algebra-for-ai.md"
+                                         },
+                                         {
+                                             "Path":  "prerequisites/probability-and-statistics.md",
+                                             "Title":  "Probability \u0026 Statistics for AI",
+                                             "Label":  "probability-and-statistics",
+                                             "Folder":  "prerequisites",
+                                             "Difficulty":  "beginner",
+                                             "EstTime":  "2h",
+                                             "SitePath":  "prerequisites/probability-and-statistics.html",
+                                             "MarkdownLink":  "../prerequisites/probability-and-statistics.md"
+                                         },
+                                         {
+                                             "Path":  "prerequisites/neural-networks.md",
+                                             "Title":  "Neural Networks",
+                                             "Label":  "neural-networks",
+                                             "Folder":  "prerequisites",
+                                             "Difficulty":  "beginner",
+                                             "EstTime":  "3h",
+                                             "SitePath":  "prerequisites/neural-networks.html",
+                                             "MarkdownLink":  "../prerequisites/neural-networks.md"
+                                         },
+                                         {
+                                             "Path":  "prerequisites/deep-learning-fundamentals.md",
+                                             "Title":  "Deep Learning Fundamentals",
+                                             "Label":  "deep-learning-fundamentals",
+                                             "Folder":  "prerequisites",
+                                             "Difficulty":  "intermediate",
+                                             "EstTime":  "2h",
+                                             "SitePath":  "prerequisites/deep-learning-fundamentals.html",
+                                             "MarkdownLink":  "../prerequisites/deep-learning-fundamentals.md"
+                                         },
+                                         {
+                                             "Path":  "prerequisites/nlp-fundamentals.md",
+                                             "Title":  "NLP Fundamentals",
+                                             "Label":  "nlp-fundamentals",
+                                             "Folder":  "prerequisites",
+                                             "Difficulty":  "beginner",
+                                             "EstTime":  "2h",
+                                             "SitePath":  "prerequisites/nlp-fundamentals.html",
+                                             "MarkdownLink":  "../prerequisites/nlp-fundamentals.md"
+                                         }
+                                     ]
+                       },
+                       {
+                           "Id":  "foundation-level-2",
+                           "Title":  "Level 2: GenAI Foundations (~20 hours)",
+                           "Notes":  [
+                                         {
+                                             "Path":  "foundations/transformers.md",
+                                             "Title":  "Transformers",
+                                             "Label":  "transformers",
+                                             "Folder":  "foundations",
+                                             "Difficulty":  "intermediate",
+                                             "EstTime":  "4h",
+                                             "SitePath":  "foundations/transformers.html",
+                                             "MarkdownLink":  "../foundations/transformers.md"
+                                         },
+                                         {
+                                             "Path":  "foundations/attention-mechanism.md",
+                                             "Title":  "Attention Mechanism",
+                                             "Label":  "attention-mechanism",
+                                             "Folder":  "foundations",
+                                             "Difficulty":  "intermediate",
+                                             "EstTime":  "3h",
+                                             "SitePath":  "foundations/attention-mechanism.html",
+                                             "MarkdownLink":  "../foundations/attention-mechanism.md"
+                                         },
+                                         {
+                                             "Path":  "foundations/tokenization.md",
+                                             "Title":  "Tokenization",
+                                             "Label":  "tokenization",
+                                             "Folder":  "foundations",
+                                             "Difficulty":  "intermediate",
+                                             "EstTime":  "2h",
+                                             "SitePath":  "foundations/tokenization.html",
+                                             "MarkdownLink":  "../foundations/tokenization.md"
+                                         },
+                                         {
+                                             "Path":  "foundations/embeddings.md",
+                                             "Title":  "Embeddings",
+                                             "Label":  "embeddings",
+                                             "Folder":  "foundations",
+                                             "Difficulty":  "intermediate",
+                                             "EstTime":  "3h",
+                                             "SitePath":  "foundations/embeddings.html",
+                                             "MarkdownLink":  "../foundations/embeddings.md"
+                                         },
+                                         {
+                                             "Path":  "foundations/modern-architectures.md",
+                                             "Title":  "Modern LLM Architectures",
+                                             "Label":  "modern-architectures",
+                                             "Folder":  "foundations",
+                                             "Difficulty":  "advanced",
+                                             "EstTime":  "4h",
+                                             "SitePath":  "foundations/modern-architectures.html",
+                                             "MarkdownLink":  "../foundations/modern-architectures.md"
+                                         },
+                                         {
+                                             "Path":  "foundations/scaling-laws-and-pretraining.md",
+                                             "Title":  "Scaling Laws \u0026 Pre-training",
+                                             "Label":  "scaling-laws-and-pretraining",
+                                             "Folder":  "foundations",
+                                             "Difficulty":  "advanced",
+                                             "EstTime":  "4h",
+                                             "SitePath":  "foundations/scaling-laws-and-pretraining.html",
+                                             "MarkdownLink":  "../foundations/scaling-laws-and-pretraining.md"
+                                         }
+                                     ]
+                       },
+                       {
+                           "Id":  "foundation-level-3",
+                           "Title":  "Level 3: Core GenAI Techniques (~25 hours)",
+                           "Notes":  [
+                                         {
+                                             "Path":  "llms/llms-overview.md",
+                                             "Title":  "Large Language Models (LLMs)",
+                                             "Label":  "llms-overview",
+                                             "Folder":  "llms",
+                                             "Difficulty":  "intermediate",
+                                             "EstTime":  "3h",
+                                             "SitePath":  "llms/llms-overview.html",
+                                             "MarkdownLink":  "../llms/llms-overview.md"
+                                         },
+                                         {
+                                             "Path":  "techniques/prompt-engineering.md",
+                                             "Title":  "Prompt Engineering",
+                                             "Label":  "prompt-engineering",
+                                             "Folder":  "techniques",
+                                             "Difficulty":  "beginner",
+                                             "EstTime":  "2h",
+                                             "SitePath":  "techniques/prompt-engineering.html",
+                                             "MarkdownLink":  "../techniques/prompt-engineering.md"
+                                         },
+                                         {
+                                             "Path":  "techniques/context-engineering.md",
+                                             "Title":  "Context Engineering \u0026 Long Context",
+                                             "Label":  "context-engineering",
+                                             "Folder":  "techniques",
+                                             "Difficulty":  "intermediate",
+                                             "EstTime":  "3h",
+                                             "SitePath":  "techniques/context-engineering.html",
+                                             "MarkdownLink":  "../techniques/context-engineering.md"
+                                         },
+                                         {
+                                             "Path":  "techniques/function-calling-and-structured-output.md",
+                                             "Title":  "Function Calling, Structured Output \u0026 Tool Use",
+                                             "Label":  "function-calling",
+                                             "Folder":  "techniques",
+                                             "Difficulty":  "intermediate",
+                                             "EstTime":  "3h",
+                                             "SitePath":  "techniques/function-calling-and-structured-output.html",
+                                             "MarkdownLink":  "../techniques/function-calling-and-structured-output.md"
+                                         },
+                                         {
+                                             "Path":  "techniques/rag.md",
+                                             "Title":  "Retrieval-Augmented Generation (RAG)",
+                                             "Label":  "rag",
+                                             "Folder":  "techniques",
+                                             "Difficulty":  "intermediate",
+                                             "EstTime":  "4h",
+                                             "SitePath":  "techniques/rag.html",
+                                             "MarkdownLink":  "../techniques/rag.md"
+                                         },
+                                         {
+                                             "Path":  "techniques/fine-tuning.md",
+                                             "Title":  "Fine-Tuning LLMs",
+                                             "Label":  "fine-tuning",
+                                             "Folder":  "techniques",
+                                             "Difficulty":  "advanced",
+                                             "EstTime":  "4h",
+                                             "SitePath":  "techniques/fine-tuning.html",
+                                             "MarkdownLink":  "../techniques/fine-tuning.md"
+                                         },
+                                         {
+                                             "Path":  "techniques/ai-agents.md",
+                                             "Title":  "AI Agents",
+                                             "Label":  "ai-agents",
+                                             "Folder":  "techniques",
+                                             "Difficulty":  "intermediate",
+                                             "EstTime":  "4h",
+                                             "SitePath":  "techniques/ai-agents.html",
+                                             "MarkdownLink":  "../techniques/ai-agents.md"
+                                         },
+                                         {
+                                             "Path":  "evaluation/evaluation-and-benchmarks.md",
+                                             "Title":  "LLM Evaluation \u0026 Benchmarks",
+                                             "Label":  "evaluation",
+                                             "Folder":  "evaluation",
+                                             "Difficulty":  "intermediate",
+                                             "EstTime":  "2h",
+                                             "SitePath":  "evaluation/evaluation-and-benchmarks.html",
+                                             "MarkdownLink":  "../evaluation/evaluation-and-benchmarks.md"
+                                         }
+                                     ]
+                       }
+                   ],
+    "Tracks":  [
+                   {
+                       "Id":  "A",
+                       "Title":  "Track A - Application and Integration Builder",
+                       "Slug":  "track-a-application-and-integration-builder",
+                       "TargetRoles":  [
+                                           "Full-Stack AI Engineer",
+                                           "AI Integration Engineer",
+                                           "AI Consultant",
+                                           "Prompt Engineer",
+                                           "AI Engineer"
+                                       ],
+                       "Notes":  [
+                                     {
+                                         "Path":  "applications/api-design-for-ai.md",
+                                         "Title":  "API Design for AI Applications",
+                                         "Label":  "api-design-for-ai",
+                                         "Folder":  "applications",
+                                         "Difficulty":  "intermediate",
+                                         "EstTime":  "2h",
+                                         "SitePath":  "applications/api-design-for-ai.html",
+                                         "MarkdownLink":  "../applications/api-design-for-ai.md"
+                                     },
+                                     {
+                                         "Path":  "techniques/graph-rag.md",
+                                         "Title":  "Graph RAG \u0026 Advanced Retrieval",
+                                         "Label":  "graph-rag",
+                                         "Folder":  "techniques",
+                                         "Difficulty":  "advanced",
+                                         "EstTime":  "3h",
+                                         "SitePath":  "techniques/graph-rag.html",
+                                         "MarkdownLink":  "../techniques/graph-rag.md"
+                                     },
+                                     {
+                                         "Path":  "tools-and-infra/vector-databases.md",
+                                         "Title":  "Vector Databases",
+                                         "Label":  "vector-databases",
+                                         "Folder":  "tools-and-infra",
+                                         "Difficulty":  "intermediate",
+                                         "EstTime":  "3h",
+                                         "SitePath":  "tools-and-infra/vector-databases.html",
+                                         "MarkdownLink":  "../tools-and-infra/vector-databases.md"
+                                     },
+                                     {
+                                         "Path":  "techniques/multi-agent-architectures.md",
+                                         "Title":  "Multi-Agent Architectures",
+                                         "Label":  "multi-agent-architectures",
+                                         "Folder":  "techniques",
+                                         "Difficulty":  "advanced",
+                                         "EstTime":  "3h",
+                                         "SitePath":  "techniques/multi-agent-architectures.html",
+                                         "MarkdownLink":  "../techniques/multi-agent-architectures.md"
+                                     },
+                                     {
+                                         "Path":  "techniques/agentic-protocols.md",
+                                         "Title":  "Agentic Protocols \u0026 Frameworks",
+                                         "Label":  "agentic-protocols",
+                                         "Folder":  "techniques",
+                                         "Difficulty":  "intermediate",
+                                         "EstTime":  "4h",
+                                         "SitePath":  "techniques/agentic-protocols.html",
+                                         "MarkdownLink":  "../techniques/agentic-protocols.md"
+                                     },
+                                     {
+                                         "Path":  "applications/conversational-ai.md",
+                                         "Title":  "Conversational AI \u0026 Dialogue Systems",
+                                         "Label":  "conversational-ai",
+                                         "Folder":  "applications",
+                                         "Difficulty":  "intermediate",
+                                         "EstTime":  "3h",
+                                         "SitePath":  "applications/conversational-ai.html",
+                                         "MarkdownLink":  "../applications/conversational-ai.md"
+                                     },
+                                     {
+                                         "Path":  "applications/voice-ai.md",
+                                         "Title":  "Voice AI \u0026 Speech",
+                                         "Label":  "voice-ai",
+                                         "Folder":  "applications",
+                                         "Difficulty":  "intermediate",
+                                         "EstTime":  "2h",
+                                         "SitePath":  "applications/voice-ai.html",
+                                         "MarkdownLink":  "../applications/voice-ai.md"
+                                     },
+                                     {
+                                         "Path":  "applications/code-generation.md",
+                                         "Title":  "Code Generation \u0026 AI-Assisted Development",
+                                         "Label":  "code-generation",
+                                         "Folder":  "applications",
+                                         "Difficulty":  "intermediate",
+                                         "EstTime":  "3h",
+                                         "SitePath":  "applications/code-generation.html",
+                                         "MarkdownLink":  "../applications/code-generation.md"
+                                     },
+                                     {
+                                         "Path":  "production/ai-system-design.md",
+                                         "Title":  "AI System Design for GenAI Applications",
+                                         "Label":  "ai-system-design",
+                                         "Folder":  "production",
+                                         "Difficulty":  "advanced",
+                                         "EstTime":  "3h",
+                                         "SitePath":  "production/ai-system-design.html",
+                                         "MarkdownLink":  "../production/ai-system-design.md"
+                                     },
+                                     {
+                                         "Path":  "production/llmops.md",
+                                         "Title":  "LLMOps \u0026 Production Deployment",
+                                         "Label":  "llmops",
+                                         "Folder":  "production",
+                                         "Difficulty":  "intermediate",
+                                         "EstTime":  "3h",
+                                         "SitePath":  "production/llmops.html",
+                                         "MarkdownLink":  "../production/llmops.md"
+                                     },
+                                     {
+                                         "Path":  "applications/ai-product-management-fundamentals.md",
+                                         "Title":  "AI Product Management Fundamentals",
+                                         "Label":  "ai-product-management-fundamentals",
+                                         "Folder":  "applications",
+                                         "Difficulty":  "intermediate",
+                                         "EstTime":  "2h",
+                                         "SitePath":  "applications/ai-product-management-fundamentals.html",
+                                         "MarkdownLink":  "../applications/ai-product-management-fundamentals.md"
+                                     }
+                                 ]
+                   },
+                   {
+                       "Id":  "B",
+                       "Title":  "Track B - AI Systems and Orchestration Engineer",
+                       "Slug":  "track-b-ai-systems-and-orchestration-engineer",
+                       "TargetRoles":  [
+                                           "GenAI Engineer",
+                                           "LLM Engineer",
+                                           "Agentic AI Engineer",
+                                           "RAG Engineer",
+                                           "AI DevTools Engineer"
+                                       ],
+                       "Notes":  [
+                                     {
+                                         "Path":  "techniques/graph-rag.md",
+                                         "Title":  "Graph RAG \u0026 Advanced Retrieval",
+                                         "Label":  "graph-rag",
+                                         "Folder":  "techniques",
+                                         "Difficulty":  "advanced",
+                                         "EstTime":  "3h",
+                                         "SitePath":  "techniques/graph-rag.html",
+                                         "MarkdownLink":  "../techniques/graph-rag.md"
+                                     },
+                                     {
+                                         "Path":  "techniques/multi-agent-architectures.md",
+                                         "Title":  "Multi-Agent Architectures",
+                                         "Label":  "multi-agent-architectures",
+                                         "Folder":  "techniques",
+                                         "Difficulty":  "advanced",
+                                         "EstTime":  "3h",
+                                         "SitePath":  "techniques/multi-agent-architectures.html",
+                                         "MarkdownLink":  "../techniques/multi-agent-architectures.md"
+                                     },
+                                     {
+                                         "Path":  "techniques/agent-evaluation.md",
+                                         "Title":  "Agent Evaluation \u0026 Observability",
+                                         "Label":  "agent-evaluation",
+                                         "Folder":  "techniques",
+                                         "Difficulty":  "advanced",
+                                         "EstTime":  "3h",
+                                         "SitePath":  "techniques/agent-evaluation.html",
+                                         "MarkdownLink":  "../techniques/agent-evaluation.md"
+                                     },
+                                     {
+                                         "Path":  "techniques/agentic-protocols.md",
+                                         "Title":  "Agentic Protocols \u0026 Frameworks",
+                                         "Label":  "agentic-protocols",
+                                         "Folder":  "techniques",
+                                         "Difficulty":  "intermediate",
+                                         "EstTime":  "4h",
+                                         "SitePath":  "techniques/agentic-protocols.html",
+                                         "MarkdownLink":  "../techniques/agentic-protocols.md"
+                                     },
+                                     {
+                                         "Path":  "techniques/advanced-fine-tuning.md",
+                                         "Title":  "Advanced Fine-Tuning for LLM Adaptation",
+                                         "Label":  "advanced-fine-tuning",
+                                         "Folder":  "techniques",
+                                         "Difficulty":  "expert",
+                                         "EstTime":  "4h",
+                                         "SitePath":  "techniques/advanced-fine-tuning.html",
+                                         "MarkdownLink":  "../techniques/advanced-fine-tuning.md"
+                                     },
+                                     {
+                                         "Path":  "techniques/rl-alignment.md",
+                                         "Title":  "Reinforcement Learning for LLM Alignment",
+                                         "Label":  "rl-alignment",
+                                         "Folder":  "techniques",
+                                         "Difficulty":  "advanced",
+                                         "EstTime":  "4h",
+                                         "SitePath":  "techniques/rl-alignment.html",
+                                         "MarkdownLink":  "../techniques/rl-alignment.md"
+                                     },
+                                     {
+                                         "Path":  "techniques/distillation-and-compression.md",
+                                         "Title":  "Knowledge Distillation \u0026 Model Compression",
+                                         "Label":  "distillation-and-compression",
+                                         "Folder":  "techniques",
+                                         "Difficulty":  "advanced",
+                                         "EstTime":  "3h",
+                                         "SitePath":  "techniques/distillation-and-compression.html",
+                                         "MarkdownLink":  "../techniques/distillation-and-compression.md"
+                                     },
+                                     {
+                                         "Path":  "techniques/synthetic-data-and-data-engineering.md",
+                                         "Title":  "Synthetic Data \u0026 Data Engineering for LLMs",
+                                         "Label":  "synthetic-data",
+                                         "Folder":  "techniques",
+                                         "Difficulty":  "intermediate",
+                                         "EstTime":  "3h",
+                                         "SitePath":  "techniques/synthetic-data-and-data-engineering.html",
+                                         "MarkdownLink":  "../techniques/synthetic-data-and-data-engineering.md"
+                                     },
+                                     {
+                                         "Path":  "evaluation/llm-evaluation-deep-dive.md",
+                                         "Title":  "LLM Evaluation Deep Dive",
+                                         "Label":  "llm-evaluation-deep-dive",
+                                         "Folder":  "evaluation",
+                                         "Difficulty":  "advanced",
+                                         "EstTime":  "3h",
+                                         "SitePath":  "evaluation/llm-evaluation-deep-dive.html",
+                                         "MarkdownLink":  "../evaluation/llm-evaluation-deep-dive.md"
+                                     },
+                                     {
+                                         "Path":  "llms/hallucination-detection.md",
+                                         "Title":  "Hallucination Detection \u0026 Mitigation",
+                                         "Label":  "hallucination-detection",
+                                         "Folder":  "llms",
+                                         "Difficulty":  "advanced",
+                                         "EstTime":  "3h",
+                                         "SitePath":  "llms/hallucination-detection.html",
+                                         "MarkdownLink":  "../llms/hallucination-detection.md"
+                                     },
+                                     {
+                                         "Path":  "tools-and-infra/vector-databases.md",
+                                         "Title":  "Vector Databases",
+                                         "Label":  "vector-databases",
+                                         "Folder":  "tools-and-infra",
+                                         "Difficulty":  "intermediate",
+                                         "EstTime":  "3h",
+                                         "SitePath":  "tools-and-infra/vector-databases.html",
+                                         "MarkdownLink":  "../tools-and-infra/vector-databases.md"
+                                     },
+                                     {
+                                         "Path":  "production/model-serving.md",
+                                         "Title":  "Model Serving for LLM Applications",
+                                         "Label":  "model-serving",
+                                         "Folder":  "production",
+                                         "Difficulty":  "advanced",
+                                         "EstTime":  "3h",
+                                         "SitePath":  "production/model-serving.html",
+                                         "MarkdownLink":  "../production/model-serving.md"
+                                     },
+                                     {
+                                         "Path":  "production/monitoring-observability.md",
+                                         "Title":  "Monitoring \u0026 Observability for GenAI Systems",
+                                         "Label":  "monitoring-observability",
+                                         "Folder":  "production",
+                                         "Difficulty":  "advanced",
+                                         "EstTime":  "3h",
+                                         "SitePath":  "production/monitoring-observability.html",
+                                         "MarkdownLink":  "../production/monitoring-observability.md"
+                                     },
+                                     {
+                                         "Path":  "production/cost-optimization.md",
+                                         "Title":  "Cost Optimization for GenAI Systems",
+                                         "Label":  "cost-optimization",
+                                         "Folder":  "production",
+                                         "Difficulty":  "advanced",
+                                         "EstTime":  "3h",
+                                         "SitePath":  "production/cost-optimization.html",
+                                         "MarkdownLink":  "../production/cost-optimization.md"
+                                     },
+                                     {
+                                         "Path":  "production/llmops.md",
+                                         "Title":  "LLMOps \u0026 Production Deployment",
+                                         "Label":  "llmops",
+                                         "Folder":  "production",
+                                         "Difficulty":  "intermediate",
+                                         "EstTime":  "3h",
+                                         "SitePath":  "production/llmops.html",
+                                         "MarkdownLink":  "../production/llmops.md"
+                                     }
+                                 ]
+                   },
+                   {
+                       "Id":  "C",
+                       "Title":  "Track C - ML and Production Engineer",
+                       "Slug":  "track-c-ml-and-production-engineer",
+                       "TargetRoles":  [
+                                           "ML Engineer",
+                                           "MLOps or LLMOps Engineer",
+                                           "AI Data Engineer",
+                                           "Data Scientist",
+                                           "Inference Optimization Engineer"
+                                       ],
+                       "Notes":  [
+                                     {
+                                         "Path":  "production/docker-and-kubernetes.md",
+                                         "Title":  "Docker \u0026 Kubernetes for GenAI Deployment",
+                                         "Label":  "docker-and-kubernetes",
+                                         "Folder":  "production",
+                                         "Difficulty":  "intermediate",
+                                         "EstTime":  "3h",
+                                         "SitePath":  "production/docker-and-kubernetes.html",
+                                         "MarkdownLink":  "../production/docker-and-kubernetes.md"
+                                     },
+                                     {
+                                         "Path":  "production/model-serving.md",
+                                         "Title":  "Model Serving for LLM Applications",
+                                         "Label":  "model-serving",
+                                         "Folder":  "production",
+                                         "Difficulty":  "advanced",
+                                         "EstTime":  "3h",
+                                         "SitePath":  "production/model-serving.html",
+                                         "MarkdownLink":  "../production/model-serving.md"
+                                     },
+                                     {
+                                         "Path":  "production/monitoring-observability.md",
+                                         "Title":  "Monitoring \u0026 Observability for GenAI Systems",
+                                         "Label":  "monitoring-observability",
+                                         "Folder":  "production",
+                                         "Difficulty":  "advanced",
+                                         "EstTime":  "3h",
+                                         "SitePath":  "production/monitoring-observability.html",
+                                         "MarkdownLink":  "../production/monitoring-observability.md"
+                                     },
+                                     {
+                                         "Path":  "production/cicd-for-ml.md",
+                                         "Title":  "CI/CD for ML and LLM Systems",
+                                         "Label":  "cicd-for-ml",
+                                         "Folder":  "production",
+                                         "Difficulty":  "advanced",
+                                         "EstTime":  "3h",
+                                         "SitePath":  "production/cicd-for-ml.html",
+                                         "MarkdownLink":  "../production/cicd-for-ml.md"
+                                     },
+                                     {
+                                         "Path":  "tools-and-infra/cloud-ml-services.md",
+                                         "Title":  "Cloud ML Services \u0026 Managed AI Platforms",
+                                         "Label":  "cloud-ml-services",
+                                         "Folder":  "tools-and-infra",
+                                         "Difficulty":  "intermediate",
+                                         "EstTime":  "3h",
+                                         "SitePath":  "tools-and-infra/cloud-ml-services.html",
+                                         "MarkdownLink":  "../tools-and-infra/cloud-ml-services.md"
+                                     },
+                                     {
+                                         "Path":  "tools-and-infra/ml-experiment-tracking.md",
+                                         "Title":  "ML Experiment Tracking",
+                                         "Label":  "ml-experiment-tracking",
+                                         "Folder":  "tools-and-infra",
+                                         "Difficulty":  "intermediate",
+                                         "EstTime":  "2h",
+                                         "SitePath":  "tools-and-infra/ml-experiment-tracking.html",
+                                         "MarkdownLink":  "../tools-and-infra/ml-experiment-tracking.md"
+                                     },
+                                     {
+                                         "Path":  "tools-and-infra/data-versioning-for-ml.md",
+                                         "Title":  "Data Versioning for ML",
+                                         "Label":  "data-versioning-for-ml",
+                                         "Folder":  "tools-and-infra",
+                                         "Difficulty":  "intermediate",
+                                         "EstTime":  "2h",
+                                         "SitePath":  "tools-and-infra/data-versioning-for-ml.html",
+                                         "MarkdownLink":  "../tools-and-infra/data-versioning-for-ml.md"
+                                     },
+                                     {
+                                         "Path":  "production/classical-ml-for-genai.md",
+                                         "Title":  "Classical ML for GenAI Builders",
+                                         "Label":  "classical-ml-for-genai",
+                                         "Folder":  "production",
+                                         "Difficulty":  "intermediate",
+                                         "EstTime":  "2h",
+                                         "SitePath":  "production/classical-ml-for-genai.html",
+                                         "MarkdownLink":  "../production/classical-ml-for-genai.md"
+                                     },
+                                     {
+                                         "Path":  "production/latency-and-throughput-engineering.md",
+                                         "Title":  "Latency \u0026 Throughput Engineering for AI Systems",
+                                         "Label":  "latency-and-throughput-engineering",
+                                         "Folder":  "production",
+                                         "Difficulty":  "advanced",
+                                         "EstTime":  "3h",
+                                         "SitePath":  "production/latency-and-throughput-engineering.html",
+                                         "MarkdownLink":  "../production/latency-and-throughput-engineering.md"
+                                     },
+                                     {
+                                         "Path":  "tools-and-infra/distributed-systems-for-ai.md",
+                                         "Title":  "Distributed Systems Fundamentals for AI",
+                                         "Label":  "distributed-systems-for-ai",
+                                         "Folder":  "tools-and-infra",
+                                         "Difficulty":  "advanced",
+                                         "EstTime":  "3h",
+                                         "SitePath":  "tools-and-infra/distributed-systems-for-ai.html",
+                                         "MarkdownLink":  "../tools-and-infra/distributed-systems-for-ai.md"
+                                     },
+                                     {
+                                         "Path":  "inference/distributed-inference-and-serving-architecture.md",
+                                         "Title":  "Distributed Inference \u0026 Serving Architecture",
+                                         "Label":  "distributed-inference-and-serving-architecture",
+                                         "Folder":  "inference",
+                                         "Difficulty":  "expert",
+                                         "EstTime":  "3h",
+                                         "SitePath":  "inference/distributed-inference-and-serving-architecture.html",
+                                         "MarkdownLink":  "../inference/distributed-inference-and-serving-architecture.md"
+                                     },
+                                     {
+                                         "Path":  "inference/inference-optimization.md",
+                                         "Title":  "Inference Optimization",
+                                         "Label":  "inference-optimization",
+                                         "Folder":  "inference",
+                                         "Difficulty":  "advanced",
+                                         "EstTime":  "3h",
+                                         "SitePath":  "inference/inference-optimization.html",
+                                         "MarkdownLink":  "../inference/inference-optimization.md"
+                                     },
+                                     {
+                                         "Path":  "production/cost-optimization.md",
+                                         "Title":  "Cost Optimization for GenAI Systems",
+                                         "Label":  "cost-optimization",
+                                         "Folder":  "production",
+                                         "Difficulty":  "advanced",
+                                         "EstTime":  "3h",
+                                         "SitePath":  "production/cost-optimization.html",
+                                         "MarkdownLink":  "../production/cost-optimization.md"
+                                     }
+                                 ]
+                   },
+                   {
+                       "Id":  "D",
+                       "Title":  "Track D - Research and Foundation Model",
+                       "Slug":  "track-d-research-and-foundation-model",
+                       "TargetRoles":  [
+                                           "Foundation Model Engineer",
+                                           "Research Scientist",
+                                           "Applied Scientist",
+                                           "AI Infrastructure Engineer"
+                                       ],
+                       "Notes":  [
+                                     {
+                                         "Path":  "foundations/scaling-laws-and-pretraining.md",
+                                         "Title":  "Scaling Laws \u0026 Pre-training",
+                                         "Label":  "scaling-laws-and-pretraining",
+                                         "Folder":  "foundations",
+                                         "Difficulty":  "advanced",
+                                         "EstTime":  "4h",
+                                         "SitePath":  "foundations/scaling-laws-and-pretraining.html",
+                                         "MarkdownLink":  "../foundations/scaling-laws-and-pretraining.md"
+                                     },
+                                     {
+                                         "Path":  "research-frontiers/distributed-training.md",
+                                         "Title":  "Distributed Training for Large Models",
+                                         "Label":  "distributed-training",
+                                         "Folder":  "research-frontiers",
+                                         "Difficulty":  "expert",
+                                         "EstTime":  "4h",
+                                         "SitePath":  "research-frontiers/distributed-training.html",
+                                         "MarkdownLink":  "../research-frontiers/distributed-training.md"
+                                     },
+                                     {
+                                         "Path":  "research-frontiers/training-infrastructure.md",
+                                         "Title":  "Training Infrastructure for AI Systems",
+                                         "Label":  "training-infrastructure",
+                                         "Folder":  "research-frontiers",
+                                         "Difficulty":  "expert",
+                                         "EstTime":  "3h",
+                                         "SitePath":  "research-frontiers/training-infrastructure.html",
+                                         "MarkdownLink":  "../research-frontiers/training-infrastructure.md"
+                                     },
+                                     {
+                                         "Path":  "techniques/advanced-fine-tuning.md",
+                                         "Title":  "Advanced Fine-Tuning for LLM Adaptation",
+                                         "Label":  "advanced-fine-tuning",
+                                         "Folder":  "techniques",
+                                         "Difficulty":  "expert",
+                                         "EstTime":  "4h",
+                                         "SitePath":  "techniques/advanced-fine-tuning.html",
+                                         "MarkdownLink":  "../techniques/advanced-fine-tuning.md"
+                                     },
+                                     {
+                                         "Path":  "techniques/rl-alignment.md",
+                                         "Title":  "Reinforcement Learning for LLM Alignment",
+                                         "Label":  "rl-alignment",
+                                         "Folder":  "techniques",
+                                         "Difficulty":  "advanced",
+                                         "EstTime":  "4h",
+                                         "SitePath":  "techniques/rl-alignment.html",
+                                         "MarkdownLink":  "../techniques/rl-alignment.md"
+                                     },
+                                     {
+                                         "Path":  "techniques/distillation-and-compression.md",
+                                         "Title":  "Knowledge Distillation \u0026 Model Compression",
+                                         "Label":  "distillation-and-compression",
+                                         "Folder":  "techniques",
+                                         "Difficulty":  "advanced",
+                                         "EstTime":  "3h",
+                                         "SitePath":  "techniques/distillation-and-compression.html",
+                                         "MarkdownLink":  "../techniques/distillation-and-compression.md"
+                                     },
+                                     {
+                                         "Path":  "research-frontiers/interpretability.md",
+                                         "Title":  "Mechanistic Interpretability",
+                                         "Label":  "interpretability",
+                                         "Folder":  "research-frontiers",
+                                         "Difficulty":  "expert",
+                                         "EstTime":  "2h",
+                                         "SitePath":  "research-frontiers/interpretability.html",
+                                         "MarkdownLink":  "../research-frontiers/interpretability.md"
+                                     },
+                                     {
+                                         "Path":  "research-frontiers/research-methodology-and-paper-reading.md",
+                                         "Title":  "Research Methodology \u0026 Paper Reading for AI",
+                                         "Label":  "research-methodology-and-paper-reading",
+                                         "Folder":  "research-frontiers",
+                                         "Difficulty":  "advanced",
+                                         "EstTime":  "2h",
+                                         "SitePath":  "research-frontiers/research-methodology-and-paper-reading.html",
+                                         "MarkdownLink":  "../research-frontiers/research-methodology-and-paper-reading.md"
+                                     },
+                                     {
+                                         "Path":  "inference/gpu-cuda-programming.md",
+                                         "Title":  "GPU \u0026 CUDA Programming for AI Engineers",
+                                         "Label":  "gpu-cuda-programming",
+                                         "Folder":  "inference",
+                                         "Difficulty":  "expert",
+                                         "EstTime":  "4h",
+                                         "SitePath":  "inference/gpu-cuda-programming.html",
+                                         "MarkdownLink":  "../inference/gpu-cuda-programming.md"
+                                     },
+                                     {
+                                         "Path":  "llms/reasoning-models.md",
+                                         "Title":  "Reasoning Models \u0026 Test-Time Compute",
+                                         "Label":  "reasoning-models",
+                                         "Folder":  "llms",
+                                         "Difficulty":  "advanced",
+                                         "EstTime":  "3h",
+                                         "SitePath":  "llms/reasoning-models.html",
+                                         "MarkdownLink":  "../llms/reasoning-models.md"
+                                     }
+                                 ]
+                   },
+                   {
+                       "Id":  "E",
+                       "Title":  "Track E - Safety, Ethics and Governance",
+                       "Slug":  "track-e-safety-ethics-and-governance",
+                       "TargetRoles":  [
+                                           "AI Safety Engineer",
+                                           "AI Red Team Engineer",
+                                           "AI Ethics Lead",
+                                           "AI Data Governance Manager"
+                                       ],
+                       "Notes":  [
+                                     {
+                                         "Path":  "ethics-and-safety/ethics-safety-alignment.md",
+                                         "Title":  "Ethics, Safety \u0026 Alignment",
+                                         "Label":  "ethics-safety-alignment",
+                                         "Folder":  "ethics-and-safety",
+                                         "Difficulty":  "intermediate",
+                                         "EstTime":  "3h",
+                                         "SitePath":  "ethics-and-safety/ethics-safety-alignment.html",
+                                         "MarkdownLink":  "../ethics-and-safety/ethics-safety-alignment.md"
+                                     },
+                                     {
+                                         "Path":  "ethics-and-safety/ai-regulation.md",
+                                         "Title":  "AI Regulation for Builders",
+                                         "Label":  "ai-regulation",
+                                         "Folder":  "ethics-and-safety",
+                                         "Difficulty":  "advanced",
+                                         "EstTime":  "2h",
+                                         "SitePath":  "ethics-and-safety/ai-regulation.html",
+                                         "MarkdownLink":  "../ethics-and-safety/ai-regulation.md"
+                                     },
+                                     {
+                                         "Path":  "ethics-and-safety/adversarial-ml-and-ai-security.md",
+                                         "Title":  "Adversarial ML \u0026 AI Security",
+                                         "Label":  "adversarial-ml-and-ai-security",
+                                         "Folder":  "ethics-and-safety",
+                                         "Difficulty":  "advanced",
+                                         "EstTime":  "3h",
+                                         "SitePath":  "ethics-and-safety/adversarial-ml-and-ai-security.html",
+                                         "MarkdownLink":  "../ethics-and-safety/adversarial-ml-and-ai-security.md"
+                                     },
+                                     {
+                                         "Path":  "ethics-and-safety/owasp-llm-top-10.md",
+                                         "Title":  "OWASP Top 10 for LLM Applications",
+                                         "Label":  "owasp-llm-top-10",
+                                         "Folder":  "ethics-and-safety",
+                                         "Difficulty":  "intermediate",
+                                         "EstTime":  "2h",
+                                         "SitePath":  "ethics-and-safety/owasp-llm-top-10.html",
+                                         "MarkdownLink":  "../ethics-and-safety/owasp-llm-top-10.md"
+                                     },
+                                     {
+                                         "Path":  "llms/hallucination-detection.md",
+                                         "Title":  "Hallucination Detection \u0026 Mitigation",
+                                         "Label":  "hallucination-detection",
+                                         "Folder":  "llms",
+                                         "Difficulty":  "advanced",
+                                         "EstTime":  "3h",
+                                         "SitePath":  "llms/hallucination-detection.html",
+                                         "MarkdownLink":  "../llms/hallucination-detection.md"
+                                     },
+                                     {
+                                         "Path":  "evaluation/evaluation-and-benchmarks.md",
+                                         "Title":  "LLM Evaluation \u0026 Benchmarks",
+                                         "Label":  "evaluation-and-benchmarks",
+                                         "Folder":  "evaluation",
+                                         "Difficulty":  "intermediate",
+                                         "EstTime":  "2h",
+                                         "SitePath":  "evaluation/evaluation-and-benchmarks.html",
+                                         "MarkdownLink":  "../evaluation/evaluation-and-benchmarks.md"
+                                     },
+                                     {
+                                         "Path":  "evaluation/llm-evaluation-deep-dive.md",
+                                         "Title":  "LLM Evaluation Deep Dive",
+                                         "Label":  "llm-evaluation-deep-dive",
+                                         "Folder":  "evaluation",
+                                         "Difficulty":  "advanced",
+                                         "EstTime":  "3h",
+                                         "SitePath":  "evaluation/llm-evaluation-deep-dive.html",
+                                         "MarkdownLink":  "../evaluation/llm-evaluation-deep-dive.md"
+                                     }
+                                 ]
+                   }
+               ]
+}

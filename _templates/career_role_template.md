@@ -10,6 +10,8 @@ updated: YYYY-MM-DD
 
 # {Role Name} — Career Guide
 
+<!-- After copying this template into career/roles/, update dates, tags, and note links so they reflect the actual role. -->
+
 > One-line summary of what this role does, where it sits in the 6-layer AI stack, and its current market demand.
 
 ---

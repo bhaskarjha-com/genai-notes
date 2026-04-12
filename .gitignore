@@ -1,3 +1,11 @@
 
 # My drafts for the project, consisting of my own ideas and notes for this project
 drafts/
+
+# link_converter.py is a script that converts links from one format to another, and is not part of the main project.
+link_converter.py
+
+# Local docs build output and local Python environments
+site/
+.venv/
+__pycache__/

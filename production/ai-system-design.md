@@ -1,0 +1,218 @@
+---
+title: "AI System Design for GenAI Applications"
+tags: [system-design, ai-architecture, genai, production, llmops]
+type: reference
+difficulty: advanced
+status: published
+parent: "[[llmops]]"
+related: ["[[../techniques/rag]]", "[[../techniques/ai-agents]]", "[[../evaluation/evaluation-and-benchmarks]]"]
+source: "Multiple sources - see Sources"
+created: 2026-04-12
+updated: 2026-04-12
+---
+
+# AI System Design for GenAI Applications
+
+> A GenAI system is not just a model call. It is the full architecture that keeps quality, latency, safety, and cost in balance.
+
+---
+
+## TL;DR
+
+- **What**: A design framework for building reliable GenAI systems in production
+- **Why**: Most failures come from orchestration, retrieval, serving, and guardrails, not from the base model alone
+- **Key point**: Good AI system design optimizes for the whole loop: request -> grounding -> generation -> verification -> monitoring
+
+---
+
+## Overview
+
+### Definition
+
+**AI system design** is the practice of translating a GenAI product requirement into a production architecture that meets quality, safety, latency, availability, and cost targets.
+
+### Scope
+
+This note covers architecture patterns, design trade-offs, bottlenecks, and interview-ready reasoning for GenAI systems. For deployment operations, see [LLMOps & Production Deployment](./llmops.md). For platform and serving context, see [GenAI Tools & Infrastructure](../tools-and-infra/tools-overview.md).
+
+### Significance
+
+- The same model can feel excellent or unusable depending on the surrounding system
+- System design is the differentiator for senior AI engineering roles
+- It forces explicit thinking about failure modes, not just happy-path demos
+
+### Prerequisites
+
+- [Retrieval-Augmented Generation (RAG)](../techniques/rag.md)
+- [AI Agents](../techniques/ai-agents.md)
+- [LLMOps & Production Deployment](./llmops.md)
+- [LLM Evaluation & Benchmarks](../evaluation/evaluation-and-benchmarks.md)
+
+---
+
+## Deep Dive
+
+### Core Architecture Layers
+
+```text
+Client
+|- Web / mobile / API consumer
+|
+Gateway
+|- auth
+|- rate limiting
+|- request shaping
+|
+Application orchestration
+|- prompt assembly
+|- tool routing
+|- retrieval / agent loops
+|
+Model + data plane
+|- LLM API or self-hosted model
+|- vector DB / search
+|- caches
+|- feature stores / business systems
+|
+Safety and quality controls
+|- input filters
+|- output validation
+|- hallucination checks
+|- policy enforcement
+|
+Observability and evaluation
+|- traces
+|- metrics
+|- online feedback
+|- regression suites
+```
+
+### Design Questions You Must Answer
+
+| Question | Why It Matters |
+|---|---|
+| What does "good" output mean? | Drives evaluation, routing, and fallback logic |
+| What is the latency budget? | Determines model size, cache strategy, and retrieval depth |
+| What data must be grounded? | Decides whether to use RAG, tools, or fine-tuning |
+| What errors are unacceptable? | Shapes guardrails and human review policy |
+| What is the cost envelope? | Impacts batching, caching, model mix, and output length |
+
+### Common GenAI System Patterns
+
+| Pattern | When To Use | Strength | Risk |
+|---|---|---|---|
+| **Direct prompt + model** | Low-risk copilots, internal tools | Fastest path to production | Weak grounding, little control |
+| **RAG pipeline** | Knowledge assistants, enterprise Q&A | Fresh and domain-specific answers | Retrieval quality dominates |
+| **Tool-using agent** | Multi-step workflows, task execution | Dynamic and powerful | Harder to evaluate and debug |
+| **Multi-model router** | Cost-sensitive or mixed-complexity workloads | Better price/performance | More routing complexity |
+| **Human-in-the-loop** | High-risk domains | Safer decisions | Slower operations |
+
+### Design Dimensions
+
+#### 1. Quality
+
+- Choose the minimum system that can hit the target outcome
+- Use grounding before weight changes when freshness matters
+- Add verification if the answer can cause real damage
+
+#### 2. Latency
+
+- Keep request budgets explicit, for example `retrieval <= 150 ms`, `model <= 1200 ms`
+- Use caching for repeated prompts, embeddings, and tool outputs
+- Avoid overly deep agent loops for user-facing flows
+
+#### 3. Reliability
+
+- Add fallbacks for model timeout, retrieval failure, and malformed tool outputs
+- Separate transient failures from semantic failures
+- Design graceful degradation instead of binary "works/fails" behavior
+
+#### 4. Safety
+
+- Filter inputs for prompt injection, secrets, and unsupported requests
+- Validate outputs for policy, format, and groundedness
+- Escalate to human review for high-risk actions
+
+#### 5. Cost
+
+- Track cost per request, per successful task, and per retained user outcome
+- Use smaller models for classification, routing, and formatting work
+- Limit context growth aggressively
+
+### Reference Architecture: Enterprise Assistant
+
+```text
+User question
+-> API gateway
+-> auth + tenant context
+-> query rewriting
+-> hybrid retrieval
+-> reranking
+-> prompt assembly with citations
+-> generation
+-> groundedness / policy checks
+-> response + trace logging
+-> feedback store for offline eval
+```
+
+### Interview Framework
+
+When asked to design a GenAI system, structure the answer like this:
+
+1. Clarify users, tasks, and failure tolerance
+2. Define success metrics and constraints
+3. Pick the base interaction pattern: prompt-only, RAG, agent, or hybrid
+4. Design the request path, data path, and safety path
+5. Explain observability, evaluation, and fallback behavior
+6. Call out scaling, cost, and future iterations
+
+---
+
+## Quick Reference
+
+| Problem | First Design Move |
+|---|---|
+| Hallucinations on private data | Add retrieval and citations |
+| High cost | Route simple tasks to smaller models and add cache layers |
+| Slow responses | Reduce context, retrieval depth, and agent steps |
+| Bad tool decisions | Tighten tool schemas and add trajectory evals |
+| Hard debugging | Add tracing and dataset-backed regression tests |
+
+---
+
+## Gotchas
+
+- Do not start with multi-agent systems unless a single-agent or RAG design clearly fails
+- A strong model cannot rescue a bad retrieval pipeline
+- Low latency and high autonomy usually pull in opposite directions
+- Evaluation must measure business success, not only benchmark scores
+
+---
+
+## Interview Angles
+
+- **Q**: When would you choose RAG over fine-tuning?
+- **A**: When the knowledge changes often, needs citations, or comes from private documents. Fine-tuning is better when the behavior itself must change consistently.
+
+- **Q**: What are the minimum production components for a GenAI assistant?
+- **A**: Auth, prompt assembly, model invocation, safety checks, observability, and evaluation. If the task depends on facts outside the model, add retrieval.
+
+---
+
+## Connections
+
+| Relationship | Topics |
+|---|---|
+| Builds on | [LLMOps & Production Deployment](./llmops.md), [Retrieval-Augmented Generation (RAG)](../techniques/rag.md), [AI Agents](../techniques/ai-agents.md) |
+| Leads to | [LLMOps & Production Deployment](./llmops.md), [Inference Optimization](../inference/inference-optimization.md), [GenAI Tools & Infrastructure](../tools-and-infra/tools-overview.md) |
+| Compare with | Traditional web system design, classical ML system design |
+| Cross-domain | Distributed systems, DevOps, platform engineering |
+
+---
+
+## Sources
+
+- Chip Huyen, *Designing Machine Learning Systems*
+- Google Cloud Architecture Center guidance for AI systems
+- AWS Well-Architected guidance for ML and generative AI workloads
+- [LLMOps & Production Deployment](./llmops.md)

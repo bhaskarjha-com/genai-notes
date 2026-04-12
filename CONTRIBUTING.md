@@ -4,11 +4,11 @@ Thank you for helping improve these study notes!
 
 ## How to Contribute
 
-1. ðŸ› **Error Reports** â€” Open an issue with the note name and the error
-2. ðŸ“ **Content Improvements** â€” Submit a PR following `_templates/notes_template.md`
-3. ðŸ”— **Better Resources** â€” Suggest resources for the Sources section of any note
-4. ðŸ†• **New Topics** â€” Propose via issue (use "new-topic" label)
-5. âœ… **Expert Review** â€” Review advanced notes in your domain of expertise
+1. 🐛 **Error Reports** — Open an issue with the note name and the error
+2. 📝 **Content Improvements** — Submit a PR following `_templates/notes_template.md`
+3. 🔗 **Better Resources** — Suggest resources for the Sources section of any note
+4. 🆕 **New Topics** — Propose via issue (use "new-topic" label)
+5. ✅ **Expert Review** — Review advanced notes in your domain of expertise
 
 ## What We Don't Accept
 
@@ -21,11 +21,11 @@ Thank you for helping improve these study notes!
 
 Every note should have at minimum:
 
-- **â˜… TL;DR** â€” 3-4 bullets (what, why, key point)
-- **â˜… Overview** â€” Definition, scope, significance, prerequisites
-- **â˜… Deep Dive** â€” Core knowledge (the main section)
-- **â˜… Connections** â€” Links to related notes in this repo
-- **â˜… Sources** â€” Where the information came from
+- **★ TL;DR** — 3-4 bullets (what, why, key point)
+- **★ Overview** — Definition, scope, significance, prerequisites
+- **★ Deep Dive** — Core knowledge (the main section)
+- **★ Connections** — Links to related notes in this repo
+- **★ Sources** — Where the information came from
 
 ## Note Format
 
@@ -33,9 +33,9 @@ Notes use section markers to indicate priority:
 
 | Marker | Meaning |
 |:------:|---------|
-| â˜… | **Always include** â€” Core sections every note must have |
-| â—† | **Include when relevant** â€” Add when the topic calls for it |
-| â—‹ | **Optional** â€” Nice to have, not required |
+| ★ | **Always include** — Core sections every note must have |
+| ◆ | **Include when relevant** — Add when the topic calls for it |
+| ○ | **Optional** — Nice to have, not required |
 
 ## Frontmatter
 

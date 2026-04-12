@@ -1,1 +1,2 @@
 mkdocs-material[imaging]>=9.6,<10
+ftfy>=6.3,<7

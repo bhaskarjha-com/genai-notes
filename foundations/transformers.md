@@ -13,11 +13,11 @@ updated: 2026-04-11
 
 # Transformers
 
-> âœ¨ **Bit**: The paper was titled "Attention Is All You Need" â€” turns out, attention + ungodly amounts of compute + internet-scale data is what you actually need.
+> ✨ **Bit**: The paper was titled "Attention Is All You Need" — turns out, attention + ungodly amounts of compute + internet-scale data is what you actually need.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: A neural network architecture based on self-attention that processes entire sequences in parallel
 - **Why**: Replaced RNNs/LSTMs. Foundation of ALL modern LLMs and most GenAI models
@@ -25,7 +25,7 @@ updated: 2026-04-11
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -37,52 +37,52 @@ This document covers the Transformer architecture itself. For attention mechanis
 
 ### Significance
 
-- **Before Transformers**: RNNs/LSTMs processed sequences one step at a time â†’ slow, couldn't handle long sequences
-- **After Transformers**: Parallel processing + attention â†’ scalable to billions of parameters
-- **Impact**: GPT, BERT, T5, LLaMA, Gemini, Claude â€” ALL are Transformer variants.
+- **Before Transformers**: RNNs/LSTMs processed sequences one step at a time → slow, couldn't handle long sequences
+- **After Transformers**: Parallel processing + attention → scalable to billions of parameters
+- **Impact**: GPT, BERT, T5, LLaMA, Gemini, Claude — ALL are Transformer variants.
 
 ### Prerequisites
 
-- [Neural Networks](../prerequisites/neural-networks.md) â€” basic neural network concepts
-- [Embeddings](./embeddings.md) â€” vector representations
+- [Neural Networks](../prerequisites/neural-networks.md) — basic neural network concepts
+- [Embeddings](./embeddings.md) — vector representations
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### The Original Architecture
 
 ```
-â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚                    TRANSFORMER ARCHITECTURE                  â”‚
-â”‚                                                              â”‚
-â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”          â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”         â”‚
-â”‚  â”‚     ENCODER       â”‚          â”‚     DECODER       â”‚        â”‚
-â”‚  â”‚  (understands)    â”‚          â”‚   (generates)     â”‚        â”‚
-â”‚  â”‚                   â”‚          â”‚                   â”‚        â”‚
-â”‚  â”‚ â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”‚    â”Œâ”€â”€â†’ â”‚ â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”‚        â”‚
-â”‚  â”‚ â”‚ Multi-Head    â”‚ â”‚    â”‚    â”‚ â”‚ Masked        â”‚ â”‚        â”‚
-â”‚  â”‚ â”‚ Self-Attentionâ”‚ â”‚    â”‚    â”‚ â”‚ Self-Attentionâ”‚ â”‚        â”‚
-â”‚  â”‚ â””â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”˜ â”‚    â”‚    â”‚ â””â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”˜ â”‚        â”‚
-â”‚  â”‚         â†“         â”‚    â”‚    â”‚         â†“         â”‚        â”‚
-â”‚  â”‚ â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”‚    â”‚    â”‚ â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”‚        â”‚
-â”‚  â”‚ â”‚ Add & Norm    â”‚ â”‚    â”‚    â”‚ â”‚ Cross-        â”‚ â”‚        â”‚
-â”‚  â”‚ â””â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”˜ â”‚    â”‚    â”‚ â”‚ Attention     â”‚ â”‚        â”‚
-â”‚  â”‚         â†“         â”‚    â”‚    â”‚ â”‚ (to encoder)  â”‚ â”‚        â”‚
-â”‚  â”‚ â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”‚    â”‚    â”‚ â””â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”˜ â”‚        â”‚
-â”‚  â”‚ â”‚ Feed-Forward  â”‚ â”‚    â”‚    â”‚         â†“         â”‚        â”‚
-â”‚  â”‚ â”‚ Network       â”‚ â”‚â”€â”€â”€â”€â”˜    â”‚ â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”‚        â”‚
-â”‚  â”‚ â””â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”˜ â”‚         â”‚ â”‚ Feed-Forward  â”‚ â”‚        â”‚
-â”‚  â”‚         â†“         â”‚         â”‚ â”‚ Network       â”‚ â”‚        â”‚
-â”‚  â”‚ â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”‚         â”‚ â””â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”˜ â”‚        â”‚
-â”‚  â”‚ â”‚ Add & Norm    â”‚ â”‚         â”‚         â†“         â”‚        â”‚
-â”‚  â”‚ â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â”‚         â”‚    Output Probs   â”‚        â”‚
-â”‚  â”‚                   â”‚         â”‚                   â”‚        â”‚
-â”‚  â”‚   Ã— N layers      â”‚         â”‚   Ã— N layers      â”‚        â”‚
-â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜          â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜         â”‚
-â”‚                                                              â”‚
-â”‚  Input: Token Embeddings + Positional Encoding               â”‚
-â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+┌─────────────────────────────────────────────────────────────┐
+│                    TRANSFORMER ARCHITECTURE                  │
+│                                                              │
+│  ┌──────────────────┐          ┌──────────────────┐         │
+│  │     ENCODER       │          │     DECODER       │        │
+│  │  (understands)    │          │   (generates)     │        │
+│  │                   │          │                   │        │
+│  │ ┌───────────────┐ │    ┌──→ │ ┌───────────────┐ │        │
+│  │ │ Multi-Head    │ │    │    │ │ Masked        │ │        │
+│  │ │ Self-Attention│ │    │    │ │ Self-Attention│ │        │
+│  │ └───────┬───────┘ │    │    │ └───────┬───────┘ │        │
+│  │         ↓         │    │    │         ↓         │        │
+│  │ ┌───────────────┐ │    │    │ ┌───────────────┐ │        │
+│  │ │ Add & Norm    │ │    │    │ │ Cross-        │ │        │
+│  │ └───────┬───────┘ │    │    │ │ Attention     │ │        │
+│  │         ↓         │    │    │ │ (to encoder)  │ │        │
+│  │ ┌───────────────┐ │    │    │ └───────┬───────┘ │        │
+│  │ │ Feed-Forward  │ │    │    │         ↓         │        │
+│  │ │ Network       │ │────┘    │ ┌───────────────┐ │        │
+│  │ └───────┬───────┘ │         │ │ Feed-Forward  │ │        │
+│  │         ↓         │         │ │ Network       │ │        │
+│  │ ┌───────────────┐ │         │ └───────┬───────┘ │        │
+│  │ │ Add & Norm    │ │         │         ↓         │        │
+│  │ └───────────────┘ │         │    Output Probs   │        │
+│  │                   │         │                   │        │
+│  │   × N layers      │         │   × N layers      │        │
+│  └──────────────────┘          └──────────────────┘         │
+│                                                              │
+│  Input: Token Embeddings + Positional Encoding               │
+└─────────────────────────────────────────────────────────────┘
 ```
 
 ### Key Components Explained
@@ -101,7 +101,7 @@ Original paper uses sinusoidal encoding. Modern models often use learned positio
 
 Each token looks at ALL other tokens to decide what's important. See [Attention Mechanism](./attention-mechanism.md) for full deep dive.
 
-**Simplified intuition**: For the sentence "The cat sat on the mat because **it** was tired" â€” self-attention lets "it" attend strongly to "cat" to understand the reference.
+**Simplified intuition**: For the sentence "The cat sat on the mat because **it** was tired" — self-attention lets "it" attend strongly to "cat" to understand the reference.
 
 #### 3. Multi-Head Attention
 
@@ -115,10 +115,10 @@ Instead of one attention computation, run multiple in parallel (multiple "heads"
 After attention, each position passes through the same 2-layer network independently:
 
 ```
-FFN(x) = ReLU(xÂ·Wâ‚ + bâ‚)Â·Wâ‚‚ + bâ‚‚
+FFN(x) = ReLU(x·W₁ + b₁)·W₂ + b₂
 ```
 
-This is where the model stores "knowledge" â€” factual information learned during training. The FFN acts as a key-value memory.
+This is where the model stores "knowledge" — factual information learned during training. The FFN acts as a key-value memory.
 
 #### 5. Residual Connections + Layer Norm
 
@@ -154,7 +154,7 @@ This prevents vanishing gradients and enables training very deep networks (100+ 
 
 ---
 
-## â—† Terminology
+## ◆ Terminology
 
 | Term                | Meaning                                                                     |
 | ------------------- | --------------------------------------------------------------------------- |
@@ -165,25 +165,25 @@ This prevents vanishing gradients and enables training very deep networks (100+ 
 | **Layer**           | One complete block (attention + FFN + norms)                                |
 | **Context Window**  | Maximum number of tokens the model can process at once                      |
 | **KV Cache**        | Stored key-value pairs from previous tokens to speed up generation          |
-| **MoE**             | Mixture of Experts â€” only activates a subset of parameters per token        |
+| **MoE**             | Mixture of Experts — only activates a subset of parameters per token        |
 
 ---
 
-## â—† Formulas & Equations
+## ◆ Formulas & Equations
 
 | Name                | Formula                                                                           | Variables                                          | Use                                 |
 | ------------------- | --------------------------------------------------------------------------------- | -------------------------------------------------- | ----------------------------------- |
 | Attention           | $$\text{Attention}(Q,K,V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V$$ | Q=queries, K=keys, V=values, d_k=key dimension     | Core attention computation          |
 | Positional Encoding | $$PE_{(pos,2i)} = \sin(pos/10000^{2i/d})$$                                        | pos=position, i=dimension index, d=model dimension | Inject position info                |
-| FFN                 | $$FFN(x) = \text{ReLU}(xW_1 + b_1)W_2 + b_2$$                                     | Wâ‚, Wâ‚‚=weight matrices                             | Process each position independently |
+| FFN                 | $$FFN(x) = \text{ReLU}(xW_1 + b_1)W_2 + b_2$$                                     | W₁, W₂=weight matrices                             | Process each position independently |
 
 ---
 
-## â—† Strengths vs Limitations
+## ◆ Strengths vs Limitations
 
-| âœ… Strengths                                    | âŒ Limitations                                         |
+| ✅ Strengths                                    | ❌ Limitations                                         |
 | ---------------------------------------------- | ----------------------------------------------------- |
-| Parallelizable (unlike RNNs) â†’ fast training   | Quadratic memory/compute with sequence length (O(nÂ²)) |
+| Parallelizable (unlike RNNs) → fast training   | Quadratic memory/compute with sequence length (O(n²)) |
 | Captures long-range dependencies via attention | Fixed context window (though growing: 1M-10M tokens)  |
 | Scales predictably with more data/compute      | Massive compute requirements for training             |
 | Transfer learning works incredibly well        | Positional encoding schemes still imperfect           |
@@ -191,11 +191,11 @@ This prevents vanishing gradients and enables training very deep networks (100+ 
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 
 ```
 Transformer Block:
-  Input â†’ [Multi-Head Attention] â†’ Add & Norm â†’ [FFN] â†’ Add & Norm â†’ Output
+  Input → [Multi-Head Attention] → Add & Norm → [FFN] → Add & Norm → Output
 
 Key Dimensions (GPT-3 175B example):
   - Layers: 96
@@ -211,20 +211,20 @@ Modern Scaling (LLaMA 4 Behemoth):
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
-- **Q**: Why do Transformers use scaled dot-product attention (divide by âˆšd_k)?
-- **A**: Without scaling, dot products grow large with high dimensions, pushing softmax into regions with tiny gradients. Dividing by âˆšd_k keeps gradients healthy.
+- **Q**: Why do Transformers use scaled dot-product attention (divide by √d_k)?
+- **A**: Without scaling, dot products grow large with high dimensions, pushing softmax into regions with tiny gradients. Dividing by √d_k keeps gradients healthy.
 
 - **Q**: What's the computational complexity of self-attention?
-- **A**: O(nÂ²Â·d) where n is sequence length and d is dimension. This quadratic scaling with n is the main bottleneck for long sequences.
+- **A**: O(n²·d) where n is sequence length and d is dimension. This quadratic scaling with n is the main bottleneck for long sequences.
 
 - **Q**: Why decoder-only for generation instead of encoder-decoder?
 - **A**: Simpler architecture, easier to scale, and with enough data the decoder learns to "encode" implicitly. Also, causal masking naturally fits left-to-right generation.
 
 ---
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics                                                                        |
 | ------------ | ----------------------------------------------------------------------------- |
@@ -235,9 +235,9 @@ Modern Scaling (LLaMA 4 Behemoth):
 
 ---
 
-## â˜… Sources
+## ★ Sources
 
-- Vaswani et al., "Attention Is All You Need" (2017) â€” https://arxiv.org/abs/1706.03762
-- "The Illustrated Transformer" by Jay Alammar â€” https://jalammar.github.io/illustrated-transformer/
-- Andrej Karpathy, "Let's build GPT from scratch" â€” YouTube lecture
+- Vaswani et al., "Attention Is All You Need" (2017) — https://arxiv.org/abs/1706.03762
+- "The Illustrated Transformer" by Jay Alammar — https://jalammar.github.io/illustrated-transformer/
+- Andrej Karpathy, "Let's build GPT from scratch" — YouTube lecture
 - "Formal Algorithms for Transformers" (Phuong & Hutter, 2022)

@@ -13,23 +13,23 @@ updated: 2026-04-12
 
 # Generative AI
 
-> âœ¨ **Bit**: "All models are wrong, but some are generative." â€” Generative AI doesn't understand anything; it's the world's most sophisticated autocomplete that accidentally became useful.
+> ✨ **Bit**: "All models are wrong, but some are generative." — Generative AI doesn't understand anything; it's the world's most sophisticated autocomplete that accidentally became useful.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: AI systems that create new content (text, images, audio, video, code) by learning patterns from training data
-- **Why**: Transforming every industry â€” from coding to drug discovery. The defining technology of 2023-2026+
-- **Key point**: Built on Transformer architecture (2017). The real breakthrough wasn't the models â€” it was scaling them
+- **Why**: Transforming every industry — from coding to drug discovery. The defining technology of 2023-2026+
+- **Key point**: Built on Transformer architecture (2017). The real breakthrough wasn't the models — it was scaling them
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
-**Generative AI** is a class of artificial intelligence models that can generate new, original content by learning statistical patterns from large datasets. Unlike discriminative AI (which classifies/predicts), generative AI creates â€” text, images, music, video, code, 3D models, and more.
+**Generative AI** is a class of artificial intelligence models that can generate new, original content by learning statistical patterns from large datasets. Unlike discriminative AI (which classifies/predicts), generative AI creates — text, images, music, video, code, 3D models, and more.
 
 ### Scope
 
@@ -53,7 +53,7 @@ This document covers the GenAI landscape at a high level. Each major sub-area ha
 | Making it fast & cheap     | [Inference Optimization](./inference/inference-optimization.md), [GPU & CUDA Programming for AI Engineers](./inference/gpu-cuda-programming.md), [Distributed Inference & Serving Architecture](./inference/distributed-inference-and-serving-architecture.md)                                                                                                                                                                                                                  |
 | Keeping it safe            | [Ethics, Safety & Alignment](./ethics-and-safety/ethics-safety-alignment.md), [AI Regulation for Builders](./ethics-and-safety/ai-regulation.md), [Adversarial ML & AI Security](./ethics-and-safety/adversarial-ml-and-ai-security.md), [OWASP Top 10 for LLM Applications](./ethics-and-safety/owasp-llm-top-10.md)                                                                                                                                                                                                         |
 | Research frontiers         | [Mechanistic Interpretability](./research-frontiers/interpretability.md), [Distributed Training for Large Models](./research-frontiers/distributed-training.md), [Training Infrastructure for AI Systems](./research-frontiers/training-infrastructure.md), [Research Methodology & Paper Reading for AI](./research-frontiers/research-methodology-and-paper-reading.md)                                                                                                                                                                                                               |
-| **Career & job readiness** | [GenAI Career Roles â€” Complete Reference (2026)](./career/genai-career-roles-universal.md), [AI Engineer](./career/roles/ai-engineer.md), [Generative AI Engineer](./career/roles/genai-engineer.md), [LLM Engineer](./career/roles/llm-engineer.md), [RAG Engineer](./career/roles/rag-engineer.md), [Agentic AI Engineer](./career/roles/agentic-ai-engineer.md), [ML Engineer](./career/roles/ml-engineer.md), [MLOps / LLMOps Engineer](./career/roles/mlops-engineer.md)                                                                                                                                                                                                                         |
+| **Career & job readiness** | [GenAI Career Roles — Complete Reference (2026)](./career/genai-career-roles-universal.md), [AI Engineer](./career/roles/ai-engineer.md), [Generative AI Engineer](./career/roles/genai-engineer.md), [LLM Engineer](./career/roles/llm-engineer.md), [RAG Engineer](./career/roles/rag-engineer.md), [Agentic AI Engineer](./career/roles/agentic-ai-engineer.md), [ML Engineer](./career/roles/ml-engineer.md), [MLOps / LLMOps Engineer](./career/roles/mlops-engineer.md)                                                                                                                                                                                                                         |
 
 ### Significance
 
@@ -64,16 +64,16 @@ This document covers the GenAI landscape at a high level. Each major sub-area ha
 
 ### Prerequisites
 
-- [Neural Networks](./prerequisites/neural-networks.md) â€” neurons, layers, backpropagation
-- [Linear Algebra for AI](./prerequisites/linear-algebra-for-ai.md) â€” vectors, matrices, dot products
-- [Python for AI](./prerequisites/python-for-ai.md) â€” NumPy, PyTorch, environment setup
-- [Probability & Statistics for AI](./prerequisites/probability-and-statistics.md) â€” distributions, loss functions, sampling
-- [Deep Learning Fundamentals](./prerequisites/deep-learning-fundamentals.md) â€” training loop, optimizers, GPUs
-- [NLP Fundamentals](./prerequisites/nlp-fundamentals.md) â€” BERT vs GPT, NER, text classification
+- [Neural Networks](./prerequisites/neural-networks.md) — neurons, layers, backpropagation
+- [Linear Algebra for AI](./prerequisites/linear-algebra-for-ai.md) — vectors, matrices, dot products
+- [Python for AI](./prerequisites/python-for-ai.md) — NumPy, PyTorch, environment setup
+- [Probability & Statistics for AI](./prerequisites/probability-and-statistics.md) — distributions, loss functions, sampling
+- [Deep Learning Fundamentals](./prerequisites/deep-learning-fundamentals.md) — training loop, optimizers, GPUs
+- [NLP Fundamentals](./prerequisites/nlp-fundamentals.md) — BERT vs GPT, NER, text classification
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### The GenAI Landscape (2025-2026)
 
@@ -81,36 +81,36 @@ Time-sensitive vendor examples in this section were last reviewed in 2026-04. Tr
 
 ```
 Generative AI
-â”œâ”€â”€ ðŸ”¤ Text/Language
-â”‚   â”œâ”€â”€ Large Language Models (LLMs)
-â”‚   â”‚   â”œâ”€â”€ Closed-Source: GPT-5.x, Gemini 3.x, Claude 4.x
-â”‚   â”‚   â””â”€â”€ Open-Source: LLaMA 4, Qwen, Mistral, DeepSeek
-â”‚   â”œâ”€â”€ Code Generation (Codex, Copilot, Cursor)
-â”‚   â””â”€â”€ Reasoning Models (o-series, Deep Think)
-â”‚
-â”œâ”€â”€ ðŸ–¼ï¸ Image Generation
-â”‚   â”œâ”€â”€ Diffusion Models: Stable Diffusion, DALL-E 3, Midjourney
-â”‚   â”œâ”€â”€ GANs (legacy, still used for specific tasks)
-â”‚   â””â”€â”€ Image Editing: Inpainting, Outpainting, Style Transfer
-â”‚
-â”œâ”€â”€ ðŸŽ¥ Video Generation
-â”‚   â”œâ”€â”€ Sora (OpenAI), Veo (Google), Runway
-â”‚   â””â”€â”€ Entering mainstream production (2025-2026)
-â”‚
-â”œâ”€â”€ ðŸ”Š Audio/Music
-â”‚   â”œâ”€â”€ Text-to-Speech: ElevenLabs, Bark
-â”‚   â”œâ”€â”€ Music: Suno, Udio
-â”‚   â””â”€â”€ Voice Cloning
-â”‚
-â”œâ”€â”€ ðŸ§¬ Multimodal
-â”‚   â”œâ”€â”€ Vision-Language Models (process image+text together)
-â”‚   â”œâ”€â”€ All frontier models are now natively multimodal
-â”‚   â””â”€â”€ Omni models (text+image+audio+video in/out)
-â”‚
-â””â”€â”€ ðŸ¤– Agentic AI (2025's defining trend)
-    â”œâ”€â”€ AI Agents that plan, reason, and act autonomously
-    â”œâ”€â”€ Tool use, function calling, code execution
-    â””â”€â”€ Multi-agent systems
+├── 🔤 Text/Language
+│   ├── Large Language Models (LLMs)
+│   │   ├── Closed-Source: GPT-5.x, Gemini 3.x, Claude 4.x
+│   │   └── Open-Source: LLaMA 4, Qwen, Mistral, DeepSeek
+│   ├── Code Generation (Codex, Copilot, Cursor)
+│   └── Reasoning Models (o-series, Deep Think)
+│
+├── 🖼️ Image Generation
+│   ├── Diffusion Models: Stable Diffusion, DALL-E 3, Midjourney
+│   ├── GANs (legacy, still used for specific tasks)
+│   └── Image Editing: Inpainting, Outpainting, Style Transfer
+│
+├── 🎥 Video Generation
+│   ├── Sora (OpenAI), Veo (Google), Runway
+│   └── Entering mainstream production (2025-2026)
+│
+├── 🔊 Audio/Music
+│   ├── Text-to-Speech: ElevenLabs, Bark
+│   ├── Music: Suno, Udio
+│   └── Voice Cloning
+│
+├── 🧬 Multimodal
+│   ├── Vision-Language Models (process image+text together)
+│   ├── All frontier models are now natively multimodal
+│   └── Omni models (text+image+audio+video in/out)
+│
+└── 🤖 Agentic AI (2025's defining trend)
+    ├── AI Agents that plan, reason, and act autonomously
+    ├── Tool use, function calling, code execution
+    └── Multi-agent systems
 ```
 
 ### The Key Paradigm Shifts
@@ -133,11 +133,11 @@ Generative AI
 4. **Alignment**: RLHF/DPO to make outputs helpful, harmless, honest
 5. **Inference**: Given input, generate output token-by-token (text) or step-by-step (images)
 
-The core insight: **Next-token prediction at scale produces emergent capabilities** â€” reasoning, coding, creativity â€” that weren't explicitly programmed.
+The core insight: **Next-token prediction at scale produces emergent capabilities** — reasoning, coding, creativity — that weren't explicitly programmed.
 
 ---
 
-## â—† Types & Classifications
+## ◆ Types & Classifications
 
 ### By Output Modality
 
@@ -171,7 +171,7 @@ The core insight: **Next-token prediction at scale produces emergent capabilitie
 
 ---
 
-## â—† Use Cases & Applications
+## ◆ Use Cases & Applications
 
 | Domain           | Application                                       | Impact                               |
 | ---------------- | ------------------------------------------------- | ------------------------------------ |
@@ -182,24 +182,24 @@ The core insight: **Next-token prediction at scale produces emergent capabilitie
 | **Finance**      | Risk analysis, report generation, fraud detection | Speed + accuracy                     |
 | **Education**    | Personalized tutoring, content creation           | Scaling quality education            |
 | **Science**      | Protein folding, materials discovery, simulation  | AlphaFold-level breakthroughs        |
-| **Legal**        | Contract review, research, drafting               | Hours â†’ minutes for document review  |
+| **Legal**        | Contract review, research, drafting               | Hours → minutes for document review  |
 
 ---
 
-## â—‹ Gotchas & Common Mistakes
+## ○ Gotchas & Common Mistakes
 
-- âš ï¸ **Hallucinations**: Models confidently generate false information. ALWAYS verify factual claims.
-- âš ï¸ **"Wrapper" trap**: Using APIs without understanding what's underneath limits your career ceiling.
-- âš ï¸ **Prompt â‰  Programming**: Prompt engineering is useful but shallow. Deep tech value is in fine-tuning, RAG, serving, evaluation.
-- âš ï¸ **Benchmark gaming**: Models are optimized for benchmarks. Real-world performance often differs.
-- âš ï¸ **Cost blindness**: API calls at scale get expensive fast. Understand token economics.
+- ⚠️ **Hallucinations**: Models confidently generate false information. ALWAYS verify factual claims.
+- ⚠️ **"Wrapper" trap**: Using APIs without understanding what's underneath limits your career ceiling.
+- ⚠️ **Prompt ≠ Programming**: Prompt engineering is useful but shallow. Deep tech value is in fine-tuning, RAG, serving, evaluation.
+- ⚠️ **Benchmark gaming**: Models are optimized for benchmarks. Real-world performance often differs.
+- ⚠️ **Cost blindness**: API calls at scale get expensive fast. Understand token economics.
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: What's the difference between discriminative and generative AI?
-- **A**: Discriminative learns P(y|x) â€” "given input, what's the label?" Generative learns P(x) or P(x|y) â€” "what does the data look like?" and can create new samples.
+- **A**: Discriminative learns P(y|x) — "given input, what's the label?" Generative learns P(x) or P(x|y) — "what does the data look like?" and can create new samples.
 
 - **Q**: Why did Transformers enable the GenAI revolution?
 - **A**: Parallelizable (unlike RNNs), scale well with compute, and the attention mechanism captures long-range dependencies. This made training on massive datasets feasible.
@@ -209,7 +209,7 @@ The core insight: **Next-token prediction at scale produces emergent capabilitie
 
 ---
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics                                                                                                              |
 | ------------ | ------------------------------------------------------------------------------------------------------------------- |
@@ -220,7 +220,7 @@ The core insight: **Next-token prediction at scale produces emergent capabilitie
 
 ---
 
-## â—‹ Notes
+## ○ Notes
 
 ### The Current Competitive Landscape (March 2026 Snapshot)
 
@@ -240,12 +240,12 @@ The industry has shifted from "chatbots that respond" to "agents that act." AI s
 
 ---
 
-## â˜… Sources
+## ★ Sources
 
-- "Attention Is All You Need" (Vaswani et al., 2017) â€” The foundational Transformer paper
-- OpenAI model changelog (2025-2026) â€” GPT-5 series releases
-- Google Gemini release notes â€” Gemini 2.0 through 3.1
-- Anthropic Claude model cards â€” Claude 4 series
+- "Attention Is All You Need" (Vaswani et al., 2017) — The foundational Transformer paper
+- OpenAI model changelog (2025-2026) — GPT-5 series releases
+- Google Gemini release notes — Gemini 2.0 through 3.1
+- Anthropic Claude model cards — Claude 4 series
 - Meta LLaMA 4 announcement (April 2025)
 - McKinsey "State of AI 2025" report
 - Sebastian Raschka's LLM year-in-review (2025)

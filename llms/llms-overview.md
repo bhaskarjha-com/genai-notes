@@ -13,11 +13,11 @@ updated: 2026-04-12
 
 # Large Language Models (LLMs)
 
-> âœ¨ **Bit**: LLMs are stochastic parrots that accidentally learned to reason. Or did they? The debate continues.
+> ✨ **Bit**: LLMs are stochastic parrots that accidentally learned to reason. Or did they? The debate continues.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: Neural networks (Transformer-based) trained on massive text corpora to understand and generate human language
 - **Why**: Foundation of modern AI assistants, code generation, search, and almost every GenAI product
@@ -25,11 +25,11 @@ updated: 2026-04-12
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
-**Large Language Models (LLMs)** are autoregressive Transformer models (decoder-only) with billions to trillions of parameters, trained on internet-scale text data to predict the next token. Through scale, they develop emergent capabilities: reasoning, coding, translation, analysis â€” tasks they were never explicitly taught.
+**Large Language Models (LLMs)** are autoregressive Transformer models (decoder-only) with billions to trillions of parameters, trained on internet-scale text data to predict the next token. Through scale, they develop emergent capabilities: reasoning, coding, translation, analysis — tasks they were never explicitly taught.
 
 ### Scope
 
@@ -38,53 +38,53 @@ This document covers LLMs as a category. For specific model families, see sub-do
 ### Significance
 
 - The core technology behind ChatGPT, Claude, Gemini, Copilot
-- LLM market: $7.77B (2025) â†’ projected $10.57B (2026)
+- LLM market: $7.77B (2025) → projected $10.57B (2026)
 - Anthropic surpassed OpenAI in enterprise usage in 2025
 
 Last verified for market and provider-snapshot statements: 2026-04.
 
 ### Prerequisites
 
-- [Transformers](../foundations/transformers.md) â€” architecture
-- [Attention Mechanism](../foundations/attention-mechanism.md) â€” how attention works
+- [Transformers](../foundations/transformers.md) — architecture
+- [Attention Mechanism](../foundations/attention-mechanism.md) — how attention works
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### How LLMs Are Built
 
 ```
 Phase 1: PRE-TRAINING (the expensive part)
-  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-  â”‚ Internet text (trillions of tokens)              â”‚
-  â”‚            â†“                                     â”‚
-  â”‚ Train: Predict next token                        â”‚
-  â”‚   "The cat sat on the ___" â†’ "mat"              â”‚
-  â”‚            â†“                                     â”‚
-  â”‚ Result: Base model (knows language, world facts) â”‚
-  â”‚          Cost: $10M - $100M+                     â”‚
-  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+  ┌─────────────────────────────────────────────────┐
+  │ Internet text (trillions of tokens)              │
+  │            ↓                                     │
+  │ Train: Predict next token                        │
+  │   "The cat sat on the ___" → "mat"              │
+  │            ↓                                     │
+  │ Result: Base model (knows language, world facts) │
+  │          Cost: $10M - $100M+                     │
+  └─────────────────────────────────────────────────┘
 
 Phase 2: ALIGNMENT (making it helpful & safe)
-  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-  â”‚ SFT: Supervised Fine-Tuning on instruction data â”‚
-  â”‚   Input: "Explain quantum computing"            â”‚
-  â”‚   Output: [high-quality human-written answer]    â”‚
-  â”‚            â†“                                     â”‚
-  â”‚ RLHF/DPO: Learn from human preferences          â”‚
-  â”‚   "Which response is better: A or B?"           â”‚
-  â”‚            â†“                                     â”‚
-  â”‚ Result: Chat model (helpful, harmless, honest)   â”‚
-  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+  ┌─────────────────────────────────────────────────┐
+  │ SFT: Supervised Fine-Tuning on instruction data │
+  │   Input: "Explain quantum computing"            │
+  │   Output: [high-quality human-written answer]    │
+  │            ↓                                     │
+  │ RLHF/DPO: Learn from human preferences          │
+  │   "Which response is better: A or B?"           │
+  │            ↓                                     │
+  │ Result: Chat model (helpful, harmless, honest)   │
+  └─────────────────────────────────────────────────┘
 
 Phase 3: DEPLOYMENT
-  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-  â”‚ API / Chat interface                             â”‚
-  â”‚ + RAG for up-to-date knowledge                  â”‚
-  â”‚ + Tool use for actions (search, code execution) â”‚
-  â”‚ + Guardrails for safety                          â”‚
-  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+  ┌─────────────────────────────────────────────────┐
+  │ API / Chat interface                             │
+  │ + RAG for up-to-date knowledge                  │
+  │ + Tool use for actions (search, code execution) │
+  │ + Guardrails for safety                          │
+  └─────────────────────────────────────────────────┘
 ```
 
 ### The Major Model Families (March 2026)
@@ -112,13 +112,13 @@ Phase 3: DEPLOYMENT
 The relationship between model size, data, and performance:
 
 ```
-Performance âˆ (Compute)^Î±
+Performance ∝ (Compute)^α
 
-Where Compute = f(Parameters Ã— Training Tokens)
+Where Compute = f(Parameters × Training Tokens)
 
 Chinchilla optimal: Train for ~20 tokens per parameter
-  - 7B model â†’ 140B tokens
-  - 70B model â†’ 1.4T tokens
+  - 7B model → 140B tokens
+  - 70B model → 1.4T tokens
 
 Modern trend: Over-train smaller models (more tokens per param)
 for better inference efficiency
@@ -127,13 +127,13 @@ for better inference efficiency
 ### Key Concepts Every Deep-Tech Person Must Know
 
 #### Tokenization
-Text â†’ numbers. Models don't see words; they see token IDs.
+Text → numbers. Models don't see words; they see token IDs.
 
 ```python
-"Hello world" â†’ [15496, 995]        # GPT-style BPE
-"Hello world" â†’ [8774, 296, 1650]    # Different tokenizer
+"Hello world" → [15496, 995]        # GPT-style BPE
+"Hello world" → [8774, 296, 1650]    # Different tokenizer
 
-# ~4 characters â‰ˆ 1 token (English average)
+# ~4 characters ≈ 1 token (English average)
 # Non-English: often 2-3x more tokens per word
 ```
 
@@ -145,9 +145,9 @@ Tokenizers: BPE (GPT), WordPiece (BERT), SentencePiece (LLaMA/Gemini)
 Input: "The capital of France is"
 
 Step 1: Process all input tokens (prefill)
-Step 2: Generate token "Paris" â†’ append to sequence
-Step 3: Generate token "." â†’ append
-Step 4: Generate token "<EOS>" â†’ stop
+Step 2: Generate token "Paris" → append to sequence
+Step 3: Generate token "." → append
+Step 4: Generate token "<EOS>" → stop
 
 Each step: Full forward pass through the model
 KV Cache: Store key/value pairs to avoid recomputation
@@ -169,7 +169,7 @@ Top-k: Only sample from the k most likely tokens
 
 ---
 
-## â—† Comparison
+## ◆ Comparison
 
 | Aspect           | GPT-5.x             | Claude 4.x      | Gemini 3.x             | LLaMA 4                 |
 | ---------------- | ------------------- | --------------- | ---------------------- | ----------------------- |
@@ -182,7 +182,7 @@ Top-k: Only sample from the k most likely tokens
 
 ---
 
-## â—† Use Cases & Applications
+## ◆ Use Cases & Applications
 
 | Use Case                | How LLMs Are Used                     | Key Challenge            |
 | ----------------------- | ------------------------------------- | ------------------------ |
@@ -195,20 +195,20 @@ Top-k: Only sample from the k most likely tokens
 
 ---
 
-## â—‹ Gotchas & Common Mistakes
+## ○ Gotchas & Common Mistakes
 
-- âš ï¸ **Hallucination â‰  lying**: The model generates plausible continuations, not facts. It has no concept of truth.
-- âš ï¸ **Context window â‰  memory**: LLMs don't remember across conversations unless you build memory systems
-- âš ï¸ **Bigger â‰  always better**: A well-fine-tuned 7B model can beat a generic 70B model on specific tasks
-- âš ï¸ **Tokens â‰  words**: Pricing and limits are in tokens (~4 chars each). Non-English = more tokens
-- âš ï¸ **Benchmarks lie**: Models are increasingly trained on benchmark data. Real-world eval matters more
+- ⚠️ **Hallucination ≠ lying**: The model generates plausible continuations, not facts. It has no concept of truth.
+- ⚠️ **Context window ≠ memory**: LLMs don't remember across conversations unless you build memory systems
+- ⚠️ **Bigger ≠ always better**: A well-fine-tuned 7B model can beat a generic 70B model on specific tasks
+- ⚠️ **Tokens ≠ words**: Pricing and limits are in tokens (~4 chars each). Non-English = more tokens
+- ⚠️ **Benchmarks lie**: Models are increasingly trained on benchmark data. Real-world eval matters more
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: Explain the training pipeline of a modern LLM.
-- **A**: Pre-training (next-token prediction on internet text) â†’ SFT (supervised fine-tuning on instruction-response pairs) â†’ RLHF/DPO (learning from human preference comparisons) â†’ Safety alignment
+- **A**: Pre-training (next-token prediction on internet text) → SFT (supervised fine-tuning on instruction-response pairs) → RLHF/DPO (learning from human preference comparisons) → Safety alignment
 
 - **Q**: What's the difference between dense and MoE architectures?
 - **A**: Dense: every parameter processes every token (e.g., GPT-4, Claude). MoE: tokens are routed to a subset of "expert" sub-networks (e.g., LLaMA 4 Maverick). MoE gives more total capacity with less compute per token.
@@ -218,7 +218,7 @@ Top-k: Only sample from the k most likely tokens
 
 ---
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics                                                                                                                  |
 | ------------ | ----------------------------------------------------------------------------------------------------------------------- |
@@ -229,7 +229,7 @@ Top-k: Only sample from the k most likely tokens
 
 ---
 
-## â˜… Sources
+## ★ Sources
 
 - OpenAI GPT-5 release blog and model cards (2025-2026)
 - Anthropic Claude 4 model documentation (2025-2026)

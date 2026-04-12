@@ -6,18 +6,18 @@ difficulty: intermediate
 status: published
 parent: "[[../genai]]"
 related: ["[[ai-agents]]", "[[../llms/llms-overview]]", "[[rag]]", "[[prompt-engineering]]"]
-source: "Multiple â€” see Sources"
+source: "Multiple — see Sources"
 created: 2026-03-22
 updated: 2026-04-11
 ---
 
 # Function Calling, Structured Output & Tool Use
 
-> âœ¨ **Bit**: An LLM that only generates text is like a brain with no hands. Function calling gives it hands â€” it can now search the web, query databases, send emails, and execute code. This is what makes LLMs actually useful in production.
+> ✨ **Bit**: An LLM that only generates text is like a brain with no hands. Function calling gives it hands — it can now search the web, query databases, send emails, and execute code. This is what makes LLMs actually useful in production.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: Mechanisms for LLMs to (1) call external functions/APIs and (2) return data in strict schemas (JSON, Pydantic)
 - **Why**: Every production LLM application uses these. You can't build real apps with free-text responses alone.
@@ -25,7 +25,7 @@ updated: 2026-04-11
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -41,42 +41,42 @@ Covers the patterns, APIs, and protocols. For building full agents with planning
 
 - Every ChatGPT plugin, every Copilot action, every enterprise AI app uses function calling
 - Structured output eliminates parsing headaches and hallucinated fields
-- MCP is becoming the USB of AI â€” one protocol for all tool connections
+- MCP is becoming the USB of AI — one protocol for all tool connections
 - This is what interviewers mean by "production LLM experience"
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### Function Calling Flow
 
 ```
-â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚                  FUNCTION CALLING FLOW                    â”‚
-â”‚                                                         â”‚
-â”‚  1. User: "What's the weather in Tokyo?"                â”‚
-â”‚                                                         â”‚
-â”‚  2. Your Code â†’ sends message + TOOL DEFINITIONS to LLMâ”‚
-â”‚     tools = [{                                          â”‚
-â”‚       name: "get_weather",                              â”‚
-â”‚       parameters: { location: string, unit: string }    â”‚
-â”‚     }]                                                  â”‚
-â”‚                                                         â”‚
-â”‚  3. LLM â†’ decides to call a tool (NOT execute it!)      â”‚
-â”‚     Response: {                                         â”‚
-â”‚       tool_call: "get_weather",                         â”‚
-â”‚       arguments: { location: "Tokyo", unit: "celsius" } â”‚
-â”‚     }                                                   â”‚
-â”‚                                                         â”‚
-â”‚  4. YOUR CODE executes the actual function               â”‚
-â”‚     result = get_weather("Tokyo", "celsius")  â†’ "22Â°C"  â”‚
-â”‚                                                         â”‚
-â”‚  5. Feed result back to LLM                             â”‚
-â”‚     messages.append(tool_result: "22Â°C")                â”‚
-â”‚                                                         â”‚
-â”‚  6. LLM generates final answer                          â”‚
-â”‚     "The weather in Tokyo is currently 22Â°C."           â”‚
-â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+┌─────────────────────────────────────────────────────────┐
+│                  FUNCTION CALLING FLOW                    │
+│                                                         │
+│  1. User: "What's the weather in Tokyo?"                │
+│                                                         │
+│  2. Your Code → sends message + TOOL DEFINITIONS to LLM│
+│     tools = [{                                          │
+│       name: "get_weather",                              │
+│       parameters: { location: string, unit: string }    │
+│     }]                                                  │
+│                                                         │
+│  3. LLM → decides to call a tool (NOT execute it!)      │
+│     Response: {                                         │
+│       tool_call: "get_weather",                         │
+│       arguments: { location: "Tokyo", unit: "celsius" } │
+│     }                                                   │
+│                                                         │
+│  4. YOUR CODE executes the actual function               │
+│     result = get_weather("Tokyo", "celsius")  → "22°C"  │
+│                                                         │
+│  5. Feed result back to LLM                             │
+│     messages.append(tool_result: "22°C")                │
+│                                                         │
+│  6. LLM generates final answer                          │
+│     "The weather in Tokyo is currently 22°C."           │
+└─────────────────────────────────────────────────────────┘
 
 KEY: The LLM NEVER executes code. It only decides what to call.
      YOUR code runs the function. Safety is YOUR responsibility.
@@ -145,13 +145,13 @@ if message.tool_calls:
         model="gpt-4o", messages=messages
     )
     print(final.choices[0].message.content)
-    # â†’ "The current weather in Tokyo is 22Â°C and partly cloudy."
+    # → "The current weather in Tokyo is 22°C and partly cloudy."
 ```
 
 ### Structured Output
 
 ```python
-# â•â•â• METHOD 1: JSON Mode (basic) â•â•â•
+# ═══ METHOD 1: JSON Mode (basic) ═══
 response = client.chat.completions.create(
     model="gpt-4o",
     messages=[{"role": "user", "content": "List 3 planets"}],
@@ -159,7 +159,7 @@ response = client.chat.completions.create(
 )
 # Returns valid JSON, but schema is NOT enforced
 
-# â•â•â• METHOD 2: Structured Output with Schema (strict) â•â•â•
+# ═══ METHOD 2: Structured Output with Schema (strict) ═══
 from pydantic import BaseModel
 
 class Planet(BaseModel):
@@ -176,11 +176,11 @@ response = client.beta.chat.completions.parse(
     response_format=PlanetList  # Schema is STRICTLY enforced
 )
 
-planets = response.choices[0].message.parsed  # â†’ PlanetList object
+planets = response.choices[0].message.parsed  # → PlanetList object
 for p in planets.planets:
     print(f"{p.name}: {p.diameter_km}km, rings={p.has_rings}")
 
-# â•â•â• METHOD 3: Instructor library (popular in production) â•â•â•
+# ═══ METHOD 3: Instructor library (popular in production) ═══
 import instructor
 
 client = instructor.from_openai(OpenAI())
@@ -196,24 +196,24 @@ planets = client.chat.completions.create(
 ### Model Context Protocol (MCP)
 
 ```
-MCP = "The USB of AI" â€” a universal standard for connecting
+MCP = "The USB of AI" — a universal standard for connecting
       LLMs to tools, data sources, and services.
 
 BEFORE MCP:
   Each tool needs custom integration code for each LLM
-  OpenAI tools â‰  Claude tools â‰  Gemini tools
-  N models Ã— M tools = NÃ—M integrations
+  OpenAI tools ≠ Claude tools ≠ Gemini tools
+  N models × M tools = N×M integrations
 
 WITH MCP:
-  Tool implements MCP server â†’ works with ANY MCP client
+  Tool implements MCP server → works with ANY MCP client
   N models + M tools = N + M integrations
 
-  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”     MCP     â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-  â”‚ LLM Client â”‚â—„â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â–ºâ”‚ MCP Server     â”‚
-  â”‚ (Claude,   â”‚  Protocol   â”‚ (Database,     â”‚
-  â”‚  Cursor,   â”‚             â”‚  GitHub,       â”‚
-  â”‚  custom)   â”‚             â”‚  Slack, etc.)  â”‚
-  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜             â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+  ┌────────────┐     MCP     ┌────────────────┐
+  │ LLM Client │◄───────────►│ MCP Server     │
+  │ (Claude,   │  Protocol   │ (Database,     │
+  │  Cursor,   │             │  GitHub,       │
+  │  custom)   │             │  Slack, etc.)  │
+  └────────────┘             └────────────────┘
 
 MCP CONCEPTS:
   Tools     = Functions the LLM can call
@@ -237,81 +237,81 @@ GROUNDING METHODS (from simple to complex):
      Simple but limited.
 
   2. RAG (Retrieval-Augmented Generation)
-     Retrieve relevant documents â†’ inject as context â†’ generate
+     Retrieve relevant documents → inject as context → generate
 See [Retrieval-Augmented Generation (RAG)](./rag.md) for full details.
 
   3. FUNCTION CALLING + LIVE DATA
-     LLM calls get_stock_price() â†’ gets real-time data
+     LLM calls get_stock_price() → gets real-time data
      Most accurate for dynamic information.
 
   4. KNOWLEDGE GRAPHS
-     Structured entity relationships (Company â†’ CEO â†’ Founded)
+     Structured entity relationships (Company → CEO → Founded)
      Graph databases (Neo4j) + LLM reasoning.
 
   5. MULTI-SOURCE VERIFICATION
-     Query multiple sources â†’ cross-validate â†’ generate
+     Query multiple sources → cross-validate → generate
      Highest accuracy, highest latency.
 ```
 
 ---
 
-## â—† Comparison
+## ◆ Comparison
 
 | Feature                  | JSON Mode                  | Structured Output          | Function Calling        |
 | ------------------------ | -------------------------- | -------------------------- | ----------------------- |
 | **What**                 | Valid JSON output          | Schema-enforced output     | Call external functions |
-| **Schema guaranteed?**   | âŒ (valid JSON, not schema) | âœ… (100% schema compliance) | âœ… (function signature)  |
+| **Schema guaranteed?**   | ❌ (valid JSON, not schema) | ✅ (100% schema compliance) | ✅ (function signature)  |
 | **Use case**             | Simple extraction          | Data pipelines, APIs       | Tool use, agents        |
 | **Hallucinated fields?** | Possible                   | No                         | No (args validated)     |
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 
 ```
 WHEN TO USE WHAT:
-  Need LLM to call APIs/tools    â†’ Function calling
-  Need structured data extraction â†’ Structured output (Pydantic)
-  Need basic JSON response        â†’ JSON mode
-  Need tool interop standard      â†’ MCP
-  Need factual grounding          â†’ RAG + citations
+  Need LLM to call APIs/tools    → Function calling
+  Need structured data extraction → Structured output (Pydantic)
+  Need basic JSON response        → JSON mode
+  Need tool interop standard      → MCP
+  Need factual grounding          → RAG + citations
 
 TOOL CHOICE OPTIONS:
-  "auto"      â†’ LLM decides whether to call a tool
-  "required"  â†’ LLM MUST call at least one tool
-  "none"      â†’ LLM cannot call any tools
-  {name: "x"} â†’ LLM must call specific tool
+  "auto"      → LLM decides whether to call a tool
+  "required"  → LLM MUST call at least one tool
+  "none"      → LLM cannot call any tools
+  {name: "x"} → LLM must call specific tool
 
 LIBRARIES:
-  instructor    â†’ Structured output with retries
-  marvin        â†’ AI functions with type hints
-  langchain     â†’ Tool/agent framework
-  pydantic      â†’ Schema definition
+  instructor    → Structured output with retries
+  marvin        → AI functions with type hints
+  langchain     → Tool/agent framework
+  pydantic      → Schema definition
 ```
 
 ---
 
-## â—‹ Gotchas & Common Mistakes
+## ○ Gotchas & Common Mistakes
 
-- âš ï¸ **LLM doesn't execute functions**: It only generates the call. YOUR code runs it. Never let the LLM run arbitrary code.
-- âš ï¸ **Tool descriptions matter enormously**: Vague descriptions â†’ wrong tool selection. Be specific and include examples.
-- âš ï¸ **Parallel tool calls**: Models can request multiple tool calls at once. Handle them all before responding.
-- âš ï¸ **JSON mode â‰  Structured Output**: JSON mode guarantees valid JSON but NOT schema compliance. Use structured output for reliable schemas.
-- âš ï¸ **Cost of tool calling**: Each round-trip (user â†’ tool call â†’ result â†’ final answer) doubles token usage.
+- ⚠️ **LLM doesn't execute functions**: It only generates the call. YOUR code runs it. Never let the LLM run arbitrary code.
+- ⚠️ **Tool descriptions matter enormously**: Vague descriptions → wrong tool selection. Be specific and include examples.
+- ⚠️ **Parallel tool calls**: Models can request multiple tool calls at once. Handle them all before responding.
+- ⚠️ **JSON mode ≠ Structured Output**: JSON mode guarantees valid JSON but NOT schema compliance. Use structured output for reliable schemas.
+- ⚠️ **Cost of tool calling**: Each round-trip (user → tool call → result → final answer) doubles token usage.
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: How does function calling work in LLMs?
 - **A**: You define tools with names, descriptions, and parameter schemas. The LLM receives the user message + tool definitions, decides if a tool should be called, and generates a JSON object with the function name and arguments. YOUR code executes the function and feeds the result back to the LLM for final response generation. The LLM never actually runs the function.
 
 - **Q**: What is MCP and why does it matter?
-- **A**: Model Context Protocol is an open standard for connecting LLMs to external tools. Before MCP, every tool needed custom integration for each model. MCP provides a universal interface â€” any MCP-compatible tool works with any MCP-compatible client. It's becoming the "USB standard" for AI tool integration.
+- **A**: Model Context Protocol is an open standard for connecting LLMs to external tools. Before MCP, every tool needed custom integration for each model. MCP provides a universal interface — any MCP-compatible tool works with any MCP-compatible client. It's becoming the "USB standard" for AI tool integration.
 
 ---
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics                                                                                    |
 | ------------ | ----------------------------------------------------------------------------------------- |
@@ -322,10 +322,10 @@ LIBRARIES:
 
 ---
 
-## â˜… Sources
+## ★ Sources
 
-- OpenAI Function Calling Guide â€” https://platform.openai.com/docs/guides/function-calling
-- OpenAI Structured Outputs â€” https://platform.openai.com/docs/guides/structured-outputs
-- Anthropic Tool Use â€” https://docs.anthropic.com/en/docs/build-with-claude/tool-use
-- Model Context Protocol â€” https://modelcontextprotocol.io
-- Instructor library â€” https://python.useinstructor.com
+- OpenAI Function Calling Guide — https://platform.openai.com/docs/guides/function-calling
+- OpenAI Structured Outputs — https://platform.openai.com/docs/guides/structured-outputs
+- Anthropic Tool Use — https://docs.anthropic.com/en/docs/build-with-claude/tool-use
+- Model Context Protocol — https://modelcontextprotocol.io
+- Instructor library — https://python.useinstructor.com

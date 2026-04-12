@@ -13,19 +13,19 @@ updated: 2026-04-11
 
 # Prompt Engineering
 
-> âœ¨ **Bit**: Prompt engineering is the art of asking the right question. Turns out, how you ask an LLM matters as much as what you ask â€” just like talking to humans.
+> ✨ **Bit**: Prompt engineering is the art of asking the right question. Turns out, how you ask an LLM matters as much as what you ask — just like talking to humans.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: Crafting inputs (prompts) to get desired outputs from LLMs without changing the model
-- **Why**: The cheapest, fastest way to improve LLM output. Zero training, zero infra â€” just better instructions.
+- **Why**: The cheapest, fastest way to improve LLM output. Zero training, zero infra — just better instructions.
 - **Key point**: Good prompting follows patterns: be specific, give examples, assign a role, think step-by-step.
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -47,17 +47,17 @@ Covers prompting techniques from basic to advanced. For when prompting isn't eno
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
-### The Prompting Hierarchy (Simplest â†’ Most Complex)
+### The Prompting Hierarchy (Simplest → Most Complex)
 
 ```
-Level 1: Zero-Shot       â†’ "Translate this to French: Hello"
-Level 2: System Prompt   â†’ "You are a French translator. Translate: Hello"
-Level 3: Few-Shot        â†’ "Here are 3 examples. Now do this one..."
-Level 4: Chain-of-Thought â†’ "Think step by step..."
-Level 5: Self-Consistency â†’ Generate multiple answers, pick the majority
-Level 6: ReAct / Tool Use â†’ Think, Act, Observe loops (enters Agent territory)
+Level 1: Zero-Shot       → "Translate this to French: Hello"
+Level 2: System Prompt   → "You are a French translator. Translate: Hello"
+Level 3: Few-Shot        → "Here are 3 examples. Now do this one..."
+Level 4: Chain-of-Thought → "Think step by step..."
+Level 5: Self-Consistency → Generate multiple answers, pick the majority
+Level 6: ReAct / Tool Use → Think, Act, Observe loops (enters Agent territory)
 ```
 
 ### Key Techniques
@@ -71,18 +71,18 @@ STRONG: "You are an expert technical editor. Summarize the following
          for software engineers. Use precise technical language."
 ```
 
-**Why it works**: Activates the model's "persona" â€” trained on text BY experts, so "being" an expert improves output.
+**Why it works**: Activates the model's "persona" — trained on text BY experts, so "being" an expert improves output.
 
 #### 2. Few-Shot Prompting
 
 ```
 Classify the sentiment:
 
-"This product is amazing!" â†’ Positive
-"Worst purchase ever." â†’ Negative
-"It's okay, nothing special." â†’ Neutral
+"This product is amazing!" → Positive
+"Worst purchase ever." → Negative
+"It's okay, nothing special." → Neutral
 
-"The quality exceeded my expectations!" â†’
+"The quality exceeded my expectations!" →
 ```
 
 **Rule of thumb**: 3-5 examples is the sweet spot. More examples = more consistent, but uses context window.
@@ -90,12 +90,12 @@ Classify the sentiment:
 #### 3. Chain of Thought (CoT)
 
 ```
-WEAK:  "What is 17 Ã— 24?"
-STRONG: "What is 17 Ã— 24? Think step by step."
+WEAK:  "What is 17 × 24?"
+STRONG: "What is 17 × 24? Think step by step."
 
 Model output with CoT:
-  "17 Ã— 24
-   = 17 Ã— 20 + 17 Ã— 4
+  "17 × 24
+   = 17 × 20 + 17 × 4
    = 340 + 68
    = 408"
 ```
@@ -132,11 +132,11 @@ Model output with CoT:
 | **Tree of Thought**     | Explore multiple reasoning branches            | Complex problem-solving          |
 | **Least-to-Most**       | Break complex problem into sub-problems        | Problems requiring decomposition |
 | **Generated Knowledge** | "First, tell me facts about X. Then, answer Y" | Knowledge-intensive questions    |
-| **Prompt Chaining**     | Output of prompt A â†’ Input of prompt B         | Multi-stage pipelines            |
+| **Prompt Chaining**     | Output of prompt A → Input of prompt B         | Multi-stage pipelines            |
 
 ### The Prompting Mistake Matrix
 
-| âŒ Common Mistake        | âœ… Better Approach                                                                                     |
+| ❌ Common Mistake        | ✅ Better Approach                                                                                     |
 | ----------------------- | ----------------------------------------------------------------------------------------------------- |
 | "Write good code"       | "Write Python 3.12 code that handles edge cases. Include type hints, docstrings, and error handling." |
 | "Summarize this"        | "Summarize in 3 bullet points for a technical audience. Each bullet max 20 words."                    |
@@ -146,60 +146,60 @@ Model output with CoT:
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 
 ```
 PROMPTING CHECKLIST:
-â–¡ Define ROLE      â†’ "You are a [specific expert]"
-â–¡ Set CONTEXT      â†’ Background info the model needs
-â–¡ State TASK       â†’ Exactly what to do
-â–¡ Specify FORMAT   â†’ How to structure the output
-â–¡ Give EXAMPLES    â†’ 2-3 examples of desired output
-â–¡ Add CONSTRAINTS  â†’ What NOT to do, length limits, etc.
-â–¡ Request REASONING â†’ "Think step by step" / "Explain your reasoning"
+□ Define ROLE      → "You are a [specific expert]"
+□ Set CONTEXT      → Background info the model needs
+□ State TASK       → Exactly what to do
+□ Specify FORMAT   → How to structure the output
+□ Give EXAMPLES    → 2-3 examples of desired output
+□ Add CONSTRAINTS  → What NOT to do, length limits, etc.
+□ Request REASONING → "Think step by step" / "Explain your reasoning"
 
 TEMPERATURE GUIDE:
-  0.0 â†’ Factual, deterministic (data extraction, classification)
-  0.3 â†’ Balanced (summarization, coding)
-  0.7 â†’ Creative (writing, brainstorming)
-  1.0 â†’ Very creative (poetry, fiction)
+  0.0 → Factual, deterministic (data extraction, classification)
+  0.3 → Balanced (summarization, coding)
+  0.7 → Creative (writing, brainstorming)
+  1.0 → Very creative (poetry, fiction)
 ```
 
 ---
 
-## â—† Strengths vs Limitations
+## ◆ Strengths vs Limitations
 
-| âœ… Strengths                   | âŒ Limitations                                            |
+| ✅ Strengths                   | ❌ Limitations                                            |
 | ----------------------------- | -------------------------------------------------------- |
 | Zero cost (no training/infra) | Can't add new knowledge                                  |
-| Instant iteration             | Fragile â€” small changes = different results              |
+| Instant iteration             | Fragile — small changes = different results              |
 | Works with any model          | Context window limits complexity                         |
 | Easy to A/B test              | Can't change model behavior permanently                  |
-| Good starting point always    | Diminishing returns at some point â†’ need RAG/fine-tuning |
+| Good starting point always    | Diminishing returns at some point → need RAG/fine-tuning |
 
 ---
 
-## â—‹ Gotchas & Common Mistakes
+## ○ Gotchas & Common Mistakes
 
-- âš ï¸ **Prompt â‰  Programming**: Prompts are probabilistic, not deterministic. Same prompt can give different results.
-- âš ï¸ **"Be concise" doesn't work well**: Instead say "Respond in exactly 3 sentences" â€” be specific about constraints.
-- âš ï¸ **Prompt injection**: Users can override your system prompt. Never trust user input in prompts for production apps.
-- âš ï¸ **Position matters**: Important instructions at the beginning AND end of prompts are most likely followed (primacy/recency effect).
-- âš ï¸ **"Just prompt engineer it" is a ceiling**: For domain expertise, consistent behavior, or new knowledge â€” prompting alone won't cut it.
+- ⚠️ **Prompt ≠ Programming**: Prompts are probabilistic, not deterministic. Same prompt can give different results.
+- ⚠️ **"Be concise" doesn't work well**: Instead say "Respond in exactly 3 sentences" — be specific about constraints.
+- ⚠️ **Prompt injection**: Users can override your system prompt. Never trust user input in prompts for production apps.
+- ⚠️ **Position matters**: Important instructions at the beginning AND end of prompts are most likely followed (primacy/recency effect).
+- ⚠️ **"Just prompt engineer it" is a ceiling**: For domain expertise, consistent behavior, or new knowledge — prompting alone won't cut it.
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: What's the difference between zero-shot, few-shot, and chain-of-thought prompting?
-- **A**: Zero-shot: just instructions, no examples. Few-shot: include examples of desired inputâ†’output pairs. CoT: ask model to show reasoning steps. Each adds more guidance and typically improves quality.
+- **A**: Zero-shot: just instructions, no examples. Few-shot: include examples of desired input→output pairs. CoT: ask model to show reasoning steps. Each adds more guidance and typically improves quality.
 
 - **Q**: How would you handle prompt injection in a production system?
 - **A**: Input sanitization, separate system/user prompts, output validation, don't include raw user input in system prompts. Use the model's built-in system prompt separation. For critical apps, add a second LLM call to verify the first output makes sense.
 
 ---
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics                                                                |
 | ------------ | --------------------------------------------------------------------- |
@@ -210,9 +210,9 @@ TEMPERATURE GUIDE:
 
 ---
 
-## â˜… Sources
+## ★ Sources
 
-- OpenAI Prompt Engineering Guide â€” https://platform.openai.com/docs/guides/prompt-engineering
-- Anthropic Prompt Engineering Guide â€” https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering
+- OpenAI Prompt Engineering Guide — https://platform.openai.com/docs/guides/prompt-engineering
+- Anthropic Prompt Engineering Guide — https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering
 - Wei et al., "Chain-of-Thought Prompting" (2022)
 - Yao et al., "Tree of Thoughts" (2023)

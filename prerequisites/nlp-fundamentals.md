@@ -6,26 +6,26 @@ difficulty: beginner
 status: published
 parent: "[[../genai]]"
 related: ["[[../foundations/transformers]]", "[[../foundations/embeddings]]", "[[../foundations/tokenization]]", "[[../llms/llms-overview]]"]
-source: "Multiple â€” see Sources"
+source: "Multiple — see Sources"
 created: 2026-03-22
 updated: 2026-04-11
 ---
 
 # NLP Fundamentals
 
-> âœ¨ **Bit**: Before GPT, NLP was a completely different world â€” specific models for specific tasks. Sentiment analysis? Train a model. Translation? Train a different model. Named entities? Yet another model. Then Transformers said "one model to rule them all" â€” and traditional NLP became a chapter in LLM history.
+> ✨ **Bit**: Before GPT, NLP was a completely different world — specific models for specific tasks. Sentiment analysis? Train a model. Translation? Train a different model. Named entities? Yet another model. Then Transformers said "one model to rule them all" — and traditional NLP became a chapter in LLM history.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
-- **What**: The foundational techniques for understanding, processing, and generating human language â€” from classical methods to the Transformer revolution
+- **What**: The foundational techniques for understanding, processing, and generating human language — from classical methods to the Transformer revolution
 - **Why**: GenAI REPLACED much of traditional NLP, but interviewers still ask about it. You need to know what came before to understand why GenAI is powerful.
 - **Key point**: BERT (2018) = encoder Transformer (understand text). GPT (2018) = decoder Transformer (generate text). This encoder vs decoder split defined GenAI.
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -37,7 +37,7 @@ Covers classical NLP tasks, the BERT vs GPT paradigm, and how LLMs changed every
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### NLP Task Landscape
 
@@ -46,7 +46,7 @@ Covers classical NLP tasks, the BERT vs GPT paradigm, and how LLMs changed every
 | **Text Classification**      | Categorize text (spam/not spam)    | TF-IDF + SVM/Naive Bayes       | LLM zero-shot or fine-tuned     |
 | **Sentiment Analysis**       | Detect emotion (positive/negative) | Lexicon-based + ML classifiers | LLM prompt: "Is this positive?" |
 | **Named Entity Recognition** | Find names, places, dates          | CRF / BiLSTM-CRF               | LLM extraction + JSON output    |
-| **Machine Translation**      | English â†’ French                   | Seq2seq + attention            | LLM prompt or specialized model |
+| **Machine Translation**      | English → French                   | Seq2seq + attention            | LLM prompt or specialized model |
 | **Summarization**            | Condense text                      | Extractive (select sentences)  | LLM abstractive summarization   |
 | **Question Answering**       | Answer from context                | BERT fine-tuned on SQuAD       | LLM + RAG                       |
 | **Text Generation**          | Write new text                     | RNNs, Markov chains            | GPT, Claude, LLaMA              |
@@ -59,32 +59,32 @@ TEXT REPRESENTATION EVOLUTION:
 
   BAG OF WORDS (BoW):
     "the cat sat on the mat"
-    â†’ {the: 2, cat: 1, sat: 1, on: 1, mat: 1}
-    âŒ Ignores word order
-    âŒ No semantics
+    → {the: 2, cat: 1, sat: 1, on: 1, mat: 1}
+    ❌ Ignores word order
+    ❌ No semantics
 
-  TF-IDF (Term Frequency Ã— Inverse Document Frequency):
+  TF-IDF (Term Frequency × Inverse Document Frequency):
     Weights words by importance (rare words score higher)
     TF = count(word) / total_words
     IDF = log(total_docs / docs_containing_word)
-    âœ… Better than BoW for retrieval
-    âŒ Still no semantics
+    ✅ Better than BoW for retrieval
+    ❌ Still no semantics
 
   WORD2VEC (2013):
     Learn 300-dim vectors where similar words are nearby
-    "king" - "man" + "woman" â‰ˆ "queen"
-    âœ… Captures semantic relationships
-    âŒ One vector per word (no context: "bank" = river or money?)
+    "king" - "man" + "woman" ≈ "queen"
+    ✅ Captures semantic relationships
+    ❌ One vector per word (no context: "bank" = river or money?)
 
   ELMo (2018):
     Context-dependent embeddings using BiLSTM
     "bank" gets different vectors in different contexts
-    âœ… Context-aware
-    âŒ Sequential processing (slow)
+    ✅ Context-aware
+    ❌ Sequential processing (slow)
 
   BERT / GPT (2018+):
     Transformer-based, attention-powered
-    âœ… Deep context, parallel processing, state-of-the-art everything
+    ✅ Deep context, parallel processing, state-of-the-art everything
 ```
 
 ### The BERT vs GPT Paradigm (Critical!)
@@ -95,11 +95,11 @@ THE FUNDAMENTAL SPLIT:
   ENCODER (BERT family):              DECODER (GPT family):
   "Understand text"                   "Generate text"
 
-  Sees: â† all tokens â†’               Sees: â† only past tokens
+  Sees: ← all tokens →               Sees: ← only past tokens
   (bidirectional)                     (autoregressive, left-to-right)
 
   Training: Predict [MASK]ed words    Training: Predict next token
-  "The [MASK] sat on the mat"        "The cat sat on the" â†’ "mat"
+  "The [MASK] sat on the mat"        "The cat sat on the" → "mat"
 
   Output: Hidden representations      Output: Next token probabilities
   (good for classification, NER)      (good for generation)
@@ -129,7 +129,7 @@ NAMED ENTITY RECOGNITION (NER):
   Output: [Apple Inc.]=ORG  [Steve Jobs]=PERSON  [Cupertino]=LOCATION
 
   Modern approach: Use LLM with structured output
-  â†’ "Extract all entities as JSON: {persons: [], orgs: [], locations: []}"
+  → "Extract all entities as JSON: {persons: [], orgs: [], locations: []}"
 
 
 SENTIMENT ANALYSIS:
@@ -137,7 +137,7 @@ SENTIMENT ANALYSIS:
   Output: NEGATIVE (confidence: 0.95)
 
   Modern approach: LLM prompt
-  â†’ "Rate the sentiment of this review: positive, negative, or neutral"
+  → "Rate the sentiment of this review: positive, negative, or neutral"
 
 
 TEXT CLASSIFICATION:
@@ -167,43 +167,43 @@ TRADITIONAL IE:            GENERATIVE IE (2025):
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 
 ```
-NLP TASK â†’ MODERN APPROACH:
-  Classification      â†’ Zero-shot LLM or fine-tuned classifier
-  Sentiment           â†’ LLM prompt or fine-tuned BERT
-  NER                 â†’ LLM with JSON output
-  Translation         â†’ NLLB, GPT-5.4, or fine-tuned model
-  Summarization       â†’ LLM (abstractive)
-  Search              â†’ Embedding model (BERT/BGE) + vector DB
-  Q&A                 â†’ RAG (retrieve + generate)
+NLP TASK → MODERN APPROACH:
+  Classification      → Zero-shot LLM or fine-tuned classifier
+  Sentiment           → LLM prompt or fine-tuned BERT
+  NER                 → LLM with JSON output
+  Translation         → NLLB, GPT-5.4, or fine-tuned model
+  Summarization       → LLM (abstractive)
+  Search              → Embedding model (BERT/BGE) + vector DB
+  Q&A                 → RAG (retrieve + generate)
 
 STILL RELEVANT IN 2026:
-  TF-IDF       â†’ BM25 search is still fast and effective
-  BERT family  â†’ Embeddings, classification, reranking
-  spaCy        â†’ Fast NER, POS, dependency parsing
-  Regex        â†’ Pattern extraction (dates, emails, IDs)
+  TF-IDF       → BM25 search is still fast and effective
+  BERT family  → Embeddings, classification, reranking
+  spaCy        → Fast NER, POS, dependency parsing
+  Regex        → Pattern extraction (dates, emails, IDs)
 
 MOSTLY OBSOLETE:
-  Word2Vec     â†’ Replaced by contextual embeddings
-  BiLSTM-CRF   â†’ Replaced by Transformer models
-  Seq2seq+attn â†’ Replaced by Transformers
+  Word2Vec     → Replaced by contextual embeddings
+  BiLSTM-CRF   → Replaced by Transformer models
+  Seq2seq+attn → Replaced by Transformers
 ```
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: What's the difference between BERT and GPT?
-- **A**: BERT is an ENCODER that sees all tokens bidirectionally (optimized for understanding â€” classification, NER, embeddings). GPT is a DECODER that sees only past tokens (optimized for generation â€” text, code, chat). Both use Transformers, but BERT predicts masked tokens while GPT predicts the next token.
+- **A**: BERT is an ENCODER that sees all tokens bidirectionally (optimized for understanding — classification, NER, embeddings). GPT is a DECODER that sees only past tokens (optimized for generation — text, code, chat). Both use Transformers, but BERT predicts masked tokens while GPT predicts the next token.
 
 - **Q**: Has GenAI made traditional NLP obsolete?
 - **A**: Mostly, yes. LLMs handle most NLP tasks via prompting, often better than task-specific models. However, BERT-based models survive for: (1) embeddings (BGE, E5), (2) sub-100ms classification at scale, (3) BM25/TF-IDF for initial retrieval in RAG. The field has consolidated around "one model, many tasks."
 
 ---
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics                                                                                    |
 | ------------ | ----------------------------------------------------------------------------------------- |
@@ -214,9 +214,9 @@ MOSTLY OBSOLETE:
 
 ---
 
-## â˜… Sources
+## ★ Sources
 
-- Jurafsky & Martin, "Speech and Language Processing" (3rd ed.) â€” https://web.stanford.edu/~jurafsky/slp3/
+- Jurafsky & Martin, "Speech and Language Processing" (3rd ed.) — https://web.stanford.edu/~jurafsky/slp3/
 - Devlin et al., "BERT: Pre-training of Deep Bidirectional Transformers" (2018)
-- spaCy documentation â€” https://spacy.io
-- HuggingFace NLP Course â€” https://huggingface.co/learn/nlp-course
+- spaCy documentation — https://spacy.io
+- HuggingFace NLP Course — https://huggingface.co/learn/nlp-course

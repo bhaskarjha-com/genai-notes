@@ -91,9 +91,9 @@ Notes follow a consistent template so the structure stays predictable.
 
 The template also uses section markers:
 
-- `Star` sections are the default core sections for every note.
-- `Diamond` sections are included when the topic needs them.
-- `Circle` sections are optional but useful when relevant.
+- ★ sections are the core sections every note must have.
+- ◆ sections are included when the topic calls for them.
+- ○ sections are optional but useful when relevant.
 
 ## Quality Notice
 

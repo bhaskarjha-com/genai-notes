@@ -4,9 +4,12 @@ site_url: https://bhaskarjha-com.github.io/genai-notes/
 repo_url: https://github.com/bhaskarjha-com/genai-notes
 repo_name: bhaskarjha-com/genai-notes
 edit_uri: edit/master/
-docs_dir: .
+docs_dir: docs
 site_dir: site
 use_directory_urls: false
+
+hooks:
+  - hooks/stage_docs.py
 
 validation:
   nav:
@@ -19,6 +22,7 @@ exclude_docs: |
   scripts/**
   _templates/**
   .github/**
+  *.copy.md
   link_converter.py
   site/**
   .gitignore
@@ -27,7 +31,7 @@ theme:
   name: material
   language: en
   icon:
-    logo: material/notebook-multiple-outline
+    logo: material/book-open-blank-variant
     repo: fontawesome/brands/github
   features:
     - navigation.sections
@@ -58,9 +62,7 @@ theme:
 
 plugins:
   - search
-  - tags:
-      tags_file: tags.md
-  - social
+  - tags
 
 markdown_extensions:
   - admonition
@@ -93,7 +95,7 @@ extra:
 nav:
   - Home:
       - Welcome: index.md
-      - GitHub README: README.md
+      - GitHub README: repo-readme.md
       - Learning Path: LEARNING_PATH.md
       - Root Overview: genai.md
       - Browse By Tag: tags.md
@@ -106,16 +108,13 @@ nav:
       - Downloadable Checklists: downloads/progress/README.md
       - Static Role Matrix: generated/topic-role-relevance-matrix.md
   - Learning Path:
-      - Universal Foundation:
-          - Level 1 - Prerequisites: LEARNING_PATH.md#level-1-prerequisites-15-hours
-          - Level 2 - GenAI Foundations: LEARNING_PATH.md#level-2-genai-foundations-20-hours
-          - Level 3 - Core GenAI Techniques: LEARNING_PATH.md#level-3-core-genai-techniques-25-hours
-      - Role Cluster Tracks:
-          - Track A - Application and Integration Builder: LEARNING_PATH.md#track-a---application-and-integration-builder
-          - Track B - AI Systems and Orchestration Engineer: LEARNING_PATH.md#track-b---ai-systems-and-orchestration-engineer
-          - Track C - ML and Production Engineer: LEARNING_PATH.md#track-c---ml-and-production-engineer
-          - Track D - Research and Foundation Model: LEARNING_PATH.md#track-d---research-and-foundation-model
-          - Track E - Safety, Ethics and Governance: LEARNING_PATH.md#track-e---safety-ethics-and-governance
+      - Full Curriculum: LEARNING_PATH.md
+      - Universal Foundation Checklist: downloads/progress/universal-foundation-checklist.md
+      - Track A Checklist: downloads/progress/track-a-application-and-integration-builder-checklist.md
+      - Track B Checklist: downloads/progress/track-b-ai-systems-and-orchestration-engineer-checklist.md
+      - Track C Checklist: downloads/progress/track-c-ml-and-production-engineer-checklist.md
+      - Track D Checklist: downloads/progress/track-d-research-and-foundation-model-checklist.md
+      - Track E Checklist: downloads/progress/track-e-safety-ethics-and-governance-checklist.md
   - Topic Library:
       - Prerequisites:
           - Python for AI: prerequisites/python-for-ai.md

@@ -6,6 +6,11 @@ drafts/
 link_converter.py
 
 # Local docs build output and local Python environments
+docs/*
+!docs/.gitkeep
 site/
 .venv/
 __pycache__/
+.tmp/
+.uv-cache/
+.cache/

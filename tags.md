@@ -7,3 +7,5 @@ Common ways to use it:
 - follow a technical theme such as `rag`, `llmops`, `evaluation`, or `multimodal`
 - scan by level with tags such as `beginner`, `intermediate`, or `advanced`
 - move sideways across related implementation patterns without losing the broader curriculum
+
+<!-- material/tags -->

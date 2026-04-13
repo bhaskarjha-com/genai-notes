@@ -97,7 +97,7 @@ Complete [Part 1 of the Learning Path](../../LEARNING_PATH.md#part-1-universal-f
 
 ## Interview Preparation
 
-Review the Interview Angles sections in [rag](../../techniques/rag.md#-interview-angles), [ai-agents](../../techniques/ai-agents.md#-interview-angles), [llmops](../../production/llmops.md#-interview-angles), and [ai-system-design](../../production/ai-system-design.md#interview-angles).
+Review the Interview Angles sections in [rag](../../techniques/rag.md#interview-angles), [ai-agents](../../techniques/ai-agents.md#interview-angles), [llmops](../../production/llmops.md#interview-angles), and [ai-system-design](../../production/ai-system-design.md#interview-angles).
 
 Common questions:
 

@@ -348,6 +348,12 @@ function Write-Utf8File {
     [System.IO.File]::WriteAllText($Path, $Content, [System.Text.UTF8Encoding]::new($false))
 }
 
+function Read-Utf8File {
+    param([string]$Path)
+
+    return [System.IO.File]::ReadAllText($Path, [System.Text.UTF8Encoding]::new($false))
+}
+
 function New-MarkdownChecklist {
     param(
         [string]$Title,
@@ -388,7 +394,7 @@ function Get-LearningPathData {
     $trackSections = New-Object System.Collections.Generic.List[object]
     $noteTrackMap = @{}
 
-    $text = Get-Content -LiteralPath $Path -Raw
+    $text = Read-Utf8File -Path $Path
     $part1Text = Get-TopLevelSection -Text $text -HeadingPrefix "Part 1"
     $part2Text = Get-TopLevelSection -Text $text -HeadingPrefix "Part 2"
 
@@ -533,7 +539,7 @@ function Get-RoleGuideData {
     $roleFiles = Get-ChildItem -LiteralPath $RolesDirectory -File -Filter *.md | Sort-Object Name
 
     foreach ($file in $roleFiles) {
-        $rawText = Get-Content -LiteralPath $file.FullName -Raw
+        $rawText = Read-Utf8File -Path $file.FullName
         $parts = Get-FrontmatterParts -Text $rawText
         $body = $parts.Body
         $title = Get-NoteTitle -Frontmatter $parts.Raw -Body $body
@@ -607,7 +613,7 @@ foreach ($dir in $topicDirs) {
 $noteFiles.Add((Join-Path $repoRoot "genai.md"))
 
 foreach ($fullPath in ($noteFiles | Sort-Object -Unique)) {
-    $rawText = Get-Content -LiteralPath $fullPath -Raw
+    $rawText = Read-Utf8File -Path $fullPath
     $parts = Get-FrontmatterParts -Text $rawText
     $status = Get-FrontmatterScalar -Frontmatter $parts.Raw -Key "status"
     if ($status -ne "published") {
@@ -739,7 +745,6 @@ $graphNodes = $publishedNotes | Sort-Object Folder, Title | ForEach-Object {
 }
 
 $graphData = [pscustomobject]@{
-    GeneratedAt = (Get-Date).ToString("yyyy-MM-dd")
     NodeCount = $graphNodes.Count
     EdgeCount = $edgeMap.Count
     Folders = @($graphNodes.Folder | Sort-Object -Unique)
@@ -827,7 +832,6 @@ foreach ($role in $roles) {
 }
 
 $matrixData = [pscustomobject]@{
-    GeneratedAt = (Get-Date).ToString("yyyy-MM-dd")
     Roles = @($matrixRoles | ForEach-Object { $_ })
     Topics = @($matrixTopics | ForEach-Object { $_ })
 }
@@ -1045,7 +1049,6 @@ foreach ($row in $progressCatalogRows) {
 }
 
 $learningPathData = [pscustomobject]@{
-    GeneratedAt = (Get-Date).ToString("yyyy-MM-dd")
     Foundation = @($learningPath.Foundation | ForEach-Object { $_ })
     Tracks = @($learningPath.Tracks | ForEach-Object { $_ })
 }

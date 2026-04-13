@@ -102,7 +102,7 @@ Complete [Part 1 of the Learning Path](../../LEARNING_PATH.md#part-1-universal-f
 
 ## Interview Preparation
 
-Review [llmops](../../production/llmops.md#-interview-angles), [docker-and-kubernetes](../../production/docker-and-kubernetes.md#interview-angles), [monitoring-observability](../../production/monitoring-observability.md#interview-angles), and [cicd-for-ml](../../production/cicd-for-ml.md#interview-angles).
+Review [llmops](../../production/llmops.md#interview-angles), [docker-and-kubernetes](../../production/docker-and-kubernetes.md#interview-angles), [monitoring-observability](../../production/monitoring-observability.md#interview-angles), and [cicd-for-ml](../../production/cicd-for-ml.md#interview-angles).
 
 Common questions:
 

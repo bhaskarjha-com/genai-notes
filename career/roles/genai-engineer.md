@@ -97,7 +97,7 @@ Complete [Part 1 of the Learning Path](../../LEARNING_PATH.md#part-1-universal-f
 
 ## Interview Preparation
 
-Review [rag](../../techniques/rag.md#-interview-angles), [advanced-fine-tuning](../../techniques/advanced-fine-tuning.md#interview-angles), [ai-agents](../../techniques/ai-agents.md#-interview-angles), and [evaluation](../../evaluation/evaluation-and-benchmarks.md#-interview-angles).
+Review [rag](../../techniques/rag.md#interview-angles), [advanced-fine-tuning](../../techniques/advanced-fine-tuning.md#interview-angles), [ai-agents](../../techniques/ai-agents.md#interview-angles), and [evaluation](../../evaluation/evaluation-and-benchmarks.md#interview-angles).
 
 Common questions:
 

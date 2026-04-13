@@ -117,8 +117,11 @@ function Get-RepoRelativePath {
 $allMarkdownFiles = Get-ChildItem -Path $repoRoot -Recurse -File -Filter *.md |
     Where-Object {
         $_.FullName -notmatch '\\\.git\\' -and
+        $_.FullName -notmatch '\\\.venv\\' -and
         $_.FullName -notmatch '\\drafts\\' -and
-        $_.FullName -notmatch '\\_templates\\'
+        $_.FullName -notmatch '\\_templates\\' -and
+        $_.FullName -notmatch '\\docs\\' -and
+        $_.FullName -notmatch '\\site\\'
     }
 
 $brokenFrontmatterLinks = New-Object System.Collections.Generic.List[string]

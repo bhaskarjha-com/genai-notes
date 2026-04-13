@@ -97,7 +97,7 @@ Complete [Part 1 of the Learning Path](../../LEARNING_PATH.md#part-1-universal-f
 
 ## Interview Preparation
 
-Review [transformers](../../foundations/transformers.md#-interview-angles), [fine-tuning](../../techniques/fine-tuning.md#-interview-angles), [advanced-fine-tuning](../../techniques/advanced-fine-tuning.md#interview-angles), and [inference-optimization](../../inference/inference-optimization.md#-interview-angles).
+Review [transformers](../../foundations/transformers.md#interview-angles), [fine-tuning](../../techniques/fine-tuning.md#interview-angles), [advanced-fine-tuning](../../techniques/advanced-fine-tuning.md#interview-angles), and [inference-optimization](../../inference/inference-optimization.md#interview-angles).
 
 Common questions:
 

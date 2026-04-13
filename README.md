@@ -38,7 +38,7 @@ Read [career/genai-career-roles-universal.md](career/genai-career-roles-universa
 - [ML Engineer](career/roles/ml-engineer.md)
 - [MLOps / LLMOps Engineer](career/roles/mlops-engineer.md)
 
-If your target role is more specialized or niche, use the grouped guides in [career/](career/) alongside the universal role reference.
+If your target role is more specialized or niche, use the grouped guides linked from [career/genai-career-roles-universal.md](career/genai-career-roles-universal.md) alongside the universal role reference.
 
 ### Path 3: Topic Reference
 

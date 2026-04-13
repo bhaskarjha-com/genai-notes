@@ -26,6 +26,7 @@ DEFAULT_EXCLUDED_DIRS = {
     ".git",
     ".venv",
     "__pycache__",
+    "docs",
     "node_modules",
     "site",
 }

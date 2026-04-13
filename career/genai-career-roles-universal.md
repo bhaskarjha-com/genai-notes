@@ -64,7 +64,7 @@ updated: 2026-04-12
 
 ---
 
-## ★ The 6-Layer AI Stack
+## ★ The 6-Layer AI Stack { #-the-6-layer-ai-stack }
 
 > **Note**: This is a career-planning model adapted from industry frameworks (a16z, NVIDIA, Sequoia). Standard industry models use 4-5 layers; this 6-layer version provides finer granularity for mapping roles.
 
@@ -101,7 +101,7 @@ updated: 2026-04-12
 
 ---
 
-## ★ Role Overview Table (31 Roles)
+## ★ Role Overview Table (31 Roles) { #-role-overview-table-31-roles }
 
 | # | Role | Layer | Entry Difficulty | Availability | Salary (US Range) | Min Education |
 |:---:|------|:---:|:---:|:---:|---|:---:|
@@ -139,9 +139,9 @@ updated: 2026-04-12
 
 ---
 
-## ★ Role-by-Role Breakdown
+## ★ Role-by-Role Breakdown { #-role-by-role-breakdown }
 
-### Layer 6 — Application (7 Roles)
+### Layer 6 — Application (7 Roles) { #layer-6--application-7-roles }
 
 ---
 
@@ -285,7 +285,7 @@ updated: 2026-04-12
 
 ---
 
-### Layer 5 — Orchestration (6 Roles)
+### Layer 5 — Orchestration (6 Roles) { #layer-5--orchestration-6-roles }
 
 ---
 
@@ -409,7 +409,7 @@ updated: 2026-04-12
 
 ---
 
-### Layer 4 — Fine-tuning & Evaluation (8 Roles)
+### Layer 4 — Fine-tuning & Evaluation (8 Roles) { #layer-4--fine-tuning--evaluation-8-roles }
 
 ---
 
@@ -573,7 +573,7 @@ updated: 2026-04-12
 
 ---
 
-### Layer 3 — Inference & Serving (3 Roles)
+### Layer 3 — Inference & Serving (3 Roles) { #layer-3--inference--serving-3-roles }
 
 ---
 
@@ -637,7 +637,7 @@ updated: 2026-04-12
 
 ---
 
-### Layer 2 — Foundation Model (3 Roles)
+### Layer 2 — Foundation Model (3 Roles) { #layer-2--foundation-model-3-roles }
 
 ---
 
@@ -701,7 +701,7 @@ updated: 2026-04-12
 
 ---
 
-### Layer 1 — Infrastructure & Hardware (2 Roles)
+### Layer 1 — Infrastructure & Hardware (2 Roles) { #layer-1--infrastructure--hardware-2-roles }
 
 ---
 
@@ -789,7 +789,7 @@ updated: 2026-04-12
 
 ---
 
-## ★ Roles by Entry Difficulty
+## ★ Roles by Entry Difficulty { #-roles-by-entry-difficulty }
 
 | Difficulty | Roles | Typical Background |
 |:---:|---|---|
@@ -800,7 +800,7 @@ updated: 2026-04-12
 
 ---
 
-## ★ Career Pathways
+## ★ Career Pathways { #-career-pathways }
 
 ```
 DEPTH TRACK (specialization):
@@ -831,7 +831,20 @@ CAREER LADDER (seniority progression):
 
 ---
 
-## ★ Interview Preparation Map
+## ★ Skills × Roles Matrix { #-skills--roles-matrix }
+
+| Skill Cluster | Most Important For | Why It Matters |
+|---|---|---|
+| Application engineering | Full-Stack AI Engineer, AI Integration Engineer, AI Engineer | Shipping useful AI features still depends on APIs, backend reliability, UX, and product integration. |
+| Orchestration and agents | AI Engineer, GenAI Engineer, Agentic AI Engineer, RAG Engineer | Many modern GenAI roles are about combining models, retrieval, tools, and workflows instead of training models from scratch. |
+| Evaluation and safety | LLM Engineer, RAG Engineer, AI Safety / Red Team Engineer, MLOps / LLMOps Engineer | Weak evaluation is one of the fastest ways to ship unreliable, unsafe, or expensive systems. |
+| Production systems | ML Engineer, MLOps / LLMOps Engineer, Inference Optimization Engineer, AI Infra / Platform Engineer | Real-world AI systems fail on latency, observability, cost, and deployment complexity long before they fail on theory. |
+| Research depth | Foundation Model Engineer, Applied AI Scientist, AI Research Scientist | These roles demand deeper command of transformers, optimization, experimental design, and paper-level reasoning. |
+| Governance and policy | AI Ethics & Governance Lead, AI Data Governance Manager, AI Consultant / Strategist | In regulated or high-risk environments, governance, compliance, and stakeholder communication are as important as the model itself. |
+
+---
+
+## ★ Interview Preparation Map { #-interview-preparation-map }
 
 ### Technical Round 1: AI/ML Fundamentals (L4-L2 roles)
 
@@ -894,7 +907,7 @@ Topics: Bias mitigation, guardrails, EU AI Act, responsible AI, red teaming, OWA
 
 ---
 
-## ★ Job Search Keywords
+## ★ Job Search Keywords { #-job-search-keywords }
 
 ```
 LAYER 6: "AI integration engineer", "full-stack AI", "AI-powered app developer",
@@ -925,7 +938,7 @@ CROSS:   "AI ethics", "responsible AI", "AI governance", "AI compliance",
 
 ---
 
-## ★ Frontier Lab Requirements
+## ★ Frontier Lab Requirements { #-frontier-lab-requirements }
 
 To work at frontier labs (OpenAI, Anthropic, Google DeepMind, Meta FAIR, xAI, Mistral):
 
@@ -956,7 +969,7 @@ WHAT MAKES YOU STAND OUT:
 
 ---
 
-## ★ Target Companies by Tier
+## ★ Target Companies by Tier { #-target-companies-by-tier }
 
 ```
 TIER 1 — FRONTIER LABS (highest pay, hardest to enter)
@@ -1007,7 +1020,7 @@ INDIA SALARY CONTEXT:
 
 ---
 
-## ★ Salary Table (All 31 Roles)
+## ★ Salary Table (All 31 Roles) { #-salary-table-all-31-roles }
 
 ```
                            UNITED STATES ($K/yr)         INDIA (₹ LPA)
@@ -1066,7 +1079,7 @@ India: Service cos pay 40-60% less than product cos for same role
 
 ---
 
-## ★ Certification Roadmap
+## ★ Certification Roadmap { #-certification-roadmap }
 
 | Certification | Applicable Roles | Priority | Notes |
 |--------------|-----------------|:---:|---|
@@ -1086,7 +1099,7 @@ India: Service cos pay 40-60% less than product cos for same role
 
 ---
 
-## ★ Portfolio Project Ideas
+## ★ Portfolio Project Ideas { #-portfolio-project-ideas }
 
 | Project | Target Roles | Layer | Differentiation Tip |
 |---------|-------------|:---:|---|
@@ -1108,7 +1121,7 @@ India: Service cos pay 40-60% less than product cos for same role
 
 ---
 
-## ★ Sources
+## ★ Sources { #-sources }
 
 - LinkedIn "Skills on the Rise 2026" and "Jobs on the Rise 2026" reports (AI Engineer #1)
 - Indeed, Glassdoor, Naukri job postings analysis (March 2026)

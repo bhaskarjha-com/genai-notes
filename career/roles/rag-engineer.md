@@ -97,7 +97,7 @@ Complete [Part 1 of the Learning Path](../../LEARNING_PATH.md#part-1-universal-f
 
 ## Interview Preparation
 
-Review [rag](../../techniques/rag.md#-interview-angles), [graph-rag](../../techniques/graph-rag.md#-interview-angles), [vector-databases](../../tools-and-infra/vector-databases.md#-interview-angles), and [hallucination-detection](../../llms/hallucination-detection.md#interview-angles).
+Review [rag](../../techniques/rag.md#interview-angles), [graph-rag](../../techniques/graph-rag.md#interview-angles), [vector-databases](../../tools-and-infra/vector-databases.md#interview-angles), and [hallucination-detection](../../llms/hallucination-detection.md#interview-angles).
 
 Common questions:
 

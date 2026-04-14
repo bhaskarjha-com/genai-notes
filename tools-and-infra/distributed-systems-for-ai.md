@@ -194,7 +194,7 @@ param_count = sum(p.numel() for p in model.parameters())
 print(f"Model parameters: {param_count:,} ({param_count/1e6:.1f}M)")
 print(f"Estimated BF16 memory: {param_count * 2 / 1e9:.2f} GB")
 print(f"Estimated FSDP across 4 GPUs: {param_count * 2 / 1e9 / 4:.2f} GB per GPU")
-# FSDP shards params across GPUs â€” linear memory reduction
+# FSDP shards params across GPUs — linear memory reduction
 ```
 
 ## ★ Connections

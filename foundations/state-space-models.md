@@ -175,12 +175,12 @@ class MinimalSSM(nn.Module):
             outputs.append(y_t)
         return torch.stack(outputs, dim=1)
 
-# Test: O(n) in memory (no nÂ² attention matrix)
+# Test: O(n) in memory (no n² attention matrix)
 ssm = MinimalSSM(d_model=64, d_state=16)
 x   = torch.randn(2, 1024, 64)  # batch=2, seq=1024, d=64
 y   = ssm(x)
 print(f"Input:  {x.shape}")  # (2, 1024, 64)
-print(f"Output: {y.shape}")  # (2, 1024, 64) â€” same shape, O(n) memory
+print(f"Output: {y.shape}")  # (2, 1024, 64) — same shape, O(n) memory
 ```
 
 ## ★ Connections

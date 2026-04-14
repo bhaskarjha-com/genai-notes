@@ -333,6 +333,26 @@
           "MarkdownLink": "../production/llmops.md"
         },
         {
+          "Path": "techniques/structured-outputs.md",
+          "Title": "Structured Outputs & Constrained Generation",
+          "Label": "structured-outputs",
+          "Folder": "techniques",
+          "Difficulty": "intermediate",
+          "EstTime": "3h",
+          "SitePath": "techniques/structured-outputs.html",
+          "MarkdownLink": "../techniques/structured-outputs.md"
+        },
+        {
+          "Path": "applications/ai-coding-agents.md",
+          "Title": "AI Coding Agents",
+          "Label": "ai-coding-agents",
+          "Folder": "applications",
+          "Difficulty": "intermediate",
+          "EstTime": "3h",
+          "SitePath": "applications/ai-coding-agents.html",
+          "MarkdownLink": "../applications/ai-coding-agents.md"
+        },
+        {
           "Path": "applications/ai-product-management-fundamentals.md",
           "Title": "AI Product Management Fundamentals",
           "Label": "ai-product-management-fundamentals",
@@ -965,6 +985,16 @@
           "EstTime": "3h",
           "SitePath": "ethics-and-safety/prompt-injection-deep-dive.html",
           "MarkdownLink": "../ethics-and-safety/prompt-injection-deep-dive.md"
+        },
+        {
+          "Path": "ethics-and-safety/mcp-security.md",
+          "Title": "MCP Security & Tool Trust",
+          "Label": "mcp-security",
+          "Folder": "ethics-and-safety",
+          "Difficulty": "advanced",
+          "EstTime": "3h",
+          "SitePath": "ethics-and-safety/mcp-security.html",
+          "MarkdownLink": "../ethics-and-safety/mcp-security.md"
         }
       ]
     }

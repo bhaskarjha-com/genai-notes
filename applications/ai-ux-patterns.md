@@ -101,26 +101,26 @@ PROGRESSIVE DISCLOSURE HIERARCHY:
   Showing the full response immediately overwhelms; chunked delivery respects limits.
 ```
 
-| Cognitive Load Pattern | When to Use | Implementation |
-|---|---|---|
-| **Chunked delivery** | Long responses (>200 words) | TL;DR first, details expandable |
-| **Skeleton states** | Inference >500ms | Shimmer animation matching response layout |
-| **Inline citations** | Factual claims | Superscript [1], source panel on click |
-| **Structured output** | Lists, tables, code | Detect and render markdown server-side |
-| **Response length control** | Power users | Terse / Standard / Detailed toggle |
-| **Diff highlighting** | Regenerated responses | Highlight what changed between versions |
+| Cognitive Load Pattern      | When to Use                 | Implementation                             |
+| --------------------------- | --------------------------- | ------------------------------------------ |
+| **Chunked delivery**        | Long responses (>200 words) | TL;DR first, details expandable            |
+| **Skeleton states**         | Inference >500ms            | Shimmer animation matching response layout |
+| **Inline citations**        | Factual claims              | Superscript [1], source panel on click     |
+| **Structured output**       | Lists, tables, code         | Detect and render markdown server-side     |
+| **Response length control** | Power users                 | Terse / Standard / Detailed toggle         |
+| **Diff highlighting**       | Regenerated responses       | Highlight what changed between versions    |
 
 ---
 
 ## ◆ Production Failure Modes
 
-| Failure                 | Symptoms                           | Root Cause                                   | Mitigation                                                    |
-| ----------------------- | ---------------------------------- | -------------------------------------------- | ------------------------------------------------------------- |
-| **Trust erosion**       | Users stop relying on AI answers   | Confident wrong answers without citations    | Add citations, confidence indicators, "I don't know"          |
-| **Latency abandonment** | Users leave during model inference | No streaming, no loading indicator           | Stream tokens, add skeleton loading                           |
-| **Feedback fatigue**    | Users stop giving feedback         | Too many feedback prompts, no visible impact | Make feedback easy (one click), show when it improves results |
-| **Cognitive overload**  | Users skim or ignore responses     | Full answer dumped without structure         | Progressive disclosure, TL;DR first, render markdown properly |
-| **Hallucination cascade** | User acts on wrong AI output     | No uncertainty signal; user trusted blindly  | Confidence indicators required for factual claims; citations  |
+| Failure                   | Symptoms                           | Root Cause                                   | Mitigation                                                    |
+| ------------------------- | ---------------------------------- | -------------------------------------------- | ------------------------------------------------------------- |
+| **Trust erosion**         | Users stop relying on AI answers   | Confident wrong answers without citations    | Add citations, confidence indicators, "I don't know"          |
+| **Latency abandonment**   | Users leave during model inference | No streaming, no loading indicator           | Stream tokens, add skeleton loading                           |
+| **Feedback fatigue**      | Users stop giving feedback         | Too many feedback prompts, no visible impact | Make feedback easy (one click), show when it improves results |
+| **Cognitive overload**    | Users skim or ignore responses     | Full answer dumped without structure         | Progressive disclosure, TL;DR first, render markdown properly |
+| **Hallucination cascade** | User acts on wrong AI output       | No uncertainty signal; user trusted blindly  | Confidence indicators required for factual claims; citations  |
 
 ---
 
@@ -179,7 +179,7 @@ client = OpenAI()
 
 @app.get("/stream")
 async def stream_response(question: str) -> StreamingResponse:
-    """Stream LLM tokens to the client as they arrive â€” core AI UX pattern."""
+    """Stream LLM tokens to the client as they arrive — core AI UX pattern."""
     def token_generator():
         stream = client.chat.completions.create(
             model="gpt-4o-mini",

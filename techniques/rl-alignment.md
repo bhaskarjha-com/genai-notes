@@ -367,7 +367,7 @@ config = DPOConfig(
     num_train_epochs=1,
     per_device_train_batch_size=1,
     learning_rate=5e-6,
-    beta=0.1,           # KL penalty coefficient â€” higher = closer to reference model
+    beta=0.1,           # KL penalty coefficient — higher = closer to reference model
     logging_steps=5,
 )
 

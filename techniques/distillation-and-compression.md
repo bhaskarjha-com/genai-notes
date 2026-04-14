@@ -262,7 +262,7 @@ labels         = torch.randint(0, vocab, (batch, seq))
 loss = distillation_loss(student_logits, teacher_logits, labels)
 print(f"Distillation loss: {loss.item():.4f}")
 
-# GGUF Quantization check (inference only â€” requires llama.cpp)
+# GGUF Quantization check (inference only — requires llama.cpp)
 # After downloading a GGUF model:
 # from llama_cpp import Llama
 # llm = Llama(model_path="./model.gguf", n_ctx=2048)

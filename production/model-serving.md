@@ -175,8 +175,8 @@ python -m vllm.entrypoints.openai.api_server \
 ### vLLM Server Setup (OpenAI-Compatible)
 
 ```bash
-# pip install vllm>=0.4
-# ⚠️ Last tested: 2026-04 | Requires: CUDA GPU, vllm>=0.4
+# pip install vllm>=2.0
+# ⚠️ Last tested: 2026-04 | Requires: CUDA GPU, vllm>=2.0
 
 python -m vllm.entrypoints.openai.api_server \
   --model meta-llama/Llama-3.2-8B-Instruct \
@@ -187,7 +187,7 @@ python -m vllm.entrypoints.openai.api_server \
 ```
 
 ```python
-# Query the vLLM server â€” identical to OpenAI API
+# Query the vLLM server — identical to OpenAI API
 # pip install openai>=1.60
 # ⚠️ Last tested: 2026-04
 from openai import OpenAI
@@ -219,6 +219,72 @@ print(f"{len(prompts)} requests in {elapsed:.1f}s = {len(prompts)/elapsed:.1f} r
 
 ---
 
+
+### Health Check and Load Test Endpoint
+
+```python
+# pip install fastapi>=0.110 uvicorn>=0.29 httpx>=0.27
+# ⚠️ Last tested: 2026-04 | Requires: fastapi>=0.110, httpx>=0.27
+import asyncio, time, statistics
+from fastapi import FastAPI
+from pydantic import BaseModel
+import httpx
+
+app = FastAPI()
+
+class HealthStatus(BaseModel):
+    status: str
+    model_loaded: bool
+    avg_latency_ms: float
+    requests_served: int
+
+_request_count = 0
+_latencies: list[float] = []
+
+@app.get("/health", response_model=HealthStatus)
+async def health_check():
+    """Production health check for LLM serving endpoint."""
+    return HealthStatus(
+        status="healthy" if _latencies and statistics.mean(_latencies) < 5000 else "degraded",
+        model_loaded=True,
+        avg_latency_ms=round(statistics.mean(_latencies), 1) if _latencies else 0,
+        requests_served=_request_count,
+    )
+
+async def load_test(base_url: str, num_requests: int = 20, concurrency: int = 5) -> dict:
+    """Simple load test for model serving endpoint."""
+    async def single_request(client: httpx.AsyncClient, i: int) -> float:
+        payload = {"model": "default", "messages": [{"role": "user", "content": f"Test {i}"}], "max_tokens": 50}
+        t0 = time.monotonic()
+        resp = await client.post(f"{base_url}/v1/chat/completions", json=payload, timeout=30)
+        elapsed = (time.monotonic() - t0) * 1000
+        return elapsed if resp.status_code == 200 else -1
+
+    async with httpx.AsyncClient() as client:
+        sem = asyncio.Semaphore(concurrency)
+        async def bounded(i):
+            async with sem:
+                return await single_request(client, i)
+        results = await asyncio.gather(*[bounded(i) for i in range(num_requests)])
+
+    ok = [r for r in results if r > 0]
+    errors = sum(1 for r in results if r < 0)
+    ok.sort()
+    n = len(ok)
+    return {
+        "total": num_requests, "errors": errors,
+        "p50_ms": round(ok[n//2], 1) if n else 0,
+        "p95_ms": round(ok[int(n*0.95)], 1) if n else 0,
+        "p99_ms": round(ok[int(n*0.99)], 1) if n else 0,
+        "throughput_rps": round(num_requests / (sum(ok)/1000/concurrency), 1) if ok else 0,
+    }
+
+# result = asyncio.run(load_test("http://localhost:8000", num_requests=50, concurrency=10))
+# print(f"P50: {result['p50_ms']}ms | P95: {result['p95_ms']}ms | Errors: {result['errors']}")
+# Expected output: P50: ~120ms | P95: ~450ms | Errors: 0
+```
+
+---
 ## ◆ Production Failure Modes
 
 | Failure                            | Symptoms                                      | Root Cause                                      | Mitigation                                      |

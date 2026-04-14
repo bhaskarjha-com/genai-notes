@@ -221,7 +221,7 @@ features = [
 ]
 for f in features:
     r = f.score()
-    print(f"{r['name']}: {r['score']:.0f}/100 ({r['confidence']}) â€” {r['guidance']}")
+    print(f"{r['name']}: {r['score']:.0f}/100 ({r['confidence']}) — {r['guidance']}")
 ```
 
 ## ★ Connections

@@ -77,7 +77,9 @@ Target roles: Full-Stack AI Engineer, AI Integration Engineer, AI Consultant, Pr
 | A8 | [code-generation](applications/code-generation.md) | 3h |
 | A9 | [ai-system-design](production/ai-system-design.md) | 3h |
 | A10 | [llmops](production/llmops.md) | 3h |
-| A11 | [ai-product-management-fundamentals](applications/ai-product-management-fundamentals.md) | 2h |
+| A11 | [structured-outputs](techniques/structured-outputs.md) | 3h |
+| A12 | [ai-coding-agents](applications/ai-coding-agents.md) | 3h |
+| A13 | [ai-product-management-fundamentals](applications/ai-product-management-fundamentals.md) | 2h |
 
 External skills: React or Next.js, Docker basics, cloud services, stakeholder communication
 
@@ -91,7 +93,7 @@ Target roles: GenAI Engineer, LLM Engineer, Agentic AI Engineer, RAG Engineer, A
 | B2 | [multi-agent-architectures](agents/multi-agent-architectures.md) | 3h |
 | B3 | [agent-evaluation](agents/agent-evaluation.md) | 3h |
 | B4 | [agent-memory](agents/agent-memory.md) | 3h |
-| B6 | [agentic-protocols](agents/agentic-protocols.md) | 4h |
+| B5 | [agentic-protocols](agents/agentic-protocols.md) | 4h |
 | B6 | [advanced-fine-tuning](techniques/advanced-fine-tuning.md) | 4h |
 | B7 | [rl-alignment](techniques/rl-alignment.md) | 4h |
 | B8 | [distillation-and-compression](techniques/distillation-and-compression.md) | 3h |
@@ -99,18 +101,18 @@ Target roles: GenAI Engineer, LLM Engineer, Agentic AI Engineer, RAG Engineer, A
 | B10 | [llm-evaluation-deep-dive](evaluation/llm-evaluation-deep-dive.md) | 3h |
 | B11 | [hallucination-detection](llms/hallucination-detection.md) | 3h |
 | B12 | [vector-databases](tools-and-infra/vector-databases.md) | 3h |
-| B12 | [model-serving](production/model-serving.md) | 3h |
-| B13 | [monitoring-observability](production/monitoring-observability.md) | 3h |
-| B14 | [cost-optimization](production/cost-optimization.md) | 3h |
-| B15 | [llmops](production/llmops.md) | 3h |
-| B16 | [embedding-fine-tuning](techniques/embedding-fine-tuning.md) | 3h |
-| B17 | [long-context-engineering](techniques/long-context-engineering.md) | 3h |
-| B18 | [retrieval-evaluation](evaluation/retrieval-evaluation.md) | 3h |
-| B19 | [guardrails-and-content-filtering](production/guardrails-and-content-filtering.md) | 3h |
-| B20 | [llm-routing-and-model-selection](production/llm-routing-and-model-selection.md) | 3h |
-| B21 | [document-parsing-and-extraction](production/document-parsing-and-extraction.md) | 2h |
-| B22 | [data-flywheel-design](production/data-flywheel-design.md) | 2h |
-| B23 | [ai-ux-patterns](applications/ai-ux-patterns.md) | 2h |
+| B13 | [model-serving](production/model-serving.md) | 3h |
+| B14 | [monitoring-observability](production/monitoring-observability.md) | 3h |
+| B15 | [cost-optimization](production/cost-optimization.md) | 3h |
+| B16 | [llmops](production/llmops.md) | 3h |
+| B17 | [embedding-fine-tuning](techniques/embedding-fine-tuning.md) | 3h |
+| B18 | [long-context-engineering](techniques/long-context-engineering.md) | 3h |
+| B19 | [retrieval-evaluation](evaluation/retrieval-evaluation.md) | 3h |
+| B20 | [guardrails-and-content-filtering](production/guardrails-and-content-filtering.md) | 3h |
+| B21 | [llm-routing-and-model-selection](production/llm-routing-and-model-selection.md) | 3h |
+| B22 | [document-parsing-and-extraction](production/document-parsing-and-extraction.md) | 2h |
+| B23 | [data-flywheel-design](production/data-flywheel-design.md) | 2h |
+| B24 | [ai-ux-patterns](applications/ai-ux-patterns.md) | 2h |
 
 External skills: System design, Docker, Kubernetes, async programming
 
@@ -171,6 +173,7 @@ Target roles: AI Safety Engineer, AI Red Team Engineer, AI Ethics Lead, AI Data 
 | E6 | [evaluation-and-benchmarks](evaluation/evaluation-and-benchmarks.md) | 2h |
 | E7 | [llm-evaluation-deep-dive](evaluation/llm-evaluation-deep-dive.md) | 3h |
 | E8 | [prompt-injection-deep-dive](ethics-and-safety/prompt-injection-deep-dive.md) | 3h |
+| E9 | [mcp-security](ethics-and-safety/mcp-security.md) | 3h |
 
 External skills: EU AI Act, NIST AI RMF, adversarial ML, secure AI delivery
 

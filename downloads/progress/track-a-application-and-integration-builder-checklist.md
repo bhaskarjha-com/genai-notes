@@ -43,4 +43,6 @@
 - [ ] [Code Generation & AI-Assisted Development](../../applications/code-generation.md) - 3h
 - [ ] [AI System Design for GenAI Applications](../../production/ai-system-design.md) - 3h
 - [ ] [LLMOps & Production Deployment](../../production/llmops.md) - 3h
+- [ ] [Structured Outputs & Constrained Generation](../../techniques/structured-outputs.md) - 3h
+- [ ] [AI Coding Agents](../../applications/ai-coding-agents.md) - 3h
 - [ ] [AI Product Management Fundamentals](../../applications/ai-product-management-fundamentals.md) - 2h

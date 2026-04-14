@@ -247,7 +247,7 @@ def cosine_beta_schedule(timesteps: int = 1000) -> torch.Tensor:
 
 betas = cosine_beta_schedule(1000)
 print(f"Beta schedule: t=0 → {betas[0]:.6f}, t=500 → {betas[500]:.4f}, t=999 → {betas[-1]:.4f}")
-# Noise is added gradually â€” early steps add tiny noise, late steps add lots
+# Noise is added gradually — early steps add tiny noise, late steps add lots
 ```
 
 ## ★ Connections

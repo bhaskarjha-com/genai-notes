@@ -228,7 +228,7 @@ baseline = torch.zeros_like(ids)
 ig = IntegratedGradients(predict)
 attrs, delta = ig.attribute(ids, baseline, target=1, return_convergence_delta=True)
 
-# attrs: (1, seq_len) â€” positive = contributes to POSITIVE class
+# attrs: (1, seq_len) — positive = contributes to POSITIVE class
 importance = attrs[0].detach().numpy()
 print(f"Convergence delta: {delta.item():.4e}  (should be near 0)")
 print("\nToken Attribution Scores:")

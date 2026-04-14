@@ -159,8 +159,8 @@ That introduces trade-offs in cache reuse, model synchronization, and observabil
 ### vLLM Distributed Serving
 
 ```python
-# pip install vllm>=0.6
-# ⚠️ Last tested: 2026-04 | Requires: vllm>=0.6
+# pip install vllm>=2.0
+# ⚠️ Last tested: 2026-04 | Requires: vllm>=2.0
 
 # Launch vLLM with tensor parallelism across 4 GPUs
 # Command line:
@@ -186,6 +186,106 @@ print(response.choices[0].message.content)
 
 ---
 
+
+### Multi-GPU Health Monitor
+
+```python
+# ⚠️ Last tested: 2026-04 | Requires: nvidia-ml-py3 (pynvml), Python 3.10+
+import pynvml
+from dataclasses import dataclass
+
+pynvml.nvmlInit()
+
+@dataclass
+class GPUHealth:
+    index: int
+    name: str
+    temp_c: int
+    utilization_pct: int
+    memory_used_gb: float
+    memory_total_gb: float
+    power_w: float
+    healthy: bool
+
+def check_gpu_health(max_temp: int = 85, min_free_gb: float = 2.0) -> list[GPUHealth]:
+    """Monitor all GPUs for distributed serving health checks."""
+    count = pynvml.nvmlDeviceGetCount()
+    results = []
+    for i in range(count):
+        h = pynvml.nvmlDeviceGetHandleByIndex(i)
+        temp = pynvml.nvmlDeviceGetTemperature(h, pynvml.NVML_TEMPERATURE_GPU)
+        util = pynvml.nvmlDeviceGetUtilizationRates(h)
+        mem = pynvml.nvmlDeviceGetMemoryInfo(h)
+        free_gb = (mem.total - mem.used) / (1024**3)
+        results.append(GPUHealth(
+            index=i, name=pynvml.nvmlDeviceGetName(h), temp_c=temp,
+            utilization_pct=util.gpu,
+            memory_used_gb=round(mem.used / (1024**3), 1),
+            memory_total_gb=round(mem.total / (1024**3), 1),
+            power_w=round(pynvml.nvmlDeviceGetPowerUsage(h) / 1000, 1),
+            healthy=(temp < max_temp and free_gb > min_free_gb),
+        ))
+    return results
+
+# for gpu in check_gpu_health():
+#     s = "OK" if gpu.healthy else "ALERT"
+#     print(f"GPU{gpu.index} [{s}]: {gpu.temp_c}C, {gpu.utilization_pct}% util, "
+#           f"{gpu.memory_used_gb}/{gpu.memory_total_gb}GB")
+# Expected output: Per-GPU health status with temperature, utilization, memory
+```
+
+### Prefill/Decode Disaggregation Router
+
+```python
+# ⚠️ Last tested: 2026-04 | Requires: Python 3.10+ (architecture pattern)
+# P/D disaggregation: separate GPU pools for prefill (compute-bound) vs decode (memory-bound)
+# Reference: DistServe (2024), Splitwise (2024)
+from dataclasses import dataclass, field
+from enum import Enum
+
+class Phase(Enum):
+    PREFILL = "prefill"
+    DECODE = "decode"
+
+@dataclass
+class PDRouter:
+    """Route LLM requests to specialized GPU pools by phase."""
+    prefill_pool: list[str] = field(default_factory=lambda: ["gpu-0", "gpu-1"])
+    decode_pool: list[str] = field(default_factory=lambda: ["gpu-2", "gpu-3", "gpu-4", "gpu-5"])
+    _pf_idx: int = 0
+    _dc_idx: int = 0
+
+    def route(self, phase: Phase) -> str:
+        if phase == Phase.PREFILL:
+            w = self.prefill_pool[self._pf_idx % len(self.prefill_pool)]
+            self._pf_idx += 1
+            return w
+        w = self.decode_pool[self._dc_idx % len(self.decode_pool)]
+        self._dc_idx += 1
+        return w
+
+    def serve(self, input_tokens: int, output_tokens: int) -> dict:
+        pf = self.route(Phase.PREFILL)
+        dc = self.route(Phase.DECODE)
+        pf_ms = input_tokens * 0.01
+        dc_ms = output_tokens * 5.0
+        return {"prefill": pf, "pf_ms": round(pf_ms, 1),
+                "decode": dc, "dc_ms": round(dc_ms, 1),
+                "total_ms": round(pf_ms + dc_ms, 1)}
+
+router = PDRouter()
+result = router.serve(input_tokens=2000, output_tokens=200)
+print(f"Prefill: {result['prefill']} ({result['pf_ms']}ms)")
+print(f"Decode:  {result['decode']} ({result['dc_ms']}ms)")
+print(f"Total:   {result['total_ms']}ms")
+# Expected output:
+# Prefill: gpu-0 (20.0ms)
+# Decode:  gpu-2 (1000.0ms)
+# Total:   1020.0ms
+```
+
+---
+
 ## ◆ Production Failure Modes
 
 | Failure | Symptoms | Root Cause | Mitigation |
@@ -194,6 +294,7 @@ print(response.choices[0].message.content)
 | **Tail latency spike** | P99 latency 10× worse than P50 | One long request blocks batch, straggler GPU | Length-aware scheduling, separate long/short request queues |
 | **GPU fragmentation** | Low utilization despite high demand | Requests don't fill GPU batches efficiently | Dynamic batching (vLLM continuous batching), right-size GPU allocation |
 | **Cascade failure** | All replicas go down simultaneously | Shared dependency failure, no circuit breakers | Health checks, circuit breakers, graceful degradation |
+| **NCCL timeout** | Training/serving hangs silently for minutes | Network partition between GPUs, slow interconnect | NCCL timeout tuning, heartbeat monitoring, automatic restart |
 
 ---
 
@@ -209,6 +310,17 @@ print(response.choices[0].message.content)
 3. Measure: throughput (tokens/sec), P50/P95/P99 latency, GPU utilization
 4. Analyze: when does adding GPUs help vs hurt?
 **Expected Output**: Throughput/latency comparison table, scaling efficiency analysis
+
+### Exercise 2: Design a P/D Disaggregated Architecture
+
+**Goal**: Design a serving system for a chat product with 10K concurrent users
+**Time**: 30 minutes
+**Steps**:
+1. Given: average 500-token input, 200-token output, target P99 < 2s
+2. Calculate: prefill compute budget vs decode memory budget
+3. Determine: optimal GPU split (how many prefill vs decode workers?)
+4. Draw: architecture diagram showing request flow and KV-cache transfer
+**Expected Output**: Architecture diagram + capacity planning table
 
 ---
 

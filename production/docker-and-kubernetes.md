@@ -209,7 +209,7 @@ Do not adopt Kubernetes only because it feels "more production."
 ### Containerize a FastAPI LLM Service
 
 ```dockerfile
-# Dockerfile â€” production LLM API service
+# Dockerfile — production LLM API service
 # ⚠️ Last tested: 2026-04 | Requires: Docker 24+
 FROM python:3.12-slim
 
@@ -230,7 +230,7 @@ CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080", "--workers", 
 ```
 
 ```python
-# main.py â€” FastAPI LLM endpoint
+# main.py — FastAPI LLM endpoint
 # pip install fastapi>=0.110 uvicorn>=0.29 openai>=1.60 pydantic>=2
 # ⚠️ Last tested: 2026-04
 from fastapi import FastAPI, HTTPException

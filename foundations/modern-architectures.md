@@ -337,7 +337,7 @@ model = MiniTransformer()
 ids   = torch.randint(0, 32000, (1, 512))
 lat   = benchmark_inference(model, ids)
 print(f"MiniTransformer (512 tokens): {lat:.1f}ms median")
-# Note: quadratic scaling â€” try seq=1024, 2048 to see latency grow
+# Note: quadratic scaling — try seq=1024, 2048 to see latency grow
 ```
 
 ## ★ Connections

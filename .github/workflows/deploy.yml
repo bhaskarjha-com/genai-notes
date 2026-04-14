@@ -28,6 +28,13 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Cache pip packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: pip-${{ hashFiles('requirements-docs.txt') }}
+          restore-keys: pip-
+
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 

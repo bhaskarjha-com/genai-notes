@@ -136,7 +136,23 @@ with mlflow.start_run(run_name="bge-small-baseline"):
     mlflow.log_artifact("configs/rag_config.yaml")
     
     print(f"Run ID: {mlflow.active_run().info.run_id}")
-# Expected: Run tracked with full reproducibility metadata
+
+# Compare runs programmatically (for CI/CD pipelines)
+experiment = mlflow.get_experiment_by_name("rag-retrieval-optimization")
+runs = mlflow.search_runs(
+    experiment_ids=[experiment.experiment_id],
+    order_by=["metrics.mrr DESC"],
+    max_results=5,
+)
+print(f"Best MRR: {runs.iloc[0]['metrics.mrr']:.3f} (run: {runs.iloc[0]['run_id'][:8]})")
+
+# Model promotion gate: only promote if MRR improved
+best_mrr = runs.iloc[0]["metrics.mrr"]
+if best_mrr > 0.70:
+    print(f"PROMOTE: MRR {best_mrr:.3f} exceeds threshold 0.70")
+else:
+    print(f"HOLD: MRR {best_mrr:.3f} below threshold 0.70")
+# Expected output: Run tracked with full reproducibility, comparison across 5 runs
 ```
 
 ### DVC Data Versioning

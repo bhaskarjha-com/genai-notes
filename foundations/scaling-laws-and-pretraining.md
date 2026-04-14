@@ -277,7 +277,7 @@ for model_name, params in [
     )
 
 # Note: Modern models (LLaMA 3, Gemma 3) over-train by 5-10x for better
-# inference efficiency â€” Chinchilla is the floor, not the ceiling.
+# inference efficiency — Chinchilla is the floor, not the ceiling.
 ```
 
 ## ★ Connections

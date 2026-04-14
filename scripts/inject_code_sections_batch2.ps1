@@ -1,3 +1,9 @@
+# ════════════════════════════════════════════════════════════════════════════
+# HISTORICAL — This script was used for the Phase 5 bulk code section
+# injection (April 2026). It is retained for audit trail only.
+# DO NOT RE-RUN — all notes now have code sections. Use the
+# maintenance prompts in _templates/MAINTENANCE_PROMPTS.md instead.
+# ════════════════════════════════════════════════════════════════════════════
 # inject_code_sections_batch2.ps1 - Phase 5 Batch 2: remaining 17 notes
 # Run from repo root: powershell -ExecutionPolicy Bypass -File scripts\inject_code_sections_batch2.ps1
 

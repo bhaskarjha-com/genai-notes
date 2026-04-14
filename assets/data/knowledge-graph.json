@@ -1,6 +1,6 @@
 {
-  "NodeCount": 79,
-  "EdgeCount": 287,
+  "NodeCount": 82,
+  "EdgeCount": 295,
   "Folders": [
     "agents",
     "applications",
@@ -49,7 +49,7 @@
         "Foundation"
       ],
       "SitePath": "agents/ai-agents.html",
-      "Degree": 22
+      "Degree": 23
     },
     {
       "Id": "agents/agent-evaluation.md",
@@ -110,7 +110,7 @@
         "B"
       ],
       "SitePath": "agents/agentic-protocols.html",
-      "Degree": 5
+      "Degree": 6
     },
     {
       "Id": "agents/multi-agent-architectures.md",
@@ -130,6 +130,27 @@
       ],
       "SitePath": "agents/multi-agent-architectures.html",
       "Degree": 7
+    },
+    {
+      "Id": "applications/ai-coding-agents.md",
+      "Title": "AI Coding Agents",
+      "Folder": "applications",
+      "Difficulty": "intermediate",
+      "Tags": [
+        "coding-agents",
+        "cursor",
+        "devin",
+        "windsurf",
+        "codex",
+        "agentic-ai",
+        "developer-tools",
+        "ai-product"
+      ],
+      "Tracks": [
+        "A"
+      ],
+      "SitePath": "applications/ai-coding-agents.html",
+      "Degree": 3
     },
     {
       "Id": "applications/ai-product-management-fundamentals.md",
@@ -210,7 +231,7 @@
         "A"
       ],
       "SitePath": "applications/code-generation.html",
-      "Degree": 5
+      "Degree": 6
     },
     {
       "Id": "applications/conversational-ai.md",
@@ -312,6 +333,26 @@
       "Degree": 9
     },
     {
+      "Id": "ethics-and-safety/mcp-security.md",
+      "Title": "MCP Security & Tool Trust",
+      "Folder": "ethics-and-safety",
+      "Difficulty": "advanced",
+      "Tags": [
+        "mcp",
+        "security",
+        "tool-poisoning",
+        "supply-chain",
+        "agentic-security",
+        "adversarial",
+        "genai-safety"
+      ],
+      "Tracks": [
+        "E"
+      ],
+      "SitePath": "ethics-and-safety/mcp-security.html",
+      "Degree": 3
+    },
+    {
       "Id": "ethics-and-safety/owasp-llm-top-10.md",
       "Title": "OWASP Top 10 for LLM Applications",
       "Folder": "ethics-and-safety",
@@ -329,7 +370,7 @@
         "E"
       ],
       "SitePath": "ethics-and-safety/owasp-llm-top-10.html",
-      "Degree": 5
+      "Degree": 6
     },
     {
       "Id": "ethics-and-safety/prompt-injection-deep-dive.md",
@@ -348,7 +389,7 @@
         "E"
       ],
       "SitePath": "ethics-and-safety/prompt-injection-deep-dive.html",
-      "Degree": 3
+      "Degree": 4
     },
     {
       "Id": "evaluation/evaluation-and-benchmarks.md",
@@ -1253,7 +1294,7 @@
         "Foundation"
       ],
       "SitePath": "techniques/context-engineering.html",
-      "Degree": 5
+      "Degree": 6
     },
     {
       "Id": "techniques/continual-learning.md",
@@ -1327,7 +1368,7 @@
         "Foundation"
       ],
       "SitePath": "techniques/function-calling-and-structured-output.html",
-      "Degree": 8
+      "Degree": 9
     },
     {
       "Id": "techniques/graph-rag.md",
@@ -1404,7 +1445,7 @@
         "Foundation"
       ],
       "SitePath": "techniques/prompt-engineering.html",
-      "Degree": 10
+      "Degree": 11
     },
     {
       "Id": "techniques/rl-alignment.md",
@@ -1445,6 +1486,26 @@
       ],
       "SitePath": "techniques/rag.html",
       "Degree": 25
+    },
+    {
+      "Id": "techniques/structured-outputs.md",
+      "Title": "Structured Outputs & Constrained Generation",
+      "Folder": "techniques",
+      "Difficulty": "intermediate",
+      "Tags": [
+        "structured-output",
+        "json-mode",
+        "constrained-decoding",
+        "pydantic",
+        "schema",
+        "function-calling",
+        "genai-technique"
+      ],
+      "Tracks": [
+        "A"
+      ],
+      "SitePath": "techniques/structured-outputs.html",
+      "Degree": 2
     },
     {
       "Id": "techniques/synthetic-data-and-data-engineering.md",
@@ -1674,6 +1735,21 @@
       "Relation": "builds-on"
     },
     {
+      "Source": "applications/ai-coding-agents.md",
+      "Target": "agents/ai-agents.md",
+      "Relation": "builds-on"
+    },
+    {
+      "Source": "applications/ai-coding-agents.md",
+      "Target": "applications/code-generation.md",
+      "Relation": "builds-on"
+    },
+    {
+      "Source": "applications/ai-coding-agents.md",
+      "Target": "techniques/context-engineering.md",
+      "Relation": "builds-on"
+    },
+    {
       "Source": "applications/ai-product-management-fundamentals.md",
       "Target": "evaluation/llm-evaluation-deep-dive.md",
       "Relation": "builds-on"
@@ -1791,6 +1867,21 @@
     {
       "Source": "ethics-and-safety/ethics-safety-alignment.md",
       "Target": "techniques/fine-tuning.md",
+      "Relation": "builds-on"
+    },
+    {
+      "Source": "ethics-and-safety/mcp-security.md",
+      "Target": "agents/agentic-protocols.md",
+      "Relation": "builds-on"
+    },
+    {
+      "Source": "ethics-and-safety/mcp-security.md",
+      "Target": "ethics-and-safety/owasp-llm-top-10.md",
+      "Relation": "builds-on"
+    },
+    {
+      "Source": "ethics-and-safety/mcp-security.md",
+      "Target": "ethics-and-safety/prompt-injection-deep-dive.md",
       "Relation": "builds-on"
     },
     {
@@ -2921,6 +3012,16 @@
     {
       "Source": "techniques/rl-alignment.md",
       "Target": "techniques/fine-tuning.md",
+      "Relation": "builds-on"
+    },
+    {
+      "Source": "techniques/structured-outputs.md",
+      "Target": "techniques/function-calling-and-structured-output.md",
+      "Relation": "builds-on"
+    },
+    {
+      "Source": "techniques/structured-outputs.md",
+      "Target": "techniques/prompt-engineering.md",
       "Relation": "builds-on"
     },
     {

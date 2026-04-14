@@ -7,7 +7,7 @@
       "MustCount": 20,
       "GoodCount": 0,
       "OptionalCount": 0,
-      "NotRelevantCount": 59
+      "NotRelevantCount": 62
     },
     {
       "Id": "agentic-ai-engineer",
@@ -16,7 +16,7 @@
       "MustCount": 25,
       "GoodCount": 5,
       "OptionalCount": 18,
-      "NotRelevantCount": 31
+      "NotRelevantCount": 34
     },
     {
       "Id": "ai-engineer",
@@ -24,8 +24,8 @@
       "PrimaryTrack": "A",
       "MustCount": 22,
       "GoodCount": 4,
-      "OptionalCount": 8,
-      "NotRelevantCount": 45
+      "OptionalCount": 10,
+      "NotRelevantCount": 46
     },
     {
       "Id": "genai-engineer",
@@ -34,7 +34,7 @@
       "MustCount": 22,
       "GoodCount": 4,
       "OptionalCount": 19,
-      "NotRelevantCount": 34
+      "NotRelevantCount": 37
     },
     {
       "Id": "llm-engineer",
@@ -43,7 +43,7 @@
       "MustCount": 22,
       "GoodCount": 3,
       "OptionalCount": 20,
-      "NotRelevantCount": 34
+      "NotRelevantCount": 37
     },
     {
       "Id": "ml-engineer",
@@ -52,7 +52,7 @@
       "MustCount": 28,
       "GoodCount": 5,
       "OptionalCount": 1,
-      "NotRelevantCount": 45
+      "NotRelevantCount": 48
     },
     {
       "Id": "mlops-engineer",
@@ -61,7 +61,7 @@
       "MustCount": 28,
       "GoodCount": 5,
       "OptionalCount": 2,
-      "NotRelevantCount": 44
+      "NotRelevantCount": 47
     },
     {
       "Id": "rag-engineer",
@@ -70,7 +70,7 @@
       "MustCount": 22,
       "GoodCount": 3,
       "OptionalCount": 20,
-      "NotRelevantCount": 34
+      "NotRelevantCount": 37
     }
   ],
   "Topics": [
@@ -157,6 +157,23 @@
         "ml-engineer": "Not Relevant",
         "mlops-engineer": "Not Relevant",
         "rag-engineer": "Optional"
+      }
+    },
+    {
+      "Path": "applications/ai-coding-agents.md",
+      "Title": "AI Coding Agents",
+      "Folder": "applications",
+      "Difficulty": "intermediate",
+      "SitePath": "applications/ai-coding-agents.html",
+      "Statuses": {
+        "README": "Not Relevant",
+        "agentic-ai-engineer": "Not Relevant",
+        "ai-engineer": "Optional",
+        "genai-engineer": "Not Relevant",
+        "llm-engineer": "Not Relevant",
+        "ml-engineer": "Not Relevant",
+        "mlops-engineer": "Not Relevant",
+        "rag-engineer": "Not Relevant"
       }
     },
     {
@@ -301,6 +318,23 @@
       "Folder": "ethics-and-safety",
       "Difficulty": "intermediate",
       "SitePath": "ethics-and-safety/ethics-safety-alignment.html",
+      "Statuses": {
+        "README": "Not Relevant",
+        "agentic-ai-engineer": "Not Relevant",
+        "ai-engineer": "Not Relevant",
+        "genai-engineer": "Not Relevant",
+        "llm-engineer": "Not Relevant",
+        "ml-engineer": "Not Relevant",
+        "mlops-engineer": "Not Relevant",
+        "rag-engineer": "Not Relevant"
+      }
+    },
+    {
+      "Path": "ethics-and-safety/mcp-security.md",
+      "Title": "MCP Security & Tool Trust",
+      "Folder": "ethics-and-safety",
+      "Difficulty": "advanced",
+      "SitePath": "ethics-and-safety/mcp-security.html",
       "Statuses": {
         "README": "Not Relevant",
         "agentic-ai-engineer": "Not Relevant",
@@ -1313,6 +1347,23 @@
         "ml-engineer": "Must",
         "mlops-engineer": "Must",
         "rag-engineer": "Must"
+      }
+    },
+    {
+      "Path": "techniques/structured-outputs.md",
+      "Title": "Structured Outputs & Constrained Generation",
+      "Folder": "techniques",
+      "Difficulty": "intermediate",
+      "SitePath": "techniques/structured-outputs.html",
+      "Statuses": {
+        "README": "Not Relevant",
+        "agentic-ai-engineer": "Not Relevant",
+        "ai-engineer": "Optional",
+        "genai-engineer": "Not Relevant",
+        "llm-engineer": "Not Relevant",
+        "ml-engineer": "Not Relevant",
+        "mlops-engineer": "Not Relevant",
+        "rag-engineer": "Not Relevant"
       }
     },
     {

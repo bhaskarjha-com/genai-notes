@@ -321,8 +321,8 @@ LATENCY TARGETS (typical):
 ### Start vLLM Server (OpenAI-Compatible)
 
 ```bash
-# pip install vllm>=0.4.0
-# ⚠️ Last tested: 2026-04 | Requires: vllm>=0.4, CUDA GPU
+# pip install vllm>=2.0.0
+# ⚠️ Last tested: 2026-04 | Requires: vllm>=2.0, CUDA GPU
 
 python -m vllm.entrypoints.openai.api_server \
   --model google/gemma-2-2b-it \
@@ -375,7 +375,13 @@ model = AutoModelForCausalLM.from_pretrained(
     attn_implementation="flash_attention_2",
 )
 tokenizer = AutoTokenizer.from_pretrained("google/gemma-2-2b-it")
-# LLaMA-70B: 140 GB in FP16 → ~35 GB with 4-bit (fits on single A100!)
+mem_gb = torch.cuda.memory_allocated() / (1024**3)
+print(f"Model loaded in {mem_gb:.1f} GB (4-bit quantized)")
+
+inputs = tokenizer("Explain quantization in one sentence:", return_tensors="pt").to(model.device)
+output = model.generate(**inputs, max_new_tokens=50)
+print(tokenizer.decode(output[0], skip_special_tokens=True))
+# LLaMA-70B: 140 GB in FP16 -> ~35 GB with 4-bit (fits on single A100!)
 ```
 
 ---

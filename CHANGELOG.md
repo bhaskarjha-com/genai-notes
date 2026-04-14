@@ -4,6 +4,28 @@ All notable changes to this repository will be documented in this file.
 
 ## [Unreleased]
 
+### Added (April 2026 Remediation — Audit Hardening)
+- **3 new frontier notes** (Phase 3):
+  - `applications/ai-coding-agents.md` — Cursor/Devin/Windsurf/Codex comparison, minimal agent implementation, production failure modes
+  - `techniques/structured-outputs.md` — Constrained decoding, JSON Schema enforcement, provider comparison (OpenAI/Anthropic/Google), Outlines/BAML
+  - `ethics-and-safety/mcp-security.md` — Tool Poisoning, Rug Pull attacks, OWASP mapping, vulnerability scanner, hardened MCP server
+- All 3 new notes registered in `mkdocs.yml`, `genai.md` scope map, and `LEARNING_PATH.md`
+- **CI/CD hardening** (Phase 2):
+  - `scripts/check_depth.ps1` — New quality gate enforcing minimum substantive code depth per difficulty level
+  - `scripts/verify_repo.ps1` — Added LEARNING_PATH sequential numbering validation
+  - `lint.yml` — Integrated `check_links.ps1` and `check_depth.ps1`
+  - `deploy.yml` — Added pip caching for faster builds
+
+### Fixed (April 2026 Remediation — Audit Hardening)
+- **LEARNING_PATH.md** Track B duplicate numbering bug (B6/B12 appeared twice, B5 skipped)
+- **Code depth** for 4 flagged notes — all 75 intermediate+ notes now pass depth check (0 thin, 0 missing blocks)
+  - `inference/distributed-inference-and-serving-architecture.md` — Added GPU health monitor, P/D disaggregation router (2→3 blocks)
+  - `inference/inference-optimization.md` — Expanded quantization code with generation test
+  - `production/model-serving.md` — Added health check and async load test endpoint
+  - `tools-and-infra/ml-experiment-and-data-management.md` — Added run comparison and model promotion gate
+- **vLLM version references** standardized to `>=2.0` across all notes
+- **Historical inject scripts** marked with `DO NOT RE-RUN` warning headers
+
 ### Added (April 2026 Remediation - Phase 6)
 - **Phase 6: CI hardening - Code & Implementation now a blocking gate**
   - `scripts/check_content_compliance.ps1`: promoted `## ★ Code & Implementation`

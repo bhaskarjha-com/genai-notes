@@ -174,7 +174,7 @@ class LLM(Protocol):
 @dataclass
 class RAGSystem:
     """
-    Production RAG â€” key design decisions:
+    Production RAG — key design decisions:
     1. Chunking: 512 tokens, 20% overlap (balance context vs precision)
     2. Embedding: text-embedding-3-small (dims=1536, cost-efficient)
     3. Retrieval: top-5 chunks + BM25 hybrid (precision + recall)

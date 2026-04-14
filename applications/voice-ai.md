@@ -255,7 +255,7 @@ def voice_pipeline(audio_file: str, system_prompt: str = "You are a helpful voic
 
 # Streaming TTS (lower latency for real-time)
 def streaming_tts(text: str, output_path: str = "stream_output.mp3") -> None:
-    """Stream TTS bytes as they arrive â€” good for low-latency voice assistants."""
+    """Stream TTS bytes as they arrive — good for low-latency voice assistants."""
     with client.audio.speech.with_streaming_response.create(
         model="tts-1", voice="nova", input=text
     ) as resp:

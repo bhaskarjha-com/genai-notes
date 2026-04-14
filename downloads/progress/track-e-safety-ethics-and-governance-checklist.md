@@ -41,3 +41,4 @@
 - [ ] [LLM Evaluation & Benchmarks](../../evaluation/evaluation-and-benchmarks.md) - 2h
 - [ ] [LLM Evaluation Deep Dive](../../evaluation/llm-evaluation-deep-dive.md) - 3h
 - [ ] [Prompt Injection Deep Dive](../../ethics-and-safety/prompt-injection-deep-dive.md) - 3h
+- [ ] [MCP Security & Tool Trust](../../ethics-and-safety/mcp-security.md) - 3h

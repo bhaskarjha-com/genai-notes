@@ -11,6 +11,7 @@ Legend: Must, Good, Optional, Not Relevant.
 | [Agent Memory Systems](../agents/agent-memory.md) | agents | Not Relevant | Optional | Not Relevant | Optional | Optional | Not Relevant | Not Relevant | Optional |
 | [Agentic Protocols & Frameworks](../agents/agentic-protocols.md) | agents | Not Relevant | Must | Optional | Good | Optional | Not Relevant | Not Relevant | Optional |
 | [Multi-Agent Architectures](../agents/multi-agent-architectures.md) | agents | Not Relevant | Must | Good | Optional | Optional | Not Relevant | Not Relevant | Optional |
+| [AI Coding Agents](../applications/ai-coding-agents.md) | applications | Not Relevant | Not Relevant | Optional | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant |
 | [AI Product Management Fundamentals](../applications/ai-product-management-fundamentals.md) | applications | Not Relevant | Not Relevant | Optional | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant |
 | [AI UX Patterns](../applications/ai-ux-patterns.md) | applications | Not Relevant | Optional | Not Relevant | Optional | Optional | Not Relevant | Not Relevant | Optional |
 | [API Design for AI Applications](../applications/api-design-for-ai.md) | applications | Not Relevant | Good | Optional | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant |
@@ -20,6 +21,7 @@ Legend: Must, Good, Optional, Not Relevant.
 | [AI Regulation for Builders](../ethics-and-safety/ai-regulation.md) | ethics-and-safety | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Good | Not Relevant |
 | [Adversarial ML & AI Security](../ethics-and-safety/adversarial-ml-and-ai-security.md) | ethics-and-safety | Not Relevant | Good | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant |
 | [Ethics, Safety & Alignment](../ethics-and-safety/ethics-safety-alignment.md) | ethics-and-safety | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant |
+| [MCP Security & Tool Trust](../ethics-and-safety/mcp-security.md) | ethics-and-safety | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant |
 | [OWASP Top 10 for LLM Applications](../ethics-and-safety/owasp-llm-top-10.md) | ethics-and-safety | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant |
 | [Prompt Injection Deep Dive](../ethics-and-safety/prompt-injection-deep-dive.md) | ethics-and-safety | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant |
 | [LLM Evaluation & Benchmarks](../evaluation/evaluation-and-benchmarks.md) | evaluation | Must | Must | Must | Must | Must | Must | Must | Must |
@@ -79,6 +81,7 @@ Legend: Must, Good, Optional, Not Relevant.
 | [Prompt Engineering](../techniques/prompt-engineering.md) | techniques | Must | Must | Must | Must | Must | Must | Must | Must |
 | [Reinforcement Learning for LLM Alignment](../techniques/rl-alignment.md) | techniques | Not Relevant | Optional | Not Relevant | Optional | Good | Not Relevant | Not Relevant | Optional |
 | [Retrieval-Augmented Generation (RAG)](../techniques/rag.md) | techniques | Must | Must | Must | Must | Must | Must | Must | Must |
+| [Structured Outputs & Constrained Generation](../techniques/structured-outputs.md) | techniques | Not Relevant | Not Relevant | Optional | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant |
 | [Synthetic Data & Data Engineering for LLMs](../techniques/synthetic-data-and-data-engineering.md) | techniques | Not Relevant | Optional | Not Relevant | Optional | Optional | Not Relevant | Not Relevant | Optional |
 | [Cloud ML Services & Managed AI Platforms](../tools-and-infra/cloud-ml-services.md) | tools-and-infra | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Must | Must | Not Relevant |
 | [Distributed Systems Fundamentals for AI](../tools-and-infra/distributed-systems-for-ai.md) | tools-and-infra | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Good | Good | Not Relevant |

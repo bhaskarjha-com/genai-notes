@@ -269,6 +269,27 @@ $missingFromGenaiScope = @(
     Where-Object { $_ -ne "genai.md" -and -not $genaiScopeLinks.Contains($_) }
 )
 
+# Validate LEARNING_PATH.md sequential numbering (no duplicates, no gaps)
+$lpLines = Get-Content -LiteralPath $learningPathPath
+$numberingErrors = New-Object System.Collections.Generic.List[string]
+$currentTrackLetter = ""
+$lastTrackNum = 0
+
+foreach ($line in $lpLines) {
+    if ($line -match '^\|\s*([A-Z])(\d+)\s*\|') {
+        $letter = $Matches[1]
+        $num = [int]$Matches[2]
+        if ($letter -ne $currentTrackLetter) {
+            $currentTrackLetter = $letter
+            $lastTrackNum = $num - 1
+        }
+        if ($num -le $lastTrackNum) {
+            $numberingErrors.Add("Track $letter has duplicate/out-of-order number ${letter}${num} (expected ${letter}$($lastTrackNum + 1))")
+        }
+        $lastTrackNum = $num
+    }
+}
+
 $topicCount = 0
 $folderSummaries = New-Object System.Collections.Generic.List[string]
 foreach ($dir in $contentDirs) {
@@ -296,6 +317,7 @@ Write-Host ("Notes missing code examples: {0}" -f $notesMissingCode.Count)
 Write-Host ("Notes missing interview angles: {0}" -f $notesMissingInterviewAngles.Count)
 Write-Host ("Published notes missing from LEARNING_PATH.md: {0}" -f $missingFromLearningPath.Count)
 Write-Host ("Published notes missing from genai.md scope map: {0}" -f $missingFromGenaiScope.Count)
+Write-Host ("LEARNING_PATH numbering errors: {0}" -f $numberingErrors.Count)
 if ($topicPublishedCount -gt 0) {
     $topicCodePct = [math]::Round(($topicCodeCount / [double]$topicPublishedCount) * 100, 1)
     $topicInterviewPct = [math]::Round(($topicInterviewCount / [double]$topicPublishedCount) * 100, 1)
@@ -354,6 +376,12 @@ if ($missingFromGenaiScope.Count -gt 0) {
     $missingFromGenaiScope | Sort-Object | ForEach-Object { Write-Host ("- {0}" -f $_) }
 }
 
+if ($numberingErrors.Count -gt 0) {
+    Write-Host ""
+    Write-Host "LEARNING_PATH numbering errors:"
+    $numberingErrors | ForEach-Object { Write-Host ("- {0}" -f $_) }
+}
+
 if (
     $brokenFrontmatterLinks.Count -gt 0 -or
     $brokenBodyLinks.Count -gt 0 -or
@@ -362,7 +390,8 @@ if (
     $notesMissingCode.Count -gt 0 -or
     $notesMissingInterviewAngles.Count -gt 0 -or
     $missingFromLearningPath.Count -gt 0 -or
-    $missingFromGenaiScope.Count -gt 0
+    $missingFromGenaiScope.Count -gt 0 -or
+    $numberingErrors.Count -gt 0
 ) {
     exit 1
 }

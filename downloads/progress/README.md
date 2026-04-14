@@ -5,8 +5,8 @@
 | Tracker | Notes | Estimated Hours |
 |---|---:|---:|
 | [Universal Foundation](./universal-foundation-checklist.md) | 20 | 60 |
-| [Track A - Application and Integration Builder](./track-a-application-and-integration-builder-checklist.md) | 31 | 91 |
+| [Track A - Application and Integration Builder](./track-a-application-and-integration-builder-checklist.md) | 33 | 97 |
 | [Track B - AI Systems and Orchestration Engineer](./track-b-ai-systems-and-orchestration-engineer-checklist.md) | 44 | 132 |
 | [Track C - ML and Production Engineer](./track-c-ml-and-production-engineer-checklist.md) | 33 | 96 |
 | [Track D - Research and Foundation Model](./track-d-research-and-foundation-model-checklist.md) | 32 | 100 |
-| [Track E - Safety, Ethics and Governance](./track-e-safety-ethics-and-governance-checklist.md) | 28 | 81 |
+| [Track E - Safety, Ethics and Governance](./track-e-safety-ethics-and-governance-checklist.md) | 29 | 84 |

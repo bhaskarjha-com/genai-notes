@@ -324,7 +324,7 @@ MCP PRIMITIVES:
 ```python
 # pip install fastmcp>=0.1 httpx>=0.27
 # ⚠️ Last tested: 2026-04 | Requires: fastmcp>=0.1
-# Model Context Protocol server â€” compatible with Claude Desktop, Cursor, custom agents
+# Model Context Protocol server — compatible with Claude Desktop, Cursor, custom agents
 
 from fastmcp import FastMCP
 import httpx
@@ -335,7 +335,7 @@ mcp = FastMCP("demo-server")
 def get_weather(city: str) -> str:
     """Get current weather for a city. Returns temperature and condition."""
     # In production: call real weather API
-    return f"{city}: 22Â°C, partly cloudy (simulated)"
+    return f"{city}: 22°C, partly cloudy (simulated)"
 
 @mcp.tool()
 def calculate(expression: str) -> str:

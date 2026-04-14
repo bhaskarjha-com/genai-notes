@@ -5,8 +5,8 @@ type: concept
 difficulty: advanced
 status: published
 last_verified: 2026-04
-parent: "[[../genai]]"
-related: ["[[fine-tuning]]", "[[../llms/llms-overview]]", "[[../ethics-and-safety/ethics-safety-alignment]]"]
+parent: "../genai.md"
+related: ["fine-tuning.md", "../llms/llms-overview.md", "../ethics-and-safety/ethics-safety-alignment.md"]
 source: "Multiple — see Sources"
 created: 2026-03-22
 updated: 2026-04-11
@@ -203,6 +203,32 @@ KEY PAPERS:
 | Compare with | [Rag](./rag.md) (retrieval-based updates), Full retraining                 |
 | Cross-domain | Cognitive science (human memory), Neuroscience                     |
 
+
+---
+
+## ◆ Production Failure Modes
+
+| Failure | Symptoms | Root Cause | Mitigation |
+|---------|----------|------------|------------|
+| **Catastrophic forgetting** | Performs well on new data but forgets old knowledge | No replay buffer or regularization during adaptation | EWC, experience replay, progressive networks |
+| **Concept drift detection failure** | Model silently degrades as data distribution shifts | No drift monitoring in place | Statistical drift detection (KS test, PSI), rolling eval sets |
+| **Data imbalance across time** | Recent data overwhelms historical patterns | No sampling strategy for temporal data | Balanced sampling, reservoir sampling, curriculum learning |
+
+---
+
+## ◆ Hands-On Exercises
+
+### Exercise 1: Demonstrate and Mitigate Catastrophic Forgetting
+
+**Goal**: Show forgetting on sequential tasks and apply EWC to prevent it
+**Time**: 45 minutes
+**Steps**:
+1. Train a model on Task A
+2. Fine-tune on Task B
+3. Measure Task A accuracy drop
+4. Apply EWC regularization
+5. Repeat and compare forgetting with and without EWC
+**Expected Output**: Before/after accuracy table showing EWC reduces forgetting
 ---
 
 

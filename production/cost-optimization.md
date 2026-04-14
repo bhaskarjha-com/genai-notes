@@ -5,8 +5,8 @@ type: procedure
 difficulty: advanced
 status: published
 last_verified: 2026-04
-parent: "[[llmops]]"
-related: ["[[model-serving]]", "[[monitoring-observability]]", "[[docker-and-kubernetes]]", "[[../inference/inference-optimization]]"]
+parent: "llmops.md"
+related: ["model-serving.md", "monitoring-observability.md", "docker-and-kubernetes.md", "../inference/inference-optimization.md"]
 source: "Multiple - see Sources"
 created: 2026-04-12
 updated: 2026-04-14

@@ -5,8 +5,8 @@ type: procedure
 difficulty: intermediate
 status: published
 last_verified: 2026-04
-parent: "[[../genai]]"
-related: ["[[../tools-and-infra/tools-overview]]", "[[../evaluation/evaluation-and-benchmarks]]", "[[../ethics-and-safety/ethics-safety-alignment]]", "[[../inference/inference-optimization]]", "[[ai-system-design]]", "[[docker-and-kubernetes]]", "[[model-serving]]", "[[monitoring-observability]]", "[[cicd-for-ml]]", "[[cost-optimization]]"]
+parent: "../genai.md"
+related: ["../tools-and-infra/tools-overview.md", "../evaluation/evaluation-and-benchmarks.md", "../ethics-and-safety/ethics-safety-alignment.md", "../inference/inference-optimization.md", "ai-system-design.md", "docker-and-kubernetes.md", "model-serving.md", "monitoring-observability.md", "cicd-for-ml.md", "cost-optimization.md"]
 source: "Multiple — see Sources"
 created: 2026-03-22
 updated: 2026-04-12
@@ -267,6 +267,32 @@ KEY METRICS:
 | Compare with | Traditional MLOps (ML models), DevOps (software)                                                                         |
 | Cross-domain | Site Reliability Engineering, Platform engineering                                                                       |
 
+
+---
+
+## ◆ Production Failure Modes
+
+| Failure | Symptoms | Root Cause | Mitigation |
+|---------|----------|------------|------------|
+| **Prompt-model version skew** | Prompt templates break after model update | No versioning of prompt-model pairs | Prompt registry with model version pinning, integration tests |
+| **Shadow production drift** | Staging doesn't predict production quality | Staging data differs from production | Production traffic shadowing, online eval with guardrails |
+| **Eval regression undetected** | Shipped regression on long-tail queries | Eval suite too small | Growing eval set from production failures, stratified eval |
+| **Secret sprawl** | API keys hardcoded in configs | No secrets management | Vault/secrets manager, environment variables, key rotation |
+
+---
+
+## ◆ Hands-On Exercises
+
+### Exercise 1: Build a Prompt Versioning System
+
+**Goal**: Set up prompt versioning with A/B test capability
+**Time**: 30 minutes
+**Steps**:
+1. Create a prompt registry (JSON/YAML config or database)
+2. Implement version pinning (prompt v1 + model gpt-4o = deployment A)
+3. Add A/B routing (50/50 split between prompt v1 and v2)
+4. Log quality scores per variant
+**Expected Output**: A/B test results showing prompt version comparison
 ---
 
 

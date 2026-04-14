@@ -5,8 +5,8 @@ type: reference
 difficulty: expert
 status: published
 last_verified: 2026-04
-parent: "[[inference-optimization]]"
-related: ["[[gpu-cuda-programming]]", "[[../production/model-serving]]", "[[../tools-and-infra/distributed-systems-for-ai]]", "[[../production/latency-and-throughput-engineering]]"]
+parent: "inference-optimization.md"
+related: ["gpu-cuda-programming.md", "../production/model-serving.md", "../tools-and-infra/distributed-systems-for-ai.md", "../production/latency-and-throughput-engineering.md"]
 source: "Multiple - see Sources"
 created: 2026-04-12
 updated: 2026-04-12

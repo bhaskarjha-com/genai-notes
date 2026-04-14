@@ -5,8 +5,8 @@ type: procedure
 difficulty: intermediate
 status: published
 last_verified: 2026-04
-parent: "[[../genai]]"
-related: ["[[../agents/ai-agents]]", "[[../agents/agentic-protocols]]", "[[../llms/llms-overview]]"]
+parent: "../genai.md"
+related: ["../agents/ai-agents.md", "../agents/agentic-protocols.md", "../llms/llms-overview.md"]
 source: "Multiple — see Sources"
 created: 2026-03-22
 updated: 2026-04-14

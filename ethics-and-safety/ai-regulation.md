@@ -5,8 +5,8 @@ type: reference
 difficulty: advanced
 status: published
 last_verified: 2026-04
-parent: "[[ethics-safety-alignment]]"
-related: ["[[../production/llmops]]", "[[../evaluation/evaluation-and-benchmarks]]", "[[../llms/hallucination-detection]]"]
+parent: "ethics-safety-alignment.md"
+related: ["../production/llmops.md", "../evaluation/evaluation-and-benchmarks.md", "../llms/hallucination-detection.md"]
 source: "Primary policy sources - see Sources"
 created: 2026-04-12
 updated: 2026-04-12
@@ -173,6 +173,31 @@ last_risk_review: 2026-04
 | Compare with | Internal policy only, purely technical safety work |
 | Cross-domain | legal, privacy, security, risk management |
 
+
+---
+
+## ◆ Production Failure Modes
+
+| Failure | Symptoms | Root Cause | Mitigation |
+|---------|----------|------------|------------|
+| **Compliance gap** | System deployed without required impact assessment | Regulatory requirements not tracked for AI systems | Regulatory checklist per deployment, legal review process |
+| **Cross-border data issues** | EU user data processed in non-compliant jurisdiction | No data residency controls for AI workloads | Data localization, region-specific model deployments |
+| **Audit trail gaps** | Cannot demonstrate compliance during audit | No logging of model decisions and data lineage | Decision logging, data provenance tracking, audit-ready exports |
+
+---
+
+## ◆ Hands-On Exercises
+
+### Exercise 1: Create a Compliance Checklist
+
+**Goal**: Build a regulatory compliance assessment for an AI system
+**Time**: 30 minutes
+**Steps**:
+1. Pick an AI system (e.g., resume screening, content moderation)
+2. Map applicable regulations (EU AI Act, CCPA, sector-specific)
+3. Assess risk tier under EU AI Act
+4. Create a compliance checklist with responsible parties
+**Expected Output**: One-page compliance assessment with action items
 ---
 
 

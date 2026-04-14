@@ -5,8 +5,8 @@ type: concept
 difficulty: intermediate
 status: published
 last_verified: 2026-04
-parent: "[[../genai]]"
-related: ["[[neural-networks]]", "[[python-for-ai]]", "[[../foundations/transformers]]", "[[../techniques/fine-tuning]]"]
+parent: "../genai.md"
+related: ["neural-networks.md", "python-for-ai.md", "../foundations/transformers.md", "../techniques/fine-tuning.md"]
 source: "Multiple - see Sources"
 created: 2026-03-18
 updated: 2026-04-11
@@ -291,6 +291,31 @@ METRICS TO MONITOR:
 | Compare with | Classical ML training (scikit-learn — much simpler)                                                     |
 | Cross-domain | Optimization theory, Numerical methods, Systems engineering                                             |
 
+
+---
+
+## ◆ Production Failure Modes
+
+| Failure | Symptoms | Root Cause | Mitigation |
+|---------|----------|------------|------------|
+| **Vanishing/exploding gradients** | Training loss plateaus or diverges | Deep networks with poor initialization or no normalization | Layer normalization, residual connections, careful init |
+| **Overfitting on small datasets** | Training accuracy 99% but test accuracy 60% | Insufficient regularization, model too large for data | Dropout, weight decay, data augmentation, early stopping |
+| **Learning rate pathology** | Training never converges or oscillates | LR too high/low, no schedule | LR finder, cosine annealing, warmup + decay |
+
+---
+
+## ◆ Hands-On Exercises
+
+### Exercise 1: Diagnose Training Pathologies
+
+**Goal**: Deliberately cause and then fix common training failures
+**Time**: 30 minutes
+**Steps**:
+1. Train a small neural network on MNIST
+2. Remove batch normalization — observe gradient issues
+3. Set learning rate to 1.0 — observe divergence
+4. Fix each issue and plot the corrected training curves
+**Expected Output**: Before/after training curves for each pathology
 ---
 
 

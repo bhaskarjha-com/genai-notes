@@ -5,8 +5,8 @@ type: procedure
 difficulty: advanced
 status: published
 last_verified: 2026-04
-parent: "[[evaluation-and-benchmarks]]"
-related: ["[[../techniques/rag]]", "[[../techniques/graph-rag]]", "[[llm-evaluation-deep-dive]]", "[[../tools-and-infra/vector-databases]]"]
+parent: "evaluation-and-benchmarks.md"
+related: ["../techniques/rag.md", "../techniques/graph-rag.md", "llm-evaluation-deep-dive.md", "../tools-and-infra/vector-databases.md"]
 source: "Multiple — see Sources"
 created: 2026-04-14
 updated: 2026-04-14

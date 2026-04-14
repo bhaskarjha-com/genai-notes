@@ -5,8 +5,8 @@ type: procedure
 difficulty: advanced
 status: published
 last_verified: 2026-04
-parent: "[[llmops]]"
-related: ["[[model-serving]]", "[[cost-optimization]]", "[[monitoring-observability]]", "[[../inference/distributed-inference-and-serving-architecture]]"]
+parent: "llmops.md"
+related: ["model-serving.md", "cost-optimization.md", "monitoring-observability.md", "../inference/distributed-inference-and-serving-architecture.md"]
 source: "Multiple - see Sources"
 created: 2026-04-12
 updated: 2026-04-14

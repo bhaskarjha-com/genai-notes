@@ -5,8 +5,8 @@ type: concept
 difficulty: beginner
 status: published
 last_verified: 2026-04
-parent: "[[../genai]]"
-related: ["[[../foundations/transformers]]", "[[deep-learning-fundamentals]]", "[[linear-algebra-for-ai]]"]
+parent: "../genai.md"
+related: ["../foundations/transformers.md", "deep-learning-fundamentals.md", "linear-algebra-for-ai.md"]
 source: "Multiple - see Sources"
 created: 2026-03-18
 updated: 2026-04-11

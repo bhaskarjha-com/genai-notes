@@ -5,8 +5,8 @@ type: concept
 difficulty: intermediate
 status: published
 last_verified: 2026-04
-parent: "[[../genai]]"
-related: ["[[rag]]", "[[prompt-engineering]]", "[[../llms/llms-overview]]", "[[../inference/inference-optimization]]"]
+parent: "../genai.md"
+related: ["rag.md", "prompt-engineering.md", "../llms/llms-overview.md", "../inference/inference-optimization.md"]
 source: "Multiple — see Sources"
 created: 2026-03-22
 updated: 2026-04-11
@@ -252,6 +252,44 @@ COST COMPARISON (per 1M input tokens, approximate):
 | Compare with | Traditional search, Knowledge bases                                |
 | Cross-domain | Information retrieval, Memory management, Caching systems          |
 
+
+---
+
+## ◆ Production Failure Modes
+
+| Failure | Symptoms | Root Cause | Mitigation |
+|---------|----------|------------|------------|
+| **Lost-in-the-middle** | Model ignores information in the middle of long contexts | Attention distribution bias (U-shaped) | Place critical info at start/end, use structural markers |
+| **Context window waste** | 128K tokens used when 8K suffices, causing latency/cost spikes | No context budget management | Token counting, dynamic context assembly, cache control |
+| **Instruction-context conflict** | System prompt and retrieved context give contradictory guidance | No priority hierarchy between instruction types | Explicit priority layers, context deduplication |
+| **Prompt injection via context** | User-supplied context contains adversarial instructions | Untrusted content injected into prompt | Input sanitization, delimiter enforcement, separate user/system context |
+
+---
+
+## ◆ Hands-On Exercises
+
+### Exercise 1: Build a Token-Budget-Aware Prompt Builder
+
+**Goal**: Create a prompt assembly system that respects token limits
+**Time**: 30 minutes
+**Steps**:
+1. Implement a PromptBuilder class with system/context/user sections
+2. Add token counting with tiktoken
+3. Implement priority-based truncation (system > user > context)
+4. Test with inputs that exceed 4K token budget
+**Expected Output**: Prompt that never exceeds budget, with truncation logging
+
+### Exercise 2: Test the Lost-in-the-Middle Effect
+
+**Goal**: Empirically demonstrate and mitigate lost-in-the-middle
+**Time**: 30 minutes
+**Steps**:
+1. Create a 20-fact context window
+2. Place a target fact at positions 1, 5, 10, 15, 20
+3. Ask the LLM about the target fact at each position
+4. Plot accuracy by position
+5. Re-test with structural markers (XML tags, section headers)
+**Expected Output**: U-shaped accuracy curve and improvement with markers
 ---
 
 

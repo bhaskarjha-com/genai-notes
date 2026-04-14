@@ -5,8 +5,8 @@ type: reference
 difficulty: intermediate
 status: published
 last_verified: 2026-04
-parent: "[[../genai]]"
-related: ["[[llms-overview]]", "[[reasoning-models]]", "[[../foundations/modern-architectures]]"]
+parent: "../genai.md"
+related: ["llms-overview.md", "reasoning-models.md", "../foundations/modern-architectures.md"]
 source: "Web research — March 2026"
 created: 2026-03-22
 updated: 2026-04-12
@@ -188,6 +188,31 @@ START: What's your use case?
 | Compare with | open-weight deployment choices, provider API strategy |
 | Cross-domain | procurement, architecture, platform strategy |
 
+
+---
+
+## ◆ Production Failure Modes
+
+| Failure | Symptoms | Root Cause | Mitigation |
+|---------|----------|------------|------------|
+| **Model selection bias** | Team always picks the largest/newest model | No structured evaluation against requirements | Decision matrix: cost, latency, quality, compliance constraints |
+| **API deprecation** | Production breaks when provider sunsets model version | No model version pinning or migration plan | Pin versions, monitor deprecation notices, abstract provider |
+| **Benchmark ≠ production** | Top benchmark model underperforms on your task | Benchmarks don't represent your distribution | Custom eval on your data before committing |
+
+---
+
+## ◆ Hands-On Exercises
+
+### Exercise 1: Build a Model Selection Matrix
+
+**Goal**: Evaluate 3 models for a specific production use case
+**Time**: 30 minutes
+**Steps**:
+1. Define 5 evaluation criteria (quality, latency, cost, context length, safety)
+2. Run 20 representative queries through GPT-4o, Claude Sonnet, and Gemini Flash
+3. Score each model on each criterion (1-5)
+4. Calculate weighted scores and recommend
+**Expected Output**: Decision matrix with recommendation and rationale
 ---
 
 

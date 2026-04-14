@@ -4,8 +4,8 @@ tags: [career, job-roles, genai, ai-engineer, llm-engineer, rag-engineer, salary
 type: reference
 difficulty: beginner
 status: published
-parent: "[[../genai]]"
-related: ["[[roles/ai-engineer]]", "[[roles/genai-engineer]]", "[[roles/llm-engineer]]", "[[roles/rag-engineer]]", "[[roles/agentic-ai-engineer]]", "[[roles/ml-engineer]]", "[[roles/mlops-engineer]]"]
+parent: "../genai.md"
+related: ["roles/ai-engineer.md", "roles/genai-engineer.md", "roles/llm-engineer.md", "roles/rag-engineer.md", "roles/agentic-ai-engineer.md", "roles/ml-engineer.md", "roles/mlops-engineer.md"]
 source: "LinkedIn, Indeed, Glassdoor, Levels.fyi, web research — March 2026"
 created: 2026-03-23
 updated: 2026-04-12

@@ -69,6 +69,6 @@ hide:
 
 <div style="background: var(--genai-card); border-radius: 1rem; padding: 1.5rem; text-align: center; border: 1px solid var(--genai-border); backdrop-filter: var(--genai-glass-blur);">
     <p style="margin:0; font-size: 0.95rem; color: var(--genai-ink-soft);">
-        <em>Built for builders, highly rigorous, regularly verified. Proceed to the <a href="genai.md">GenAI Root Concept Map</a> to begin exploring.</em>
+        <em>Built for builders, highly rigorous, regularly verified. Proceed to the <a href="genai.html">GenAI Root Concept Map</a> to begin exploring.</em>
     </p>
 </div>

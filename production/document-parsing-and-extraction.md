@@ -5,8 +5,8 @@ type: procedure
 difficulty: intermediate
 status: published
 last_verified: 2026-04
-parent: "[[llmops]]"
-related: ["[[../techniques/rag]]", "[[../techniques/context-engineering]]", "[[../tools-and-infra/vector-databases]]"]
+parent: "llmops.md"
+related: ["../techniques/rag.md", "../techniques/context-engineering.md", "../tools-and-infra/vector-databases.md"]
 source: "Multiple — see Sources"
 created: 2026-04-14
 updated: 2026-04-14

@@ -5,8 +5,8 @@ type: concept
 difficulty: beginner
 status: published
 last_verified: 2026-04
-parent: "[[../genai]]"
-related: ["[[neural-networks]]", "[[../foundations/embeddings]]", "[[../foundations/attention-mechanism]]"]
+parent: "../genai.md"
+related: ["neural-networks.md", "../foundations/embeddings.md", "../foundations/attention-mechanism.md"]
 source: "3Blue1Brown, Khan Academy, Deep Learning Book"
 created: 2026-03-18
 updated: 2026-04-11

@@ -5,8 +5,8 @@ type: concept
 difficulty: advanced
 status: published
 last_verified: 2026-04
-parent: "[[../genai]]"
-related: ["[[../llms/llms-overview]]", "[[../tools-and-infra/tools-overview]]", "[[../foundations/transformers]]", "[[gpu-cuda-programming]]", "[[distributed-inference-and-serving-architecture]]", "[[../production/cost-optimization]]"]
+parent: "../genai.md"
+related: ["../llms/llms-overview.md", "../tools-and-infra/tools-overview.md", "../foundations/transformers.md", "gpu-cuda-programming.md", "distributed-inference-and-serving-architecture.md", "../production/cost-optimization.md"]
 source: "Multiple papers and frameworks - see Sources"
 created: 2026-03-18
 updated: 2026-04-12
@@ -264,6 +264,32 @@ LATENCY TARGETS (typical):
 | Compare with | Training optimization (different phase), Model compression (overlapping)     |
 | Cross-domain | Computer architecture (memory hierarchy), OS (paging), Compiler optimization |
 
+
+---
+
+## ◆ Production Failure Modes
+
+| Failure | Symptoms | Root Cause | Mitigation |
+|---------|----------|------------|------------|
+| **Quantization quality cliff** | INT4 model produces gibberish on certain inputs | Weight outliers in specific layers | Per-channel quantization (GPTQ), SmoothQuant, mixed precision |
+| **Speculative decoding mismatch** | Draft model rejects >50% of tokens, no speedup | Draft model too different from target | Use distilled draft model, tune acceptance threshold |
+| **KV-cache OOM at batch** | Works for 1 request, OOM at batch size 8 | KV-cache scales linearly with batch size | Paged attention (vLLM), GQA/MQA, KV-cache quantization |
+| **Continuous batching stalls** | Throughput plateaus despite available GPU | Short sequences blocking slots for long ones | Preemptive scheduling, iteration-level batching |
+
+---
+
+## ◆ Hands-On Exercises
+
+### Exercise 1: Benchmark Quantization Levels
+
+**Goal**: Compare FP16, INT8, INT4 on latency, throughput, and quality
+**Time**: 30 minutes
+**Steps**:
+1. Load the same model at FP16, INT8 (bitsandbytes), and INT4 (GPTQ)
+2. Run 50 inference samples at each precision
+3. Measure tokens/second, memory usage, and output quality (BLEU or LLM-judge)
+4. Plot the Pareto frontier of quality vs speed
+**Expected Output**: Quality/speed tradeoff chart across precisions
 ---
 
 

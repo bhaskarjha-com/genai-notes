@@ -5,8 +5,8 @@ type: procedure
 difficulty: expert
 status: published
 last_verified: 2026-04
-parent: "[[fine-tuning]]"
-related: ["[[rl-alignment]]", "[[synthetic-data-and-data-engineering]]", "[[distillation-and-compression]]"]
+parent: "fine-tuning.md"
+related: ["rl-alignment.md", "synthetic-data-and-data-engineering.md", "distillation-and-compression.md"]
 source: "Multiple sources - see Sources"
 created: 2026-04-12
 updated: 2026-04-14

@@ -3,7 +3,7 @@ title: "RAG Engineer - Career Guide"
 tags: [career, rag-engineer, genai]
 type: reference
 status: published
-parent: "[[../genai-career-roles-universal]]"
+parent: "../genai-career-roles-universal.md"
 created: 2026-04-12
 updated: 2026-04-12
 ---

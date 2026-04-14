@@ -5,8 +5,8 @@ type: concept
 difficulty: advanced
 status: published
 last_verified: 2026-04
-parent: "[[../genai]]"
-related: ["[[../foundations/transformers]]", "[[../llms/llms-overview]]"]
+parent: "../genai.md"
+related: ["../foundations/transformers.md", "../llms/llms-overview.md"]
 source: "Ho et al., 2020 (DDPM) + latest developments"
 created: 2026-03-18
 updated: 2026-04-11
@@ -200,6 +200,31 @@ U-Net Structure:
 | Compare with | GANs (adversarial), VAEs (variational), Autoregressive image models       |
 | Cross-domain | Physics (thermodynamic diffusion), Stochastic processes                   |
 
+
+---
+
+## ◆ Production Failure Modes
+
+| Failure | Symptoms | Root Cause | Mitigation |
+|---------|----------|------------|------------|
+| **Prompt-image misalignment** | Generated image doesn't match text prompt | Model struggles with spatial relationships and counting | Negative prompts, prompt engineering, ControlNet guidance |
+| **NSFW content generation** | Inappropriate content despite safety filters | Safety classifier misses novel attack vectors | Multi-layer safety classifiers, NSFW model fine-tuning |
+| **Consistency across generations** | Same prompt produces wildly different styles | No seed management, no style conditioning | Fixed seeds for reproducibility, style-conditioned LoRA |
+
+---
+
+## ◆ Hands-On Exercises
+
+### Exercise 1: Compare Diffusion Architectures
+
+**Goal**: Generate images with different diffusion models and compare quality
+**Time**: 30 minutes
+**Steps**:
+1. Use the same 5 text prompts across SDXL, DALL-E 3, and Midjourney
+2. Rate each output on prompt adherence, quality, and style
+3. Measure generation time per image
+4. Document cost per generation
+**Expected Output**: Comparison grid with quality scores and generation metrics
 ---
 
 

@@ -4,8 +4,8 @@ tags: [career, applied-ml, data-engineering, nlp, computer-vision, conversationa
 type: reference
 difficulty: intermediate
 status: published
-parent: "[[./genai-career-roles-universal]]"
-related: ["[[./roles/llm-engineer]]", "[[./roles/ml-engineer]]", "[[./roles/rag-engineer]]"]
+parent: "./genai-career-roles-universal.md"
+related: ["./roles/llm-engineer.md", "./roles/ml-engineer.md", "./roles/rag-engineer.md"]
 source: "Repo synthesis from the universal career reference and linked notes"
 created: 2026-04-12
 updated: 2026-04-12

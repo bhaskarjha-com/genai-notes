@@ -5,8 +5,8 @@ type: concept
 difficulty: intermediate
 status: published
 last_verified: 2026-04
-parent: "[[../genai]]"
-related: ["[[../agents/ai-agents]]", "[[../llms/llms-overview]]", "[[rag]]", "[[prompt-engineering]]"]
+parent: "../genai.md"
+related: ["../agents/ai-agents.md", "../llms/llms-overview.md", "rag.md", "prompt-engineering.md"]
 source: "Multiple — see Sources"
 created: 2026-03-22
 updated: 2026-04-11
@@ -323,6 +323,45 @@ LIBRARIES:
 | Compare with | Direct prompting (text-only), Fine-tuning (embedding knowledge)                           |
 | Cross-domain | API design, RPC protocols, Software architecture                                          |
 
+
+---
+
+## ◆ Production Failure Modes
+
+| Failure | Symptoms | Root Cause | Mitigation |
+|---------|----------|------------|------------|
+| **Schema hallucination** | Model invents function names or parameters not in schema | Ambiguous intent, schema too complex | Constrained decoding, explicit examples in system prompt |
+| **Argument type mismatch** | Function receives string instead of int, null for required field | LLM outputs approximate types | Pydantic validation layer, strict JSON schema with type coercion |
+| **Infinite tool loops** | Agent calls the same tool repeatedly without progress | No exit condition, tool returns don't resolve query | Max iteration limit, loop detection, escalation to human |
+| **Partial extraction** | Structured output missing fields or has empty values | Complex input requiring multi-step reasoning | Chain-of-thought before extraction, break into sub-extractions |
+| **Format regression across models** | Code breaks when switching LLM providers | Different models interpret schemas differently | Provider abstraction layer, model-specific schema adapters |
+
+---
+
+## ◆ Hands-On Exercises
+
+### Exercise 1: Build a Structured Data Extractor
+
+**Goal**: Extract structured data from unstructured text using function calling
+**Time**: 30 minutes
+**Steps**:
+1. Define a Pydantic model for a job posting (title, company, salary_range, skills, location)
+2. Use OpenAI function calling with
+esponse_format
+3. Test on 5 real job posting descriptions
+4. Log extraction accuracy per field
+**Expected Output**: JSON extractions with >90% field accuracy
+
+### Exercise 2: Handle Tool Calling Edge Cases
+
+**Goal**: Build robust error handling for function calling failures
+**Time**: 30 minutes
+**Steps**:
+1. Create 3 tools (weather, calculator, search)
+2. Send 10 queries including ambiguous ones
+3. Add validation that catches schema violations
+4. Add fallback when tool call fails
+**Expected Output**: Error handling reduces failures from ~30% to <5%
 ---
 
 

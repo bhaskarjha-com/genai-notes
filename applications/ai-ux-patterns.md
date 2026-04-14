@@ -5,8 +5,8 @@ type: reference
 difficulty: intermediate
 status: published
 last_verified: 2026-04
-parent: "[[../production/ai-system-design]]"
-related: ["[[api-design-for-ai]]", "[[conversational-ai]]", "[[voice-ai]]", "[[ai-product-management-fundamentals]]"]
+parent: "../production/ai-system-design.md"
+related: ["api-design-for-ai.md", "conversational-ai.md", "voice-ai.md", "ai-product-management-fundamentals.md"]
 source: "Multiple — see Sources"
 created: 2026-04-14
 updated: 2026-04-14

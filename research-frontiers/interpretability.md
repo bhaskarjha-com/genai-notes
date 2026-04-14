@@ -5,8 +5,8 @@ type: concept
 difficulty: expert
 status: published
 last_verified: 2026-04
-parent: "[[../genai]]"
-related: ["[[../ethics-and-safety/ethics-safety-alignment]]", "[[../foundations/transformers]]", "[[../llms/llms-overview]]"]
+parent: "../genai.md"
+related: ["../ethics-and-safety/ethics-safety-alignment.md", "../foundations/transformers.md", "../llms/llms-overview.md"]
 source: "Anthropic, OpenAI — see Sources"
 created: 2026-03-22
 updated: 2026-04-11
@@ -207,6 +207,31 @@ RESEARCH GROUPS:
 | Compare with | Behavioral evaluation (external), Explainable AI (XAI, surface-level)                                             |
 | Cross-domain | Neuroscience, Reverse engineering, Complex systems                                                                |
 
+
+---
+
+## ◆ Production Failure Modes
+
+| Failure | Symptoms | Root Cause | Mitigation |
+|---------|----------|------------|------------|
+| **Explanation infidelity** | Explanation doesn't match actual model reasoning | Post-hoc explanations approximate, not exact | Mechanistic interpretability, circuit-level analysis |
+| **Feature attribution noise** | Saliency maps highlight irrelevant tokens | Gradient saturation, adversarial sensitivity | Integrated gradients, multiple attribution methods, sanity checks |
+| **Interpretability theater** | Explanations satisfy auditors but don't reveal real risks | Using simple metrics as proxy for understanding | Causal interventions, ablation studies, not just correlation |
+
+---
+
+## ◆ Hands-On Exercises
+
+### Exercise 1: Probe a Model's Internal Representations
+
+**Goal**: Train a linear probe to detect what information a model encodes
+**Time**: 45 minutes
+**Steps**:
+1. Extract hidden states from a language model for 1000 sentences
+2. Train a linear classifier to predict sentence properties (sentiment, topic, syntax)
+3. Compare probing accuracy at different layers
+4. Identify which layers encode which types of information
+**Expected Output**: Layer-by-layer probing accuracy chart
 ---
 
 

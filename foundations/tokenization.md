@@ -5,8 +5,8 @@ type: concept
 difficulty: intermediate
 status: published
 last_verified: 2026-04
-parent: "[[../genai]]"
-related: ["[[transformers]]", "[[embeddings]]", "[[../llms/llms-overview]]"]
+parent: "../genai.md"
+related: ["transformers.md", "embeddings.md", "../llms/llms-overview.md"]
 source: "Sennrich et al. (BPE, 2016), SentencePiece, tiktoken"
 created: 2026-03-18
 updated: 2026-04-11
@@ -222,6 +222,30 @@ TOOLS:
 | Compare with | Character encoding (ASCII/UTF-8), Word-level parsing                      |
 | Cross-domain | Linguistic morphology, Data compression                                   |
 
+
+---
+
+## ◆ Production Failure Modes
+
+| Failure | Symptoms | Root Cause | Mitigation |
+|---------|----------|------------|------------|
+| **Token count mismatch** | Context window overflow despite short text | Different tokenizers produce different counts; code/non-English inflate tokens | Use exact model tokenizer (tiktoken), not character heuristics |
+| **Multilingual over-tokenization** | Non-English text uses 2-5x more tokens | BPE trained primarily on English corpus | Multilingual tokenizers, language-specific models |
+| **Special token injection** | User input contains control tokens that alter behavior | No input sanitization | Strip or escape special tokens from user input |
+
+---
+
+## ◆ Hands-On Exercises
+
+### Exercise 1: Token Economics Calculator
+
+**Goal**: Build a tool that estimates API cost from text input
+**Time**: 20 minutes
+**Steps**:
+1. Use tiktoken to count tokens for 10 sample texts (English, code, multilingual)
+2. Calculate cost at GPT-4o pricing per input/output
+3. Compare token counts across languages and content types
+**Expected Output**: Cost table showing 2-3x variance across languages
 ---
 
 

@@ -5,8 +5,8 @@ type: concept
 difficulty: intermediate
 status: published
 last_verified: 2026-04
-parent: "[[../genai]]"
-related: ["[[attention-mechanism]]", "[[../llms/llms-overview]]"]
+parent: "../genai.md"
+related: ["attention-mechanism.md", "../llms/llms-overview.md"]
 source: "Attention Is All You Need (Vaswani et al., 2017)"
 created: 2026-03-18
 updated: 2026-04-11
@@ -234,6 +234,31 @@ Modern Scaling (LLaMA 4 Behemoth):
 | Compare with | RNNs (sequential), LSTMs (gated sequential), CNNs (local patterns)            |
 | Cross-domain | Graph attention networks (GNNs), Vision Transformers (ViT)                    |
 
+
+---
+
+## ◆ Production Failure Modes
+
+| Failure | Symptoms | Root Cause | Mitigation |
+|---------|----------|------------|------------|
+| **Attention bottleneck** | Inference latency grows quadratically with sequence length | O(n²) self-attention complexity | FlashAttention, sparse attention, SSM alternatives |
+| **Positional encoding limits** | Quality degrades beyond training context length | Fixed positional encodings don't extrapolate | RoPE with NTK scaling, ALiBi, position interpolation |
+| **KV-cache memory explosion** | OOM during batch inference with long sequences | KV-cache grows linearly per layer per head per token | GQA/MQA, KV-cache quantization, paged attention (vLLM) |
+
+---
+
+## ◆ Hands-On Exercises
+
+### Exercise 1: Implement Scaled Dot-Product Attention from Scratch
+
+**Goal**: Build attention in pure PyTorch and verify against the built-in
+**Time**: 30 minutes
+**Steps**:
+1. Implement Q·K^T/√d_k → softmax → ·V in PyTorch
+2. Add causal mask
+3. Compare output against `torch.nn.functional.scaled_dot_product_attention`
+4. Verify outputs match to 1e-5 tolerance
+**Expected Output**: Matching outputs and attention weight visualization
 ---
 
 

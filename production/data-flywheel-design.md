@@ -5,8 +5,8 @@ type: procedure
 difficulty: advanced
 status: published
 last_verified: 2026-04
-parent: "[[llmops]]"
-related: ["[[monitoring-observability]]", "[[../evaluation/llm-evaluation-deep-dive]]", "[[../techniques/fine-tuning]]", "[[../techniques/synthetic-data-and-data-engineering]]"]
+parent: "llmops.md"
+related: ["monitoring-observability.md", "../evaluation/llm-evaluation-deep-dive.md", "../techniques/fine-tuning.md", "../techniques/synthetic-data-and-data-engineering.md"]
 source: "Multiple — see Sources"
 created: 2026-04-14
 updated: 2026-04-14

@@ -5,8 +5,8 @@ type: reference
 difficulty: advanced
 status: published
 last_verified: 2026-04
-parent: "[[llmops]]"
-related: ["[[../techniques/rag]]", "[[../agents/ai-agents]]", "[[../evaluation/evaluation-and-benchmarks]]"]
+parent: "llmops.md"
+related: ["../techniques/rag.md", "../agents/ai-agents.md", "../evaluation/evaluation-and-benchmarks.md"]
 source: "Multiple sources - see Sources"
 created: 2026-04-12
 updated: 2026-04-12
@@ -209,6 +209,31 @@ When asked to design a GenAI system, structure the answer like this:
 | Compare with | Traditional web system design, classical ML system design |
 | Cross-domain | Distributed systems, DevOps, platform engineering |
 
+
+---
+
+## ◆ Hands-On Exercises
+
+### Exercise 1: Design an AI System Architecture
+
+**Goal**: Create a complete system design for an AI-powered application
+**Time**: 45 minutes
+**Steps**:
+1. Pick a system (e.g., AI customer support, document search)
+2. Draw the architecture: ingestion, processing, serving, monitoring
+3. Identify single points of failure and add redundancy
+4. Estimate costs at 100K, 1M, and 10M requests/month
+**Expected Output**: Architecture diagram with cost estimates and failure analysis
+
+---
+
+## ◆ Production Failure Modes
+
+| Failure | Symptoms | Root Cause | Mitigation |
+|---------|----------|------------|------------|
+| **Single point of failure** | Entire system down when one component fails | No redundancy in critical path | Redundant components, circuit breakers, graceful degradation |
+| **Scaling cliff** | System works at 100 RPS but falls over at 200 RPS | Bottleneck component not identified | Load testing, identify bottlenecks, horizontal scaling |
+| **Data pipeline drift** | Model quality degrades without code changes | Input data distribution shifts silently | Data quality monitoring, schema validation, drift detection |
 ---
 
 

@@ -5,8 +5,8 @@ type: procedure
 difficulty: advanced
 status: published
 last_verified: 2026-04
-parent: "[[llmops]]"
-related: ["[[docker-and-kubernetes]]", "[[monitoring-observability]]", "[[../evaluation/llm-evaluation-deep-dive]]", "[[model-serving]]"]
+parent: "llmops.md"
+related: ["docker-and-kubernetes.md", "monitoring-observability.md", "../evaluation/llm-evaluation-deep-dive.md", "model-serving.md"]
 source: "Multiple - see Sources"
 created: 2026-04-12
 updated: 2026-04-14

@@ -5,8 +5,8 @@ type: procedure
 difficulty: expert
 status: published
 last_verified: 2026-04
-parent: "[[inference-optimization]]"
-related: ["[[../research-frontiers/distributed-training]]", "[[../production/model-serving]]", "[[../foundations/transformers]]"]
+parent: "inference-optimization.md"
+related: ["../research-frontiers/distributed-training.md", "../production/model-serving.md", "../foundations/transformers.md"]
 source: "Multiple - see Sources"
 created: 2026-04-12
 updated: 2026-04-14

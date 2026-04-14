@@ -3,7 +3,7 @@ title: "LLM Engineer - Career Guide"
 tags: [career, llm-engineer, genai]
 type: reference
 status: published
-parent: "[[../genai-career-roles-universal]]"
+parent: "../genai-career-roles-universal.md"
 created: 2026-04-12
 updated: 2026-04-12
 ---

@@ -5,8 +5,8 @@ type: procedure
 difficulty: intermediate
 status: published
 last_verified: 2026-04
-parent: "[[llmops]]"
-related: ["[[../tools-and-infra/ml-experiment-and-data-management]]", "[[cost-optimization]]"]
+parent: "llmops.md"
+related: ["../tools-and-infra/ml-experiment-and-data-management.md", "cost-optimization.md"]
 source: "Multiple - see Sources"
 created: 2026-04-12
 updated: 2026-04-14

@@ -5,8 +5,8 @@ type: procedure
 difficulty: intermediate
 status: published
 last_verified: 2026-04
-parent: "[[llmops]]"
-related: ["[[model-serving]]", "[[monitoring-observability]]", "[[cicd-for-ml]]", "[[cost-optimization]]"]
+parent: "llmops.md"
+related: ["model-serving.md", "monitoring-observability.md", "cicd-for-ml.md", "cost-optimization.md"]
 source: "Multiple - see Sources"
 created: 2026-04-12
 updated: 2026-04-12
@@ -219,6 +219,32 @@ Do not adopt Kubernetes only because it feels "more production."
 | Compare with | Managed PaaS deployment, serverless inference |
 | Cross-domain | DevOps, platform engineering, SRE |
 
+
+---
+
+## ◆ Production Failure Modes
+
+| Failure | Symptoms | Root Cause | Mitigation |
+|---------|----------|------------|------------|
+| **GPU scheduling failures** | Pods stuck in Pending, no GPU assigned | Insufficient GPU node pool, no resource quotas | Node auto-scaling, quotas, GPU sharing (MIG, time-slicing) |
+| **Image size explosion** | 15GB+ container images, slow pulls | CUDA runtime + model weights in image | Multi-stage builds, model weights via volume mount |
+| **OOM kills during inference** | Container killed mid-request | Memory limit too low for model + KV-cache | Profile actual memory, set limits 20% above peak |
+| **Health check false positives** | K8s restarts healthy pods | Health check doesn't verify GPU readiness | Custom health endpoint with test inference |
+
+---
+
+## ◆ Hands-On Exercises
+
+### Exercise 1: Containerize a Model Server
+
+**Goal**: Build an optimized Docker image for LLM serving and deploy to K8s
+**Time**: 45 minutes
+**Steps**:
+1. Write a multi-stage Dockerfile (build deps, then runtime-only)
+2. Mount model weights as a volume (not baked into image)
+3. Deploy to minikube with GPU resource requests
+4. Test horizontal pod autoscaling based on request queue depth
+**Expected Output**: Running pod with GPU access, image size under 2GB
 ---
 
 

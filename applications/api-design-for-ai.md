@@ -5,8 +5,8 @@ type: reference
 difficulty: intermediate
 status: published
 last_verified: 2026-04
-parent: "[[../production/ai-system-design]]"
-related: ["[[../production/model-serving]]", "[[../techniques/function-calling-and-structured-output]]", "[[../production/llmops]]"]
+parent: "../production/ai-system-design.md"
+related: ["../production/model-serving.md", "../techniques/function-calling-and-structured-output.md", "../production/llmops.md"]
 source: "Multiple - see Sources"
 created: 2026-04-12
 updated: 2026-04-14

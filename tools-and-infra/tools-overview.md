@@ -5,8 +5,8 @@ type: reference
 difficulty: intermediate
 status: published
 last_verified: 2026-04
-parent: "[[../genai]]"
-related: ["[[../techniques/rag]]", "[[../agents/ai-agents]]", "[[../llms/llms-overview]]", "[[cloud-ml-services]]", "[[distributed-systems-for-ai]]", "[[ml-experiment-and-data-management]]"]
+parent: "../genai.md"
+related: ["../techniques/rag.md", "../agents/ai-agents.md", "../llms/llms-overview.md", "cloud-ml-services.md", "distributed-systems-for-ai.md", "ml-experiment-and-data-management.md"]
 source: "Multiple - see Sources"
 created: 2026-03-18
 updated: 2026-04-12
@@ -241,6 +241,31 @@ BUDGET STACK (learning / hobby):
 | Compare with | Traditional ML infra (MLflow, Kubeflow)          |
 | Cross-domain | DevOps, Cloud architecture, Systems design       |
 
+
+---
+
+## ◆ Production Failure Modes
+
+| Failure | Symptoms | Root Cause | Mitigation |
+|---------|----------|------------|------------|
+| **Tool sprawl** | Team uses 5 different experiment trackers, no standard | No standardized toolchain decision | Document standard stack, enforce via CI/CD templates |
+| **Version incompatibility** | LangChain update breaks production pipeline | No pinned dependencies, no integration tests | Pin versions, test upgrades in staging, use lockfiles |
+| **Framework lock-in** | Cannot switch from LangChain to LlamaIndex without rewrite | Tight coupling to framework internals | Abstract LLM calls behind interface, minimize framework surface |
+
+---
+
+## ◆ Hands-On Exercises
+
+### Exercise 1: Evaluate a GenAI Stack
+
+**Goal**: Assess and document a complete GenAI toolchain for a use case
+**Time**: 30 minutes
+**Steps**:
+1. Pick a use case (e.g., internal knowledge assistant)
+2. Select tools for each layer: LLM, embedding, vector DB, orchestration, serving
+3. Document tradeoffs for each selection (cost, lock-in, maturity)
+4. Create a stack diagram with version pins
+**Expected Output**: One-page stack decision document with rationale
 ---
 
 

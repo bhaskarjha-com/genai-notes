@@ -5,8 +5,8 @@ type: concept
 difficulty: intermediate
 status: published
 last_verified: 2026-04
-parent: "[[../genai]]"
-related: ["[[../llms/llms-overview]]", "[[../evaluation/evaluation-and-benchmarks]]", "[[../llms/hallucination-detection]]", "[[ai-regulation]]", "[[adversarial-ml-and-ai-security]]", "[[owasp-llm-top-10]]"]
+parent: "../genai.md"
+related: ["../llms/llms-overview.md", "../evaluation/evaluation-and-benchmarks.md", "../llms/hallucination-detection.md", "ai-regulation.md", "adversarial-ml-and-ai-security.md", "owasp-llm-top-10.md"]
 source: "Multiple - see Sources"
 created: 2026-03-18
 updated: 2026-04-12
@@ -262,6 +262,31 @@ PRODUCTION SAFETY CHECKLIST:
 | Compare with | Traditional software testing, Security engineering            |
 | Cross-domain | Philosophy (ethics), Law (regulation), Psychology (bias)      |
 
+
+---
+
+## ◆ Production Failure Modes
+
+| Failure | Symptoms | Root Cause | Mitigation |
+|---------|----------|------------|------------|
+| **Bias amplification** | Model outputs reinforce stereotypes | Training data reflects historical biases | Bias benchmarks, diverse eval sets, debiasing techniques |
+| **Over-refusal** | Model refuses legitimate queries due to safety filters | Safety classifier too aggressive | Balanced safety training, refusal rate monitoring, appeal process |
+| **Value misalignment** | Model behaves ethically in tests but harmfully in deployment | Distribution shift between eval and production | Red teaming, adversarial testing, continuous monitoring |
+
+---
+
+## ◆ Hands-On Exercises
+
+### Exercise 1: Red Team an LLM for Bias
+
+**Goal**: Systematically test an LLM for demographic and cultural biases
+**Time**: 30 minutes
+**Steps**:
+1. Create 20 paired test cases varying only by demographic attributes
+2. Run through your production LLM
+3. Compare outputs for systematic differences
+4. Document findings with severity ratings
+**Expected Output**: Bias assessment report with specific examples and severity
 ---
 
 

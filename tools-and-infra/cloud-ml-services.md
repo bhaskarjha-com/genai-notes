@@ -5,8 +5,8 @@ type: reference
 difficulty: intermediate
 status: published
 last_verified: 2026-04
-parent: "[[tools-overview]]"
-related: ["[[ml-experiment-and-data-management]]", "[[../production/llmops]]", "[[../production/docker-and-kubernetes]]"]
+parent: "tools-overview.md"
+related: ["ml-experiment-and-data-management.md", "../production/llmops.md", "../production/docker-and-kubernetes.md"]
 source: "Primary vendor docs - see Sources"
 created: 2026-04-12
 updated: 2026-04-12
@@ -160,6 +160,31 @@ az ml online-endpoint list
 | Compare with | self-hosted platform engineering |
 | Cross-domain | cloud architecture, governance, platform strategy |
 
+
+---
+
+## ◆ Production Failure Modes
+
+| Failure | Symptoms | Root Cause | Mitigation |
+|---------|----------|------------|------------|
+| **Vendor lock-in** | Cannot migrate workloads between clouds | Proprietary APIs, custom runtimes | Use open standards (ONNX, containers), abstract service layer |
+| **Cost overrun** | Monthly bill 5-10x expected | Idle GPU instances, no auto-shutdown | Spot instances, auto-scaling to zero, budget alerts |
+| **Region availability** | GPU instance type unavailable in target region | Limited GPU supply in specific regions | Multi-region fallback, reserved capacity, spot pools |
+
+---
+
+## ◆ Hands-On Exercises
+
+### Exercise 1: Deploy the Same Model on Two Clouds
+
+**Goal**: Deploy an LLM endpoint on AWS and GCP, compare cost and latency
+**Time**: 45 minutes
+**Steps**:
+1. Deploy a small model on AWS SageMaker and GCP Vertex AI
+2. Run 50 inference requests against each
+3. Compare cold start time, p95 latency, and per-request cost
+4. Document migration considerations
+**Expected Output**: Cloud comparison table with latency, cost, and ease-of-use scores
 ---
 
 

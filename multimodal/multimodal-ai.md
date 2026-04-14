@@ -5,8 +5,8 @@ type: concept
 difficulty: intermediate
 status: published
 last_verified: 2026-04
-parent: "[[../genai]]"
-related: ["[[../llms/llms-overview]]", "[[../multimodal/diffusion-models]]", "[[../foundations/transformers]]", "[[computer-vision-fundamentals]]"]
+parent: "../genai.md"
+related: ["../llms/llms-overview.md", "../multimodal/diffusion-models.md", "../foundations/transformers.md", "computer-vision-fundamentals.md"]
 source: "Multiple - see Sources"
 created: 2026-03-18
 updated: 2026-04-12
@@ -244,6 +244,31 @@ WHAT'S EARLY (research/demos):
 | Compare with | Single-modality models (text-only, image-only)                                                       |
 | Cross-domain | Computer vision, Audio signal processing, HCI                                                        |
 
+
+---
+
+## ◆ Production Failure Modes
+
+| Failure | Symptoms | Root Cause | Mitigation |
+|---------|----------|------------|------------|
+| **Modality dominance** | Model relies heavily on text, ignores image/audio inputs | Unbalanced multi-modal training, text bias | Ablation testing per modality, balanced training data |
+| **OCR/vision hallucination** | Model reads text in images that doesn't exist | Visual encoder hallucination | Verification pipeline, confidence thresholds, multi-model consensus |
+| **Audio transcription errors** | Speech-to-text fails on accents, noise, domain jargon | Insufficient acoustic diversity in training | Domain-specific fine-tuning, preprocessing (noise reduction) |
+
+---
+
+## ◆ Hands-On Exercises
+
+### Exercise 1: Build a Multimodal Document Analyzer
+
+**Goal**: Process documents with text + images using a multimodal LLM
+**Time**: 30 minutes
+**Steps**:
+1. Prepare 5 documents with text, charts, and tables
+2. Send each to a multimodal model (GPT-4o or Gemini)
+3. Ask structured questions about both text and visual content
+4. Grade accuracy on text-based vs image-based questions
+**Expected Output**: Accuracy comparison: text questions vs visual questions
 ---
 
 

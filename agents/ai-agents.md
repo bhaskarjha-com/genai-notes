@@ -5,8 +5,8 @@ type: concept
 difficulty: intermediate
 status: published
 last_verified: 2026-04
-parent: "[[../genai]]"
-related: ["[[../techniques/rag]]", "[[../llms/llms-overview]]", "[[../techniques/prompt-engineering]]", "[[multi-agent-architectures]]", "[[agent-evaluation]]"]
+parent: "../genai.md"
+related: ["../techniques/rag.md", "../llms/llms-overview.md", "../techniques/prompt-engineering.md", "multi-agent-architectures.md", "agent-evaluation.md"]
 source: "Multiple - see Sources"
 created: 2026-03-18
 updated: 2026-04-12
@@ -334,6 +334,45 @@ For protocols connecting agents (MCP, A2A), see [Agentic Protocols](./agentic-pr
 | Compare with | Simple chains (no autonomy), Chatbots (reactive only)                                                  |
 | Cross-domain | Robotics (embodied agents), Game AI, Control theory                                                    |
 
+
+---
+
+## ◆ Production Failure Modes
+
+| Failure | Symptoms | Root Cause | Mitigation |
+|---------|----------|------------|------------|
+| **Infinite loops** | Agent repeats the same action indefinitely, burning tokens | No exit condition, tool output doesn't resolve query | Max iteration limits, loop detection, exponential backoff |
+| **Tool misuse** | Agent calls wrong tool or passes wrong arguments | Ambiguous tool descriptions, too many tools | Clear docstrings, reduce active tool set per task, few-shot examples |
+| **State corruption** | Agent "forgets" previous observations, contradicts itself | Message history exceeds context window | Sliding window with summarization, explicit state tracking |
+| **Cascading failures** | One tool error causes entire workflow to crash | No error handling in tool execution layer | Try/catch per tool call, graceful degradation, fallback tools |
+| **Cost explosion** | Agent runs up large bills on a single query | Unconstrained reasoning depth | Token budgets per run, model routing (expensive for reasoning only) |
+
+---
+
+## ◆ Hands-On Exercises
+
+### Exercise 1: Build an Agent with Guardrails
+
+**Goal**: Create a LangGraph agent with loop detection and cost limits
+**Time**: 45 minutes
+**Steps**:
+1. Build a 3-tool agent (search, calculator, code interpreter)
+2. Add max_iterations=10 limit
+3. Add duplicate-action detection
+4. Add token counting per run
+5. Test with adversarial queries designed to trigger loops
+**Expected Output**: Agent that gracefully terminates rather than looping, with cost logged
+
+### Exercise 2: Compare Agent Architectures
+
+**Goal**: Build the same workflow as ReAct vs Plan-and-Execute and compare
+**Time**: 30 minutes
+**Steps**:
+1. Implement a ReAct loop for a research task
+2. Implement a Plan-then-Execute version for the same task
+3. Run 5 queries on both
+4. Compare cost, latency, and answer quality
+**Expected Output**: Comparison table with cost/latency/quality per architecture
 ---
 
 

@@ -3,7 +3,7 @@ title: "{Role Name} — Career Guide"
 tags: [career, {role-tag}, genai]
 type: reference
 status: draft
-parent: "[[../genai-career-roles-universal]]"
+parent: "../genai-career-roles-universal.md"
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
 ---

@@ -5,8 +5,8 @@ type: concept
 difficulty: intermediate
 status: published
 last_verified: 2026-04
-parent: "[[../genai]]"
-related: ["[[../multimodal/multimodal-ai]]", "[[../agents/ai-agents]]", "[[../agents/agentic-protocols]]", "[[conversational-ai]]"]
+parent: "../genai.md"
+related: ["../multimodal/multimodal-ai.md", "../agents/ai-agents.md", "../agents/agentic-protocols.md", "conversational-ai.md"]
 source: "Multiple — see Sources"
 created: 2026-03-22
 updated: 2026-04-12
@@ -215,6 +215,31 @@ KEY METRICS:
 | Compare with | Text-based chatbots, Screen-based UI                         |
 | Cross-domain | Signal processing, Linguistics, UX design                    |
 
+
+---
+
+## ◆ Production Failure Modes
+
+| Failure | Symptoms | Root Cause | Mitigation |
+|---------|----------|------------|------------|
+| **Latency kills UX** | Users hang up or disengage during voice interaction | STT + LLM + TTS pipeline too slow | Streaming STT/TTS, edge processing, speculative responses |
+| **Accent/dialect failures** | System fails on non-standard English or regional accents | STT trained on limited accent diversity | Accent-specific models, preprocessing, user adaptation |
+| **Turn-taking confusion** | System talks over user or has awkward pauses | No barge-in detection, fixed silence thresholds | Voice activity detection (VAD), adaptive silence detection |
+
+---
+
+## ◆ Hands-On Exercises
+
+### Exercise 1: Build a Voice-to-Voice Pipeline
+
+**Goal**: Create an end-to-end voice conversation system
+**Time**: 45 minutes
+**Steps**:
+1. Set up STT (Whisper or Deepgram)
+2. Connect to an LLM for response generation
+3. Add TTS (ElevenLabs or Coqui) for audio output
+4. Measure end-to-end latency for 5 conversation turns
+**Expected Output**: Working voice pipeline with latency measurements per stage
 ---
 
 

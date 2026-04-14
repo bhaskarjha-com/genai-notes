@@ -1,6 +1,6 @@
 {
     "NodeCount":  74,
-    "EdgeCount":  576,
+    "EdgeCount":  250,
     "Folders":  [
                     "applications",
                     "ethics-and-safety",
@@ -47,7 +47,7 @@
                                      "A"
                                  ],
                       "SitePath":  "applications/ai-product-management-fundamentals.html",
-                      "Degree":  8
+                      "Degree":  3
                   },
                   {
                       "Id":  "applications/ai-ux-patterns.md",
@@ -67,7 +67,7 @@
                                      "B"
                                  ],
                       "SitePath":  "applications/ai-ux-patterns.html",
-                      "Degree":  8
+                      "Degree":  3
                   },
                   {
                       "Id":  "applications/api-design-for-ai.md",
@@ -87,7 +87,7 @@
                                      "A"
                                  ],
                       "SitePath":  "applications/api-design-for-ai.html",
-                      "Degree":  9
+                      "Degree":  3
                   },
                   {
                       "Id":  "applications/code-generation.md",
@@ -110,7 +110,7 @@
                                      "A"
                                  ],
                       "SitePath":  "applications/code-generation.html",
-                      "Degree":  4
+                      "Degree":  2
                   },
                   {
                       "Id":  "applications/conversational-ai.md",
@@ -129,7 +129,7 @@
                                      "A"
                                  ],
                       "SitePath":  "applications/conversational-ai.html",
-                      "Degree":  10
+                      "Degree":  4
                   },
                   {
                       "Id":  "applications/voice-ai.md",
@@ -150,7 +150,7 @@
                                      "A"
                                  ],
                       "SitePath":  "applications/voice-ai.html",
-                      "Degree":  7
+                      "Degree":  2
                   },
                   {
                       "Id":  "ethics-and-safety/adversarial-ml-and-ai-security.md",
@@ -168,7 +168,7 @@
                                      "E"
                                  ],
                       "SitePath":  "ethics-and-safety/adversarial-ml-and-ai-security.html",
-                      "Degree":  15
+                      "Degree":  6
                   },
                   {
                       "Id":  "ethics-and-safety/ai-regulation.md",
@@ -187,7 +187,7 @@
                                      "E"
                                  ],
                       "SitePath":  "ethics-and-safety/ai-regulation.html",
-                      "Degree":  11
+                      "Degree":  4
                   },
                   {
                       "Id":  "ethics-and-safety/ethics-safety-alignment.md",
@@ -208,7 +208,7 @@
                                      "E"
                                  ],
                       "SitePath":  "ethics-and-safety/ethics-safety-alignment.html",
-                      "Degree":  24
+                      "Degree":  9
                   },
                   {
                       "Id":  "ethics-and-safety/owasp-llm-top-10.md",
@@ -226,7 +226,7 @@
                                      "E"
                                  ],
                       "SitePath":  "ethics-and-safety/owasp-llm-top-10.html",
-                      "Degree":  13
+                      "Degree":  5
                   },
                   {
                       "Id":  "ethics-and-safety/prompt-injection-deep-dive.md",
@@ -245,7 +245,7 @@
                                      "E"
                                  ],
                       "SitePath":  "ethics-and-safety/prompt-injection-deep-dive.html",
-                      "Degree":  7
+                      "Degree":  3
                   },
                   {
                       "Id":  "evaluation/evaluation-and-benchmarks.md",
@@ -266,7 +266,7 @@
                                      "E"
                                  ],
                       "SitePath":  "evaluation/evaluation-and-benchmarks.html",
-                      "Degree":  20
+                      "Degree":  6
                   },
                   {
                       "Id":  "evaluation/llm-evaluation-deep-dive.md",
@@ -286,7 +286,7 @@
                                      "E"
                                  ],
                       "SitePath":  "evaluation/llm-evaluation-deep-dive.html",
-                      "Degree":  21
+                      "Degree":  10
                   },
                   {
                       "Id":  "evaluation/retrieval-evaluation.md",
@@ -306,7 +306,7 @@
                                      "B"
                                  ],
                       "SitePath":  "evaluation/retrieval-evaluation.html",
-                      "Degree":  12
+                      "Degree":  6
                   },
                   {
                       "Id":  "evaluation/system-design-for-ai-interviews.md",
@@ -324,7 +324,7 @@
 
                                  ],
                       "SitePath":  "evaluation/system-design-for-ai-interviews.html",
-                      "Degree":  9
+                      "Degree":  3
                   },
                   {
                       "Id":  "foundations/attention-mechanism.md",
@@ -342,7 +342,7 @@
                                      "Foundation"
                                  ],
                       "SitePath":  "foundations/attention-mechanism.html",
-                      "Degree":  22
+                      "Degree":  12
                   },
                   {
                       "Id":  "foundations/attention-deep-dive.md",
@@ -362,7 +362,7 @@
                                      "D"
                                  ],
                       "SitePath":  "foundations/attention-deep-dive.html",
-                      "Degree":  9
+                      "Degree":  4
                   },
                   {
                       "Id":  "foundations/embeddings.md",
@@ -380,7 +380,7 @@
                                      "Foundation"
                                  ],
                       "SitePath":  "foundations/embeddings.html",
-                      "Degree":  20
+                      "Degree":  11
                   },
                   {
                       "Id":  "foundations/modern-architectures.md",
@@ -400,7 +400,7 @@
                                      "Foundation"
                                  ],
                       "SitePath":  "foundations/modern-architectures.html",
-                      "Degree":  16
+                      "Degree":  6
                   },
                   {
                       "Id":  "foundations/scaling-laws-and-pretraining.md",
@@ -421,7 +421,7 @@
                                      "D"
                                  ],
                       "SitePath":  "foundations/scaling-laws-and-pretraining.html",
-                      "Degree":  10
+                      "Degree":  5
                   },
                   {
                       "Id":  "foundations/state-space-models.md",
@@ -440,7 +440,7 @@
                                      "D"
                                  ],
                       "SitePath":  "foundations/state-space-models.html",
-                      "Degree":  8
+                      "Degree":  3
                   },
                   {
                       "Id":  "foundations/tokenization.md",
@@ -459,7 +459,7 @@
                                      "Foundation"
                                  ],
                       "SitePath":  "foundations/tokenization.html",
-                      "Degree":  9
+                      "Degree":  4
                   },
                   {
                       "Id":  "foundations/transformers.md",
@@ -477,7 +477,7 @@
                                      "Foundation"
                                  ],
                       "SitePath":  "foundations/transformers.html",
-                      "Degree":  45
+                      "Degree":  23
                   },
                   {
                       "Id":  "inference/distributed-inference-and-serving-architecture.md",
@@ -496,7 +496,7 @@
                                      "C"
                                  ],
                       "SitePath":  "inference/distributed-inference-and-serving-architecture.html",
-                      "Degree":  14
+                      "Degree":  6
                   },
                   {
                       "Id":  "inference/gpu-cuda-programming.md",
@@ -516,7 +516,7 @@
                                      "D"
                                  ],
                       "SitePath":  "inference/gpu-cuda-programming.html",
-                      "Degree":  11
+                      "Degree":  4
                   },
                   {
                       "Id":  "inference/inference-optimization.md",
@@ -536,7 +536,7 @@
                                      "C"
                                  ],
                       "SitePath":  "inference/inference-optimization.html",
-                      "Degree":  33
+                      "Degree":  14
                   },
                   {
                       "Id":  "llms/hallucination-detection.md",
@@ -555,7 +555,7 @@
                                      "E"
                                  ],
                       "SitePath":  "llms/hallucination-detection.html",
-                      "Degree":  17
+                      "Degree":  7
                   },
                   {
                       "Id":  "llms/llms-overview.md",
@@ -575,7 +575,7 @@
                                      "Foundation"
                                  ],
                       "SitePath":  "llms/llms-overview.html",
-                      "Degree":  60
+                      "Degree":  28
                   },
                   {
                       "Id":  "llms/llm-landscape.md",
@@ -596,7 +596,7 @@
 
                                  ],
                       "SitePath":  "llms/llm-landscape.html",
-                      "Degree":  10
+                      "Degree":  5
                   },
                   {
                       "Id":  "llms/reasoning-models.md",
@@ -617,7 +617,7 @@
                                      "D"
                                  ],
                       "SitePath":  "llms/reasoning-models.html",
-                      "Degree":  13
+                      "Degree":  7
                   },
                   {
                       "Id":  "multimodal/computer-vision-fundamentals.md",
@@ -636,7 +636,7 @@
 
                                  ],
                       "SitePath":  "multimodal/computer-vision-fundamentals.html",
-                      "Degree":  9
+                      "Degree":  4
                   },
                   {
                       "Id":  "multimodal/diffusion-models.md",
@@ -654,7 +654,7 @@
 
                                  ],
                       "SitePath":  "multimodal/diffusion-models.html",
-                      "Degree":  10
+                      "Degree":  5
                   },
                   {
                       "Id":  "multimodal/multimodal-ai.md",
@@ -674,7 +674,7 @@
 
                                  ],
                       "SitePath":  "multimodal/multimodal-ai.html",
-                      "Degree":  12
+                      "Degree":  5
                   },
                   {
                       "Id":  "prerequisites/deep-learning-fundamentals.md",
@@ -693,7 +693,7 @@
                                      "Foundation"
                                  ],
                       "SitePath":  "prerequisites/deep-learning-fundamentals.html",
-                      "Degree":  22
+                      "Degree":  14
                   },
                   {
                       "Id":  "prerequisites/linear-algebra-for-ai.md",
@@ -712,7 +712,7 @@
                                      "Foundation"
                                  ],
                       "SitePath":  "prerequisites/linear-algebra-for-ai.html",
-                      "Degree":  17
+                      "Degree":  11
                   },
                   {
                       "Id":  "prerequisites/neural-networks.md",
@@ -732,7 +732,7 @@
                                      "Foundation"
                                  ],
                       "SitePath":  "prerequisites/neural-networks.html",
-                      "Degree":  20
+                      "Degree":  12
                   },
                   {
                       "Id":  "prerequisites/nlp-fundamentals.md",
@@ -752,7 +752,7 @@
                                      "Foundation"
                                  ],
                       "SitePath":  "prerequisites/nlp-fundamentals.html",
-                      "Degree":  10
+                      "Degree":  5
                   },
                   {
                       "Id":  "prerequisites/probability-and-statistics.md",
@@ -772,7 +772,7 @@
                                      "Foundation"
                                  ],
                       "SitePath":  "prerequisites/probability-and-statistics.html",
-                      "Degree":  9
+                      "Degree":  5
                   },
                   {
                       "Id":  "prerequisites/python-for-ai.md",
@@ -791,7 +791,7 @@
                                      "Foundation"
                                  ],
                       "SitePath":  "prerequisites/python-for-ai.html",
-                      "Degree":  9
+                      "Degree":  4
                   },
                   {
                       "Id":  "production/ai-system-design.md",
@@ -809,7 +809,7 @@
                                      "A"
                                  ],
                       "SitePath":  "production/ai-system-design.html",
-                      "Degree":  25
+                      "Degree":  15
                   },
                   {
                       "Id":  "production/cicd-for-ml.md",
@@ -828,7 +828,7 @@
                                      "C"
                                  ],
                       "SitePath":  "production/cicd-for-ml.html",
-                      "Degree":  17
+                      "Degree":  8
                   },
                   {
                       "Id":  "production/classical-ml-for-genai.md",
@@ -847,7 +847,7 @@
                                      "C"
                                  ],
                       "SitePath":  "production/classical-ml-for-genai.html",
-                      "Degree":  7
+                      "Degree":  4
                   },
                   {
                       "Id":  "production/cost-optimization.md",
@@ -868,7 +868,7 @@
                                      "C"
                                  ],
                       "SitePath":  "production/cost-optimization.html",
-                      "Degree":  23
+                      "Degree":  10
                   },
                   {
                       "Id":  "production/data-flywheel-design.md",
@@ -886,7 +886,7 @@
                                      "B"
                                  ],
                       "SitePath":  "production/data-flywheel-design.html",
-                      "Degree":  8
+                      "Degree":  3
                   },
                   {
                       "Id":  "production/docker-and-kubernetes.md",
@@ -905,7 +905,7 @@
                                      "C"
                                  ],
                       "SitePath":  "production/docker-and-kubernetes.html",
-                      "Degree":  17
+                      "Degree":  7
                   },
                   {
                       "Id":  "production/document-parsing-and-extraction.md",
@@ -925,7 +925,7 @@
                                      "B"
                                  ],
                       "SitePath":  "production/document-parsing-and-extraction.html",
-                      "Degree":  7
+                      "Degree":  3
                   },
                   {
                       "Id":  "production/guardrails-and-content-filtering.md",
@@ -944,7 +944,7 @@
                                      "B"
                                  ],
                       "SitePath":  "production/guardrails-and-content-filtering.html",
-                      "Degree":  9
+                      "Degree":  4
                   },
                   {
                       "Id":  "production/latency-and-throughput-engineering.md",
@@ -963,7 +963,7 @@
                                      "C"
                                  ],
                       "SitePath":  "production/latency-and-throughput-engineering.html",
-                      "Degree":  12
+                      "Degree":  6
                   },
                   {
                       "Id":  "production/llm-routing-and-model-selection.md",
@@ -982,7 +982,7 @@
                                      "B"
                                  ],
                       "SitePath":  "production/llm-routing-and-model-selection.html",
-                      "Degree":  8
+                      "Degree":  3
                   },
                   {
                       "Id":  "production/llmops.md",
@@ -1003,7 +1003,7 @@
                                      "B"
                                  ],
                       "SitePath":  "production/llmops.html",
-                      "Degree":  42
+                      "Degree":  13
                   },
                   {
                       "Id":  "production/model-serving.md",
@@ -1024,7 +1024,7 @@
                                      "C"
                                  ],
                       "SitePath":  "production/model-serving.html",
-                      "Degree":  30
+                      "Degree":  13
                   },
                   {
                       "Id":  "production/monitoring-observability.md",
@@ -1044,7 +1044,7 @@
                                      "C"
                                  ],
                       "SitePath":  "production/monitoring-observability.html",
-                      "Degree":  28
+                      "Degree":  12
                   },
                   {
                       "Id":  "research-frontiers/distributed-training.md",
@@ -1066,7 +1066,7 @@
                                      "D"
                                  ],
                       "SitePath":  "research-frontiers/distributed-training.html",
-                      "Degree":  15
+                      "Degree":  6
                   },
                   {
                       "Id":  "research-frontiers/interpretability.md",
@@ -1085,7 +1085,7 @@
                                      "D"
                                  ],
                       "SitePath":  "research-frontiers/interpretability.html",
-                      "Degree":  10
+                      "Degree":  5
                   },
                   {
                       "Id":  "research-frontiers/research-methodology-and-paper-reading.md",
@@ -1103,7 +1103,7 @@
                                      "D"
                                  ],
                       "SitePath":  "research-frontiers/research-methodology-and-paper-reading.html",
-                      "Degree":  6
+                      "Degree":  2
                   },
                   {
                       "Id":  "genai.md",
@@ -1120,7 +1120,7 @@
 
                                  ],
                       "SitePath":  "genai.html",
-                      "Degree":  42
+                      "Degree":  5
                   },
                   {
                       "Id":  "techniques/advanced-fine-tuning.md",
@@ -1140,7 +1140,7 @@
                                      "D"
                                  ],
                       "SitePath":  "techniques/advanced-fine-tuning.html",
-                      "Degree":  12
+                      "Degree":  6
                   },
                   {
                       "Id":  "techniques/context-engineering.md",
@@ -1159,7 +1159,7 @@
                                      "Foundation"
                                  ],
                       "SitePath":  "techniques/context-engineering.html",
-                      "Degree":  14
+                      "Degree":  5
                   },
                   {
                       "Id":  "techniques/continual-learning.md",
@@ -1177,7 +1177,7 @@
 
                                  ],
                       "SitePath":  "techniques/continual-learning.html",
-                      "Degree":  7
+                      "Degree":  3
                   },
                   {
                       "Id":  "techniques/embedding-fine-tuning.md",
@@ -1196,7 +1196,7 @@
                                      "B"
                                  ],
                       "SitePath":  "techniques/embedding-fine-tuning.html",
-                      "Degree":  9
+                      "Degree":  4
                   },
                   {
                       "Id":  "techniques/fine-tuning.md",
@@ -1215,7 +1215,7 @@
                                      "Foundation"
                                  ],
                       "SitePath":  "techniques/fine-tuning.html",
-                      "Degree":  31
+                      "Degree":  16
                   },
                   {
                       "Id":  "techniques/function-calling-and-structured-output.md",
@@ -1235,7 +1235,7 @@
                                      "Foundation"
                                  ],
                       "SitePath":  "techniques/function-calling-and-structured-output.html",
-                      "Degree":  10
+                      "Degree":  4
                   },
                   {
                       "Id":  "techniques/graph-rag.md",
@@ -1255,7 +1255,7 @@
                                      "B"
                                  ],
                       "SitePath":  "techniques/graph-rag.html",
-                      "Degree":  7
+                      "Degree":  2
                   },
                   {
                       "Id":  "techniques/distillation-and-compression.md",
@@ -1275,7 +1275,7 @@
                                      "D"
                                  ],
                       "SitePath":  "techniques/distillation-and-compression.html",
-                      "Degree":  11
+                      "Degree":  5
                   },
                   {
                       "Id":  "techniques/long-context-engineering.md",
@@ -1294,7 +1294,7 @@
                                      "B"
                                  ],
                       "SitePath":  "techniques/long-context-engineering.html",
-                      "Degree":  8
+                      "Degree":  3
                   },
                   {
                       "Id":  "techniques/prompt-engineering.md",
@@ -1312,7 +1312,7 @@
                                      "Foundation"
                                  ],
                       "SitePath":  "techniques/prompt-engineering.html",
-                      "Degree":  15
+                      "Degree":  8
                   },
                   {
                       "Id":  "techniques/rl-alignment.md",
@@ -1334,7 +1334,7 @@
                                      "D"
                                  ],
                       "SitePath":  "techniques/rl-alignment.html",
-                      "Degree":  11
+                      "Degree":  5
                   },
                   {
                       "Id":  "techniques/rag.md",
@@ -1352,7 +1352,7 @@
                                      "Foundation"
                                  ],
                       "SitePath":  "techniques/rag.html",
-                      "Degree":  42
+                      "Degree":  22
                   },
                   {
                       "Id":  "techniques/synthetic-data-and-data-engineering.md",
@@ -1371,7 +1371,7 @@
                                      "B"
                                  ],
                       "SitePath":  "techniques/synthetic-data-and-data-engineering.html",
-                      "Degree":  10
+                      "Degree":  4
                   },
                   {
                       "Id":  "tools-and-infra/cloud-ml-services.md",
@@ -1390,7 +1390,7 @@
                                      "C"
                                  ],
                       "SitePath":  "tools-and-infra/cloud-ml-services.html",
-                      "Degree":  11
+                      "Degree":  3
                   },
                   {
                       "Id":  "tools-and-infra/distributed-systems-for-ai.md",
@@ -1408,7 +1408,7 @@
                                      "C"
                                  ],
                       "SitePath":  "tools-and-infra/distributed-systems-for-ai.html",
-                      "Degree":  13
+                      "Degree":  4
                   },
                   {
                       "Id":  "tools-and-infra/tools-overview.md",
@@ -1428,7 +1428,7 @@
 
                                  ],
                       "SitePath":  "tools-and-infra/tools-overview.html",
-                      "Degree":  16
+                      "Degree":  4
                   },
                   {
                       "Id":  "tools-and-infra/ml-experiment-and-data-management.md",
@@ -1448,7 +1448,7 @@
                                      "C"
                                  ],
                       "SitePath":  "tools-and-infra/ml-experiment-and-data-management.html",
-                      "Degree":  12
+                      "Degree":  4
                   },
                   {
                       "Id":  "tools-and-infra/vector-databases.md",
@@ -1469,39 +1469,19 @@
                                      "B"
                                  ],
                       "SitePath":  "tools-and-infra/vector-databases.html",
-                      "Degree":  14
+                      "Degree":  6
                   }
               ],
     "Links":  [
                   {
                       "Source":  "applications/ai-product-management-fundamentals.md",
-                      "Target":  "applications/api-design-for-ai.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "applications/ai-product-management-fundamentals.md",
                       "Target":  "evaluation/llm-evaluation-deep-dive.md",
                       "Relation":  "builds-on"
                   },
                   {
                       "Source":  "applications/ai-product-management-fundamentals.md",
-                      "Target":  "evaluation/llm-evaluation-deep-dive.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "applications/ai-product-management-fundamentals.md",
-                      "Target":  "genai.md",
-                      "Relation":  "parent"
-                  },
-                  {
-                      "Source":  "applications/ai-product-management-fundamentals.md",
                       "Target":  "production/ai-system-design.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "applications/ai-product-management-fundamentals.md",
-                      "Target":  "production/ai-system-design.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "applications/ai-ux-patterns.md",
@@ -1510,18 +1490,8 @@
                   },
                   {
                       "Source":  "applications/ai-ux-patterns.md",
-                      "Target":  "applications/ai-product-management-fundamentals.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "applications/ai-ux-patterns.md",
                       "Target":  "applications/api-design-for-ai.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "applications/ai-ux-patterns.md",
-                      "Target":  "applications/api-design-for-ai.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "applications/ai-ux-patterns.md",
@@ -1529,34 +1499,9 @@
                       "Relation":  "builds-on"
                   },
                   {
-                      "Source":  "applications/ai-ux-patterns.md",
-                      "Target":  "applications/conversational-ai.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "applications/ai-ux-patterns.md",
-                      "Target":  "applications/voice-ai.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "applications/ai-ux-patterns.md",
-                      "Target":  "production/ai-system-design.md",
-                      "Relation":  "parent"
-                  },
-                  {
                       "Source":  "applications/api-design-for-ai.md",
                       "Target":  "production/ai-system-design.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "applications/api-design-for-ai.md",
-                      "Target":  "production/ai-system-design.md",
-                      "Relation":  "parent"
-                  },
-                  {
-                      "Source":  "applications/api-design-for-ai.md",
-                      "Target":  "production/llmops.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "applications/api-design-for-ai.md",
@@ -1564,29 +1509,9 @@
                       "Relation":  "builds-on"
                   },
                   {
-                      "Source":  "applications/api-design-for-ai.md",
-                      "Target":  "production/model-serving.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "applications/api-design-for-ai.md",
-                      "Target":  "techniques/function-calling-and-structured-output.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "applications/code-generation.md",
-                      "Target":  "genai.md",
-                      "Relation":  "parent"
-                  },
-                  {
                       "Source":  "applications/code-generation.md",
                       "Target":  "llms/llms-overview.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "applications/code-generation.md",
-                      "Target":  "llms/llms-overview.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "applications/code-generation.md",
@@ -1600,23 +1525,8 @@
                   },
                   {
                       "Source":  "applications/conversational-ai.md",
-                      "Target":  "applications/voice-ai.md",
-                      "Relation":  "parent"
-                  },
-                  {
-                      "Source":  "applications/conversational-ai.md",
-                      "Target":  "evaluation/llm-evaluation-deep-dive.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "applications/conversational-ai.md",
                       "Target":  "production/ai-system-design.md",
                       "Relation":  "leads-to"
-                  },
-                  {
-                      "Source":  "applications/conversational-ai.md",
-                      "Target":  "production/ai-system-design.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "applications/conversational-ai.md",
@@ -1624,29 +1534,9 @@
                       "Relation":  "builds-on"
                   },
                   {
-                      "Source":  "applications/conversational-ai.md",
-                      "Target":  "techniques/function-calling-and-structured-output.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "applications/voice-ai.md",
-                      "Target":  "applications/conversational-ai.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "applications/voice-ai.md",
-                      "Target":  "genai.md",
-                      "Relation":  "parent"
-                  },
-                  {
                       "Source":  "applications/voice-ai.md",
                       "Target":  "multimodal/multimodal-ai.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "applications/voice-ai.md",
-                      "Target":  "multimodal/multimodal-ai.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "ethics-and-safety/adversarial-ml-and-ai-security.md",
@@ -1655,18 +1545,8 @@
                   },
                   {
                       "Source":  "ethics-and-safety/adversarial-ml-and-ai-security.md",
-                      "Target":  "ethics-and-safety/ai-regulation.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "ethics-and-safety/adversarial-ml-and-ai-security.md",
                       "Target":  "ethics-and-safety/ethics-safety-alignment.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "ethics-and-safety/adversarial-ml-and-ai-security.md",
-                      "Target":  "ethics-and-safety/ethics-safety-alignment.md",
-                      "Relation":  "parent"
                   },
                   {
                       "Source":  "ethics-and-safety/adversarial-ml-and-ai-security.md",
@@ -1674,84 +1554,19 @@
                       "Relation":  "leads-to"
                   },
                   {
-                      "Source":  "ethics-and-safety/adversarial-ml-and-ai-security.md",
-                      "Target":  "ethics-and-safety/owasp-llm-top-10.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "ethics-and-safety/adversarial-ml-and-ai-security.md",
-                      "Target":  "production/llmops.md",
-                      "Relation":  "related"
-                  },
-                  {
                       "Source":  "ethics-and-safety/ai-regulation.md",
                       "Target":  "ethics-and-safety/ethics-safety-alignment.md",
                       "Relation":  "builds-on"
                   },
                   {
                       "Source":  "ethics-and-safety/ai-regulation.md",
-                      "Target":  "ethics-and-safety/ethics-safety-alignment.md",
-                      "Relation":  "parent"
-                  },
-                  {
-                      "Source":  "ethics-and-safety/ai-regulation.md",
-                      "Target":  "evaluation/evaluation-and-benchmarks.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "ethics-and-safety/ai-regulation.md",
-                      "Target":  "llms/hallucination-detection.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "ethics-and-safety/ai-regulation.md",
                       "Target":  "production/llmops.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "ethics-and-safety/ai-regulation.md",
-                      "Target":  "production/llmops.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "ethics-and-safety/ethics-safety-alignment.md",
-                      "Target":  "ethics-and-safety/adversarial-ml-and-ai-security.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "ethics-and-safety/ethics-safety-alignment.md",
-                      "Target":  "ethics-and-safety/ai-regulation.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "ethics-and-safety/ethics-safety-alignment.md",
-                      "Target":  "ethics-and-safety/owasp-llm-top-10.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "ethics-and-safety/ethics-safety-alignment.md",
-                      "Target":  "evaluation/evaluation-and-benchmarks.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "ethics-and-safety/ethics-safety-alignment.md",
-                      "Target":  "genai.md",
-                      "Relation":  "parent"
-                  },
-                  {
-                      "Source":  "ethics-and-safety/ethics-safety-alignment.md",
-                      "Target":  "llms/hallucination-detection.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "ethics-and-safety/ethics-safety-alignment.md",
                       "Target":  "llms/llms-overview.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "ethics-and-safety/ethics-safety-alignment.md",
-                      "Target":  "llms/llms-overview.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "ethics-and-safety/ethics-safety-alignment.md",
@@ -1765,53 +1580,18 @@
                   },
                   {
                       "Source":  "ethics-and-safety/owasp-llm-top-10.md",
-                      "Target":  "ethics-and-safety/adversarial-ml-and-ai-security.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "ethics-and-safety/owasp-llm-top-10.md",
                       "Target":  "ethics-and-safety/ai-regulation.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "ethics-and-safety/owasp-llm-top-10.md",
-                      "Target":  "ethics-and-safety/ai-regulation.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "ethics-and-safety/owasp-llm-top-10.md",
-                      "Target":  "ethics-and-safety/ethics-safety-alignment.md",
-                      "Relation":  "parent"
-                  },
-                  {
-                      "Source":  "ethics-and-safety/owasp-llm-top-10.md",
-                      "Target":  "production/llmops.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "ethics-and-safety/prompt-injection-deep-dive.md",
                       "Target":  "ethics-and-safety/adversarial-ml-and-ai-security.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "ethics-and-safety/prompt-injection-deep-dive.md",
-                      "Target":  "ethics-and-safety/adversarial-ml-and-ai-security.md",
-                      "Relation":  "parent"
-                  },
-                  {
-                      "Source":  "ethics-and-safety/prompt-injection-deep-dive.md",
-                      "Target":  "ethics-and-safety/adversarial-ml-and-ai-security.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "ethics-and-safety/prompt-injection-deep-dive.md",
                       "Target":  "ethics-and-safety/owasp-llm-top-10.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "ethics-and-safety/prompt-injection-deep-dive.md",
-                      "Target":  "ethics-and-safety/owasp-llm-top-10.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "ethics-and-safety/prompt-injection-deep-dive.md",
@@ -1819,49 +1599,14 @@
                       "Relation":  "leads-to"
                   },
                   {
-                      "Source":  "ethics-and-safety/prompt-injection-deep-dive.md",
-                      "Target":  "production/guardrails-and-content-filtering.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "evaluation/evaluation-and-benchmarks.md",
-                      "Target":  "evaluation/llm-evaluation-deep-dive.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "evaluation/evaluation-and-benchmarks.md",
-                      "Target":  "evaluation/system-design-for-ai-interviews.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "evaluation/evaluation-and-benchmarks.md",
-                      "Target":  "genai.md",
-                      "Relation":  "parent"
-                  },
-                  {
-                      "Source":  "evaluation/evaluation-and-benchmarks.md",
-                      "Target":  "llms/hallucination-detection.md",
-                      "Relation":  "related"
-                  },
-                  {
                       "Source":  "evaluation/evaluation-and-benchmarks.md",
                       "Target":  "llms/llms-overview.md",
                       "Relation":  "builds-on"
                   },
                   {
                       "Source":  "evaluation/evaluation-and-benchmarks.md",
-                      "Target":  "llms/llms-overview.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "evaluation/evaluation-and-benchmarks.md",
                       "Target":  "techniques/rag.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "evaluation/evaluation-and-benchmarks.md",
-                      "Target":  "techniques/rag.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "evaluation/llm-evaluation-deep-dive.md",
@@ -1870,18 +1615,8 @@
                   },
                   {
                       "Source":  "evaluation/llm-evaluation-deep-dive.md",
-                      "Target":  "evaluation/evaluation-and-benchmarks.md",
-                      "Relation":  "parent"
-                  },
-                  {
-                      "Source":  "evaluation/llm-evaluation-deep-dive.md",
                       "Target":  "llms/hallucination-detection.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "evaluation/llm-evaluation-deep-dive.md",
-                      "Target":  "llms/hallucination-detection.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "evaluation/llm-evaluation-deep-dive.md",
@@ -1894,29 +1629,9 @@
                       "Relation":  "leads-to"
                   },
                   {
-                      "Source":  "evaluation/llm-evaluation-deep-dive.md",
-                      "Target":  "production/monitoring-observability.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "evaluation/llm-evaluation-deep-dive.md",
-                      "Target":  "techniques/rag.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "evaluation/retrieval-evaluation.md",
-                      "Target":  "evaluation/evaluation-and-benchmarks.md",
-                      "Relation":  "parent"
-                  },
-                  {
                       "Source":  "evaluation/retrieval-evaluation.md",
                       "Target":  "evaluation/llm-evaluation-deep-dive.md",
                       "Relation":  "compare-with"
-                  },
-                  {
-                      "Source":  "evaluation/retrieval-evaluation.md",
-                      "Target":  "evaluation/llm-evaluation-deep-dive.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "evaluation/retrieval-evaluation.md",
@@ -1925,33 +1640,13 @@
                   },
                   {
                       "Source":  "evaluation/retrieval-evaluation.md",
-                      "Target":  "techniques/graph-rag.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "evaluation/retrieval-evaluation.md",
                       "Target":  "techniques/rag.md",
                       "Relation":  "builds-on"
                   },
                   {
                       "Source":  "evaluation/retrieval-evaluation.md",
-                      "Target":  "techniques/rag.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "evaluation/retrieval-evaluation.md",
                       "Target":  "tools-and-infra/vector-databases.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "evaluation/retrieval-evaluation.md",
-                      "Target":  "tools-and-infra/vector-databases.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "evaluation/system-design-for-ai-interviews.md",
-                      "Target":  "evaluation/evaluation-and-benchmarks.md",
-                      "Relation":  "parent"
                   },
                   {
                       "Source":  "evaluation/system-design-for-ai-interviews.md",
@@ -1960,18 +1655,8 @@
                   },
                   {
                       "Source":  "evaluation/system-design-for-ai-interviews.md",
-                      "Target":  "production/ai-system-design.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "evaluation/system-design-for-ai-interviews.md",
                       "Target":  "production/model-serving.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "evaluation/system-design-for-ai-interviews.md",
-                      "Target":  "production/model-serving.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "evaluation/system-design-for-ai-interviews.md",
@@ -1979,29 +1664,9 @@
                       "Relation":  "builds-on"
                   },
                   {
-                      "Source":  "evaluation/system-design-for-ai-interviews.md",
-                      "Target":  "production/monitoring-observability.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "evaluation/system-design-for-ai-interviews.md",
-                      "Target":  "tools-and-infra/distributed-systems-for-ai.md",
-                      "Relation":  "related"
-                  },
-                  {
                       "Source":  "foundations/attention-deep-dive.md",
                       "Target":  "foundations/attention-mechanism.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "foundations/attention-deep-dive.md",
-                      "Target":  "foundations/attention-mechanism.md",
-                      "Relation":  "parent"
-                  },
-                  {
-                      "Source":  "foundations/attention-deep-dive.md",
-                      "Target":  "foundations/attention-mechanism.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "foundations/attention-deep-dive.md",
@@ -2010,53 +1675,23 @@
                   },
                   {
                       "Source":  "foundations/attention-deep-dive.md",
-                      "Target":  "foundations/state-space-models.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "foundations/attention-deep-dive.md",
                       "Target":  "foundations/transformers.md",
                       "Relation":  "builds-on"
                   },
                   {
                       "Source":  "foundations/attention-deep-dive.md",
-                      "Target":  "foundations/transformers.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "foundations/attention-deep-dive.md",
                       "Target":  "inference/inference-optimization.md",
                       "Relation":  "leads-to"
-                  },
-                  {
-                      "Source":  "foundations/attention-deep-dive.md",
-                      "Target":  "inference/inference-optimization.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "foundations/attention-mechanism.md",
                       "Target":  "foundations/transformers.md",
                       "Relation":  "leads-to"
-                  },
-                  {
-                      "Source":  "foundations/attention-mechanism.md",
-                      "Target":  "foundations/transformers.md",
-                      "Relation":  "parent"
-                  },
-                  {
-                      "Source":  "foundations/attention-mechanism.md",
-                      "Target":  "foundations/transformers.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "foundations/attention-mechanism.md",
                       "Target":  "llms/llms-overview.md",
                       "Relation":  "leads-to"
-                  },
-                  {
-                      "Source":  "foundations/attention-mechanism.md",
-                      "Target":  "llms/llms-overview.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "foundations/attention-mechanism.md",
@@ -2070,16 +1705,6 @@
                   },
                   {
                       "Source":  "foundations/embeddings.md",
-                      "Target":  "foundations/transformers.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "foundations/embeddings.md",
-                      "Target":  "genai.md",
-                      "Relation":  "parent"
-                  },
-                  {
-                      "Source":  "foundations/embeddings.md",
                       "Target":  "prerequisites/linear-algebra-for-ai.md",
                       "Relation":  "builds-on"
                   },
@@ -2090,18 +1715,8 @@
                   },
                   {
                       "Source":  "foundations/embeddings.md",
-                      "Target":  "techniques/rag.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "foundations/embeddings.md",
                       "Target":  "tools-and-infra/vector-databases.md",
                       "Relation":  "leads-to"
-                  },
-                  {
-                      "Source":  "foundations/embeddings.md",
-                      "Target":  "tools-and-infra/vector-databases.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "foundations/modern-architectures.md",
@@ -2110,43 +1725,18 @@
                   },
                   {
                       "Source":  "foundations/modern-architectures.md",
-                      "Target":  "foundations/attention-mechanism.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "foundations/modern-architectures.md",
                       "Target":  "foundations/transformers.md",
                       "Relation":  "builds-on"
                   },
                   {
                       "Source":  "foundations/modern-architectures.md",
-                      "Target":  "foundations/transformers.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "foundations/modern-architectures.md",
-                      "Target":  "genai.md",
-                      "Relation":  "parent"
-                  },
-                  {
-                      "Source":  "foundations/modern-architectures.md",
                       "Target":  "inference/inference-optimization.md",
                       "Relation":  "leads-to"
                   },
                   {
                       "Source":  "foundations/modern-architectures.md",
-                      "Target":  "inference/inference-optimization.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "foundations/modern-architectures.md",
                       "Target":  "llms/llms-overview.md",
                       "Relation":  "leads-to"
-                  },
-                  {
-                      "Source":  "foundations/modern-architectures.md",
-                      "Target":  "llms/llms-overview.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "foundations/modern-architectures.md",
@@ -2155,33 +1745,13 @@
                   },
                   {
                       "Source":  "foundations/scaling-laws-and-pretraining.md",
-                      "Target":  "foundations/modern-architectures.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "foundations/scaling-laws-and-pretraining.md",
                       "Target":  "foundations/transformers.md",
                       "Relation":  "builds-on"
                   },
                   {
                       "Source":  "foundations/scaling-laws-and-pretraining.md",
-                      "Target":  "foundations/transformers.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "foundations/scaling-laws-and-pretraining.md",
-                      "Target":  "genai.md",
-                      "Relation":  "parent"
-                  },
-                  {
-                      "Source":  "foundations/scaling-laws-and-pretraining.md",
                       "Target":  "llms/llms-overview.md",
                       "Relation":  "leads-to"
-                  },
-                  {
-                      "Source":  "foundations/scaling-laws-and-pretraining.md",
-                      "Target":  "llms/llms-overview.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "foundations/scaling-laws-and-pretraining.md",
@@ -2200,28 +1770,8 @@
                   },
                   {
                       "Source":  "foundations/state-space-models.md",
-                      "Target":  "foundations/attention-mechanism.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "foundations/state-space-models.md",
-                      "Target":  "foundations/modern-architectures.md",
-                      "Relation":  "parent"
-                  },
-                  {
-                      "Source":  "foundations/state-space-models.md",
                       "Target":  "foundations/transformers.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "foundations/state-space-models.md",
-                      "Target":  "foundations/transformers.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "foundations/state-space-models.md",
-                      "Target":  "inference/inference-optimization.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "foundations/tokenization.md",
@@ -2230,28 +1780,8 @@
                   },
                   {
                       "Source":  "foundations/tokenization.md",
-                      "Target":  "foundations/embeddings.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "foundations/tokenization.md",
-                      "Target":  "foundations/transformers.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "foundations/tokenization.md",
-                      "Target":  "genai.md",
-                      "Relation":  "parent"
-                  },
-                  {
-                      "Source":  "foundations/tokenization.md",
                       "Target":  "llms/llms-overview.md",
                       "Relation":  "leads-to"
-                  },
-                  {
-                      "Source":  "foundations/tokenization.md",
-                      "Target":  "llms/llms-overview.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "foundations/transformers.md",
@@ -2260,28 +1790,13 @@
                   },
                   {
                       "Source":  "foundations/transformers.md",
-                      "Target":  "foundations/attention-mechanism.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "foundations/transformers.md",
                       "Target":  "foundations/embeddings.md",
                       "Relation":  "builds-on"
                   },
                   {
                       "Source":  "foundations/transformers.md",
-                      "Target":  "genai.md",
-                      "Relation":  "parent"
-                  },
-                  {
-                      "Source":  "foundations/transformers.md",
                       "Target":  "llms/llms-overview.md",
                       "Relation":  "leads-to"
-                  },
-                  {
-                      "Source":  "foundations/transformers.md",
-                      "Target":  "llms/llms-overview.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "foundations/transformers.md",
@@ -2320,23 +1835,8 @@
                   },
                   {
                       "Source":  "inference/distributed-inference-and-serving-architecture.md",
-                      "Target":  "inference/gpu-cuda-programming.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "inference/distributed-inference-and-serving-architecture.md",
                       "Target":  "inference/inference-optimization.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "inference/distributed-inference-and-serving-architecture.md",
-                      "Target":  "inference/inference-optimization.md",
-                      "Relation":  "parent"
-                  },
-                  {
-                      "Source":  "inference/distributed-inference-and-serving-architecture.md",
-                      "Target":  "production/latency-and-throughput-engineering.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "inference/distributed-inference-and-serving-architecture.md",
@@ -2345,18 +1845,8 @@
                   },
                   {
                       "Source":  "inference/distributed-inference-and-serving-architecture.md",
-                      "Target":  "production/model-serving.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "inference/distributed-inference-and-serving-architecture.md",
                       "Target":  "tools-and-infra/distributed-systems-for-ai.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "inference/distributed-inference-and-serving-architecture.md",
-                      "Target":  "tools-and-infra/distributed-systems-for-ai.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "inference/gpu-cuda-programming.md",
@@ -2365,23 +1855,8 @@
                   },
                   {
                       "Source":  "inference/gpu-cuda-programming.md",
-                      "Target":  "foundations/transformers.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "inference/gpu-cuda-programming.md",
                       "Target":  "inference/inference-optimization.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "inference/gpu-cuda-programming.md",
-                      "Target":  "inference/inference-optimization.md",
-                      "Relation":  "parent"
-                  },
-                  {
-                      "Source":  "inference/gpu-cuda-programming.md",
-                      "Target":  "production/model-serving.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "inference/gpu-cuda-programming.md",
@@ -2389,54 +1864,14 @@
                       "Relation":  "leads-to"
                   },
                   {
-                      "Source":  "inference/gpu-cuda-programming.md",
-                      "Target":  "research-frontiers/distributed-training.md",
-                      "Relation":  "related"
-                  },
-                  {
                       "Source":  "inference/inference-optimization.md",
                       "Target":  "foundations/transformers.md",
                       "Relation":  "builds-on"
                   },
                   {
                       "Source":  "inference/inference-optimization.md",
-                      "Target":  "foundations/transformers.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "inference/inference-optimization.md",
-                      "Target":  "genai.md",
-                      "Relation":  "parent"
-                  },
-                  {
-                      "Source":  "inference/inference-optimization.md",
-                      "Target":  "inference/distributed-inference-and-serving-architecture.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "inference/inference-optimization.md",
-                      "Target":  "inference/gpu-cuda-programming.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "inference/inference-optimization.md",
                       "Target":  "llms/llms-overview.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "inference/inference-optimization.md",
-                      "Target":  "llms/llms-overview.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "inference/inference-optimization.md",
-                      "Target":  "production/cost-optimization.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "inference/inference-optimization.md",
-                      "Target":  "tools-and-infra/tools-overview.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "llms/hallucination-detection.md",
@@ -2445,11 +1880,6 @@
                   },
                   {
                       "Source":  "llms/hallucination-detection.md",
-                      "Target":  "ethics-and-safety/ethics-safety-alignment.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "llms/hallucination-detection.md",
                       "Target":  "evaluation/evaluation-and-benchmarks.md",
                       "Relation":  "builds-on"
                   },
@@ -2460,18 +1890,8 @@
                   },
                   {
                       "Source":  "llms/hallucination-detection.md",
-                      "Target":  "evaluation/evaluation-and-benchmarks.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "llms/hallucination-detection.md",
                       "Target":  "llms/llms-overview.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "llms/hallucination-detection.md",
-                      "Target":  "llms/llms-overview.md",
-                      "Relation":  "parent"
                   },
                   {
                       "Source":  "llms/hallucination-detection.md",
@@ -2484,21 +1904,6 @@
                       "Relation":  "builds-on"
                   },
                   {
-                      "Source":  "llms/hallucination-detection.md",
-                      "Target":  "techniques/rag.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "llms/llm-landscape.md",
-                      "Target":  "foundations/modern-architectures.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "llms/llm-landscape.md",
-                      "Target":  "genai.md",
-                      "Relation":  "parent"
-                  },
-                  {
                       "Source":  "llms/llm-landscape.md",
                       "Target":  "inference/inference-optimization.md",
                       "Relation":  "leads-to"
@@ -2510,18 +1915,8 @@
                   },
                   {
                       "Source":  "llms/llm-landscape.md",
-                      "Target":  "llms/llms-overview.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "llms/llm-landscape.md",
                       "Target":  "llms/reasoning-models.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "llms/llm-landscape.md",
-                      "Target":  "llms/reasoning-models.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "llms/llm-landscape.md",
@@ -2540,28 +1935,8 @@
                   },
                   {
                       "Source":  "llms/llms-overview.md",
-                      "Target":  "foundations/transformers.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "llms/llms-overview.md",
-                      "Target":  "genai.md",
-                      "Relation":  "parent"
-                  },
-                  {
-                      "Source":  "llms/llms-overview.md",
-                      "Target":  "llms/hallucination-detection.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "llms/llms-overview.md",
                       "Target":  "techniques/fine-tuning.md",
                       "Relation":  "leads-to"
-                  },
-                  {
-                      "Source":  "llms/llms-overview.md",
-                      "Target":  "techniques/fine-tuning.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "llms/llms-overview.md",
@@ -2572,11 +1947,6 @@
                       "Source":  "llms/llms-overview.md",
                       "Target":  "techniques/rag.md",
                       "Relation":  "leads-to"
-                  },
-                  {
-                      "Source":  "llms/llms-overview.md",
-                      "Target":  "techniques/rag.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "llms/reasoning-models.md",
@@ -2585,16 +1955,6 @@
                   },
                   {
                       "Source":  "llms/reasoning-models.md",
-                      "Target":  "foundations/transformers.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "llms/reasoning-models.md",
-                      "Target":  "genai.md",
-                      "Relation":  "parent"
-                  },
-                  {
-                      "Source":  "llms/reasoning-models.md",
                       "Target":  "inference/inference-optimization.md",
                       "Relation":  "leads-to"
                   },
@@ -2602,11 +1962,6 @@
                       "Source":  "llms/reasoning-models.md",
                       "Target":  "llms/llms-overview.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "llms/reasoning-models.md",
-                      "Target":  "llms/llms-overview.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "llms/reasoning-models.md",
@@ -2619,19 +1974,9 @@
                       "Relation":  "builds-on"
                   },
                   {
-                      "Source":  "llms/reasoning-models.md",
-                      "Target":  "techniques/prompt-engineering.md",
-                      "Relation":  "related"
-                  },
-                  {
                       "Source":  "multimodal/computer-vision-fundamentals.md",
                       "Target":  "foundations/embeddings.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "multimodal/computer-vision-fundamentals.md",
-                      "Target":  "foundations/embeddings.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "multimodal/computer-vision-fundamentals.md",
@@ -2640,18 +1985,8 @@
                   },
                   {
                       "Source":  "multimodal/computer-vision-fundamentals.md",
-                      "Target":  "foundations/modern-architectures.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "multimodal/computer-vision-fundamentals.md",
                       "Target":  "multimodal/diffusion-models.md",
                       "Relation":  "leads-to"
-                  },
-                  {
-                      "Source":  "multimodal/computer-vision-fundamentals.md",
-                      "Target":  "multimodal/diffusion-models.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "multimodal/computer-vision-fundamentals.md",
@@ -2659,29 +1994,9 @@
                       "Relation":  "builds-on"
                   },
                   {
-                      "Source":  "multimodal/computer-vision-fundamentals.md",
-                      "Target":  "multimodal/multimodal-ai.md",
-                      "Relation":  "parent"
-                  },
-                  {
                       "Source":  "multimodal/diffusion-models.md",
                       "Target":  "foundations/transformers.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "multimodal/diffusion-models.md",
-                      "Target":  "foundations/transformers.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "multimodal/diffusion-models.md",
-                      "Target":  "genai.md",
-                      "Relation":  "parent"
-                  },
-                  {
-                      "Source":  "multimodal/diffusion-models.md",
-                      "Target":  "llms/llms-overview.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "multimodal/multimodal-ai.md",
@@ -2690,53 +2005,18 @@
                   },
                   {
                       "Source":  "multimodal/multimodal-ai.md",
-                      "Target":  "foundations/transformers.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "multimodal/multimodal-ai.md",
-                      "Target":  "genai.md",
-                      "Relation":  "parent"
-                  },
-                  {
-                      "Source":  "multimodal/multimodal-ai.md",
                       "Target":  "llms/llms-overview.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "multimodal/multimodal-ai.md",
-                      "Target":  "llms/llms-overview.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "multimodal/multimodal-ai.md",
-                      "Target":  "multimodal/computer-vision-fundamentals.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "multimodal/multimodal-ai.md",
                       "Target":  "multimodal/diffusion-models.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "multimodal/multimodal-ai.md",
-                      "Target":  "multimodal/diffusion-models.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "prerequisites/deep-learning-fundamentals.md",
                       "Target":  "foundations/transformers.md",
                       "Relation":  "leads-to"
-                  },
-                  {
-                      "Source":  "prerequisites/deep-learning-fundamentals.md",
-                      "Target":  "foundations/transformers.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "prerequisites/deep-learning-fundamentals.md",
-                      "Target":  "genai.md",
-                      "Relation":  "parent"
                   },
                   {
                       "Source":  "prerequisites/deep-learning-fundamentals.md",
@@ -2752,11 +2032,6 @@
                       "Source":  "prerequisites/deep-learning-fundamentals.md",
                       "Target":  "prerequisites/neural-networks.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "prerequisites/deep-learning-fundamentals.md",
-                      "Target":  "prerequisites/neural-networks.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "prerequisites/deep-learning-fundamentals.md",
@@ -2765,18 +2040,8 @@
                   },
                   {
                       "Source":  "prerequisites/deep-learning-fundamentals.md",
-                      "Target":  "prerequisites/python-for-ai.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "prerequisites/deep-learning-fundamentals.md",
                       "Target":  "techniques/fine-tuning.md",
                       "Relation":  "leads-to"
-                  },
-                  {
-                      "Source":  "prerequisites/deep-learning-fundamentals.md",
-                      "Target":  "techniques/fine-tuning.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "prerequisites/linear-algebra-for-ai.md",
@@ -2785,28 +2050,13 @@
                   },
                   {
                       "Source":  "prerequisites/linear-algebra-for-ai.md",
-                      "Target":  "foundations/attention-mechanism.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "prerequisites/linear-algebra-for-ai.md",
                       "Target":  "foundations/embeddings.md",
                       "Relation":  "leads-to"
-                  },
-                  {
-                      "Source":  "prerequisites/linear-algebra-for-ai.md",
-                      "Target":  "foundations/embeddings.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "prerequisites/linear-algebra-for-ai.md",
                       "Target":  "foundations/transformers.md",
                       "Relation":  "leads-to"
-                  },
-                  {
-                      "Source":  "prerequisites/linear-algebra-for-ai.md",
-                      "Target":  "genai.md",
-                      "Relation":  "parent"
                   },
                   {
                       "Source":  "prerequisites/linear-algebra-for-ai.md",
@@ -2814,44 +2064,19 @@
                       "Relation":  "leads-to"
                   },
                   {
-                      "Source":  "prerequisites/linear-algebra-for-ai.md",
-                      "Target":  "prerequisites/neural-networks.md",
-                      "Relation":  "related"
-                  },
-                  {
                       "Source":  "prerequisites/neural-networks.md",
                       "Target":  "foundations/transformers.md",
                       "Relation":  "leads-to"
                   },
                   {
                       "Source":  "prerequisites/neural-networks.md",
-                      "Target":  "foundations/transformers.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "prerequisites/neural-networks.md",
-                      "Target":  "genai.md",
-                      "Relation":  "parent"
-                  },
-                  {
-                      "Source":  "prerequisites/neural-networks.md",
                       "Target":  "prerequisites/deep-learning-fundamentals.md",
                       "Relation":  "leads-to"
-                  },
-                  {
-                      "Source":  "prerequisites/neural-networks.md",
-                      "Target":  "prerequisites/deep-learning-fundamentals.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "prerequisites/neural-networks.md",
                       "Target":  "prerequisites/linear-algebra-for-ai.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "prerequisites/neural-networks.md",
-                      "Target":  "prerequisites/linear-algebra-for-ai.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "prerequisites/neural-networks.md",
@@ -2865,38 +2090,13 @@
                   },
                   {
                       "Source":  "prerequisites/nlp-fundamentals.md",
-                      "Target":  "foundations/embeddings.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "prerequisites/nlp-fundamentals.md",
-                      "Target":  "foundations/tokenization.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "prerequisites/nlp-fundamentals.md",
                       "Target":  "foundations/transformers.md",
                       "Relation":  "leads-to"
                   },
                   {
                       "Source":  "prerequisites/nlp-fundamentals.md",
-                      "Target":  "foundations/transformers.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "prerequisites/nlp-fundamentals.md",
-                      "Target":  "genai.md",
-                      "Relation":  "parent"
-                  },
-                  {
-                      "Source":  "prerequisites/nlp-fundamentals.md",
                       "Target":  "llms/llms-overview.md",
                       "Relation":  "leads-to"
-                  },
-                  {
-                      "Source":  "prerequisites/nlp-fundamentals.md",
-                      "Target":  "llms/llms-overview.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "prerequisites/nlp-fundamentals.md",
@@ -2910,28 +2110,13 @@
                   },
                   {
                       "Source":  "prerequisites/probability-and-statistics.md",
-                      "Target":  "genai.md",
-                      "Relation":  "parent"
-                  },
-                  {
-                      "Source":  "prerequisites/probability-and-statistics.md",
                       "Target":  "llms/llms-overview.md",
                       "Relation":  "leads-to"
                   },
                   {
                       "Source":  "prerequisites/probability-and-statistics.md",
-                      "Target":  "llms/llms-overview.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "prerequisites/probability-and-statistics.md",
                       "Target":  "prerequisites/deep-learning-fundamentals.md",
                       "Relation":  "leads-to"
-                  },
-                  {
-                      "Source":  "prerequisites/probability-and-statistics.md",
-                      "Target":  "prerequisites/deep-learning-fundamentals.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "prerequisites/probability-and-statistics.md",
@@ -2939,24 +2124,9 @@
                       "Relation":  "leads-to"
                   },
                   {
-                      "Source":  "prerequisites/probability-and-statistics.md",
-                      "Target":  "prerequisites/neural-networks.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "prerequisites/python-for-ai.md",
-                      "Target":  "genai.md",
-                      "Relation":  "parent"
-                  },
-                  {
                       "Source":  "prerequisites/python-for-ai.md",
                       "Target":  "prerequisites/deep-learning-fundamentals.md",
                       "Relation":  "leads-to"
-                  },
-                  {
-                      "Source":  "prerequisites/python-for-ai.md",
-                      "Target":  "prerequisites/deep-learning-fundamentals.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "prerequisites/python-for-ai.md",
@@ -2965,23 +2135,8 @@
                   },
                   {
                       "Source":  "prerequisites/python-for-ai.md",
-                      "Target":  "prerequisites/linear-algebra-for-ai.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "prerequisites/python-for-ai.md",
                       "Target":  "prerequisites/neural-networks.md",
                       "Relation":  "leads-to"
-                  },
-                  {
-                      "Source":  "prerequisites/python-for-ai.md",
-                      "Target":  "prerequisites/neural-networks.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "production/ai-system-design.md",
-                      "Target":  "evaluation/evaluation-and-benchmarks.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "production/ai-system-design.md",
@@ -3000,18 +2155,8 @@
                   },
                   {
                       "Source":  "production/ai-system-design.md",
-                      "Target":  "production/llmops.md",
-                      "Relation":  "parent"
-                  },
-                  {
-                      "Source":  "production/ai-system-design.md",
                       "Target":  "techniques/rag.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "production/ai-system-design.md",
-                      "Target":  "techniques/rag.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "production/ai-system-design.md",
@@ -3025,11 +2170,6 @@
                   },
                   {
                       "Source":  "production/cicd-for-ml.md",
-                      "Target":  "evaluation/llm-evaluation-deep-dive.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "production/cicd-for-ml.md",
                       "Target":  "production/cost-optimization.md",
                       "Relation":  "leads-to"
                   },
@@ -3040,28 +2180,8 @@
                   },
                   {
                       "Source":  "production/cicd-for-ml.md",
-                      "Target":  "production/docker-and-kubernetes.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "production/cicd-for-ml.md",
-                      "Target":  "production/llmops.md",
-                      "Relation":  "parent"
-                  },
-                  {
-                      "Source":  "production/cicd-for-ml.md",
-                      "Target":  "production/model-serving.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "production/cicd-for-ml.md",
                       "Target":  "production/monitoring-observability.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "production/cicd-for-ml.md",
-                      "Target":  "production/monitoring-observability.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "production/classical-ml-for-genai.md",
@@ -3075,28 +2195,13 @@
                   },
                   {
                       "Source":  "production/classical-ml-for-genai.md",
-                      "Target":  "production/cost-optimization.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "production/classical-ml-for-genai.md",
                       "Target":  "production/llmops.md",
                       "Relation":  "builds-on"
                   },
                   {
                       "Source":  "production/classical-ml-for-genai.md",
-                      "Target":  "production/llmops.md",
-                      "Relation":  "parent"
-                  },
-                  {
-                      "Source":  "production/classical-ml-for-genai.md",
                       "Target":  "tools-and-infra/ml-experiment-and-data-management.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "production/classical-ml-for-genai.md",
-                      "Target":  "tools-and-infra/ml-experiment-and-data-management.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "production/cost-optimization.md",
@@ -3105,38 +2210,13 @@
                   },
                   {
                       "Source":  "production/cost-optimization.md",
-                      "Target":  "inference/inference-optimization.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "production/cost-optimization.md",
-                      "Target":  "production/docker-and-kubernetes.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "production/cost-optimization.md",
-                      "Target":  "production/llmops.md",
-                      "Relation":  "parent"
-                  },
-                  {
-                      "Source":  "production/cost-optimization.md",
                       "Target":  "production/model-serving.md",
                       "Relation":  "builds-on"
                   },
                   {
                       "Source":  "production/cost-optimization.md",
-                      "Target":  "production/model-serving.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "production/cost-optimization.md",
                       "Target":  "production/monitoring-observability.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "production/cost-optimization.md",
-                      "Target":  "production/monitoring-observability.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "production/data-flywheel-design.md",
@@ -3145,38 +2225,13 @@
                   },
                   {
                       "Source":  "production/data-flywheel-design.md",
-                      "Target":  "evaluation/llm-evaluation-deep-dive.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "production/data-flywheel-design.md",
-                      "Target":  "production/llmops.md",
-                      "Relation":  "parent"
-                  },
-                  {
-                      "Source":  "production/data-flywheel-design.md",
                       "Target":  "production/monitoring-observability.md",
                       "Relation":  "builds-on"
                   },
                   {
                       "Source":  "production/data-flywheel-design.md",
-                      "Target":  "production/monitoring-observability.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "production/data-flywheel-design.md",
                       "Target":  "techniques/fine-tuning.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "production/data-flywheel-design.md",
-                      "Target":  "techniques/fine-tuning.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "production/data-flywheel-design.md",
-                      "Target":  "techniques/synthetic-data-and-data-engineering.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "production/docker-and-kubernetes.md",
@@ -3190,43 +2245,18 @@
                   },
                   {
                       "Source":  "production/docker-and-kubernetes.md",
-                      "Target":  "production/cicd-for-ml.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "production/docker-and-kubernetes.md",
-                      "Target":  "production/cost-optimization.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "production/docker-and-kubernetes.md",
                       "Target":  "production/llmops.md",
                       "Relation":  "builds-on"
                   },
                   {
                       "Source":  "production/docker-and-kubernetes.md",
-                      "Target":  "production/llmops.md",
-                      "Relation":  "parent"
-                  },
-                  {
-                      "Source":  "production/docker-and-kubernetes.md",
                       "Target":  "production/model-serving.md",
                       "Relation":  "leads-to"
                   },
                   {
                       "Source":  "production/docker-and-kubernetes.md",
-                      "Target":  "production/model-serving.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "production/docker-and-kubernetes.md",
                       "Target":  "production/monitoring-observability.md",
                       "Relation":  "leads-to"
-                  },
-                  {
-                      "Source":  "production/docker-and-kubernetes.md",
-                      "Target":  "production/monitoring-observability.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "production/document-parsing-and-extraction.md",
@@ -3240,28 +2270,8 @@
                   },
                   {
                       "Source":  "production/document-parsing-and-extraction.md",
-                      "Target":  "production/llmops.md",
-                      "Relation":  "parent"
-                  },
-                  {
-                      "Source":  "production/document-parsing-and-extraction.md",
-                      "Target":  "techniques/context-engineering.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "production/document-parsing-and-extraction.md",
                       "Target":  "techniques/rag.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "production/document-parsing-and-extraction.md",
-                      "Target":  "techniques/rag.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "production/document-parsing-and-extraction.md",
-                      "Target":  "tools-and-infra/vector-databases.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "production/guardrails-and-content-filtering.md",
@@ -3270,18 +2280,8 @@
                   },
                   {
                       "Source":  "production/guardrails-and-content-filtering.md",
-                      "Target":  "ethics-and-safety/adversarial-ml-and-ai-security.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "production/guardrails-and-content-filtering.md",
                       "Target":  "ethics-and-safety/owasp-llm-top-10.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "production/guardrails-and-content-filtering.md",
-                      "Target":  "ethics-and-safety/owasp-llm-top-10.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "production/guardrails-and-content-filtering.md",
@@ -3289,24 +2289,9 @@
                       "Relation":  "builds-on"
                   },
                   {
-                      "Source":  "production/guardrails-and-content-filtering.md",
-                      "Target":  "production/llmops.md",
-                      "Relation":  "parent"
-                  },
-                  {
-                      "Source":  "production/guardrails-and-content-filtering.md",
-                      "Target":  "production/monitoring-observability.md",
-                      "Relation":  "related"
-                  },
-                  {
                       "Source":  "production/latency-and-throughput-engineering.md",
                       "Target":  "inference/distributed-inference-and-serving-architecture.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "production/latency-and-throughput-engineering.md",
-                      "Target":  "inference/distributed-inference-and-serving-architecture.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "production/latency-and-throughput-engineering.md",
@@ -3325,33 +2310,13 @@
                   },
                   {
                       "Source":  "production/latency-and-throughput-engineering.md",
-                      "Target":  "production/cost-optimization.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "production/latency-and-throughput-engineering.md",
-                      "Target":  "production/llmops.md",
-                      "Relation":  "parent"
-                  },
-                  {
-                      "Source":  "production/latency-and-throughput-engineering.md",
                       "Target":  "production/model-serving.md",
                       "Relation":  "builds-on"
                   },
                   {
                       "Source":  "production/latency-and-throughput-engineering.md",
-                      "Target":  "production/model-serving.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "production/latency-and-throughput-engineering.md",
                       "Target":  "production/monitoring-observability.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "production/latency-and-throughput-engineering.md",
-                      "Target":  "production/monitoring-observability.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "production/llmops.md",
@@ -3360,28 +2325,8 @@
                   },
                   {
                       "Source":  "production/llmops.md",
-                      "Target":  "ethics-and-safety/ethics-safety-alignment.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "production/llmops.md",
                       "Target":  "evaluation/evaluation-and-benchmarks.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "production/llmops.md",
-                      "Target":  "evaluation/evaluation-and-benchmarks.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "production/llmops.md",
-                      "Target":  "genai.md",
-                      "Relation":  "parent"
-                  },
-                  {
-                      "Source":  "production/llmops.md",
-                      "Target":  "inference/inference-optimization.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "production/llmops.md",
@@ -3389,64 +2334,14 @@
                       "Relation":  "builds-on"
                   },
                   {
-                      "Source":  "production/llmops.md",
-                      "Target":  "production/ai-system-design.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "production/llmops.md",
-                      "Target":  "production/cicd-for-ml.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "production/llmops.md",
-                      "Target":  "production/cost-optimization.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "production/llmops.md",
-                      "Target":  "production/docker-and-kubernetes.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "production/llmops.md",
-                      "Target":  "production/model-serving.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "production/llmops.md",
-                      "Target":  "production/monitoring-observability.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "production/llmops.md",
-                      "Target":  "tools-and-infra/tools-overview.md",
-                      "Relation":  "related"
-                  },
-                  {
                       "Source":  "production/llm-routing-and-model-selection.md",
                       "Target":  "llms/llm-landscape.md",
                       "Relation":  "builds-on"
                   },
                   {
                       "Source":  "production/llm-routing-and-model-selection.md",
-                      "Target":  "llms/llm-landscape.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "production/llm-routing-and-model-selection.md",
                       "Target":  "production/cost-optimization.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "production/llm-routing-and-model-selection.md",
-                      "Target":  "production/cost-optimization.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "production/llm-routing-and-model-selection.md",
-                      "Target":  "production/llmops.md",
-                      "Relation":  "parent"
                   },
                   {
                       "Source":  "production/llm-routing-and-model-selection.md",
@@ -3454,24 +2349,9 @@
                       "Relation":  "builds-on"
                   },
                   {
-                      "Source":  "production/llm-routing-and-model-selection.md",
-                      "Target":  "production/model-serving.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "production/llm-routing-and-model-selection.md",
-                      "Target":  "techniques/context-engineering.md",
-                      "Relation":  "related"
-                  },
-                  {
                       "Source":  "production/model-serving.md",
                       "Target":  "inference/inference-optimization.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "production/model-serving.md",
-                      "Target":  "inference/inference-optimization.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "production/model-serving.md",
@@ -3485,33 +2365,13 @@
                   },
                   {
                       "Source":  "production/model-serving.md",
-                      "Target":  "production/cost-optimization.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "production/model-serving.md",
                       "Target":  "production/docker-and-kubernetes.md",
                       "Relation":  "builds-on"
                   },
                   {
                       "Source":  "production/model-serving.md",
-                      "Target":  "production/docker-and-kubernetes.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "production/model-serving.md",
-                      "Target":  "production/llmops.md",
-                      "Relation":  "parent"
-                  },
-                  {
-                      "Source":  "production/model-serving.md",
                       "Target":  "production/monitoring-observability.md",
                       "Relation":  "leads-to"
-                  },
-                  {
-                      "Source":  "production/model-serving.md",
-                      "Target":  "production/monitoring-observability.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "production/monitoring-observability.md",
@@ -3520,18 +2380,8 @@
                   },
                   {
                       "Source":  "production/monitoring-observability.md",
-                      "Target":  "llms/hallucination-detection.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "production/monitoring-observability.md",
                       "Target":  "production/cicd-for-ml.md",
                       "Relation":  "leads-to"
-                  },
-                  {
-                      "Source":  "production/monitoring-observability.md",
-                      "Target":  "production/cicd-for-ml.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "production/monitoring-observability.md",
@@ -3540,43 +2390,18 @@
                   },
                   {
                       "Source":  "production/monitoring-observability.md",
-                      "Target":  "production/cost-optimization.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "production/monitoring-observability.md",
                       "Target":  "production/llmops.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "production/monitoring-observability.md",
-                      "Target":  "production/llmops.md",
-                      "Relation":  "parent"
-                  },
-                  {
-                      "Source":  "production/monitoring-observability.md",
-                      "Target":  "production/model-serving.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "research-frontiers/distributed-training.md",
                       "Target":  "foundations/scaling-laws-and-pretraining.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "research-frontiers/distributed-training.md",
-                      "Target":  "foundations/scaling-laws-and-pretraining.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "research-frontiers/distributed-training.md",
                       "Target":  "foundations/transformers.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "research-frontiers/distributed-training.md",
-                      "Target":  "genai.md",
-                      "Relation":  "parent"
                   },
                   {
                       "Source":  "research-frontiers/distributed-training.md",
@@ -3590,63 +2415,18 @@
                   },
                   {
                       "Source":  "research-frontiers/distributed-training.md",
-                      "Target":  "inference/gpu-cuda-programming.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "research-frontiers/distributed-training.md",
-                      "Target":  "inference/inference-optimization.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "research-frontiers/distributed-training.md",
                       "Target":  "techniques/advanced-fine-tuning.md",
                       "Relation":  "leads-to"
-                  },
-                  {
-                      "Source":  "research-frontiers/distributed-training.md",
-                      "Target":  "techniques/advanced-fine-tuning.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "research-frontiers/distributed-training.md",
-                      "Target":  "tools-and-infra/cloud-ml-services.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "research-frontiers/distributed-training.md",
-                      "Target":  "tools-and-infra/distributed-systems-for-ai.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "research-frontiers/interpretability.md",
                       "Target":  "ethics-and-safety/ethics-safety-alignment.md",
                       "Relation":  "leads-to"
-                  },
-                  {
-                      "Source":  "research-frontiers/interpretability.md",
-                      "Target":  "ethics-and-safety/ethics-safety-alignment.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "research-frontiers/interpretability.md",
                       "Target":  "foundations/transformers.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "research-frontiers/interpretability.md",
-                      "Target":  "foundations/transformers.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "research-frontiers/interpretability.md",
-                      "Target":  "genai.md",
-                      "Relation":  "parent"
-                  },
-                  {
-                      "Source":  "research-frontiers/interpretability.md",
-                      "Target":  "llms/llms-overview.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "research-frontiers/interpretability.md",
@@ -3665,28 +2445,8 @@
                   },
                   {
                       "Source":  "research-frontiers/research-methodology-and-paper-reading.md",
-                      "Target":  "evaluation/llm-evaluation-deep-dive.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "research-frontiers/research-methodology-and-paper-reading.md",
-                      "Target":  "genai.md",
-                      "Relation":  "parent"
-                  },
-                  {
-                      "Source":  "research-frontiers/research-methodology-and-paper-reading.md",
-                      "Target":  "research-frontiers/distributed-training.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "research-frontiers/research-methodology-and-paper-reading.md",
                       "Target":  "research-frontiers/interpretability.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "research-frontiers/research-methodology-and-paper-reading.md",
-                      "Target":  "research-frontiers/interpretability.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "techniques/advanced-fine-tuning.md",
@@ -3695,18 +2455,8 @@
                   },
                   {
                       "Source":  "techniques/advanced-fine-tuning.md",
-                      "Target":  "techniques/distillation-and-compression.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "techniques/advanced-fine-tuning.md",
                       "Target":  "techniques/fine-tuning.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "techniques/advanced-fine-tuning.md",
-                      "Target":  "techniques/fine-tuning.md",
-                      "Relation":  "parent"
                   },
                   {
                       "Source":  "techniques/advanced-fine-tuning.md",
@@ -3715,18 +2465,8 @@
                   },
                   {
                       "Source":  "techniques/advanced-fine-tuning.md",
-                      "Target":  "techniques/rl-alignment.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "techniques/advanced-fine-tuning.md",
                       "Target":  "techniques/synthetic-data-and-data-engineering.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "techniques/advanced-fine-tuning.md",
-                      "Target":  "techniques/synthetic-data-and-data-engineering.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "techniques/context-engineering.md",
@@ -3735,21 +2475,6 @@
                   },
                   {
                       "Source":  "techniques/context-engineering.md",
-                      "Target":  "genai.md",
-                      "Relation":  "parent"
-                  },
-                  {
-                      "Source":  "techniques/context-engineering.md",
-                      "Target":  "inference/inference-optimization.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "techniques/context-engineering.md",
-                      "Target":  "llms/llms-overview.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "techniques/context-engineering.md",
                       "Target":  "production/llmops.md",
                       "Relation":  "leads-to"
                   },
@@ -3760,33 +2485,8 @@
                   },
                   {
                       "Source":  "techniques/context-engineering.md",
-                      "Target":  "techniques/prompt-engineering.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "techniques/context-engineering.md",
                       "Target":  "techniques/rag.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "techniques/context-engineering.md",
-                      "Target":  "techniques/rag.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "techniques/continual-learning.md",
-                      "Target":  "ethics-and-safety/ethics-safety-alignment.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "techniques/continual-learning.md",
-                      "Target":  "genai.md",
-                      "Relation":  "parent"
-                  },
-                  {
-                      "Source":  "techniques/continual-learning.md",
-                      "Target":  "llms/llms-overview.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "techniques/continual-learning.md",
@@ -3797,11 +2497,6 @@
                       "Source":  "techniques/continual-learning.md",
                       "Target":  "techniques/fine-tuning.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "techniques/continual-learning.md",
-                      "Target":  "techniques/fine-tuning.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "techniques/continual-learning.md",
@@ -3810,23 +2505,8 @@
                   },
                   {
                       "Source":  "techniques/distillation-and-compression.md",
-                      "Target":  "foundations/modern-architectures.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "techniques/distillation-and-compression.md",
-                      "Target":  "genai.md",
-                      "Relation":  "parent"
-                  },
-                  {
-                      "Source":  "techniques/distillation-and-compression.md",
                       "Target":  "inference/inference-optimization.md",
                       "Relation":  "leads-to"
-                  },
-                  {
-                      "Source":  "techniques/distillation-and-compression.md",
-                      "Target":  "inference/inference-optimization.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "techniques/distillation-and-compression.md",
@@ -3837,11 +2517,6 @@
                       "Source":  "techniques/distillation-and-compression.md",
                       "Target":  "techniques/fine-tuning.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "techniques/distillation-and-compression.md",
-                      "Target":  "techniques/fine-tuning.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "techniques/embedding-fine-tuning.md",
@@ -3850,18 +2525,8 @@
                   },
                   {
                       "Source":  "techniques/embedding-fine-tuning.md",
-                      "Target":  "evaluation/retrieval-evaluation.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "techniques/embedding-fine-tuning.md",
                       "Target":  "foundations/embeddings.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "techniques/embedding-fine-tuning.md",
-                      "Target":  "foundations/embeddings.md",
-                      "Relation":  "parent"
                   },
                   {
                       "Source":  "techniques/embedding-fine-tuning.md",
@@ -3870,23 +2535,8 @@
                   },
                   {
                       "Source":  "techniques/embedding-fine-tuning.md",
-                      "Target":  "techniques/fine-tuning.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "techniques/embedding-fine-tuning.md",
                       "Target":  "techniques/rag.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "techniques/embedding-fine-tuning.md",
-                      "Target":  "techniques/rag.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "techniques/embedding-fine-tuning.md",
-                      "Target":  "tools-and-infra/vector-databases.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "techniques/fine-tuning.md",
@@ -3895,28 +2545,8 @@
                   },
                   {
                       "Source":  "techniques/fine-tuning.md",
-                      "Target":  "genai.md",
-                      "Relation":  "parent"
-                  },
-                  {
-                      "Source":  "techniques/fine-tuning.md",
                       "Target":  "llms/llms-overview.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "techniques/fine-tuning.md",
-                      "Target":  "llms/llms-overview.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "techniques/fine-tuning.md",
-                      "Target":  "techniques/advanced-fine-tuning.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "techniques/fine-tuning.md",
-                      "Target":  "techniques/prompt-engineering.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "techniques/fine-tuning.md",
@@ -3924,34 +2554,14 @@
                       "Relation":  "compare-with"
                   },
                   {
-                      "Source":  "techniques/fine-tuning.md",
-                      "Target":  "techniques/rag.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "techniques/function-calling-and-structured-output.md",
-                      "Target":  "genai.md",
-                      "Relation":  "parent"
-                  },
-                  {
                       "Source":  "techniques/function-calling-and-structured-output.md",
                       "Target":  "llms/llms-overview.md",
                       "Relation":  "builds-on"
                   },
                   {
                       "Source":  "techniques/function-calling-and-structured-output.md",
-                      "Target":  "llms/llms-overview.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "techniques/function-calling-and-structured-output.md",
                       "Target":  "techniques/prompt-engineering.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "techniques/function-calling-and-structured-output.md",
-                      "Target":  "techniques/prompt-engineering.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "techniques/function-calling-and-structured-output.md",
@@ -3959,39 +2569,14 @@
                       "Relation":  "leads-to"
                   },
                   {
-                      "Source":  "techniques/function-calling-and-structured-output.md",
-                      "Target":  "techniques/rag.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "techniques/graph-rag.md",
-                      "Target":  "genai.md",
-                      "Relation":  "parent"
-                  },
-                  {
-                      "Source":  "techniques/graph-rag.md",
-                      "Target":  "techniques/context-engineering.md",
-                      "Relation":  "related"
-                  },
-                  {
                       "Source":  "techniques/graph-rag.md",
                       "Target":  "techniques/rag.md",
                       "Relation":  "builds-on"
                   },
                   {
                       "Source":  "techniques/graph-rag.md",
-                      "Target":  "techniques/rag.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "techniques/graph-rag.md",
                       "Target":  "tools-and-infra/vector-databases.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "techniques/graph-rag.md",
-                      "Target":  "tools-and-infra/vector-databases.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "techniques/long-context-engineering.md",
@@ -4000,28 +2585,8 @@
                   },
                   {
                       "Source":  "techniques/long-context-engineering.md",
-                      "Target":  "foundations/attention-mechanism.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "techniques/long-context-engineering.md",
-                      "Target":  "foundations/transformers.md",
-                      "Relation":  "parent"
-                  },
-                  {
-                      "Source":  "techniques/long-context-engineering.md",
-                      "Target":  "inference/inference-optimization.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "techniques/long-context-engineering.md",
                       "Target":  "techniques/context-engineering.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "techniques/long-context-engineering.md",
-                      "Target":  "techniques/context-engineering.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "techniques/long-context-engineering.md",
@@ -4029,24 +2594,9 @@
                       "Relation":  "builds-on"
                   },
                   {
-                      "Source":  "techniques/long-context-engineering.md",
-                      "Target":  "techniques/rag.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "techniques/prompt-engineering.md",
-                      "Target":  "genai.md",
-                      "Relation":  "parent"
-                  },
-                  {
                       "Source":  "techniques/prompt-engineering.md",
                       "Target":  "llms/llms-overview.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "techniques/prompt-engineering.md",
-                      "Target":  "llms/llms-overview.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "techniques/prompt-engineering.md",
@@ -4064,34 +2614,14 @@
                       "Relation":  "leads-to"
                   },
                   {
-                      "Source":  "techniques/prompt-engineering.md",
-                      "Target":  "techniques/rag.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "techniques/rag.md",
-                      "Target":  "genai.md",
-                      "Relation":  "parent"
-                  },
-                  {
                       "Source":  "techniques/rag.md",
                       "Target":  "llms/llms-overview.md",
                       "Relation":  "builds-on"
                   },
                   {
                       "Source":  "techniques/rag.md",
-                      "Target":  "llms/llms-overview.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "techniques/rag.md",
                       "Target":  "techniques/fine-tuning.md",
                       "Relation":  "compare-with"
-                  },
-                  {
-                      "Source":  "techniques/rag.md",
-                      "Target":  "techniques/fine-tuning.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "techniques/rag.md",
@@ -4105,28 +2635,8 @@
                   },
                   {
                       "Source":  "techniques/rl-alignment.md",
-                      "Target":  "ethics-and-safety/ethics-safety-alignment.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "techniques/rl-alignment.md",
-                      "Target":  "genai.md",
-                      "Relation":  "parent"
-                  },
-                  {
-                      "Source":  "techniques/rl-alignment.md",
-                      "Target":  "llms/llms-overview.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "techniques/rl-alignment.md",
                       "Target":  "llms/reasoning-models.md",
                       "Relation":  "leads-to"
-                  },
-                  {
-                      "Source":  "techniques/rl-alignment.md",
-                      "Target":  "llms/reasoning-models.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "techniques/rl-alignment.md",
@@ -4137,11 +2647,6 @@
                       "Source":  "techniques/rl-alignment.md",
                       "Target":  "techniques/fine-tuning.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "techniques/rl-alignment.md",
-                      "Target":  "techniques/fine-tuning.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "techniques/synthetic-data-and-data-engineering.md",
@@ -4150,38 +2655,13 @@
                   },
                   {
                       "Source":  "techniques/synthetic-data-and-data-engineering.md",
-                      "Target":  "genai.md",
-                      "Relation":  "parent"
-                  },
-                  {
-                      "Source":  "techniques/synthetic-data-and-data-engineering.md",
-                      "Target":  "llms/llms-overview.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "techniques/synthetic-data-and-data-engineering.md",
                       "Target":  "techniques/distillation-and-compression.md",
                       "Relation":  "leads-to"
                   },
                   {
                       "Source":  "techniques/synthetic-data-and-data-engineering.md",
-                      "Target":  "techniques/distillation-and-compression.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "techniques/synthetic-data-and-data-engineering.md",
                       "Target":  "techniques/fine-tuning.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "techniques/synthetic-data-and-data-engineering.md",
-                      "Target":  "techniques/fine-tuning.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "tools-and-infra/cloud-ml-services.md",
-                      "Target":  "production/docker-and-kubernetes.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "tools-and-infra/cloud-ml-services.md",
@@ -4190,23 +2670,8 @@
                   },
                   {
                       "Source":  "tools-and-infra/cloud-ml-services.md",
-                      "Target":  "production/llmops.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "tools-and-infra/cloud-ml-services.md",
-                      "Target":  "tools-and-infra/ml-experiment-and-data-management.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "tools-and-infra/cloud-ml-services.md",
                       "Target":  "tools-and-infra/tools-overview.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "tools-and-infra/cloud-ml-services.md",
-                      "Target":  "tools-and-infra/tools-overview.md",
-                      "Relation":  "parent"
                   },
                   {
                       "Source":  "tools-and-infra/distributed-systems-for-ai.md",
@@ -4215,38 +2680,13 @@
                   },
                   {
                       "Source":  "tools-and-infra/distributed-systems-for-ai.md",
-                      "Target":  "inference/distributed-inference-and-serving-architecture.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "tools-and-infra/distributed-systems-for-ai.md",
                       "Target":  "production/ai-system-design.md",
                       "Relation":  "builds-on"
                   },
                   {
                       "Source":  "tools-and-infra/distributed-systems-for-ai.md",
-                      "Target":  "production/ai-system-design.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "tools-and-infra/distributed-systems-for-ai.md",
                       "Target":  "production/model-serving.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "tools-and-infra/distributed-systems-for-ai.md",
-                      "Target":  "production/model-serving.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "tools-and-infra/distributed-systems-for-ai.md",
-                      "Target":  "tools-and-infra/cloud-ml-services.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "tools-and-infra/distributed-systems-for-ai.md",
-                      "Target":  "tools-and-infra/tools-overview.md",
-                      "Relation":  "parent"
                   },
                   {
                       "Source":  "tools-and-infra/ml-experiment-and-data-management.md",
@@ -4255,53 +2695,18 @@
                   },
                   {
                       "Source":  "tools-and-infra/ml-experiment-and-data-management.md",
-                      "Target":  "production/cicd-for-ml.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "tools-and-infra/ml-experiment-and-data-management.md",
                       "Target":  "production/llmops.md",
                       "Relation":  "leads-to"
                   },
                   {
                       "Source":  "tools-and-infra/ml-experiment-and-data-management.md",
-                      "Target":  "production/llmops.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "tools-and-infra/ml-experiment-and-data-management.md",
-                      "Target":  "production/monitoring-observability.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "tools-and-infra/ml-experiment-and-data-management.md",
                       "Target":  "tools-and-infra/cloud-ml-services.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "tools-and-infra/ml-experiment-and-data-management.md",
-                      "Target":  "tools-and-infra/cloud-ml-services.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "tools-and-infra/ml-experiment-and-data-management.md",
-                      "Target":  "tools-and-infra/tools-overview.md",
-                      "Relation":  "parent"
-                  },
-                  {
-                      "Source":  "tools-and-infra/tools-overview.md",
-                      "Target":  "genai.md",
-                      "Relation":  "parent"
                   },
                   {
                       "Source":  "tools-and-infra/tools-overview.md",
                       "Target":  "llms/llms-overview.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "tools-and-infra/tools-overview.md",
-                      "Target":  "llms/llms-overview.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "tools-and-infra/tools-overview.md",
@@ -4309,49 +2714,14 @@
                       "Relation":  "builds-on"
                   },
                   {
-                      "Source":  "tools-and-infra/tools-overview.md",
-                      "Target":  "techniques/rag.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "tools-and-infra/tools-overview.md",
-                      "Target":  "tools-and-infra/cloud-ml-services.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "tools-and-infra/tools-overview.md",
-                      "Target":  "tools-and-infra/distributed-systems-for-ai.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "tools-and-infra/tools-overview.md",
-                      "Target":  "tools-and-infra/ml-experiment-and-data-management.md",
-                      "Relation":  "related"
-                  },
-                  {
                       "Source":  "tools-and-infra/vector-databases.md",
                       "Target":  "llms/llms-overview.md",
                       "Relation":  "builds-on"
-                  },
-                  {
-                      "Source":  "tools-and-infra/vector-databases.md",
-                      "Target":  "llms/llms-overview.md",
-                      "Relation":  "related"
                   },
                   {
                       "Source":  "tools-and-infra/vector-databases.md",
                       "Target":  "techniques/rag.md",
                       "Relation":  "leads-to"
-                  },
-                  {
-                      "Source":  "tools-and-infra/vector-databases.md",
-                      "Target":  "techniques/rag.md",
-                      "Relation":  "related"
-                  },
-                  {
-                      "Source":  "tools-and-infra/vector-databases.md",
-                      "Target":  "tools-and-infra/tools-overview.md",
-                      "Relation":  "parent"
                   }
               ]
 }

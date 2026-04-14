@@ -4,8 +4,8 @@ tags: [career, research, infrastructure, foundation-models, distributed-training
 type: reference
 difficulty: advanced
 status: published
-parent: "[[./genai-career-roles-universal]]"
-related: ["[[./roles/llm-engineer]]", "[[./roles/ml-engineer]]", "[[./roles/mlops-engineer]]"]
+parent: "./genai-career-roles-universal.md"
+related: ["./roles/llm-engineer.md", "./roles/ml-engineer.md", "./roles/mlops-engineer.md"]
 source: "Repo synthesis from the universal career reference and linked notes"
 created: 2026-04-12
 updated: 2026-04-12

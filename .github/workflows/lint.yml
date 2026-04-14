@@ -27,3 +27,7 @@ jobs:
       - name: Run markdown quality checks
         shell: pwsh
         run: powershell -ExecutionPolicy Bypass -File scripts/markdown_quality_check.ps1
+
+      - name: Check content compliance (failure modes + exercises)
+        shell: pwsh
+        run: powershell -ExecutionPolicy Bypass -File scripts/check_content_compliance.ps1

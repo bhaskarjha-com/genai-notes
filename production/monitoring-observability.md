@@ -5,8 +5,8 @@ type: reference
 difficulty: advanced
 status: published
 last_verified: 2026-04
-parent: "[[llmops]]"
-related: ["[[model-serving]]", "[[cicd-for-ml]]", "[[cost-optimization]]", "[[../agents/agent-evaluation]]", "[[../llms/hallucination-detection]]"]
+parent: "llmops.md"
+related: ["model-serving.md", "cicd-for-ml.md", "cost-optimization.md", "../agents/agent-evaluation.md", "../llms/hallucination-detection.md"]
 source: "Multiple - see Sources"
 created: 2026-04-12
 updated: 2026-04-12
@@ -193,6 +193,32 @@ Last verified for example categories and ecosystem naming: 2026-04.
 | Compare with | Traditional APM and log-only monitoring |
 | Cross-domain | SRE, analytics engineering, experimentation |
 
+
+---
+
+## ◆ Production Failure Modes
+
+| Failure | Symptoms | Root Cause | Mitigation |
+|---------|----------|------------|------------|
+| **Alert fatigue** | Team ignores alerts because too many are non-actionable | Thresholds too sensitive, no severity tiers | Tiered alerting (P0-P3), alert correlation, runbook links |
+| **Metric cardinality explosion** | Monitoring system slows or crashes | Unbounded label values (per-user metrics) | Bounded label sets, metric aggregation, pre-aggregated dashboards |
+| **LLM quality blind spots** | Quality degrades but no alert fires | Only tracking latency/throughput, not output quality | LLM-as-judge sampling, drift detection, user feedback loops |
+| **Log volume cost** | Logging costs exceed inference costs | Logging full prompts/completions at volume | Log sampling (1-5%), structured logging, retention policies |
+
+---
+
+## ◆ Hands-On Exercises
+
+### Exercise 1: Build an LLM Monitoring Dashboard
+
+**Goal**: Create a monitoring setup that tracks latency, cost, and quality
+**Time**: 45 minutes
+**Steps**:
+1. Instrument a FastAPI LLM endpoint with OpenTelemetry
+2. Track p50/p95/p99 latency, token usage, error rate
+3. Add a quality score metric (LLM-as-judge on 1% of responses)
+4. Visualize in a dashboard (Grafana or matplotlib)
+**Expected Output**: Dashboard with 4 panels: latency, throughput, cost, quality
 ---
 
 

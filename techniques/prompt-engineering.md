@@ -5,8 +5,8 @@ type: procedure
 difficulty: beginner
 status: published
 last_verified: 2026-04
-parent: "[[../genai]]"
-related: ["[[../agents/ai-agents]]", "[[rag]]", "[[../llms/llms-overview]]"]
+parent: "../genai.md"
+related: ["../agents/ai-agents.md", "rag.md", "../llms/llms-overview.md"]
 source: "OpenAI Prompt Engineering Guide, Anthropic Prompting Guide"
 created: 2026-03-18
 updated: 2026-04-11

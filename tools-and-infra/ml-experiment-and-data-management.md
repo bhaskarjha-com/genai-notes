@@ -5,8 +5,8 @@ type: reference
 difficulty: intermediate
 status: published
 last_verified: 2026-04
-parent: "[[tools-overview]]"
-related: ["[[cloud-ml-services]]", "[[../production/cicd-for-ml]]", "[[../production/llmops]]", "[[../production/monitoring-observability]]"]
+parent: "tools-overview.md"
+related: ["cloud-ml-services.md", "../production/cicd-for-ml.md", "../production/llmops.md", "../production/monitoring-observability.md"]
 source: "Multiple — see Sources"
 created: 2026-04-14
 updated: 2026-04-14
@@ -240,6 +240,21 @@ DATA VERSIONING CHECKLIST:
 | 🔧 Hands-on | [LakeFS Documentation](https://docs.lakefs.io/) | Git-like versioning for data lakes |
 | 📘 Book | "Designing Machine Learning Systems" by Chip Huyen (2022), Ch 4, 6 | Data management and experiment tracking in ML workflows |
 
+
+---
+
+## ◆ Hands-On Exercises
+
+### Exercise 1: Set Up End-to-End Experiment Tracking
+
+**Goal**: Track a complete ML experiment with reproducibility
+**Time**: 30 minutes
+**Steps**:
+1. Set up MLflow tracking server locally
+2. Train a model with 3 hyperparameter configurations
+3. Log params, metrics, artifacts, and environment info for each run
+4. Use the MLflow UI to compare runs and select the best
+**Expected Output**: MLflow dashboard showing 3 comparable runs with artifact links
 ---
 
 ## ★ Sources

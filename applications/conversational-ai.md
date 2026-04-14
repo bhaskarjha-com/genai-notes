@@ -5,8 +5,8 @@ type: procedure
 difficulty: intermediate
 status: published
 last_verified: 2026-04
-parent: "[[voice-ai]]"
-related: ["[[../agents/ai-agents]]", "[[../techniques/function-calling-and-structured-output]]", "[[../production/ai-system-design]]", "[[../evaluation/llm-evaluation-deep-dive]]"]
+parent: "voice-ai.md"
+related: ["../agents/ai-agents.md", "../techniques/function-calling-and-structured-output.md", "../production/ai-system-design.md", "../evaluation/llm-evaluation-deep-dive.md"]
 source: "Multiple - see Sources"
 created: 2026-04-12
 updated: 2026-04-14

@@ -5,8 +5,8 @@ type: reference
 difficulty: intermediate
 status: published
 last_verified: 2026-04
-parent: "[[../genai]]"
-related: ["[[../production/ai-system-design]]", "[[../evaluation/llm-evaluation-deep-dive]]", "[[api-design-for-ai]]"]
+parent: "../genai.md"
+related: ["../production/ai-system-design.md", "../evaluation/llm-evaluation-deep-dive.md", "api-design-for-ai.md"]
 source: "Multiple - see Sources"
 created: 2026-04-12
 updated: 2026-04-12
@@ -185,6 +185,31 @@ launch_plan:
 | Compare with | traditional PM, pure model benchmarking |
 | Cross-domain | UX, strategy, analytics |
 
+
+---
+
+## ◆ Production Failure Modes
+
+| Failure | Symptoms | Root Cause | Mitigation |
+|---------|----------|------------|------------|
+| **AI feature underutilization** | Feature shipped but <10% of users engage | No user research on actual pain points | User interviews, MVP testing, feature flags with metrics |
+| **Expectation gap** | Users expect perfect AI, disappointed by errors | No UX communication about AI limitations | Confidence indicators, graceful failure UX, manage expectations |
+| **Metric disconnect** | ML metrics improving but business KPIs flat | Optimizing wrong proxy metric | Map ML metrics to business outcomes, cohort analysis |
+
+---
+
+## ◆ Hands-On Exercises
+
+### Exercise 1: Write an AI Product Brief
+
+**Goal**: Create a product requirements document for an AI feature
+**Time**: 30 minutes
+**Steps**:
+1. Define the user problem and how AI solves it
+2. Specify success metrics (ML metrics + business KPIs)
+3. Define the failure mode UX (what happens when AI is wrong)
+4. Create a go/no-go quality threshold
+**Expected Output**: One-page AI product brief with quality gates
 ---
 
 

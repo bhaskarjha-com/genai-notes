@@ -5,8 +5,8 @@ type: reference
 difficulty: advanced
 status: published
 last_verified: 2026-04
-parent: "[[llmops]]"
-related: ["[[docker-and-kubernetes]]", "[[monitoring-observability]]", "[[cost-optimization]]", "[[../inference/inference-optimization]]"]
+parent: "llmops.md"
+related: ["docker-and-kubernetes.md", "monitoring-observability.md", "cost-optimization.md", "../inference/inference-optimization.md"]
 source: "Multiple - see Sources"
 created: 2026-04-12
 updated: 2026-04-12
@@ -185,6 +185,32 @@ python -m vllm.entrypoints.openai.api_server \
 | Compare with | Managed API consumption, classical REST service deployment |
 | Cross-domain | Distributed systems, queueing, API platform design |
 
+
+---
+
+## ◆ Production Failure Modes
+
+| Failure | Symptoms | Root Cause | Mitigation |
+|---------|----------|------------|------------|
+| **Cold start latency** | First request takes 30-60 seconds | Model loading from disk to GPU on demand | Model preloading, warm standby replicas |
+| **GPU memory fragmentation** | OOM despite sufficient total VRAM | Non-contiguous allocation from dynamic batching | vLLM paged attention, periodic defragmentation |
+| **Batch queue starvation** | High-priority requests delayed by large batch | FIFO batching without priority | Priority queues, preemptive scheduling |
+| **Model version rollback failure** | Can't revert after bad deployment | No versioned model registry | Model registry (MLflow), blue-green deployments |
+
+---
+
+## ◆ Hands-On Exercises
+
+### Exercise 1: Deploy and Benchmark a Model Server
+
+**Goal**: Deploy a model with vLLM and benchmark at different concurrency levels
+**Time**: 45 minutes
+**Steps**:
+1. Deploy a small model with vLLM or TGI
+2. Benchmark latency at 1, 10, and 50 concurrent requests
+3. Implement a health check endpoint that verifies GPU readiness
+4. Measure cold start time vs warm request time
+**Expected Output**: Latency vs concurrency table, health check implementation
 ---
 
 

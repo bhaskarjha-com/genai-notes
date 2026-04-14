@@ -5,8 +5,8 @@ type: concept
 difficulty: intermediate
 status: published
 last_verified: 2026-04
-parent: "[[../genai]]"
-related: ["[[fine-tuning]]", "[[../llms/llms-overview]]", "[[../agents/ai-agents]]"]
+parent: "../genai.md"
+related: ["fine-tuning.md", "../llms/llms-overview.md", "../agents/ai-agents.md"]
 source: "Lewis et al., 2020 + latest hybrid RAG techniques"
 created: 2026-03-18
 updated: 2026-04-11
@@ -336,6 +336,45 @@ EVALUATION TOOLS:
 | Compare with | [Fine Tuning](./fine-tuning.md) (changes model), Long-context (no retrieval), Knowledge graphs |
 | Cross-domain | Information retrieval (IR), Search engines                                     |
 
+
+---
+
+## ◆ Production Failure Modes
+
+| Failure | Symptoms | Root Cause | Mitigation |
+|---------|----------|------------|------------|
+| **Context poisoning** | LLM generates confidently wrong answers with citations | Irrelevant or contradictory chunks retrieved | Reranking layer (cross-encoder), relevance score thresholds |
+| **Stale embeddings** | Correct docs exist but aren't retrieved | New docs added without re-embedding, index not refreshed | Incremental indexing pipeline, TTL on embeddings |
+| **Chunk boundary loss** | Answers miss key information that spans two chunks | Important context split across chunk boundaries | Overlapping chunks, parent-document retrieval, semantic chunking |
+| **Retrieval drift** | Quality degrades over weeks without code changes | User query distribution shifts away from test queries | Continuous retrieval eval (MRR/nDCG), query log monitoring |
+| **Context window overflow** | Token limit errors or truncated context | Too many chunks retrieved, no length management | Dynamic k selection, token-budget-aware retrieval |
+
+---
+
+## ◆ Hands-On Exercises
+
+### Exercise 1: Build and Break a RAG Pipeline
+
+**Goal**: Build a minimal RAG pipeline, then systematically break it with adversarial queries
+**Time**: 45 minutes
+**Steps**:
+1. Load a 10-page PDF with PyPDFLoader
+2. Chunk with RecursiveCharacterTextSplitter (1000 chars, 200 overlap)
+3. Embed with text-embedding-3-small, store in Chroma
+4. Query with 5 normal questions — log retrieval scores
+5. Query with 5 adversarial queries (ambiguous, multi-hop, out-of-scope) — document failures
+**Expected Output**: Table comparing retrieval precision for normal vs adversarial queries
+
+### Exercise 2: Add a Reranking Layer
+
+**Goal**: Add a cross-encoder reranker and measure retrieval quality improvement
+**Time**: 30 minutes
+**Steps**:
+1. Take the pipeline from Exercise 1
+2. Add sentence-transformers cross-encoder reranking on top-20 results
+3. Re-run the same 10 queries
+4. Compare MRR@5 before and after reranking
+**Expected Output**: MRR improvement of 15-30% on adversarial queries
 ---
 
 

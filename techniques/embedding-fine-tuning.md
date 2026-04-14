@@ -5,8 +5,8 @@ type: procedure
 difficulty: advanced
 status: published
 last_verified: 2026-04
-parent: "[[../foundations/embeddings]]"
-related: ["[[../techniques/rag]]", "[[../evaluation/retrieval-evaluation]]", "[[../tools-and-infra/vector-databases]]", "[[../techniques/fine-tuning]]"]
+parent: "../foundations/embeddings.md"
+related: ["../techniques/rag.md", "../evaluation/retrieval-evaluation.md", "../tools-and-infra/vector-databases.md", "../techniques/fine-tuning.md"]
 source: "Multiple — see Sources"
 created: 2026-04-14
 updated: 2026-04-14
@@ -252,6 +252,21 @@ EXPECTED IMPROVEMENTS:
 | 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 3 | Embedding selection and optimization in RAG |
 | 🔧 Hands-on | [MTEB Leaderboard](https://huggingface.co/spaces/mteb/leaderboard) | Compare embedding model quality before choosing a base |
 
+
+---
+
+## ◆ Hands-On Exercises
+
+### Exercise 1: Fine-Tune an Embedding Model on Your Domain
+
+**Goal**: Improve retrieval quality by fine-tuning embeddings on domain data
+**Time**: 45 minutes
+**Steps**:
+1. Create 200 positive pairs (query, relevant document) from your domain
+2. Generate hard negatives using BM25 retrieval
+3. Fine-tune a sentence-transformers model with MultipleNegativesRankingLoss
+4. Compare retrieval metrics before and after fine-tuning
+**Expected Output**: MRR improvement table showing fine-tuned model outperforms base
 ---
 
 ## ★ Sources

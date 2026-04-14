@@ -5,8 +5,8 @@ type: concept
 difficulty: expert
 status: published
 last_verified: 2026-04
-parent: "[[../foundations/modern-architectures]]"
-related: ["[[../foundations/transformers]]", "[[../foundations/attention-mechanism]]", "[[../inference/inference-optimization]]"]
+parent: "../foundations/modern-architectures.md"
+related: ["../foundations/transformers.md", "../foundations/attention-mechanism.md", "../inference/inference-optimization.md"]
 source: "Multiple — see Sources"
 created: 2026-04-14
 updated: 2026-04-14
@@ -158,6 +158,21 @@ KEY MAMBA INSIGHT:
 | 🎥 Video | [Yannic Kilcher — "Mamba Explained"](https://www.youtube.com/@YannicKilcher) | Detailed paper walkthrough |
 | 📄 Paper | [Dao & Gu "Transformers are SSMs" (Mamba-2, 2024)](https://arxiv.org/abs/2405.21060) | Unifying SSMs and attention theoretically |
 
+
+---
+
+## ◆ Hands-On Exercises
+
+### Exercise 1: Compare SSM vs Transformer on Long Sequences
+
+**Goal**: Benchmark Mamba vs Transformer on sequence length scaling
+**Time**: 30 minutes
+**Steps**:
+1. Run inference with a Transformer model at lengths 1K, 4K, 16K, 64K
+2. Run inference with a Mamba model at the same lengths
+3. Plot latency vs sequence length for both
+4. Compare memory usage at each length
+**Expected Output**: Latency and memory charts showing SSM's linear vs Transformer's quadratic scaling
 ---
 
 ## ★ Sources

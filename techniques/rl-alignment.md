@@ -5,8 +5,8 @@ type: concept
 difficulty: advanced
 status: published
 last_verified: 2026-04
-parent: "[[../genai]]"
-related: ["[[../ethics-and-safety/ethics-safety-alignment]]", "[[../llms/llms-overview]]", "[[../llms/reasoning-models]]", "[[fine-tuning]]"]
+parent: "../genai.md"
+related: ["../ethics-and-safety/ethics-safety-alignment.md", "../llms/llms-overview.md", "../llms/reasoning-models.md", "fine-tuning.md"]
 source: "Multiple — see Sources"
 created: 2026-03-22
 updated: 2026-04-11
@@ -338,6 +338,44 @@ KEY FORMULAS:
 | Compare with | Constitutional AI (Anthropic's approach), Self-play                                                       |
 | Cross-domain | Game theory, Behavioural economics (KTO), Curriculum learning                                             |
 
+
+---
+
+## ◆ Production Failure Modes
+
+| Failure | Symptoms | Root Cause | Mitigation |
+|---------|----------|------------|------------|
+| **Reward model overoptimization** | High reward scores but sycophantic or robotic outputs | Policy exploits reward model weaknesses | KL divergence penalty, reward model ensembles, periodic human eval |
+| **Mode collapse** | Model produces same style/format regardless of prompt | Insufficient exploration, overly strong optimization | Temperature tuning, entropy bonus, diverse training prompts |
+| **Alignment tax** | Model becomes "safe" but less capable or helpful | Over-cautious refusal behavior | Balanced training data (helpful + harmless), capability benchmarks |
+| **Preference data bias** | Model reflects annotator biases, not user preferences | Homogeneous annotator pool, unclear guidelines | Diverse annotators, inter-annotator agreement checks |
+| **PPO training instability** | Loss diverges, reward spikes then crashes | Hyperparameter sensitivity (clip ratio, GAE lambda) | DPO for stability, gradient clipping, careful PPO tuning |
+
+---
+
+## ◆ Hands-On Exercises
+
+### Exercise 1: Compare DPO vs PPO on a Toy Task
+
+**Goal**: Understand practical differences between DPO and PPO alignment
+**Time**: 45 minutes
+**Steps**:
+1. Create a preference dataset of 100 chosen/rejected pairs for helpfulness
+2. Fine-tune a small model with DPO using TRL
+3. Fine-tune the same model with PPO+reward model
+4. Compare output quality, training time, and stability
+**Expected Output**: Side-by-side comparison table (quality, training curves, wall time)
+
+### Exercise 2: Detect Reward Hacking
+
+**Goal**: Deliberately cause and detect reward model overoptimization
+**Time**: 30 minutes
+**Steps**:
+1. Train a simple reward model on preferences
+2. Optimize policy against it for too many steps (no KL penalty)
+3. Plot reward score vs human preference as training progresses
+4. Identify the point where reward diverges from quality
+**Expected Output**: Plot showing reward overoptimization inflection point
 ---
 
 

@@ -5,8 +5,8 @@ type: concept
 difficulty: intermediate
 status: published
 last_verified: 2026-04
-parent: "[[../genai]]"
-related: ["[[../foundations/transformers]]", "[[../techniques/rag]]", "[[../techniques/fine-tuning]]", "[[hallucination-detection]]"]
+parent: "../genai.md"
+related: ["../foundations/transformers.md", "../techniques/rag.md", "../techniques/fine-tuning.md", "hallucination-detection.md"]
 source: "Multiple - see Sources"
 created: 2026-03-18
 updated: 2026-04-12
@@ -229,6 +229,31 @@ Top-k: Only sample from the k most likely tokens
 | Compare with | Traditional NLP (rule-based), Smaller language models (BERT-era)                                                        |
 | Cross-domain | Cognitive science (language understanding), Linguistics                                                                 |
 
+
+---
+
+## ◆ Production Failure Modes
+
+| Failure | Symptoms | Root Cause | Mitigation |
+|---------|----------|------------|------------|
+| **Hallucination in critical paths** | Confident but factually wrong outputs in production | No grounding, no verification layer | RAG, citation requirements, confidence calibration |
+| **Prompt sensitivity** | Small wording changes cause dramatically different outputs | Models are sensitive to prompt phrasing | Prompt testing suite, A/B test prompts, few-shot examples |
+| **Context window mismanagement** | Truncated context or token limit errors | No token counting before API call | Pre-flight token counting, dynamic prompt assembly |
+
+---
+
+## ◆ Hands-On Exercises
+
+### Exercise 1: Stress-Test an LLM's Boundaries
+
+**Goal**: Systematically discover where an LLM fails
+**Time**: 30 minutes
+**Steps**:
+1. Create 20 test cases: factual, reasoning, math, code, multilingual
+2. Run through your production LLM
+3. Grade each response (correct, partially correct, hallucinated, refused)
+4. Create a failure pattern taxonomy
+**Expected Output**: Failure taxonomy with frequency counts per category
 ---
 
 

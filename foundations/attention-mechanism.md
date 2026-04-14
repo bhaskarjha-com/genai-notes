@@ -5,8 +5,8 @@ type: concept
 difficulty: intermediate
 status: published
 last_verified: 2026-04
-parent: "[[transformers]]"
-related: ["[[transformers]]", "[[../llms/llms-overview]]"]
+parent: "transformers.md"
+related: ["transformers.md", "../llms/llms-overview.md"]
 source: "Attention Is All You Need (Vaswani et al., 2017)"
 created: 2026-03-18
 updated: 2026-04-11
@@ -218,6 +218,31 @@ Modern defaults:
 | Compare with | Recurrence (RNNs), Convolution (CNNs)                                            |
 | Cross-domain | Vision Transformers (ViT), Graph Attention Networks                              |
 
+
+---
+
+## ◆ Production Failure Modes
+
+| Failure | Symptoms | Root Cause | Mitigation |
+|---------|----------|------------|------------|
+| **Attention sink** | First token receives disproportionate attention regardless of content | Model uses first position as default attention target | StreamingLLM sink tokens, attention bias corrections |
+| **Head redundancy** | Many heads learn identical patterns, wasting capacity | No head diversity regularization | Head pruning, auxiliary diversity loss, structured dropout |
+| **Cross-attention misalignment** | Decoder attends to wrong encoder regions | Insufficient data diversity, positional confusion | Alignment training, attention supervision |
+
+---
+
+## ◆ Hands-On Exercises
+
+### Exercise 1: Visualize Attention Patterns
+
+**Goal**: Extract and visualize attention weights to understand model behavior
+**Time**: 30 minutes
+**Steps**:
+1. Load a pretrained BERT or GPT-2
+2. Run a sentence through with `output_attentions=True`
+3. Plot attention heatmaps for 3 different heads
+4. Identify syntactic vs semantic attention patterns
+**Expected Output**: Attention heatmaps showing different heads capture different linguistic patterns
 ---
 
 

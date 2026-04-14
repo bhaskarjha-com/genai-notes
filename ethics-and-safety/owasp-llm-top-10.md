@@ -5,8 +5,8 @@ type: reference
 difficulty: intermediate
 status: published
 last_verified: 2026-04
-parent: "[[ethics-safety-alignment]]"
-related: ["[[adversarial-ml-and-ai-security]]", "[[ai-regulation]]", "[[../production/llmops]]"]
+parent: "ethics-safety-alignment.md"
+related: ["adversarial-ml-and-ai-security.md", "ai-regulation.md", "../production/llmops.md"]
 source: "OWASP primary sources - see Sources"
 created: 2026-04-12
 updated: 2026-04-12
@@ -162,6 +162,31 @@ OWASP's AI security work has expanded beyond only this Top 10 into the broader O
 | Compare with | general OWASP web-app risk framing |
 | Cross-domain | AppSec, governance, incident response |
 
+
+---
+
+## ◆ Hands-On Exercises
+
+### Exercise 1: OWASP Security Assessment
+
+**Goal**: Test your LLM application against the OWASP LLM Top 10
+**Time**: 45 minutes
+**Steps**:
+1. Deploy a test LLM endpoint with a system prompt
+2. Test each OWASP category: prompt injection, data leakage, insecure output handling
+3. Document which attacks succeed and which are blocked
+4. Implement mitigations for successful attacks
+**Expected Output**: OWASP assessment matrix with pass/fail/partial per category
+
+---
+
+## ◆ Production Failure Modes
+
+| Failure | Symptoms | Root Cause | Mitigation |
+|---------|----------|------------|------------|
+| **Prompt injection bypass** | Attacker overrides system instructions | No input sanitization or privilege separation | Input filtering, output validation, sandboxed execution |
+| **Sensitive data exposure** | Model reveals PII or proprietary data in responses | Training data memorization, no output filtering | PII detection on output, data sanitization, differential privacy |
+| **Insecure plugin execution** | Third-party tool executes malicious code | No sandboxing of tool execution | Sandboxed execution, permission scoping, output validation |
 ---
 
 

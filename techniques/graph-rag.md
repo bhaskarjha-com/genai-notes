@@ -5,8 +5,8 @@ type: concept
 difficulty: advanced
 status: published
 last_verified: 2026-04
-parent: "[[../genai]]"
-related: ["[[rag]]", "[[../agents/ai-agents]]", "[[context-engineering]]", "[[../tools-and-infra/vector-databases]]"]
+parent: "../genai.md"
+related: ["rag.md", "../agents/ai-agents.md", "context-engineering.md", "../tools-and-infra/vector-databases.md"]
 source: "Multiple — see Sources"
 created: 2026-03-22
 updated: 2026-04-11
@@ -233,6 +233,32 @@ KNOWLEDGE GRAPH TOOLS:
 | Compare with | Standard RAG (similarity only), Long context (no retrieval)     |
 | Cross-domain | Graph databases, Knowledge management, Information retrieval    |
 
+
+---
+
+## ◆ Production Failure Modes
+
+| Failure | Symptoms | Root Cause | Mitigation |
+|---------|----------|------------|------------|
+| **Graph construction drift** | Knowledge graph becomes stale while source docs update | No incremental graph update pipeline | Event-driven graph refresh, diff-based entity extraction |
+| **Entity resolution failures** | Same entity appears as multiple nodes ("OpenAI" vs "openai") | No entity normalization step | Fuzzy matching, canonical entity index, embedding-based dedup |
+| **Sparse subgraph retrieval** | Queries return disconnected nodes with no relationships | Query doesn't map to graph structure | Hybrid retrieval (vector + graph), community detection |
+| **Triple extraction noise** | Garbage relationships pollute the graph | LLM hallucination during entity/relation extraction | Confidence thresholds, human-in-the-loop for high-value domains |
+
+---
+
+## ◆ Hands-On Exercises
+
+### Exercise 1: Build a Mini Knowledge Graph from Documents
+
+**Goal**: Extract entities and relationships from documents and query the graph
+**Time**: 45 minutes
+**Steps**:
+1. Use an LLM to extract (subject, predicate, object) triples from 5 documents
+2. Build a NetworkX graph
+3. Implement a simple graph traversal retriever
+4. Compare answers from graph-RAG vs naive vector-RAG on 5 relationship questions
+**Expected Output**: Side-by-side answer comparison showing graph-RAG advantage on relationship queries
 ---
 
 

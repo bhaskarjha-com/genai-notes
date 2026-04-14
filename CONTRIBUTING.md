@@ -70,8 +70,8 @@ type: concept|tool|theory|procedure|entity|reference
 difficulty: beginner|intermediate|advanced|expert
 status: draft|published
 last_verified: YYYY-MM
-parent: "[[./parent-topic]]"
-related: ["[[./related-topic]]"]
+parent: "./parent-topic.md"
+related: ["./related-topic.md"]
 source: "URL or citation"
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
@@ -105,7 +105,7 @@ All code samples must follow these standards:
 
 | Location | Format | Why |
 |----------|--------|-----|
-| Frontmatter (`parent`, `related`) | `[[wiki-link]]` | Metadata; benefits Obsidian graph view |
+| Frontmatter (`parent`, `related`) | `wiki-link.md` | Metadata; benefits Obsidian graph view |
 | Body text, Connections, Scope tables | `[text](path.md)` | Must render as clickable links on GitHub |
 
 ## Submitting Changes

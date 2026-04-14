@@ -5,8 +5,8 @@ type: reference
 difficulty: advanced
 status: published
 last_verified: 2026-04
-parent: "[[../genai]]"
-related: ["[[interpretability]]", "[[distributed-training]]", "[[../evaluation/llm-evaluation-deep-dive]]"]
+parent: "../genai.md"
+related: ["interpretability.md", "distributed-training.md", "../evaluation/llm-evaluation-deep-dive.md"]
 source: "Multiple - see Sources"
 created: 2026-04-12
 updated: 2026-04-12
@@ -172,6 +172,31 @@ notes_to_capture:
 | Compare with | blog-post level understanding |
 | Cross-domain | scientific method, experimentation |
 
+
+---
+
+## ◆ Hands-On Exercises
+
+### Exercise 1: Critically Analyze a Recent Paper
+
+**Goal**: Apply structured paper reading to a 2026 ML paper
+**Time**: 45 minutes
+**Steps**:
+1. Select a recent paper from arXiv (published within last 3 months)
+2. Do a 3-pass reading: (1) abstract + figures, (2) methods, (3) experiments
+3. Identify: key contribution, limitations, missing baselines, reproducibility concerns
+4. Write a 1-page critical review with a recommendation (accept/reject)
+**Expected Output**: Structured paper review with specific technical critiques
+
+---
+
+## ◆ Production Failure Modes
+
+| Failure | Symptoms | Root Cause | Mitigation |
+|---------|----------|------------|------------|
+| **Reproducibility failure** | Cannot reproduce paper results in your environment | Missing implementation details, different hardware | Check official repos, contact authors, document environment exactly |
+| **Cherry-picked baselines** | Paper claims SOTA but uses weak baselines | Author incentive to show improvement | Compare against multiple recent baselines, reproduce yourself |
+| **Hype-driven adoption** | Team implements flashy paper technique that doesn't help | No evaluation against simpler alternatives | Always benchmark against simple baseline first |
 ---
 
 

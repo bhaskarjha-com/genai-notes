@@ -5,8 +5,8 @@ type: concept
 difficulty: beginner
 status: published
 last_verified: 2026-04
-parent: "[[../genai]]"
-related: ["[[../foundations/transformers]]", "[[../foundations/embeddings]]", "[[../foundations/tokenization]]", "[[../llms/llms-overview]]"]
+parent: "../genai.md"
+related: ["../foundations/transformers.md", "../foundations/embeddings.md", "../foundations/tokenization.md", "../llms/llms-overview.md"]
 source: "Multiple — see Sources"
 created: 2026-03-22
 updated: 2026-04-11

@@ -5,8 +5,8 @@ type: concept
 difficulty: advanced
 status: published
 last_verified: 2026-04
-parent: "[[../genai]]"
-related: ["[[fine-tuning]]", "[[../inference/inference-optimization]]", "[[../foundations/modern-architectures]]"]
+parent: "../genai.md"
+related: ["fine-tuning.md", "../inference/inference-optimization.md", "../foundations/modern-architectures.md"]
 source: "Multiple — see Sources"
 created: 2026-03-22
 updated: 2026-04-11
@@ -221,6 +221,32 @@ KEY INSIGHT:
 | Compare with | Quantization (number precision), Pruning (removing weights)      |
 | Cross-domain | Transfer learning, Curriculum learning                           |
 
+
+---
+
+## ◆ Production Failure Modes
+
+| Failure | Symptoms | Root Cause | Mitigation |
+|---------|----------|------------|------------|
+| **Capability cliff** | Student model loses specific capabilities while matching aggregate metrics | Distillation data doesn't cover edge cases | Targeted distillation on weak subsets, multi-task distillation |
+| **Quantization outliers** | Quality drops sharply at INT4/INT8 | Activation outliers in certain layers | SmoothQuant, GPTQ per-channel quantization, mixed precision |
+| **Pruning instability** | Structured pruning removes critical attention heads | No importance scoring before pruning | Magnitude + gradient importance scores, iterative pruning |
+| **Format mismatch** | Distilled model can't follow complex instructions | Training data focused on short completions | Include instruction-following examples in distillation dataset |
+
+---
+
+## ◆ Hands-On Exercises
+
+### Exercise 1: Quantize and Benchmark at Multiple Precisions
+
+**Goal**: Quantize a model from FP16 to INT8 to INT4 and benchmark
+**Time**: 30 minutes
+**Steps**:
+1. Load a base model in FP16
+2. Quantize with bitsandbytes (8-bit, then 4-bit)
+3. Run a standard benchmark at each precision
+4. Measure inference speed at each level
+**Expected Output**: Quality/speed tradeoff chart across precisions
 ---
 
 

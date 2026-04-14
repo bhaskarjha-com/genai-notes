@@ -5,8 +5,8 @@ type: procedure
 difficulty: beginner
 status: published
 last_verified: 2026-04
-parent: "[[../genai]]"
-related: ["[[neural-networks]]", "[[linear-algebra-for-ai]]", "[[deep-learning-fundamentals]]"]
+parent: "../genai.md"
+related: ["neural-networks.md", "linear-algebra-for-ai.md", "deep-learning-fundamentals.md"]
 source: "PyTorch docs, NumPy docs, Hugging Face docs"
 created: 2026-03-18
 updated: 2026-04-12
@@ -64,7 +64,7 @@ This is not a general Python tutorial. It assumes you already know variables, lo
 ### NumPy: Think in Arrays, Not Loops
 
 ```python
-# ?? Last tested: 2026-04
+# ⚠️ Last tested: 2026-04
 import numpy as np
 
 a = np.array([1, 2, 3])
@@ -83,7 +83,7 @@ The important shift is mental, not just syntactic: most AI code is vectorized. Y
 ### PyTorch: Tensors, Devices, And Gradients
 
 ```python
-# ?? Last tested: 2026-04
+# ⚠️ Last tested: 2026-04
 import torch
 import torch.nn as nn
 
@@ -106,7 +106,7 @@ Three ideas show up constantly:
 ### Hugging Face: Model APIs Without Rebuilding Everything
 
 ```python
-# ?? Last tested: 2026-04
+# ⚠️ Last tested: 2026-04
 from transformers import AutoTokenizer, AutoModelForCausalLM
 
 model_name = "Qwen/Qwen2.5-1.5B-Instruct"
@@ -161,7 +161,7 @@ For AI work, environment mistakes often look like model bugs. Version mismatches
 | local API service | FastAPI |
 
 ```python
-# ?? Last tested: 2026-04
+# ⚠️ Last tested: 2026-04
 import torch
 print(torch.cuda.is_available())
 print(torch.cuda.device_count())

@@ -5,8 +5,8 @@ type: concept
 difficulty: intermediate
 status: published
 last_verified: 2026-04
-parent: "[[../genai]]"
-related: ["[[transformers]]", "[[../techniques/rag]]", "[[../tools-and-infra/vector-databases]]"]
+parent: "../genai.md"
+related: ["transformers.md", "../techniques/rag.md", "../tools-and-infra/vector-databases.md"]
 source: "Multiple - see Sources"
 created: 2026-03-18
 updated: 2026-04-11
@@ -252,6 +252,32 @@ SIMILARITY THRESHOLDS (cosine, rough guide):
 | Compare with | One-hot encoding (sparse), TF-IDF (sparse, frequency-based), Knowledge graphs         |
 | Cross-domain | Recommendation systems, Computer vision (image embeddings), Bioinformatics            |
 
+
+---
+
+## ◆ Production Failure Modes
+
+| Failure | Symptoms | Root Cause | Mitigation |
+|---------|----------|------------|------------|
+| **Embedding drift** | Similarity scores become unreliable over time | Model update changes embedding space without re-indexing | Version-locked models, full re-index on model change |
+| **Domain mismatch** | General embeddings perform poorly on specialized content | Model trained on general web data | Domain-specific fine-tuning, domain-adapted models |
+| **Dimensionality curse** | High-dimensional embeddings slow retrieval without quality gain | Using 1536-dim when 256-dim suffices | Matryoshka embeddings, PCA reduction, benchmark at multiple dims |
+| **Cosine similarity ceiling** | All documents score 0.7-0.9, no discrimination | Embedding space too clustered for domain | Calibrated thresholds, reranking layer, hybrid retrieval |
+
+---
+
+## ◆ Hands-On Exercises
+
+### Exercise 1: Compare Embedding Models on Your Domain
+
+**Goal**: Benchmark 3 embedding models on domain-specific retrieval
+**Time**: 30 minutes
+**Steps**:
+1. Prepare 20 query-document pairs from your domain
+2. Embed with OpenAI text-embedding-3-small, Cohere embed-v4, and sentence-transformers
+3. Compute cosine similarity for each pair
+4. Rank models by retrieval accuracy
+**Expected Output**: Comparison table with Precision@5 per model
 ---
 
 

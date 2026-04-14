@@ -5,8 +5,8 @@ type: concept
 difficulty: advanced
 status: published
 last_verified: 2026-04
-parent: "[[../genai]]"
-related: ["[[llms-overview]]", "[[../foundations/transformers]]", "[[../techniques/prompt-engineering]]"]
+parent: "../genai.md"
+related: ["llms-overview.md", "../foundations/transformers.md", "../techniques/prompt-engineering.md"]
 source: "Multiple — see Sources"
 created: 2026-03-22
 updated: 2026-04-11
@@ -291,6 +291,32 @@ KEY NUMBERS:
 | Compare with | Standard LLMs (direct generation), [Ai Agents](../agents/ai-agents.md) (multi-step but external planning)                                       |
 | Cross-domain | Formal verification, Theorem proving, Game AI (MCTS)                                                                                    |
 
+
+---
+
+## ◆ Production Failure Modes
+
+| Failure | Symptoms | Root Cause | Mitigation |
+|---------|----------|------------|------------|
+| **Thinking token explosion** | Reasoning model uses 10K+ thinking tokens on simple questions | No complexity routing, all queries sent to reasoning model | Classify complexity first, route simple queries to base model |
+| **False reasoning chains** | Plausible-sounding but logically invalid reasoning | Chain-of-thought doesn't guarantee logical validity | Verification step, structured output for checkable steps |
+| **Latency unacceptable** | 15-30 second response times | Test-time compute inherently slow | Streaming partial results, speculative execution, caching |
+| **Cost 10x vs base model** | Reasoning model costs overwhelm budget | Using o1-level model for all queries | Tiered model selection, reasoning only for complex queries |
+
+---
+
+## ◆ Hands-On Exercises
+
+### Exercise 1: Build a Complexity Router
+
+**Goal**: Route queries to reasoning vs non-reasoning models based on complexity
+**Time**: 30 minutes
+**Steps**:
+1. Create 20 queries spanning simple factual to complex multi-step reasoning
+2. Build a lightweight classifier (LLM-as-judge or heuristic) for complexity
+3. Route simple queries to GPT-4o-mini and complex to o3-mini
+4. Compare cost vs quality with and without routing
+**Expected Output**: 50-70% cost reduction with <5% quality drop on simple queries
 ---
 
 

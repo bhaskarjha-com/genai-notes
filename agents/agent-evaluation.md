@@ -5,8 +5,8 @@ type: reference
 difficulty: advanced
 status: published
 last_verified: 2026-04
-parent: "[[ai-agents]]"
-related: ["[[multi-agent-architectures]]", "[[../evaluation/evaluation-and-benchmarks]]", "[[../production/llmops]]", "[[../llms/hallucination-detection]]"]
+parent: "ai-agents.md"
+related: ["multi-agent-architectures.md", "../evaluation/evaluation-and-benchmarks.md", "../production/llmops.md", "../llms/hallucination-detection.md"]
 source: "Multiple sources - see Sources"
 created: 2026-04-12
 updated: 2026-04-12
@@ -191,6 +191,31 @@ Median cost per task:        $0.031
 | Compare with | Static prompt evaluation, benchmark-only evaluation |
 | Cross-domain | APM, distributed tracing, experiment management |
 
+
+---
+
+## ◆ Hands-On Exercises
+
+### Exercise 1: Build an Agent Evaluation Harness
+
+**Goal**: Create a reproducible evaluation framework for agent workflows
+**Time**: 45 minutes
+**Steps**:
+1. Define 10 agent tasks with expected outcomes
+2. Run your agent on each task 3 times (test determinism)
+3. Score on: task completion, cost, latency, and tool usage efficiency
+4. Create a regression test suite that can run in CI
+**Expected Output**: Agent evaluation report with pass/fail per task and variance analysis
+
+---
+
+## ◆ Production Failure Modes
+
+| Failure | Symptoms | Root Cause | Mitigation |
+|---------|----------|------------|------------|
+| **Non-deterministic results** | Same agent task produces different outcomes on each run | LLM sampling randomness, tool output variance | Temperature=0, seed pinning, majority vote across runs |
+| **Eval metric gaming** | Agent scores high on eval but fails on real tasks | Eval tasks too narrow, no edge cases | Diverse eval suite, production failure replay, held-out test sets |
+| **Cost-blind evaluation** | Agent solves task but at 10x expected cost | No cost tracking in eval harness | Include cost/token metrics in eval scoring |
 ---
 
 

@@ -5,8 +5,8 @@ type: procedure
 difficulty: expert
 status: published
 last_verified: 2026-04
-parent: "[[../genai]]"
-related: ["[[../foundations/scaling-laws-and-pretraining]]", "[[../inference/gpu-cuda-programming]]", "[[../techniques/advanced-fine-tuning]]", "[[../inference/inference-optimization]]", "[[../tools-and-infra/cloud-ml-services]]", "[[../tools-and-infra/distributed-systems-for-ai]]"]
+parent: "../genai.md"
+related: ["../foundations/scaling-laws-and-pretraining.md", "../inference/gpu-cuda-programming.md", "../techniques/advanced-fine-tuning.md", "../inference/inference-optimization.md", "../tools-and-infra/cloud-ml-services.md", "../tools-and-infra/distributed-systems-for-ai.md"]
 source: "Multiple - see Sources"
 created: 2026-04-12
 updated: 2026-04-14

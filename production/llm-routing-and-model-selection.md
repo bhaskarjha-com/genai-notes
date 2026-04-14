@@ -5,8 +5,8 @@ type: procedure
 difficulty: advanced
 status: published
 last_verified: 2026-04
-parent: "[[llmops]]"
-related: ["[[cost-optimization]]", "[[model-serving]]", "[[../llms/llm-landscape]]", "[[../techniques/context-engineering]]"]
+parent: "llmops.md"
+related: ["cost-optimization.md", "model-serving.md", "../llms/llm-landscape.md", "../techniques/context-engineering.md"]
 source: "Multiple — see Sources"
 created: 2026-04-14
 updated: 2026-04-14

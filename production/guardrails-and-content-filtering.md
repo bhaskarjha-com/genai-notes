@@ -5,8 +5,8 @@ type: procedure
 difficulty: advanced
 status: published
 last_verified: 2026-04
-parent: "[[llmops]]"
-related: ["[[../ethics-and-safety/adversarial-ml-and-ai-security]]", "[[../ethics-and-safety/owasp-llm-top-10]]", "[[monitoring-observability]]", "[[../agents/ai-agents]]"]
+parent: "llmops.md"
+related: ["../ethics-and-safety/adversarial-ml-and-ai-security.md", "../ethics-and-safety/owasp-llm-top-10.md", "monitoring-observability.md", "../agents/ai-agents.md"]
 source: "Multiple — see Sources"
 created: 2026-04-14
 updated: 2026-04-14

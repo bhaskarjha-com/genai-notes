@@ -5,8 +5,8 @@ type: tool
 difficulty: intermediate
 status: published
 last_verified: 2026-04
-parent: "[[tools-overview]]"
-related: ["[[../techniques/rag]]", "[[../llms/llms-overview]]"]
+parent: "tools-overview.md"
+related: ["../techniques/rag.md", "../llms/llms-overview.md"]
 source: "Multiple - see Sources"
 created: 2026-03-18
 updated: 2026-04-11
@@ -270,6 +270,32 @@ EMBEDDING DIMENSIONS:
 | Compare with | Traditional databases (SQL), Search engines (Elasticsearch), Knowledge graphs |
 | Cross-domain | Information retrieval, Computational geometry (nearest neighbor)              |
 
+
+---
+
+## ◆ Production Failure Modes
+
+| Failure | Symptoms | Root Cause | Mitigation |
+|---------|----------|------------|------------|
+| **Index staleness** | New documents not found in search | Ingestion pipeline lag, no real-time indexing | Streaming ingestion, write-ahead log, refresh intervals |
+| **Recall vs latency tradeoff** | High recall requires seconds-long queries | Exact search too slow, ANN too lossy | Tune HNSW parameters (ef, M), benchmark your data distribution |
+| **Embedding model lock-in** | Cannot switch embedding models without full re-index | Vectors are model-specific | Abstract embedding layer, plan for re-indexing, Matryoshka |
+| **Metadata filter performance** | Filtered queries 10x slower than unfiltered | Poor metadata indexing, post-retrieval filtering | Pre-filtered ANN, composite indexes, partition by metadata |
+
+---
+
+## ◆ Hands-On Exercises
+
+### Exercise 1: Benchmark Vector DB Performance
+
+**Goal**: Compare retrieval quality and latency across vector databases
+**Time**: 30 minutes
+**Steps**:
+1. Prepare 10K vectors from a real embedding model
+2. Index in Chroma and a managed solution (Pinecone or Qdrant)
+3. Run 100 queries, measure recall@10 and p95 latency
+4. Test with metadata filters and measure impact
+**Expected Output**: Performance comparison table with recall, latency, and filtered performance
 ---
 
 

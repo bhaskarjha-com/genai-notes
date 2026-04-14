@@ -4,8 +4,8 @@ tags: [career, application-roles, consulting, product, architecture, prompt-engi
 type: reference
 difficulty: intermediate
 status: published
-parent: "[[./genai-career-roles-universal]]"
-related: ["[[./roles/ai-engineer]]", "[[./roles/genai-engineer]]", "[[./roles/agentic-ai-engineer]]"]
+parent: "./genai-career-roles-universal.md"
+related: ["./roles/ai-engineer.md", "./roles/genai-engineer.md", "./roles/agentic-ai-engineer.md"]
 source: "Repo synthesis from the universal career reference and linked notes"
 created: 2026-04-12
 updated: 2026-04-12

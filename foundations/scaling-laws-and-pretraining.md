@@ -5,8 +5,8 @@ type: concept
 difficulty: advanced
 status: published
 last_verified: 2026-04
-parent: "[[../genai]]"
-related: ["[[transformers]]", "[[../llms/llms-overview]]", "[[modern-architectures]]"]
+parent: "../genai.md"
+related: ["transformers.md", "../llms/llms-overview.md", "modern-architectures.md"]
 source: "Multiple — see Sources"
 created: 2026-03-22
 updated: 2026-04-11
@@ -247,6 +247,31 @@ PRE-TRAINING OBJECTIVE:
 | Compare with | Fine-tuning (adaptation), Few-shot (no training)                     |
 | Cross-domain | Distributed systems, HPC, Data engineering                           |
 
+
+---
+
+## ◆ Production Failure Modes
+
+| Failure | Symptoms | Root Cause | Mitigation |
+|---------|----------|------------|------------|
+| **Compute budget misallocation** | Over-parameterized model with insufficient data (or vice versa) | Ignoring Chinchilla scaling laws (20 tokens per parameter) | Use Chinchilla-optimal ratios for compute allocation |
+| **Data quality plateau** | Loss stops decreasing despite more compute | Training data contains duplicates, noise, low-quality content | Deduplicate, filter by perplexity, quality-score data |
+| **Emergent capability surprises** | Capabilities appear or disappear at unexpected scale | Phase transitions in model behavior | Benchmark at multiple scales, don't extrapolate from small models |
+
+---
+
+## ◆ Hands-On Exercises
+
+### Exercise 1: Plot Your Own Scaling Law
+
+**Goal**: Train models at 3 different scales and verify power-law behavior
+**Time**: 45 minutes
+**Steps**:
+1. Train a small transformer at 1M, 10M, 100M parameters on the same dataset
+2. Log validation loss at each scale
+3. Plot loss vs compute on log-log scale
+4. Fit a power law and extrapolate
+**Expected Output**: Log-log plot showing linear scaling law relationship
 ---
 
 

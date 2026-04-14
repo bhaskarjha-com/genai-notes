@@ -5,8 +5,8 @@ type: procedure
 difficulty: advanced
 status: published
 last_verified: 2026-04
-parent: "[[ai-agents]]"
-related: ["[[ai-agents]]", "[[multi-agent-architectures]]", "[[../techniques/rag]]", "[[../techniques/context-engineering]]"]
+parent: "ai-agents.md"
+related: ["ai-agents.md", "multi-agent-architectures.md", "../techniques/rag.md", "../techniques/context-engineering.md"]
 source: "Multiple — see Sources"
 created: 2026-04-14
 updated: 2026-04-14

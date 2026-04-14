@@ -5,8 +5,8 @@ type: concept
 difficulty: intermediate
 status: published
 last_verified: 2026-04
-parent: "[[../genai]]"
-related: ["[[fine-tuning]]", "[[distillation-and-compression]]", "[[../llms/llms-overview]]"]
+parent: "../genai.md"
+related: ["fine-tuning.md", "distillation-and-compression.md", "../llms/llms-overview.md"]
 source: "Multiple — see Sources"
 created: 2026-03-22
 updated: 2026-04-11
@@ -267,6 +267,32 @@ QUALITY > QUANTITY:
 | Compare with | Traditional ML data pipelines, Human annotation  |
 | Cross-domain | Data engineering, ETL pipelines, Data quality    |
 
+
+---
+
+## ◆ Production Failure Modes
+
+| Failure | Symptoms | Root Cause | Mitigation |
+|---------|----------|------------|------------|
+| **Model collapse** | Synthetic-data-trained model produces repetitive outputs | Training on data from same model family | Mix synthetic with real data (20%+ real), diverse generators |
+| **Distribution mismatch** | Model trained on synthetic data fails on real inputs | Synthetic data doesn't match production distribution | Validate against real data statistics, domain-specific generators |
+| **Quality amplification** | Errors in seed data get amplified through pipeline | No quality filtering on generated data | Multi-stage quality filtering, LLM-as-judge scoring |
+| **PII leakage** | Generated data contains memorized PII from training | Large models memorize training examples | Differential privacy, PII detection on output, canary tokens |
+
+---
+
+## ◆ Hands-On Exercises
+
+### Exercise 1: Generate and Validate a Synthetic Dataset
+
+**Goal**: Create synthetic training data and measure quality vs real data
+**Time**: 45 minutes
+**Steps**:
+1. Take 50 real examples from a classification dataset
+2. Use an LLM to generate 200 synthetic examples matching the distribution
+3. Train a classifier on synthetic-only vs real-only vs mixed
+4. Compare test accuracy across all three
+**Expected Output**: Accuracy comparison table showing mixed data performs best
 ---
 
 

@@ -310,7 +310,7 @@ Every entry MUST have a specific "Why" explaining value for THIS topic.
 
 <!--
 LINKING:
-  Frontmatter parent/related: [[../genai]]
+  Frontmatter parent/related: ../genai.md
   Body text same directory:   [Topic Name](./topic-name.md)
   Sub-document:               [Detailed Topic](./subdir/detailed-topic.md)
   Parent topic:               [Topic Name](../topic-name.md)

@@ -5,8 +5,8 @@ type: reference
 difficulty: intermediate
 status: published
 last_verified: 2026-04
-parent: "[[../genai]]"
-related: ["[[../llms/llms-overview]]", "[[../techniques/rag]]", "[[../agents/agent-evaluation]]", "[[../llms/hallucination-detection]]", "[[llm-evaluation-deep-dive]]", "[[system-design-for-ai-interviews]]"]
+parent: "../genai.md"
+related: ["../llms/llms-overview.md", "../techniques/rag.md", "../agents/agent-evaluation.md", "../llms/hallucination-detection.md", "llm-evaluation-deep-dive.md", "system-design-for-ai-interviews.md"]
 source: "Multiple benchmarks and frameworks - see Sources"
 created: 2026-03-18
 updated: 2026-04-12
@@ -248,6 +248,31 @@ BENCHMARK SATURATION WARNING:
 | Compare with | Traditional ML metrics (accuracy, F1), Software testing           |
 | Cross-domain | Psychometrics (test design), Statistics (inter-rater reliability) |
 
+
+---
+
+## ◆ Production Failure Modes
+
+| Failure | Symptoms | Root Cause | Mitigation |
+|---------|----------|------------|------------|
+| **Benchmark contamination** | Model scores high on benchmarks but fails on real tasks | Benchmark data in training set | Hold-out custom evals, temporal splits, canary questions |
+| **Metric gaming** | High BLEU/ROUGE but poor human preference | Optimizing for proxy metrics | Human eval alongside automated metrics, LLM-as-judge |
+| **Eval set stagnation** | Same eval set used for months while user needs evolve | No process to update eval sets | Continuously add production failures to eval set |
+
+---
+
+## ◆ Hands-On Exercises
+
+### Exercise 1: Build a Custom Evaluation Suite
+
+**Goal**: Create a domain-specific eval suite with automated and human metrics
+**Time**: 45 minutes
+**Steps**:
+1. Collect 50 real user queries from your domain
+2. Create gold-standard answers for each
+3. Implement automated scoring (ROUGE, LLM-as-judge, exact match)
+4. Run 3 different models through the suite and rank them
+**Expected Output**: Model comparison leaderboard with multiple metrics
 ---
 
 

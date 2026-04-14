@@ -5,8 +5,8 @@ type: procedure
 difficulty: advanced
 status: published
 last_verified: 2026-04
-parent: "[[../genai]]"
-related: ["[[rag]]", "[[../llms/llms-overview]]", "[[prompt-engineering]]", "[[advanced-fine-tuning]]"]
+parent: "../genai.md"
+related: ["rag.md", "../llms/llms-overview.md", "prompt-engineering.md", "advanced-fine-tuning.md"]
 source: "Hu et al. LoRA (2021), QLoRA (2023), latest hybrid techniques"
 created: 2026-03-18
 updated: 2026-04-12
@@ -307,6 +307,44 @@ model = FastLanguageModel.get_peft_model(
 # Train with standard HuggingFace Trainer — just faster!
 ```
 
+
+---
+
+## ◆ Production Failure Modes
+
+| Failure | Symptoms | Root Cause | Mitigation |
+|---------|----------|------------|------------|
+| **Catastrophic forgetting** | Model loses general capabilities after fine-tuning | Aggressive learning rate, too many epochs on narrow data | Lower LR (1e-5 to 5e-6), early stopping, eval on general benchmarks |
+| **Overfitting to format** | Model only works with exact training format | Insufficient format diversity in training data | Augment with paraphrases, vary system prompts |
+| **Data contamination** | Inflated eval metrics don't reflect real performance | Test data leaked into training set | Strict train/test split, deduplication, temporal splits |
+| **Reward hacking** | High reward scores but poor actual output quality | Misspecified reward function | Human evaluation alongside automated metrics, KL penalty |
+| **Training instability** | Loss spikes, NaN gradients, divergence | Learning rate too high, batch size too small | Gradient clipping, warmup schedule, data quality audit |
+
+---
+
+## ◆ Hands-On Exercises
+
+### Exercise 1: Fine-Tune and Measure Forgetting
+
+**Goal**: Fine-tune a model and quantify capability regression
+**Time**: 60 minutes
+**Steps**:
+1. Take a base model (e.g., distilbert-base)
+2. Fine-tune on IMDB sentiment (3 epochs)
+3. Evaluate on IMDB test set AND on a general NLI benchmark
+4. Compare general capability before and after fine-tuning
+**Expected Output**: Accuracy on target task vs regression on general benchmarks
+
+### Exercise 2: Debug a Bad Fine-Tune
+
+**Goal**: Diagnose and fix a fine-tuning job that overfits
+**Time**: 30 minutes
+**Steps**:
+1. Run a fine-tune with intentionally bad hyperparams (LR=1e-3, 10 epochs)
+2. Plot training loss vs validation loss
+3. Identify the overfitting epoch
+4. Re-run with corrected LR, early stopping, and dropout
+**Expected Output**: Training curves showing overfitting pattern and fix
 ---
 
 

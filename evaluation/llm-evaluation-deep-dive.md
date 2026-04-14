@@ -5,8 +5,8 @@ type: reference
 difficulty: advanced
 status: published
 last_verified: 2026-04
-parent: "[[evaluation-and-benchmarks]]"
-related: ["[[../llms/hallucination-detection]]", "[[../agents/agent-evaluation]]", "[[../techniques/rag]]", "[[../production/monitoring-observability]]"]
+parent: "evaluation-and-benchmarks.md"
+related: ["../llms/hallucination-detection.md", "../agents/agent-evaluation.md", "../techniques/rag.md", "../production/monitoring-observability.md"]
 source: "Multiple - see Sources"
 created: 2026-04-12
 updated: 2026-04-12
@@ -200,6 +200,31 @@ For agents, score more than the final text:
 | Compare with | Static benchmark tracking, ad hoc manual testing |
 | Cross-domain | Experiment design, analytics, QA |
 
+
+---
+
+## ◆ Hands-On Exercises
+
+### Exercise 1: Build an LLM-as-Judge Pipeline
+
+**Goal**: Create an automated evaluation pipeline using LLM-as-judge
+**Time**: 30 minutes
+**Steps**:
+1. Create 30 test cases with reference answers
+2. Generate outputs from 2 different models
+3. Use GPT-4o as judge with a structured rubric (1-5 scale on accuracy, relevance, completeness)
+4. Compare LLM-judge scores against your human ratings
+**Expected Output**: Correlation analysis between human and LLM-judge scores
+
+---
+
+## ◆ Production Failure Modes
+
+| Failure | Symptoms | Root Cause | Mitigation |
+|---------|----------|------------|------------|
+| **Judge model bias** | LLM-as-judge favors verbose or same-family outputs | Position bias, verbosity bias, self-preference | Randomize order, normalize length, use different judge family |
+| **Eval-production gap** | Model passes eval suite but fails on production queries | Eval distribution doesn't match production | Continuously add production failures to eval set |
+| **Metric saturation** | All models score 90%+, no discrimination | Eval too easy, ceiling effect | Add adversarial and edge-case test cases, use harder benchmarks |
 ---
 
 

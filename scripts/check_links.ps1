@@ -75,6 +75,7 @@ $allMarkdownFiles = Get-ChildItem -Path $repoRoot -Recurse -File -Filter *.md |
 $brokenFrontmatterLinks = New-Object System.Collections.Generic.List[string]
 $brokenBodyLinks = New-Object System.Collections.Generic.List[string]
 $bodyWikiLinks = New-Object System.Collections.Generic.List[string]
+$frontmatterWikiLinks = New-Object System.Collections.Generic.List[string]
 
 foreach ($file in $allMarkdownFiles) {
     $rawText = Get-Content -LiteralPath $file.FullName -Raw
@@ -84,8 +85,15 @@ foreach ($file in $allMarkdownFiles) {
     $relativePath = Get-RepoRelativePath -RootPath $repoRoot -TargetPath $file.FullName
 
     if ($frontmatter) {
+        # Fail if any wiki-links remain (regression check)
         $wikiMatches = [regex]::Matches($frontmatter, '\[\[([^\]]+)\]\]')
         foreach ($match in $wikiMatches) {
+            $frontmatterWikiLinks.Add("$relativePath -> $($match.Groups[1].Value)")
+        }
+
+        # Parse standard markdown paths from parent/related fields
+        $pathMatches = [regex]::Matches($frontmatter, '"([^"]*\.md)"')
+        foreach ($match in $pathMatches) {
             $resolved = Resolve-DocTarget -SourcePath $file.FullName -Target $match.Groups[1].Value
             if ($resolved -and -not (Test-Path -LiteralPath $resolved)) {
                 $brokenFrontmatterLinks.Add("$relativePath -> $($match.Groups[1].Value)")
@@ -117,6 +125,7 @@ Write-Host "------------------------"
 Write-Host ("Broken frontmatter links: {0}" -f $brokenFrontmatterLinks.Count)
 Write-Host ("Broken body links: {0}" -f $brokenBodyLinks.Count)
 Write-Host ("Body wiki-links outside templates/drafts: {0}" -f $bodyWikiLinks.Count)
+Write-Host ("Frontmatter wiki-links (legacy, must be 0): {0}" -f $frontmatterWikiLinks.Count)
 
 if ($brokenFrontmatterLinks.Count -gt 0) {
     Write-Host ""
@@ -136,7 +145,13 @@ if ($bodyWikiLinks.Count -gt 0) {
     $bodyWikiLinks | Sort-Object | ForEach-Object { Write-Host ("- {0}" -f $_) }
 }
 
-if ($brokenFrontmatterLinks.Count -gt 0 -or $brokenBodyLinks.Count -gt 0 -or $bodyWikiLinks.Count -gt 0) {
+if ($frontmatterWikiLinks.Count -gt 0) {
+    Write-Host ""
+    Write-Host "Frontmatter wiki-links (MUST be converted to standard markdown):"
+    $frontmatterWikiLinks | Sort-Object | ForEach-Object { Write-Host ("- {0}" -f $_) }
+}
+
+if ($brokenFrontmatterLinks.Count -gt 0 -or $brokenBodyLinks.Count -gt 0 -or $bodyWikiLinks.Count -gt 0 -or $frontmatterWikiLinks.Count -gt 0) {
     exit 1
 }
 

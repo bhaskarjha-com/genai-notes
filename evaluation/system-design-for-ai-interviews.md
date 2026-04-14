@@ -5,8 +5,8 @@ type: reference
 difficulty: advanced
 status: published
 last_verified: 2026-04
-parent: "[[evaluation-and-benchmarks]]"
-related: ["[[../production/ai-system-design]]", "[[../production/model-serving]]", "[[../production/monitoring-observability]]", "[[../tools-and-infra/distributed-systems-for-ai]]"]
+parent: "evaluation-and-benchmarks.md"
+related: ["../production/ai-system-design.md", "../production/model-serving.md", "../production/monitoring-observability.md", "../tools-and-infra/distributed-systems-for-ai.md"]
 source: "Repo synthesis - see Sources"
 created: 2026-04-12
 updated: 2026-04-14

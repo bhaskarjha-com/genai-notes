@@ -4,8 +4,8 @@ tags: [career, safety, governance, regulation, red-teaming, ai-security]
 type: reference
 difficulty: intermediate
 status: published
-parent: "[[./genai-career-roles-universal]]"
-related: ["[[./roles/agentic-ai-engineer]]", "[[./roles/mlops-engineer]]", "[[./roles/rag-engineer]]"]
+parent: "./genai-career-roles-universal.md"
+related: ["./roles/agentic-ai-engineer.md", "./roles/mlops-engineer.md", "./roles/rag-engineer.md"]
 source: "Repo synthesis from the universal career reference and linked notes"
 created: 2026-04-12
 updated: 2026-04-12

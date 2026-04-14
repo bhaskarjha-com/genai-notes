@@ -5,8 +5,8 @@ type: reference
 difficulty: advanced
 status: published
 last_verified: 2026-04
-parent: "[[ethics-safety-alignment]]"
-related: ["[[owasp-llm-top-10]]", "[[ai-regulation]]", "[[../production/llmops]]", "[[../agents/ai-agents]]"]
+parent: "ethics-safety-alignment.md"
+related: ["owasp-llm-top-10.md", "ai-regulation.md", "../production/llmops.md", "../agents/ai-agents.md"]
 source: "Multiple - see Sources"
 created: 2026-04-12
 updated: 2026-04-14

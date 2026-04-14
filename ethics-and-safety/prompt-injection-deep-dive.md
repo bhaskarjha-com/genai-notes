@@ -5,8 +5,8 @@ type: reference
 difficulty: advanced
 status: published
 last_verified: 2026-04
-parent: "[[adversarial-ml-and-ai-security]]"
-related: ["[[adversarial-ml-and-ai-security]]", "[[owasp-llm-top-10]]", "[[../production/guardrails-and-content-filtering]]", "[[../agents/ai-agents]]"]
+parent: "adversarial-ml-and-ai-security.md"
+related: ["adversarial-ml-and-ai-security.md", "owasp-llm-top-10.md", "../production/guardrails-and-content-filtering.md", "../agents/ai-agents.md"]
 source: "Multiple — see Sources"
 created: 2026-04-14
 updated: 2026-04-14

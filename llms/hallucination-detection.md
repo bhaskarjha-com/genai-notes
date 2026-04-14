@@ -5,8 +5,8 @@ type: concept
 difficulty: advanced
 status: published
 last_verified: 2026-04
-parent: "[[llms-overview]]"
-related: ["[[../techniques/rag]]", "[[../evaluation/evaluation-and-benchmarks]]", "[[../ethics-and-safety/ethics-safety-alignment]]"]
+parent: "llms-overview.md"
+related: ["../techniques/rag.md", "../evaluation/evaluation-and-benchmarks.md", "../ethics-and-safety/ethics-safety-alignment.md"]
 source: "Multiple sources - see Sources"
 created: 2026-04-12
 updated: 2026-04-12
@@ -182,6 +182,31 @@ def answer_with_check(query, context_chunks, llm, verifier):
 | Compare with | Generic model quality issues, prompt injection, data leakage |
 | Cross-domain | Information retrieval, fact checking, uncertainty estimation |
 
+
+---
+
+## ◆ Hands-On Exercises
+
+### Exercise 1: Build a Hallucination Detection Pipeline
+
+**Goal**: Create a multi-method hallucination detection system
+**Time**: 45 minutes
+**Steps**:
+1. Generate 20 LLM responses on factual questions
+2. Implement 3 detection methods: self-consistency, retrieval-grounding, NLI
+3. Label each response as factual/hallucinated using all 3 methods
+4. Compare detection accuracy against human annotations
+**Expected Output**: Detection method comparison table with precision/recall
+
+---
+
+## ◆ Production Failure Modes
+
+| Failure | Symptoms | Root Cause | Mitigation |
+|---------|----------|------------|------------|
+| **False positive refusals** | System flags accurate responses as hallucinations | Detection threshold too aggressive | Calibrate thresholds on domain data, multi-method consensus |
+| **Confident hallucinations** | Model hallucinates with high confidence scores | Confidence ≠ correctness for LLMs | Retrieval grounding, self-consistency checks, citation verification |
+| **Detection latency** | Real-time hallucination check adds 2-5s per response | Detection method too compute-intensive | Lightweight pre-filter, async verification, batch checking |
 ---
 
 

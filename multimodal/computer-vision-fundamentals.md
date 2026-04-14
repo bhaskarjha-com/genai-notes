@@ -5,8 +5,8 @@ type: procedure
 difficulty: intermediate
 status: published
 last_verified: 2026-04
-parent: "[[multimodal-ai]]"
-related: ["[[diffusion-models]]", "[[../foundations/embeddings]]", "[[../foundations/modern-architectures]]"]
+parent: "multimodal-ai.md"
+related: ["diffusion-models.md", "../foundations/embeddings.md", "../foundations/modern-architectures.md"]
 source: "Multiple - see Sources"
 created: 2026-04-12
 updated: 2026-04-14

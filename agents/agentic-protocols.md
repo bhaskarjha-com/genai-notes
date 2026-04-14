@@ -5,8 +5,8 @@ type: concept
 difficulty: intermediate
 status: published
 last_verified: 2026-04
-parent: "[[../genai]]"
-related: ["[[ai-agents]]", "[[../techniques/function-calling-and-structured-output]]", "[[../tools-and-infra/tools-overview]]"]
+parent: "../genai.md"
+related: ["ai-agents.md", "../techniques/function-calling-and-structured-output.md", "../tools-and-infra/tools-overview.md"]
 source: "Multiple — see Sources"
 created: 2026-03-22
 updated: 2026-04-11
@@ -325,6 +325,32 @@ MCP PRIMITIVES:
 | Compare with | REST APIs (static), GraphQL (query), gRPC (binary)        |
 | Cross-domain | Microservices architecture, API gateways, Service mesh    |
 
+
+---
+
+## ◆ Production Failure Modes
+
+| Failure | Symptoms | Root Cause | Mitigation |
+|---------|----------|------------|------------|
+| **Protocol version mismatch** | Agent fails to connect to MCP server or A2A endpoint | Client/server on different protocol versions | Version negotiation in handshake, backward compat layer |
+| **Tool discovery overload** | Agent overwhelmed by too many available tools | Server exposes all tools without filtering | Server-side tool filtering, capability manifests per task |
+| **Auth token expiration** | Agent mid-workflow loses access to services | OAuth token TTL shorter than workflow | Token refresh middleware, proactive refresh before expiration |
+| **Serialization failures** | Complex tool inputs/outputs fail across protocol boundary | Non-JSON-serializable types, binary data | Schema validation at boundary, base64 for binary |
+
+---
+
+## ◆ Hands-On Exercises
+
+### Exercise 1: Connect to an MCP Server
+
+**Goal**: Set up a local MCP server and connect an agent client to it
+**Time**: 30 minutes
+**Steps**:
+1. Create a simple MCP server with 2 tools using the MCP SDK
+2. Create an MCP client that discovers tools
+3. Send a query that requires tool use
+4. Log the full MCP message exchange
+**Expected Output**: Complete MCP message trace showing discovery, call, response
 ---
 
 

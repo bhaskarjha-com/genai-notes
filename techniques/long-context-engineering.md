@@ -5,8 +5,8 @@ type: procedure
 difficulty: advanced
 status: published
 last_verified: 2026-04
-parent: "[[../foundations/transformers]]"
-related: ["[[../techniques/rag]]", "[[../techniques/context-engineering]]", "[[../inference/inference-optimization]]", "[[../foundations/attention-mechanism]]"]
+parent: "../foundations/transformers.md"
+related: ["../techniques/rag.md", "../techniques/context-engineering.md", "../inference/inference-optimization.md", "../foundations/attention-mechanism.md"]
 source: "Multiple — see Sources"
 created: 2026-04-14
 updated: 2026-04-14

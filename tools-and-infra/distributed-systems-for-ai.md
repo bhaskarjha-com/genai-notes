@@ -5,8 +5,8 @@ type: concept
 difficulty: advanced
 status: published
 last_verified: 2026-04
-parent: "[[tools-overview]]"
-related: ["[[cloud-ml-services]]", "[[../production/ai-system-design]]", "[[../production/model-serving]]", "[[../inference/distributed-inference-and-serving-architecture]]"]
+parent: "tools-overview.md"
+related: ["cloud-ml-services.md", "../production/ai-system-design.md", "../production/model-serving.md", "../inference/distributed-inference-and-serving-architecture.md"]
 source: "Multiple - see Sources"
 created: 2026-04-12
 updated: 2026-04-12
@@ -168,6 +168,31 @@ async def call_with_budget(primary_model, fallback_model, payload):
 | Compare with | single-node AI apps |
 | Cross-domain | backend systems, SRE, networking |
 
+
+---
+
+## ◆ Production Failure Modes
+
+| Failure | Symptoms | Root Cause | Mitigation |
+|---------|----------|------------|------------|
+| **Network partitions** | Partial failures where some nodes can't communicate | Cloud network issues, AZ failures | Retry with backoff, circuit breakers, multi-AZ deployment |
+| **Straggler nodes** | End-to-end latency dominated by slowest worker | Heterogeneous hardware, noisy neighbors | Speculative execution, straggler detection, redundant workers |
+| **Consistency vs latency** | Stale model served during rolling update | Eventually consistent deployments | Version-aware routing, blue-green deploys, read-your-writes |
+
+---
+
+## ◆ Hands-On Exercises
+
+### Exercise 1: Simulate Distributed Failures
+
+**Goal**: Build fault tolerance into a multi-service AI pipeline
+**Time**: 30 minutes
+**Steps**:
+1. Build a 3-service pipeline (embed → retrieve → generate) with FastAPI
+2. Add circuit breakers (tenacity or pybreaker) to each service call
+3. Simulate failures by killing each service in turn
+4. Verify graceful degradation instead of cascading failures
+**Expected Output**: System that returns partial results instead of 500 errors
 ---
 
 

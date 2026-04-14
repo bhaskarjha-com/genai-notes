@@ -5,8 +5,8 @@ type: concept
 difficulty: advanced
 status: published
 last_verified: 2026-04
-parent: "[[../genai]]"
-related: ["[[transformers]]", "[[attention-mechanism]]", "[[../llms/llms-overview]]", "[[../inference/inference-optimization]]"]
+parent: "../genai.md"
+related: ["transformers.md", "attention-mechanism.md", "../llms/llms-overview.md", "../inference/inference-optimization.md"]
 source: "Multiple papers — see Sources"
 created: 2026-03-22
 updated: 2026-04-11
@@ -300,6 +300,31 @@ WHICH MODELS USE WHAT:
 | Compare with | Original Transformer (2017), RNNs (sequential)                                        |
 | Cross-domain | Computer architecture (memory hierarchy), Sparse computation                          |
 
+
+---
+
+## ◆ Production Failure Modes
+
+| Failure | Symptoms | Root Cause | Mitigation |
+|---------|----------|------------|------------|
+| **Architecture-capability mismatch** | Selected architecture underperforms on task type | Using encoder-only for generation, decoder-only for classification | Architecture selection guide: encoder for classification, decoder for generation |
+| **MoE routing collapse** | Only 1-2 experts receive all tokens, others unused | Load balancing loss insufficient | Auxiliary load balancing loss, expert parallelism, capacity factors |
+| **Long-context degradation** | Quality drops beyond pre-training context window | Architecture doesn't support position extrapolation | RoPE scaling, ALiBi, progressive context extension |
+
+---
+
+## ◆ Hands-On Exercises
+
+### Exercise 1: Compare Architecture Families on a Task
+
+**Goal**: Run the same task through encoder-only, decoder-only, and encoder-decoder models
+**Time**: 30 minutes
+**Steps**:
+1. Choose a summarization or classification task
+2. Run with BERT (encoder), GPT-2 (decoder), T5 (enc-dec)
+3. Compare output quality and inference speed
+4. Document which architecture wins and why
+**Expected Output**: Architecture comparison table with quality scores and latency
 ---
 
 

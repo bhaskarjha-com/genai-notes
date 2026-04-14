@@ -5,8 +5,8 @@ type: procedure
 difficulty: advanced
 status: published
 last_verified: 2026-04
-parent: "[[ai-agents]]"
-related: ["[[agentic-protocols]]", "[[agent-evaluation]]", "[[../applications/code-generation]]", "[[../production/ai-system-design]]"]
+parent: "ai-agents.md"
+related: ["agentic-protocols.md", "agent-evaluation.md", "../applications/code-generation.md", "../production/ai-system-design.md"]
 source: "Multiple sources - see Sources"
 created: 2026-04-12
 updated: 2026-04-14

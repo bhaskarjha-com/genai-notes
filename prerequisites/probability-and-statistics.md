@@ -5,8 +5,8 @@ type: concept
 difficulty: beginner
 status: published
 last_verified: 2026-04
-parent: "[[../genai]]"
-related: ["[[neural-networks]]", "[[deep-learning-fundamentals]]", "[[../llms/llms-overview]]"]
+parent: "../genai.md"
+related: ["neural-networks.md", "deep-learning-fundamentals.md", "../llms/llms-overview.md"]
 source: "Multiple - see Sources"
 created: 2026-03-18
 updated: 2026-04-11

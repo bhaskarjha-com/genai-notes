@@ -5,8 +5,8 @@ type: concept
 difficulty: expert
 status: published
 last_verified: 2026-04
-parent: "[[attention-mechanism]]"
-related: ["[[attention-mechanism]]", "[[transformers]]", "[[../inference/inference-optimization]]", "[[state-space-models]]"]
+parent: "attention-mechanism.md"
+related: ["attention-mechanism.md", "transformers.md", "../inference/inference-optimization.md", "state-space-models.md"]
 source: "Multiple — see Sources"
 created: 2026-04-14
 updated: 2026-04-14
@@ -237,6 +237,21 @@ for name, cfg in configs.items():
 | 📄 Paper | [Ainslie et al. "GQA: Grouped-Query Attention" (2023)](https://arxiv.org/abs/2305.13245) | The GQA paper used by LLaMA 2/3 |
 | 🎥 Video | [3Blue1Brown — "Attention in Transformers"](https://www.youtube.com/watch?v=eMlx5fFNoYc) | Best visual explanation |
 
+
+---
+
+## ◆ Hands-On Exercises
+
+### Exercise 1: Implement GQA and Compare KV-Cache Size
+
+**Goal**: Build GQA attention and measure memory savings vs standard MHA
+**Time**: 30 minutes
+**Steps**:
+1. Implement MHA with 32 heads
+2. Implement GQA with 32 query heads and 8 KV heads
+3. Compare KV-cache memory at 2048 sequence length
+4. Verify output quality is similar on a test batch
+**Expected Output**: Memory comparison table showing 4x KV-cache reduction with GQA
 ---
 
 ## ★ Sources

@@ -74,17 +74,17 @@ This means the model literally **cannot** produce output that violates the schem
 
 ```
 Schema: {"name": string, "age": integer}
-                                              
-Token 1: "{"         ✓ (must start with {)    
-Token 2: '"name"'    ✓ (required field)       
-Token 3: ":"         ✓ (key-value separator)  
+
+Token 1: "{"         ✓ (must start with {)
+Token 2: '"name"'    ✓ (required field)
+Token 3: ":"         ✓ (key-value separator)
 Token 4: '"Alice"'   ✓ (string value expected)
-Token 5: ","         ✓ (more fields needed)   
-Token 6: '"age"'     ✓ (required field)       
-Token 7: ":"         ✓ (separator)            
-Token 8: "30"        ✓ (integer expected)     
-Token 9: "}"         ✓ (all fields present)   
-                                              
+Token 5: ","         ✓ (more fields needed)
+Token 6: '"age"'     ✓ (required field)
+Token 7: ":"         ✓ (separator)
+Token 8: "30"        ✓ (integer expected)
+Token 9: "}"         ✓ (all fields present)
+
 Token 8: '"thirty"'  ✗ MASKED — integer required
 Token 5: "}"         ✗ MASKED — "age" still required
 ```
@@ -221,8 +221,8 @@ schema = {
     }
 }
 
-review_text = """Battery life is incredible — easily lasts 2 days. 
-Camera is decent but struggles in low light. Build quality feels premium. 
+review_text = """Battery life is incredible — easily lasts 2 days.
+Camera is decent but struggles in low light. Build quality feels premium.
 Overpriced compared to competitors though."""
 
 resp = client.chat.completions.create(

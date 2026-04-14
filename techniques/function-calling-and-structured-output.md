@@ -86,7 +86,7 @@ KEY: The LLM NEVER executes code. It only decides what to call.
 ### Function Calling API (OpenAI Pattern)
 
 ```python
-# ?? Last tested: 2026-04
+# ⚠️ Last tested: 2026-04
 from openai import OpenAI
 import json
 
@@ -153,7 +153,7 @@ if message.tool_calls:
 ### Structured Output
 
 ```python
-# ?? Last tested: 2026-04
+# ⚠️ Last tested: 2026-04
 # ═══ METHOD 1: JSON Mode (basic) ═══
 response = client.chat.completions.create(
     model="gpt-4o",

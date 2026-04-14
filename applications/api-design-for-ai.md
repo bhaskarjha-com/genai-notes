@@ -18,16 +18,14 @@ updated: 2026-04-14
 
 ---
 
-## TL;DR
-
+## ★ TL;DR
 - **What**: The design patterns for building application-facing APIs around AI systems.
 - **Why**: Poor API design leaks model quirks, makes clients brittle, and turns AI product iteration into integration pain.
 - **Key point**: Design APIs around product tasks and operational constraints, not around raw model endpoints alone.
 
 ---
 
-## Overview
-
+## ★ Overview
 ### Definition
 
 An **AI application API** is the contract between clients and an AI-backed service. It defines request shape, response shape, streaming behavior, error semantics, and operational guarantees.
@@ -50,8 +48,7 @@ This note focuses on product-facing APIs, not provider SDK specifics. It covers 
 
 ---
 
-## Deep Dive
-
+## ★ Deep Dive
 ### Core Design Questions
 
 Ask:
@@ -143,8 +140,7 @@ Do not force clients to track every prompt revision.
 
 ---
 
-## Quick Reference
-
+## ◆ Quick Reference
 | Need | Better Design Choice |
 |---|---|
 | interactive chat | streaming endpoint |
@@ -155,8 +151,7 @@ Do not force clients to track every prompt revision.
 
 ---
 
-## Gotchas
-
+## ○ Gotchas & Common Mistakes
 - Raw provider payload passthrough creates long-term client pain.
 - Streaming is not always better if the task is short and structured.
 - Hidden prompt changes can look like API regressions to downstream teams.
@@ -164,8 +159,7 @@ Do not force clients to track every prompt revision.
 
 ---
 
-## Interview Angles
-
+## ○ Interview Angles
 - **Q**: What should an AI API return besides the answer?
 - **A**: Usually a request id, status or finish reason, and optionally citations or usage metadata depending on the product. Those fields make debugging, billing, and trust much easier.
 
@@ -174,8 +168,7 @@ Do not force clients to track every prompt revision.
 
 ---
 
-## Connections
-
+## ★ Connections
 | Relationship | Topics |
 |---|---|
 | Builds on | [AI System Design for GenAI Applications](../production/ai-system-design.md), [Model Serving for LLM Applications](../production/model-serving.md) |

@@ -165,7 +165,7 @@ RAG Evaluation = Separate what went wrong WHERE
 ## ◆ Code & Implementation
 
 ```python
-# ?? Last tested: 2026-04
+# ⚠️ Last tested: 2026-04
 # ═══ RAGAS: Evaluate a RAG Pipeline ═══
 from ragas import evaluate
 from ragas.metrics import faithfulness, answer_relevancy, context_precision

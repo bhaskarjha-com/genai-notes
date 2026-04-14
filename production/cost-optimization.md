@@ -18,16 +18,14 @@ updated: 2026-04-14
 
 ---
 
-## TL;DR
-
+## ★ TL;DR
 - **What**: The design and operational practices used to reduce the cost of running AI systems without unacceptable quality loss.
 - **Why**: Token, compute, and infrastructure costs can erase product margin quickly.
 - **Key point**: The biggest savings usually come from architecture and routing decisions, not from tiny prompt tweaks.
 
 ---
 
-## Overview
-
+## ★ Overview
 ### Definition
 
 **Cost optimization** is the disciplined process of improving quality-per-dollar across model calls, retrieval, serving, storage, and operations.
@@ -50,8 +48,7 @@ This note focuses on production GenAI economics: request shaping, model routing,
 
 ---
 
-## Deep Dive
-
+## ★ Deep Dive
 ### Where The Money Goes
 
 Common cost buckets:
@@ -133,8 +130,7 @@ Self-hosting is not automatically cheaper. It becomes attractive only when workl
 
 ---
 
-## Quick Reference
-
+## ◆ Quick Reference
 | Cost Problem | Better First Move |
 |---|---|
 | Large bills from simple requests | add model routing |
@@ -145,8 +141,7 @@ Self-hosting is not automatically cheaper. It becomes attractive only when workl
 
 ---
 
-## Gotchas
-
+## ○ Gotchas & Common Mistakes
 - Cheapest model is not cheapest if failure rates explode.
 - Teams often optimize token counts while ignoring failed-task cost.
 - Caching can create stale or incorrect outputs if scope and invalidation are weak.
@@ -154,8 +149,7 @@ Self-hosting is not automatically cheaper. It becomes attractive only when workl
 
 ---
 
-## Interview Angles
-
+## ○ Interview Angles
 - **Q**: What are the biggest cost levers in a GenAI application?
 - **A**: Model routing, context control, caching, retrieval discipline, and serving choices. Small prompt tweaks help, but architecture decisions usually dominate the savings.
 
@@ -164,8 +158,7 @@ Self-hosting is not automatically cheaper. It becomes attractive only when workl
 
 ---
 
-## Connections
-
+## ★ Connections
 | Relationship | Topics |
 |---|---|
 | Builds on | [Model Serving for LLM Applications](./model-serving.md), [Inference Optimization](../inference/inference-optimization.md), [Monitoring & Observability for GenAI Systems](./monitoring-observability.md) |

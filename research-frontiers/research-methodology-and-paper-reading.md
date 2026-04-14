@@ -18,16 +18,14 @@ updated: 2026-04-12
 
 ---
 
-## TL;DR
-
+## ★ TL;DR
 - **What**: A practical framework for reading AI papers and designing research-minded experiments.
 - **Why**: Frontier work moves fast, and shallow paper consumption leads to weak understanding and cargo-cult implementation.
 - **Key point**: Focus on claims, setup, evidence, limitations, and reproducibility.
 
 ---
 
-## Overview
-
+## ★ Overview
 ### Definition
 
 This note covers how to read papers critically, evaluate evidence, and structure experiments so you can learn from research rather than merely quote it.
@@ -50,8 +48,7 @@ It applies to engineers, researchers, and advanced learners. It is not limited t
 
 ---
 
-## Deep Dive
-
+## ★ Deep Dive
 ### The Five Questions To Ask Of Any Paper
 
 1. What exact claim is being made?
@@ -133,8 +130,7 @@ notes_to_capture:
 
 ---
 
-## Quick Reference
-
+## ◆ Quick Reference
 | If You Want To Know... | Read This Part First |
 |---|---|
 | what the paper claims | abstract and conclusion |
@@ -145,16 +141,14 @@ notes_to_capture:
 
 ---
 
-## Gotchas
-
+## ○ Gotchas & Common Mistakes
 - Newer does not automatically mean better.
 - A strong benchmark result can hide weak operational value.
 - Reproducing only the headline number misses the real lesson.
 
 ---
 
-## Interview Angles
-
+## ○ Interview Angles
 - **Q**: How do you read an AI paper efficiently?
 - **A**: I start by extracting the core claim and evaluation setup, then inspect baselines, ablations, and limitations. I try to determine what is durable knowledge versus benchmark-specific optimization.
 
@@ -163,8 +157,7 @@ notes_to_capture:
 
 ---
 
-## Connections
-
+## ★ Connections
 | Relationship | Topics |
 |---|---|
 | Builds on | [LLM Evaluation Deep Dive](../evaluation/llm-evaluation-deep-dive.md), [Mechanistic Interpretability](./interpretability.md) |
@@ -208,8 +201,7 @@ notes_to_capture:
 | 🔧 Hands-on | [Semantic Scholar](https://www.semanticscholar.org/) | AI-powered paper search and citation graph |
 | 🔧 Hands-on | [Papers With Code](https://paperswithcode.com/) | Papers linked to implementations and benchmarks |
 
-## Sources
-
+## ★ Sources
 - S. Keshav, "How to Read a Paper"
 - reproducibility guidance from major ML venues
 - [LLM Evaluation Deep Dive](../evaluation/llm-evaluation-deep-dive.md)

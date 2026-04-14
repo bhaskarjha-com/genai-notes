@@ -140,7 +140,7 @@ Do you want managed or self-hosted?
 ### Quick Start Examples
 
 ```python
-# ?? Last tested: 2026-04
+# ⚠️ Last tested: 2026-04
 # ═══ CHROMA (simplest - great for learning) ═══
 import chromadb
 from chromadb.utils import embedding_functions
@@ -163,7 +163,7 @@ print(results["documents"])  # → Most similar docs
 ```
 
 ```python
-# ?? Last tested: 2026-04
+# ⚠️ Last tested: 2026-04
 # ═══ QDRANT (production-ready) ═══
 from qdrant_client import QdrantClient
 from qdrant_client.models import VectorParams, Distance, PointStruct

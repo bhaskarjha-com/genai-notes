@@ -153,7 +153,7 @@ MITIGATIONS:
 ### Context Engineering in Practice
 
 ```python
-# ?? Last tested: 2026-04
+# ⚠️ Last tested: 2026-04
 # ═══ Context Engineering Example ═══
 
 def build_context(user_query: str, conversation_history: list) -> list:

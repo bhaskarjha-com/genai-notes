@@ -1,0 +1,49 @@
+name: External Link Check
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+jobs:
+  check-links:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Restore lychee cache
+        uses: actions/cache@v4
+        with:
+          path: .lycheecache
+          key: cache-lychee-${{ github.sha }}
+          restore-keys: cache-lychee-
+
+      - name: Lychee Link Checker
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --cache
+            --max-cache-age 7d
+            --exclude-mail
+            --timeout 30
+            --max-retries 3
+            --root-dir "$(pwd)"
+            --exclude-path generated
+            --exclude-path downloads
+            --exclude-path docs
+            --exclude-path site
+            --exclude-path .venv
+            --exclude-path _templates
+            "**/*.md"
+          fail: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload link report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: link-report
+          path: lychee/out.md

@@ -18,16 +18,14 @@ updated: 2026-04-12
 
 ---
 
-## TL;DR
-
+## ★ TL;DR
 - **What**: A community-driven security framework highlighting the most important risks in LLM applications.
 - **Why**: It gives product and engineering teams a practical checklist for design reviews, red-teaming, and secure delivery.
 - **Key point**: Use it as a threat-modeling starting point, not a substitute for real system analysis.
 
 ---
 
-## Overview
-
+## ★ Overview
 ### Definition
 
 The **OWASP Top 10 for LLM Applications** is part of the broader **OWASP GenAI Security Project** and catalogs major risk categories for LLM and GenAI systems.
@@ -52,8 +50,7 @@ Last verified for OWASP project naming and version references: 2026-04.
 
 ---
 
-## Deep Dive
-
+## ★ Deep Dive
 ### Why This Framework Matters
 
 The OWASP framing helps teams move from vague fear to specific review questions:
@@ -102,7 +99,7 @@ Use the list during:
 ### Example: Guarded Request Path
 
 ```python
-# ?? Last tested: 2026-04
+# ⚠️ Last tested: 2026-04
 def handle_llm_request(user_input, retrieved_chunks):
     safe_context = redact_secrets(retrieved_chunks)  # LLM06
     prompt = build_prompt(user_input=user_input, context=safe_context)
@@ -124,8 +121,7 @@ OWASP's AI security work has expanded beyond only this Top 10 into the broader O
 
 ---
 
-## Quick Reference
-
+## ◆ Quick Reference
 | If Reviewing... | Start With |
 |---|---|
 | RAG assistant | prompt injection, disclosure, overreliance |
@@ -135,16 +131,14 @@ OWASP's AI security work has expanded beyond only this Top 10 into the broader O
 
 ---
 
-## Gotchas
-
+## ○ Gotchas & Common Mistakes
 - The list is a starting point, not a complete risk assessment.
 - "Overreliance" is a socio-technical risk, not only a model flaw.
 - Security reviews fail when they ignore downstream systems that trust model output.
 
 ---
 
-## Interview Angles
-
+## ○ Interview Angles
 - **Q**: Why is the OWASP LLM Top 10 useful for engineers?
 - **A**: It turns vague AI security concerns into a concrete checklist of failure modes that can be mapped to architecture, threat modeling, and release controls.
 
@@ -153,8 +147,7 @@ OWASP's AI security work has expanded beyond only this Top 10 into the broader O
 
 ---
 
-## Connections
-
+## ★ Connections
 | Relationship | Topics |
 |---|---|
 | Builds on | [Adversarial ML & AI Security](./adversarial-ml-and-ai-security.md), [AI Regulation for Builders](./ai-regulation.md) |
@@ -198,8 +191,7 @@ OWASP's AI security work has expanded beyond only this Top 10 into the broader O
 | 📄 Paper | [Greshake et al. "Prompt Injection" (2023)](https://arxiv.org/abs/2302.12173) | Systematic study of indirect injection attacks |
 | 🔧 Hands-on | [NIST AI RMF Playbook](https://airc.nist.gov/AI_RMF_Playbook) | Risk management actions for AI systems |
 
-## Sources
-
+## ★ Sources
 - OWASP Top 10 for Large Language Model Applications - https://owasp.org/www-project-top-10-for-large-language-model-applications/
 - OWASP GenAI Security Project - https://genai.owasp.org/
 - OWASP Top 10 for LLM Applications 2025 resource page - https://genai.owasp.org/resource/owasp-top-10-for-llm-applications-2025/

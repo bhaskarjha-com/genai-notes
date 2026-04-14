@@ -18,16 +18,14 @@ updated: 2026-04-14
 
 ---
 
-## TL;DR
-
+## ★ TL;DR
 - **What**: The study of attacks against AI systems and the controls used to defend them.
 - **Why**: LLM apps can leak data, misuse tools, follow malicious instructions, or become gateways into other systems.
 - **Key point**: Treat the full AI application as the security boundary, not just the model.
 
 ---
 
-## Overview
-
+## ★ Overview
 ### Definition
 
 **Adversarial ML** covers attacks that manipulate model inputs, training data, behavior, or surrounding infrastructure. In GenAI, this includes prompt injection, data poisoning, insecure tool use, and misuse of autonomous workflows.
@@ -50,8 +48,7 @@ This note is application-focused. It covers practical threat categories and defe
 
 ---
 
-## Deep Dive
-
+## ★ Deep Dive
 ### Common Threat Families
 
 | Threat | Example |
@@ -120,8 +117,7 @@ tools:
 
 ---
 
-## Quick Reference
-
+## ◆ Quick Reference
 | Risk | First Defense |
 |---|---|
 | prompt injection | context isolation and strict tool policy |
@@ -132,8 +128,7 @@ tools:
 
 ---
 
-## Gotchas
-
+## ○ Gotchas & Common Mistakes
 - A strong system prompt is not a security boundary.
 - Output validation matters even when the model is "usually right."
 - Security issues often appear at system integration points, not in the model alone.
@@ -141,8 +136,7 @@ tools:
 
 ---
 
-## Interview Angles
-
+## ○ Interview Angles
 - **Q**: Why is prompt injection a security problem and not only a quality problem?
 - **A**: Because malicious instructions can manipulate system behavior, trigger data leakage, or cause unauthorized actions through tools and downstream systems. That makes it part of the application's security surface.
 
@@ -151,8 +145,7 @@ tools:
 
 ---
 
-## Connections
-
+## ★ Connections
 | Relationship | Topics |
 |---|---|
 | Builds on | [Ethics, Safety & Alignment](./ethics-safety-alignment.md), [AI Regulation for Builders](./ai-regulation.md) |

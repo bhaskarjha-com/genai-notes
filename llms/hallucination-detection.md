@@ -18,16 +18,14 @@ updated: 2026-04-12
 
 ---
 
-## TL;DR
-
+## ★ TL;DR
 - **What**: Methods to detect and reduce unsupported, fabricated, or overconfident model outputs
 - **Why**: Hallucination is one of the main blockers to production trust in GenAI systems
 - **Key point**: The best fix is usually system-level grounding and verification, not just a better prompt
 
 ---
 
-## Overview
-
+## ★ Overview
 ### Definition
 
 A **hallucination** is an output that is fluent and plausible but unsupported by the available evidence, tool results, or real-world facts.
@@ -51,8 +49,7 @@ This note covers hallucination types, detection methods, mitigation strategies, 
 
 ---
 
-## Deep Dive
-
+## ★ Deep Dive
 ### Useful Taxonomy
 
 | Type | Description | Example |
@@ -122,7 +119,7 @@ User request
 ### Simple Groundedness Pattern
 
 ```python
-# ?? Last tested: 2026-04
+# ⚠️ Last tested: 2026-04
 def answer_with_check(query, context_chunks, llm, verifier):
     draft = llm.generate(query=query, context=context_chunks)
     verdict = verifier.score(answer=draft, evidence=context_chunks)
@@ -143,8 +140,7 @@ def answer_with_check(query, context_chunks, llm, verifier):
 
 ---
 
-## Quick Reference
-
+## ◆ Quick Reference
 | Signal | Interpretation |
 |---|---|
 | High fluency + low evidence coverage | Likely hallucination risk |
@@ -154,8 +150,7 @@ def answer_with_check(query, context_chunks, llm, verifier):
 
 ---
 
-## Gotchas
-
+## ○ Gotchas & Common Mistakes
 - "Lower temperature" is not a full hallucination strategy
 - Fine-tuning can improve style while still preserving factual failure modes
 - A judge model can also hallucinate if it is not grounded on evidence
@@ -163,8 +158,7 @@ def answer_with_check(query, context_chunks, llm, verifier):
 
 ---
 
-## Interview Angles
-
+## ○ Interview Angles
 - **Q**: What is the most effective way to reduce hallucination in enterprise assistants?
 - **A**: Ground the answer on retrieval or tool outputs, require evidence in the response path, and add a post-generation verification step with abstention when confidence is low.
 
@@ -173,8 +167,7 @@ def answer_with_check(query, context_chunks, llm, verifier):
 
 ---
 
-## Connections
-
+## ★ Connections
 | Relationship | Topics |
 |---|---|
 | Builds on | [Large Language Models (LLMs)](./llms-overview.md), [Retrieval-Augmented Generation (RAG)](../techniques/rag.md), [LLM Evaluation & Benchmarks](../evaluation/evaluation-and-benchmarks.md) |
@@ -218,8 +211,7 @@ def answer_with_check(query, context_chunks, llm, verifier):
 | 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 4 | Hallucination detection as part of evaluation strategy |
 | 🔧 Hands-on | [Vectara HHEM](https://huggingface.co/vectara/hallucination_evaluation_model) | Open-source hallucination evaluation model |
 
-## Sources
-
+## ★ Sources
 - SelfCheckGPT paper
 - RAGAS documentation
 - NLI / entailment literature for factual verification

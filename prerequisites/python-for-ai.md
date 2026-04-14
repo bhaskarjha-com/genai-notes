@@ -18,16 +18,14 @@ updated: 2026-04-12
 
 ---
 
-## TL;DR
-
+## ★ TL;DR
 - **What**: The Python ecosystem and working habits most useful for AI and GenAI development.
 - **Why**: Nearly every serious AI framework, dataset tool, model stack, and orchestration library has a Python-first workflow.
 - **Key point**: Learn arrays, tensors, environments, and model APIs before chasing higher-level frameworks.
 
 ---
 
-## Overview
-
+## ★ Overview
 ### Definition
 
 This note covers the Python tooling that matters specifically for AI work: numerical computing, tensor operations, model loading, environments, and basic workflow hygiene.
@@ -49,8 +47,7 @@ This is not a general Python tutorial. It assumes you already know variables, lo
 
 ---
 
-## Deep Dive
-
+## ★ Deep Dive
 ### The Core Stack
 
 | Layer | Primary Tools | Why It Matters |
@@ -149,8 +146,7 @@ For AI work, environment mistakes often look like model bugs. Version mismatches
 
 ---
 
-## Quick Reference
-
+## ◆ Quick Reference
 | Need | Use |
 |---|---|
 | fast array math | NumPy |
@@ -171,8 +167,7 @@ if torch.cuda.is_available():
 
 ---
 
-## Gotchas
-
+## ○ Gotchas & Common Mistakes
 - CPU tensors and GPU tensors cannot be mixed in the same operation.
 - `pip install torch` is not enough guidance by itself; CUDA compatibility matters.
 - Forgetting `model.eval()` can change inference behavior through dropout or batch-norm state.
@@ -181,8 +176,7 @@ if torch.cuda.is_available():
 
 ---
 
-## Interview Angles
-
+## ○ Interview Angles
 - **Q**: Why is Python dominant in AI if it is slower than C++?
 - **A**: Python gives fast iteration and a huge ecosystem, while the expensive numerical work runs underneath in optimized C, C++, CUDA, or vendor kernels. Python is the control layer, not the performance bottleneck.
 
@@ -194,8 +188,7 @@ if torch.cuda.is_available():
 
 ---
 
-## Connections
-
+## ★ Connections
 | Relationship | Topics |
 |---|---|
 | Builds on | [Linear Algebra for AI](./linear-algebra-for-ai.md) |
@@ -214,8 +207,7 @@ if torch.cuda.is_available():
 | 🔧 Hands-on | [Real Python Tutorials](https://realpython.com/) | High-quality Python tutorials with ML focus |
 | 🎓 Course | [fast.ai — "Practical Deep Learning"](https://course.fast.ai/) | Learn Python in the context of deep learning |
 
-## Sources
-
+## ★ Sources
 - PyTorch documentation - https://pytorch.org/docs/
 - NumPy documentation - https://numpy.org/doc/
 - Hugging Face documentation - https://huggingface.co/docs

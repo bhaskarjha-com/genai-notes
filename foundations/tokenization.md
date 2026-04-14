@@ -109,7 +109,7 @@ STEP 4: ('low', 'er') is frequent
 ### Practical Impact
 
 ```python
-# ?? Last tested: 2026-04
+# ⚠️ Last tested: 2026-04
 # Using OpenAI's tiktoken
 import tiktoken
 enc = tiktoken.encoding_for_model("gpt-4o")

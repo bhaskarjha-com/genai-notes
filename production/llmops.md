@@ -118,7 +118,7 @@ TOOLS:
 | **Drift**                 | Performance degradation over time | Arize Phoenix           |
 
 ```python
-# ?? Last tested: 2026-04
+# ⚠️ Last tested: 2026-04
 # ═══ Basic LLM Observability with Langfuse ═══
 from langfuse.openai import openai  # Drop-in replacement
 

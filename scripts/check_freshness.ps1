@@ -21,7 +21,7 @@ $StableThresholdMonths = 12
 
 $ContentDirs = @(
     "applications", "agents", "ethics-and-safety", "evaluation", "foundations",
-    "image-generation", "inference", "llms", "multimodal", "prerequisites",
+    "inference", "llms", "multimodal", "prerequisites",
     "production", "research-frontiers", "techniques", "tools-and-infra"
 )
 

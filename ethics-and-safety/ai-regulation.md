@@ -18,16 +18,14 @@ updated: 2026-04-12
 
 ---
 
-## TL;DR
-
+## ★ TL;DR
 - **What**: A practical overview of the main regulatory and governance frameworks that affect AI builders.
 - **Why**: Compliance, safety, documentation, and deployment choices are becoming product requirements, not optional extras.
 - **Key point**: Start with risk classification, documentation, monitoring, and human accountability rather than trying to memorize every clause.
 
 ---
 
-## Overview
-
+## ★ Overview
 ### Definition
 
 **AI regulation** covers binding legal requirements and softer governance frameworks that shape how AI systems are designed, deployed, documented, and monitored.
@@ -52,8 +50,7 @@ Last verified for timeline-oriented statements: 2026-04.
 
 ---
 
-## Deep Dive
-
+## ★ Deep Dive
 ### The Builder's Mental Model
 
 When regulation enters the picture, start with four questions:
@@ -134,8 +131,7 @@ last_risk_review: 2026-04
 
 ---
 
-## Quick Reference
-
+## ◆ Quick Reference
 | If You Are Building... | First Governance Move |
 |---|---|
 | Internal low-risk assistant | document limits, monitor usage, add human escalation |
@@ -145,8 +141,7 @@ last_risk_review: 2026-04
 
 ---
 
-## Gotchas
-
+## ○ Gotchas & Common Mistakes
 - Regulation applies to use context, not only model type.
 - "We use an API provider" does not remove all downstream responsibility.
 - Governance evidence is hard to reconstruct after launch if you never logged it.
@@ -154,8 +149,7 @@ last_risk_review: 2026-04
 
 ---
 
-## Interview Angles
-
+## ○ Interview Angles
 - **Q**: What should an AI engineer do when working on a potentially regulated use case?
 - **A**: Classify the use case early, document system purpose and limitations, build evaluation and monitoring into the workflow, and pull in legal or compliance partners before launch rather than after problems appear.
 
@@ -164,8 +158,7 @@ last_risk_review: 2026-04
 
 ---
 
-## Connections
-
+## ★ Connections
 | Relationship | Topics |
 |---|---|
 | Builds on | [Ethics, Safety & Alignment](./ethics-safety-alignment.md), [LLMOps & Production Deployment](../production/llmops.md) |
@@ -209,8 +202,7 @@ last_risk_review: 2026-04
 | 📘 Book | "The AI Dilemma" by Tegmark (2024) | Accessible treatment of AI governance challenges |
 | 🔧 Hands-on | [NIST AI RMF](https://www.nist.gov/artificial-intelligence/ai-risk-management-framework) | US risk management framework for AI systems |
 
-## Sources
-
+## ★ Sources
 - European Commission, AI Act policy page - https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai
 - European Commission, "European Artificial Intelligence Act comes into force" - https://digital-strategy.ec.europa.eu/en/news/european-artificial-intelligence-act-comes-force
 - NIST AI RMF Playbook - https://www.nist.gov/itl/ai-risk-management-framework/nist-ai-rmf-playbook

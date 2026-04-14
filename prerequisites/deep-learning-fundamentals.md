@@ -49,7 +49,7 @@ Covers training mechanics applicable to all GenAI models. For Transformer-specif
 ### The Training Loop (Universal)
 
 ```python
-# ?? Last tested: 2026-04
+# ⚠️ Last tested: 2026-04
 # THE training loop — this is the same for BERT, GPT, Stable Diffusion, everything.
 for epoch in range(num_epochs):
     for batch in dataloader:
@@ -200,7 +200,7 @@ VRAM IS THE BOTTLENECK:
 ```
 
 ```python
-# ?? Last tested: 2026-04
+# ⚠️ Last tested: 2026-04
 # Check GPU
 import torch
 print(torch.cuda.is_available())          # True if GPU ready

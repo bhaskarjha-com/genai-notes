@@ -172,7 +172,7 @@ TEMPERATURE SAMPLING:
 | **Top-K + Top-P**   | Apply both filters                                | Production default for most APIs  |
 
 ```python
-# ?? Last tested: 2026-04
+# ⚠️ Last tested: 2026-04
 # OpenAI API example — these ARE sampling strategies
 response = client.chat.completions.create(
     model="gpt-4o",

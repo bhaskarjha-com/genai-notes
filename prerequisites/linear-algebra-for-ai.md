@@ -78,7 +78,7 @@ TENSOR (nD):  Generalization to any number of dimensions
 ```
 
 ```python
-# ?? Last tested: 2026-04
+# ⚠️ Last tested: 2026-04
 import torch
 
 scalar = torch.tensor(5.0)           # 0D: shape ()
@@ -133,7 +133,7 @@ WHERE IN GenAI:
 ```
 
 ```python
-# ?? Last tested: 2026-04
+# ⚠️ Last tested: 2026-04
 # Matrix multiply in PyTorch
 A = torch.randn(2, 3)
 B = torch.randn(3, 2)

@@ -127,7 +127,7 @@ EMBEDDING REPRESENTATION (dense, captures meaning):
 ### Similarity Measurement
 
 ```python
-# ?? Last tested: 2026-04
+# ⚠️ Last tested: 2026-04
 import numpy as np
 
 def cosine_similarity(a, b):
@@ -154,7 +154,7 @@ cosine_similarity(embed_cat, embed_car)  # → 0.12 (very different)
 ## ◆ Code & Implementation
 
 ```python
-# ?? Last tested: 2026-04
+# ⚠️ Last tested: 2026-04
 # ═══ OPENAI EMBEDDINGS ═══
 from openai import OpenAI
 client = OpenAI()

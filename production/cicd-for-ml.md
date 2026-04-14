@@ -18,16 +18,14 @@ updated: 2026-04-14
 
 ---
 
-## TL;DR
-
+## ★ TL;DR
 - **What**: The automation pipeline for testing, packaging, validating, and releasing ML and LLM systems.
 - **Why**: AI changes can silently degrade quality, safety, or cost while all unit tests still pass.
 - **Key point**: CI/CD for AI must validate behavior, not just syntax and infrastructure.
 
 ---
 
-## Overview
-
+## ★ Overview
 ### Definition
 
 **CI/CD for AI systems** extends normal software delivery with model, prompt, dataset, and evaluation checks.
@@ -50,8 +48,7 @@ This note covers the delivery path for GenAI services and ML-backed applications
 
 ---
 
-## Deep Dive
-
+## ★ Deep Dive
 ### What Changes in AI Systems
 
 The delivery pipeline may need to track changes in:
@@ -138,8 +135,7 @@ jobs:
 
 ---
 
-## Quick Reference
-
+## ◆ Quick Reference
 | Change Type | Minimum Checks |
 |---|---|
 | Prompt change | offline evals, cost diff, formatting checks |
@@ -150,8 +146,7 @@ jobs:
 
 ---
 
-## Gotchas
-
+## ○ Gotchas & Common Mistakes
 - Unit tests alone can create false confidence.
 - A better benchmark score can still be a worse product outcome.
 - Teams often forget to version datasets and prompts.
@@ -159,8 +154,7 @@ jobs:
 
 ---
 
-## Interview Angles
-
+## ○ Interview Angles
 - **Q**: What makes CI/CD for LLM systems different from regular CI/CD?
 - **A**: The output behavior is probabilistic and influenced by prompts, models, and datasets, so the pipeline needs evaluation gates, cost checks, and rollout safety beyond normal software tests.
 
@@ -169,8 +163,7 @@ jobs:
 
 ---
 
-## Connections
-
+## ★ Connections
 | Relationship | Topics |
 |---|---|
 | Builds on | [LLM Evaluation Deep Dive](../evaluation/llm-evaluation-deep-dive.md), [Monitoring & Observability for GenAI Systems](./monitoring-observability.md), [Docker & Kubernetes for GenAI Deployment](./docker-and-kubernetes.md) |

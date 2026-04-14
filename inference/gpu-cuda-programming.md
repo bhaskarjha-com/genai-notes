@@ -18,16 +18,14 @@ updated: 2026-04-14
 
 ---
 
-## TL;DR
-
+## ★ TL;DR
 - **What**: The hardware and programming concepts behind GPU-accelerated AI workloads.
 - **Why**: Many training and inference bottlenecks make sense only if you understand memory hierarchy, parallel execution, and kernel behavior.
 - **Key point**: In AI systems, moving data efficiently is often harder than doing the math.
 
 ---
 
-## Overview
-
+## ★ Overview
 ### Definition
 
 A **GPU** is a massively parallel processor optimized for throughput-oriented numeric computation. **CUDA** is NVIDIA's programming model and toolchain for writing GPU-accelerated programs.
@@ -50,8 +48,7 @@ This note gives AI engineers a practical systems view: how GPU execution works, 
 
 ---
 
-## Deep Dive
-
+## ★ Deep Dive
 ### GPU Mental Model
 
 GPUs are built for many operations in parallel:
@@ -144,8 +141,7 @@ Ask:
 
 ---
 
-## Quick Reference
-
+## ◆ Quick Reference
 | Question | Heuristic |
 |---|---|
 | Slow decode on large model | suspect memory bandwidth or KV-cache behavior |
@@ -156,8 +152,7 @@ Ask:
 
 ---
 
-## Gotchas
-
+## ○ Gotchas & Common Mistakes
 - GPU utilization percentages are useful but incomplete.
 - Compute throughput and memory throughput are different bottlenecks.
 - Kernel-level optimization is usually wasted if the higher-level architecture is wrong.
@@ -165,8 +160,7 @@ Ask:
 
 ---
 
-## Interview Angles
-
+## ○ Interview Angles
 - **Q**: Why are LLM decode steps often memory-bound?
 - **A**: Each generated token requires repeatedly loading weights and KV-cache state, so memory movement can dominate arithmetic. That is why layout, caching, and serving-engine design matter so much.
 
@@ -175,8 +169,7 @@ Ask:
 
 ---
 
-## Connections
-
+## ★ Connections
 | Relationship | Topics |
 |---|---|
 | Builds on | [Transformers](../foundations/transformers.md), [Inference Optimization](./inference-optimization.md) |

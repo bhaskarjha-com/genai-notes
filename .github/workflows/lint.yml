@@ -6,7 +6,7 @@ on:
 
 jobs:
   repo-quality:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Check out repository
@@ -14,7 +14,7 @@ jobs:
 
       - name: Regenerate learner assets
         shell: pwsh
-        run: powershell -ExecutionPolicy Bypass -File scripts/generate_learning_assets.ps1
+        run: ./scripts/generate_learning_assets.ps1
 
       - name: Ensure generated assets are committed
         shell: pwsh
@@ -22,12 +22,12 @@ jobs:
 
       - name: Verify repo structure and content standards
         shell: pwsh
-        run: powershell -ExecutionPolicy Bypass -File scripts/verify_repo.ps1
+        run: ./scripts/verify_repo.ps1
 
       - name: Run markdown quality checks
         shell: pwsh
-        run: powershell -ExecutionPolicy Bypass -File scripts/markdown_quality_check.ps1
+        run: ./scripts/markdown_quality_check.ps1
 
       - name: Check content compliance (failure modes + exercises)
         shell: pwsh
-        run: powershell -ExecutionPolicy Bypass -File scripts/check_content_compliance.ps1
+        run: ./scripts/check_content_compliance.ps1

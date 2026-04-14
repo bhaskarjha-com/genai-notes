@@ -7,7 +7,6 @@ $topicDirs = @(
     "ethics-and-safety",
     "evaluation",
     "foundations",
-    "image-generation",
     "inference",
     "llms",
     "multimodal",

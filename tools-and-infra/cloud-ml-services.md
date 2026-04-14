@@ -18,16 +18,14 @@ updated: 2026-04-12
 
 ---
 
-## TL;DR
-
+## ★ TL;DR
 - **What**: The major managed cloud platforms used to build, deploy, and operate ML and GenAI systems.
 - **Why**: These platforms bundle notebooks, training, deployment, evaluation, security, and governance into one operating environment.
 - **Key point**: The best platform choice depends less on raw features and more on team context, cloud alignment, and governance needs.
 
 ---
 
-## Overview
-
+## ★ Overview
 ### Definition
 
 **Cloud ML services** are managed platforms that support parts or all of the ML and GenAI lifecycle, including data prep, training, experimentation, deployment, monitoring, and governance.
@@ -52,8 +50,7 @@ Last verified for major platform naming and positioning: 2026-04.
 
 ---
 
-## Deep Dive
-
+## ★ Deep Dive
 ### What Managed Platforms Usually Provide
 
 | Capability | Examples |
@@ -120,8 +117,7 @@ az ml online-endpoint list
 
 ---
 
-## Quick Reference
-
+## ◆ Quick Reference
 | Need | Good Direction |
 |---|---|
 | already on AWS | evaluate SageMaker AI first |
@@ -132,8 +128,7 @@ az ml online-endpoint list
 
 ---
 
-## Gotchas
-
+## ○ Gotchas & Common Mistakes
 - Teams overestimate how much of the platform they will actually use.
 - Platform convenience can turn into lock-in if abstraction boundaries are weak.
 - Billing complexity can hide in adjacent services, not only the platform headline cost.
@@ -141,8 +136,7 @@ az ml online-endpoint list
 
 ---
 
-## Interview Angles
-
+## ○ Interview Angles
 - **Q**: How would you choose between SageMaker, Vertex AI, and Azure AI Foundry?
 - **A**: I would start with the existing cloud footprint, governance requirements, workload type, and team skills. The best choice is usually the platform that fits the organization's operating context, not the one with the longest feature list.
 
@@ -151,8 +145,7 @@ az ml online-endpoint list
 
 ---
 
-## Connections
-
+## ★ Connections
 | Relationship | Topics |
 |---|---|
 | Builds on | [GenAI Tools & Infrastructure](./tools-overview.md), [LLMOps & Production Deployment](../production/llmops.md) |
@@ -196,8 +189,7 @@ az ml online-endpoint list
 | 🔧 Hands-on | [Google Vertex AI Documentation](https://cloud.google.com/vertex-ai/docs) | Google's unified ML platform |
 | 🔧 Hands-on | [Azure AI Studio](https://learn.microsoft.com/en-us/azure/ai-studio/) | Microsoft's AI development platform |
 
-## Sources
-
+## ★ Sources
 - AWS SageMaker AI documentation and overview pages
 - Google Cloud Vertex AI documentation and overview pages
 - Microsoft Azure AI Foundry and Azure Machine Learning documentation

@@ -18,16 +18,14 @@ updated: 2026-04-12
 
 ---
 
-## TL;DR
-
+## ★ TL;DR
 - **What**: The core deployment stack for packaging, shipping, and scaling AI services.
 - **Why**: Most production AI systems fail on environment drift, weak rollout practices, or poor scaling long before they fail on model quality.
 - **Key point**: Use Docker to standardize runtime; use Kubernetes when you need repeatable multi-instance operations, autoscaling, and infrastructure policy.
 
 ---
 
-## Overview
-
+## ★ Overview
 ### Definition
 
 **Docker** packages an application and its dependencies into a portable container image. **Kubernetes** schedules and manages those containers across a cluster.
@@ -50,8 +48,7 @@ This note covers the practical concepts an AI engineer needs: image design, cont
 
 ---
 
-## Deep Dive
-
+## ★ Deep Dive
 ### Why Containers Matter for AI
 
 AI apps are unusually dependency-heavy:
@@ -178,8 +175,7 @@ Do not adopt Kubernetes only because it feels "more production."
 
 ---
 
-## Quick Reference
-
+## ◆ Quick Reference
 | Situation | Better First Move |
 |---|---|
 | Shipping a prototype | Docker on one VM or managed platform |
@@ -191,8 +187,7 @@ Do not adopt Kubernetes only because it feels "more production."
 
 ---
 
-## Gotchas
-
+## ○ Gotchas & Common Mistakes
 - Large model downloads can make pod startup painfully slow; plan warmup and image strategy.
 - "One huge container" creates noisy failure domains and painful deploys.
 - Kubernetes does not fix bad serving architecture; it only manages it.
@@ -200,8 +195,7 @@ Do not adopt Kubernetes only because it feels "more production."
 
 ---
 
-## Interview Angles
-
+## ○ Interview Angles
 - **Q**: When would you choose Kubernetes for a GenAI system?
 - **A**: When the system has multiple independently scaled services, controlled rollouts, background jobs, observability requirements, or self-hosted inference that needs GPU scheduling. For smaller systems, a managed platform or simple container deployment may be better.
 
@@ -210,8 +204,7 @@ Do not adopt Kubernetes only because it feels "more production."
 
 ---
 
-## Connections
-
+## ★ Connections
 | Relationship | Topics |
 |---|---|
 | Builds on | [LLMOps & Production Deployment](./llmops.md), [AI System Design for GenAI Applications](./ai-system-design.md) |
@@ -257,8 +250,7 @@ Do not adopt Kubernetes only because it feels "more production."
 | 📘 Book | "Kubernetes in Action" by Luksa (2020) | Comprehensive K8s reference |
 | 🎥 Video | [TechWorld with Nana — "Docker + K8s"](https://www.youtube.com/@TechWorldwithNana) | Best beginner-friendly container tutorials |
 
-## Sources
-
+## ★ Sources
 - Docker documentation - https://docs.docker.com
 - Kubernetes documentation - https://kubernetes.io/docs
 - NVIDIA Kubernetes device plugin documentation

@@ -18,16 +18,14 @@ updated: 2026-04-12
 
 ---
 
-## TL;DR
-
+## ★ TL;DR
 - **What**: The product-thinking layer for identifying, shaping, and delivering useful AI features.
 - **Why**: Many AI projects fail because the product problem is vague even when the model is impressive.
 - **Key point**: The product manager's job is to turn model possibility into reliable user value.
 
 ---
 
-## Overview
-
+## ★ Overview
 ### Definition
 
 **AI product management** combines normal product work with AI-specific concerns such as probabilistic behavior, evaluation, trust, data access, and human oversight.
@@ -50,8 +48,7 @@ This note is for technical learners who want product fluency. It covers use-case
 
 ---
 
-## Deep Dive
-
+## ★ Deep Dive
 ### Start With The User Problem
 
 Good AI product questions:
@@ -145,8 +142,7 @@ launch_plan:
 
 ---
 
-## Quick Reference
-
+## ◆ Quick Reference
 | If You Are Unsure About... | Ask This |
 |---|---|
 | use case quality | what user pain disappears if this works? |
@@ -157,8 +153,7 @@ launch_plan:
 
 ---
 
-## Gotchas
-
+## ○ Gotchas & Common Mistakes
 - Strong demos can hide weak repeat usage.
 - Product-market fit and model capability are different questions.
 - Users often prefer slower but more trustworthy AI.
@@ -166,8 +161,7 @@ launch_plan:
 
 ---
 
-## Interview Angles
-
+## ○ Interview Angles
 - **Q**: How do you decide whether an AI feature is worth building?
 - **A**: I start with the user workflow and measurable outcome, then test whether AI materially improves that workflow at an acceptable quality, trust, and cost level. If it does not, I narrow the scope or avoid the feature.
 
@@ -176,8 +170,7 @@ launch_plan:
 
 ---
 
-## Connections
-
+## ★ Connections
 | Relationship | Topics |
 |---|---|
 | Builds on | [AI System Design for GenAI Applications](../production/ai-system-design.md), [LLM Evaluation Deep Dive](../evaluation/llm-evaluation-deep-dive.md) |
@@ -221,8 +214,7 @@ launch_plan:
 | 📘 Book | "The AI Product Manager's Handbook" by Buest (2023) | PM-specific AI guide |
 | 🎥 Video | [Lenny's Podcast — AI Product Management Episodes](https://www.lennyspodcast.com/) | PM perspectives on building with AI |
 
-## Sources
-
+## ★ Sources
 - Reforge and product strategy material on AI products
 - [AI System Design for GenAI Applications](../production/ai-system-design.md)
 - [LLM Evaluation Deep Dive](../evaluation/llm-evaluation-deep-dive.md)

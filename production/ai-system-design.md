@@ -18,16 +18,14 @@ updated: 2026-04-12
 
 ---
 
-## TL;DR
-
+## ★ TL;DR
 - **What**: A design framework for building reliable GenAI systems in production
 - **Why**: Most failures come from orchestration, retrieval, serving, and guardrails, not from the base model alone
 - **Key point**: Good AI system design optimizes for the whole loop: request -> grounding -> generation -> verification -> monitoring
 
 ---
 
-## Overview
-
+## ★ Overview
 ### Definition
 
 **AI system design** is the practice of translating a GenAI product requirement into a production architecture that meets quality, safety, latency, availability, and cost targets.
@@ -51,8 +49,7 @@ This note covers architecture patterns, design trade-offs, bottlenecks, and inte
 
 ---
 
-## Deep Dive
-
+## ★ Deep Dive
 ### Core Architecture Layers
 
 ```text
@@ -169,8 +166,7 @@ When asked to design a GenAI system, structure the answer like this:
 
 ---
 
-## Quick Reference
-
+## ◆ Quick Reference
 | Problem | First Design Move |
 |---|---|
 | Hallucinations on private data | Add retrieval and citations |
@@ -181,8 +177,7 @@ When asked to design a GenAI system, structure the answer like this:
 
 ---
 
-## Gotchas
-
+## ○ Gotchas & Common Mistakes
 - Do not start with multi-agent systems unless a single-agent or RAG design clearly fails
 - A strong model cannot rescue a bad retrieval pipeline
 - Low latency and high autonomy usually pull in opposite directions
@@ -190,8 +185,7 @@ When asked to design a GenAI system, structure the answer like this:
 
 ---
 
-## Interview Angles
-
+## ○ Interview Angles
 - **Q**: When would you choose RAG over fine-tuning?
 - **A**: When the knowledge changes often, needs citations, or comes from private documents. Fine-tuning is better when the behavior itself must change consistently.
 
@@ -200,8 +194,7 @@ When asked to design a GenAI system, structure the answer like this:
 
 ---
 
-## Connections
-
+## ★ Connections
 | Relationship | Topics |
 |---|---|
 | Builds on | [LLMOps & Production Deployment](./llmops.md), [Retrieval-Augmented Generation (RAG)](../techniques/rag.md), [AI Agents](../agents/ai-agents.md) |
@@ -246,8 +239,7 @@ When asked to design a GenAI system, structure the answer like this:
 | 🎥 Video | [Alex Xu — System Design Interview Series](https://www.youtube.com/@ByteByteGo) | Visual system design explanations |
 | 🔧 Hands-on | [Google MLOps Guide](https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning) | Production ML architecture patterns |
 
-## Sources
-
+## ★ Sources
 - Chip Huyen, *Designing Machine Learning Systems*
 - Google Cloud Architecture Center guidance for AI systems
 - AWS Well-Architected guidance for ML and generative AI workloads

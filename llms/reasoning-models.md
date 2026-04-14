@@ -203,7 +203,7 @@ DISTILLED VERSIONS:
 ## ◆ Code & Implementation
 
 ```python
-# ?? Last tested: 2026-04
+# ⚠️ Last tested: 2026-04
 # ═══ Using OpenAI o3 ═══
 from openai import OpenAI
 client = OpenAI()

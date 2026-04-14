@@ -18,16 +18,14 @@ updated: 2026-04-12
 
 ---
 
-## TL;DR
-
+## ★ TL;DR
 - **What**: The distributed-systems ideas most relevant to AI and GenAI platforms.
 - **Why**: Production AI systems are built from many networked components, and their failures are often distributed-systems failures.
 - **Key point**: Reliability comes from flow control, state management, and graceful degradation as much as from model quality.
 
 ---
 
-## Overview
-
+## ★ Overview
 ### Definition
 
 **Distributed systems** are systems whose components communicate over a network while coordinating work, state, and failure handling.
@@ -50,8 +48,7 @@ This note is practical and AI-oriented. It focuses on service boundaries, queues
 
 ---
 
-## Deep Dive
-
+## ★ Deep Dive
 ### Why AI Systems Become Distributed
 
 A production GenAI request might touch:
@@ -113,7 +110,7 @@ That means network, state, and partial failure are built into the architecture.
 ### Example: Timeout, Concurrency, And Fallback
 
 ```python
-# ?? Last tested: 2026-04
+# ⚠️ Last tested: 2026-04
 import asyncio
 
 semaphore = asyncio.Semaphore(32)
@@ -128,8 +125,7 @@ async def call_with_budget(primary_model, fallback_model, payload):
 
 ---
 
-## Quick Reference
-
+## ◆ Quick Reference
 | Symptom | Likely Distributed-Systems Issue |
 |---|---|
 | sudden latency spikes | queue buildup or downstream contention |
@@ -140,8 +136,7 @@ async def call_with_budget(primary_model, fallback_model, payload):
 
 ---
 
-## Gotchas
-
+## ○ Gotchas & Common Mistakes
 - A "microservice" split can hurt more than it helps if the system is small.
 - Retries without idempotency create expensive duplicates.
 - Teams often treat queues as free buffers instead of operational surfaces.
@@ -149,8 +144,7 @@ async def call_with_budget(primary_model, fallback_model, payload):
 
 ---
 
-## Interview Angles
-
+## ○ Interview Angles
 - **Q**: Why do AI systems need distributed-systems knowledge?
 - **A**: Because production AI is composed of many interacting services with partial failure, variable latency, and expensive state transitions. Reliability depends on queueing, retry policy, caching, and graceful degradation.
 
@@ -159,8 +153,7 @@ async def call_with_budget(primary_model, fallback_model, payload):
 
 ---
 
-## Connections
-
+## ★ Connections
 | Relationship | Topics |
 |---|---|
 | Builds on | [AI System Design for GenAI Applications](../production/ai-system-design.md), [Model Serving for LLM Applications](../production/model-serving.md) |
@@ -204,8 +197,7 @@ async def call_with_budget(primary_model, fallback_model, payload):
 | 🎓 Course | [MIT 6.824: Distributed Systems](https://pdos.csail.mit.edu/6.824/) | Best academic distributed systems course |
 | 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 8 | Distributed patterns specific to AI workloads |
 
-## Sources
-
+## ★ Sources
 - Martin Kleppmann, *Designing Data-Intensive Applications*
 - cloud architecture guidance for resilient systems
 - [AI System Design for GenAI Applications](../production/ai-system-design.md)

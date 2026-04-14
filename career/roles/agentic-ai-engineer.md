@@ -5,7 +5,7 @@ type: reference
 status: published
 parent: "../genai-career-roles-universal.md"
 created: 2026-04-12
-updated: 2026-04-12
+updated: 2026-04-14
 ---
 
 # Agentic AI Engineer - Career Guide
@@ -26,6 +26,18 @@ updated: 2026-04-12
 | **Job Availability** | Medium-High |
 | **Entry Requirements** | Bachelor's in CS plus hands-on GenAI engineering, async systems understanding, and a strong agent portfolio |
 | **Last Researched** | 2026-03 |
+
+---
+
+## A Day in the Life
+
+- **9:00** — Review agent trace logs from overnight: a support agent got stuck in a tool retry loop 12 times
+- **9:30** — Root-cause analysis: the loop was caused by a schema mismatch between the planner and the CRM tool
+- **10:30** — Design a new supervisor pattern for the multi-agent workflow: the current flat architecture doesn't scale past 4 sub-agents
+- **12:00** — Implement guardrails: add a policy layer that blocks the agent from modifying production data without human approval
+- **14:00** — A/B test two planner prompts on the offline eval suite (500 tasks) and compare trajectory efficiency
+- **15:30** — Integrate a new MCP server for the document management system
+- **17:00** — Write the agent scorecard for the weekly review: task completion, cost, loop rate, escalation rate
 
 ---
 
@@ -89,12 +101,50 @@ Complete [Part 1 of the Learning Path](../../LEARNING_PATH.md#part-1-universal-f
 
 ---
 
+## Resume Bullet Templates
+
+### Entry Level
+- Built multi-tool customer support agent handling 500 queries/day with 82% task completion rate and full trace observability
+- Implemented human-in-the-loop approval workflow for agent actions, reducing unauthorized operations by 95%
+
+### Mid Level
+- Designed supervisor-based multi-agent system orchestrating 5 specialized agents, improving complex task completion from 45% to 78%
+- Led agent evaluation framework development with trajectory scoring, catching 15 critical failure modes before production deployment
+
+### Senior Level
+- Architected enterprise agentic platform supporting 8 production agent workflows with 99.2% uptime, processing 50K tasks/month
+- Established company-wide agent safety framework including policy enforcement, tool access controls, and escalation protocols adopted by 4 engineering teams
+
+---
+
 ## Portfolio Project Ideas
 
 | Project | Description | Skills Demonstrated | Difficulty |
 |---|---|---|:---:|
-| Agentic support copilot | multi-step support assistant with approvals and trace review | agents, tools, eval, guardrails | Medium |
-| Operations agent runner | task-execution system with queueing, retries, and observability | agent systems, API design, LLMOps | Medium |
+| Agentic support copilot | Multi-step support assistant with approvals and trace review | Agents, tools, eval, guardrails | Medium |
+| Operations agent runner | Task-execution system with queueing, retries, and observability | Agent systems, API design, LLMOps | Medium |
+| Multi-agent research assistant | Supervisor + specialist agents that decompose research tasks | Multi-agent, MCP, trajectory evaluation | Hard |
+| Agent safety testing harness | Red-team framework that tests agent behavior against adversarial inputs | Safety, evaluation, policy enforcement | Hard |
+
+---
+
+## Take-Home Project Examples
+
+### Example 1: Build a Tool-Using Agent
+
+**Brief**: Build an agent that can answer questions about a product catalog by using 3 provided tools (search, filter, compare). Include trace logging.
+
+**Evaluation criteria**: Tool selection accuracy, task completion on 10 test cases, trace quality, error handling.
+
+**Time**: 4-6 hours
+
+### Example 2: Agent Safety Evaluation
+
+**Brief**: Given a working agent with tool access, identify 5 failure modes and implement guardrails for each. Document the failure mode, the guardrail, and the test.
+
+**Evaluation criteria**: Comprehensiveness of failure mode analysis, guardrail effectiveness, test coverage.
+
+**Time**: 3-4 hours
 
 ---
 
@@ -107,6 +157,30 @@ Common questions:
 - When should you use an agent instead of RAG or a fixed workflow?
 - How do you evaluate an agent beyond final answer quality?
 - How do you reduce tool misuse and unsafe autonomy?
+
+---
+
+### System Design Interview Scenarios
+
+**Scenario 1: Design an agentic customer support system**
+- Requirements: Handle refunds, order tracking, and escalation across 3 backend systems, 10K tasks/day
+- Key decisions: Single agent vs multi-agent, tool access control, human-in-the-loop triggers, trace storage
+- Scoring: Safety approach, failure handling, scalability, cost estimation
+
+**Scenario 2: Design a multi-agent document processing pipeline**
+- Requirements: Ingest contracts, extract terms, verify compliance, flag risks. 1K documents/week.
+- Key decisions: Agent specialization, supervisor pattern, verification steps, rollback on errors
+- Scoring: Agent architecture, reliability approach, human oversight integration
+
+---
+
+## 30-60-90 Day Onboarding Plan
+
+| Phase | Focus | Key Deliverables |
+|-------|-------|------------------|
+| **Days 1-30 (Learn)** | Understand the existing agent architecture, tool integrations, and failure patterns | Review all agent traces from the last month, document the top 5 failure modes |
+| **Days 31-60 (Contribute)** | Improve one agent workflow end-to-end | Reduce loop rate or increase task completion by a measurable amount, add eval cases |
+| **Days 61-90 (Own)** | Own an agent system in production | Take ownership of the agent scorecard, propose architectural improvements |
 
 ---
 

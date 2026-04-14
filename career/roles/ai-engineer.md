@@ -5,7 +5,7 @@ type: reference
 status: published
 parent: "../genai-career-roles-universal.md"
 created: 2026-04-12
-updated: 2026-04-12
+updated: 2026-04-14
 ---
 
 # AI Engineer - Career Guide
@@ -26,6 +26,18 @@ updated: 2026-04-12
 | **Job Availability** | High |
 | **Entry Requirements** | Bachelor's in CS/SE plus software engineering experience and AI project work |
 | **Last Researched** | 2026-03 |
+
+---
+
+## A Day in the Life
+
+- **9:00** — Sprint planning: prioritize AI feature requests alongside product and design
+- **9:45** — Debug a streaming response issue in the chat UI — the SSE connection drops on long answers
+- **11:00** — Integrate a new function-calling tool for the internal assistant (calendar booking)
+- **13:00** — Review eval results: the latest prompt change improved accuracy by 4% but added 800ms latency
+- **14:30** — Pair with the ML team on a fine-tuning experiment for domain-specific classification
+- **16:00** — Write cost comparison: GPT-5.4-mini vs self-hosted LLaMA 4 Scout for the high-volume summarization endpoint
+- **17:00** — On-call handoff: document a workaround for the rate-limiting issue discovered today
 
 ---
 
@@ -86,12 +98,50 @@ Complete [Part 1 of the Learning Path](../../LEARNING_PATH.md#part-1-universal-f
 
 ---
 
+## Resume Bullet Templates
+
+### Entry Level
+- Shipped AI-powered search feature serving 50K daily queries, reducing zero-result rate from 15% to 3%
+- Built automated evaluation pipeline for LLM responses, testing 200+ scenarios per release cycle
+
+### Mid Level
+- Led integration of RAG-based Q&A into flagship product, driving 25% increase in user engagement and reducing support tickets by 40%
+- Designed model routing system that reduced inference costs by 45% by dynamically selecting GPT-5.4-mini vs full model based on query complexity
+
+### Senior Level
+- Architected AI platform serving 8 product teams, standardizing LLM integration patterns and reducing time-to-ship for new AI features from 6 weeks to 2
+- Established AI quality framework with automated regression testing, reducing production incidents by 70% year-over-year
+
+---
+
 ## Portfolio Project Ideas
 
 | Project | Description | Skills Demonstrated | Difficulty |
 |---|---|---|:---:|
 | Internal knowledge copilot | RAG assistant with citations, feedback, and admin analytics | RAG, eval, LLMOps | Medium |
 | Workflow automation agent | Task-oriented assistant that uses tools and approvals | Agents, function calling, system design | Medium |
+| Model routing service | Intelligent request router that selects optimal model per query | Cost optimization, classification, API design | Medium |
+| AI feature experimentation platform | A/B testing framework for LLM-powered features with statistical significance tracking | Evaluation, experimentation, data analysis | Hard |
+
+---
+
+## Take-Home Project Examples
+
+### Example 1: Build an AI-Powered Feature
+
+**Brief**: Build a document summarization API that accepts PDFs, extracts key points, and returns structured JSON with confidence scores.
+
+**Evaluation criteria**: API design quality, error handling, latency under 5s, summarization quality (human-evaluated), and cost estimation.
+
+**Time**: 4-6 hours
+
+### Example 2: Prompt Optimization Challenge
+
+**Brief**: Given a working but underperforming prompt for customer intent classification (70% accuracy), improve it to 90%+ using any technique (few-shot, chain-of-thought, structured output).
+
+**Evaluation criteria**: Accuracy improvement, methodology documented, cost impact analyzed, edge cases identified.
+
+**Time**: 2-3 hours
 
 ---
 
@@ -104,6 +154,30 @@ Common questions:
 - When should you use RAG vs fine-tuning?
 - How would you design a production AI feature with latency and cost constraints?
 - How do you evaluate whether an AI feature is reliable enough to ship?
+
+---
+
+### System Design Interview Scenarios
+
+**Scenario 1: Design an AI-powered product search**
+- Requirements: 100K products, natural language queries, real-time results, personalization
+- Key decisions: Embedding strategy, hybrid search, caching, fallback behavior
+- Scoring: scalability, latency approach, failure modes, cost estimation
+
+**Scenario 2: Design a multi-tenant AI assistant platform**
+- Requirements: Serve 50+ enterprise customers, each with custom knowledge bases and model preferences
+- Key decisions: Tenant isolation, model routing, data partitioning, usage billing
+- Scoring: security, scalability, customization approach, operational complexity
+
+---
+
+## 30-60-90 Day Onboarding Plan
+
+| Phase | Focus | Key Deliverables |
+|-------|-------|------------------|
+| **Days 1-30 (Learn)** | Understand the product, existing AI features, and engineering culture | Complete onboarding, ship a small AI feature bug fix, map the LLM integration points |
+| **Days 31-60 (Contribute)** | Own a feature end-to-end from design to deployment | Ship one new AI-powered feature, set up monitoring and eval for it |
+| **Days 61-90 (Own)** | Drive technical direction for AI features | Propose an architectural improvement, establish a best practice that the team adopts |
 
 ---
 

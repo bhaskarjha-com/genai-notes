@@ -30,7 +30,7 @@ updated: 2026-04-11
 
 ### Definition
 
-- **MCP (Model Context Protocol)**: Open standard by Anthropic for connecting LLM applications to external tools, data, and services
+- **MCP (Model Context Protocol)**: Open standard (originally by Anthropic, now governed by the Linux Foundation's Agentic AI Foundation) for connecting LLM applications to external tools, data, and services
 - **A2A (Agent-to-Agent Protocol)**: Open standard by Google for communication between different AI agents
 - **ADK (Agent Development Kit)**: Google's open-source framework for building, deploying, and orchestrating AI agents
 
@@ -122,11 +122,12 @@ THREE PRIMITIVES:
   │    User-controlled (user selects them)        │
   └──────────────────────────────────────────────┘
 
-SECURITY (2025-11-25 spec):
+SECURITY (2026 spec):
   - MCP servers = OAuth 2.0 Resource Servers
+  - Enterprise auth: SSO-integrated flows (Cross-App Access)
   - Structured JSON output (structuredContent)
   - User elicitation (model can ask for input mid-session)
-  - Rate limiting, scope consent
+  - Rate limiting, scope consent, observability/audit trails
 
 MCP SERVER EXAMPLES:
   GitHub       → repos, issues, PRs as tools
@@ -240,7 +241,7 @@ AGENT HIERARCHY IN ADK:
 ## ◆ Code Example: MCP Server
 
 ```python
-# ?? Last tested: 2026-04
+# ⚠️ Last tested: 2026-04
 # ═══ Building a simple MCP server ═══
 from mcp.server import Server
 from mcp.types import Tool, TextContent
@@ -285,7 +286,7 @@ PROTOCOL CHEAT SHEET:
   Need to build the agents?                    → ADK / LangGraph / CrewAI
 
 MATURITY (March 2026):
-  MCP:     Production-ready ✅ (adopted by OpenAI, Google, Anthropic)
+  MCP:     Production-ready ✅ (Linux Foundation standard, adopted by OpenAI, Google, Anthropic)
   A2A:     Early adoption ⚠️ (spec stable, ecosystem growing)
   ADK:     GA ✅ (deployed on Vertex AI, active development)
 

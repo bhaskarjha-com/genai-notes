@@ -6,7 +6,7 @@ on:
 
 jobs:
   links:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Check out repository
@@ -14,4 +14,4 @@ jobs:
 
       - name: Run internal link checks
         shell: pwsh
-        run: powershell -ExecutionPolicy Bypass -File scripts/check_links.ps1
+        run: ./scripts/check_links.ps1

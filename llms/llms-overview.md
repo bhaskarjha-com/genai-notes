@@ -131,7 +131,7 @@ for better inference efficiency
 Text → numbers. Models don't see words; they see token IDs.
 
 ```python
-# ?? Last tested: 2026-04
+# ⚠️ Last tested: 2026-04
 "Hello world" → [15496, 995]        # GPT-style BPE
 "Hello world" → [8774, 296, 1650]    # Different tokenizer
 

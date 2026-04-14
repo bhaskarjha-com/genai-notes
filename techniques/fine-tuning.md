@@ -4,6 +4,7 @@ tags: [fine-tuning, lora, qlora, peft, training, genai-techniques]
 type: procedure
 difficulty: advanced
 status: published
+last_verified: 2026-04
 parent: "[[../genai]]"
 related: ["[[rag]]", "[[../llms/llms-overview]]", "[[prompt-engineering]]", "[[advanced-fine-tuning]]"]
 source: "Hu et al. LoRA (2021), QLoRA (2023), latest hybrid techniques"
@@ -159,6 +160,7 @@ Performance: Within 1-2% of full fine-tuning
 ### Fine-tuning with QLoRA (Step-by-Step)
 
 ```python
+# ?? Last tested: 2026-04
 # 1. Install dependencies
 # pip install transformers peft bitsandbytes trl datasets accelerate
 
@@ -306,6 +308,16 @@ model = FastLanguageModel.get_peft_model(
 ```
 
 ---
+
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 📄 Paper | [Hu et al. "LoRA" (2021)](https://arxiv.org/abs/2106.09685) | The foundational parameter-efficient fine-tuning paper |
+| 🔧 Hands-on | [HuggingFace PEFT Library](https://huggingface.co/docs/peft/) | Production PEFT implementation with LoRA, QLoRA, etc. |
+| 📘 Book | "LLM Engineer's Handbook" by Iusztin & Labonne (2024), Ch 5-6 | Practical fine-tuning pipeline guide |
+| 🎥 Video | [Sebastian Raschka — "LoRA and Fine-Tuning LLMs"](https://www.youtube.com/watch?v=MEhQH0Xa1hw) | Clear explanation of LoRA mechanics and practical tips |
 
 ## ★ Sources
 

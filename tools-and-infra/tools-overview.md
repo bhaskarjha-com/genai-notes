@@ -4,8 +4,9 @@ tags: [tools, infrastructure, langchain, llamaindex, vector-db, serving, genai]
 type: reference
 difficulty: intermediate
 status: published
+last_verified: 2026-04
 parent: "[[../genai]]"
-related: ["[[../techniques/rag]]", "[[../techniques/ai-agents]]", "[[../llms/llms-overview]]", "[[cloud-ml-services]]", "[[distributed-systems-for-ai]]", "[[ml-experiment-tracking]]", "[[data-versioning-for-ml]]"]
+related: ["[[../techniques/rag]]", "[[../agents/ai-agents]]", "[[../llms/llms-overview]]", "[[cloud-ml-services]]", "[[distributed-systems-for-ai]]", "[[ml-experiment-tracking]]", "[[data-versioning-for-ml]]"]
 source: "Multiple - see Sources"
 created: 2026-03-18
 updated: 2026-04-12
@@ -37,8 +38,8 @@ This is the overview/index document. Deep dives on individual tools are in sub-d
 - [Vector Databases](./vector-databases.md) - Pinecone, Weaviate, Qdrant, Chroma, pgvector
 - [Cloud ML Services & Managed AI Platforms](./cloud-ml-services.md)
 - [Distributed Systems Fundamentals for AI](./distributed-systems-for-ai.md)
-- [ML Experiment Tracking](./ml-experiment-tracking.md)
-- [Data Versioning for ML](./data-versioning-for-ml.md)
+- [ML Experiment & Data Management](./ml-experiment-and-data-management.md)
+- [ML Experiment & Data Management](./ml-experiment-and-data-management.md)
 - For orchestration + RAG code, also see [Rag](../techniques/rag.md)
 
 ### Significance
@@ -241,6 +242,15 @@ BUDGET STACK (learning / hobby):
 | Cross-domain | DevOps, Cloud architecture, Systems design       |
 
 ---
+
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 📘 Book | "AI Engineering" by Chip Huyen (2025) | Covers the full AI tooling landscape |
+| 🔧 Hands-on | [HuggingFace Ecosystem](https://huggingface.co/) | Central hub for models, datasets, and tools |
+| 🔧 Hands-on | [LangChain Documentation](https://python.langchain.com/) | Comprehensive LLM application framework |
 
 ## ★ Sources
 

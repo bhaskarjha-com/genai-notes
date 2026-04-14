@@ -24,7 +24,7 @@ Legend: Must, Good, Optional, Not Relevant.
 | [Scaling Laws & Pre-training](../foundations/scaling-laws-and-pretraining.md) | foundations | Must | Must | Must | Must | Must | Must | Must |
 | [Tokenization](../foundations/tokenization.md) | foundations | Must | Must | Must | Must | Must | Must | Must |
 | [Transformers](../foundations/transformers.md) | foundations | Must | Must | Must | Must | Must | Must | Must |
-| [Diffusion Models](../image-generation/diffusion-models.md) | image-generation | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant |
+| [Diffusion Models](../multimodal/diffusion-models.md) | image-generation | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant |
 | [Distributed Inference & Serving Architecture](../inference/distributed-inference-and-serving-architecture.md) | inference | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Good | Good | Not Relevant |
 | [GPU & CUDA Programming for AI Engineers](../inference/gpu-cuda-programming.md) | inference | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Good | Not Relevant | Not Relevant |
 | [Inference Optimization](../inference/inference-optimization.md) | inference | Not Relevant | Good | Not Relevant | Must | Good | Optional | Not Relevant |
@@ -52,26 +52,26 @@ Legend: Must, Good, Optional, Not Relevant.
 | [Distributed Training for Large Models](../research-frontiers/distributed-training.md) | research-frontiers | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant |
 | [Mechanistic Interpretability](../research-frontiers/interpretability.md) | research-frontiers | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant |
 | [Research Methodology & Paper Reading for AI](../research-frontiers/research-methodology-and-paper-reading.md) | research-frontiers | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant |
-| [Training Infrastructure for AI Systems](../research-frontiers/training-infrastructure.md) | research-frontiers | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant |
+| [Distributed Training & Training Infrastructure](../research-frontiers/distributed-training.md) | research-frontiers | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant |
 | [Generative AI](../genai.md) | root | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant |
 | [Advanced Fine-Tuning for LLM Adaptation](../techniques/advanced-fine-tuning.md) | techniques | Optional | Good | Must | Must | Not Relevant | Not Relevant | Optional |
-| [Agent Evaluation & Observability](../techniques/agent-evaluation.md) | techniques | Must | Good | Optional | Optional | Not Relevant | Not Relevant | Optional |
-| [Agentic Protocols & Frameworks](../techniques/agentic-protocols.md) | techniques | Must | Optional | Good | Optional | Not Relevant | Not Relevant | Optional |
-| [AI Agents](../techniques/ai-agents.md) | techniques | Must | Must | Must | Must | Must | Must | Must |
+| [Agent Evaluation & Observability](../agents/agent-evaluation.md) | techniques | Must | Good | Optional | Optional | Not Relevant | Not Relevant | Optional |
+| [Agentic Protocols & Frameworks](../agents/agentic-protocols.md) | techniques | Must | Optional | Good | Optional | Not Relevant | Not Relevant | Optional |
+| [AI Agents](../agents/ai-agents.md) | techniques | Must | Must | Must | Must | Must | Must | Must |
 | [Context Engineering & Long Context](../techniques/context-engineering.md) | techniques | Must | Must | Must | Must | Must | Must | Must |
 | [Continual Learning & Lifelong AI](../techniques/continual-learning.md) | techniques | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant |
 | [Fine-Tuning LLMs](../techniques/fine-tuning.md) | techniques | Must | Must | Must | Must | Must | Must | Must |
 | [Function Calling, Structured Output & Tool Use](../techniques/function-calling-and-structured-output.md) | techniques | Must | Must | Must | Must | Must | Must | Must |
 | [Graph RAG & Advanced Retrieval](../techniques/graph-rag.md) | techniques | Optional | Optional | Good | Optional | Not Relevant | Not Relevant | Must |
 | [Knowledge Distillation & Model Compression](../techniques/distillation-and-compression.md) | techniques | Optional | Not Relevant | Optional | Good | Not Relevant | Not Relevant | Optional |
-| [Multi-Agent Architectures](../techniques/multi-agent-architectures.md) | techniques | Must | Good | Optional | Optional | Not Relevant | Not Relevant | Optional |
+| [Multi-Agent Architectures](../agents/multi-agent-architectures.md) | techniques | Must | Good | Optional | Optional | Not Relevant | Not Relevant | Optional |
 | [Prompt Engineering](../techniques/prompt-engineering.md) | techniques | Must | Must | Must | Must | Must | Must | Must |
 | [Reinforcement Learning for LLM Alignment](../techniques/rl-alignment.md) | techniques | Optional | Not Relevant | Optional | Good | Not Relevant | Not Relevant | Optional |
 | [Retrieval-Augmented Generation (RAG)](../techniques/rag.md) | techniques | Must | Must | Must | Must | Must | Must | Must |
 | [Synthetic Data & Data Engineering for LLMs](../techniques/synthetic-data-and-data-engineering.md) | techniques | Optional | Not Relevant | Optional | Optional | Not Relevant | Not Relevant | Optional |
 | [Cloud ML Services & Managed AI Platforms](../tools-and-infra/cloud-ml-services.md) | tools-and-infra | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Must | Must | Not Relevant |
-| [Data Versioning for ML](../tools-and-infra/data-versioning-for-ml.md) | tools-and-infra | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Must | Must | Not Relevant |
+| [ML Experiment & Data Management](../tools-and-infra/ml-experiment-and-data-management.md) | tools-and-infra | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Must | Must | Not Relevant |
 | [Distributed Systems Fundamentals for AI](../tools-and-infra/distributed-systems-for-ai.md) | tools-and-infra | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Good | Good | Not Relevant |
 | [GenAI Tools & Infrastructure](../tools-and-infra/tools-overview.md) | tools-and-infra | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant |
-| [ML Experiment Tracking](../tools-and-infra/ml-experiment-tracking.md) | tools-and-infra | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Must | Must | Not Relevant |
+| [ML Experiment & Data Management](../tools-and-infra/ml-experiment-and-data-management.md) | tools-and-infra | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Must | Must | Not Relevant |
 | [Vector Databases](../tools-and-infra/vector-databases.md) | tools-and-infra | Optional | Optional | Optional | Optional | Not Relevant | Not Relevant | Must |

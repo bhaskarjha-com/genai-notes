@@ -4,6 +4,7 @@ tags: [owasp, security, llm-top-10, genai-security, risks]
 type: reference
 difficulty: intermediate
 status: published
+last_verified: 2026-04
 parent: "[[ethics-safety-alignment]]"
 related: ["[[adversarial-ml-and-ai-security]]", "[[ai-regulation]]", "[[../production/llmops]]"]
 source: "OWASP primary sources - see Sources"
@@ -101,6 +102,7 @@ Use the list during:
 ### Example: Guarded Request Path
 
 ```python
+# ?? Last tested: 2026-04
 def handle_llm_request(user_input, retrieved_chunks):
     safe_context = redact_secrets(retrieved_chunks)  # LLM06
     prompt = build_prompt(user_input=user_input, context=safe_context)
@@ -161,6 +163,15 @@ OWASP's AI security work has expanded beyond only this Top 10 into the broader O
 | Cross-domain | AppSec, governance, incident response |
 
 ---
+
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 🔧 Hands-on | [OWASP LLM Top 10 (2025)](https://owasp.org/www-project-top-10-for-large-language-model-applications/) | The definitive LLM security checklist |
+| 📄 Paper | [Greshake et al. "Prompt Injection" (2023)](https://arxiv.org/abs/2302.12173) | Systematic study of indirect injection attacks |
+| 🔧 Hands-on | [NIST AI RMF Playbook](https://airc.nist.gov/AI_RMF_Playbook) | Risk management actions for AI systems |
 
 ## Sources
 

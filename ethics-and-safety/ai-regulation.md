@@ -4,6 +4,7 @@ tags: [regulation, governance, eu-ai-act, nist, compliance, responsible-ai]
 type: reference
 difficulty: advanced
 status: published
+last_verified: 2026-04
 parent: "[[ethics-safety-alignment]]"
 related: ["[[../production/llmops]]", "[[../evaluation/evaluation-and-benchmarks]]", "[[../llms/hallucination-detection]]"]
 source: "Primary policy sources - see Sources"
@@ -124,7 +125,7 @@ system_name: support-assistant
 owner: ai-platform
 use_case: customer support drafting
 model_route:
-  primary: gpt-5.4-mini
+  primary: gpt-4o-mini
   fallback: claude-sonnet
 human_oversight: required_for_refunds_over_1000
 evaluation_set: support_eval_v4
@@ -173,6 +174,15 @@ last_risk_review: 2026-04
 | Cross-domain | legal, privacy, security, risk management |
 
 ---
+
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 🔧 Hands-on | [EU AI Act Summary](https://artificialintelligenceact.eu/) | Comprehensive guide to the EU AI Act |
+| 📘 Book | "The AI Dilemma" by Tegmark (2024) | Accessible treatment of AI governance challenges |
+| 🔧 Hands-on | [NIST AI RMF](https://www.nist.gov/artificial-intelligence/ai-risk-management-framework) | US risk management framework for AI systems |
 
 ## Sources
 

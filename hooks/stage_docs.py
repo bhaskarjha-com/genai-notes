@@ -21,6 +21,7 @@ PUBLIC_FILE_MAP = (
 )
 
 PUBLIC_DIRS = (
+    "agents",
     "applications",
     "assets",
     "career",
@@ -29,7 +30,6 @@ PUBLIC_DIRS = (
     "evaluation",
     "foundations",
     "generated",
-    "image-generation",
     "inference",
     "learner-tools",
     "llms",

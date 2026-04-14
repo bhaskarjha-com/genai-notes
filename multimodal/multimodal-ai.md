@@ -4,8 +4,9 @@ tags: [multimodal, vision-language, text-to-video, text-to-audio, sora, veo, gen
 type: concept
 difficulty: intermediate
 status: published
+last_verified: 2026-04
 parent: "[[../genai]]"
-related: ["[[../llms/llms-overview]]", "[[../image-generation/diffusion-models]]", "[[../foundations/transformers]]", "[[computer-vision-fundamentals]]"]
+related: ["[[../llms/llms-overview]]", "[[../multimodal/diffusion-models]]", "[[../foundations/transformers]]", "[[computer-vision-fundamentals]]"]
 source: "Multiple - see Sources"
 created: 2026-03-18
 updated: 2026-04-12
@@ -33,7 +34,7 @@ updated: 2026-04-12
 
 ### Scope
 
-Covers: Vision-language models, text-to-video, text-to-audio, and cross-modal understanding. For image generation specifically, see [Diffusion Models](../image-generation/diffusion-models.md). For the visual-understanding side of multimodal work, see [Computer Vision Fundamentals for AI Builders](./computer-vision-fundamentals.md). For the text-only LLM perspective, see [Llms Overview](../llms/llms-overview.md).
+Covers: Vision-language models, text-to-video, text-to-audio, and cross-modal understanding. For image generation specifically, see [Diffusion Models](../multimodal/diffusion-models.md). For the visual-understanding side of multimodal work, see [Computer Vision Fundamentals for AI Builders](./computer-vision-fundamentals.md). For the text-only LLM perspective, see [Llms Overview](../llms/llms-overview.md).
 
 Last verified for frontier-model and product examples in this note: 2026-04.
 
@@ -238,12 +239,22 @@ WHAT'S EARLY (research/demos):
 
 | Relationship | Topics                                                                                               |
 | ------------ | ---------------------------------------------------------------------------------------------------- |
-| Builds on    | [Transformers](../foundations/transformers.md), [Llms Overview](../llms/llms-overview.md), [Diffusion Models](../image-generation/diffusion-models.md) |
+| Builds on    | [Transformers](../foundations/transformers.md), [Llms Overview](../llms/llms-overview.md), [Diffusion Models](../multimodal/diffusion-models.md) |
 | Leads to     | AR/VR AI, Robotics (visual+language understanding), Video AI                                         |
 | Compare with | Single-modality models (text-only, image-only)                                                       |
 | Cross-domain | Computer vision, Audio signal processing, HCI                                                        |
 
 ---
+
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 📄 Paper | [OpenAI "GPT-4V System Card" (2023)](https://cdn.openai.com/papers/GPTV_System_Card.pdf) | How multimodal capabilities are evaluated and deployed |
+| 📄 Paper | [Radford et al. "CLIP" (2021)](https://arxiv.org/abs/2103.00020) | Foundational vision-language alignment paper |
+| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 3 | Multimodal model capabilities and application patterns |
+| 🔧 Hands-on | [Google Gemini API Docs](https://ai.google.dev/docs) | Production multimodal API with vision, audio, and video |
 
 ## ★ Sources
 

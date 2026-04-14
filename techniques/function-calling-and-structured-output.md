@@ -4,8 +4,9 @@ tags: [function-calling, tool-use, structured-output, json-mode, mcp, grounding,
 type: concept
 difficulty: intermediate
 status: published
+last_verified: 2026-04
 parent: "[[../genai]]"
-related: ["[[ai-agents]]", "[[../llms/llms-overview]]", "[[rag]]", "[[prompt-engineering]]"]
+related: ["[[../agents/ai-agents]]", "[[../llms/llms-overview]]", "[[rag]]", "[[prompt-engineering]]"]
 source: "Multiple — see Sources"
 created: 2026-03-22
 updated: 2026-04-11
@@ -35,7 +36,7 @@ updated: 2026-04-11
 
 ### Scope
 
-Covers the patterns, APIs, and protocols. For building full agents with planning loops, see [Ai Agents](./ai-agents.md). For retrieval specifically, see [Rag](./rag.md).
+Covers the patterns, APIs, and protocols. For building full agents with planning loops, see [Ai Agents](../agents/ai-agents.md). For retrieval specifically, see [Rag](./rag.md).
 
 ### Significance
 
@@ -85,6 +86,7 @@ KEY: The LLM NEVER executes code. It only decides what to call.
 ### Function Calling API (OpenAI Pattern)
 
 ```python
+# ?? Last tested: 2026-04
 from openai import OpenAI
 import json
 
@@ -117,7 +119,7 @@ tools = [
 
 # 2. Send message with tools
 response = client.chat.completions.create(
-    model="gpt-5.4",
+    model="gpt-4o",
     messages=[{"role": "user", "content": "Weather in Tokyo?"}],
     tools=tools,
     tool_choice="auto"  # auto | none | required | specific function
@@ -151,6 +153,7 @@ if message.tool_calls:
 ### Structured Output
 
 ```python
+# ?? Last tested: 2026-04
 # ═══ METHOD 1: JSON Mode (basic) ═══
 response = client.chat.completions.create(
     model="gpt-4o",
@@ -316,11 +319,21 @@ LIBRARIES:
 | Relationship | Topics                                                                                    |
 | ------------ | ----------------------------------------------------------------------------------------- |
 | Builds on    | [Llms Overview](../llms/llms-overview.md), [Prompt Engineering](./prompt-engineering.md)                                         |
-| Leads to     | [Ai Agents](./ai-agents.md) (agents = function calling + planning loops), [Rag](./rag.md) (retrieval as a tool) |
+| Leads to     | [Ai Agents](../agents/ai-agents.md) (agents = function calling + planning loops), [Rag](./rag.md) (retrieval as a tool) |
 | Compare with | Direct prompting (text-only), Fine-tuning (embedding knowledge)                           |
 | Cross-domain | API design, RPC protocols, Software architecture                                          |
 
 ---
+
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 🔧 Hands-on | [OpenAI Function Calling Guide](https://platform.openai.com/docs/guides/function-calling) | Best documentation for function calling implementation |
+| 🔧 Hands-on | [Instructor Library](https://python.useinstructor.com/) | Production library for structured output extraction with Pydantic |
+| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 6 (Agents) | Covers tool use and structured output in agent architectures |
+| 🔧 Hands-on | [Anthropic Tool Use Guide](https://docs.anthropic.com/en/docs/build-with-claude/tool-use) | Claude's approach to function calling with examples |
 
 ## ★ Sources
 

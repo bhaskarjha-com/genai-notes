@@ -4,8 +4,9 @@ tags: [rag, retrieval, embeddings, vector-db, genai-techniques]
 type: concept
 difficulty: intermediate
 status: published
+last_verified: 2026-04
 parent: "[[../genai]]"
-related: ["[[fine-tuning]]", "[[../llms/llms-overview]]", "[[ai-agents]]"]
+related: ["[[fine-tuning]]", "[[../llms/llms-overview]]", "[[../agents/ai-agents]]"]
 source: "Lewis et al., 2020 + latest hybrid RAG techniques"
 created: 2026-03-18
 updated: 2026-04-11
@@ -118,7 +119,7 @@ Convert text chunks and queries into high-dimensional vectors for similarity sea
 | Model                           | Dimensions | Strengths                            |
 | ------------------------------- | ---------- | ------------------------------------ |
 | OpenAI `text-embedding-3-large` | 3072       | Best quality, API, Matryoshka dims   |
-| **Gemini Embedding 2**          | Flexible   | Multimodal! (text+image+video+audio) |
+| **Gemini text-embedding-004**          | Flexible   | Multimodal! (text+image+video+audio) |
 | Cohere `embed-v4`               | 1024       | Best multilingual (100+ languages)   |
 | Voyage AI `voyage-3-large`      | —          | Best for code & technical docs       |
 | `bge-m3` (BAAI)                 | 1024       | Best open-source, hybrid retrieval   |
@@ -181,11 +182,16 @@ Basic RAG
 ### Minimal RAG with LangChain (Python)
 
 ```python
+# pip install langchain>=0.3 langchain-openai>=0.3 langchain-community>=0.3 chromadb>=0.5
+# ⚠️ Last tested: 2026-04 | Requires: langchain>=0.3
+
 from langchain_community.document_loaders import PyPDFLoader
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 from langchain_community.vectorstores import Chroma
-from langchain.chains import RetrievalQA
+from langchain.chains import create_retrieval_chain
+from langchain.chains.combine_documents import create_stuff_documents_chain
+from langchain_core.prompts import ChatPromptTemplate
 
 # 1. Load & Chunk
 loader = PyPDFLoader("your_document.pdf")
@@ -202,23 +208,25 @@ chunks = splitter.split_documents(docs)
 embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
 vectorstore = Chroma.from_documents(chunks, embeddings)
 
-# 3. Query
+# 3. Build Retrieval Chain (modern LangChain pattern)
 retriever = vectorstore.as_retriever(
     search_type="similarity",
     search_kwargs={"k": 5}
 )
 
-llm = ChatOpenAI(model="gpt-5.4", temperature=0)
+llm = ChatOpenAI(model="gpt-4o", temperature=0)
 
-qa_chain = RetrievalQA.from_chain_type(
-    llm=llm,
-    chain_type="stuff",  # stuff all chunks into one prompt
-    retriever=retriever,
-    return_source_documents=True
-)
+prompt = ChatPromptTemplate.from_messages([
+    ("system", "Answer based only on the provided context. If unsure, say so.\n\nContext:\n{context}"),
+    ("human", "{input}"),
+])
 
-result = qa_chain.invoke({"query": "What are the key findings?"})
-print(result["result"])
+question_answer_chain = create_stuff_documents_chain(llm, prompt)
+rag_chain = create_retrieval_chain(retriever, question_answer_chain)
+
+result = rag_chain.invoke({"input": "What are the key findings?"})
+print(result["answer"])
+# result["context"] contains the retrieved source documents
 ```
 
 ---
@@ -324,11 +332,21 @@ EVALUATION TOOLS:
 | Relationship | Topics                                                                         |
 | ------------ | ------------------------------------------------------------------------------ |
 | Builds on    | [Llms Overview](../llms/llms-overview.md), Embeddings, Vector Search                           |
-| Leads to     | [Ai Agents](./ai-agents.md) (Agentic RAG), [Vector Databases](../tools-and-infra/vector-databases.md)           |
+| Leads to     | [Ai Agents](../agents/ai-agents.md) (Agentic RAG), [Vector Databases](../tools-and-infra/vector-databases.md)           |
 | Compare with | [Fine Tuning](./fine-tuning.md) (changes model), Long-context (no retrieval), Knowledge graphs |
 | Cross-domain | Information retrieval (IR), Search engines                                     |
 
 ---
+
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 📄 Paper | [Lewis et al. "Retrieval-Augmented Generation" (2020)](https://arxiv.org/abs/2005.11401) | The original RAG paper |
+| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 3-4 | Best practical treatment of RAG architecture and evaluation |
+| 🎓 Course | [deeplearning.ai — "Building and Evaluating RAG"](https://www.deeplearning.ai/) | Hands-on RAG implementation course |
+| 🔧 Hands-on | [LlamaIndex RAG Tutorial](https://docs.llamaindex.ai/) | Production RAG framework with excellent documentation |
 
 ## ★ Sources
 

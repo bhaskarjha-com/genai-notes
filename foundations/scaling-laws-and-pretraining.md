@@ -4,6 +4,7 @@ tags: [scaling-laws, pre-training, chinchilla, compute, training, data-mix, gena
 type: concept
 difficulty: advanced
 status: published
+last_verified: 2026-04
 parent: "[[../genai]]"
 related: ["[[transformers]]", "[[../llms/llms-overview]]", "[[modern-architectures]]"]
 source: "Multiple — see Sources"
@@ -247,6 +248,16 @@ PRE-TRAINING OBJECTIVE:
 | Cross-domain | Distributed systems, HPC, Data engineering                           |
 
 ---
+
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 📄 Paper | [Kaplan et al. "Scaling Laws for Neural Language Models" (2020)](https://arxiv.org/abs/2001.08361) | Original OpenAI scaling laws — compute, data, parameters |
+| 📄 Paper | [Hoffmann et al. "Chinchilla" (2022)](https://arxiv.org/abs/2203.15556) | Revised scaling: compute-optimal training needs more data than expected |
+| 🎥 Video | [Andrej Karpathy — "Let's Build GPT"](https://www.youtube.com/watch?v=kCc8FmEb1nY) | Build a language model from scratch — pretraining intuition |
+| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 2 | Practical understanding of model selection and scaling tradeoffs |
 
 ## ★ Sources
 

@@ -4,6 +4,7 @@ tags: [transformers, architecture, deep-learning, attention, genai-foundations]
 type: concept
 difficulty: intermediate
 status: published
+last_verified: 2026-04
 parent: "[[../genai]]"
 related: ["[[attention-mechanism]]", "[[../llms/llms-overview]]"]
 source: "Attention Is All You Need (Vaswani et al., 2017)"
@@ -229,11 +230,21 @@ Modern Scaling (LLaMA 4 Behemoth):
 | Relationship | Topics                                                                        |
 | ------------ | ----------------------------------------------------------------------------- |
 | Builds on    | [Neural Networks](../prerequisites/neural-networks.md), [Embeddings](./embeddings.md), [Attention Mechanism](./attention-mechanism.md) |
-| Leads to     | [Large Language Models (LLMs)](../llms/llms-overview.md), [Diffusion Models](../image-generation/diffusion-models.md)     |
+| Leads to     | [Large Language Models (LLMs)](../llms/llms-overview.md), [Diffusion Models](../multimodal/diffusion-models.md)     |
 | Compare with | RNNs (sequential), LSTMs (gated sequential), CNNs (local patterns)            |
 | Cross-domain | Graph attention networks (GNNs), Vision Transformers (ViT)                    |
 
 ---
+
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 📄 Paper | [Vaswani et al. "Attention Is All You Need" (2017)](https://arxiv.org/abs/1706.03762) | The foundational transformer paper — read Sections 3-4 |
+| 🎥 Video | [3Blue1Brown — "Attention in Transformers"](https://www.youtube.com/watch?v=eMlx5fFNoYc) | Best visual explanation of how attention works |
+| 🎓 Course | [Stanford CS224n: NLP with Deep Learning](http://web.stanford.edu/class/cs224n/) | Gold standard NLP course covering transformers in depth |
+| 📘 Book | "Build a Large Language Model (From Scratch)" by Sebastian Raschka (2024), Ch 3 | Step-by-step transformer implementation in PyTorch |
 
 ## ★ Sources
 

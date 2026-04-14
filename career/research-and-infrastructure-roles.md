@@ -42,7 +42,7 @@ Complete [Part 1 of the Learning Path](../LEARNING_PATH.md#part-1-universal-foun
 |---|---|---|:---:|:---:|
 | 1 | Scaling laws and pretraining | [scaling-laws-and-pretraining](../foundations/scaling-laws-and-pretraining.md) | Must | 4h |
 | 2 | Distributed training | [distributed-training](../research-frontiers/distributed-training.md) | Must | 4h |
-| 3 | Training infrastructure | [training-infrastructure](../research-frontiers/training-infrastructure.md) | Must | 3h |
+| 3 | Training infrastructure | [training-infrastructure](../research-frontiers/distributed-training.md) | Must | 3h |
 | 4 | GPU and CUDA programming | [gpu-cuda-programming](../inference/gpu-cuda-programming.md) | Must | 4h |
 | 5 | Distributed inference and serving architecture | [distributed-inference-and-serving-architecture](../inference/distributed-inference-and-serving-architecture.md) | Must | 3h |
 | 6 | Mechanistic interpretability | [interpretability](../research-frontiers/interpretability.md) | Must | 2h |

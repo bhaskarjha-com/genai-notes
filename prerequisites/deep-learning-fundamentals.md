@@ -4,6 +4,7 @@ tags: [deep-learning, training, optimizer, regularization, gpu, genai-prerequisi
 type: concept
 difficulty: intermediate
 status: published
+last_verified: 2026-04
 parent: "[[../genai]]"
 related: ["[[neural-networks]]", "[[python-for-ai]]", "[[../foundations/transformers]]", "[[../techniques/fine-tuning]]"]
 source: "Multiple - see Sources"
@@ -48,6 +49,7 @@ Covers training mechanics applicable to all GenAI models. For Transformer-specif
 ### The Training Loop (Universal)
 
 ```python
+# ?? Last tested: 2026-04
 # THE training loop — this is the same for BERT, GPT, Stable Diffusion, everything.
 for epoch in range(num_epochs):
     for batch in dataloader:
@@ -198,6 +200,7 @@ VRAM IS THE BOTTLENECK:
 ```
 
 ```python
+# ?? Last tested: 2026-04
 # Check GPU
 import torch
 print(torch.cuda.is_available())          # True if GPU ready
@@ -289,6 +292,15 @@ METRICS TO MONITOR:
 | Cross-domain | Optimization theory, Numerical methods, Systems engineering                                             |
 
 ---
+
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 📘 Book | "Deep Learning" by Goodfellow, Bengio, Courville (2016) | The definitive deep learning textbook |
+| 🎓 Course | [fast.ai — Practical Deep Learning](https://course.fast.ai/) | Best practical introduction to deep learning |
+| 🎥 Video | [3Blue1Brown — "Neural Networks"](https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi) | Beautiful visual explanations of DL concepts |
 
 ## ★ Sources
 

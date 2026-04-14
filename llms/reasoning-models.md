@@ -4,6 +4,7 @@ tags: [reasoning, o1, o3, chain-of-thought, test-time-compute, deepseek-r1, thin
 type: concept
 difficulty: advanced
 status: published
+last_verified: 2026-04
 parent: "[[../genai]]"
 related: ["[[llms-overview]]", "[[../foundations/transformers]]", "[[../techniques/prompt-engineering]]"]
 source: "Multiple — see Sources"
@@ -202,6 +203,7 @@ DISTILLED VERSIONS:
 ## ◆ Code & Implementation
 
 ```python
+# ?? Last tested: 2026-04
 # ═══ Using OpenAI o3 ═══
 from openai import OpenAI
 client = OpenAI()
@@ -286,10 +288,20 @@ KEY NUMBERS:
 | ------------ | --------------------------------------------------------------------------------------------------------------------------------------- |
 | Builds on    | [Llms Overview](./llms-overview.md), [Prompt Engineering](../techniques/prompt-engineering.md) (CoT), [Deep Learning Fundamentals](../prerequisites/deep-learning-fundamentals.md) (RL)                     |
 | Leads to     | [Ethics Safety Alignment](../ethics-and-safety/ethics-safety-alignment.md) (alignment via RL), [Inference Optimization](../inference/inference-optimization.md) (serving reasoning models) |
-| Compare with | Standard LLMs (direct generation), [Ai Agents](../techniques/ai-agents.md) (multi-step but external planning)                                       |
+| Compare with | Standard LLMs (direct generation), [Ai Agents](../agents/ai-agents.md) (multi-step but external planning)                                       |
 | Cross-domain | Formal verification, Theorem proving, Game AI (MCTS)                                                                                    |
 
 ---
+
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 📄 Paper | [Wei et al. "Chain-of-Thought Prompting" (2022)](https://arxiv.org/abs/2201.11903) | Foundational paper on reasoning in LLMs |
+| 📄 Paper | [DeepSeek-R1 Technical Report (2025)](https://arxiv.org/abs/2501.12948) | How GRPO enables reasoning model training |
+| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 5 | Covers reasoning techniques and their production implications |
+| 🎥 Video | [Andrej Karpathy — "Deep Dive into o1"](https://www.youtube.com/watch?v=tEzs3VHyBDM) | Analysis of reasoning model architectures |
 
 ## ★ Sources
 

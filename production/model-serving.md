@@ -4,6 +4,7 @@ tags: [serving, vllm, triton, tgi, inference, llmops, production]
 type: reference
 difficulty: advanced
 status: published
+last_verified: 2026-04
 parent: "[[llmops]]"
 related: ["[[docker-and-kubernetes]]", "[[monitoring-observability]]", "[[cost-optimization]]", "[[../inference/inference-optimization]]"]
 source: "Multiple - see Sources"
@@ -185,6 +186,16 @@ python -m vllm.entrypoints.openai.api_server \
 | Cross-domain | Distributed systems, queueing, API platform design |
 
 ---
+
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 🔧 Hands-on | [vLLM Documentation](https://docs.vllm.ai/) | Best open-source LLM serving engine |
+| 🔧 Hands-on | [TGI Documentation](https://huggingface.co/docs/text-generation-inference/) | HuggingFace's production serving solution |
+| 📄 Paper | [Kwon et al. "PagedAttention" (2023)](https://arxiv.org/abs/2309.06180) | KV-cache management that powers vLLM |
+| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 8 | Model serving patterns for production |
 
 ## Sources
 

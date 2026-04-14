@@ -46,8 +46,8 @@ Complete [Part 1 of the Learning Path](../../LEARNING_PATH.md#part-1-universal-f
 | 5 | CI/CD for ML | [cicd-for-ml](../../production/cicd-for-ml.md) | Must | 3h |
 | 6 | Cost optimization | [cost-optimization](../../production/cost-optimization.md) | Must | 3h |
 | 7 | Cloud ML services | [cloud-ml-services](../../tools-and-infra/cloud-ml-services.md) | Must | 3h |
-| 8 | ML experiment tracking | [ml-experiment-tracking](../../tools-and-infra/ml-experiment-tracking.md) | Must | 2h |
-| 9 | Data versioning | [data-versioning-for-ml](../../tools-and-infra/data-versioning-for-ml.md) | Must | 2h |
+| 8 | ML experiment tracking | [ml-experiment-tracking](../../tools-and-infra/ml-experiment-and-data-management.md) | Must | 2h |
+| 9 | Data versioning | [data-versioning-for-ml](../../tools-and-infra/ml-experiment-and-data-management.md) | Must | 2h |
 
 ### Phase 3: Advanced / Differentiating Knowledge
 

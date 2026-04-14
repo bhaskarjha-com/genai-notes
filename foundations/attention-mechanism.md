@@ -4,6 +4,7 @@ tags: [attention, self-attention, multi-head, transformers, genai-foundations]
 type: concept
 difficulty: intermediate
 status: published
+last_verified: 2026-04
 parent: "[[transformers]]"
 related: ["[[transformers]]", "[[../llms/llms-overview]]"]
 source: "Attention Is All You Need (Vaswani et al., 2017)"
@@ -218,6 +219,16 @@ Modern defaults:
 | Cross-domain | Vision Transformers (ViT), Graph Attention Networks                              |
 
 ---
+
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 📄 Paper | [Vaswani et al. "Attention Is All You Need" (2017)](https://arxiv.org/abs/1706.03762) — Section 3 | Precise mathematical definition of scaled dot-product attention |
+| 🎥 Video | [3Blue1Brown — "Attention in Transformers, Visually Explained"](https://www.youtube.com/watch?v=eMlx5fFNoYc) | Best visual intuition for Q/K/V and multi-head attention |
+| 📄 Paper | [Dao et al. "FlashAttention" (2022)](https://arxiv.org/abs/2205.14135) | IO-aware attention kernels — essential for understanding modern efficiency |
+| 📘 Book | "Build a Large Language Model (From Scratch)" by Sebastian Raschka (2024), Ch 3 | Implement attention from scratch in PyTorch |
 
 ## ★ Sources
 

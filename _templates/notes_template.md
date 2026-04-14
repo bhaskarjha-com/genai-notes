@@ -4,14 +4,15 @@ tags: []
 type: concept|tool|theory|procedure|entity|reference
 difficulty: beginner|intermediate|advanced|expert
 status: draft|published
+last_verified: YYYY-MM
 parent: ""
 related: []
 source: ""
-created: 
-updated: 
+created:
+updated:
 ---
 
-<!-- 
+<!--
 ╔═══════════════════════════════════════════════════════════════════════════════╗
 ║                          HOW TO USE THIS TEMPLATE                          ║
 ╠═══════════════════════════════════════════════════════════════════════════════╣
@@ -24,12 +25,18 @@ updated:
 ║  2. Sections are marked:                                                    ║
 ║     ★ = Always fill     ◆ = Include when relevant     ○ = Optional          ║
 ║                                                                             ║
-║  3. Delete empty sections. The template adapts by subtraction.              ║
+║  3. MINIMUM REQUIRED for published notes:                                   ║
+║     ★ TL;DR, ★ Overview, ★ Deep Dive, ★ Connections,                       ║
+║     ★ Recommended Resources, ★ Sources                                      ║
+║     ★ Code & Implementation — MANDATORY for type: procedure or tool         ║
 ║                                                                             ║
-║  4. If any section grows large, extract to a sub-document and link:         ║
+║  4. Remove ◆ / ○ sections only if genuinely N/A for the topic.              ║
+║     Do NOT remove sections just because they take effort to fill.           ║
+║                                                                             ║
+║  5. If any section grows large, extract to a sub-document and link:         ║
 ║     → "See [Detailed Topic](./subtopic/detailed-topic.md)"                  ║
 ║                                                                             ║
-║  5. Delete this instruction block in actual documents.                      ║
+║  6. Delete this instruction block in actual documents.                      ║
 ╚═══════════════════════════════════════════════════════════════════════════════╝
 -->
 
@@ -43,9 +50,9 @@ updated:
 
 <!-- If you only have 30 seconds, what matters? Max 4 bullets. -->
 
-- **What**: 
-- **Why**: 
-- **Key point**: 
+- **What**:
+- **Why**:
+- **Key point**:
 
 ---
 
@@ -72,7 +79,7 @@ updated:
 
 ## ★ Deep Dive
 
-<!-- 
+<!--
 THIS IS YOUR MAIN SECTION. The core knowledge lives here.
 How does it actually work? Principles, mechanisms, architecture, theory.
 Use sub-headings freely based on what the topic demands.
@@ -131,14 +138,23 @@ Include: diagrams, formulas, pseudocode, architecture, proofs — whatever fits.
 # Commands or code for setup/execution
 ```
 
-1. **Step 1** — 
-2. **Step 2** — 
+1. **Step 1** —
+2. **Step 2** —
 
 ---
 
-## ◆ Code & Implementation
+## ★ Code & Implementation
 
-<!-- Working code. Snippets you'll actually copy-paste and use. -->
+<!--
+★ MANDATORY for notes with type: procedure or type: tool.
+◆ Strongly encouraged for all other types.
+
+STANDARDS:
+  - Every code block must include: imports, setup, expected output
+  - Add pip install comment: # pip install library>=version
+  - Add version marker: # ⚠️ Last tested: YYYY-MM | Requires: lib>=version
+  - Non-runnable code: # PSEUDOCODE — illustrative, not runnable as-is
+-->
 
 ```python
 
@@ -182,7 +198,7 @@ Include: diagrams, formulas, pseudocode, architecture, proofs — whatever fits.
 [code / formula / diagram / walkthrough]
 ```
 
-**Explanation**: 
+**Explanation**:
 
 ---
 
@@ -196,11 +212,24 @@ Include: diagrams, formulas, pseudocode, architecture, proofs — whatever fits.
 
 ---
 
+## ◆ Production Failure Modes
+
+<!--
+Real-world ways this technology breaks in production.
+Include for all production-track and intermediate+ notes.
+-->
+
+| Failure | Symptoms | Root Cause | Mitigation |
+|---------|----------|------------|------------|
+| | | | |
+
+---
+
 ## ○ Gotchas & Common Mistakes
 
 <!-- What WILL trip you (or tripped you) up. Hard-won knowledge. -->
 
-- ⚠️ 
+- ⚠️
 
 ---
 
@@ -208,8 +237,36 @@ Include: diagrams, formulas, pseudocode, architecture, proofs — whatever fits.
 
 <!-- How might this come up? Prep questions for yourself. -->
 
-- **Q**: 
-- **A**: 
+- **Q**:
+- **A**:
+
+---
+
+## ◆ Hands-On Exercises
+
+<!--
+Progressive exercises to build real understanding.
+Include at least 2 exercises for intermediate+ notes.
+-->
+
+### Exercise 1: {Name}
+
+**Goal**: What you'll build or verify
+**Time**: X minutes
+**Steps**:
+1.
+2.
+3.
+**Expected Output**: What success looks like
+
+### Exercise 2: {Name}
+
+**Goal**:
+**Time**: X minutes
+**Steps**:
+1.
+2.
+**Expected Output**:
 
 ---
 
@@ -226,18 +283,20 @@ Include: diagrams, formulas, pseudocode, architecture, proofs — whatever fits.
 
 ---
 
-## ○ Open Questions
+## ★ Recommended Resources
 
-<!-- What's still unclear? Track your learning gaps. -->
+<!--
+Curated learning resources. 5-8 items.
+Every entry MUST have a specific "Why" explaining value for THIS topic.
+-->
 
-- [ ] 
-
----
-
-## ○ Notes
-
-<!-- Anything that doesn't fit elsewhere. Temporary home until you know where it belongs. -->
-
+| Type | Resource | Why |
+|------|----------|-----|
+| 📄 Paper | [Paper Name](URL) | Why this paper matters for this topic |
+| 📘 Book | Book Name by Author, Chapter N | What this chapter uniquely covers |
+| 🎓 Course | [Course Name](URL) | Why this course, which modules |
+| 🎥 Video | [Video Title](URL) | What makes this explanation good |
+| 🔧 Hands-on | [Repo/Tutorial](URL) | What you'll build or learn |
 
 ---
 
@@ -245,7 +304,7 @@ Include: diagrams, formulas, pseudocode, architecture, proofs — whatever fits.
 
 <!-- Where you learned this. Always keep the trail. -->
 
-- 
+-
 
 ---
 

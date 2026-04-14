@@ -4,6 +4,7 @@ tags: [tokenization, bpe, wordpiece, sentencepiece, llm-internals, genai-foundat
 type: concept
 difficulty: intermediate
 status: published
+last_verified: 2026-04
 parent: "[[../genai]]"
 related: ["[[transformers]]", "[[embeddings]]", "[[../llms/llms-overview]]"]
 source: "Sennrich et al. (BPE, 2016), SentencePiece, tiktoken"
@@ -108,9 +109,10 @@ STEP 4: ('low', 'er') is frequent
 ### Practical Impact
 
 ```python
+# ?? Last tested: 2026-04
 # Using OpenAI's tiktoken
 import tiktoken
-enc = tiktoken.encoding_for_model("gpt-5.4")
+enc = tiktoken.encoding_for_model("gpt-4o")
 
 # English is efficient:
 tokens = enc.encode("Hello, how are you?")
@@ -221,6 +223,16 @@ TOOLS:
 | Cross-domain | Linguistic morphology, Data compression                                   |
 
 ---
+
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 📄 Paper | [Sennrich et al. "BPE for Neural Machine Translation" (2016)](https://arxiv.org/abs/1508.07909) | The paper that introduced BPE to NLP |
+| 🎥 Video | [Andrej Karpathy — "Let's Build GPT Tokenizer"](https://www.youtube.com/watch?v=zduSFxRajkE) | Build BPE from scratch — best practical walkthrough |
+| 🔧 Hands-on | [HuggingFace Tokenizers Library](https://huggingface.co/docs/tokenizers/) | Fast, production-grade tokenizer implementations |
+| 📘 Book | "Build a Large Language Model (From Scratch)" by Sebastian Raschka (2024), Ch 2 | Tokenizer implementation with BPE and SentencePiece |
 
 ## ★ Sources
 

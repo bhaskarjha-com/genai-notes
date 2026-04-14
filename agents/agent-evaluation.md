@@ -4,6 +4,7 @@ tags: [agent-eval, observability, tracing, evaluation, genai-techniques]
 type: reference
 difficulty: advanced
 status: published
+last_verified: 2026-04
 parent: "[[ai-agents]]"
 related: ["[[multi-agent-architectures]]", "[[../evaluation/evaluation-and-benchmarks]]", "[[../production/llmops]]", "[[../llms/hallucination-detection]]"]
 source: "Multiple sources - see Sources"
@@ -191,6 +192,15 @@ Median cost per task:        $0.031
 | Cross-domain | APM, distributed tracing, experiment management |
 
 ---
+
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 📄 Paper | [Jimenez et al. "SWE-bench" (2023)](https://arxiv.org/abs/2310.06770) | Benchmark for evaluating coding agents on real GitHub issues |
+| 🔧 Hands-on | [LangSmith Evaluations](https://docs.smith.langchain.com/) | Production agent evaluation and tracing |
+| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 7 | Agent evaluation patterns and metrics |
 
 ## Sources
 

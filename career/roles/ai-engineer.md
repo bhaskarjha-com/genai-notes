@@ -41,7 +41,7 @@ Complete [Part 1 of the Learning Path](../../LEARNING_PATH.md#part-1-universal-f
 |---|---|---|:---:|:---:|
 | 1 | RAG | [rag](../../techniques/rag.md) | Must | 4h |
 | 2 | Function Calling | [function-calling](../../techniques/function-calling-and-structured-output.md) | Must | 3h |
-| 3 | AI Agents | [ai-agents](../../techniques/ai-agents.md) | Must | 4h |
+| 3 | AI Agents | [ai-agents](../../agents/ai-agents.md) | Must | 4h |
 | 4 | AI System Design | [ai-system-design](../../production/ai-system-design.md) | Must | 3h |
 | 5 | LLMOps | [llmops](../../production/llmops.md) | Must | 3h |
 
@@ -49,8 +49,8 @@ Complete [Part 1 of the Learning Path](../../LEARNING_PATH.md#part-1-universal-f
 
 | # | Topic | Note | Priority | Est. Time |
 |---|---|---|:---:|:---:|
-| 1 | Multi-agent architectures | [multi-agent-architectures](../../techniques/multi-agent-architectures.md) | Good | 3h |
-| 2 | Agent evaluation | [agent-evaluation](../../techniques/agent-evaluation.md) | Good | 3h |
+| 1 | Multi-agent architectures | [multi-agent-architectures](../../agents/multi-agent-architectures.md) | Good | 3h |
+| 2 | Agent evaluation | [agent-evaluation](../../agents/agent-evaluation.md) | Good | 3h |
 | 3 | Inference optimization | [inference-optimization](../../inference/inference-optimization.md) | Good | 3h |
 | 4 | Advanced fine-tuning | [advanced-fine-tuning](../../techniques/advanced-fine-tuning.md) | Good | 4h |
 
@@ -97,7 +97,7 @@ Complete [Part 1 of the Learning Path](../../LEARNING_PATH.md#part-1-universal-f
 
 ## Interview Preparation
 
-Review the Interview Angles sections in [rag](../../techniques/rag.md#interview-angles), [ai-agents](../../techniques/ai-agents.md#interview-angles), [llmops](../../production/llmops.md#interview-angles), and [ai-system-design](../../production/ai-system-design.md#interview-angles).
+Review the Interview Angles sections in [rag](../../techniques/rag.md#interview-angles), [ai-agents](../../agents/ai-agents.md#interview-angles), [llmops](../../production/llmops.md#interview-angles), and [ai-system-design](../../production/ai-system-design.md#interview-angles).
 
 Common questions:
 

@@ -4,6 +4,7 @@ tags: [vector-db, embeddings, similarity-search, pinecone, qdrant, chroma, genai
 type: tool
 difficulty: intermediate
 status: published
+last_verified: 2026-04
 parent: "[[tools-overview]]"
 related: ["[[../techniques/rag]]", "[[../llms/llms-overview]]"]
 source: "Multiple - see Sources"
@@ -139,6 +140,7 @@ Do you want managed or self-hosted?
 ### Quick Start Examples
 
 ```python
+# ?? Last tested: 2026-04
 # ═══ CHROMA (simplest - great for learning) ═══
 import chromadb
 from chromadb.utils import embedding_functions
@@ -161,6 +163,7 @@ print(results["documents"])  # → Most similar docs
 ```
 
 ```python
+# ?? Last tested: 2026-04
 # ═══ QDRANT (production-ready) ═══
 from qdrant_client import QdrantClient
 from qdrant_client.models import VectorParams, Distance, PointStruct
@@ -268,6 +271,16 @@ EMBEDDING DIMENSIONS:
 | Cross-domain | Information retrieval, Computational geometry (nearest neighbor)              |
 
 ---
+
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 🔧 Hands-on | [Qdrant Documentation](https://qdrant.tech/documentation/) | Excellent open-source vector DB with filtering support |
+| 🔧 Hands-on | [Pinecone Documentation](https://docs.pinecone.io/) | Managed vector DB — easiest to start with |
+| 📄 Paper | [Johnson et al. "FAISS" (2017)](https://arxiv.org/abs/1702.08734) | Foundational nearest-neighbor search algorithms |
+| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 3 | Vector search in the context of RAG systems |
 
 ## ★ Sources
 

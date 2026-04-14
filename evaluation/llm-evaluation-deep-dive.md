@@ -4,8 +4,9 @@ tags: [evaluation, llm-as-judge, ragas, deepeval, judges, regression]
 type: reference
 difficulty: advanced
 status: published
+last_verified: 2026-04
 parent: "[[evaluation-and-benchmarks]]"
-related: ["[[../llms/hallucination-detection]]", "[[../techniques/agent-evaluation]]", "[[../techniques/rag]]", "[[../production/monitoring-observability]]"]
+related: ["[[../llms/hallucination-detection]]", "[[../agents/agent-evaluation]]", "[[../techniques/rag]]", "[[../production/monitoring-observability]]"]
 source: "Multiple - see Sources"
 created: 2026-04-12
 updated: 2026-04-12
@@ -45,7 +46,7 @@ The note goes beyond benchmark names and covers evaluation design, judge usage, 
 
 - [LLM Evaluation & Benchmarks](./evaluation-and-benchmarks.md)
 - [Hallucination Detection & Mitigation](../llms/hallucination-detection.md)
-- [Agent Evaluation & Observability](../techniques/agent-evaluation.md)
+- [Agent Evaluation & Observability](../agents/agent-evaluation.md)
 
 ---
 
@@ -194,12 +195,22 @@ For agents, score more than the final text:
 
 | Relationship | Topics |
 |---|---|
-| Builds on | [LLM Evaluation & Benchmarks](./evaluation-and-benchmarks.md), [Hallucination Detection & Mitigation](../llms/hallucination-detection.md), [Agent Evaluation & Observability](../techniques/agent-evaluation.md) |
+| Builds on | [LLM Evaluation & Benchmarks](./evaluation-and-benchmarks.md), [Hallucination Detection & Mitigation](../llms/hallucination-detection.md), [Agent Evaluation & Observability](../agents/agent-evaluation.md) |
 | Leads to | [Monitoring & Observability for GenAI Systems](../production/monitoring-observability.md), [CI/CD for ML and LLM Systems](../production/cicd-for-ml.md) |
 | Compare with | Static benchmark tracking, ad hoc manual testing |
 | Cross-domain | Experiment design, analytics, QA |
 
 ---
+
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 4 (Evaluation) | Best practical treatment of LLM evaluation |
+| 🔧 Hands-on | [RAGAS Documentation](https://docs.ragas.io/) | Framework for RAG evaluation metrics |
+| 📄 Paper | [Zheng et al. "Judging LLM-as-a-Judge" (2023)](https://arxiv.org/abs/2306.05685) | When and how to use LLMs to evaluate LLMs |
+| 🔧 Hands-on | [DeepEval Documentation](https://docs.confident-ai.com/) | Production LLM evaluation framework |
 
 ## Sources
 

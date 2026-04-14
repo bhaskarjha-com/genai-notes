@@ -4,8 +4,9 @@ tags: [graph-rag, knowledge-graph, multi-hop-reasoning, graphrag, agentic-rag, g
 type: concept
 difficulty: advanced
 status: published
+last_verified: 2026-04
 parent: "[[../genai]]"
-related: ["[[rag]]", "[[ai-agents]]", "[[context-engineering]]", "[[../tools-and-infra/vector-databases]]"]
+related: ["[[rag]]", "[[../agents/ai-agents]]", "[[context-engineering]]", "[[../tools-and-infra/vector-databases]]"]
 source: "Multiple — see Sources"
 created: 2026-03-22
 updated: 2026-04-11
@@ -227,12 +228,21 @@ KNOWLEDGE GRAPH TOOLS:
 
 | Relationship | Topics                                                          |
 | ------------ | --------------------------------------------------------------- |
-| Builds on    | [Rag](./rag.md), [Vector Databases](../tools-and-infra/vector-databases.md), [Ai Agents](./ai-agents.md) |
+| Builds on    | [Rag](./rag.md), [Vector Databases](../tools-and-infra/vector-databases.md), [Ai Agents](../agents/ai-agents.md) |
 | Leads to     | Enterprise knowledge systems, Compliance AI                     |
 | Compare with | Standard RAG (similarity only), Long context (no retrieval)     |
 | Cross-domain | Graph databases, Knowledge management, Information retrieval    |
 
 ---
+
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 📄 Paper | [Edge et al. "Graph RAG" (Microsoft, 2024)](https://arxiv.org/abs/2404.16130) | The paper that introduced graph-based RAG architecture |
+| 🔧 Hands-on | [Microsoft GraphRAG](https://github.com/microsoft/graphrag) | Open-source Graph RAG implementation |
+| 🔧 Hands-on | [Neo4j GenAI Documentation](https://neo4j.com/docs/genai/) | Graph database + LLM integration patterns |
 
 ## ★ Sources
 

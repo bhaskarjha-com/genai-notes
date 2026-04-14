@@ -4,6 +4,7 @@ tags: [continual-learning, catastrophic-forgetting, lifelong-learning, knowledge
 type: concept
 difficulty: advanced
 status: published
+last_verified: 2026-04
 parent: "[[../genai]]"
 related: ["[[fine-tuning]]", "[[../llms/llms-overview]]", "[[../ethics-and-safety/ethics-safety-alignment]]"]
 source: "Multiple — see Sources"
@@ -198,11 +199,20 @@ KEY PAPERS:
 | Relationship | Topics                                                             |
 | ------------ | ------------------------------------------------------------------ |
 | Builds on    | [Fine Tuning](./fine-tuning.md), [Deep Learning Fundamentals](../prerequisites/deep-learning-fundamentals.md)   |
-| Leads to     | Lifelong AI agents, [Ai Agents](./ai-agents.md), Self-improving AI |
+| Leads to     | Lifelong AI agents, [Ai Agents](../agents/ai-agents.md), Self-improving AI |
 | Compare with | [Rag](./rag.md) (retrieval-based updates), Full retraining                 |
 | Cross-domain | Cognitive science (human memory), Neuroscience                     |
 
 ---
+
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 📄 Paper | [Scialom et al. "Fine-Tuned Language Models are Continual Learners" (2022)](https://arxiv.org/abs/2205.12393) | Continual learning in the LLM context |
+| 📘 Book | "Designing Machine Learning Systems" by Chip Huyen (2022), Ch 9 | Data distribution shifts and continuous adaptation |
+| 🔧 Hands-on | [Avalanche Library](https://avalanche.continualai.org/) | Open-source continual learning framework |
 
 ## ★ Sources
 

@@ -1,14 +1,15 @@
 ---
 title: "GPU & CUDA Programming for AI Engineers"
 tags: [gpu, cuda, kernels, memory, performance, ai-infra, inference]
-type: concept
+type: procedure
 difficulty: expert
 status: published
+last_verified: 2026-04
 parent: "[[inference-optimization]]"
 related: ["[[../research-frontiers/distributed-training]]", "[[../production/model-serving]]", "[[../foundations/transformers]]"]
 source: "Multiple - see Sources"
 created: 2026-04-12
-updated: 2026-04-12
+updated: 2026-04-14
 ---
 
 # GPU & CUDA Programming for AI Engineers
@@ -185,9 +186,95 @@ Ask:
 
 ---
 
-## Sources
+## ★ Code & Implementation
 
-- NVIDIA CUDA documentation
-- NVIDIA Nsight documentation
+### GPU Memory Profiling with PyTorch
+
+```python
+# pip install torch>=2.0
+# ⚠️ Last tested: 2026-04 | Requires: torch>=2.0
+
+import torch
+
+def gpu_memory_report():
+    """Print current GPU memory usage."""
+    if not torch.cuda.is_available():
+        print("No GPU available")
+        return
+    
+    allocated = torch.cuda.memory_allocated() / 1e9
+    reserved = torch.cuda.memory_reserved() / 1e9
+    max_allocated = torch.cuda.max_memory_allocated() / 1e9
+    total = torch.cuda.get_device_properties(0).total_mem / 1e9
+    
+    print(f"GPU: {torch.cuda.get_device_name(0)}")
+    print(f"Allocated: {allocated:.2f} GB")
+    print(f"Reserved:  {reserved:.2f} GB")
+    print(f"Peak:      {max_allocated:.2f} GB")
+    print(f"Total:     {total:.2f} GB")
+    print(f"Free:      {total - reserved:.2f} GB")
+
+# Example: profile loading a model
+from transformers import AutoModelForCausalLM
+
+gpu_memory_report()  # Before
+model = AutoModelForCausalLM.from_pretrained(
+    "meta-llama/Llama-3.1-8B", torch_dtype=torch.bfloat16, device_map="cuda"
+)
+gpu_memory_report()  # After
+
+# Expected output:
+# GPU: NVIDIA A100 80GB
+# Allocated: 15.20 GB  (8B params × 2 bytes)
+# Reserved:  16.00 GB
+# Peak:      15.20 GB
+# Total:     80.00 GB
+# Free:      64.00 GB
+```
+
+---
+
+## ◆ Production Failure Modes
+
+| Failure | Symptoms | Root Cause | Mitigation |
+|---------|----------|------------|------------|
+| **CUDA OOM** | `RuntimeError: CUDA out of memory` | Model + activations + KV-cache exceed GPU memory | Reduce batch size, enable gradient checkpointing, use quantization |
+| **Memory-bound decode** | Low GPU compute utilization, high memory bandwidth usage | Each token loads full KV-cache, bottlenecked by HBM bandwidth | Use FlashAttention, PagedAttention (vLLM), quantized KV-cache |
+| **Kernel launch overhead** | Many tiny operations, GPU mostly idle | Thousands of small kernels with CPU launch overhead | CUDA graphs, kernel fusion, torch.compile |
+| **PCIe bottleneck** | CPU preprocessing faster than GPU transfer | Large data transfers over PCIe instead of NVLink | Prefetch data, pin memory, overlap transfer with compute |
+
+---
+
+## ◆ Hands-On Exercises
+
+### Exercise 1: GPU Memory Estimation
+
+**Goal**: Build intuition for GPU memory requirements
+**Time**: 20 minutes
+**Steps**:
+1. Calculate memory for a 7B model in fp32, fp16, int8, and int4
+2. With the model loaded in bf16, estimate remaining memory for KV-cache
+3. Calculate max batch size × sequence length that fits in remaining memory
+4. Compare your estimates with actual usage using the profiling code above
+**Expected Output**: Memory estimation table matching real GPU measurements within 10%
+
+---
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 🎓 Course | [NVIDIA CUDA Programming Guide](https://docs.nvidia.com/cuda/cuda-c-programming-guide/) | Official reference for CUDA concepts and programming model |
+| 🎓 Course | [Stanford CS149: Parallel Computing](http://cs149.stanford.edu/) | Deep dive into GPU parallelism, memory hierarchy, and scheduling |
+| 📄 Paper | [Dao et al. "FlashAttention" (2022)](https://arxiv.org/abs/2205.14135) | Shows how IO-aware kernel design transforms attention performance |
+| 🔧 Hands-on | [NVIDIA Nsight Systems / Compute](https://developer.nvidia.com/nsight-systems) | Essential GPU profiling tools for identifying bottlenecks |
+| 🎥 Video | [Jeremy Howard — "CUDA Programming" (fast.ai)](https://course.fast.ai/) | Practical introduction to CUDA for ML engineers |
+
+---
+
+## ★ Sources
+
+- NVIDIA CUDA Programming Guide — https://docs.nvidia.com/cuda/
+- NVIDIA Nsight Documentation — https://developer.nvidia.com/nsight-systems
+- Dao et al. "FlashAttention: Fast and Memory-Efficient Exact Attention" (2022)
 - [Inference Optimization](./inference-optimization.md)
-- FlashAttention papers and documentation

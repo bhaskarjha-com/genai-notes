@@ -4,6 +4,7 @@ tags: [docker, kubernetes, containers, deployment, llmops, production]
 type: procedure
 difficulty: intermediate
 status: published
+last_verified: 2026-04
 parent: "[[llmops]]"
 related: ["[[model-serving]]", "[[monitoring-observability]]", "[[cicd-for-ml]]", "[[cost-optimization]]"]
 source: "Multiple - see Sources"
@@ -219,6 +220,16 @@ Do not adopt Kubernetes only because it feels "more production."
 | Cross-domain | DevOps, platform engineering, SRE |
 
 ---
+
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 🔧 Hands-on | [Docker Official Documentation](https://docs.docker.com/) | Container fundamentals for ML deployment |
+| 🔧 Hands-on | [Kubernetes for ML (Kubeflow)](https://www.kubeflow.org/docs/) | ML-specific Kubernetes orchestration |
+| 📘 Book | "Kubernetes in Action" by Luksa (2020) | Comprehensive K8s reference |
+| 🎥 Video | [TechWorld with Nana — "Docker + K8s"](https://www.youtube.com/@TechWorldwithNana) | Best beginner-friendly container tutorials |
 
 ## Sources
 

@@ -4,11 +4,12 @@ tags: [system-design, interviews, ai-architecture, mlops, evaluation]
 type: reference
 difficulty: advanced
 status: published
+last_verified: 2026-04
 parent: "[[evaluation-and-benchmarks]]"
 related: ["[[../production/ai-system-design]]", "[[../production/model-serving]]", "[[../production/monitoring-observability]]", "[[../tools-and-infra/distributed-systems-for-ai]]"]
 source: "Repo synthesis - see Sources"
 created: 2026-04-12
-updated: 2026-04-12
+updated: 2026-04-14
 ---
 
 # System Design for AI Interviews
@@ -163,8 +164,49 @@ flowchart LR
 
 ---
 
-## Sources
+## ◆ Production Failure Modes
+
+| Failure | Symptoms | Root Cause | Mitigation |
+|---------|----------|------------|------------|
+| **Over-engineering in design** | 30-minute answer covers infrastructure but misses requirements | Jumped to tools before clarifying the problem | Always start with 5 min of requirements, metrics, constraints |
+| **Missing evaluation story** | Interviewer asks "how do you know it works?" and candidate freezes | Forgot to plan evaluation as part of the design | Include eval from the start: offline metrics, online A/B, human review |
+| **No cost analysis** | "Just use GPT-4 for everything" | Didn't calculate cost at scale | Always estimate: requests/day × cost/request = monthly cost |
+| **Ignoring failure modes** | Design only covers happy path | No mention of latency spikes, model failures, or safety | Explicitly discuss: what breaks? how do you detect it? how do you recover? |
+
+---
+
+## ◆ Hands-On Exercises
+
+### Exercise 1: Practice System Design
+
+**Goal**: Design an AI system in 35 minutes (interview simulation)
+**Time**: 35 minutes
+**Steps**:
+1. Pick a prompt: "Design an AI-powered customer support system for an e-commerce company"
+2. Spend 5 min on requirements (scope, scale, latency, safety)
+3. Spend 15 min on architecture (retrieval, model, routing, tools)
+4. Spend 10 min on evaluation, monitoring, and cost
+5. Spend 5 min on scaling and failure modes
+**Expected Output**: Architecture diagram, component decisions with rationale, metrics plan
+
+---
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 📘 Book | "AI Engineering" by Chip Huyen (2025) | Covers AI system design end-to-end — the single best prep resource |
+| 📘 Book | "Designing Machine Learning Systems" by Chip Huyen (2022) | System design fundamentals — data, features, serving, monitoring |
+| 🎥 Video | [Alex Xu — "System Design Interview" Series](https://www.youtube.com/@ByteByteGo) | Best visual explanations of system design interview techniques |
+| 🔧 Hands-on | [AI System Design Practice Problems](https://www.educative.io/) | Structured practice with AI-specific system design prompts |
+| 📄 Paper | [Google "MLOps: Continuous delivery for ML"](https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning) | Production ML patterns frequently tested in interviews |
+
+---
+
+## ★ Sources
 
 - [AI System Design for GenAI Applications](../production/ai-system-design.md)
 - [Monitoring & Observability for GenAI Systems](../production/monitoring-observability.md)
 - [Distributed Systems Fundamentals for AI](../tools-and-infra/distributed-systems-for-ai.md)
+- Huyen, C. "AI Engineering" (2025)
+- Huyen, C. "Designing Machine Learning Systems" (2022)

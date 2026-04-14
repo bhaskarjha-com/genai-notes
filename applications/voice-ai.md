@@ -4,8 +4,9 @@ tags: [voice-ai, tts, stt, text-to-speech, speech-to-text, realtime-api, whisper
 type: concept
 difficulty: intermediate
 status: published
+last_verified: 2026-04
 parent: "[[../genai]]"
-related: ["[[../multimodal/multimodal-ai]]", "[[../techniques/ai-agents]]", "[[../techniques/agentic-protocols]]", "[[conversational-ai]]"]
+related: ["[[../multimodal/multimodal-ai]]", "[[../agents/ai-agents]]", "[[../agents/agentic-protocols]]", "[[conversational-ai]]"]
 source: "Multiple — see Sources"
 created: 2026-03-22
 updated: 2026-04-12
@@ -209,12 +210,21 @@ KEY METRICS:
 
 | Relationship | Topics                                                       |
 | ------------ | ------------------------------------------------------------ |
-| Builds on    | [Multimodal Ai](../multimodal/multimodal-ai.md), [Ai Agents](../techniques/ai-agents.md) |
+| Builds on    | [Multimodal Ai](../multimodal/multimodal-ai.md), [Ai Agents](../agents/ai-agents.md) |
 | Leads to     | Conversational AI, Accessibility, IoT/Edge AI                |
 | Compare with | Text-based chatbots, Screen-based UI                         |
 | Cross-domain | Signal processing, Linguistics, UX design                    |
 
 ---
+
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 🔧 Hands-on | [OpenAI Audio API](https://platform.openai.com/docs/guides/audio) | Production speech-to-text and text-to-speech |
+| 🔧 Hands-on | [ElevenLabs Documentation](https://elevenlabs.io/docs) | State-of-the-art voice synthesis |
+| 📄 Paper | [Radford et al. "Whisper" (2022)](https://arxiv.org/abs/2212.04356) | Robust speech recognition via large-scale supervision |
 
 ## ★ Sources
 

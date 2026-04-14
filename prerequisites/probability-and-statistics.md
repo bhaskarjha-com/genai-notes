@@ -4,6 +4,7 @@ tags: [probability, statistics, bayes, distributions, loss-functions, sampling, 
 type: concept
 difficulty: beginner
 status: published
+last_verified: 2026-04
 parent: "[[../genai]]"
 related: ["[[neural-networks]]", "[[deep-learning-fundamentals]]", "[[../llms/llms-overview]]"]
 source: "Multiple - see Sources"
@@ -171,9 +172,10 @@ TEMPERATURE SAMPLING:
 | **Top-K + Top-P**   | Apply both filters                                | Production default for most APIs  |
 
 ```python
+# ?? Last tested: 2026-04
 # OpenAI API example — these ARE sampling strategies
 response = client.chat.completions.create(
-    model="gpt-5.4",
+    model="gpt-4o",
     messages=[{"role": "user", "content": "Write a poem"}],
     temperature=0.7,    # Creativity level
     top_p=0.9,          # Nucleus sampling (consider top 90% probability mass)
@@ -238,6 +240,15 @@ KEY DISTRIBUTIONS:
 | Cross-domain | Information theory (entropy), Bayesian statistics, Signal processing           |
 
 ---
+
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 📘 Book | "All of Statistics" by Wasserman (2004) | Concise treatment of statistics for ML |
+| 🎥 Video | [StatQuest with Josh Starmer](https://www.youtube.com/@statquest) | Best visual explanations of statistical concepts |
+| 🎓 Course | [MIT 6.041: Intro to Probability](https://ocw.mit.edu/courses/6-041-probabilistic-systems-analysis-and-applied-probability-fall-2010/) | Rigorous probability foundations |
 
 ## ★ Sources
 

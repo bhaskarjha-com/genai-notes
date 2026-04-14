@@ -4,8 +4,9 @@ tags: [evaluation, benchmarks, mmlu, humaneval, ragas, testing, genai]
 type: reference
 difficulty: intermediate
 status: published
+last_verified: 2026-04
 parent: "[[../genai]]"
-related: ["[[../llms/llms-overview]]", "[[../techniques/rag]]", "[[../techniques/agent-evaluation]]", "[[../llms/hallucination-detection]]", "[[llm-evaluation-deep-dive]]", "[[system-design-for-ai-interviews]]"]
+related: ["[[../llms/llms-overview]]", "[[../techniques/rag]]", "[[../agents/agent-evaluation]]", "[[../llms/hallucination-detection]]", "[[llm-evaluation-deep-dive]]", "[[system-design-for-ai-interviews]]"]
 source: "Multiple benchmarks and frameworks - see Sources"
 created: 2026-03-18
 updated: 2026-04-12
@@ -164,6 +165,7 @@ RAG Evaluation = Separate what went wrong WHERE
 ## ◆ Code & Implementation
 
 ```python
+# ?? Last tested: 2026-04
 # ═══ RAGAS: Evaluate a RAG Pipeline ═══
 from ragas import evaluate
 from ragas.metrics import faithfulness, answer_relevancy, context_precision
@@ -247,6 +249,15 @@ BENCHMARK SATURATION WARNING:
 | Cross-domain | Psychometrics (test design), Statistics (inter-rater reliability) |
 
 ---
+
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 4 | Best treatment of AI evaluation strategy |
+| 🔧 Hands-on | [Eleuther AI LM Eval Harness](https://github.com/EleutherAI/lm-evaluation-harness) | Standard LLM benchmark suite |
+| 🔧 Hands-on | [LMSYS Chatbot Arena](https://chat.lmsys.org/) | Human evaluation via head-to-head comparisons |
 
 ## ★ Sources
 

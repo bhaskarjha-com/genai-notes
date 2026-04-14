@@ -1,14 +1,15 @@
 ---
 title: "Cost Optimization for GenAI Systems"
 tags: [cost, optimization, token-cost, routing, caching, llmops, production]
-type: reference
+type: procedure
 difficulty: advanced
 status: published
+last_verified: 2026-04
 parent: "[[llmops]]"
 related: ["[[model-serving]]", "[[monitoring-observability]]", "[[docker-and-kubernetes]]", "[[../inference/inference-optimization]]"]
 source: "Multiple - see Sources"
 created: 2026-04-12
-updated: 2026-04-12
+updated: 2026-04-14
 ---
 
 # Cost Optimization for GenAI Systems
@@ -174,8 +175,96 @@ Self-hosting is not automatically cheaper. It becomes attractive only when workl
 
 ---
 
-## Sources
+## ◆ Code & Implementation
+
+### Token Cost Calculator
+
+```python
+# No external dependencies required
+# ⚠️ Last tested: 2026-04
+
+# Pricing as of April 2026 (per 1M tokens)
+PRICING = {
+    "gpt-4o":       {"input": 2.50, "output": 10.00},
+    "gpt-4o-mini":  {"input": 0.15, "output": 0.60},
+    "claude-sonnet": {"input": 3.00, "output": 15.00},
+    "claude-haiku":  {"input": 0.25, "output": 1.25},
+    "gemini-flash":  {"input": 0.075, "output": 0.30},
+}
+
+def estimate_cost(
+    model: str,
+    input_tokens: int,
+    output_tokens: int,
+    requests_per_day: int,
+) -> dict:
+    """Estimate daily and monthly API costs for a given workload."""
+    p = PRICING[model]
+    cost_per_req = (input_tokens * p["input"] + output_tokens * p["output"]) / 1_000_000
+    daily = cost_per_req * requests_per_day
+    monthly = daily * 30
+    return {
+        "model": model,
+        "cost_per_request": f"${cost_per_req:.5f}",
+        "daily_cost": f"${daily:.2f}",
+        "monthly_cost": f"${monthly:.2f}",
+    }
+
+# Compare models for a typical RAG chatbot workload
+for model in PRICING:
+    result = estimate_cost(model, input_tokens=2000, output_tokens=500, requests_per_day=10_000)
+    print(f"{result['model']:>15}: {result['cost_per_request']}/req | {result['daily_cost']}/day | {result['monthly_cost']}/mo")
+
+# Expected output:
+#         gpt-4o: $0.01000/req | $100.00/day | $3000.00/mo
+#     gpt-4o-mini: $0.00060/req | $6.00/day | $180.00/mo
+#   claude-sonnet: $0.01350/req | $135.00/day | $4050.00/mo
+#    claude-haiku: $0.00113/req | $11.25/day | $337.50/mo
+#    gemini-flash: $0.00030/req | $3.00/day | $90.00/mo
+```
+
+---
+
+## ◆ Production Failure Modes
+
+| Failure | Symptoms | Root Cause | Mitigation |
+|---------|----------|------------|------------|
+| **Silent cost explosion** | Monthly bill 5× higher than expected | Context window bloat, no token monitoring | Per-request cost tracking, budget alerts at 80% |
+| **Cache poisoning** | Users get wrong cached answers | Semantic cache too aggressive, poor invalidation | Tighter similarity threshold, cache TTL, user-specific cache keys |
+| **Routing misclassification** | Cheap model fails on complex queries, retries hit expensive model | Router not trained on edge cases | Confidence threshold on router, fallback cost tracking |
+| **Stale cost assumptions** | Optimization based on old pricing, provider changed rates | API pricing changes quarterly | Automate pricing checks, use provider cost APIs |
+
+---
+
+## ◆ Hands-On Exercises
+
+### Exercise 1: Cost Audit
+
+**Goal**: Calculate the true cost of your AI pipeline per request
+**Time**: 30 minutes
+**Steps**:
+1. Instrument token counting on input and output for 100 requests
+2. Calculate per-request cost using the pricing calculator above
+3. Identify the top 3 most expensive request types
+4. Estimate savings from routing 50% of simple requests to a cheaper model
+**Expected Output**: Cost breakdown table with optimization savings estimate
+
+---
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 9 (AI Engineering Architecture) | Covers cost-aware system design and model routing patterns |
+| 🔧 Hands-on | [OpenAI Usage Dashboard](https://platform.openai.com/usage) | Real-time cost tracking for API users |
+| 🎥 Video | [FinOps for AI/ML](https://www.finops.org/wg/ai-ml/) | FinOps Foundation's framework for managing AI infrastructure costs |
+| 📄 Paper | [Ding et al. "RouteLLM" (2024)](https://arxiv.org/abs/2406.18665) | Academic approach to cost-aware model routing |
+
+---
+
+## ★ Sources
 
 - [Inference Optimization](../inference/inference-optimization.md)
 - [LLMOps & Production Deployment](./llmops.md)
 - Cloud cost and workload management guidance from major providers
+- OpenAI, Anthropic, Google AI pricing pages (April 2026)

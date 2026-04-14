@@ -39,10 +39,10 @@ Complete [Part 1 of the Learning Path](../../LEARNING_PATH.md#part-1-universal-f
 
 | # | Topic | Note | Priority | Est. Time |
 |---|---|---|:---:|:---:|
-| 1 | AI Agents | [ai-agents](../../techniques/ai-agents.md) | Must | 4h |
-| 2 | Multi-agent architectures | [multi-agent-architectures](../../techniques/multi-agent-architectures.md) | Must | 3h |
-| 3 | Agent evaluation | [agent-evaluation](../../techniques/agent-evaluation.md) | Must | 3h |
-| 4 | Agentic protocols | [agentic-protocols](../../techniques/agentic-protocols.md) | Must | 4h |
+| 1 | AI Agents | [ai-agents](../../agents/ai-agents.md) | Must | 4h |
+| 2 | Multi-agent architectures | [multi-agent-architectures](../../agents/multi-agent-architectures.md) | Must | 3h |
+| 3 | Agent evaluation | [agent-evaluation](../../agents/agent-evaluation.md) | Must | 3h |
+| 4 | Agentic protocols | [agentic-protocols](../../agents/agentic-protocols.md) | Must | 4h |
 | 5 | Function calling | [function-calling](../../techniques/function-calling-and-structured-output.md) | Must | 3h |
 | 6 | AI system design | [ai-system-design](../../production/ai-system-design.md) | Must | 3h |
 | 7 | LLMOps | [llmops](../../production/llmops.md) | Must | 3h |
@@ -100,7 +100,7 @@ Complete [Part 1 of the Learning Path](../../LEARNING_PATH.md#part-1-universal-f
 
 ## Interview Preparation
 
-Review [ai-agents](../../techniques/ai-agents.md#interview-angles), [multi-agent-architectures](../../techniques/multi-agent-architectures.md#interview-angles), [agent-evaluation](../../techniques/agent-evaluation.md#interview-angles), and [ai-system-design](../../production/ai-system-design.md#interview-angles).
+Review [ai-agents](../../agents/ai-agents.md#interview-angles), [multi-agent-architectures](../../agents/multi-agent-architectures.md#interview-angles), [agent-evaluation](../../agents/agent-evaluation.md#interview-angles), and [ai-system-design](../../production/ai-system-design.md#interview-angles).
 
 Common questions:
 

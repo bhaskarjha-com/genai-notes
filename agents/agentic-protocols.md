@@ -4,8 +4,9 @@ tags: [mcp, a2a, adk, agent-protocols, langraph, crewai, autogen, agentic-infra,
 type: concept
 difficulty: intermediate
 status: published
+last_verified: 2026-04
 parent: "[[../genai]]"
-related: ["[[ai-agents]]", "[[function-calling-and-structured-output]]", "[[../tools-and-infra/tools-overview]]"]
+related: ["[[ai-agents]]", "[[../techniques/function-calling-and-structured-output]]", "[[../tools-and-infra/tools-overview]]"]
 source: "Multiple — see Sources"
 created: 2026-03-22
 updated: 2026-04-11
@@ -35,7 +36,7 @@ updated: 2026-04-11
 
 ### Scope
 
-Covers protocols and frameworks. For agent architecture/planning patterns, see [Ai Agents](./ai-agents.md). For function calling API patterns, see [Function Calling And Structured Output](./function-calling-and-structured-output.md).
+Covers protocols and frameworks. For agent architecture/planning patterns, see [Ai Agents](./ai-agents.md). For function calling API patterns, see [Function Calling And Structured Output](../techniques/function-calling-and-structured-output.md).
 
 ### Significance
 
@@ -239,6 +240,7 @@ AGENT HIERARCHY IN ADK:
 ## ◆ Code Example: MCP Server
 
 ```python
+# ?? Last tested: 2026-04
 # ═══ Building a simple MCP server ═══
 from mcp.server import Server
 from mcp.types import Tool, TextContent
@@ -318,12 +320,22 @@ MCP PRIMITIVES:
 
 | Relationship | Topics                                                    |
 | ------------ | --------------------------------------------------------- |
-| Builds on    | [Function Calling And Structured Output](./function-calling-and-structured-output.md), [Ai Agents](./ai-agents.md) |
+| Builds on    | [Function Calling And Structured Output](../techniques/function-calling-and-structured-output.md), [Ai Agents](./ai-agents.md) |
 | Leads to     | Production multi-agent systems, Enterprise AI             |
 | Compare with | REST APIs (static), GraphQL (query), gRPC (binary)        |
 | Cross-domain | Microservices architecture, API gateways, Service mesh    |
 
 ---
+
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 🔧 Hands-on | [MCP Specification](https://modelcontextprotocol.io/) | The standard protocol for agent-tool communication |
+| 🔧 Hands-on | [Google A2A Protocol](https://google.github.io/A2A/) | Agent-to-agent communication protocol |
+| 🔧 Hands-on | [Google ADK Documentation](https://google.github.io/adk-docs/) | Google's Agent Development Kit |
+| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 7 | Agent protocols and inter-agent communication patterns |
 
 ## ★ Sources
 

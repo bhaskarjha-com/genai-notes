@@ -47,9 +47,9 @@ Complete [Part 1 of the Learning Path](../LEARNING_PATH.md#part-1-universal-foun
 
 | Role | High-Leverage Notes | Why |
 |---|---|---|
-| AI Safety / Red Team Engineer | [hallucination-detection](../llms/hallucination-detection.md), [agent-evaluation](../techniques/agent-evaluation.md), [ai-agents](../techniques/ai-agents.md) | attack paths and behavioral failure modes matter most |
+| AI Safety / Red Team Engineer | [hallucination-detection](../llms/hallucination-detection.md), [agent-evaluation](../agents/agent-evaluation.md), [ai-agents](../agents/ai-agents.md) | attack paths and behavioral failure modes matter most |
 | AI Ethics & Governance Lead | [ai-product-management-fundamentals](../applications/ai-product-management-fundamentals.md), [ai-system-design](../production/ai-system-design.md), [system-design-for-ai-interviews](../evaluation/system-design-for-ai-interviews.md) | governance must map to real delivery decisions |
-| AI Data Governance Manager | [data-versioning-for-ml](../tools-and-infra/data-versioning-for-ml.md), [ml-experiment-tracking](../tools-and-infra/ml-experiment-tracking.md), [cloud-ml-services](../tools-and-infra/cloud-ml-services.md) | lineage, retention, and control surfaces |
+| AI Data Governance Manager | [data-versioning-for-ml](../tools-and-infra/ml-experiment-and-data-management.md), [cloud-ml-services](../tools-and-infra/cloud-ml-services.md) | lineage, retention, and control surfaces |
 
 ### Phase 4: External Skills
 

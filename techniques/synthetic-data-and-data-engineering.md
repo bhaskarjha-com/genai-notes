@@ -4,6 +4,7 @@ tags: [synthetic-data, data-engineering, self-instruct, data-curation, training-
 type: concept
 difficulty: intermediate
 status: published
+last_verified: 2026-04
 parent: "[[../genai]]"
 related: ["[[fine-tuning]]", "[[distillation-and-compression]]", "[[../llms/llms-overview]]"]
 source: "Multiple — see Sources"
@@ -267,6 +268,15 @@ QUALITY > QUANTITY:
 | Cross-domain | Data engineering, ETL pipelines, Data quality    |
 
 ---
+
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 📄 Paper | [Peng et al. "Instruction Tuning with GPT-4" (2023)](https://arxiv.org/abs/2304.03277) | Foundational approach to synthetic instruction data |
+| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 4 | Covers synthetic data for evaluation and training |
+| 🔧 Hands-on | [Argilla Documentation](https://docs.argilla.io/) | Platform for data labeling and synthetic data curation |
 
 ## ★ Sources
 

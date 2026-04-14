@@ -4,6 +4,7 @@ tags: [llm-comparison, gpt-5, gemini-3, claude-4, llama-4, model-selection, open
 type: reference
 difficulty: intermediate
 status: published
+last_verified: 2026-04
 parent: "[[../genai]]"
 related: ["[[llms-overview]]", "[[reasoning-models]]", "[[../foundations/modern-architectures]]"]
 source: "Web research — March 2026"
@@ -188,6 +189,15 @@ START: What's your use case?
 | Cross-domain | procurement, architecture, platform strategy |
 
 ---
+
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 🔧 Hands-on | [LMSYS Chatbot Arena](https://chat.lmsys.org/) | Live human-evaluated model rankings |
+| 🔧 Hands-on | [Artificial Analysis](https://artificialanalysis.ai/) | Speed, price, and quality comparisons across LLM providers |
+| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 2 | Model selection framework for practitioners |
 
 ## ★ Sources
 

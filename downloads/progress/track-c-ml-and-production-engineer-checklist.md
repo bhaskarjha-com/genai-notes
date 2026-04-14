@@ -28,7 +28,7 @@
 - [ ] [Function Calling, Structured Output & Tool Use](../../techniques/function-calling-and-structured-output.md) - 3h
 - [ ] [Retrieval-Augmented Generation (RAG)](../../techniques/rag.md) - 4h
 - [ ] [Fine-Tuning LLMs](../../techniques/fine-tuning.md) - 4h
-- [ ] [AI Agents](../../techniques/ai-agents.md) - 4h
+- [ ] [AI Agents](../../agents/ai-agents.md) - 4h
 - [ ] [LLM Evaluation & Benchmarks](../../evaluation/evaluation-and-benchmarks.md) - 2h
 
 ## Track C - ML and Production Engineer
@@ -38,8 +38,8 @@
 - [ ] [Monitoring & Observability for GenAI Systems](../../production/monitoring-observability.md) - 3h
 - [ ] [CI/CD for ML and LLM Systems](../../production/cicd-for-ml.md) - 3h
 - [ ] [Cloud ML Services & Managed AI Platforms](../../tools-and-infra/cloud-ml-services.md) - 3h
-- [ ] [ML Experiment Tracking](../../tools-and-infra/ml-experiment-tracking.md) - 2h
-- [ ] [Data Versioning for ML](../../tools-and-infra/data-versioning-for-ml.md) - 2h
+- [ ] [ML Experiment & Data Management](../../tools-and-infra/ml-experiment-and-data-management.md) - 2h
+- [ ] [ML Experiment & Data Management](../../tools-and-infra/ml-experiment-and-data-management.md) - 2h
 - [ ] [Classical ML for GenAI Builders](../../production/classical-ml-for-genai.md) - 2h
 - [ ] [Latency & Throughput Engineering for AI Systems](../../production/latency-and-throughput-engineering.md) - 3h
 - [ ] [Distributed Systems Fundamentals for AI](../../tools-and-infra/distributed-systems-for-ai.md) - 3h

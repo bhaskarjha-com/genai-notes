@@ -40,7 +40,7 @@ Complete [Part 1 of the Learning Path](../../LEARNING_PATH.md#part-1-universal-f
 | # | Topic | Note | Priority | Est. Time |
 |---|---|---|:---:|:---:|
 | 1 | RAG | [rag](../../techniques/rag.md) | Must | 4h |
-| 2 | AI Agents | [ai-agents](../../techniques/ai-agents.md) | Must | 4h |
+| 2 | AI Agents | [ai-agents](../../agents/ai-agents.md) | Must | 4h |
 | 3 | LLMOps | [llmops](../../production/llmops.md) | Must | 3h |
 | 4 | Evaluation | [evaluation](../../evaluation/evaluation-and-benchmarks.md) | Must | 2h |
 | 5 | Advanced fine-tuning | [advanced-fine-tuning](../../techniques/advanced-fine-tuning.md) | Must | 4h |
@@ -50,7 +50,7 @@ Complete [Part 1 of the Learning Path](../../LEARNING_PATH.md#part-1-universal-f
 | # | Topic | Note | Priority | Est. Time |
 |---|---|---|:---:|:---:|
 | 1 | Graph RAG | [graph-rag](../../techniques/graph-rag.md) | Good | 3h |
-| 2 | Agentic protocols | [agentic-protocols](../../techniques/agentic-protocols.md) | Good | 4h |
+| 2 | Agentic protocols | [agentic-protocols](../../agents/agentic-protocols.md) | Good | 4h |
 | 3 | Hallucination detection | [hallucination-detection](../../llms/hallucination-detection.md) | Good | 3h |
 | 4 | AI system design | [ai-system-design](../../production/ai-system-design.md) | Good | 3h |
 
@@ -97,7 +97,7 @@ Complete [Part 1 of the Learning Path](../../LEARNING_PATH.md#part-1-universal-f
 
 ## Interview Preparation
 
-Review [rag](../../techniques/rag.md#interview-angles), [advanced-fine-tuning](../../techniques/advanced-fine-tuning.md#interview-angles), [ai-agents](../../techniques/ai-agents.md#interview-angles), and [evaluation](../../evaluation/evaluation-and-benchmarks.md#interview-angles).
+Review [rag](../../techniques/rag.md#interview-angles), [advanced-fine-tuning](../../techniques/advanced-fine-tuning.md#interview-angles), [ai-agents](../../agents/ai-agents.md#interview-angles), and [evaluation](../../evaluation/evaluation-and-benchmarks.md#interview-angles).
 
 Common questions:
 

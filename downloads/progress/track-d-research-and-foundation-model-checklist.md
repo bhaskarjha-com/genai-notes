@@ -28,14 +28,14 @@
 - [ ] [Function Calling, Structured Output & Tool Use](../../techniques/function-calling-and-structured-output.md) - 3h
 - [ ] [Retrieval-Augmented Generation (RAG)](../../techniques/rag.md) - 4h
 - [ ] [Fine-Tuning LLMs](../../techniques/fine-tuning.md) - 4h
-- [ ] [AI Agents](../../techniques/ai-agents.md) - 4h
+- [ ] [AI Agents](../../agents/ai-agents.md) - 4h
 - [ ] [LLM Evaluation & Benchmarks](../../evaluation/evaluation-and-benchmarks.md) - 2h
 
 ## Track D - Research and Foundation Model
 
 - [ ] [Scaling Laws & Pre-training](../../foundations/scaling-laws-and-pretraining.md) - 4h
 - [ ] [Distributed Training for Large Models](../../research-frontiers/distributed-training.md) - 4h
-- [ ] [Training Infrastructure for AI Systems](../../research-frontiers/training-infrastructure.md) - 3h
+- [ ] [Distributed Training & Training Infrastructure](../../research-frontiers/distributed-training.md) - 3h
 - [ ] [Advanced Fine-Tuning for LLM Adaptation](../../techniques/advanced-fine-tuning.md) - 4h
 - [ ] [Reinforcement Learning for LLM Alignment](../../techniques/rl-alignment.md) - 4h
 - [ ] [Knowledge Distillation & Model Compression](../../techniques/distillation-and-compression.md) - 3h

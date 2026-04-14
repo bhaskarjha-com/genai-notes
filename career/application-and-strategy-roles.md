@@ -61,9 +61,9 @@ Complete [Part 1 of the Learning Path](../LEARNING_PATH.md#part-1-universal-foun
 | AI Consultant / Strategist | [llm-evaluation-deep-dive](../evaluation/llm-evaluation-deep-dive.md), [cost-optimization](../production/cost-optimization.md), [ai-regulation](../ethics-and-safety/ai-regulation.md) | business framing plus safe delivery |
 | AI Product Manager | [llm-evaluation-deep-dive](../evaluation/llm-evaluation-deep-dive.md), [hallucination-detection](../llms/hallucination-detection.md), [ai-regulation](../ethics-and-safety/ai-regulation.md) | trust, rollout quality, and governance |
 | AI Technical Writer / DevRel | [llms-overview](../llms/llms-overview.md), [code-generation](../applications/code-generation.md), [genai.md](../genai.md) | teach concepts accurately and accessibly |
-| Prompt Engineer | [agent-evaluation](../techniques/agent-evaluation.md), [hallucination-detection](../llms/hallucination-detection.md), [llm-evaluation-deep-dive](../evaluation/llm-evaluation-deep-dive.md) | prompt work without evaluation stays shallow |
+| Prompt Engineer | [agent-evaluation](../agents/agent-evaluation.md), [hallucination-detection](../llms/hallucination-detection.md), [llm-evaluation-deep-dive](../evaluation/llm-evaluation-deep-dive.md) | prompt work without evaluation stays shallow |
 | AI Solutions Architect | [distributed-systems-for-ai](../tools-and-infra/distributed-systems-for-ai.md), [model-serving](../production/model-serving.md), [monitoring-observability](../production/monitoring-observability.md) | architecture trade-offs dominate the role |
-| AI Developer Tools Engineer | [multi-agent-architectures](../techniques/multi-agent-architectures.md), [agentic-protocols](../techniques/agentic-protocols.md), [tools-overview](../tools-and-infra/tools-overview.md) | platform primitives and developer ergonomics |
+| AI Developer Tools Engineer | [multi-agent-architectures](../agents/multi-agent-architectures.md), [agentic-protocols](../agents/agentic-protocols.md), [tools-overview](../tools-and-infra/tools-overview.md) | platform primitives and developer ergonomics |
 
 ### Phase 4: External Skills
 

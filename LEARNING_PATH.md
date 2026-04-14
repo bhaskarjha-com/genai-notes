@@ -52,7 +52,7 @@ Every GenAI learner starts here, regardless of the target role.
 | 16 | Function Calling and Structured Output | [function-calling](techniques/function-calling-and-structured-output.md) | 3h | intermediate |
 | 17 | RAG | [rag](techniques/rag.md) | 4h | intermediate |
 | 18 | Fine-Tuning | [fine-tuning](techniques/fine-tuning.md) | 4h | intermediate |
-| 19 | AI Agents | [ai-agents](techniques/ai-agents.md) | 4h | intermediate |
+| 19 | AI Agents | [ai-agents](agents/ai-agents.md) | 4h | intermediate |
 | 20 | Evaluation and Benchmarks | [evaluation](evaluation/evaluation-and-benchmarks.md) | 2h | intermediate |
 
 After Part 1, you have the foundation for any GenAI role.
@@ -70,8 +70,8 @@ Target roles: Full-Stack AI Engineer, AI Integration Engineer, AI Consultant, Pr
 | A1 | [api-design-for-ai](applications/api-design-for-ai.md) | 2h |
 | A2 | [graph-rag](techniques/graph-rag.md) | 3h |
 | A3 | [vector-databases](tools-and-infra/vector-databases.md) | 3h |
-| A4 | [multi-agent-architectures](techniques/multi-agent-architectures.md) | 3h |
-| A5 | [agentic-protocols](techniques/agentic-protocols.md) | 4h |
+| A4 | [multi-agent-architectures](agents/multi-agent-architectures.md) | 3h |
+| A5 | [agentic-protocols](agents/agentic-protocols.md) | 4h |
 | A6 | [conversational-ai](applications/conversational-ai.md) | 3h |
 | A7 | [voice-ai](applications/voice-ai.md) | 2h |
 | A8 | [code-generation](applications/code-generation.md) | 3h |
@@ -88,9 +88,9 @@ Target roles: GenAI Engineer, LLM Engineer, Agentic AI Engineer, RAG Engineer, A
 | # | Note | Est. Time |
 |---|------|:---------:|
 | B1 | [graph-rag](techniques/graph-rag.md) | 3h |
-| B2 | [multi-agent-architectures](techniques/multi-agent-architectures.md) | 3h |
-| B3 | [agent-evaluation](techniques/agent-evaluation.md) | 3h |
-| B4 | [agentic-protocols](techniques/agentic-protocols.md) | 4h |
+| B2 | [multi-agent-architectures](agents/multi-agent-architectures.md) | 3h |
+| B3 | [agent-evaluation](agents/agent-evaluation.md) | 3h |
+| B4 | [agentic-protocols](agents/agentic-protocols.md) | 4h |
 | B5 | [advanced-fine-tuning](techniques/advanced-fine-tuning.md) | 4h |
 | B6 | [rl-alignment](techniques/rl-alignment.md) | 4h |
 | B7 | [distillation-and-compression](techniques/distillation-and-compression.md) | 3h |
@@ -116,8 +116,8 @@ Target roles: ML Engineer, MLOps or LLMOps Engineer, AI Data Engineer, Data Scie
 | C3 | [monitoring-observability](production/monitoring-observability.md) | 3h |
 | C4 | [cicd-for-ml](production/cicd-for-ml.md) | 3h |
 | C5 | [cloud-ml-services](tools-and-infra/cloud-ml-services.md) | 3h |
-| C6 | [ml-experiment-tracking](tools-and-infra/ml-experiment-tracking.md) | 2h |
-| C7 | [data-versioning-for-ml](tools-and-infra/data-versioning-for-ml.md) | 2h |
+| C6 | [ml-experiment-tracking](tools-and-infra/ml-experiment-and-data-management.md) | 2h |
+| C7 | [data-versioning-for-ml](tools-and-infra/ml-experiment-and-data-management.md) | 2h |
 | C8 | [classical-ml-for-genai](production/classical-ml-for-genai.md) | 2h |
 | C9 | [latency-and-throughput-engineering](production/latency-and-throughput-engineering.md) | 3h |
 | C10 | [distributed-systems-for-ai](tools-and-infra/distributed-systems-for-ai.md) | 3h |
@@ -135,7 +135,7 @@ Target roles: Foundation Model Engineer, Research Scientist, Applied Scientist, 
 |---|------|:---------:|
 | D1 | [scaling-laws-and-pretraining](foundations/scaling-laws-and-pretraining.md) | 4h |
 | D2 | [distributed-training](research-frontiers/distributed-training.md) | 4h |
-| D3 | [training-infrastructure](research-frontiers/training-infrastructure.md) | 3h |
+| D3 | [training-infrastructure](research-frontiers/distributed-training.md) | 3h |
 | D4 | [advanced-fine-tuning](techniques/advanced-fine-tuning.md) | 4h |
 | D5 | [rl-alignment](techniques/rl-alignment.md) | 4h |
 | D6 | [distillation-and-compression](techniques/distillation-and-compression.md) | 3h |
@@ -181,7 +181,7 @@ Use these after Part 1 and your main track when you want deeper specialization, 
 |---|------|:---------:|---|
 | S3 | [multimodal-ai](multimodal/multimodal-ai.md) | 3h | builders moving beyond text-only systems |
 | S4 | [computer-vision-fundamentals](multimodal/computer-vision-fundamentals.md) | 3h | multimodal builders, CV-adjacent roles, document AI |
-| S5 | [diffusion-models](image-generation/diffusion-models.md) | 4h | image generation, multimodal research, creative AI systems |
+| S5 | [diffusion-models](multimodal/diffusion-models.md) | 4h | image generation, multimodal research, creative AI systems |
 
 ### Adaptive Systems and Knowledge Updates
 

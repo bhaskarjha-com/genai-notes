@@ -4,6 +4,7 @@ tags: [distributed-inference, serving, scaling, kv-cache, architecture, inferenc
 type: reference
 difficulty: expert
 status: published
+last_verified: 2026-04
 parent: "[[inference-optimization]]"
 related: ["[[gpu-cuda-programming]]", "[[../production/model-serving]]", "[[../tools-and-infra/distributed-systems-for-ai]]", "[[../production/latency-and-throughput-engineering]]"]
 source: "Multiple - see Sources"
@@ -160,8 +161,78 @@ That introduces trade-offs in cache reuse, model synchronization, and observabil
 
 ---
 
-## Sources
+## ★ Code & Implementation
 
-- serving-engine documentation such as vLLM and TGI
+### vLLM Distributed Serving
+
+```python
+# pip install vllm>=0.6
+# ⚠️ Last tested: 2026-04 | Requires: vllm>=0.6
+
+# Launch vLLM with tensor parallelism across 4 GPUs
+# Command line:
+# python -m vllm.entrypoints.openai.api_server \
+#     --model meta-llama/Llama-3.1-70B-Instruct \
+#     --tensor-parallel-size 4 \
+#     --max-model-len 8192 \
+#     --gpu-memory-utilization 0.9 \
+#     --port 8000
+
+# Python client (OpenAI-compatible API)
+from openai import OpenAI
+
+client = OpenAI(base_url="http://localhost:8000/v1", api_key="unused")
+response = client.chat.completions.create(
+    model="meta-llama/Llama-3.1-70B-Instruct",
+    messages=[{"role": "user", "content": "Explain KV-cache in 2 sentences."}],
+    max_tokens=100,
+)
+print(response.choices[0].message.content)
+# Expected: Served across 4 GPUs with automatic tensor parallelism
+```
+
+---
+
+## ◆ Production Failure Modes
+
+| Failure | Symptoms | Root Cause | Mitigation |
+|---------|----------|------------|------------|
+| **KV-cache OOM** | Server rejects new requests, GPU memory exhausted | Too many concurrent long-context requests | Set max_model_len, implement request queuing, monitor cache utilization |
+| **Tail latency spike** | P99 latency 10× worse than P50 | One long request blocks batch, straggler GPU | Length-aware scheduling, separate long/short request queues |
+| **GPU fragmentation** | Low utilization despite high demand | Requests don't fill GPU batches efficiently | Dynamic batching (vLLM continuous batching), right-size GPU allocation |
+| **Cascade failure** | All replicas go down simultaneously | Shared dependency failure, no circuit breakers | Health checks, circuit breakers, graceful degradation |
+
+---
+
+## ◆ Hands-On Exercises
+
+### Exercise 1: Benchmark Serving Throughput
+
+**Goal**: Compare single-GPU vs multi-GPU serving performance
+**Time**: 45 minutes
+**Steps**:
+1. Deploy a 7B model on 1 GPU with vLLM, benchmark with 100 concurrent requests
+2. Deploy the same model on 2 GPUs with tensor parallelism, repeat benchmark
+3. Measure: throughput (tokens/sec), P50/P95/P99 latency, GPU utilization
+4. Analyze: when does adding GPUs help vs hurt?
+**Expected Output**: Throughput/latency comparison table, scaling efficiency analysis
+
+---
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 🔧 Hands-on | [vLLM Documentation](https://docs.vllm.ai/) | Best open-source LLM serving engine — PagedAttention, continuous batching |
+| 🔧 Hands-on | [TGI Documentation](https://huggingface.co/docs/text-generation-inference/) | HuggingFace’s production serving engine |
+| 📄 Paper | [Kwon et al. "PagedAttention" (vLLM, 2023)](https://arxiv.org/abs/2309.06180) | The paper that revolutionized KV-cache management for LLM serving |
+| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 8 | Covers serving architecture, batching, and scaling patterns |
+
+---
+
+## ★ Sources
+
+- vLLM documentation — https://docs.vllm.ai/
+- TGI documentation — https://huggingface.co/docs/text-generation-inference/
 - [Inference Optimization](./inference-optimization.md)
 - [Distributed Systems Fundamentals for AI](../tools-and-infra/distributed-systems-for-ai.md)

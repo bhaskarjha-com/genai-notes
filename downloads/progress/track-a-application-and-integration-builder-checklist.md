@@ -28,7 +28,7 @@
 - [ ] [Function Calling, Structured Output & Tool Use](../../techniques/function-calling-and-structured-output.md) - 3h
 - [ ] [Retrieval-Augmented Generation (RAG)](../../techniques/rag.md) - 4h
 - [ ] [Fine-Tuning LLMs](../../techniques/fine-tuning.md) - 4h
-- [ ] [AI Agents](../../techniques/ai-agents.md) - 4h
+- [ ] [AI Agents](../../agents/ai-agents.md) - 4h
 - [ ] [LLM Evaluation & Benchmarks](../../evaluation/evaluation-and-benchmarks.md) - 2h
 
 ## Track A - Application and Integration Builder
@@ -36,8 +36,8 @@
 - [ ] [API Design for AI Applications](../../applications/api-design-for-ai.md) - 2h
 - [ ] [Graph RAG & Advanced Retrieval](../../techniques/graph-rag.md) - 3h
 - [ ] [Vector Databases](../../tools-and-infra/vector-databases.md) - 3h
-- [ ] [Multi-Agent Architectures](../../techniques/multi-agent-architectures.md) - 3h
-- [ ] [Agentic Protocols & Frameworks](../../techniques/agentic-protocols.md) - 4h
+- [ ] [Multi-Agent Architectures](../../agents/multi-agent-architectures.md) - 3h
+- [ ] [Agentic Protocols & Frameworks](../../agents/agentic-protocols.md) - 4h
 - [ ] [Conversational AI & Dialogue Systems](../../applications/conversational-ai.md) - 3h
 - [ ] [Voice AI & Speech](../../applications/voice-ai.md) - 2h
 - [ ] [Code Generation & AI-Assisted Development](../../applications/code-generation.md) - 3h

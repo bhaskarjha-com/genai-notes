@@ -4,6 +4,7 @@ tags: [embeddings, vectors, representation, similarity, genai-foundations]
 type: concept
 difficulty: intermediate
 status: published
+last_verified: 2026-04
 parent: "[[../genai]]"
 related: ["[[transformers]]", "[[../techniques/rag]]", "[[../tools-and-infra/vector-databases]]"]
 source: "Multiple - see Sources"
@@ -126,6 +127,7 @@ EMBEDDING REPRESENTATION (dense, captures meaning):
 ### Similarity Measurement
 
 ```python
+# ?? Last tested: 2026-04
 import numpy as np
 
 def cosine_similarity(a, b):
@@ -152,6 +154,7 @@ cosine_similarity(embed_cat, embed_car)  # → 0.12 (very different)
 ## ◆ Code & Implementation
 
 ```python
+# ?? Last tested: 2026-04
 # ═══ OPENAI EMBEDDINGS ═══
 from openai import OpenAI
 client = OpenAI()
@@ -250,6 +253,16 @@ SIMILARITY THRESHOLDS (cosine, rough guide):
 | Cross-domain | Recommendation systems, Computer vision (image embeddings), Bioinformatics            |
 
 ---
+
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 📄 Paper | [Mikolov et al. "Word2Vec" (2013)](https://arxiv.org/abs/1301.3781) | Where it all started — skip-gram and CBOW |
+| 🎥 Video | [Jay Alammar — "The Illustrated Word2vec"](https://jalammar.github.io/illustrated-word2vec/) | Best visual explanation of word embeddings |
+| 🔧 Hands-on | [OpenAI Embeddings Guide](https://platform.openai.com/docs/guides/embeddings) | Practical guide to using production embeddings |
+| 📘 Book | "Speech and Language Processing" by Jurafsky & Martin, Ch 6 | Authoritative textbook treatment of vector semantics |
 
 ## ★ Sources
 

@@ -4,6 +4,7 @@ tags: [inference, quantization, speculative-decoding, kv-cache, serving, perform
 type: concept
 difficulty: advanced
 status: published
+last_verified: 2026-04
 parent: "[[../genai]]"
 related: ["[[../llms/llms-overview]]", "[[../tools-and-infra/tools-overview]]", "[[../foundations/transformers]]", "[[gpu-cuda-programming]]", "[[distributed-inference-and-serving-architecture]]", "[[../production/cost-optimization]]"]
 source: "Multiple papers and frameworks - see Sources"
@@ -264,6 +265,16 @@ LATENCY TARGETS (typical):
 | Cross-domain | Computer architecture (memory hierarchy), OS (paging), Compiler optimization |
 
 ---
+
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 📄 Paper | [Dao et al. "FlashAttention-2" (2023)](https://arxiv.org/abs/2307.08691) | 2× faster attention — essential for production serving |
+| 📄 Paper | [Leviathan et al. "Speculative Decoding" (2022)](https://arxiv.org/abs/2211.17192) | Accelerate decoding without quality loss |
+| 🔧 Hands-on | [vLLM Documentation](https://docs.vllm.ai/) | Production inference optimization in practice |
+| 📘 Book | "Efficient Deep Learning" by Menghani (2024) | Comprehensive treatment of inference optimization techniques |
 
 ## ★ Sources
 

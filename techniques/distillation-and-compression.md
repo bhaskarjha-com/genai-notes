@@ -4,6 +4,7 @@ tags: [distillation, compression, pruning, teacher-student, efficiency, genai]
 type: concept
 difficulty: advanced
 status: published
+last_verified: 2026-04
 parent: "[[../genai]]"
 related: ["[[fine-tuning]]", "[[../inference/inference-optimization]]", "[[../foundations/modern-architectures]]"]
 source: "Multiple — see Sources"
@@ -221,6 +222,15 @@ KEY INSIGHT:
 | Cross-domain | Transfer learning, Curriculum learning                           |
 
 ---
+
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 📄 Paper | [Hinton et al. "Distilling Knowledge in Neural Networks" (2015)](https://arxiv.org/abs/1503.02531) | The foundational knowledge distillation paper |
+| 📄 Paper | [Dettmers et al. "GPTQ" (2022)](https://arxiv.org/abs/2210.17323) | Post-training quantization for large models |
+| 📘 Book | "Efficient Deep Learning" by Menghani (2024) | Comprehensive treatment of compression techniques |
 
 ## ★ Sources
 

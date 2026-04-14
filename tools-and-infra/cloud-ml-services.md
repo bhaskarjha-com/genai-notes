@@ -4,6 +4,7 @@ tags: [cloud, sagemaker, vertex-ai, azure-ai-foundry, mlops, infrastructure]
 type: reference
 difficulty: intermediate
 status: published
+last_verified: 2026-04
 parent: "[[tools-overview]]"
 related: ["[[ml-experiment-tracking]]", "[[data-versioning-for-ml]]", "[[../production/llmops]]", "[[../production/docker-and-kubernetes]]"]
 source: "Primary vendor docs - see Sources"
@@ -160,6 +161,15 @@ az ml online-endpoint list
 | Cross-domain | cloud architecture, governance, platform strategy |
 
 ---
+
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 🔧 Hands-on | [AWS Bedrock Documentation](https://docs.aws.amazon.com/bedrock/) | Multi-model API access on AWS |
+| 🔧 Hands-on | [Google Vertex AI Documentation](https://cloud.google.com/vertex-ai/docs) | Google's unified ML platform |
+| 🔧 Hands-on | [Azure AI Studio](https://learn.microsoft.com/en-us/azure/ai-studio/) | Microsoft's AI development platform |
 
 ## Sources
 

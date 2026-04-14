@@ -4,6 +4,7 @@ tags: [context-window, long-context, context-caching, prompt-caching, rag-vs-con
 type: concept
 difficulty: intermediate
 status: published
+last_verified: 2026-04
 parent: "[[../genai]]"
 related: ["[[rag]]", "[[prompt-engineering]]", "[[../llms/llms-overview]]", "[[../inference/inference-optimization]]"]
 source: "Multiple — see Sources"
@@ -152,6 +153,7 @@ MITIGATIONS:
 ### Context Engineering in Practice
 
 ```python
+# ?? Last tested: 2026-04
 # ═══ Context Engineering Example ═══
 
 def build_context(user_query: str, conversation_history: list) -> list:
@@ -251,6 +253,15 @@ COST COMPARISON (per 1M input tokens, approximate):
 | Cross-domain | Information retrieval, Memory management, Caching systems          |
 
 ---
+
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 🔧 Hands-on | [Anthropic Prompt Engineering Guide](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering) | Best practical guide to context window management |
+| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 5 | Covers prompt and context design patterns systematically |
+| 🎥 Video | [Simon Willison — "Context Engineering"](https://simonwillison.net/) | Practical insights on managing LLM context |
 
 ## ★ Sources
 

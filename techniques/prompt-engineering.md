@@ -4,8 +4,9 @@ tags: [prompt-engineering, prompting, few-shot, chain-of-thought, genai-techniqu
 type: procedure
 difficulty: beginner
 status: published
+last_verified: 2026-04
 parent: "[[../genai]]"
-related: ["[[ai-agents]]", "[[rag]]", "[[../llms/llms-overview]]"]
+related: ["[[../agents/ai-agents]]", "[[rag]]", "[[../llms/llms-overview]]"]
 source: "OpenAI Prompt Engineering Guide, Anthropic Prompting Guide"
 created: 2026-03-18
 updated: 2026-04-11
@@ -204,11 +205,21 @@ TEMPERATURE GUIDE:
 | Relationship | Topics                                                                |
 | ------------ | --------------------------------------------------------------------- |
 | Builds on    | [Llms Overview](../llms/llms-overview.md)                                             |
-| Leads to     | [Ai Agents](./ai-agents.md), [Rag](./rag.md) (prompt is key in RAG too)                     |
+| Leads to     | [Ai Agents](../agents/ai-agents.md), [Rag](./rag.md) (prompt is key in RAG too)                     |
 | Compare with | [Fine Tuning](./fine-tuning.md) (permanent behavior change), [Rag](./rag.md) (adds knowledge) |
 | Cross-domain | UX writing, Human communication, Psychology (framing effects)         |
 
 ---
+
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 🔧 Hands-on | [Anthropic Prompt Engineering Guide](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering) | Industry-best prompt engineering documentation |
+| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 5 (Prompt Engineering) | Systematic treatment of prompting techniques with evaluation |
+| 🔧 Hands-on | [OpenAI Prompt Engineering Guide](https://platform.openai.com/docs/guides/prompt-engineering) | Practical tips with examples for GPT models |
+| 🎓 Course | [deeplearning.ai — "ChatGPT Prompt Engineering"](https://www.deeplearning.ai/) | Short, practical course on effective prompting |
 
 ## ★ Sources
 

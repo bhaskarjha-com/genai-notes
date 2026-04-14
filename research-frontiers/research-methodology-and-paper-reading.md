@@ -4,6 +4,7 @@ tags: [research, papers, methodology, experiments, reproducibility]
 type: reference
 difficulty: advanced
 status: published
+last_verified: 2026-04
 parent: "[[../genai]]"
 related: ["[[interpretability]]", "[[distributed-training]]", "[[../evaluation/llm-evaluation-deep-dive]]"]
 source: "Multiple - see Sources"
@@ -172,6 +173,15 @@ notes_to_capture:
 | Cross-domain | scientific method, experimentation |
 
 ---
+
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 🎥 Video | [Yannic Kilcher's Paper Explanations](https://www.youtube.com/@YannicKilcher) | Best ML paper walkthroughs on YouTube |
+| 🔧 Hands-on | [Semantic Scholar](https://www.semanticscholar.org/) | AI-powered paper search and citation graph |
+| 🔧 Hands-on | [Papers With Code](https://paperswithcode.com/) | Papers linked to implementations and benchmarks |
 
 ## Sources
 

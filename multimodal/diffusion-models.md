@@ -4,6 +4,7 @@ tags: [diffusion, image-generation, stable-diffusion, dall-e, genai]
 type: concept
 difficulty: advanced
 status: published
+last_verified: 2026-04
 parent: "[[../genai]]"
 related: ["[[../foundations/transformers]]", "[[../llms/llms-overview]]"]
 source: "Ho et al., 2020 (DDPM) + latest developments"
@@ -200,6 +201,16 @@ U-Net Structure:
 | Cross-domain | Physics (thermodynamic diffusion), Stochastic processes                   |
 
 ---
+
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 📄 Paper | [Ho et al. "Denoising Diffusion Probabilistic Models" (2020)](https://arxiv.org/abs/2006.11239) | Foundational diffusion model paper |
+| 📄 Paper | [Rombach et al. "Latent Diffusion Models" (2022)](https://arxiv.org/abs/2112.10752) | Stable Diffusion architecture paper |
+| 🎥 Video | [Yannic Kilcher — "Diffusion Models"](https://www.youtube.com/@YannicKilcher) | Clear explanation of the diffusion process |
+| 🔧 Hands-on | [HuggingFace Diffusers Library](https://huggingface.co/docs/diffusers/) | Production diffusion model library |
 
 ## ★ Sources
 

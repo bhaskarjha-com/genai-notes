@@ -4,6 +4,7 @@ tags: [interpretability, mech-interp, superposition, sparse-autoencoders, circui
 type: concept
 difficulty: expert
 status: published
+last_verified: 2026-04
 parent: "[[../genai]]"
 related: ["[[../ethics-and-safety/ethics-safety-alignment]]", "[[../foundations/transformers]]", "[[../llms/llms-overview]]"]
 source: "Anthropic, OpenAI — see Sources"
@@ -207,6 +208,15 @@ RESEARCH GROUPS:
 | Cross-domain | Neuroscience, Reverse engineering, Complex systems                                                                |
 
 ---
+
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 📄 Paper | [Olah et al. "Zoom In" (2020)](https://distill.pub/2020/circuits/zoom-in/) | Beautiful interactive visualization of neural network features |
+| 📄 Paper | [Anthropic — "Scaling Monosemanticity" (2023)](https://transformer-circuits.pub/2023/monosemantic-features/) | Extracting interpretable features from language models |
+| 🎥 Video | [3Blue1Brown — "Neural Networks"](https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi) | Visual intuition for neural network internals |
 
 ## ★ Sources
 

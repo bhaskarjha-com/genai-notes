@@ -4,8 +4,9 @@ tags: [system-design, ai-architecture, genai, production, llmops]
 type: reference
 difficulty: advanced
 status: published
+last_verified: 2026-04
 parent: "[[llmops]]"
-related: ["[[../techniques/rag]]", "[[../techniques/ai-agents]]", "[[../evaluation/evaluation-and-benchmarks]]"]
+related: ["[[../techniques/rag]]", "[[../agents/ai-agents]]", "[[../evaluation/evaluation-and-benchmarks]]"]
 source: "Multiple sources - see Sources"
 created: 2026-04-12
 updated: 2026-04-12
@@ -44,7 +45,7 @@ This note covers architecture patterns, design trade-offs, bottlenecks, and inte
 ### Prerequisites
 
 - [Retrieval-Augmented Generation (RAG)](../techniques/rag.md)
-- [AI Agents](../techniques/ai-agents.md)
+- [AI Agents](../agents/ai-agents.md)
 - [LLMOps & Production Deployment](./llmops.md)
 - [LLM Evaluation & Benchmarks](../evaluation/evaluation-and-benchmarks.md)
 
@@ -203,12 +204,22 @@ When asked to design a GenAI system, structure the answer like this:
 
 | Relationship | Topics |
 |---|---|
-| Builds on | [LLMOps & Production Deployment](./llmops.md), [Retrieval-Augmented Generation (RAG)](../techniques/rag.md), [AI Agents](../techniques/ai-agents.md) |
+| Builds on | [LLMOps & Production Deployment](./llmops.md), [Retrieval-Augmented Generation (RAG)](../techniques/rag.md), [AI Agents](../agents/ai-agents.md) |
 | Leads to | [LLMOps & Production Deployment](./llmops.md), [Inference Optimization](../inference/inference-optimization.md), [GenAI Tools & Infrastructure](../tools-and-infra/tools-overview.md) |
 | Compare with | Traditional web system design, classical ML system design |
 | Cross-domain | Distributed systems, DevOps, platform engineering |
 
 ---
+
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 📘 Book | "AI Engineering" by Chip Huyen (2025) | End-to-end AI system design reference |
+| 📘 Book | "Designing Machine Learning Systems" by Chip Huyen (2022) | Foundational ML system design patterns |
+| 🎥 Video | [Alex Xu — System Design Interview Series](https://www.youtube.com/@ByteByteGo) | Visual system design explanations |
+| 🔧 Hands-on | [Google MLOps Guide](https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning) | Production ML architecture patterns |
 
 ## Sources
 

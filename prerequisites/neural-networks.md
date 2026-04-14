@@ -4,6 +4,7 @@ tags: [neural-networks, perceptron, backpropagation, activation, cnn, rnn, genai
 type: concept
 difficulty: beginner
 status: published
+last_verified: 2026-04
 parent: "[[../genai]]"
 related: ["[[../foundations/transformers]]", "[[deep-learning-fundamentals]]", "[[linear-algebra-for-ai]]"]
 source: "Multiple - see Sources"
@@ -174,6 +175,7 @@ Evolution:  FFN (1980s) → CNN (1998) → RNN/LSTM (2014) → Transformer (2017
 ## ◆ Code & Implementation
 
 ```python
+# ?? Last tested: 2026-04
 # ═══ SIMPLE NEURAL NETWORK IN PYTORCH ═══
 import torch
 import torch.nn as nn
@@ -269,6 +271,15 @@ ACTIVATION CHOICE:
 | Cross-domain | Neuroscience (loose inspiration), Control theory                |
 
 ---
+
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 🎥 Video | [3Blue1Brown — "What is a Neural Network?"](https://www.youtube.com/watch?v=aircAruvnKk) | Best visual introduction to neural networks |
+| 🎓 Course | [Stanford CS231n](http://cs231n.stanford.edu/) | Deep dive into neural network architectures |
+| 📘 Book | "Deep Learning" by Goodfellow, Bengio, Courville (2016), Ch 6 | Mathematical foundations of feedforward networks |
 
 ## ★ Sources
 

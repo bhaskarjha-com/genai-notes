@@ -4,6 +4,7 @@ tags: [hallucination, groundedness, factuality, reliability, llm]
 type: concept
 difficulty: advanced
 status: published
+last_verified: 2026-04
 parent: "[[llms-overview]]"
 related: ["[[../techniques/rag]]", "[[../evaluation/evaluation-and-benchmarks]]", "[[../ethics-and-safety/ethics-safety-alignment]]"]
 source: "Multiple sources - see Sources"
@@ -121,6 +122,7 @@ User request
 ### Simple Groundedness Pattern
 
 ```python
+# ?? Last tested: 2026-04
 def answer_with_check(query, context_chunks, llm, verifier):
     draft = llm.generate(query=query, context=context_chunks)
     verdict = verifier.score(answer=draft, evidence=context_chunks)
@@ -181,6 +183,15 @@ def answer_with_check(query, context_chunks, llm, verifier):
 | Cross-domain | Information retrieval, fact checking, uncertainty estimation |
 
 ---
+
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 📄 Paper | [Min et al. "FActScore" (2023)](https://arxiv.org/abs/2305.14251) | Fine-grained factuality scoring for LLM outputs |
+| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 4 | Hallucination detection as part of evaluation strategy |
+| 🔧 Hands-on | [Vectara HHEM](https://huggingface.co/vectara/hallucination_evaluation_model) | Open-source hallucination evaluation model |
 
 ## Sources
 

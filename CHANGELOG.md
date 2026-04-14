@@ -14,8 +14,8 @@ All notable changes to this repository will be documented in this file.
 - Phase 1 critical notes:
   `production/ai-system-design.md`,
   `llms/hallucination-detection.md`,
-  `techniques/multi-agent-architectures.md`,
-  `techniques/agent-evaluation.md`,
+  `agents/multi-agent-architectures.md`,
+  `agents/agent-evaluation.md`,
   `techniques/advanced-fine-tuning.md`,
   `production/docker-and-kubernetes.md`,
   `production/model-serving.md`,

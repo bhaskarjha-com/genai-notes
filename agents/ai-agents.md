@@ -4,8 +4,9 @@ tags: [agents, agentic-ai, tool-use, function-calling, autonomy, genai-technique
 type: concept
 difficulty: intermediate
 status: published
+last_verified: 2026-04
 parent: "[[../genai]]"
-related: ["[[rag]]", "[[../llms/llms-overview]]", "[[prompt-engineering]]", "[[multi-agent-architectures]]", "[[agent-evaluation]]"]
+related: ["[[../techniques/rag]]", "[[../llms/llms-overview]]", "[[../techniques/prompt-engineering]]", "[[multi-agent-architectures]]", "[[agent-evaluation]]"]
 source: "Multiple - see Sources"
 created: 2026-03-18
 updated: 2026-04-12
@@ -33,7 +34,7 @@ An **AI Agent** is a system where an LLM acts as a reasoning engine that can: (1
 
 ### Scope
 
-Covers: Agent architecture, tool use, planning patterns, multi-agent systems, and frameworks. For the underlying LLM, see [Llms Overview](../llms/llms-overview.md). For RAG as a tool agents use, see [Rag](./rag.md). For specialized coordination patterns, see [Multi-Agent Architectures](./multi-agent-architectures.md). For tracing and scoring agent runs, see [Agent Evaluation & Observability](./agent-evaluation.md).
+Covers: Agent architecture, tool use, planning patterns, multi-agent systems, and frameworks. For the underlying LLM, see [Llms Overview](../llms/llms-overview.md). For RAG as a tool agents use, see [Rag](../techniques/rag.md). For specialized coordination patterns, see [Multi-Agent Architectures](./multi-agent-architectures.md). For tracing and scoring agent runs, see [Agent Evaluation & Observability](./agent-evaluation.md).
 
 ### Significance
 
@@ -45,8 +46,8 @@ Covers: Agent architecture, tool use, planning patterns, multi-agent systems, an
 ### Prerequisites
 
 - [Llms Overview](../llms/llms-overview.md) — the brain of the agent
-- [Prompt Engineering](./prompt-engineering.md) — how to instruct agents
-- [Rag](./rag.md) — agents often use RAG as a tool
+- [Prompt Engineering](../techniques/prompt-engineering.md) — how to instruct agents
+- [Rag](../techniques/rag.md) — agents often use RAG as a tool
 
 ---
 
@@ -186,11 +187,14 @@ ACT:   respond_to_user(summary + table)
 ### Simple Agent with LangGraph
 
 ```python
+# pip install langgraph>=0.3 langchain-openai>=0.3
+# ⚠️ Last tested: 2026-04 | Requires: langgraph>=0.3
+
 from langgraph.graph import StateGraph, MessagesState, START, END
+from langgraph.prebuilt import ToolNode
 from langchain_openai import ChatOpenAI
 from langchain_core.tools import tool
 
-# Define tools
 @tool
 def search_web(query: str) -> str:
     """Search the web for information."""
@@ -203,22 +207,13 @@ def calculator(expression: str) -> str:
     return str(eval(expression))
 
 # Create LLM with tools
-llm = ChatOpenAI(model="gpt-5.4").bind_tools([search_web, calculator])
+tools = [search_web, calculator]
+llm = ChatOpenAI(model="gpt-4o").bind_tools(tools)
 
 # Define the agent logic
 def agent_node(state: MessagesState):
     response = llm.invoke(state["messages"])
     return {"messages": [response]}
-
-def tool_node(state: MessagesState):
-    # Execute tool calls from the last message
-    last_message = state["messages"][-1]
-    results = []
-    for tool_call in last_message.tool_calls:
-        tool_fn = {"search_web": search_web, "calculator": calculator}
-        result = tool_fn[tool_call["name"]].invoke(tool_call["args"])
-        results.append(result)
-    return {"messages": results}
 
 def should_continue(state: MessagesState):
     last_message = state["messages"][-1]
@@ -226,10 +221,10 @@ def should_continue(state: MessagesState):
         return "tools"
     return END
 
-# Build graph
+# Build graph — ToolNode handles ToolMessage creation automatically
 graph = StateGraph(MessagesState)
 graph.add_node("agent", agent_node)
-graph.add_node("tools", tool_node)
+graph.add_node("tools", ToolNode(tools))  # Correctly wraps results in ToolMessage
 graph.add_edge(START, "agent")
 graph.add_conditional_edges("agent", should_continue, {"tools": "tools", END: END})
 graph.add_edge("tools", "agent")  # After tools, back to agent
@@ -334,12 +329,22 @@ For protocols connecting agents (MCP, A2A), see [Agentic Protocols](./agentic-pr
 
 | Relationship | Topics                                                                                                 |
 | ------------ | ------------------------------------------------------------------------------------------------------ |
-| Builds on    | [Llms Overview](../llms/llms-overview.md), [Rag](./rag.md), [Prompt Engineering](./prompt-engineering.md), [Function Calling And Structured Output](./function-calling-and-structured-output.md) |
+| Builds on    | [Llms Overview](../llms/llms-overview.md), [Rag](../techniques/rag.md), [Prompt Engineering](../techniques/prompt-engineering.md), [Function Calling And Structured Output](../techniques/function-calling-and-structured-output.md) |
 | Leads to     | [Agentic Protocols](./agentic-protocols.md) (MCP/A2A/ADK), [Code Generation](../applications/code-generation.md) (coding agents)               |
 | Compare with | Simple chains (no autonomy), Chatbots (reactive only)                                                  |
 | Cross-domain | Robotics (embodied agents), Game AI, Control theory                                                    |
 
 ---
+
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 📄 Paper | [Anthropic — "Building Effective Agents" (2025)](https://docs.anthropic.com/en/docs/build-with-claude/agent-patterns) | Industry reference for agent design patterns |
+| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 7 (Agents) | Practical treatment of agent loops, tools, and memory |
+| 🔧 Hands-on | [LangGraph Documentation](https://langchain-ai.github.io/langgraph/) | Build production agent workflows with state management |
+| 🎥 Video | [Harrison Chase — "What Are AI Agents?"](https://www.youtube.com/watch?v=DWUdGhRrv2c) | LangChain creator explaining agent architectures |
 
 ## ★ Sources
 

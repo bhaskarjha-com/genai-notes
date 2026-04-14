@@ -4,6 +4,7 @@ tags: [rlhf, dpo, ppo, grpo, alignment, reward-model, preference-optimization, g
 type: concept
 difficulty: advanced
 status: published
+last_verified: 2026-04
 parent: "[[../genai]]"
 related: ["[[../ethics-and-safety/ethics-safety-alignment]]", "[[../llms/llms-overview]]", "[[../llms/reasoning-models]]", "[[fine-tuning]]"]
 source: "Multiple — see Sources"
@@ -338,6 +339,16 @@ KEY FORMULAS:
 | Cross-domain | Game theory, Behavioural economics (KTO), Curriculum learning                                             |
 
 ---
+
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 📄 Paper | [Ouyang et al. "InstructGPT" (2022)](https://arxiv.org/abs/2203.02155) | Definitive RLHF paper — SFT → RM → PPO pipeline |
+| 📄 Paper | [Rafailov et al. "DPO" (2023)](https://arxiv.org/abs/2305.18290) | DPO as simpler alternative to PPO |
+| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 5 | Covers RLHF, DPO, and alignment in production context |
+| 🎥 Video | [Hugging Face — "RLHF Explained"](https://huggingface.co/blog/rlhf) | Clear visual walkthrough of the RLHF pipeline |
 
 ## ★ Sources
 

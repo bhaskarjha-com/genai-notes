@@ -4,6 +4,7 @@ tags: [linear-algebra, vectors, matrices, dot-product, tensors, genai-prerequisi
 type: concept
 difficulty: beginner
 status: published
+last_verified: 2026-04
 parent: "[[../genai]]"
 related: ["[[neural-networks]]", "[[../foundations/embeddings]]", "[[../foundations/attention-mechanism]]"]
 source: "3Blue1Brown, Khan Academy, Deep Learning Book"
@@ -77,6 +78,7 @@ TENSOR (nD):  Generalization to any number of dimensions
 ```
 
 ```python
+# ?? Last tested: 2026-04
 import torch
 
 scalar = torch.tensor(5.0)           # 0D: shape ()
@@ -131,6 +133,7 @@ WHERE IN GenAI:
 ```
 
 ```python
+# ?? Last tested: 2026-04
 # Matrix multiply in PyTorch
 A = torch.randn(2, 3)
 B = torch.randn(3, 2)
@@ -283,6 +286,15 @@ PYTORCH CHEAT SHEET:
 | Cross-domain | Physics (vector spaces), Computer graphics (transformations)                                                                |
 
 ---
+
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 🎥 Video | [3Blue1Brown — "Essence of Linear Algebra"](https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab) | Best visual linear algebra series ever created |
+| 📘 Book | "Linear Algebra Done Right" by Axler (2015) | Rigorous but readable linear algebra |
+| 🎓 Course | [MIT 18.06: Linear Algebra](https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/) | Gilbert Strang's legendary course |
 
 ## ★ Sources
 

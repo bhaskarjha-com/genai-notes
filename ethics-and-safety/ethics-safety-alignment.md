@@ -4,6 +4,7 @@ tags: [ethics, safety, alignment, rlhf, hallucination, bias, responsible-ai, gen
 type: concept
 difficulty: intermediate
 status: published
+last_verified: 2026-04
 parent: "[[../genai]]"
 related: ["[[../llms/llms-overview]]", "[[../evaluation/evaluation-and-benchmarks]]", "[[../llms/hallucination-detection]]", "[[ai-regulation]]", "[[adversarial-ml-and-ai-security]]", "[[owasp-llm-top-10]]"]
 source: "Multiple - see Sources"
@@ -262,6 +263,15 @@ PRODUCTION SAFETY CHECKLIST:
 | Cross-domain | Philosophy (ethics), Law (regulation), Psychology (bias)      |
 
 ---
+
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 📄 Paper | [Anthropic — "Constitutional AI" (2022)](https://arxiv.org/abs/2212.08073) | Self-supervised alignment via principles |
+| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 6 | Safety, guardrails, and alignment in production |
+| 🔧 Hands-on | [Guardrails AI](https://www.guardrailsai.com/) | Open-source framework for AI safety guardrails |
 
 ## ★ Sources
 

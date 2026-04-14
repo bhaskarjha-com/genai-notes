@@ -4,6 +4,7 @@ tags: [llmops, production, monitoring, observability, deployment, ci-cd, genai]
 type: procedure
 difficulty: intermediate
 status: published
+last_verified: 2026-04
 parent: "[[../genai]]"
 related: ["[[../tools-and-infra/tools-overview]]", "[[../evaluation/evaluation-and-benchmarks]]", "[[../ethics-and-safety/ethics-safety-alignment]]", "[[../inference/inference-optimization]]", "[[ai-system-design]]", "[[docker-and-kubernetes]]", "[[model-serving]]", "[[monitoring-observability]]", "[[cicd-for-ml]]", "[[cost-optimization]]"]
 source: "Multiple — see Sources"
@@ -117,12 +118,13 @@ TOOLS:
 | **Drift**                 | Performance degradation over time | Arize Phoenix           |
 
 ```python
+# ?? Last tested: 2026-04
 # ═══ Basic LLM Observability with Langfuse ═══
 from langfuse.openai import openai  # Drop-in replacement
 
 # Every call is now automatically traced
 response = openai.chat.completions.create(
-    model="gpt-5.4",
+    model="gpt-4o",
     messages=[{"role": "user", "content": "Explain RAG"}],
     metadata={"user_id": "user_123", "session": "abc"}
 )
@@ -266,6 +268,16 @@ KEY METRICS:
 | Cross-domain | Site Reliability Engineering, Platform engineering                                                                       |
 
 ---
+
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 8-9 | Definitive treatment of LLMOps patterns |
+| 📘 Book | "Designing Machine Learning Systems" by Chip Huyen (2022) | MLOps foundations that LLMOps builds on |
+| 🔧 Hands-on | [LangSmith Documentation](https://docs.smith.langchain.com/) | Production LLM observability and evaluation platform |
+| 🎥 Video | [Chip Huyen — "Building LLM Applications for Production"](https://huyenchip.com/) | Practical LLMOps talk covering common pitfalls |
 
 ## ★ Sources
 

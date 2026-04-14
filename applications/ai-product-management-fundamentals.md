@@ -4,6 +4,7 @@ tags: [ai-product-management, product, strategy, evaluation, applications]
 type: reference
 difficulty: intermediate
 status: published
+last_verified: 2026-04
 parent: "[[../genai]]"
 related: ["[[../production/ai-system-design]]", "[[../evaluation/llm-evaluation-deep-dive]]", "[[api-design-for-ai]]"]
 source: "Multiple - see Sources"
@@ -185,6 +186,15 @@ launch_plan:
 | Cross-domain | UX, strategy, analytics |
 
 ---
+
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 1, 9 | Product thinking for AI applications |
+| 📘 Book | "The AI Product Manager's Handbook" by Buest (2023) | PM-specific AI guide |
+| 🎥 Video | [Lenny's Podcast — AI Product Management Episodes](https://www.lennyspodcast.com/) | PM perspectives on building with AI |
 
 ## Sources
 

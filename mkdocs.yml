@@ -134,6 +134,8 @@ nav:
           - Embeddings: foundations/embeddings.md
           - Modern Architectures: foundations/modern-architectures.md
           - Scaling Laws and Pretraining: foundations/scaling-laws-and-pretraining.md
+          - Attention Deep Dive: foundations/attention-deep-dive.md
+          - State Space Models: foundations/state-space-models.md
       - LLMs:
           - LLMs Overview: llms/llms-overview.md
           - LLM Landscape: llms/llm-landscape.md
@@ -147,27 +149,31 @@ nav:
           - Graph RAG: techniques/graph-rag.md
           - Fine-Tuning: techniques/fine-tuning.md
           - Advanced Fine-Tuning: techniques/advanced-fine-tuning.md
-          - AI Agents: techniques/ai-agents.md
-          - Multi-Agent Architectures: techniques/multi-agent-architectures.md
-          - Agent Evaluation: techniques/agent-evaluation.md
-          - Agentic Protocols: techniques/agentic-protocols.md
           - RL Alignment: techniques/rl-alignment.md
           - Distillation and Compression: techniques/distillation-and-compression.md
           - Synthetic Data and Data Engineering: techniques/synthetic-data-and-data-engineering.md
           - Continual Learning: techniques/continual-learning.md
+          - Embedding Fine-Tuning: techniques/embedding-fine-tuning.md
+          - Long-Context Engineering: techniques/long-context-engineering.md
+      - Agents:
+          - AI Agents: agents/ai-agents.md
+          - Multi-Agent Architectures: agents/multi-agent-architectures.md
+          - Agent Memory Systems: agents/agent-memory.md
+          - Agent Evaluation: agents/agent-evaluation.md
+          - Agentic Protocols: agents/agentic-protocols.md
       - Applications:
           - API Design for AI: applications/api-design-for-ai.md
           - AI Product Management Fundamentals: applications/ai-product-management-fundamentals.md
           - Code Generation: applications/code-generation.md
           - Conversational AI: applications/conversational-ai.md
           - Voice AI: applications/voice-ai.md
+          - AI UX Patterns: applications/ai-ux-patterns.md
       - Tools and Infra:
           - Tools Overview: tools-and-infra/tools-overview.md
           - Vector Databases: tools-and-infra/vector-databases.md
           - Cloud ML Services: tools-and-infra/cloud-ml-services.md
           - Distributed Systems for AI: tools-and-infra/distributed-systems-for-ai.md
-          - ML Experiment Tracking: tools-and-infra/ml-experiment-tracking.md
-          - Data Versioning for ML: tools-and-infra/data-versioning-for-ml.md
+          - ML Experiment and Data Management: tools-and-infra/ml-experiment-and-data-management.md
       - Production:
           - AI System Design: production/ai-system-design.md
           - Docker and Kubernetes: production/docker-and-kubernetes.md
@@ -175,13 +181,18 @@ nav:
           - Monitoring and Observability: production/monitoring-observability.md
           - CI/CD for ML: production/cicd-for-ml.md
           - LLMOps: production/llmops.md
+          - LLM Routing and Model Selection: production/llm-routing-and-model-selection.md
+          - Guardrails and Content Filtering: production/guardrails-and-content-filtering.md
           - Cost Optimization: production/cost-optimization.md
           - Classical ML for GenAI: production/classical-ml-for-genai.md
           - Latency and Throughput Engineering: production/latency-and-throughput-engineering.md
+          - Data Flywheel Design: production/data-flywheel-design.md
+          - Document Parsing and Extraction: production/document-parsing-and-extraction.md
       - Evaluation:
           - Evaluation and Benchmarks: evaluation/evaluation-and-benchmarks.md
           - LLM Evaluation Deep Dive: evaluation/llm-evaluation-deep-dive.md
           - System Design for AI Interviews: evaluation/system-design-for-ai-interviews.md
+          - Retrieval Evaluation: evaluation/retrieval-evaluation.md
       - Inference:
           - Inference Optimization: inference/inference-optimization.md
           - GPU and CUDA Programming: inference/gpu-cuda-programming.md
@@ -191,14 +202,13 @@ nav:
           - AI Regulation: ethics-and-safety/ai-regulation.md
           - Adversarial ML and AI Security: ethics-and-safety/adversarial-ml-and-ai-security.md
           - OWASP LLM Top 10: ethics-and-safety/owasp-llm-top-10.md
+          - Prompt Injection Deep Dive: ethics-and-safety/prompt-injection-deep-dive.md
       - Multimodal:
           - Multimodal AI: multimodal/multimodal-ai.md
           - Computer Vision Fundamentals: multimodal/computer-vision-fundamentals.md
-      - Image Generation:
-          - Diffusion Models: image-generation/diffusion-models.md
+          - Diffusion Models: multimodal/diffusion-models.md
       - Research Frontiers:
-          - Distributed Training: research-frontiers/distributed-training.md
-          - Training Infrastructure: research-frontiers/training-infrastructure.md
+          - Distributed Training and Infrastructure: research-frontiers/distributed-training.md
           - Interpretability: research-frontiers/interpretability.md
           - Research Methodology and Paper Reading: research-frontiers/research-methodology-and-paper-reading.md
   - Career Guides:

@@ -44,8 +44,8 @@ Complete [Part 1 of the Learning Path](../LEARNING_PATH.md#part-1-universal-foun
 | 2 | LLM evaluation deep dive | [llm-evaluation-deep-dive](../evaluation/llm-evaluation-deep-dive.md) | Must | 3h |
 | 3 | Hallucination detection | [hallucination-detection](../llms/hallucination-detection.md) | Must | 3h |
 | 4 | Synthetic data and data engineering | [synthetic-data-and-data-engineering](../techniques/synthetic-data-and-data-engineering.md) | Must | 3h |
-| 5 | ML experiment tracking | [ml-experiment-tracking](../tools-and-infra/ml-experiment-tracking.md) | Must | 2h |
-| 6 | Data versioning for ML | [data-versioning-for-ml](../tools-and-infra/data-versioning-for-ml.md) | Must | 2h |
+| 5 | ML experiment tracking | [ml-experiment-tracking](../tools-and-infra/ml-experiment-and-data-management.md) | Must | 2h |
+| 6 | Data versioning for ML | [data-versioning-for-ml](../tools-and-infra/ml-experiment-and-data-management.md) | Must | 2h |
 
 ### Phase 3: Role-Specific Emphasis
 
@@ -53,7 +53,7 @@ Complete [Part 1 of the Learning Path](../LEARNING_PATH.md#part-1-universal-foun
 |---|---|---|
 | AI Data Engineer | [cloud-ml-services](../tools-and-infra/cloud-ml-services.md), [distributed-systems-for-ai](../tools-and-infra/distributed-systems-for-ai.md), [llmops](../production/llmops.md) | pipeline reliability and operational ownership |
 | NLP Engineer | [rl-alignment](../techniques/rl-alignment.md), [continual-learning](../techniques/continual-learning.md), [reasoning-models](../llms/reasoning-models.md) | deeper model-adaptation and behavior work |
-| Computer Vision Engineer | [multimodal-ai](../multimodal/multimodal-ai.md), [computer-vision-fundamentals](../multimodal/computer-vision-fundamentals.md), [diffusion-models](../image-generation/diffusion-models.md) | visual understanding and generation depth |
+| Computer Vision Engineer | [multimodal-ai](../multimodal/multimodal-ai.md), [computer-vision-fundamentals](../multimodal/computer-vision-fundamentals.md), [diffusion-models](../multimodal/diffusion-models.md) | visual understanding and generation depth |
 | Data Scientist (GenAI) | [evaluation-and-benchmarks](../evaluation/evaluation-and-benchmarks.md), [classical-ml-for-genai](../production/classical-ml-for-genai.md), [llm-landscape](../llms/llm-landscape.md) | experiment design and decision support |
 | Conversational AI Engineer | [conversational-ai](../applications/conversational-ai.md), [voice-ai](../applications/voice-ai.md), [context-engineering](../techniques/context-engineering.md) | multi-turn behavior and speech interactions |
 | AI Trainer / RLHF Annotator | [rl-alignment](../techniques/rl-alignment.md), [ethics-safety-alignment](../ethics-and-safety/ethics-safety-alignment.md), [evaluation-and-benchmarks](../evaluation/evaluation-and-benchmarks.md) | feedback quality and alignment judgment |

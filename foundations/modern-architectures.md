@@ -4,6 +4,7 @@ tags: [moe, mixture-of-experts, gqa, rope, flash-attention, architecture, genai]
 type: concept
 difficulty: advanced
 status: published
+last_verified: 2026-04
 parent: "[[../genai]]"
 related: ["[[transformers]]", "[[attention-mechanism]]", "[[../llms/llms-overview]]", "[[../inference/inference-optimization]]"]
 source: "Multiple papers — see Sources"
@@ -300,6 +301,16 @@ WHICH MODELS USE WHAT:
 | Cross-domain | Computer architecture (memory hierarchy), Sparse computation                          |
 
 ---
+
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 📄 Paper | [Gu & Dao "Mamba: Linear-Time Sequence Modeling" (2023)](https://arxiv.org/abs/2312.00752) | State-space models challenging transformers |
+| 📄 Paper | [Touvron et al. "LLaMA" (2023)](https://arxiv.org/abs/2302.13971) | Open-weight LLM architecture decisions explained |
+| 🎥 Video | [Yannic Kilcher — Architecture Breakdowns](https://www.youtube.com/@YannicKilcher) | Detailed paper walkthroughs of modern architectures |
+| 📘 Book | "Build a Large Language Model (From Scratch)" by Sebastian Raschka (2024) | End-to-end architecture implementation |
 
 ## ★ Sources
 

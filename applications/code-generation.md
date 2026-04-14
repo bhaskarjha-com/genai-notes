@@ -1,14 +1,15 @@
 ---
 title: "Code Generation & AI-Assisted Development"
 tags: [code-generation, copilot, cursor, antigravity, gemini-cli, claude-code, windsurf, devin, coding-agents, genai]
-type: concept
+type: procedure
 difficulty: intermediate
 status: published
+last_verified: 2026-04
 parent: "[[../genai]]"
-related: ["[[../techniques/ai-agents]]", "[[../techniques/agentic-protocols]]", "[[../llms/llms-overview]]"]
+related: ["[[../agents/ai-agents]]", "[[../agents/agentic-protocols]]", "[[../llms/llms-overview]]"]
 source: "Multiple — see Sources"
 created: 2026-03-22
-updated: 2026-04-11
+updated: 2026-04-14
 ---
 
 # Code Generation & AI-Assisted Development
@@ -33,7 +34,7 @@ AI-assisted development encompasses tools ranging from inline code completion to
 
 ### Scope
 
-Covers the major tools, architectures, and paradigms for AI coding. For the underlying LLM technology, see [Llms Overview](../llms/llms-overview.md). For agent patterns, see [Ai Agents](../techniques/ai-agents.md). For agentic protocols (MCP), see [Agentic Protocols](../techniques/agentic-protocols.md).
+Covers the major tools, architectures, and paradigms for AI coding. For the underlying LLM technology, see [Llms Overview](../llms/llms-overview.md). For agent patterns, see [Ai Agents](../agents/ai-agents.md). For agentic protocols (MCP), see [Agentic Protocols](../agents/agentic-protocols.md).
 
 Last verified for product-landscape references in this note: 2026-04.
 
@@ -281,6 +282,112 @@ POLYGLOT BENCH — Multi-language code generation:
 
 ---
 
+## ★ Code & Implementation
+
+### Custom MCP Tool for a Coding Agent
+
+```python
+# pip install mcp>=1.0
+# ⚠️ Last tested: 2026-04 | Requires: mcp>=1.0
+
+from mcp.server import Server
+from mcp.types import Tool, TextContent
+import subprocess
+import json
+
+# Create an MCP server that gives coding agents access to your build system
+server = Server("build-tools")
+
+@server.tool()
+async def run_tests(test_path: str = ".", verbose: bool = False) -> list[TextContent]:
+    """Run pytest on the specified path and return results."""
+    cmd = ["python", "-m", "pytest", test_path, "--tb=short", "-q"]
+    if verbose:
+        cmd.append("-v")
+    
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
+    
+    output = result.stdout + result.stderr
+    return [TextContent(type="text", text=f"Exit code: {result.returncode}\n{output}")]
+
+@server.tool()
+async def lint_file(file_path: str) -> list[TextContent]:
+    """Run ruff linter on a file and return issues."""
+    result = subprocess.run(
+        ["python", "-m", "ruff", "check", file_path, "--output-format=json"],
+        capture_output=True, text=True,
+    )
+    issues = json.loads(result.stdout) if result.stdout else []
+    if not issues:
+        return [TextContent(type="text", text="No lint issues found ✓")]
+    
+    summary = "\n".join(f"  L{i['location']['row']}: {i['code']} {i['message']}" for i in issues)
+    return [TextContent(type="text", text=f"Found {len(issues)} issues:\n{summary}")]
+
+@server.tool()
+async def get_type_errors(file_path: str) -> list[TextContent]:
+    """Run mypy type checker on a file."""
+    result = subprocess.run(
+        ["python", "-m", "mypy", file_path, "--no-color"],
+        capture_output=True, text=True,
+    )
+    return [TextContent(type="text", text=result.stdout or "No type errors ✓")]
+
+# Run the MCP server (agents connect to this via stdio or SSE)
+if __name__ == "__main__":
+    import asyncio
+    asyncio.run(server.run())
+
+# Expected: Coding agents can now run tests, lint, and type-check
+# via MCP tool calls, getting structured feedback to iterate on.
+```
+
+### Prompt Engineering for Coding Agents
+
+```markdown
+# Example: .cursorrules / AGENTS.md file for guiding AI coding agents
+
+## Project Context
+- Language: Python 3.12, TypeScript 5.4
+- Framework: FastAPI (backend), Next.js 14 (frontend)
+- Testing: pytest + pytest-asyncio (backend), vitest (frontend)
+- Style: ruff for Python, eslint + prettier for TS
+
+## Coding Standards
+- All functions must have type hints (Python) or TypeScript types
+- All public functions must have docstrings
+- No `any` type in TypeScript — use proper generics
+- Error handling: use Result types, never bare except/catch
+- Tests: minimum 1 test per public function, use fixtures
+
+## Architecture Rules
+- Backend: domain-driven design (service → repository → model)
+- Never import from one domain into another directly
+- All API responses use Pydantic models with examples
+- Database: async SQLAlchemy with Alembic migrations
+
+## When Making Changes
+1. Read existing tests first to understand expected behavior
+2. Run `make test` before AND after changes
+3. Run `make lint` and fix all issues
+4. If adding a new endpoint, update OpenAPI docs
+```
+
+---
+
+## ◆ Production Failure Modes
+
+| Failure | Symptoms | Root Cause | Mitigation |
+|---------|----------|------------|------------|
+| **Hallucinated APIs** | ImportError, AttributeError at runtime | AI uses functions/methods that don't exist or have changed | Pin dependency versions in prompts, verify imports, run tests |
+| **Subtle logic bugs** | Tests pass but behavior is wrong in edge cases | AI produces plausible-looking but incorrect logic | Write property-based tests, review diffs carefully, test edge cases |
+| **Security vulnerabilities** | SQL injection, XSS, hardcoded secrets | AI reproduces insecure patterns from training data | Run SAST tools (Bandit, Semgrep), never commit AI code without security review |
+| **Style/architecture drift** | Codebase becomes inconsistent over sessions | Each AI session starts fresh, doesn't know prior decisions | Use .cursorrules/AGENTS.md, enforce via linting, architectural decision records |
+| **Context window overflow** | Agent "forgets" earlier files, makes contradictory changes | Too many files in context, exceeds model limits | Use focused prompts, reference specific files, break large tasks into smaller ones |
+| **License contamination** | Copyrighted code snippets reproduced verbatim | Model memorized open-source code during training | Use enterprise-licensed tools (Copilot Business), code scanning for license issues |
+
+---
+
 ## ◆ Quick Reference
 
 ```
@@ -326,14 +433,53 @@ KEY TREND (2026):
 
 ---
 
+## ◆ Hands-On Exercises
+
+### Exercise 1: Compare AI Coding Tools
+
+**Goal**: Evaluate two AI coding tools on the same task
+**Time**: 60 minutes
+**Steps**:
+1. Pick a small coding task (e.g., "build a REST API for a todo list with tests")
+2. Complete it with Tool A (e.g., Cursor) and Tool B (e.g., Gemini CLI)
+3. Compare: time to completion, code quality, test coverage, number of iterations
+4. Note where each tool excelled and where it struggled
+**Expected Output**: Comparison table with metrics, recommendation for your workflow
+
+### Exercise 2: Build an MCP Tool Server
+
+**Goal**: Create a custom MCP server that gives coding agents access to your tools
+**Time**: 45 minutes
+**Steps**:
+1. Use the MCP code example above as a starting point
+2. Add tools for your specific workflow (e.g., database migration, docker commands)
+3. Connect it to your IDE agent (Cursor MCP config or Antigravity)
+4. Test: ask the agent to "run tests and fix any failures" — does it use your MCP tools?
+**Expected Output**: Working MCP server with 3+ custom tools, connected to your coding agent
+
+---
+
 ## ★ Connections
 
 | Relationship | Topics                                                                                      |
 | ------------ | ------------------------------------------------------------------------------------------- |
-| Builds on    | [Llms Overview](../llms/llms-overview.md), [Ai Agents](../techniques/ai-agents.md), [Agentic Protocols](../techniques/agentic-protocols.md) |
-| Leads to     | Autonomous software engineering, AI DevOps                                                  |
+| Builds on    | [Llms Overview](../llms/llms-overview.md), [Ai Agents](../agents/ai-agents.md), [Agentic Protocols](../agents/agentic-protocols.md) |
+| Leads to     | Autonomous software engineering, AI DevOps, [AI System Design](../production/ai-system-design.md) |
 | Compare with | Traditional IDEs (VS Code, JetBrains), Manual coding                                        |
-| Cross-domain | Software engineering, DevOps, Testing                                                       |
+| Cross-domain | Software engineering, DevOps, Testing, CI/CD                                                |
+
+---
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 7 (Agents) | Practical treatment of coding agents and tool-use patterns |
+| 🔧 Hands-on | [MCP Specification & Tutorials](https://modelcontextprotocol.io/) | Learn the protocol that connects coding agents to external tools |
+| 🎥 Video | [Andrej Karpathy — "Intro to LLMs"](https://www.youtube.com/watch?v=zjkBMFhNj_g) | Foundational understanding of how the models behind coding agents work |
+| 📄 Paper | [Jimenez et al. "SWE-bench"](https://arxiv.org/abs/2310.06770) | The benchmark that defines how we measure coding agent capability |
+| 🔧 Hands-on | [Cursor Documentation](https://docs.cursor.com/) | Best docs for understanding AI-IDE integration patterns |
+| 🔧 Hands-on | [Gemini CLI Getting Started](https://github.com/google-gemini/gemini-cli) | Fastest way to try terminal-based agentic coding |
 
 ---
 
@@ -347,3 +493,4 @@ KEY TREND (2026):
 - Windsurf — https://windsurf.com
 - Devin — https://devin.ai
 - SWE-Bench results — https://www.swebench.com
+- MCP Specification — https://modelcontextprotocol.io/

@@ -4,6 +4,7 @@ tags: [nlp, natural-language-processing, ner, sentiment, text-classification, be
 type: concept
 difficulty: beginner
 status: published
+last_verified: 2026-04
 parent: "[[../genai]]"
 related: ["[[../foundations/transformers]]", "[[../foundations/embeddings]]", "[[../foundations/tokenization]]", "[[../llms/llms-overview]]"]
 source: "Multiple — see Sources"
@@ -213,6 +214,15 @@ MOSTLY OBSOLETE:
 | Cross-domain | Linguistics, Information retrieval, Search engines                                        |
 
 ---
+
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 📘 Book | "Speech and Language Processing" by Jurafsky & Martin (3rd ed.) | The NLP bible — freely available online |
+| 🎓 Course | [Stanford CS224n: NLP with Deep Learning](http://web.stanford.edu/class/cs224n/) | Best NLP course covering classical to modern methods |
+| 🔧 Hands-on | [spaCy Course](https://course.spacy.io/) | Practical NLP with production-ready tools |
 
 ## ★ Sources
 

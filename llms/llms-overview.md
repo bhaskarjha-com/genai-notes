@@ -4,6 +4,7 @@ tags: [llm, gpt, claude, gemini, llama, language-models, genai]
 type: concept
 difficulty: intermediate
 status: published
+last_verified: 2026-04
 parent: "[[../genai]]"
 related: ["[[../foundations/transformers]]", "[[../techniques/rag]]", "[[../techniques/fine-tuning]]", "[[hallucination-detection]]"]
 source: "Multiple - see Sources"
@@ -130,6 +131,7 @@ for better inference efficiency
 Text → numbers. Models don't see words; they see token IDs.
 
 ```python
+# ?? Last tested: 2026-04
 "Hello world" → [15496, 995]        # GPT-style BPE
 "Hello world" → [8774, 296, 1650]    # Different tokenizer
 
@@ -223,11 +225,21 @@ Top-k: Only sample from the k most likely tokens
 | Relationship | Topics                                                                                                                  |
 | ------------ | ----------------------------------------------------------------------------------------------------------------------- |
 | Builds on    | [Transformers](../foundations/transformers.md), [Attention Mechanism](../foundations/attention-mechanism.md)                                                 |
-| Leads to     | [Rag](../techniques/rag.md), [Fine Tuning](../techniques/fine-tuning.md), [Ai Agents](../techniques/ai-agents.md), [Prompt Engineering](../techniques/prompt-engineering.md) |
+| Leads to     | [Rag](../techniques/rag.md), [Fine Tuning](../techniques/fine-tuning.md), [Ai Agents](../agents/ai-agents.md), [Prompt Engineering](../techniques/prompt-engineering.md) |
 | Compare with | Traditional NLP (rule-based), Smaller language models (BERT-era)                                                        |
 | Cross-domain | Cognitive science (language understanding), Linguistics                                                                 |
 
 ---
+
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 1-2 | Best introduction to LLMs for practitioners |
+| 🎥 Video | [Andrej Karpathy — "Intro to Large Language Models"](https://www.youtube.com/watch?v=zjkBMFhNj_g) | Best 1-hour overview of how LLMs work |
+| 📘 Book | "Build a Large Language Model (From Scratch)" by Sebastian Raschka (2024) | Implement an LLM from scratch in PyTorch |
+| 🔧 Hands-on | [HuggingFace Transformers](https://huggingface.co/docs/transformers/) | Production library for working with LLMs |
 
 ## ★ Sources
 

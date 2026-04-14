@@ -4,11 +4,12 @@ tags: [api, rest, streaming, webhooks, async, ai-architecture, applications]
 type: reference
 difficulty: intermediate
 status: published
+last_verified: 2026-04
 parent: "[[../production/ai-system-design]]"
 related: ["[[../production/model-serving]]", "[[../techniques/function-calling-and-structured-output]]", "[[../production/llmops]]"]
 source: "Multiple - see Sources"
 created: 2026-04-12
-updated: 2026-04-12
+updated: 2026-04-14
 ---
 
 # API Design for AI Applications
@@ -184,8 +185,105 @@ Do not force clients to track every prompt revision.
 
 ---
 
-## Sources
+## ★ Code & Implementation
 
-- OpenAPI specification guidance
-- major cloud API design guidance
-- [AI System Design for GenAI Applications](../production/ai-system-design.md)
+### FastAPI AI Endpoint with Streaming
+
+```python
+# pip install fastapi>=0.110 uvicorn>=0.27 openai>=1.0
+# ⚠️ Last tested: 2026-04 | Requires: fastapi>=0.110
+
+from fastapi import FastAPI
+from fastapi.responses import StreamingResponse
+from openai import OpenAI
+import json, uuid, time
+
+app = FastAPI()
+client = OpenAI()
+
+@app.post("/v1/summarize")
+async def summarize(request: dict):
+    """AI summarization endpoint with structured response."""
+    trace_id = str(uuid.uuid4())
+    start = time.time()
+    
+    response = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[{"role": "user", "content": f"Summarize: {request['text']}"}],
+        max_tokens=200,
+    )
+    
+    return {
+        "summary": response.choices[0].message.content,
+        "finish_reason": response.choices[0].finish_reason,
+        "usage": {"input_tokens": response.usage.prompt_tokens,
+                  "output_tokens": response.usage.completion_tokens},
+        "trace_id": trace_id,
+        "latency_ms": round((time.time() - start) * 1000),
+    }
+
+@app.post("/v1/chat/stream")
+async def chat_stream(request: dict):
+    """Streaming chat endpoint via SSE."""
+    def generate():
+        stream = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=request["messages"],
+            stream=True,
+        )
+        for chunk in stream:
+            if chunk.choices[0].delta.content:
+                yield f"data: {json.dumps({'content': chunk.choices[0].delta.content})}\n\n"
+        yield "data: [DONE]\n\n"
+    
+    return StreamingResponse(generate(), media_type="text/event-stream")
+# Expected: POST /v1/summarize returns structured JSON with trace_id
+# POST /v1/chat/stream returns SSE token stream
+```
+
+---
+
+## ◆ Production Failure Modes
+
+| Failure | Symptoms | Root Cause | Mitigation |
+|---------|----------|------------|------------|
+| **Provider passthrough leak** | Client breaks when model changes | Raw provider response exposed to clients | Wrap in stable response schema, version the contract |
+| **Retry storm** | 10× traffic spike after transient failure | Client retries without backoff, server returns 500 for rate limits | Use 429 with Retry-After header, implement client-side exponential backoff |
+| **Streaming disconnect** | User sees partial response, no error | Long SSE stream interrupted by proxy/LB timeout | Heartbeat pings, configurable timeouts, client reconnection logic |
+| **Schema drift** | Downstream automation breaks silently | Prompt change alters output structure | Use structured output / JSON schema enforcement, version schemas |
+
+---
+
+## ◆ Hands-On Exercises
+
+### Exercise 1: Design an AI API Contract
+
+**Goal**: Design a complete API contract for an AI-powered document extraction service
+**Time**: 30 minutes
+**Steps**:
+1. Define request schema (input document, extraction fields, format preferences)
+2. Define response schema (extracted fields, confidence scores, trace_id, usage)
+3. Define error responses (validation, rate limit, policy refusal, timeout)
+4. Add streaming endpoint for real-time extraction feedback
+5. Document with OpenAPI spec
+**Expected Output**: Complete OpenAPI spec covering sync, async, and streaming patterns
+
+---
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 8 | API design patterns for AI-backed services |
+| 🔧 Hands-on | [OpenAI API Reference](https://platform.openai.com/docs/api-reference) | Gold standard for AI API design — study their schema, streaming, and error patterns |
+| 🔧 Hands-on | [FastAPI Documentation](https://fastapi.tiangolo.com/) | Best Python framework for building AI APIs with auto-documentation |
+| 📄 Paper | [Google API Design Guide](https://cloud.google.com/apis/design) | Industry-standard API design principles applicable to AI services |
+
+---
+
+## ★ Sources
+
+- OpenAPI Specification — https://spec.openapis.org/
+- Google API Design Guide — https://cloud.google.com/apis/design
+- OpenAI API Reference — https://platform.openai.com/docs/api-reference
+- [AI System Design](../production/ai-system-design.md)

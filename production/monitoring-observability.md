@@ -4,8 +4,9 @@ tags: [monitoring, observability, tracing, evals, llmops, production]
 type: reference
 difficulty: advanced
 status: published
+last_verified: 2026-04
 parent: "[[llmops]]"
-related: ["[[model-serving]]", "[[cicd-for-ml]]", "[[cost-optimization]]", "[[../techniques/agent-evaluation]]", "[[../llms/hallucination-detection]]"]
+related: ["[[model-serving]]", "[[cicd-for-ml]]", "[[cost-optimization]]", "[[../agents/agent-evaluation]]", "[[../llms/hallucination-detection]]"]
 source: "Multiple - see Sources"
 created: 2026-04-12
 updated: 2026-04-12
@@ -45,7 +46,7 @@ This note focuses on production telemetry for LLM apps, RAG systems, and agents.
 
 - [LLMOps & Production Deployment](./llmops.md)
 - [LLM Evaluation & Benchmarks](../evaluation/evaluation-and-benchmarks.md)
-- [Agent Evaluation & Observability](../techniques/agent-evaluation.md)
+- [Agent Evaluation & Observability](../agents/agent-evaluation.md)
 
 ---
 
@@ -125,7 +126,7 @@ Last verified for example categories and ecosystem naming: 2026-04.
 {
   "request_id": "req_123",
   "route": "support-assistant",
-  "model": "gpt-5.4-mini",
+  "model": "gpt-4o-mini",
   "prompt_version": "support-v7",
   "retrieval": {
     "top_k": 5,
@@ -187,16 +188,26 @@ Last verified for example categories and ecosystem naming: 2026-04.
 
 | Relationship | Topics |
 |---|---|
-| Builds on | [LLMOps & Production Deployment](./llmops.md), [Agent Evaluation & Observability](../techniques/agent-evaluation.md), [LLM Evaluation Deep Dive](../evaluation/llm-evaluation-deep-dive.md) |
+| Builds on | [LLMOps & Production Deployment](./llmops.md), [Agent Evaluation & Observability](../agents/agent-evaluation.md), [LLM Evaluation Deep Dive](../evaluation/llm-evaluation-deep-dive.md) |
 | Leads to | [CI/CD for ML and LLM Systems](./cicd-for-ml.md), [Cost Optimization for GenAI Systems](./cost-optimization.md) |
 | Compare with | Traditional APM and log-only monitoring |
 | Cross-domain | SRE, analytics engineering, experimentation |
 
 ---
 
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 🔧 Hands-on | [LangSmith Documentation](https://docs.smith.langchain.com/) | Production LLM observability platform |
+| 🔧 Hands-on | [Arize Phoenix](https://docs.arize.com/phoenix/) | Open-source LLM observability and evaluation |
+| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 9 | Monitoring patterns specific to AI systems |
+| 🎥 Video | [Shreya Shankar — "Rethinking ML Monitoring"](https://www.shreya-shankar.com/) | Data quality monitoring for ML systems |
+
 ## Sources
 
 - Langfuse documentation
 - LangSmith documentation
 - Arize Phoenix documentation
-- [Agent Evaluation & Observability](../techniques/agent-evaluation.md)
+- [Agent Evaluation & Observability](../agents/agent-evaluation.md)

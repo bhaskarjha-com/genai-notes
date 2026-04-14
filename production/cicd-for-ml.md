@@ -4,11 +4,12 @@ tags: [cicd, mlops, llmops, deployment, testing, automation]
 type: procedure
 difficulty: advanced
 status: published
+last_verified: 2026-04
 parent: "[[llmops]]"
 related: ["[[docker-and-kubernetes]]", "[[monitoring-observability]]", "[[../evaluation/llm-evaluation-deep-dive]]", "[[model-serving]]"]
 source: "Multiple - see Sources"
 created: 2026-04-12
-updated: 2026-04-12
+updated: 2026-04-14
 ---
 
 # CI/CD for ML and LLM Systems
@@ -179,9 +180,46 @@ jobs:
 
 ---
 
-## Sources
+## ◆ Production Failure Modes
 
-- GitHub Actions documentation
-- Argo CD documentation
-- MLflow documentation
+| Failure | Symptoms | Root Cause | Mitigation |
+|---------|----------|------------|------------|
+| **Silent quality regression** | Users complain but all tests pass | Eval suite doesn't cover the regression scenario | Maintain a diverse gold dataset, add user-reported failures to eval set |
+| **Prompt version mismatch** | Staging works, production doesn't | Prompt not versioned, wrong version deployed | Version prompts in code, tag with deployment |
+| **Eval suite too slow** | Developers skip evals, merge without checks | Full eval takes 30+ minutes, blocks PRs | Tier evals: fast (2min) on PR, full (30min) nightly |
+| **Canary doesn't catch** | Bad version reaches 100% of users | Canary metric too coarse or monitored too briefly | Monitor task completion rate (not just latency), hold canary for 1+ hours |
+
+---
+
+## ◆ Hands-On Exercises
+
+### Exercise 1: Build an AI CI Pipeline
+
+**Goal**: Create a GitHub Actions workflow with eval gates
+**Time**: 45 minutes
+**Steps**:
+1. Create a simple LLM-based application (e.g., summarizer) with 3 prompt templates
+2. Write a gold eval set of 10 input/expected-output pairs
+3. Create a GitHub Actions workflow that runs pytest + eval suite on every PR
+4. Add a quality gate: block merge if eval score drops below 80%
+**Expected Output**: Working CI pipeline that catches prompt regressions
+
+---
+
+## ★ Recommended Resources
+
+| Type | Resource | Why |
+|------|----------|-----|
+| 📘 Book | "Designing Machine Learning Systems" by Chip Huyen (2022), Ch 9 (Deployment) | Best treatment of ML deployment patterns and release strategies |
+| 🔧 Hands-on | [GitHub Actions for ML](https://docs.github.com/en/actions) | CI/CD platform most accessible for ML teams |
+| 🔧 Hands-on | [MLflow Model Registry](https://mlflow.org/docs/latest/model-registry.html) | Model versioning and stage transitions |
+| 🎥 Video | [Shreya Shankar — "Rethinking ML Monitoring"](https://www.shreya-shankar.com/) | How to detect quality regressions in production ML |
+
+---
+
+## ★ Sources
+
+- GitHub Actions documentation — https://docs.github.com/en/actions
+- Argo CD documentation — https://argo-cd.readthedocs.io/
+- MLflow documentation — https://mlflow.org/docs/
 - [LLMOps & Production Deployment](./llmops.md)

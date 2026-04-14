@@ -15,14 +15,14 @@
 ## 📑 Table of Contents
 
 - [What This Is](#what-this-is)
-- [Quick Start](#-quick-start)
-- [How to Use](#-how-to-use)
-- [What's Covered](#-whats-covered)
-- [Study Tools](#-study-tools)
-- [Note Format](#-note-format)
+- [Quick Start](#quick-start)
+- [How to Use](#how-to-use)
+- [What's Covered](#whats-covered)
+- [Study Tools](#study-tools)
+- [Note Format](#note-format)
 - [Quality Notice](#quality-notice)
-- [Contributing](#-contributing)
-- [License](#%EF%B8%8F-license)
+- [Contributing](#contributing)
+- [License](#license)
 
 ---
 
@@ -46,7 +46,7 @@ Then pick your path:
 | Path | Start Here | Best For |
 |------|-----------|----------|
 | **Linear study** | [LEARNING_PATH.md](LEARNING_PATH.md) | Systematic coverage, universal foundation + role tracks |
-| **Role-based study** | [career/roles/](career/roles/) | Jump to your target role's curated learning path |
+| **Role-based study** | [career/roles/](career/roles/README.md) | Jump to your target role's curated learning path |
 | **Topic reference** | [genai.md](genai.md) | Browse the full scope map and dive into any topic |
 
 ---

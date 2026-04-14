@@ -99,7 +99,7 @@ extra:
 nav:
   - Home:
       - Welcome: index.md
-      - GitHub README: README.md
+      - GitHub README: repo-readme.md
       - Learning Path: LEARNING_PATH.md
       - Root Overview: genai.md
       - Browse By Tag: tags.md

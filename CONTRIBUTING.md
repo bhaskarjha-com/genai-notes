@@ -127,7 +127,7 @@ Open an issue with the "question" label. We're happy to help!
 
 ## For AI-Assisted Maintenance
 
-A complete library of ready-to-use maintenance prompts is available at [`_templates/MAINTENANCE_PROMPTS.md`](_templates/MAINTENANCE_PROMPTS.md).
+A complete library of ready-to-use maintenance prompts is available in the repository at `_templates/MAINTENANCE_PROMPTS.md`.
 
 It contains session-agnostic prompts for:
 - Creating new notes from scratch

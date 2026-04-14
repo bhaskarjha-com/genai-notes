@@ -6,19 +6,6 @@
 
 ---
 
-## Table of Contents
-
-- [What This Is](#what-this-is)
-- [Quick Start](#quick-start)
-- [How to Use](#how-to-use)
-- [What's Covered](#whats-covered)
-- [Study Tools](#study-tools)
-- [Note Format](#note-format)
-- [Contributing](#contributing)
-- [License](#license)
-
----
-
 ## What This Is
 
 This repository is a public collection of structured GenAI study notes in plain markdown. Each topic is designed as a self-contained 30–60 minute study session that combines theory, code, terminology, comparisons, gotchas, and interview angles.
@@ -39,7 +26,7 @@ Then pick your path:
 | Path | Start Here | Best For |
 |------|-----------|----------|
 | **Linear study** | [LEARNING_PATH.md](LEARNING_PATH.html) | Systematic coverage, universal foundation + role tracks |
-| **Role-based study** | [career/roles/](career/roles/) | Jump to your target role's curated learning path |
+| **Role-based study** | [career/roles/](career/roles/README.md) | Jump to your target role's curated learning path |
 | **Topic reference** | [genai.md](genai.html) | Browse the full scope map and dive into any topic |
 
 ---

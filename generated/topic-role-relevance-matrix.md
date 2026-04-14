@@ -6,6 +6,11 @@ Legend: Must, Good, Optional, Not Relevant.
 
 | Topic | Folder | Individual Role Guides | Agentic AI Engineer | AI Engineer | Generative AI Engineer | LLM Engineer | ML Engineer | MLOps / LLMOps Engineer | RAG Engineer |
 |---|---|---|---|---|---|---|---|---|---|
+| [AI Agents](../agents/ai-agents.md) | agents | Must | Must | Must | Must | Must | Must | Must | Must |
+| [Agent Evaluation & Observability](../agents/agent-evaluation.md) | agents | Not Relevant | Must | Good | Optional | Optional | Not Relevant | Not Relevant | Optional |
+| [Agent Memory Systems](../agents/agent-memory.md) | agents | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant |
+| [Agentic Protocols & Frameworks](../agents/agentic-protocols.md) | agents | Not Relevant | Must | Optional | Good | Optional | Not Relevant | Not Relevant | Optional |
+| [Multi-Agent Architectures](../agents/multi-agent-architectures.md) | agents | Not Relevant | Must | Good | Optional | Optional | Not Relevant | Not Relevant | Optional |
 | [AI Product Management Fundamentals](../applications/ai-product-management-fundamentals.md) | applications | Not Relevant | Not Relevant | Optional | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant |
 | [AI UX Patterns](../applications/ai-ux-patterns.md) | applications | Not Relevant | Optional | Not Relevant | Optional | Optional | Not Relevant | Not Relevant | Optional |
 | [API Design for AI Applications](../applications/api-design-for-ai.md) | applications | Not Relevant | Good | Optional | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant |

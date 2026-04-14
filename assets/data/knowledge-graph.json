@@ -1,7 +1,8 @@
 {
-  "NodeCount": 74,
-  "EdgeCount": 250,
+  "NodeCount": 79,
+  "EdgeCount": 287,
   "Folders": [
+    "agents",
     "applications",
     "ethics-and-safety",
     "evaluation",
@@ -31,6 +32,103 @@
     "E"
   ],
   "Nodes": [
+    {
+      "Id": "agents/ai-agents.md",
+      "Title": "AI Agents",
+      "Folder": "agents",
+      "Difficulty": "intermediate",
+      "Tags": [
+        "agents",
+        "agentic-ai",
+        "tool-use",
+        "function-calling",
+        "autonomy",
+        "genai-techniques"
+      ],
+      "Tracks": [
+        "Foundation"
+      ],
+      "SitePath": "agents/ai-agents.html",
+      "Degree": 22
+    },
+    {
+      "Id": "agents/agent-evaluation.md",
+      "Title": "Agent Evaluation & Observability",
+      "Folder": "agents",
+      "Difficulty": "advanced",
+      "Tags": [
+        "agent-eval",
+        "observability",
+        "tracing",
+        "evaluation",
+        "genai-techniques"
+      ],
+      "Tracks": [
+        "B"
+      ],
+      "SitePath": "agents/agent-evaluation.html",
+      "Degree": 8
+    },
+    {
+      "Id": "agents/agent-memory.md",
+      "Title": "Agent Memory Systems",
+      "Folder": "agents",
+      "Difficulty": "advanced",
+      "Tags": [
+        "agents",
+        "memory",
+        "context",
+        "state",
+        "conversation",
+        "rag",
+        "production"
+      ],
+      "Tracks": [],
+      "SitePath": "agents/agent-memory.html",
+      "Degree": 4
+    },
+    {
+      "Id": "agents/agentic-protocols.md",
+      "Title": "Agentic Protocols & Frameworks",
+      "Folder": "agents",
+      "Difficulty": "intermediate",
+      "Tags": [
+        "mcp",
+        "a2a",
+        "adk",
+        "agent-protocols",
+        "langraph",
+        "crewai",
+        "autogen",
+        "agentic-infra",
+        "genai"
+      ],
+      "Tracks": [
+        "A",
+        "B"
+      ],
+      "SitePath": "agents/agentic-protocols.html",
+      "Degree": 5
+    },
+    {
+      "Id": "agents/multi-agent-architectures.md",
+      "Title": "Multi-Agent Architectures",
+      "Folder": "agents",
+      "Difficulty": "advanced",
+      "Tags": [
+        "multi-agent",
+        "agents",
+        "orchestration",
+        "coordination",
+        "genai-techniques"
+      ],
+      "Tracks": [
+        "A",
+        "B"
+      ],
+      "SitePath": "agents/multi-agent-architectures.html",
+      "Degree": 7
+    },
     {
       "Id": "applications/ai-product-management-fundamentals.md",
       "Title": "AI Product Management Fundamentals",
@@ -110,7 +208,7 @@
         "A"
       ],
       "SitePath": "applications/code-generation.html",
-      "Degree": 2
+      "Degree": 5
     },
     {
       "Id": "applications/conversational-ai.md",
@@ -129,7 +227,7 @@
         "A"
       ],
       "SitePath": "applications/conversational-ai.html",
-      "Degree": 4
+      "Degree": 5
     },
     {
       "Id": "applications/voice-ai.md",
@@ -150,7 +248,7 @@
         "A"
       ],
       "SitePath": "applications/voice-ai.html",
-      "Degree": 2
+      "Degree": 3
     },
     {
       "Id": "ethics-and-safety/ai-regulation.md",
@@ -269,7 +367,7 @@
         "E"
       ],
       "SitePath": "evaluation/evaluation-and-benchmarks.html",
-      "Degree": 6
+      "Degree": 8
     },
     {
       "Id": "evaluation/llm-evaluation-deep-dive.md",
@@ -289,7 +387,7 @@
         "E"
       ],
       "SitePath": "evaluation/llm-evaluation-deep-dive.html",
-      "Degree": 10
+      "Degree": 11
     },
     {
       "Id": "evaluation/retrieval-evaluation.md",
@@ -381,7 +479,7 @@
         "Foundation"
       ],
       "SitePath": "foundations/embeddings.html",
-      "Degree": 11
+      "Degree": 12
     },
     {
       "Id": "foundations/modern-architectures.md",
@@ -598,7 +696,7 @@
         "Foundation"
       ],
       "SitePath": "llms/llms-overview.html",
-      "Degree": 28
+      "Degree": 30
     },
     {
       "Id": "llms/reasoning-models.md",
@@ -619,7 +717,7 @@
         "D"
       ],
       "SitePath": "llms/reasoning-models.html",
-      "Degree": 7
+      "Degree": 8
     },
     {
       "Id": "multimodal/computer-vision-fundamentals.md",
@@ -805,7 +903,7 @@
         "A"
       ],
       "SitePath": "production/ai-system-design.html",
-      "Degree": 15
+      "Degree": 17
     },
     {
       "Id": "production/cicd-for-ml.md",
@@ -980,7 +1078,7 @@
         "B"
       ],
       "SitePath": "production/llmops.html",
-      "Degree": 13
+      "Degree": 14
     },
     {
       "Id": "production/latency-and-throughput-engineering.md",
@@ -1040,7 +1138,7 @@
         "C"
       ],
       "SitePath": "production/monitoring-observability.html",
-      "Degree": 12
+      "Degree": 13
     },
     {
       "Id": "research-frontiers/distributed-training.md",
@@ -1114,7 +1212,7 @@
       ],
       "Tracks": [],
       "SitePath": "genai.html",
-      "Degree": 5
+      "Degree": 6
     },
     {
       "Id": "techniques/advanced-fine-tuning.md",
@@ -1169,7 +1267,7 @@
       ],
       "Tracks": [],
       "SitePath": "techniques/continual-learning.html",
-      "Degree": 3
+      "Degree": 4
     },
     {
       "Id": "techniques/embedding-fine-tuning.md",
@@ -1227,7 +1325,7 @@
         "Foundation"
       ],
       "SitePath": "techniques/function-calling-and-structured-output.html",
-      "Degree": 4
+      "Degree": 8
     },
     {
       "Id": "techniques/graph-rag.md",
@@ -1247,7 +1345,7 @@
         "B"
       ],
       "SitePath": "techniques/graph-rag.html",
-      "Degree": 2
+      "Degree": 3
     },
     {
       "Id": "techniques/distillation-and-compression.md",
@@ -1304,7 +1402,7 @@
         "Foundation"
       ],
       "SitePath": "techniques/prompt-engineering.html",
-      "Degree": 8
+      "Degree": 10
     },
     {
       "Id": "techniques/rl-alignment.md",
@@ -1344,7 +1442,7 @@
         "Foundation"
       ],
       "SitePath": "techniques/rag.html",
-      "Degree": 22
+      "Degree": 25
     },
     {
       "Id": "techniques/synthetic-data-and-data-engineering.md",
@@ -1464,6 +1562,116 @@
   ],
   "Links": [
     {
+      "Source": "agents/agent-evaluation.md",
+      "Target": "agents/ai-agents.md",
+      "Relation": "builds-on"
+    },
+    {
+      "Source": "agents/agent-evaluation.md",
+      "Target": "agents/multi-agent-architectures.md",
+      "Relation": "leads-to"
+    },
+    {
+      "Source": "agents/agent-evaluation.md",
+      "Target": "evaluation/evaluation-and-benchmarks.md",
+      "Relation": "builds-on"
+    },
+    {
+      "Source": "agents/agent-evaluation.md",
+      "Target": "evaluation/evaluation-and-benchmarks.md",
+      "Relation": "leads-to"
+    },
+    {
+      "Source": "agents/agent-evaluation.md",
+      "Target": "production/llmops.md",
+      "Relation": "builds-on"
+    },
+    {
+      "Source": "agents/agent-memory.md",
+      "Target": "agents/ai-agents.md",
+      "Relation": "builds-on"
+    },
+    {
+      "Source": "agents/agent-memory.md",
+      "Target": "agents/multi-agent-architectures.md",
+      "Relation": "leads-to"
+    },
+    {
+      "Source": "agents/agent-memory.md",
+      "Target": "foundations/embeddings.md",
+      "Relation": "builds-on"
+    },
+    {
+      "Source": "agents/agent-memory.md",
+      "Target": "techniques/rag.md",
+      "Relation": "builds-on"
+    },
+    {
+      "Source": "agents/agentic-protocols.md",
+      "Target": "agents/ai-agents.md",
+      "Relation": "builds-on"
+    },
+    {
+      "Source": "agents/agentic-protocols.md",
+      "Target": "techniques/function-calling-and-structured-output.md",
+      "Relation": "builds-on"
+    },
+    {
+      "Source": "agents/ai-agents.md",
+      "Target": "agents/agentic-protocols.md",
+      "Relation": "leads-to"
+    },
+    {
+      "Source": "agents/ai-agents.md",
+      "Target": "applications/code-generation.md",
+      "Relation": "leads-to"
+    },
+    {
+      "Source": "agents/ai-agents.md",
+      "Target": "llms/llms-overview.md",
+      "Relation": "builds-on"
+    },
+    {
+      "Source": "agents/ai-agents.md",
+      "Target": "techniques/function-calling-and-structured-output.md",
+      "Relation": "builds-on"
+    },
+    {
+      "Source": "agents/ai-agents.md",
+      "Target": "techniques/prompt-engineering.md",
+      "Relation": "builds-on"
+    },
+    {
+      "Source": "agents/ai-agents.md",
+      "Target": "techniques/rag.md",
+      "Relation": "builds-on"
+    },
+    {
+      "Source": "agents/multi-agent-architectures.md",
+      "Target": "agents/agent-evaluation.md",
+      "Relation": "leads-to"
+    },
+    {
+      "Source": "agents/multi-agent-architectures.md",
+      "Target": "agents/agentic-protocols.md",
+      "Relation": "builds-on"
+    },
+    {
+      "Source": "agents/multi-agent-architectures.md",
+      "Target": "agents/ai-agents.md",
+      "Relation": "builds-on"
+    },
+    {
+      "Source": "agents/multi-agent-architectures.md",
+      "Target": "production/ai-system-design.md",
+      "Relation": "leads-to"
+    },
+    {
+      "Source": "agents/multi-agent-architectures.md",
+      "Target": "techniques/function-calling-and-structured-output.md",
+      "Relation": "builds-on"
+    },
+    {
       "Source": "applications/ai-product-management-fundamentals.md",
       "Target": "evaluation/llm-evaluation-deep-dive.md",
       "Relation": "builds-on"
@@ -1500,6 +1708,16 @@
     },
     {
       "Source": "applications/code-generation.md",
+      "Target": "agents/agentic-protocols.md",
+      "Relation": "builds-on"
+    },
+    {
+      "Source": "applications/code-generation.md",
+      "Target": "agents/ai-agents.md",
+      "Relation": "builds-on"
+    },
+    {
+      "Source": "applications/code-generation.md",
       "Target": "llms/llms-overview.md",
       "Relation": "builds-on"
     },
@@ -1507,6 +1725,11 @@
       "Source": "applications/code-generation.md",
       "Target": "production/ai-system-design.md",
       "Relation": "leads-to"
+    },
+    {
+      "Source": "applications/conversational-ai.md",
+      "Target": "agents/ai-agents.md",
+      "Relation": "builds-on"
     },
     {
       "Source": "applications/conversational-ai.md",
@@ -1521,6 +1744,11 @@
     {
       "Source": "applications/conversational-ai.md",
       "Target": "techniques/function-calling-and-structured-output.md",
+      "Relation": "builds-on"
+    },
+    {
+      "Source": "applications/voice-ai.md",
+      "Target": "agents/ai-agents.md",
       "Relation": "builds-on"
     },
     {
@@ -1596,6 +1824,11 @@
     {
       "Source": "evaluation/evaluation-and-benchmarks.md",
       "Target": "techniques/rag.md",
+      "Relation": "builds-on"
+    },
+    {
+      "Source": "evaluation/llm-evaluation-deep-dive.md",
+      "Target": "agents/agent-evaluation.md",
       "Relation": "builds-on"
     },
     {
@@ -1800,6 +2033,11 @@
     },
     {
       "Source": "genai.md",
+      "Target": "agents/ai-agents.md",
+      "Relation": "leads-to"
+    },
+    {
+      "Source": "genai.md",
       "Target": "foundations/attention-mechanism.md",
       "Relation": "builds-on"
     },
@@ -1915,6 +2153,11 @@
     },
     {
       "Source": "llms/llms-overview.md",
+      "Target": "agents/ai-agents.md",
+      "Relation": "leads-to"
+    },
+    {
+      "Source": "llms/llms-overview.md",
       "Target": "foundations/attention-mechanism.md",
       "Relation": "builds-on"
     },
@@ -1937,6 +2180,11 @@
       "Source": "llms/llms-overview.md",
       "Target": "techniques/rag.md",
       "Relation": "leads-to"
+    },
+    {
+      "Source": "llms/reasoning-models.md",
+      "Target": "agents/ai-agents.md",
+      "Relation": "compare-with"
     },
     {
       "Source": "llms/reasoning-models.md",
@@ -2127,6 +2375,11 @@
       "Source": "prerequisites/python-for-ai.md",
       "Target": "prerequisites/neural-networks.md",
       "Relation": "leads-to"
+    },
+    {
+      "Source": "production/ai-system-design.md",
+      "Target": "agents/ai-agents.md",
+      "Relation": "builds-on"
     },
     {
       "Source": "production/ai-system-design.md",
@@ -2365,6 +2618,11 @@
     },
     {
       "Source": "production/monitoring-observability.md",
+      "Target": "agents/agent-evaluation.md",
+      "Relation": "builds-on"
+    },
+    {
+      "Source": "production/monitoring-observability.md",
       "Target": "evaluation/llm-evaluation-deep-dive.md",
       "Relation": "builds-on"
     },
@@ -2480,6 +2738,11 @@
     },
     {
       "Source": "techniques/continual-learning.md",
+      "Target": "agents/ai-agents.md",
+      "Relation": "leads-to"
+    },
+    {
+      "Source": "techniques/continual-learning.md",
       "Target": "prerequisites/deep-learning-fundamentals.md",
       "Relation": "builds-on"
     },
@@ -2545,6 +2808,11 @@
     },
     {
       "Source": "techniques/function-calling-and-structured-output.md",
+      "Target": "agents/ai-agents.md",
+      "Relation": "leads-to"
+    },
+    {
+      "Source": "techniques/function-calling-and-structured-output.md",
       "Target": "llms/llms-overview.md",
       "Relation": "builds-on"
     },
@@ -2557,6 +2825,11 @@
       "Source": "techniques/function-calling-and-structured-output.md",
       "Target": "techniques/rag.md",
       "Relation": "leads-to"
+    },
+    {
+      "Source": "techniques/graph-rag.md",
+      "Target": "agents/ai-agents.md",
+      "Relation": "builds-on"
     },
     {
       "Source": "techniques/graph-rag.md",
@@ -2585,6 +2858,11 @@
     },
     {
       "Source": "techniques/prompt-engineering.md",
+      "Target": "agents/ai-agents.md",
+      "Relation": "leads-to"
+    },
+    {
+      "Source": "techniques/prompt-engineering.md",
       "Target": "llms/llms-overview.md",
       "Relation": "builds-on"
     },
@@ -2601,6 +2879,11 @@
     {
       "Source": "techniques/prompt-engineering.md",
       "Target": "techniques/rag.md",
+      "Relation": "leads-to"
+    },
+    {
+      "Source": "techniques/rag.md",
+      "Target": "agents/ai-agents.md",
       "Relation": "leads-to"
     },
     {

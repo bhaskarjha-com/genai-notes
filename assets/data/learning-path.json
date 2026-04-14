@@ -197,6 +197,16 @@
           "MarkdownLink": "../techniques/fine-tuning.md"
         },
         {
+          "Path": "agents/ai-agents.md",
+          "Title": "AI Agents",
+          "Label": "ai-agents",
+          "Folder": "agents",
+          "Difficulty": "intermediate",
+          "EstTime": "4h",
+          "SitePath": "agents/ai-agents.html",
+          "MarkdownLink": "../agents/ai-agents.md"
+        },
+        {
           "Path": "evaluation/evaluation-and-benchmarks.md",
           "Title": "LLM Evaluation & Benchmarks",
           "Label": "evaluation",
@@ -251,6 +261,26 @@
           "EstTime": "3h",
           "SitePath": "tools-and-infra/vector-databases.html",
           "MarkdownLink": "../tools-and-infra/vector-databases.md"
+        },
+        {
+          "Path": "agents/multi-agent-architectures.md",
+          "Title": "Multi-Agent Architectures",
+          "Label": "multi-agent-architectures",
+          "Folder": "agents",
+          "Difficulty": "advanced",
+          "EstTime": "3h",
+          "SitePath": "agents/multi-agent-architectures.html",
+          "MarkdownLink": "../agents/multi-agent-architectures.md"
+        },
+        {
+          "Path": "agents/agentic-protocols.md",
+          "Title": "Agentic Protocols & Frameworks",
+          "Label": "agentic-protocols",
+          "Folder": "agents",
+          "Difficulty": "intermediate",
+          "EstTime": "4h",
+          "SitePath": "agents/agentic-protocols.html",
+          "MarkdownLink": "../agents/agentic-protocols.md"
         },
         {
           "Path": "applications/conversational-ai.md",
@@ -335,6 +365,36 @@
           "EstTime": "3h",
           "SitePath": "techniques/graph-rag.html",
           "MarkdownLink": "../techniques/graph-rag.md"
+        },
+        {
+          "Path": "agents/multi-agent-architectures.md",
+          "Title": "Multi-Agent Architectures",
+          "Label": "multi-agent-architectures",
+          "Folder": "agents",
+          "Difficulty": "advanced",
+          "EstTime": "3h",
+          "SitePath": "agents/multi-agent-architectures.html",
+          "MarkdownLink": "../agents/multi-agent-architectures.md"
+        },
+        {
+          "Path": "agents/agent-evaluation.md",
+          "Title": "Agent Evaluation & Observability",
+          "Label": "agent-evaluation",
+          "Folder": "agents",
+          "Difficulty": "advanced",
+          "EstTime": "3h",
+          "SitePath": "agents/agent-evaluation.html",
+          "MarkdownLink": "../agents/agent-evaluation.md"
+        },
+        {
+          "Path": "agents/agentic-protocols.md",
+          "Title": "Agentic Protocols & Frameworks",
+          "Label": "agentic-protocols",
+          "Folder": "agents",
+          "Difficulty": "intermediate",
+          "EstTime": "4h",
+          "SitePath": "agents/agentic-protocols.html",
+          "MarkdownLink": "../agents/agentic-protocols.md"
         },
         {
           "Path": "techniques/advanced-fine-tuning.md",

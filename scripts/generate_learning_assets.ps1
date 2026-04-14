@@ -3,6 +3,7 @@ $ErrorActionPreference = "Stop"
 $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
 
 $topicDirs = @(
+    "agents",
     "applications",
     "ethics-and-safety",
     "evaluation",

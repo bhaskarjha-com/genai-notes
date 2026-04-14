@@ -4,76 +4,161 @@
       "Id": "README",
       "Title": "Individual Role Guides",
       "PrimaryTrack": null,
-      "MustCount": 19,
+      "MustCount": 20,
       "GoodCount": 0,
       "OptionalCount": 0,
-      "NotRelevantCount": 55
+      "NotRelevantCount": 59
     },
     {
       "Id": "agentic-ai-engineer",
       "Title": "Agentic AI Engineer",
       "PrimaryTrack": "B",
-      "MustCount": 21,
+      "MustCount": 25,
       "GoodCount": 5,
       "OptionalCount": 17,
-      "NotRelevantCount": 31
+      "NotRelevantCount": 32
     },
     {
       "Id": "ai-engineer",
       "Title": "AI Engineer",
       "PrimaryTrack": "A",
-      "MustCount": 21,
-      "GoodCount": 2,
-      "OptionalCount": 7,
-      "NotRelevantCount": 44
+      "MustCount": 22,
+      "GoodCount": 4,
+      "OptionalCount": 8,
+      "NotRelevantCount": 45
     },
     {
       "Id": "genai-engineer",
       "Title": "Generative AI Engineer",
       "PrimaryTrack": "B",
-      "MustCount": 21,
-      "GoodCount": 3,
-      "OptionalCount": 16,
-      "NotRelevantCount": 34
+      "MustCount": 22,
+      "GoodCount": 4,
+      "OptionalCount": 18,
+      "NotRelevantCount": 35
     },
     {
       "Id": "llm-engineer",
       "Title": "LLM Engineer",
       "PrimaryTrack": "B",
-      "MustCount": 21,
+      "MustCount": 22,
       "GoodCount": 3,
-      "OptionalCount": 16,
-      "NotRelevantCount": 34
+      "OptionalCount": 19,
+      "NotRelevantCount": 35
     },
     {
       "Id": "ml-engineer",
       "Title": "ML Engineer",
       "PrimaryTrack": "C",
-      "MustCount": 27,
+      "MustCount": 28,
       "GoodCount": 5,
       "OptionalCount": 1,
-      "NotRelevantCount": 41
+      "NotRelevantCount": 45
     },
     {
       "Id": "mlops-engineer",
       "Title": "MLOps / LLMOps Engineer",
       "PrimaryTrack": "C",
-      "MustCount": 27,
+      "MustCount": 28,
       "GoodCount": 5,
       "OptionalCount": 2,
-      "NotRelevantCount": 40
+      "NotRelevantCount": 44
     },
     {
       "Id": "rag-engineer",
       "Title": "RAG Engineer",
       "PrimaryTrack": "B",
-      "MustCount": 21,
+      "MustCount": 22,
       "GoodCount": 3,
-      "OptionalCount": 16,
-      "NotRelevantCount": 34
+      "OptionalCount": 19,
+      "NotRelevantCount": 35
     }
   ],
   "Topics": [
+    {
+      "Path": "agents/ai-agents.md",
+      "Title": "AI Agents",
+      "Folder": "agents",
+      "Difficulty": "intermediate",
+      "SitePath": "agents/ai-agents.html",
+      "Statuses": {
+        "README": "Must",
+        "agentic-ai-engineer": "Must",
+        "ai-engineer": "Must",
+        "genai-engineer": "Must",
+        "llm-engineer": "Must",
+        "ml-engineer": "Must",
+        "mlops-engineer": "Must",
+        "rag-engineer": "Must"
+      }
+    },
+    {
+      "Path": "agents/agent-evaluation.md",
+      "Title": "Agent Evaluation & Observability",
+      "Folder": "agents",
+      "Difficulty": "advanced",
+      "SitePath": "agents/agent-evaluation.html",
+      "Statuses": {
+        "README": "Not Relevant",
+        "agentic-ai-engineer": "Must",
+        "ai-engineer": "Good",
+        "genai-engineer": "Optional",
+        "llm-engineer": "Optional",
+        "ml-engineer": "Not Relevant",
+        "mlops-engineer": "Not Relevant",
+        "rag-engineer": "Optional"
+      }
+    },
+    {
+      "Path": "agents/agent-memory.md",
+      "Title": "Agent Memory Systems",
+      "Folder": "agents",
+      "Difficulty": "advanced",
+      "SitePath": "agents/agent-memory.html",
+      "Statuses": {
+        "README": "Not Relevant",
+        "agentic-ai-engineer": "Not Relevant",
+        "ai-engineer": "Not Relevant",
+        "genai-engineer": "Not Relevant",
+        "llm-engineer": "Not Relevant",
+        "ml-engineer": "Not Relevant",
+        "mlops-engineer": "Not Relevant",
+        "rag-engineer": "Not Relevant"
+      }
+    },
+    {
+      "Path": "agents/agentic-protocols.md",
+      "Title": "Agentic Protocols & Frameworks",
+      "Folder": "agents",
+      "Difficulty": "intermediate",
+      "SitePath": "agents/agentic-protocols.html",
+      "Statuses": {
+        "README": "Not Relevant",
+        "agentic-ai-engineer": "Must",
+        "ai-engineer": "Optional",
+        "genai-engineer": "Good",
+        "llm-engineer": "Optional",
+        "ml-engineer": "Not Relevant",
+        "mlops-engineer": "Not Relevant",
+        "rag-engineer": "Optional"
+      }
+    },
+    {
+      "Path": "agents/multi-agent-architectures.md",
+      "Title": "Multi-Agent Architectures",
+      "Folder": "agents",
+      "Difficulty": "advanced",
+      "SitePath": "agents/multi-agent-architectures.html",
+      "Statuses": {
+        "README": "Not Relevant",
+        "agentic-ai-engineer": "Must",
+        "ai-engineer": "Good",
+        "genai-engineer": "Optional",
+        "llm-engineer": "Optional",
+        "ml-engineer": "Not Relevant",
+        "mlops-engineer": "Not Relevant",
+        "rag-engineer": "Optional"
+      }
+    },
     {
       "Path": "applications/ai-product-management-fundamentals.md",
       "Title": "AI Product Management Fundamentals",

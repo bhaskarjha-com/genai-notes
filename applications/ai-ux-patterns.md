@@ -9,7 +9,7 @@ parent: "../production/ai-system-design.md"
 related: ["api-design-for-ai.md", "conversational-ai.md", "voice-ai.md", "ai-product-management-fundamentals.md"]
 source: "Multiple — see Sources"
 created: 2026-04-14
-updated: 2026-04-14
+updated: 2026-04-15
 ---
 
 # AI UX Patterns
@@ -80,6 +80,36 @@ PILLAR 1: SPEED                    PILLAR 2: TRUST                  PILLAR 3: CO
 | **No way to correct**     | Users feel powerless               | Edit, regenerate, and feedback buttons    |
 | **Hiding AI involvement** | Users feel deceived                | Be transparent about AI-generated content |
 
+### Cognitive Load Patterns
+
+AI responses are often longer and denser than traditional software output. Managing cognitive load is critical:
+
+```
+PROGRESSIVE DISCLOSURE HIERARCHY:
+
+  Level 1 (Always visible):
+    TL;DR summary -- 1-2 sentences. Show immediately.
+
+  Level 2 (Expandable):
+    Key points -- bullet list. Expand on click.
+
+  Level 3 (On demand):
+    Full response -- complete text. "Read more" link.
+    Sources / citations -- only when user asks "How do you know?"
+
+  Why it works: Miller's Law -- working memory holds 7+/-2 items.
+  Showing the full response immediately overwhelms; chunked delivery respects limits.
+```
+
+| Cognitive Load Pattern | When to Use | Implementation |
+|---|---|---|
+| **Chunked delivery** | Long responses (>200 words) | TL;DR first, details expandable |
+| **Skeleton states** | Inference >500ms | Shimmer animation matching response layout |
+| **Inline citations** | Factual claims | Superscript [1], source panel on click |
+| **Structured output** | Lists, tables, code | Detect and render markdown server-side |
+| **Response length control** | Power users | Terse / Standard / Detailed toggle |
+| **Diff highlighting** | Regenerated responses | Highlight what changed between versions |
+
 ---
 
 ## ◆ Production Failure Modes
@@ -89,6 +119,8 @@ PILLAR 1: SPEED                    PILLAR 2: TRUST                  PILLAR 3: CO
 | **Trust erosion**       | Users stop relying on AI answers   | Confident wrong answers without citations    | Add citations, confidence indicators, "I don't know"          |
 | **Latency abandonment** | Users leave during model inference | No streaming, no loading indicator           | Stream tokens, add skeleton loading                           |
 | **Feedback fatigue**    | Users stop giving feedback         | Too many feedback prompts, no visible impact | Make feedback easy (one click), show when it improves results |
+| **Cognitive overload**  | Users skim or ignore responses     | Full answer dumped without structure         | Progressive disclosure, TL;DR first, render markdown properly |
+| **Hallucination cascade** | User acts on wrong AI output     | No uncertainty signal; user trusted blindly  | Confidence indicators required for factual claims; citations  |
 
 ---
 
@@ -96,6 +128,12 @@ PILLAR 1: SPEED                    PILLAR 2: TRUST                  PILLAR 3: CO
 
 - **Q**: How would you design the UX for an AI research assistant?
 - **A**: Three core principles. Speed: stream responses token-by-token with a skeleton loading state. Trust: every claim gets an inline citation with a link to the source document — clicking opens the relevant passage highlighted. Control: users can regenerate, edit the response, or thumbs-down with a reason. I'd add progressive disclosure — a TL;DR summary with expandable details underneath. For uncertainty, I'd use a confidence indicator and have the AI explicitly say "I'm not sure about this" rather than hallucinating confidently.
+
+- **Q**: How do you handle the trust problem with AI-generated content?
+- **A**: Trust is built through transparency and verifiability. Three patterns: (1) Citation cards — every factual claim links to its source; users can verify. (2) Explicit uncertainty — "I'm not confident about this" is better than false confidence. (3) Graceful correction — make it trivially easy to edit, regenerate, or flag wrong answers. The key insight: users don't need AI to be perfect, they need to know *when* to trust it and when to double-check.
+
+- **Q**: Streaming responses seem simple — what are the hard engineering tradeoffs?
+- **A**: Three non-obvious challenges. (1) Partial markdown — streaming mid-table or mid-code-block means your frontend must handle incomplete syntax gracefully without layout breaking. (2) Cancellation — users abort early; you need to cleanly close SSE connections and stop generation to avoid wasted cost. (3) Error recovery — if the stream breaks after 50 tokens, resume or restart gracefully, not leave a half-rendered response. At scale: buffer DOM updates to batches of ~50ms to avoid 100+ React re-renders/second, and cache common prompt prefixes server-side.
 
 ---
 
@@ -110,6 +148,18 @@ PILLAR 1: SPEED                    PILLAR 2: TRUST                  PILLAR 3: CO
 2. Score it on Speed, Trust, and Control (1-10 each)
 3. Identify 3 UX anti-patterns and suggest improvements
 **Expected Output**: UX audit scorecard with improvement recommendations
+
+### Exercise 2: Build a Streaming AI Interface
+
+**Goal**: Implement a streaming chat UI with confidence indicators
+**Time**: 45 minutes
+**Steps**:
+1. Use the FastAPI streaming endpoint from the Code section below
+2. Build a React frontend that renders tokens progressively using the TypeScript pattern
+3. Add a confidence color indicator (green/yellow/red) using the confidence endpoint
+4. Add a "Regenerate" button that clears and re-streams the response
+5. Test: measure perceived speed vs. non-streaming (5-person user study)
+**Expected Output**: Working chat UI with streaming + confidence + regenerate UX
 
 ---
 
@@ -190,6 +240,62 @@ result = answer_with_confidence("What is the population of Mars?")
 print(f"Answer: {result['answer']}")
 print(f"Confidence: {result['confidence']:.0%} → {confidence_color(result['confidence'])}")
 print(f"Caveat: {result.get('uncertainty_note')}")
+```
+
+### React Streaming UI (TypeScript — DOM Ref Pattern)
+
+```typescript
+// npm install openai  (React 18+ assumed)
+// ⚠️ Last tested: 2026-04 | Requires: React 18+, EventSource API
+// Key insight: use ref + direct DOM mutation for streaming, NOT useState per token.
+// useState per token = 100+ re-renders/sec = jank. Ref mutation = smooth.
+
+import { useRef, useState, useCallback } from 'react';
+
+export function StreamingChat() {
+  const [question, setQuestion]   = useState('');
+  const [isStreaming, setStreaming] = useState(false);
+  const outputRef  = useRef<HTMLDivElement>(null);
+  const esRef      = useRef<EventSource | null>(null);
+
+  const handleAsk = useCallback(() => {
+    if (!question.trim() || isStreaming) return;
+    setStreaming(true);
+    if (outputRef.current) outputRef.current.textContent = '';
+
+    // Close any previous stream
+    esRef.current?.close();
+
+    const es = new EventSource(`/stream?question=${encodeURIComponent(question)}`);
+    esRef.current = es;
+
+    es.onmessage = (e) => {
+      if (e.data === '[DONE]') { es.close(); setStreaming(false); return; }
+      // Direct DOM mutation: avoids re-rendering entire component per token
+      if (outputRef.current) outputRef.current.textContent += e.data;
+    };
+
+    es.onerror = () => {
+      es.close();
+      setStreaming(false);
+      if (outputRef.current) outputRef.current.textContent += ' [Stream error]';
+    };
+  }, [question, isStreaming]);
+
+  const handleCancel = () => {
+    esRef.current?.close();
+    setStreaming(false);
+  };
+
+  return (
+    <div>
+      <textarea value={question} onChange={e => setQuestion(e.target.value)} rows={3} />
+      <button onClick={handleAsk} disabled={isStreaming}>Ask</button>
+      {isStreaming && <button onClick={handleCancel}>Stop</button>}
+      <div ref={outputRef} aria-live="polite" className="ai-output" />
+    </div>
+  );
+}
 ```
 
 ## ★ Connections

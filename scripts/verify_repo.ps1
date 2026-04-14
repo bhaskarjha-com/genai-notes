@@ -119,7 +119,9 @@ $allMarkdownFiles = Get-ChildItem -Path $repoRoot -Recurse -File -Filter *.md |
         $_.FullName -notmatch '[/\\]drafts[/\\]' -and
         $_.FullName -notmatch '[/\\]_templates[/\\]' -and
         $_.FullName -notmatch '[/\\]docs[/\\]' -and
-        $_.FullName -notmatch '[/\\]site[/\\]'
+        $_.FullName -notmatch '[/\\]site[/\\]' -and
+        # repo-readme.md uses .html MkDocs links intentionally — skip local link check
+        $_.Name -ne 'repo-readme.md'
     }
 
 $brokenFrontmatterLinks = New-Object System.Collections.Generic.List[string]

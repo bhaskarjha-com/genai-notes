@@ -44,3 +44,11 @@
 - [ ] [Monitoring & Observability for GenAI Systems](../../production/monitoring-observability.md) - 3h
 - [ ] [Cost Optimization for GenAI Systems](../../production/cost-optimization.md) - 3h
 - [ ] [LLMOps & Production Deployment](../../production/llmops.md) - 3h
+- [ ] [Embedding Fine-Tuning](../../techniques/embedding-fine-tuning.md) - 3h
+- [ ] [Long-Context Engineering](../../techniques/long-context-engineering.md) - 3h
+- [ ] [Retrieval Evaluation](../../evaluation/retrieval-evaluation.md) - 3h
+- [ ] [Guardrails & Content Filtering](../../production/guardrails-and-content-filtering.md) - 3h
+- [ ] [LLM Routing & Model Selection](../../production/llm-routing-and-model-selection.md) - 3h
+- [ ] [Document Parsing & Extraction](../../production/document-parsing-and-extraction.md) - 2h
+- [ ] [Data Flywheel Design](../../production/data-flywheel-design.md) - 2h
+- [ ] [AI UX Patterns](../../applications/ai-ux-patterns.md) - 2h

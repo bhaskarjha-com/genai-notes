@@ -42,3 +42,5 @@
 - [ ] [Research Methodology & Paper Reading for AI](../../research-frontiers/research-methodology-and-paper-reading.md) - 2h
 - [ ] [GPU & CUDA Programming for AI Engineers](../../inference/gpu-cuda-programming.md) - 4h
 - [ ] [Reasoning Models & Test-Time Compute](../../llms/reasoning-models.md) - 3h
+- [ ] [Attention Mechanism Deep Dive](../../foundations/attention-deep-dive.md) - 4h
+- [ ] [State Space Models](../../foundations/state-space-models.md) - 3h

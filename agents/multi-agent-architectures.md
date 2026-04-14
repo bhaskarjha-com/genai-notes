@@ -224,17 +224,17 @@ def supervisor(state: TeamState) -> dict:
     """Supervisor decides which agent to call next."""
     system = """You are a project supervisor. Based on the current state, decide the next step:
     - If no research exists: route to 'researcher'
-    - If research exists but no draft: route to 'writer'  
+    - If research exists but no draft: route to 'writer'
     - If draft exists but no review: route to 'reviewer'
     - If review exists: route to 'done'
-    
+
     Respond with ONLY the agent name: researcher, writer, reviewer, or done"""
-    
+
     context = f"""Task: {state['task']}
 Research: {'Done' if state.get('research_output') else 'Not started'}
 Draft: {'Done' if state.get('draft_output') else 'Not started'}
 Review: {'Done' if state.get('review_output') else 'Not started'}"""
-    
+
     response = llm.invoke([
         SystemMessage(content=system),
         HumanMessage(content=context),
@@ -419,7 +419,7 @@ MULTI-AGENT COST MODEL:
   Single agent:    1 × (LLM call + tools) = ~$0.03
   Supervisor + 3 workers: 4-7 × LLM call = ~$0.12-$0.21
   Debate (2 rounds): 5-7 × LLM call = ~$0.15-$0.21
-  
+
   Rule of thumb: Multi-agent costs 3-7× more than single-agent.
   Make sure the quality improvement justifies this.
 ```

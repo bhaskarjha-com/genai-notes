@@ -62,7 +62,7 @@ MODEL TIERS (per 1M input tokens):
     Use for: classification, extraction, simple Q&A, reformatting
     Latency: 100-300ms TTFT
 
-  TIER 2: MID-RANGE                 $1.00 - $5.00  
+  TIER 2: MID-RANGE                 $1.00 - $5.00
     GPT-4o, Claude Sonnet, Gemini Pro
     Use for: complex Q&A, summarization, code generation
     Latency: 300-800ms TTFT
@@ -73,7 +73,7 @@ MODEL TIERS (per 1M input tokens):
     Latency: 1-5s TTFT
 
   COST DIFFERENCE: Tier 3 is up to 1000× more expensive than Tier 1
-  
+
   QUALITY DIFFERENCE: For simple tasks, Tier 1 ≈ Tier 3 quality
                       For hard tasks, Tier 3 >> Tier 1 quality
 ```
@@ -163,7 +163,7 @@ def classify_difficulty(query: str) -> str:
 Output JSON: {"difficulty": "easy"|"medium"|"hard", "reason": "brief explanation"}
 
 easy: simple facts, formatting, classification, short answers
-medium: summarization, code generation, multi-step reasoning  
+medium: summarization, code generation, multi-step reasoning
 hard: complex analysis, mathematical proofs, novel code architecture"""
         }, {
             "role": "user",
@@ -179,27 +179,27 @@ hard: complex analysis, mathematical proofs, novel code architecture"""
 def route_and_respond(query: str, messages: list[dict] = None) -> dict:
     """Route query to appropriate model and return response with metadata."""
     start = time.time()
-    
+
     # Step 1: Classify difficulty
     difficulty = classify_difficulty(query)
     tier_map = {"easy": "cheap", "medium": "mid", "hard": "expensive"}
     tier = tier_map[difficulty]
     model_config = MODELS[tier]
-    
+
     # Step 2: Generate response with selected model
     msgs = messages or [{"role": "user", "content": query}]
     response = client.chat.completions.create(
         model=model_config["name"],
         messages=msgs,
     )
-    
+
     # Step 3: Calculate cost
     usage = response.usage
     cost = (
         usage.prompt_tokens * model_config["input_cost"] / 1_000_000 +
         usage.completion_tokens * model_config["output_cost"] / 1_000_000
     )
-    
+
     return {
         "content": response.choices[0].message.content,
         "model_used": model_config["name"],
@@ -230,13 +230,13 @@ ROUTING DECISION GUIDE:
   High traffic + labeled data?      → Train a classifier
   Quality-critical + can't misroute? → Cascade (try cheap first)
   Cold start / no labeled data?     → LLM-as-router
-  
+
 COST SAVINGS ESTIMATES:
   No routing (all GPT-4):           $100/day baseline
   Rule-based routing:               $30-50/day (50-70% savings)
   Classifier routing:               $15-25/day (75-85% savings)
   Cascade with confidence:          $20-30/day (70-80% savings)
-  
+
 TRAFFIC DISTRIBUTION TARGET:
   Tier 1 (cheap):    70-80% of requests
   Tier 2 (mid):      15-25% of requests

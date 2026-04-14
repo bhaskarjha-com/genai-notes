@@ -102,6 +102,14 @@ Target roles: GenAI Engineer, LLM Engineer, Agentic AI Engineer, RAG Engineer, A
 | B13 | [monitoring-observability](production/monitoring-observability.md) | 3h |
 | B14 | [cost-optimization](production/cost-optimization.md) | 3h |
 | B15 | [llmops](production/llmops.md) | 3h |
+| B16 | [embedding-fine-tuning](techniques/embedding-fine-tuning.md) | 3h |
+| B17 | [long-context-engineering](techniques/long-context-engineering.md) | 3h |
+| B18 | [retrieval-evaluation](evaluation/retrieval-evaluation.md) | 3h |
+| B19 | [guardrails-and-content-filtering](production/guardrails-and-content-filtering.md) | 3h |
+| B20 | [llm-routing-and-model-selection](production/llm-routing-and-model-selection.md) | 3h |
+| B21 | [document-parsing-and-extraction](production/document-parsing-and-extraction.md) | 2h |
+| B22 | [data-flywheel-design](production/data-flywheel-design.md) | 2h |
+| B23 | [ai-ux-patterns](applications/ai-ux-patterns.md) | 2h |
 
 External skills: System design, Docker, Kubernetes, async programming
 
@@ -143,6 +151,8 @@ Target roles: Foundation Model Engineer, Research Scientist, Applied Scientist, 
 | D8 | [research-methodology-and-paper-reading](research-frontiers/research-methodology-and-paper-reading.md) | 2h |
 | D9 | [gpu-cuda-programming](inference/gpu-cuda-programming.md) | 4h |
 | D10 | [reasoning-models](llms/reasoning-models.md) | 3h |
+| D11 | [attention-deep-dive](foundations/attention-deep-dive.md) | 4h |
+| D12 | [state-space-models](foundations/state-space-models.md) | 3h |
 
 External skills: C++, CUDA, distributed training, JAX, paper reading, reproducibility discipline
 
@@ -159,6 +169,7 @@ Target roles: AI Safety Engineer, AI Red Team Engineer, AI Ethics Lead, AI Data 
 | E5 | [hallucination-detection](llms/hallucination-detection.md) | 3h |
 | E6 | [evaluation-and-benchmarks](evaluation/evaluation-and-benchmarks.md) | 2h |
 | E7 | [llm-evaluation-deep-dive](evaluation/llm-evaluation-deep-dive.md) | 3h |
+| E8 | [prompt-injection-deep-dive](ethics-and-safety/prompt-injection-deep-dive.md) | 3h |
 
 External skills: EU AI Act, NIST AI RMF, adversarial ML, secure AI delivery
 

@@ -67,7 +67,7 @@ GPU MEMORY BREAKDOWN (training a 7B parameter model in fp32):
   TOTAL:                                   ~122-150 GB
 
   Best single GPU (2026):  H100 80GB, A100 80GB
-  
+
   Result: Even a 7B model in fp32 CANNOT train on a single GPU.
 
 WITH MIXED PRECISION (fp16/bf16):
@@ -130,12 +130,12 @@ ZeRO STAGES:
 Stage 0: DDP (baseline)
   Each GPU: full weights + full optimizer + full gradients
   Memory per GPU: ~150 GB for 7B model
-  
+
 Stage 1: Shard Optimizer State
-  Each GPU: full weights + 1/N optimizer + full gradients  
+  Each GPU: full weights + 1/N optimizer + full gradients
   Memory saved: ~60% of optimizer = huge win
   Communication: same as DDP
-  
+
 Stage 2: Shard Optimizer + Gradients
   Each GPU: full weights + 1/N optimizer + 1/N gradients
   Memory saved: more, but weights still replicated
@@ -145,7 +145,7 @@ Stage 3: Shard Everything (= FSDP)
   Each GPU: 1/N weights + 1/N optimizer + 1/N gradients
   Memory saved: maximum — scales linearly with GPU count
   Communication: all-gather weights before compute, re-shard after
-  
+
   ┌──────────────────────────────────────────────────┐
   │  MEMORY PER GPU (7B model, 8 GPUs, bf16)         │
   │                                                    │
@@ -197,7 +197,7 @@ MEMORY ESTIMATION FORMULAS:
 
   Total (fp16 mixed precision, single GPU):
     weights(2) + optimizer(8) + gradients(2) = 12 bytes per parameter
-    
+
   EXAMPLES:
     7B model:   7B × 12 = 84 GB  (needs A100 80GB + gradient checkpointing)
     13B model:  13B × 12 = 156 GB (needs multi-GPU)
@@ -223,18 +223,18 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 
 def train_with_fsdp():
     """Example: FSDP training setup for a large language model."""
-    
+
     # 1. Initialize distributed
     dist.init_process_group("nccl")
     local_rank = dist.get_rank()
     torch.cuda.set_device(local_rank)
-    
+
     # 2. Load model
     model = AutoModelForCausalLM.from_pretrained(
         "meta-llama/Llama-3.1-8B",
         torch_dtype=torch.bfloat16,
     )
-    
+
     # 3. Wrap with FSDP
     model = FSDP(
         model,
@@ -246,10 +246,10 @@ def train_with_fsdp():
         device_id=local_rank,
         use_orig_params=True,  # Required for torch.compile compatibility
     )
-    
+
     # 4. Setup optimizer (operates on sharded parameters)
     optimizer = torch.optim.AdamW(model.parameters(), lr=2e-5)
-    
+
     # 5. Training loop (simplified)
     model.train()
     for batch in dataloader:  # Your distributed dataloader
@@ -259,10 +259,10 @@ def train_with_fsdp():
         loss.backward()
         optimizer.step()
         optimizer.zero_grad()
-        
+
         if local_rank == 0:
             print(f"Loss: {loss.item():.4f}")
-    
+
     dist.destroy_process_group()
 
 # Launch: torchrun --nproc_per_node=4 train.py

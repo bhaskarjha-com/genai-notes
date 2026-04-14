@@ -87,10 +87,10 @@ DISCRETIZATION:
   For digital computation, we discretize with step size Δ:
   h[k] = Ā h[k-1] + B̄ x[k]
   y[k] = C h[k]
-  
+
   Where Ā = exp(ΔA), B̄ = (ΔA)⁻¹(exp(ΔA) - I)(ΔB)
 
-KEY MAMBA INSIGHT: 
+KEY MAMBA INSIGHT:
   Make B, C, and Δ input-dependent (selective)
   This allows the model to selectively remember or forget
   information based on the current input — like a learned gate.

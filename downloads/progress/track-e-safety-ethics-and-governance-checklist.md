@@ -39,3 +39,4 @@
 - [ ] [Hallucination Detection & Mitigation](../../llms/hallucination-detection.md) - 3h
 - [ ] [LLM Evaluation & Benchmarks](../../evaluation/evaluation-and-benchmarks.md) - 2h
 - [ ] [LLM Evaluation Deep Dive](../../evaluation/llm-evaluation-deep-dive.md) - 3h
+- [ ] [Prompt Injection Deep Dive](../../ethics-and-safety/prompt-injection-deep-dive.md) - 3h

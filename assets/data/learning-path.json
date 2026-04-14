@@ -445,6 +445,86 @@
                                          "EstTime":  "3h",
                                          "SitePath":  "production/llmops.html",
                                          "MarkdownLink":  "../production/llmops.md"
+                                     },
+                                     {
+                                         "Path":  "techniques/embedding-fine-tuning.md",
+                                         "Title":  "Embedding Fine-Tuning",
+                                         "Label":  "embedding-fine-tuning",
+                                         "Folder":  "techniques",
+                                         "Difficulty":  "advanced",
+                                         "EstTime":  "3h",
+                                         "SitePath":  "techniques/embedding-fine-tuning.html",
+                                         "MarkdownLink":  "../techniques/embedding-fine-tuning.md"
+                                     },
+                                     {
+                                         "Path":  "techniques/long-context-engineering.md",
+                                         "Title":  "Long-Context Engineering",
+                                         "Label":  "long-context-engineering",
+                                         "Folder":  "techniques",
+                                         "Difficulty":  "advanced",
+                                         "EstTime":  "3h",
+                                         "SitePath":  "techniques/long-context-engineering.html",
+                                         "MarkdownLink":  "../techniques/long-context-engineering.md"
+                                     },
+                                     {
+                                         "Path":  "evaluation/retrieval-evaluation.md",
+                                         "Title":  "Retrieval Evaluation",
+                                         "Label":  "retrieval-evaluation",
+                                         "Folder":  "evaluation",
+                                         "Difficulty":  "advanced",
+                                         "EstTime":  "3h",
+                                         "SitePath":  "evaluation/retrieval-evaluation.html",
+                                         "MarkdownLink":  "../evaluation/retrieval-evaluation.md"
+                                     },
+                                     {
+                                         "Path":  "production/guardrails-and-content-filtering.md",
+                                         "Title":  "Guardrails \u0026 Content Filtering",
+                                         "Label":  "guardrails-and-content-filtering",
+                                         "Folder":  "production",
+                                         "Difficulty":  "advanced",
+                                         "EstTime":  "3h",
+                                         "SitePath":  "production/guardrails-and-content-filtering.html",
+                                         "MarkdownLink":  "../production/guardrails-and-content-filtering.md"
+                                     },
+                                     {
+                                         "Path":  "production/llm-routing-and-model-selection.md",
+                                         "Title":  "LLM Routing \u0026 Model Selection",
+                                         "Label":  "llm-routing-and-model-selection",
+                                         "Folder":  "production",
+                                         "Difficulty":  "advanced",
+                                         "EstTime":  "3h",
+                                         "SitePath":  "production/llm-routing-and-model-selection.html",
+                                         "MarkdownLink":  "../production/llm-routing-and-model-selection.md"
+                                     },
+                                     {
+                                         "Path":  "production/document-parsing-and-extraction.md",
+                                         "Title":  "Document Parsing \u0026 Extraction",
+                                         "Label":  "document-parsing-and-extraction",
+                                         "Folder":  "production",
+                                         "Difficulty":  "intermediate",
+                                         "EstTime":  "2h",
+                                         "SitePath":  "production/document-parsing-and-extraction.html",
+                                         "MarkdownLink":  "../production/document-parsing-and-extraction.md"
+                                     },
+                                     {
+                                         "Path":  "production/data-flywheel-design.md",
+                                         "Title":  "Data Flywheel Design",
+                                         "Label":  "data-flywheel-design",
+                                         "Folder":  "production",
+                                         "Difficulty":  "advanced",
+                                         "EstTime":  "2h",
+                                         "SitePath":  "production/data-flywheel-design.html",
+                                         "MarkdownLink":  "../production/data-flywheel-design.md"
+                                     },
+                                     {
+                                         "Path":  "applications/ai-ux-patterns.md",
+                                         "Title":  "AI UX Patterns",
+                                         "Label":  "ai-ux-patterns",
+                                         "Folder":  "applications",
+                                         "Difficulty":  "intermediate",
+                                         "EstTime":  "2h",
+                                         "SitePath":  "applications/ai-ux-patterns.html",
+                                         "MarkdownLink":  "../applications/ai-ux-patterns.md"
                                      }
                                  ]
                    },
@@ -702,6 +782,26 @@
                                          "EstTime":  "3h",
                                          "SitePath":  "llms/reasoning-models.html",
                                          "MarkdownLink":  "../llms/reasoning-models.md"
+                                     },
+                                     {
+                                         "Path":  "foundations/attention-deep-dive.md",
+                                         "Title":  "Attention Mechanism Deep Dive",
+                                         "Label":  "attention-deep-dive",
+                                         "Folder":  "foundations",
+                                         "Difficulty":  "expert",
+                                         "EstTime":  "4h",
+                                         "SitePath":  "foundations/attention-deep-dive.html",
+                                         "MarkdownLink":  "../foundations/attention-deep-dive.md"
+                                     },
+                                     {
+                                         "Path":  "foundations/state-space-models.md",
+                                         "Title":  "State Space Models",
+                                         "Label":  "state-space-models",
+                                         "Folder":  "foundations",
+                                         "Difficulty":  "expert",
+                                         "EstTime":  "3h",
+                                         "SitePath":  "foundations/state-space-models.html",
+                                         "MarkdownLink":  "../foundations/state-space-models.md"
                                      }
                                  ]
                    },
@@ -785,6 +885,16 @@
                                          "EstTime":  "3h",
                                          "SitePath":  "evaluation/llm-evaluation-deep-dive.html",
                                          "MarkdownLink":  "../evaluation/llm-evaluation-deep-dive.md"
+                                     },
+                                     {
+                                         "Path":  "ethics-and-safety/prompt-injection-deep-dive.md",
+                                         "Title":  "Prompt Injection Deep Dive",
+                                         "Label":  "prompt-injection-deep-dive",
+                                         "Folder":  "ethics-and-safety",
+                                         "Difficulty":  "advanced",
+                                         "EstTime":  "3h",
+                                         "SitePath":  "ethics-and-safety/prompt-injection-deep-dive.html",
+                                         "MarkdownLink":  "../ethics-and-safety/prompt-injection-deep-dive.md"
                                      }
                                  ]
                    }

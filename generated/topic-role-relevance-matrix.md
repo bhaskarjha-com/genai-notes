@@ -7,7 +7,7 @@ Legend: Must, Good, Optional, Not Relevant.
 | Topic | Folder | Agentic AI Engineer | AI Engineer | Generative AI Engineer | LLM Engineer | ML Engineer | MLOps / LLMOps Engineer | RAG Engineer |
 |---|---|---|---|---|---|---|---|---|
 | [AI Product Management Fundamentals](../applications/ai-product-management-fundamentals.md) | applications | Not Relevant | Optional | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant |
-| [AI UX Patterns](../applications/ai-ux-patterns.md) | applications | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant |
+| [AI UX Patterns](../applications/ai-ux-patterns.md) | applications | Optional | Not Relevant | Optional | Optional | Not Relevant | Not Relevant | Optional |
 | [API Design for AI Applications](../applications/api-design-for-ai.md) | applications | Good | Optional | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant |
 | [Code Generation & AI-Assisted Development](../applications/code-generation.md) | applications | Not Relevant | Optional | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant |
 | [Conversational AI & Dialogue Systems](../applications/conversational-ai.md) | applications | Good | Optional | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant |
@@ -19,7 +19,7 @@ Legend: Must, Good, Optional, Not Relevant.
 | [Prompt Injection Deep Dive](../ethics-and-safety/prompt-injection-deep-dive.md) | ethics-and-safety | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant |
 | [LLM Evaluation & Benchmarks](../evaluation/evaluation-and-benchmarks.md) | evaluation | Must | Must | Must | Must | Must | Must | Must |
 | [LLM Evaluation Deep Dive](../evaluation/llm-evaluation-deep-dive.md) | evaluation | Optional | Not Relevant | Optional | Optional | Not Relevant | Not Relevant | Optional |
-| [Retrieval Evaluation](../evaluation/retrieval-evaluation.md) | evaluation | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant |
+| [Retrieval Evaluation](../evaluation/retrieval-evaluation.md) | evaluation | Optional | Not Relevant | Optional | Optional | Not Relevant | Not Relevant | Optional |
 | [System Design for AI Interviews](../evaluation/system-design-for-ai-interviews.md) | evaluation | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Good | Not Relevant |
 | [Attention Mechanism](../foundations/attention-mechanism.md) | foundations | Must | Must | Must | Must | Must | Must | Must |
 | [Attention Mechanism Deep Dive](../foundations/attention-deep-dive.md) | foundations | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant |
@@ -49,12 +49,12 @@ Legend: Must, Good, Optional, Not Relevant.
 | [CI/CD for ML and LLM Systems](../production/cicd-for-ml.md) | production | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Must | Must | Not Relevant |
 | [Classical ML for GenAI Builders](../production/classical-ml-for-genai.md) | production | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Must | Optional | Not Relevant |
 | [Cost Optimization for GenAI Systems](../production/cost-optimization.md) | production | Optional | Not Relevant | Optional | Optional | Optional | Must | Optional |
-| [Data Flywheel Design](../production/data-flywheel-design.md) | production | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant |
+| [Data Flywheel Design](../production/data-flywheel-design.md) | production | Optional | Not Relevant | Optional | Optional | Not Relevant | Not Relevant | Optional |
 | [Docker & Kubernetes for GenAI Deployment](../production/docker-and-kubernetes.md) | production | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Must | Must | Not Relevant |
-| [Document Parsing & Extraction](../production/document-parsing-and-extraction.md) | production | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant |
-| [Guardrails & Content Filtering](../production/guardrails-and-content-filtering.md) | production | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant |
+| [Document Parsing & Extraction](../production/document-parsing-and-extraction.md) | production | Optional | Not Relevant | Optional | Optional | Not Relevant | Not Relevant | Optional |
+| [Guardrails & Content Filtering](../production/guardrails-and-content-filtering.md) | production | Optional | Not Relevant | Optional | Optional | Not Relevant | Not Relevant | Optional |
 | [Latency & Throughput Engineering for AI Systems](../production/latency-and-throughput-engineering.md) | production | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Good | Good | Not Relevant |
-| [LLM Routing & Model Selection](../production/llm-routing-and-model-selection.md) | production | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant |
+| [LLM Routing & Model Selection](../production/llm-routing-and-model-selection.md) | production | Optional | Not Relevant | Optional | Optional | Not Relevant | Not Relevant | Optional |
 | [LLMOps & Production Deployment](../production/llmops.md) | production | Must | Must | Must | Optional | Must | Must | Good |
 | [Model Serving for LLM Applications](../production/model-serving.md) | production | Optional | Not Relevant | Optional | Optional | Must | Must | Optional |
 | [Monitoring & Observability for GenAI Systems](../production/monitoring-observability.md) | production | Good | Not Relevant | Optional | Optional | Must | Must | Optional |
@@ -65,12 +65,12 @@ Legend: Must, Good, Optional, Not Relevant.
 | [Advanced Fine-Tuning for LLM Adaptation](../techniques/advanced-fine-tuning.md) | techniques | Optional | Good | Must | Must | Not Relevant | Not Relevant | Optional |
 | [Context Engineering & Long Context](../techniques/context-engineering.md) | techniques | Must | Must | Must | Must | Must | Must | Must |
 | [Continual Learning & Lifelong AI](../techniques/continual-learning.md) | techniques | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant |
-| [Embedding Fine-Tuning](../techniques/embedding-fine-tuning.md) | techniques | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant |
+| [Embedding Fine-Tuning](../techniques/embedding-fine-tuning.md) | techniques | Optional | Not Relevant | Optional | Optional | Not Relevant | Not Relevant | Optional |
 | [Fine-Tuning LLMs](../techniques/fine-tuning.md) | techniques | Must | Must | Must | Must | Must | Must | Must |
 | [Function Calling, Structured Output & Tool Use](../techniques/function-calling-and-structured-output.md) | techniques | Must | Must | Must | Must | Must | Must | Must |
 | [Graph RAG & Advanced Retrieval](../techniques/graph-rag.md) | techniques | Optional | Optional | Good | Optional | Not Relevant | Not Relevant | Must |
 | [Knowledge Distillation & Model Compression](../techniques/distillation-and-compression.md) | techniques | Optional | Not Relevant | Optional | Good | Not Relevant | Not Relevant | Optional |
-| [Long-Context Engineering](../techniques/long-context-engineering.md) | techniques | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant |
+| [Long-Context Engineering](../techniques/long-context-engineering.md) | techniques | Optional | Not Relevant | Optional | Optional | Not Relevant | Not Relevant | Optional |
 | [Prompt Engineering](../techniques/prompt-engineering.md) | techniques | Must | Must | Must | Must | Must | Must | Must |
 | [Reinforcement Learning for LLM Alignment](../techniques/rl-alignment.md) | techniques | Optional | Not Relevant | Optional | Good | Not Relevant | Not Relevant | Optional |
 | [Retrieval-Augmented Generation (RAG)](../techniques/rag.md) | techniques | Must | Must | Must | Must | Must | Must | Must |

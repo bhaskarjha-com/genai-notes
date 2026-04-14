@@ -64,7 +64,7 @@
                                    "ai-product"
                                ],
                       "Tracks":  [
-
+                                     "B"
                                  ],
                       "SitePath":  "applications/ai-ux-patterns.html",
                       "Degree":  8
@@ -242,7 +242,7 @@
                                    "production"
                                ],
                       "Tracks":  [
-
+                                     "E"
                                  ],
                       "SitePath":  "ethics-and-safety/prompt-injection-deep-dive.html",
                       "Degree":  7
@@ -303,7 +303,7 @@
                                    "ndcg"
                                ],
                       "Tracks":  [
-
+                                     "B"
                                  ],
                       "SitePath":  "evaluation/retrieval-evaluation.html",
                       "Degree":  12
@@ -359,7 +359,7 @@
                                    "transformers"
                                ],
                       "Tracks":  [
-
+                                     "D"
                                  ],
                       "SitePath":  "foundations/attention-deep-dive.html",
                       "Degree":  9
@@ -437,7 +437,7 @@
                                    "research"
                                ],
                       "Tracks":  [
-
+                                     "D"
                                  ],
                       "SitePath":  "foundations/state-space-models.html",
                       "Degree":  8
@@ -883,7 +883,7 @@
                                    "continuous-improvement"
                                ],
                       "Tracks":  [
-
+                                     "B"
                                  ],
                       "SitePath":  "production/data-flywheel-design.html",
                       "Degree":  8
@@ -922,7 +922,7 @@
                                    "production"
                                ],
                       "Tracks":  [
-
+                                     "B"
                                  ],
                       "SitePath":  "production/document-parsing-and-extraction.html",
                       "Degree":  7
@@ -941,7 +941,7 @@
                                    "llmops"
                                ],
                       "Tracks":  [
-
+                                     "B"
                                  ],
                       "SitePath":  "production/guardrails-and-content-filtering.html",
                       "Degree":  9
@@ -979,7 +979,7 @@
                                    "llmops"
                                ],
                       "Tracks":  [
-
+                                     "B"
                                  ],
                       "SitePath":  "production/llm-routing-and-model-selection.html",
                       "Degree":  8
@@ -1193,7 +1193,7 @@
                                    "production"
                                ],
                       "Tracks":  [
-
+                                     "B"
                                  ],
                       "SitePath":  "techniques/embedding-fine-tuning.html",
                       "Degree":  9
@@ -1291,7 +1291,7 @@
                                    "production"
                                ],
                       "Tracks":  [
-
+                                     "B"
                                  ],
                       "SitePath":  "techniques/long-context-engineering.html",
                       "Degree":  8

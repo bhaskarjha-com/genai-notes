@@ -115,11 +115,11 @@ model = SentenceTransformer("BAAI/bge-small-en-v1.5")
 
 # 2. Prepare training data (query, positive_doc pairs)
 train_examples = [
-    InputExample(texts=["What causes hypertension?", 
+    InputExample(texts=["What causes hypertension?",
                         "Hypertension is primarily caused by arterial stiffening..."]),
-    InputExample(texts=["Treatment for type 2 diabetes", 
+    InputExample(texts=["Treatment for type 2 diabetes",
                         "First-line treatment for T2DM includes metformin..."]),
-    InputExample(texts=["Side effects of statins", 
+    InputExample(texts=["Side effects of statins",
                         "Common statin side effects include myalgia..."]),
     # ... add 1K-10K pairs for production quality
 ]

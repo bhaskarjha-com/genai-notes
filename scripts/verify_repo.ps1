@@ -201,10 +201,16 @@ foreach ($file in $allMarkdownFiles) {
             continue
         }
 
-        if ($relativePath -like "career\roles\*.md") {
+        if ($relativePath -like "career\roles\*.md" -or $relativePath -like "career/roles/*.md") {
             foreach ($requiredHeading in @("Role Overview", "Learning Path", "Skills Breakdown", "Interview Preparation", "Sources")) {
                 if (-not (Get-HeadingMatch -Text $bodyWithoutCode -Heading $requiredHeading)) {
                     $complianceIssues.Add("$relativePath -> missing section '$requiredHeading'")
+                }
+            }
+            # Enforce enriched career template sections
+            foreach ($enrichedSection in @("A Day in the Life", "Resume Bullet", "Take-Home Project", "Onboarding")) {
+                if (-not (Get-HeadingMatch -Text $bodyWithoutCode -Heading $enrichedSection)) {
+                    $complianceIssues.Add("$relativePath -> missing enriched section '$enrichedSection'")
                 }
             }
         }
@@ -213,6 +219,13 @@ foreach ($file in $allMarkdownFiles) {
                 foreach ($requiredHeading in @("TL;DR", "Overview", "Deep Dive", "Connections", "Sources")) {
                     if (-not (Get-HeadingMatch -Text $bodyWithoutCode -Heading $requiredHeading)) {
                         $complianceIssues.Add("$relativePath -> missing section '$requiredHeading'")
+                    }
+                }
+                # Enforce heading markers (must have ★/◆/○ prefix)
+                foreach ($markerHeading in @("TL;DR", "Overview", "Deep Dive", "Connections", "Sources")) {
+                    $barePattern = "(?im)^##\s+$([regex]::Escape($markerHeading))\s*$"
+                    if ([regex]::IsMatch($bodyWithoutCode, $barePattern)) {
+                        $complianceIssues.Add("$relativePath -> bare heading '## $markerHeading' missing marker (expected ★/◆/○)")
                     }
                 }
             }

@@ -101,7 +101,7 @@ foreach ($file in $allMarkdownFiles) {
         }
     }
 
-    if ($relativePath -eq "CONTRIBUTING.md") {
+    if ($relativePath -like "*CONTRIBUTING.md") {
         continue
     }
 

@@ -1,4 +1,4 @@
-﻿$ErrorActionPreference = "Stop"
+$ErrorActionPreference = "Stop"
 
 $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
 $markdownFiles = Get-ChildItem -Path $repoRoot -Recurse -File -Filter *.md |
@@ -98,12 +98,29 @@ if ($mojibakeIssues.Count -gt 0) {
     $mojibakeIssues | Sort-Object | ForEach-Object { Write-Host ("- {0}" -f $_) }
 }
 
+# Check for broken version markers (# ?? instead of # ⚠️)
+$brokenVersionMarkers = New-Object System.Collections.Generic.List[string]
+foreach ($file in $markdownFiles) {
+    $content = Get-Content $file.FullName -Raw -ErrorAction SilentlyContinue
+    if ($content -and $content -match '# \?\? Last tested') {
+        $brokenVersionMarkers.Add($file.FullName.Substring($repoRoot.Length + 1))
+    }
+}
+
+Write-Host ("Broken version markers (# ??): {0}" -f $brokenVersionMarkers.Count)
+if ($brokenVersionMarkers.Count -gt 0) {
+    Write-Host ""
+    Write-Host "Files with broken version markers:"
+    $brokenVersionMarkers | Sort-Object | ForEach-Object { Write-Host ("- {0}" -f $_) }
+}
+
 if (
     $trailingWhitespace.Count -gt 0 -or
     $tabCharacters.Count -gt 0 -or
     $h1Issues.Count -gt 0 -or
     $codeFenceIssues.Count -gt 0 -or
-    $mojibakeIssues.Count -gt 0
+    $mojibakeIssues.Count -gt 0 -or
+    $brokenVersionMarkers.Count -gt 0
 ) {
     exit 1
 }

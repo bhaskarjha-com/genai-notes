@@ -106,7 +106,7 @@ All code samples must follow these standards:
 | Location | Format | Why |
 |----------|--------|-----|
 | Frontmatter (`parent`, `related`) | `wiki-link.md` | Metadata; benefits Obsidian graph view |
-| Body text, Connections, Scope tables | `[text](path.md)` | Must render as clickable links on GitHub |
+| Body text, Connections, Scope tables | `[text](relative/path.md)` | Must render as clickable links on GitHub |
 
 ## Submitting Changes
 

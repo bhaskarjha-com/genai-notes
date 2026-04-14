@@ -28,15 +28,11 @@
 - [ ] [Function Calling, Structured Output & Tool Use](../../techniques/function-calling-and-structured-output.md) - 3h
 - [ ] [Retrieval-Augmented Generation (RAG)](../../techniques/rag.md) - 4h
 - [ ] [Fine-Tuning LLMs](../../techniques/fine-tuning.md) - 4h
-- [ ] [AI Agents](../../agents/ai-agents.md) - 4h
 - [ ] [LLM Evaluation & Benchmarks](../../evaluation/evaluation-and-benchmarks.md) - 2h
 
 ## Track B - AI Systems and Orchestration Engineer
 
 - [ ] [Graph RAG & Advanced Retrieval](../../techniques/graph-rag.md) - 3h
-- [ ] [Multi-Agent Architectures](../../agents/multi-agent-architectures.md) - 3h
-- [ ] [Agent Evaluation & Observability](../../agents/agent-evaluation.md) - 3h
-- [ ] [Agentic Protocols & Frameworks](../../agents/agentic-protocols.md) - 4h
 - [ ] [Advanced Fine-Tuning for LLM Adaptation](../../techniques/advanced-fine-tuning.md) - 4h
 - [ ] [Reinforcement Learning for LLM Alignment](../../techniques/rl-alignment.md) - 4h
 - [ ] [Knowledge Distillation & Model Compression](../../techniques/distillation-and-compression.md) - 3h

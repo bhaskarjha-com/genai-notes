@@ -28,7 +28,6 @@
 - [ ] [Function Calling, Structured Output & Tool Use](../../techniques/function-calling-and-structured-output.md) - 3h
 - [ ] [Retrieval-Augmented Generation (RAG)](../../techniques/rag.md) - 4h
 - [ ] [Fine-Tuning LLMs](../../techniques/fine-tuning.md) - 4h
-- [ ] [AI Agents](../../agents/ai-agents.md) - 4h
 - [ ] [LLM Evaluation & Benchmarks](../../evaluation/evaluation-and-benchmarks.md) - 2h
 
 ## Track C - ML and Production Engineer

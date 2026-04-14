@@ -197,16 +197,6 @@
                                              "MarkdownLink":  "../techniques/fine-tuning.md"
                                          },
                                          {
-                                             "Path":  "techniques/ai-agents.md",
-                                             "Title":  "AI Agents",
-                                             "Label":  "ai-agents",
-                                             "Folder":  "techniques",
-                                             "Difficulty":  "intermediate",
-                                             "EstTime":  "4h",
-                                             "SitePath":  "techniques/ai-agents.html",
-                                             "MarkdownLink":  "../techniques/ai-agents.md"
-                                         },
-                                         {
                                              "Path":  "evaluation/evaluation-and-benchmarks.md",
                                              "Title":  "LLM Evaluation \u0026 Benchmarks",
                                              "Label":  "evaluation",
@@ -261,26 +251,6 @@
                                          "EstTime":  "3h",
                                          "SitePath":  "tools-and-infra/vector-databases.html",
                                          "MarkdownLink":  "../tools-and-infra/vector-databases.md"
-                                     },
-                                     {
-                                         "Path":  "techniques/multi-agent-architectures.md",
-                                         "Title":  "Multi-Agent Architectures",
-                                         "Label":  "multi-agent-architectures",
-                                         "Folder":  "techniques",
-                                         "Difficulty":  "advanced",
-                                         "EstTime":  "3h",
-                                         "SitePath":  "techniques/multi-agent-architectures.html",
-                                         "MarkdownLink":  "../techniques/multi-agent-architectures.md"
-                                     },
-                                     {
-                                         "Path":  "techniques/agentic-protocols.md",
-                                         "Title":  "Agentic Protocols \u0026 Frameworks",
-                                         "Label":  "agentic-protocols",
-                                         "Folder":  "techniques",
-                                         "Difficulty":  "intermediate",
-                                         "EstTime":  "4h",
-                                         "SitePath":  "techniques/agentic-protocols.html",
-                                         "MarkdownLink":  "../techniques/agentic-protocols.md"
                                      },
                                      {
                                          "Path":  "applications/conversational-ai.md",
@@ -365,36 +335,6 @@
                                          "EstTime":  "3h",
                                          "SitePath":  "techniques/graph-rag.html",
                                          "MarkdownLink":  "../techniques/graph-rag.md"
-                                     },
-                                     {
-                                         "Path":  "techniques/multi-agent-architectures.md",
-                                         "Title":  "Multi-Agent Architectures",
-                                         "Label":  "multi-agent-architectures",
-                                         "Folder":  "techniques",
-                                         "Difficulty":  "advanced",
-                                         "EstTime":  "3h",
-                                         "SitePath":  "techniques/multi-agent-architectures.html",
-                                         "MarkdownLink":  "../techniques/multi-agent-architectures.md"
-                                     },
-                                     {
-                                         "Path":  "techniques/agent-evaluation.md",
-                                         "Title":  "Agent Evaluation \u0026 Observability",
-                                         "Label":  "agent-evaluation",
-                                         "Folder":  "techniques",
-                                         "Difficulty":  "advanced",
-                                         "EstTime":  "3h",
-                                         "SitePath":  "techniques/agent-evaluation.html",
-                                         "MarkdownLink":  "../techniques/agent-evaluation.md"
-                                     },
-                                     {
-                                         "Path":  "techniques/agentic-protocols.md",
-                                         "Title":  "Agentic Protocols \u0026 Frameworks",
-                                         "Label":  "agentic-protocols",
-                                         "Folder":  "techniques",
-                                         "Difficulty":  "intermediate",
-                                         "EstTime":  "4h",
-                                         "SitePath":  "techniques/agentic-protocols.html",
-                                         "MarkdownLink":  "../techniques/agentic-protocols.md"
                                      },
                                      {
                                          "Path":  "techniques/advanced-fine-tuning.md",
@@ -571,24 +511,24 @@
                                          "MarkdownLink":  "../tools-and-infra/cloud-ml-services.md"
                                      },
                                      {
-                                         "Path":  "tools-and-infra/ml-experiment-tracking.md",
-                                         "Title":  "ML Experiment Tracking",
+                                         "Path":  "tools-and-infra/ml-experiment-and-data-management.md",
+                                         "Title":  "ML Experiment \u0026 Data Management",
                                          "Label":  "ml-experiment-tracking",
                                          "Folder":  "tools-and-infra",
                                          "Difficulty":  "intermediate",
                                          "EstTime":  "2h",
-                                         "SitePath":  "tools-and-infra/ml-experiment-tracking.html",
-                                         "MarkdownLink":  "../tools-and-infra/ml-experiment-tracking.md"
+                                         "SitePath":  "tools-and-infra/ml-experiment-and-data-management.html",
+                                         "MarkdownLink":  "../tools-and-infra/ml-experiment-and-data-management.md"
                                      },
                                      {
-                                         "Path":  "tools-and-infra/data-versioning-for-ml.md",
-                                         "Title":  "Data Versioning for ML",
+                                         "Path":  "tools-and-infra/ml-experiment-and-data-management.md",
+                                         "Title":  "ML Experiment \u0026 Data Management",
                                          "Label":  "data-versioning-for-ml",
                                          "Folder":  "tools-and-infra",
                                          "Difficulty":  "intermediate",
                                          "EstTime":  "2h",
-                                         "SitePath":  "tools-and-infra/data-versioning-for-ml.html",
-                                         "MarkdownLink":  "../tools-and-infra/data-versioning-for-ml.md"
+                                         "SitePath":  "tools-and-infra/ml-experiment-and-data-management.html",
+                                         "MarkdownLink":  "../tools-and-infra/ml-experiment-and-data-management.md"
                                      },
                                      {
                                          "Path":  "production/classical-ml-for-genai.md",
@@ -675,7 +615,7 @@
                                      },
                                      {
                                          "Path":  "research-frontiers/distributed-training.md",
-                                         "Title":  "Distributed Training for Large Models",
+                                         "Title":  "Distributed Training \u0026 Training Infrastructure",
                                          "Label":  "distributed-training",
                                          "Folder":  "research-frontiers",
                                          "Difficulty":  "expert",
@@ -684,14 +624,14 @@
                                          "MarkdownLink":  "../research-frontiers/distributed-training.md"
                                      },
                                      {
-                                         "Path":  "research-frontiers/training-infrastructure.md",
-                                         "Title":  "Training Infrastructure for AI Systems",
+                                         "Path":  "research-frontiers/distributed-training.md",
+                                         "Title":  "Distributed Training \u0026 Training Infrastructure",
                                          "Label":  "training-infrastructure",
                                          "Folder":  "research-frontiers",
                                          "Difficulty":  "expert",
                                          "EstTime":  "3h",
-                                         "SitePath":  "research-frontiers/training-infrastructure.html",
-                                         "MarkdownLink":  "../research-frontiers/training-infrastructure.md"
+                                         "SitePath":  "research-frontiers/distributed-training.html",
+                                         "MarkdownLink":  "../research-frontiers/distributed-training.md"
                                      },
                                      {
                                          "Path":  "techniques/advanced-fine-tuning.md",

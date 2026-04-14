@@ -6,7 +6,7 @@ difficulty: intermediate
 status: published
 last_verified: 2026-04
 parent: "[[llmops]]"
-related: ["[[../tools-and-infra/ml-experiment-tracking]]", "[[../tools-and-infra/data-versioning-for-ml]]", "[[cost-optimization]]"]
+related: ["[[../tools-and-infra/ml-experiment-and-data-management]]", "[[cost-optimization]]"]
 source: "Multiple - see Sources"
 created: 2026-04-12
 updated: 2026-04-14

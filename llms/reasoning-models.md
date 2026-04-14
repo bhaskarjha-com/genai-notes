@@ -76,6 +76,8 @@ ERA 2: TEST-TIME COMPUTE SCALING (2024+)
 
   KEY INSIGHT: You can DYNAMICALLY allocate compute per problem.
   Easy question → fast answer. Hard math → 10 minutes of thinking.
+
+  THE SCALING CEILING: Test-time compute scaling is bounded by the model's ability to verify its own logic (the verification-generation gap). If verifying a step is as hard as generating it, inference scaling flatlines. Furthermore, massive thinking chains lead to KV cache exhaustion on GPUs.
 ```
 
 ### How Reasoning Models Work
@@ -258,7 +260,7 @@ KEY NUMBERS:
 ## ○ Gotchas & Common Mistakes
 
 - ⚠️ **Don't prompt "think step by step"**: Reasoning models already do this internally. Adding CoT prompts can actually hurt performance.
-- ⚠️ **Cost surprise**: A single complex query can consume 50K+ tokens of thinking. Monitor costs closely.
+- ⚠️ **KV Cache Explosion & Cost Surprise**: A single complex query can consume 50K+ tokens of thinking. Because reasoning models autoregressively output and attend to these hidden tokens, the KV cache grows massive during test-time compute. This forces dynamic PagedAttention management and huge API costs. Monitor token economics ruthlessly.
 - ⚠️ **Latency**: Thinking takes time. A hard math problem might take 30-60 seconds. Not suitable for real-time chat.
 - ⚠️ **Not always better**: For simple tasks, reasoning models waste compute and can overthink. Use standard models for simple tasks.
 - ⚠️ **Hidden thinking ≠ explainable**: You see the answer but not always the reasoning (o1/o3 hide thinking by default).

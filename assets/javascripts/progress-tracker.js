@@ -98,7 +98,7 @@
         }
 
         const item = document.createElement("label");
-        item.className = "progress-item";
+        item.className = "progress-item" + (checked ? " completed" : "");
         item.innerHTML =
           '<input type="checkbox" data-progress-key="' +
           noteKey +

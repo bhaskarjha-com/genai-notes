@@ -35,10 +35,14 @@ theme:
     repo: fontawesome/brands/github
   features:
     - navigation.sections
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.prune
     - navigation.expand
     - navigation.top
     - search.suggest
     - search.highlight
+    - search.share
     - content.code.copy
     - content.tabs.link
     - content.action.edit

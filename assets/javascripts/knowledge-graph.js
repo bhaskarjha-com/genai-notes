@@ -171,8 +171,9 @@
     }
 
     if (hovered || radius >= 12) {
-      ctx.font = "12px sans-serif";
+      ctx.font = "13px var(--md-text-font, sans-serif)";
       ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue("--genai-ink-soft") || "#475569";
+      if(hovered) ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue("--genai-teal") || "#0d9488";
       ctx.fillText(node.Title, node.x + radius + 6, node.y + 4);
     }
   }
@@ -263,8 +264,8 @@
         return;
       }
 
-      node.vx *= 0.9;
-      node.vy *= 0.9;
+      node.vx *= 0.85;
+      node.vy *= 0.85;
       node.x = Math.min(canvas.width - 22, Math.max(22, node.x + node.vx));
       node.y = Math.min(canvas.height - 22, Math.max(22, node.y + node.vy));
     });

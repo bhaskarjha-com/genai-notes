@@ -235,25 +235,75 @@ WHAT'S EARLY (research/demos):
 
 ---
 
+## ★ Code & Implementation
+
+### Vision + Text with GPT-4o (Image Analysis)
+
+```python
+# pip install openai>=1.60 Pillow>=10
+# ⚠️ Last tested: 2026-04 | Requires: openai>=1.60, OPENAI_API_KEY env var
+import base64
+from pathlib import Path
+from openai import OpenAI
+
+client = OpenAI()
+
+def analyze_image(image_path: str, question: str = "Describe this image in detail.") -> str:
+    """Send an image + question to GPT-4o vision."""
+    img_bytes = Path(image_path).read_bytes()
+    b64_image = base64.b64encode(img_bytes).decode("utf-8")
+    ext       = Path(image_path).suffix.lstrip(".").lower()
+    media_type = f"image/{ext}" if ext in ("jpg", "jpeg", "png", "gif", "webp") else "image/jpeg"
+
+    response = client.chat.completions.create(
+        model="gpt-4o",
+        messages=[{
+            "role": "user",
+            "content": [
+                {"type": "image_url",
+                 "image_url": {"url": f"data:{media_type};base64,{b64_image}", "detail": "high"}},
+                {"type": "text", "text": question},
+            ],
+        }],
+        max_tokens=500,
+    )
+    return response.choices[0].message.content
+
+# URL-based (no local file needed for testing)
+response = client.chat.completions.create(
+    model="gpt-4o",
+    messages=[{
+        "role": "user",
+        "content": [
+            {"type": "image_url",
+             "image_url": {"url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Simple_English_Wikipedia_favicon.svg/240px-Simple_English_Wikipedia_favicon.svg.png"}},
+            {"type": "text", "text": "What is shown in this image?"},
+        ],
+    }],
+    max_tokens=100,
+)
+print(response.choices[0].message.content)
+```
+
 ## ★ Connections
 
-| Relationship | Topics                                                                                               |
-| ------------ | ---------------------------------------------------------------------------------------------------- |
+| Relationship | Topics                                                                                                                                           |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Builds on    | [Transformers](../foundations/transformers.md), [Llms Overview](../llms/llms-overview.md), [Diffusion Models](../multimodal/diffusion-models.md) |
-| Leads to     | AR/VR AI, Robotics (visual+language understanding), Video AI                                         |
-| Compare with | Single-modality models (text-only, image-only)                                                       |
-| Cross-domain | Computer vision, Audio signal processing, HCI                                                        |
+| Leads to     | AR/VR AI, Robotics (visual+language understanding), Video AI                                                                                     |
+| Compare with | Single-modality models (text-only, image-only)                                                                                                   |
+| Cross-domain | Computer vision, Audio signal processing, HCI                                                                                                    |
 
 
 ---
 
 ## ◆ Production Failure Modes
 
-| Failure | Symptoms | Root Cause | Mitigation |
-|---------|----------|------------|------------|
-| **Modality dominance** | Model relies heavily on text, ignores image/audio inputs | Unbalanced multi-modal training, text bias | Ablation testing per modality, balanced training data |
-| **OCR/vision hallucination** | Model reads text in images that doesn't exist | Visual encoder hallucination | Verification pipeline, confidence thresholds, multi-model consensus |
-| **Audio transcription errors** | Speech-to-text fails on accents, noise, domain jargon | Insufficient acoustic diversity in training | Domain-specific fine-tuning, preprocessing (noise reduction) |
+| Failure                        | Symptoms                                                 | Root Cause                                  | Mitigation                                                          |
+| ------------------------------ | -------------------------------------------------------- | ------------------------------------------- | ------------------------------------------------------------------- |
+| **Modality dominance**         | Model relies heavily on text, ignores image/audio inputs | Unbalanced multi-modal training, text bias  | Ablation testing per modality, balanced training data               |
+| **OCR/vision hallucination**   | Model reads text in images that doesn't exist            | Visual encoder hallucination                | Verification pipeline, confidence thresholds, multi-model consensus |
+| **Audio transcription errors** | Speech-to-text fails on accents, noise, domain jargon    | Insufficient acoustic diversity in training | Domain-specific fine-tuning, preprocessing (noise reduction)        |
 
 ---
 
@@ -274,12 +324,12 @@ WHAT'S EARLY (research/demos):
 
 ## ★ Recommended Resources
 
-| Type | Resource | Why |
-|------|----------|-----|
-| 📄 Paper | [OpenAI "GPT-4V System Card" (2023)](https://cdn.openai.com/papers/GPTV_System_Card.pdf) | How multimodal capabilities are evaluated and deployed |
-| 📄 Paper | [Radford et al. "CLIP" (2021)](https://arxiv.org/abs/2103.00020) | Foundational vision-language alignment paper |
-| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 3 | Multimodal model capabilities and application patterns |
-| 🔧 Hands-on | [Google Gemini API Docs](https://ai.google.dev/docs) | Production multimodal API with vision, audio, and video |
+| Type       | Resource                                                                                 | Why                                                     |
+| ---------- | ---------------------------------------------------------------------------------------- | ------------------------------------------------------- |
+| 📄 Paper    | [OpenAI "GPT-4V System Card" (2023)](https://cdn.openai.com/papers/GPTV_System_Card.pdf) | How multimodal capabilities are evaluated and deployed  |
+| 📄 Paper    | [Radford et al. "CLIP" (2021)](https://arxiv.org/abs/2103.00020)                         | Foundational vision-language alignment paper            |
+| 📘 Book     | "AI Engineering" by Chip Huyen (2025), Ch 3                                              | Multimodal model capabilities and application patterns  |
+| 🔧 Hands-on | [Google Gemini API Docs](https://ai.google.dev/docs)                                     | Production multimodal API with vision, audio, and video |
 
 ## ★ Sources
 

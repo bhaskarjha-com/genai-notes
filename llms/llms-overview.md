@@ -220,7 +220,67 @@ Top-k: Only sample from the k most likely tokens
 
 ---
 
+## ★ Code & Implementation
+
+### Call OpenAI GPT API (Streaming)
+
+```python
+# pip install openai>=1.60
+# ⚠️ Last tested: 2026-04 | Requires: openai>=1.60, OPENAI_API_KEY env var
+from openai import OpenAI
+
+client = OpenAI()
+
+# Token counting pre-flight (avoid hitting context limits)
+import tiktoken
+enc = tiktoken.encoding_for_model("gpt-4o")
+user_message = "Explain transformers in 3 sentences."
+token_count = len(enc.encode(user_message))
+print(f"Prompt tokens: {token_count}")  # Budget-check before expensive call
+
+# Streaming generation
+stream = client.chat.completions.create(
+    model="gpt-4o-mini",  # ~30x cheaper than gpt-4o, 90% quality
+    messages=[
+        {"role": "system", "content": "You are a concise ML expert."},
+        {"role": "user", "content": user_message},
+    ],
+    max_tokens=200,
+    temperature=0.7,
+    stream=True,
+)
+for chunk in stream:
+    if chunk.choices[0].delta.content:
+        print(chunk.choices[0].delta.content, end="", flush=True)
+print()  # newline after streaming
+```
+
+### Load Open-Weight LLM with HuggingFace
+
+```python
+# pip install transformers>=4.40 torch>=2.3
+# ⚠️ Last tested: 2026-04 | Requires: transformers>=4.40, torch>=2.3
+# Note: CPU-only is slow. GPU (CUDA or MPS) strongly recommended.
+from transformers import pipeline
+
+# Gemma 4 E2B: 2B params, ~5GB, runs on most GPUs
+pipe = pipeline(
+    "text-generation",
+    model="google/gemma-2-2b-it",
+    device_map="auto",  # auto-detect GPU/CPU
+    max_new_tokens=200,
+    do_sample=True,
+    temperature=0.7,
+)
+
+response = pipe([{"role": "user", "content": "What is an LLM?"}])
+print(response[0]["generated_text"][-1]["content"])
+```
+
+---
+
 ## ★ Connections
+
 
 | Relationship | Topics                                                                                                                  |
 | ------------ | ----------------------------------------------------------------------------------------------------------------------- |

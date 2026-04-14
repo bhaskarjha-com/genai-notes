@@ -66,32 +66,32 @@ Client request
 
 ### Core Serving Concerns
 
-| Concern | Why It Matters |
-|---|---|
-| **Latency** | Interactive chat feels broken when time-to-first-token is poor |
-| **Throughput** | Determines how many concurrent users the system can handle |
-| **Memory** | LLM serving is often bottlenecked by model and KV-cache memory |
-| **Reliability** | Timeouts, retries, and overload behavior must be explicit |
-| **Cost** | Serving choices directly shape GPU usage and token economics |
+| Concern         | Why It Matters                                                 |
+| --------------- | -------------------------------------------------------------- |
+| **Latency**     | Interactive chat feels broken when time-to-first-token is poor |
+| **Throughput**  | Determines how many concurrent users the system can handle     |
+| **Memory**      | LLM serving is often bottlenecked by model and KV-cache memory |
+| **Reliability** | Timeouts, retries, and overload behavior must be explicit      |
+| **Cost**        | Serving choices directly shape GPU usage and token economics   |
 
 ### Common Serving Patterns
 
-| Pattern | Best For | Trade-Off |
-|---|---|---|
-| **Managed API** | Fast iteration, low infra overhead | Less control, possible vendor lock-in |
-| **Self-hosted open model** | Privacy, cost control, fine-tuned models | Need GPU and ops maturity |
-| **Hybrid routing** | Mixed workloads and cost tuning | More complexity |
-| **Async batch serving** | Offline generation and evaluation | Not ideal for interactive UX |
+| Pattern                    | Best For                                 | Trade-Off                             |
+| -------------------------- | ---------------------------------------- | ------------------------------------- |
+| **Managed API**            | Fast iteration, low infra overhead       | Less control, possible vendor lock-in |
+| **Self-hosted open model** | Privacy, cost control, fine-tuned models | Need GPU and ops maturity             |
+| **Hybrid routing**         | Mixed workloads and cost tuning          | More complexity                       |
+| **Async batch serving**    | Offline generation and evaluation        | Not ideal for interactive UX          |
 
 ### Serving Engines
 
-| Engine | Best Known For | Typical Fit |
-|---|---|---|
-| **vLLM** | High-throughput open-source LLM serving | General self-hosted LLM serving |
-| **TGI** | Hugging Face ecosystem integration | Teams already in HF stack |
-| **Triton Inference Server** | Multi-model, multi-backend serving | Broader ML platform setups |
-| **SGLang** | Efficient serving for structured generation workloads | High-throughput advanced setups |
-| **Ollama** | Local developer ergonomics | Local testing, not primary production stack |
+| Engine                      | Best Known For                                        | Typical Fit                                 |
+| --------------------------- | ----------------------------------------------------- | ------------------------------------------- |
+| **vLLM**                    | High-throughput open-source LLM serving               | General self-hosted LLM serving             |
+| **TGI**                     | Hugging Face ecosystem integration                    | Teams already in HF stack                   |
+| **Triton Inference Server** | Multi-model, multi-backend serving                    | Broader ML platform setups                  |
+| **SGLang**                  | Efficient serving for structured generation workloads | High-throughput advanced setups             |
+| **Ollama**                  | Local developer ergonomics                            | Local testing, not primary production stack |
 
 ### API Shape Decisions
 
@@ -107,21 +107,21 @@ These choices affect the gateway, eval harness, and downstream clients.
 
 ### Batch vs Interactive Serving
 
-| Mode | Optimize For | Typical Examples |
-|---|---|---|
-| **Interactive** | Low latency and fast first token | Chat, copilots, agents |
-| **Batch** | Throughput and unit cost | Classification, offline summaries, eval runs |
+| Mode            | Optimize For                     | Typical Examples                             |
+| --------------- | -------------------------------- | -------------------------------------------- |
+| **Interactive** | Low latency and fast first token | Chat, copilots, agents                       |
+| **Batch**       | Throughput and unit cost         | Classification, offline summaries, eval runs |
 
 ### Practical Metrics
 
-| Metric | Why It Matters |
-|---|---|
-| **TTFT** | User perceives responsiveness through first token speed |
-| **Tokens/sec** | Measures generation throughput |
-| **Requests/sec** | Endpoint capacity indicator |
-| **GPU utilization** | Tells whether hardware is being used efficiently |
-| **P95 latency** | Better than averages for production reliability |
-| **Error rate** | Helps separate overload from semantic failures |
+| Metric              | Why It Matters                                          |
+| ------------------- | ------------------------------------------------------- |
+| **TTFT**            | User perceives responsiveness through first token speed |
+| **Tokens/sec**      | Measures generation throughput                          |
+| **Requests/sec**    | Endpoint capacity indicator                             |
+| **GPU utilization** | Tells whether hardware is being used efficiently        |
+| **P95 latency**     | Better than averages for production reliability         |
+| **Error rate**      | Helps separate overload from semantic failures          |
 
 ### Minimal Self-Hosted OpenAI-Compatible Serving
 
@@ -143,13 +143,13 @@ python -m vllm.entrypoints.openai.api_server \
 ---
 
 ## ◆ Quick Reference
-| Problem | First Serving Move |
-|---|---|
-| High API cost | Evaluate self-hosting or smaller-model routing |
-| Slow first token | Reduce prompt size, enable streaming, inspect prefill path |
-| GPU memory pressure | Quantize, reduce batch size, inspect KV-cache growth |
-| Uneven traffic | Add queueing, autoscaling, and backpressure |
-| Mixed workloads | Split interactive and batch paths |
+| Problem             | First Serving Move                                         |
+| ------------------- | ---------------------------------------------------------- |
+| High API cost       | Evaluate self-hosting or smaller-model routing             |
+| Slow first token    | Reduce prompt size, enable streaming, inspect prefill path |
+| GPU memory pressure | Quantize, reduce batch size, inspect KV-cache growth       |
+| Uneven traffic      | Add queueing, autoscaling, and backpressure                |
+| Mixed workloads     | Split interactive and batch paths                          |
 
 ---
 
@@ -170,25 +170,63 @@ python -m vllm.entrypoints.openai.api_server \
 
 ---
 
+## ★ Code & Implementation
+
+### vLLM Server Setup (OpenAI-Compatible)
+
+```bash
+# pip install vllm>=0.4
+# ⚠️ Last tested: 2026-04 | Requires: CUDA GPU, vllm>=0.4
+
+python -m vllm.entrypoints.openai.api_server \
+  --model meta-llama/Llama-3.2-8B-Instruct \
+  --tensor-parallel-size 1 \
+  --gpu-memory-utilization 0.90 \
+  --max-model-len 8192 \
+  --port 8000
+```
+
+```python
+# Query the vLLM server â€” identical to OpenAI API
+# pip install openai>=1.60
+# ⚠️ Last tested: 2026-04
+from openai import OpenAI
+import time
+
+client = OpenAI(base_url="http://localhost:8000/v1", api_key="not-needed")
+
+# Throughput test: 30 requests
+prompts = ["What is RAG?", "Explain LoRA.", "What is MoE?"] * 10
+start = time.monotonic()
+for p in prompts:
+    client.chat.completions.create(
+        model="meta-llama/Llama-3.2-8B-Instruct",
+        messages=[{"role": "user", "content": p}],
+        max_tokens=50,
+    )
+elapsed = time.monotonic() - start
+print(f"{len(prompts)} requests in {elapsed:.1f}s = {len(prompts)/elapsed:.1f} req/s")
+```
+
 ## ★ Connections
-| Relationship | Topics |
-|---|---|
-| Builds on | [Inference Optimization](../inference/inference-optimization.md), [Docker & Kubernetes for GenAI Deployment](./docker-and-kubernetes.md), [AI System Design for GenAI Applications](./ai-system-design.md) |
-| Leads to | [Monitoring & Observability for GenAI Systems](./monitoring-observability.md), [Cost Optimization for GenAI Systems](./cost-optimization.md) |
-| Compare with | Managed API consumption, classical REST service deployment |
-| Cross-domain | Distributed systems, queueing, API platform design |
+| Relationship | Topics                                                                                                                                                                                                     |
+| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Builds on    | [Inference Optimization](../inference/inference-optimization.md), [Docker & Kubernetes for GenAI Deployment](./docker-and-kubernetes.md), [AI System Design for GenAI Applications](./ai-system-design.md) |
+| Leads to     | [Monitoring & Observability for GenAI Systems](./monitoring-observability.md), [Cost Optimization for GenAI Systems](./cost-optimization.md)                                                               |
+| Compare with | Managed API consumption, classical REST service deployment                                                                                                                                                 |
+| Cross-domain | Distributed systems, queueing, API platform design                                                                                                                                                         |
 
 
 ---
 
 ## ◆ Production Failure Modes
 
-| Failure | Symptoms | Root Cause | Mitigation |
-|---------|----------|------------|------------|
-| **Cold start latency** | First request takes 30-60 seconds | Model loading from disk to GPU on demand | Model preloading, warm standby replicas |
-| **GPU memory fragmentation** | OOM despite sufficient total VRAM | Non-contiguous allocation from dynamic batching | vLLM paged attention, periodic defragmentation |
-| **Batch queue starvation** | High-priority requests delayed by large batch | FIFO batching without priority | Priority queues, preemptive scheduling |
-| **Model version rollback failure** | Can't revert after bad deployment | No versioned model registry | Model registry (MLflow), blue-green deployments |
+| Failure                            | Symptoms                                      | Root Cause                                      | Mitigation                                      |
+| ---------------------------------- | --------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
+| **Cold start latency**             | First request takes 30-60 seconds             | Model loading from disk to GPU on demand        | Model preloading, warm standby replicas         |
+| **GPU memory fragmentation**       | OOM despite sufficient total VRAM             | Non-contiguous allocation from dynamic batching | vLLM paged attention, periodic defragmentation  |
+| **Batch queue starvation**         | High-priority requests delayed by large batch | FIFO batching without priority                  | Priority queues, preemptive scheduling          |
+| **Model version rollback failure** | Can't revert after bad deployment             | No versioned model registry                     | Model registry (MLflow), blue-green deployments |
 
 ---
 
@@ -209,12 +247,12 @@ python -m vllm.entrypoints.openai.api_server \
 
 ## ★ Recommended Resources
 
-| Type | Resource | Why |
-|------|----------|-----|
-| 🔧 Hands-on | [vLLM Documentation](https://docs.vllm.ai/) | Best open-source LLM serving engine |
+| Type       | Resource                                                                    | Why                                       |
+| ---------- | --------------------------------------------------------------------------- | ----------------------------------------- |
+| 🔧 Hands-on | [vLLM Documentation](https://docs.vllm.ai/)                                 | Best open-source LLM serving engine       |
 | 🔧 Hands-on | [TGI Documentation](https://huggingface.co/docs/text-generation-inference/) | HuggingFace's production serving solution |
-| 📄 Paper | [Kwon et al. "PagedAttention" (2023)](https://arxiv.org/abs/2309.06180) | KV-cache management that powers vLLM |
-| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 8 | Model serving patterns for production |
+| 📄 Paper    | [Kwon et al. "PagedAttention" (2023)](https://arxiv.org/abs/2309.06180)     | KV-cache management that powers vLLM      |
+| 📘 Book     | "AI Engineering" by Chip Huyen (2025), Ch 8                                 | Model serving patterns for production     |
 
 ## ★ Sources
 - vLLM documentation - https://docs.vllm.ai

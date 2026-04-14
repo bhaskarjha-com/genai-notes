@@ -194,25 +194,82 @@ KEY PAPERS:
 
 ---
 
+## ★ Code & Implementation
+
+### Elastic Weight Consolidation (EWC) Implementation
+
+```python
+# pip install torch>=2.3
+# ⚠️ Last tested: 2026-04 | Requires: torch>=2.3
+# EWC protects important weights from catastrophic forgetting when fine-tuning
+
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+from copy import deepcopy
+
+class EWC:
+    """Elastic Weight Consolidation regularizer."""
+    def __init__(self, model: nn.Module, dataset_loader, lambda_ewc: float = 400.0):
+        self.model      = model
+        self.lambda_ewc = lambda_ewc
+        self._old_params: dict[str, torch.Tensor] = {}
+        self._fisher:     dict[str, torch.Tensor] = {}
+        self._compute_fisher(dataset_loader)
+
+    def _compute_fisher(self, loader) -> None:
+        """Estimate Fisher information (parameter importance) from task A data."""
+        fisher = {n: torch.zeros_like(p) for n, p in self.model.named_parameters()}
+        self.model.eval()
+        for inputs, targets in loader:
+            self.model.zero_grad()
+            logits = self.model(inputs)
+            loss   = F.cross_entropy(logits, targets)
+            loss.backward()
+            for n, p in self.model.named_parameters():
+                if p.grad is not None:
+                    fisher[n] += p.grad.pow(2)
+        # Normalize by dataset size
+        n = len(loader.dataset)
+        self._fisher     = {n: f / n for n, f in fisher.items()}
+        self._old_params = {n: p.clone().detach() for n, p in self.model.named_parameters()}
+
+    def penalty(self) -> torch.Tensor:
+        """Compute EWC regularization term. Add to task B training loss."""
+        loss = torch.tensor(0.0)
+        for n, p in self.model.named_parameters():
+            if n in self._fisher:
+                loss += (self._fisher[n] * (p - self._old_params[n]).pow(2)).sum()
+        return 0.5 * self.lambda_ewc * loss
+
+# Usage:
+# ewc = EWC(model, task_a_loader)
+# for batch in task_b_loader:
+#     loss = task_b_loss(model, batch) + ewc.penalty()
+#     loss.backward()
+#     optimizer.step()
+print("EWC class ready. Usage: loss += ewc.penalty() during Task B training.")
+```
+
 ## ★ Connections
 
-| Relationship | Topics                                                             |
-| ------------ | ------------------------------------------------------------------ |
-| Builds on    | [Fine Tuning](./fine-tuning.md), [Deep Learning Fundamentals](../prerequisites/deep-learning-fundamentals.md)   |
-| Leads to     | Lifelong AI agents, [Ai Agents](../agents/ai-agents.md), Self-improving AI |
-| Compare with | [Rag](./rag.md) (retrieval-based updates), Full retraining                 |
-| Cross-domain | Cognitive science (human memory), Neuroscience                     |
+| Relationship | Topics                                                                                                        |
+| ------------ | ------------------------------------------------------------------------------------------------------------- |
+| Builds on    | [Fine Tuning](./fine-tuning.md), [Deep Learning Fundamentals](../prerequisites/deep-learning-fundamentals.md) |
+| Leads to     | Lifelong AI agents, [Ai Agents](../agents/ai-agents.md), Self-improving AI                                    |
+| Compare with | [Rag](./rag.md) (retrieval-based updates), Full retraining                                                    |
+| Cross-domain | Cognitive science (human memory), Neuroscience                                                                |
 
 
 ---
 
 ## ◆ Production Failure Modes
 
-| Failure | Symptoms | Root Cause | Mitigation |
-|---------|----------|------------|------------|
-| **Catastrophic forgetting** | Performs well on new data but forgets old knowledge | No replay buffer or regularization during adaptation | EWC, experience replay, progressive networks |
-| **Concept drift detection failure** | Model silently degrades as data distribution shifts | No drift monitoring in place | Statistical drift detection (KS test, PSI), rolling eval sets |
-| **Data imbalance across time** | Recent data overwhelms historical patterns | No sampling strategy for temporal data | Balanced sampling, reservoir sampling, curriculum learning |
+| Failure                             | Symptoms                                            | Root Cause                                           | Mitigation                                                    |
+| ----------------------------------- | --------------------------------------------------- | ---------------------------------------------------- | ------------------------------------------------------------- |
+| **Catastrophic forgetting**         | Performs well on new data but forgets old knowledge | No replay buffer or regularization during adaptation | EWC, experience replay, progressive networks                  |
+| **Concept drift detection failure** | Model silently degrades as data distribution shifts | No drift monitoring in place                         | Statistical drift detection (KS test, PSI), rolling eval sets |
+| **Data imbalance across time**      | Recent data overwhelms historical patterns          | No sampling strategy for temporal data               | Balanced sampling, reservoir sampling, curriculum learning    |
 
 ---
 
@@ -234,11 +291,11 @@ KEY PAPERS:
 
 ## ★ Recommended Resources
 
-| Type | Resource | Why |
-|------|----------|-----|
-| 📄 Paper | [Scialom et al. "Fine-Tuned Language Models are Continual Learners" (2022)](https://arxiv.org/abs/2205.12393) | Continual learning in the LLM context |
-| 📘 Book | "Designing Machine Learning Systems" by Chip Huyen (2022), Ch 9 | Data distribution shifts and continuous adaptation |
-| 🔧 Hands-on | [Avalanche Library](https://avalanche.continualai.org/) | Open-source continual learning framework |
+| Type       | Resource                                                                                                      | Why                                                |
+| ---------- | ------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
+| 📄 Paper    | [Scialom et al. "Fine-Tuned Language Models are Continual Learners" (2022)](https://arxiv.org/abs/2205.12393) | Continual learning in the LLM context              |
+| 📘 Book     | "Designing Machine Learning Systems" by Chip Huyen (2022), Ch 9                                               | Data distribution shifts and continuous adaptation |
+| 🔧 Hands-on | [Avalanche Library](https://avalanche.continualai.org/)                                                       | Open-source continual learning framework           |
 
 ## ★ Sources
 

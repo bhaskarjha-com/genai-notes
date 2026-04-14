@@ -212,26 +212,84 @@ KEY INSIGHT:
 
 ---
 
+## ★ Code & Implementation
+
+### Knowledge Distillation: Teacher → Student Loss
+
+```python
+# pip install torch>=2.3 transformers>=4.40
+# ⚠️ Last tested: 2026-04 | Requires: torch>=2.3
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+
+def distillation_loss(
+    student_logits: torch.Tensor,
+    teacher_logits: torch.Tensor,
+    labels: torch.Tensor,
+    temperature: float = 4.0,
+    alpha: float = 0.7,
+) -> torch.Tensor:
+    """
+    Combined distillation + CE loss.
+
+    student_logits: (batch, seq, vocab)
+    teacher_logits: (batch, seq, vocab)
+    labels:         (batch, seq) ground-truth token IDs
+    temperature:    softs the teacher distribution (higher = more information)
+    alpha:          weight of distillation loss (1-alpha = CE weight)
+    """
+    # Soft targets from teacher (temperature scaling)
+    soft_teacher = F.softmax(teacher_logits / temperature, dim=-1)
+    soft_student = F.log_softmax(student_logits / temperature, dim=-1)
+    kd_loss = F.kl_div(soft_student, soft_teacher, reduction="batchmean") * (temperature ** 2)
+
+    # Hard targets from ground truth labels
+    ce_loss = F.cross_entropy(
+        student_logits.view(-1, student_logits.size(-1)),
+        labels.view(-1),
+        ignore_index=-100,
+    )
+
+    return alpha * kd_loss + (1 - alpha) * ce_loss
+
+# Example shapes (tiny vocab for demo)
+batch, seq, vocab = 2, 10, 100
+student_logits = torch.randn(batch, seq, vocab)
+teacher_logits = torch.randn(batch, seq, vocab)
+labels         = torch.randint(0, vocab, (batch, seq))
+
+loss = distillation_loss(student_logits, teacher_logits, labels)
+print(f"Distillation loss: {loss.item():.4f}")
+
+# GGUF Quantization check (inference only â€” requires llama.cpp)
+# After downloading a GGUF model:
+# from llama_cpp import Llama
+# llm = Llama(model_path="./model.gguf", n_ctx=2048)
+# output = llm("Explain LoRA in one sentence.", max_tokens=80)
+# print(output["choices"][0]["text"])
+```
+
 ## ★ Connections
 
-| Relationship | Topics                                                           |
-| ------------ | ---------------------------------------------------------------- |
+| Relationship | Topics                                                                                                        |
+| ------------ | ------------------------------------------------------------------------------------------------------------- |
 | Builds on    | [Fine Tuning](./fine-tuning.md), [Deep Learning Fundamentals](../prerequisites/deep-learning-fundamentals.md) |
-| Leads to     | Edge AI deployment, [Inference Optimization](../inference/inference-optimization.md)      |
-| Compare with | Quantization (number precision), Pruning (removing weights)      |
-| Cross-domain | Transfer learning, Curriculum learning                           |
+| Leads to     | Edge AI deployment, [Inference Optimization](../inference/inference-optimization.md)                          |
+| Compare with | Quantization (number precision), Pruning (removing weights)                                                   |
+| Cross-domain | Transfer learning, Curriculum learning                                                                        |
 
 
 ---
 
 ## ◆ Production Failure Modes
 
-| Failure | Symptoms | Root Cause | Mitigation |
-|---------|----------|------------|------------|
-| **Capability cliff** | Student model loses specific capabilities while matching aggregate metrics | Distillation data doesn't cover edge cases | Targeted distillation on weak subsets, multi-task distillation |
-| **Quantization outliers** | Quality drops sharply at INT4/INT8 | Activation outliers in certain layers | SmoothQuant, GPTQ per-channel quantization, mixed precision |
-| **Pruning instability** | Structured pruning removes critical attention heads | No importance scoring before pruning | Magnitude + gradient importance scores, iterative pruning |
-| **Format mismatch** | Distilled model can't follow complex instructions | Training data focused on short completions | Include instruction-following examples in distillation dataset |
+| Failure                   | Symptoms                                                                   | Root Cause                                 | Mitigation                                                     |
+| ------------------------- | -------------------------------------------------------------------------- | ------------------------------------------ | -------------------------------------------------------------- |
+| **Capability cliff**      | Student model loses specific capabilities while matching aggregate metrics | Distillation data doesn't cover edge cases | Targeted distillation on weak subsets, multi-task distillation |
+| **Quantization outliers** | Quality drops sharply at INT4/INT8                                         | Activation outliers in certain layers      | SmoothQuant, GPTQ per-channel quantization, mixed precision    |
+| **Pruning instability**   | Structured pruning removes critical attention heads                        | No importance scoring before pruning       | Magnitude + gradient importance scores, iterative pruning      |
+| **Format mismatch**       | Distilled model can't follow complex instructions                          | Training data focused on short completions | Include instruction-following examples in distillation dataset |
 
 ---
 
@@ -252,11 +310,11 @@ KEY INSIGHT:
 
 ## ★ Recommended Resources
 
-| Type | Resource | Why |
-|------|----------|-----|
-| 📄 Paper | [Hinton et al. "Distilling Knowledge in Neural Networks" (2015)](https://arxiv.org/abs/1503.02531) | The foundational knowledge distillation paper |
-| 📄 Paper | [Dettmers et al. "GPTQ" (2022)](https://arxiv.org/abs/2210.17323) | Post-training quantization for large models |
-| 📘 Book | "Efficient Deep Learning" by Menghani (2024) | Comprehensive treatment of compression techniques |
+| Type    | Resource                                                                                           | Why                                               |
+| ------- | -------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
+| 📄 Paper | [Hinton et al. "Distilling Knowledge in Neural Networks" (2015)](https://arxiv.org/abs/1503.02531) | The foundational knowledge distillation paper     |
+| 📄 Paper | [Dettmers et al. "GPTQ" (2022)](https://arxiv.org/abs/2210.17323)                                  | Post-training quantization for large models       |
+| 📘 Book  | "Efficient Deep Learning" by Menghani (2024)                                                       | Comprehensive treatment of compression techniques |
 
 ## ★ Sources
 

@@ -213,7 +213,64 @@ TOOLS:
 
 ---
 
+## ★ Code & Implementation
+
+### Token Cost Calculator (tiktoken)
+
+```python
+# pip install tiktoken>=0.6
+# ⚠️ Last tested: 2026-04 | Requires: tiktoken>=0.6
+import tiktoken
+
+enc = tiktoken.encoding_for_model("gpt-4o")
+
+def token_cost_report(texts: dict[str, str], price_per_1m: float = 2.50) -> None:
+    """Report token count and estimated cost for a dict of text samples."""
+    print(f"{'Label':<25} {'Tokens':>8} {'Cost ($)':>12}")
+    print("-" * 48)
+    for label, text in texts.items():
+        n = len(enc.encode(text))
+        cost = (n / 1_000_000) * price_per_1m
+        print(f"{label:<25} {n:>8,} {cost:>12.6f}")
+
+samples = {
+    "English (100 words)":  "The quick brown fox jumps over the lazy dog. " * 5,
+    "Code (Python func)":   "def fibonacci(n):\n    if n <= 1:\n        return n\n    return fibonacci(n-1) + fibonacci(n-2)\n" * 3,
+    "Hindi (same meaning)":  "नमस्ते, आप कैसे हैं? मैं ठीक हूँ। " * 10,   # 2-4x more tokens
+    "JSON (structured)":    '{"name": "Alice", "age": 30, "city": "Tokyo"}\n' * 10,
+}
+token_cost_report(samples)
+# English: ~75 tokens  — Hindi: ~200+ tokens for equivalent content
+```
+
+### Cross-Model Token Comparison
+
+```python
+# ⚠️ Last tested: 2026-04 | Requires: tiktoken>=0.6, transformers>=4.40
+import tiktoken
+from transformers import AutoTokenizer
+
+text = "The transformer architecture revolutionized natural language processing in 2017."
+
+# OpenAI tokenizers
+for model in ["gpt-4o", "gpt-3.5-turbo"]:
+    enc = tiktoken.encoding_for_model(model)
+    tokens = enc.encode(text)
+    print(f"OpenAI {model}: {len(tokens)} tokens → {tokens}")
+
+# HuggingFace tokenizers
+for hf_model in ["meta-llama/Llama-3.2-1B", "google/gemma-2-2b"]:
+    tok = AutoTokenizer.from_pretrained(hf_model)
+    tokens = tok.encode(text)
+    print(f"HF {hf_model.split('/')[-1]}: {len(tokens)} tokens")
+# Different tokenizers → different counts for same text
+# This is why you MUST use the correct tokenizer for each model
+```
+
+---
+
 ## ★ Connections
+
 
 | Relationship | Topics                                                                    |
 | ------------ | ------------------------------------------------------------------------- |

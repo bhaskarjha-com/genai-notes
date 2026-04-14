@@ -209,7 +209,87 @@ Modern defaults:
 
 ---
 
+## ★ Code & Implementation
+
+### Scaled Dot-Product Attention from Scratch
+
+```python
+# ⚠️ Last tested: 2026-04 | Requires: torch>=2.3
+import torch
+import torch.nn.functional as F
+
+def scaled_dot_product_attention(Q, K, V, causal_mask=False):
+    """
+    Q: (batch, seq_len, d_k)
+    K: (batch, seq_len, d_k)
+    V: (batch, seq_len, d_v)
+    """
+    d_k = Q.size(-1)
+    # Step 1+2+3: QK^T / sqrt(d_k)
+    scores = torch.matmul(Q, K.transpose(-2, -1)) / (d_k ** 0.5)
+
+    if causal_mask:
+        # Mask future positions (upper triangle) with -inf
+        seq_len = Q.size(-2)
+        mask = torch.triu(torch.ones(seq_len, seq_len, device=Q.device), diagonal=1).bool()
+        scores = scores.masked_fill(mask, float('-inf'))
+
+    # Step 4: Softmax
+    weights = F.softmax(scores, dim=-1)
+
+    # Step 5: Weighted sum of V
+    output = torch.matmul(weights, V)
+    return output, weights
+
+# Verify against PyTorch built-in
+Q = torch.randn(1, 5, 32)  # batch=1, seq_len=5, d_k=32
+K = torch.randn(1, 5, 32)
+V = torch.randn(1, 5, 32)
+
+custom_out, weights = scaled_dot_product_attention(Q, K, V, causal_mask=True)
+builtin_out = F.scaled_dot_product_attention(Q, K, V, is_causal=True)
+
+print(f"Max diff vs built-in: {(custom_out - builtin_out).abs().max().item():.2e}")
+# Should be < 1e-5 (numerical precision only)
+print(f"Attention weights shape: {weights.shape}")  # (1, 5, 5)
+```
+
+### Visualize Attention Heads (HuggingFace)
+
+```python
+# pip install transformers>=4.40 matplotlib>=3.8
+# ⚠️ Last tested: 2026-04 | Requires: transformers>=4.40, matplotlib
+import torch
+import matplotlib.pyplot as plt
+from transformers import AutoTokenizer, AutoModel
+
+tokenizer = AutoTokenizer.from_pretrained("google/gemma-2-2b")
+model = AutoModel.from_pretrained("google/gemma-2-2b", output_attentions=True)
+
+sentence = "The cat sat on the mat because it was tired."
+inputs = tokenizer(sentence, return_tensors="pt")
+with torch.no_grad():
+    outputs = model(**inputs)
+
+# outputs.attentions: tuple of (batch, heads, seq_len, seq_len) per layer
+attn_layer0 = outputs.attentions[0][0]  # Layer 0, batch 0: (heads, seq_len, seq_len)
+tokens = tokenizer.convert_ids_to_tokens(inputs["input_ids"][0])
+
+# Plot head 0 from layer 0
+fig, ax = plt.subplots(figsize=(8, 8))
+ax.imshow(attn_layer0[0].numpy(), cmap="Blues", vmin=0, vmax=1)
+ax.set_xticks(range(len(tokens))); ax.set_xticklabels(tokens, rotation=45, ha="right")
+ax.set_yticks(range(len(tokens))); ax.set_yticklabels(tokens)
+ax.set_title("Layer 0, Head 0 Attention")
+plt.tight_layout()
+plt.savefig("attention_head0.png", dpi=150)
+print("Saved attention_head0.png")
+```
+
+---
+
 ## ★ Connections
+
 
 | Relationship | Topics                                                                           |
 | ------------ | -------------------------------------------------------------------------------- |

@@ -41,14 +41,16 @@ Include when the topic calls for it — do **not** omit just because they take e
 - **◆ Terminology** — Domain-specific terms
 - **◆ Types & Classifications** — When applicable
 
-### Depth Minimums
+### Depth Requirements
 
-| Difficulty | Minimum Length | Code Examples |
-|:----------:|:--------------:|:-------------:|
-| Beginner | 200 lines | ≥1 |
-| Intermediate | 400 lines | ≥2 |
-| Advanced | 500 lines | ≥2 |
-| Expert | 500 lines | ≥3 |
+Every note must meet these quality signals (not arbitrary line counts):
+
+| Difficulty | Code Examples | Production Failure Modes | Exercises |
+|:----------:|:-------------:|:------------------------:|:---------:|
+| Beginner   | ≥1            | ≥2 rows                  | ≥1        |
+| Intermediate | ≥2          | ≥3 rows                  | ≥1        |
+| Advanced   | ≥2            | ≥4 rows                  | ≥2        |
+| Expert     | ≥3            | ≥4 rows                  | ≥2        |
 
 ## Section Markers
 
@@ -113,10 +115,26 @@ All code samples must follow these standards:
 1. Fork the repo
 2. Create a branch (`feature/topic-name` or `fix/issue-description`)
 3. Make your changes following the template and standards above
-4. Regenerate learner assets: `make generate` (or `pwsh scripts/generate_learning_assets.ps1`)
-5. Verify the repo: `make verify` (or `pwsh scripts/verify_repo.ps1`)
+4. Regenerate learner assets: `make generate` (Windows without make: `pwsh scripts/generate_learning_assets.ps1`)
+5. Verify the repo: `make verify` (Windows without make: `pwsh scripts/verify_repo.ps1`)
 6. Submit a PR with a clear description of what changed and why
 
 ## Questions?
 
 Open an issue with the "question" label. We're happy to help!
+
+---
+
+## For AI-Assisted Maintenance
+
+A complete library of ready-to-use maintenance prompts is available at [`_templates/MAINTENANCE_PROMPTS.md`](_templates/MAINTENANCE_PROMPTS.md).
+
+It contains session-agnostic prompts for:
+- Creating new notes from scratch
+- Updating notes for frontier accuracy
+- Fixing template compliance
+- Adding code sections to existing notes
+- CI/CD and structural fixes
+- Full repository audits
+
+Always include **Section 0 (Repository Context)** from that file when starting a fresh AI session on this repo.

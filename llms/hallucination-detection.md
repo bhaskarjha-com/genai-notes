@@ -52,12 +52,12 @@ This note covers hallucination types, detection methods, mitigation strategies, 
 ## ★ Deep Dive
 ### Useful Taxonomy
 
-| Type | Description | Example |
-|---|---|---|
-| **Intrinsic** | Contradicts provided context | Model cites a value not present in the retrieved chunk |
-| **Extrinsic** | Sounds factual but is false outside the context | Fake company, paper, package, or legal clause |
-| **Fabricated citation** | Invented source or quote | Nonexistent article or benchmark |
-| **Reasoning drift** | Early steps are plausible, final conclusion is unsupported | Tool traces do not justify the final recommendation |
+| Type                    | Description                                                | Example                                                |
+| ----------------------- | ---------------------------------------------------------- | ------------------------------------------------------ |
+| **Intrinsic**           | Contradicts provided context                               | Model cites a value not present in the retrieved chunk |
+| **Extrinsic**           | Sounds factual but is false outside the context            | Fake company, paper, package, or legal clause          |
+| **Fabricated citation** | Invented source or quote                                   | Nonexistent article or benchmark                       |
+| **Reasoning drift**     | Early steps are plausible, final conclusion is unsupported | Tool traces do not justify the final recommendation    |
 
 ### Detection Strategies
 
@@ -100,14 +100,14 @@ User request
 
 ### Mitigation Strategies
 
-| Strategy | Best For | Limitation |
-|---|---|---|
-| **RAG with citations** | Knowledge assistants | Depends on retrieval quality |
-| **Tool use** | Dynamic facts and calculations | Tool outputs can still be misused |
-| **Structured output** | Workflows and APIs | Does not guarantee truthfulness |
-| **Abstain / say "I do not know"** | High-risk domains | Can reduce answer coverage |
-| **Fine-tuning on domain style** | Format and task consistency | Does not guarantee current facts |
-| **Verifier pass** | Expensive or high-stakes requests | Adds latency and cost |
+| Strategy                          | Best For                          | Limitation                        |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| **RAG with citations**            | Knowledge assistants              | Depends on retrieval quality      |
+| **Tool use**                      | Dynamic facts and calculations    | Tool outputs can still be misused |
+| **Structured output**             | Workflows and APIs                | Does not guarantee truthfulness   |
+| **Abstain / say "I do not know"** | High-risk domains                 | Can reduce answer coverage        |
+| **Fine-tuning on domain style**   | Format and task consistency       | Does not guarantee current facts  |
+| **Verifier pass**                 | Expensive or high-stakes requests | Adds latency and cost             |
 
 ### What Works Best In Practice
 
@@ -141,12 +141,12 @@ def answer_with_check(query, context_chunks, llm, verifier):
 ---
 
 ## ◆ Quick Reference
-| Signal | Interpretation |
-|---|---|
-| High fluency + low evidence coverage | Likely hallucination risk |
-| Wrong citations | Retrieval or citation assembly bug |
-| Repeated invented entities | Model prior overpowering context |
-| Strong answer on empty retrieval | Missing abstention policy |
+| Signal                               | Interpretation                     |
+| ------------------------------------ | ---------------------------------- |
+| High fluency + low evidence coverage | Likely hallucination risk          |
+| Wrong citations                      | Retrieval or citation assembly bug |
+| Repeated invented entities           | Model prior overpowering context   |
+| Strong answer on empty retrieval     | Missing abstention policy          |
 
 ---
 
@@ -167,13 +167,73 @@ def answer_with_check(query, context_chunks, llm, verifier):
 
 ---
 
+## ★ Code & Implementation
+
+### Production Groundedness Checker with Abstention
+
+```python
+# pip install openai>=1.60
+# ⚠️ Last tested: 2026-04 | Requires: openai>=1.60, OPENAI_API_KEY env var
+from openai import OpenAI
+import json
+
+client = OpenAI()
+
+def check_groundedness(answer: str, context_chunks: list[str], threshold: float = 0.7) -> dict:
+    """Ask a judge LLM whether an answer is grounded in the given context."""
+    context = "\n\n".join(f"[Chunk {i+1}]: {c}" for i, c in enumerate(context_chunks))
+    prompt = (
+        "You are a factuality judge. Score whether the ANSWER is supported by the CONTEXT.\n\n"
+        f"CONTEXT:\n{context}\n\nANSWER:\n{answer}\n\n"
+        'JSON only: {"score": 0.0-1.0, "reason": "...", "unsupported_claims": ["..."]}'
+    )
+    resp = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[{"role": "user", "content": prompt}],
+        temperature=0,
+        response_format={"type": "json_object"},
+    )
+    result = json.loads(resp.choices[0].message.content)
+    result["grounded"] = result["score"] >= threshold
+    return result
+
+# Wrong year â€” should be flagged
+context = ["The Eiffel Tower was built in 1889 and stands 330 meters tall."]
+answer  = "The Eiffel Tower was built in 1890."
+check   = check_groundedness(answer, context)
+print(f"Grounded: {check['grounded']} | Score: {check['score']:.2f}")
+print(f"Unsupported: {check.get('unsupported_claims', [])}")
+```
+
+### Self-Consistency Check (Reference-Free)
+
+```python
+# ⚠️ Last tested: 2026-04 | Requires: openai>=1.60, OPENAI_API_KEY
+from collections import Counter
+
+def self_consistency_check(question: str, n: int = 5) -> dict:
+    answers = [
+        client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[{"role": "user", "content": question}],
+            temperature=0.8, max_tokens=80,
+        ).choices[0].message.content.strip()
+        for _ in range(n)
+    ]
+    top, freq = Counter(answers).most_common(1)[0]
+    return {"answer": top, "consistency": freq / n, "confident": freq / n >= 0.6}
+
+r = self_consistency_check("What year was the Eiffel Tower built?")
+print(f"{r['answer']} ({r['consistency']:.0%} agreement, confident={r['confident']})")
+```
+
 ## ★ Connections
-| Relationship | Topics |
-|---|---|
-| Builds on | [Large Language Models (LLMs)](./llms-overview.md), [Retrieval-Augmented Generation (RAG)](../techniques/rag.md), [LLM Evaluation & Benchmarks](../evaluation/evaluation-and-benchmarks.md) |
-| Leads to | [Ethics, Safety & Alignment](../ethics-and-safety/ethics-safety-alignment.md), [Advanced Fine-Tuning for LLM Adaptation](../techniques/advanced-fine-tuning.md), [LLM Evaluation & Benchmarks](../evaluation/evaluation-and-benchmarks.md) |
-| Compare with | Generic model quality issues, prompt injection, data leakage |
-| Cross-domain | Information retrieval, fact checking, uncertainty estimation |
+| Relationship | Topics                                                                                                                                                                                                                                     |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Builds on    | [Large Language Models (LLMs)](./llms-overview.md), [Retrieval-Augmented Generation (RAG)](../techniques/rag.md), [LLM Evaluation & Benchmarks](../evaluation/evaluation-and-benchmarks.md)                                                |
+| Leads to     | [Ethics, Safety & Alignment](../ethics-and-safety/ethics-safety-alignment.md), [Advanced Fine-Tuning for LLM Adaptation](../techniques/advanced-fine-tuning.md), [LLM Evaluation & Benchmarks](../evaluation/evaluation-and-benchmarks.md) |
+| Compare with | Generic model quality issues, prompt injection, data leakage                                                                                                                                                                               |
+| Cross-domain | Information retrieval, fact checking, uncertainty estimation                                                                                                                                                                               |
 
 
 ---
@@ -195,21 +255,21 @@ def answer_with_check(query, context_chunks, llm, verifier):
 
 ## ◆ Production Failure Modes
 
-| Failure | Symptoms | Root Cause | Mitigation |
-|---------|----------|------------|------------|
-| **False positive refusals** | System flags accurate responses as hallucinations | Detection threshold too aggressive | Calibrate thresholds on domain data, multi-method consensus |
-| **Confident hallucinations** | Model hallucinates with high confidence scores | Confidence ≠ correctness for LLMs | Retrieval grounding, self-consistency checks, citation verification |
-| **Detection latency** | Real-time hallucination check adds 2-5s per response | Detection method too compute-intensive | Lightweight pre-filter, async verification, batch checking |
+| Failure                      | Symptoms                                             | Root Cause                             | Mitigation                                                          |
+| ---------------------------- | ---------------------------------------------------- | -------------------------------------- | ------------------------------------------------------------------- |
+| **False positive refusals**  | System flags accurate responses as hallucinations    | Detection threshold too aggressive     | Calibrate thresholds on domain data, multi-method consensus         |
+| **Confident hallucinations** | Model hallucinates with high confidence scores       | Confidence ≠ correctness for LLMs      | Retrieval grounding, self-consistency checks, citation verification |
+| **Detection latency**        | Real-time hallucination check adds 2-5s per response | Detection method too compute-intensive | Lightweight pre-filter, async verification, batch checking          |
 ---
 
 
 ## ★ Recommended Resources
 
-| Type | Resource | Why |
-|------|----------|-----|
-| 📄 Paper | [Min et al. "FActScore" (2023)](https://arxiv.org/abs/2305.14251) | Fine-grained factuality scoring for LLM outputs |
-| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 4 | Hallucination detection as part of evaluation strategy |
-| 🔧 Hands-on | [Vectara HHEM](https://huggingface.co/vectara/hallucination_evaluation_model) | Open-source hallucination evaluation model |
+| Type       | Resource                                                                      | Why                                                    |
+| ---------- | ----------------------------------------------------------------------------- | ------------------------------------------------------ |
+| 📄 Paper    | [Min et al. "FActScore" (2023)](https://arxiv.org/abs/2305.14251)             | Fine-grained factuality scoring for LLM outputs        |
+| 📘 Book     | "AI Engineering" by Chip Huyen (2025), Ch 4                                   | Hallucination detection as part of evaluation strategy |
+| 🔧 Hands-on | [Vectara HHEM](https://huggingface.co/vectara/hallucination_evaluation_model) | Open-source hallucination evaluation model             |
 
 ## ★ Sources
 - SelfCheckGPT paper

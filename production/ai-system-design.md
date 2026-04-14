@@ -87,23 +87,23 @@ Observability and evaluation
 
 ### Design Questions You Must Answer
 
-| Question | Why It Matters |
-|---|---|
-| What does "good" output mean? | Drives evaluation, routing, and fallback logic |
-| What is the latency budget? | Determines model size, cache strategy, and retrieval depth |
-| What data must be grounded? | Decides whether to use RAG, tools, or fine-tuning |
-| What errors are unacceptable? | Shapes guardrails and human review policy |
-| What is the cost envelope? | Impacts batching, caching, model mix, and output length |
+| Question                      | Why It Matters                                             |
+| ----------------------------- | ---------------------------------------------------------- |
+| What does "good" output mean? | Drives evaluation, routing, and fallback logic             |
+| What is the latency budget?   | Determines model size, cache strategy, and retrieval depth |
+| What data must be grounded?   | Decides whether to use RAG, tools, or fine-tuning          |
+| What errors are unacceptable? | Shapes guardrails and human review policy                  |
+| What is the cost envelope?    | Impacts batching, caching, model mix, and output length    |
 
 ### Common GenAI System Patterns
 
-| Pattern | When To Use | Strength | Risk |
-|---|---|---|---|
-| **Direct prompt + model** | Low-risk copilots, internal tools | Fastest path to production | Weak grounding, little control |
-| **RAG pipeline** | Knowledge assistants, enterprise Q&A | Fresh and domain-specific answers | Retrieval quality dominates |
-| **Tool-using agent** | Multi-step workflows, task execution | Dynamic and powerful | Harder to evaluate and debug |
-| **Multi-model router** | Cost-sensitive or mixed-complexity workloads | Better price/performance | More routing complexity |
-| **Human-in-the-loop** | High-risk domains | Safer decisions | Slower operations |
+| Pattern                   | When To Use                                  | Strength                          | Risk                           |
+| ------------------------- | -------------------------------------------- | --------------------------------- | ------------------------------ |
+| **Direct prompt + model** | Low-risk copilots, internal tools            | Fastest path to production        | Weak grounding, little control |
+| **RAG pipeline**          | Knowledge assistants, enterprise Q&A         | Fresh and domain-specific answers | Retrieval quality dominates    |
+| **Tool-using agent**      | Multi-step workflows, task execution         | Dynamic and powerful              | Harder to evaluate and debug   |
+| **Multi-model router**    | Cost-sensitive or mixed-complexity workloads | Better price/performance          | More routing complexity        |
+| **Human-in-the-loop**     | High-risk domains                            | Safer decisions                   | Slower operations              |
 
 ### Design Dimensions
 
@@ -167,13 +167,13 @@ When asked to design a GenAI system, structure the answer like this:
 ---
 
 ## ◆ Quick Reference
-| Problem | First Design Move |
-|---|---|
-| Hallucinations on private data | Add retrieval and citations |
-| High cost | Route simple tasks to smaller models and add cache layers |
-| Slow responses | Reduce context, retrieval depth, and agent steps |
-| Bad tool decisions | Tighten tool schemas and add trajectory evals |
-| Hard debugging | Add tracing and dataset-backed regression tests |
+| Problem                        | First Design Move                                         |
+| ------------------------------ | --------------------------------------------------------- |
+| Hallucinations on private data | Add retrieval and citations                               |
+| High cost                      | Route simple tasks to smaller models and add cache layers |
+| Slow responses                 | Reduce context, retrieval depth, and agent steps          |
+| Bad tool decisions             | Tighten tool schemas and add trajectory evals             |
+| Hard debugging                 | Add tracing and dataset-backed regression tests           |
 
 ---
 
@@ -194,13 +194,61 @@ When asked to design a GenAI system, structure the answer like this:
 
 ---
 
+## ★ Code & Implementation
+
+### Production RAG System Scaffold
+
+```python
+# pip install openai>=1.60 chromadb>=0.5
+# ⚠️ Last tested: 2026-04 | Requires: openai>=1.60, chromadb>=0.5, OPENAI_API_KEY env var
+from openai import OpenAI
+import chromadb
+
+client = OpenAI()
+chroma = chromadb.Client()
+col    = chroma.get_or_create_collection("docs")
+
+def index_documents(docs: list[str]) -> None:
+    embeddings = client.embeddings.create(
+        model="text-embedding-3-small", input=docs
+    ).data
+    col.add(
+        documents=docs,
+        embeddings=[e.embedding for e in embeddings],
+        ids=[f"doc_{i}" for i in range(len(docs))],
+    )
+
+def rag_query(question: str, top_k: int = 3) -> str:
+    q_emb = client.embeddings.create(
+        model="text-embedding-3-small", input=[question]
+    ).data[0].embedding
+    results = col.query(query_embeddings=[q_emb], n_results=top_k)
+    context = "\n\n".join(results["documents"][0])
+    resp = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[
+            {"role": "system", "content": "Answer ONLY from context. If unsure, say so."},
+            {"role": "user",   "content": f"Context:\n{context}\n\nQuestion: {question}"},
+        ],
+        max_tokens=300, temperature=0,
+    )
+    return resp.choices[0].message.content
+
+index_documents([
+    "Transformers use self-attention to process sequences in parallel.",
+    "LoRA fine-tunes models by adding low-rank adapters to frozen weights.",
+    "RAG combines retrieval and generation to ground answers in external documents.",
+])
+print(rag_query("How does RAG work?"))
+```
+
 ## ★ Connections
-| Relationship | Topics |
-|---|---|
-| Builds on | [LLMOps & Production Deployment](./llmops.md), [Retrieval-Augmented Generation (RAG)](../techniques/rag.md), [AI Agents](../agents/ai-agents.md) |
-| Leads to | [LLMOps & Production Deployment](./llmops.md), [Inference Optimization](../inference/inference-optimization.md), [GenAI Tools & Infrastructure](../tools-and-infra/tools-overview.md) |
-| Compare with | Traditional web system design, classical ML system design |
-| Cross-domain | Distributed systems, DevOps, platform engineering |
+| Relationship | Topics                                                                                                                                                                                |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Builds on    | [LLMOps & Production Deployment](./llmops.md), [Retrieval-Augmented Generation (RAG)](../techniques/rag.md), [AI Agents](../agents/ai-agents.md)                                      |
+| Leads to     | [LLMOps & Production Deployment](./llmops.md), [Inference Optimization](../inference/inference-optimization.md), [GenAI Tools & Infrastructure](../tools-and-infra/tools-overview.md) |
+| Compare with | Traditional web system design, classical ML system design                                                                                                                             |
+| Cross-domain | Distributed systems, DevOps, platform engineering                                                                                                                                     |
 
 
 ---
@@ -222,22 +270,22 @@ When asked to design a GenAI system, structure the answer like this:
 
 ## ◆ Production Failure Modes
 
-| Failure | Symptoms | Root Cause | Mitigation |
-|---------|----------|------------|------------|
-| **Single point of failure** | Entire system down when one component fails | No redundancy in critical path | Redundant components, circuit breakers, graceful degradation |
-| **Scaling cliff** | System works at 100 RPS but falls over at 200 RPS | Bottleneck component not identified | Load testing, identify bottlenecks, horizontal scaling |
-| **Data pipeline drift** | Model quality degrades without code changes | Input data distribution shifts silently | Data quality monitoring, schema validation, drift detection |
+| Failure                     | Symptoms                                          | Root Cause                              | Mitigation                                                   |
+| --------------------------- | ------------------------------------------------- | --------------------------------------- | ------------------------------------------------------------ |
+| **Single point of failure** | Entire system down when one component fails       | No redundancy in critical path          | Redundant components, circuit breakers, graceful degradation |
+| **Scaling cliff**           | System works at 100 RPS but falls over at 200 RPS | Bottleneck component not identified     | Load testing, identify bottlenecks, horizontal scaling       |
+| **Data pipeline drift**     | Model quality degrades without code changes       | Input data distribution shifts silently | Data quality monitoring, schema validation, drift detection  |
 ---
 
 
 ## ★ Recommended Resources
 
-| Type | Resource | Why |
-|------|----------|-----|
-| 📘 Book | "AI Engineering" by Chip Huyen (2025) | End-to-end AI system design reference |
-| 📘 Book | "Designing Machine Learning Systems" by Chip Huyen (2022) | Foundational ML system design patterns |
-| 🎥 Video | [Alex Xu — System Design Interview Series](https://www.youtube.com/@ByteByteGo) | Visual system design explanations |
-| 🔧 Hands-on | [Google MLOps Guide](https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning) | Production ML architecture patterns |
+| Type       | Resource                                                                                                                           | Why                                    |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
+| 📘 Book     | "AI Engineering" by Chip Huyen (2025)                                                                                              | End-to-end AI system design reference  |
+| 📘 Book     | "Designing Machine Learning Systems" by Chip Huyen (2022)                                                                          | Foundational ML system design patterns |
+| 🎥 Video    | [Alex Xu — System Design Interview Series](https://www.youtube.com/@ByteByteGo)                                                    | Visual system design explanations      |
+| 🔧 Hands-on | [Google MLOps Guide](https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning) | Production ML architecture patterns    |
 
 ## ★ Sources
 - Chip Huyen, *Designing Machine Learning Systems*

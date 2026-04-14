@@ -238,25 +238,67 @@ PRE-TRAINING OBJECTIVE:
 
 ---
 
+## ★ Code & Implementation
+
+### Chinchilla Optimal Token Calculator
+
+```python
+# ⚠️ Last tested: 2026-04 | Requires: Python 3.10+ (stdlib only)
+# Chinchilla paper (Hoffmann et al. 2022): optimal training = 20 tokens per parameter
+
+def chinchilla_optimal(params: float, budget_override: float | None = None) -> dict:
+    """
+    params: model parameters (e.g. 7e9 for 7B)
+    Returns: Chinchilla-optimal token count and FLOPs estimate
+    """
+    tokens_optimal = 20 * params          # Chinchilla rule
+    flops_estimate = 6 * params * tokens_optimal  # ~6 * N * D for transformer training
+    return {
+        "params":         params,
+        "params_B":       params / 1e9,
+        "tokens_optimal": tokens_optimal,
+        "tokens_B":       tokens_optimal / 1e9,
+        "flops_estimate": flops_estimate,
+        "flops_e21":      flops_estimate / 1e21,
+    }
+
+# Compare common model sizes
+for model_name, params in [
+    ("LLaMA 3.2 1B",  1e9),
+    ("LLaMA 3.2 8B",  8e9),
+    ("LLaMA 3 70B",  70e9),
+    ("GPT-3 175B",  175e9),
+]:
+    r = chinchilla_optimal(params)
+    print(
+        f"{model_name:<18} | {r['params_B']:>6.1f}B params | "
+        f"optimal: {r['tokens_B']:>6.0f}B tokens | "
+        f"{r['flops_e21']:.1f}e21 FLOPs"
+    )
+
+# Note: Modern models (LLaMA 3, Gemma 3) over-train by 5-10x for better
+# inference efficiency â€” Chinchilla is the floor, not the ceiling.
+```
+
 ## ★ Connections
 
-| Relationship | Topics                                                               |
-| ------------ | -------------------------------------------------------------------- |
-| Builds on    | [Transformers](./transformers.md), [Deep Learning Fundamentals](../prerequisites/deep-learning-fundamentals.md)    |
-| Leads to     | [Llms Overview](../llms/llms-overview.md), [Fine Tuning](../techniques/fine-tuning.md) (SFT stage) |
-| Compare with | Fine-tuning (adaptation), Few-shot (no training)                     |
-| Cross-domain | Distributed systems, HPC, Data engineering                           |
+| Relationship | Topics                                                                                                          |
+| ------------ | --------------------------------------------------------------------------------------------------------------- |
+| Builds on    | [Transformers](./transformers.md), [Deep Learning Fundamentals](../prerequisites/deep-learning-fundamentals.md) |
+| Leads to     | [Llms Overview](../llms/llms-overview.md), [Fine Tuning](../techniques/fine-tuning.md) (SFT stage)              |
+| Compare with | Fine-tuning (adaptation), Few-shot (no training)                                                                |
+| Cross-domain | Distributed systems, HPC, Data engineering                                                                      |
 
 
 ---
 
 ## ◆ Production Failure Modes
 
-| Failure | Symptoms | Root Cause | Mitigation |
-|---------|----------|------------|------------|
-| **Compute budget misallocation** | Over-parameterized model with insufficient data (or vice versa) | Ignoring Chinchilla scaling laws (20 tokens per parameter) | Use Chinchilla-optimal ratios for compute allocation |
-| **Data quality plateau** | Loss stops decreasing despite more compute | Training data contains duplicates, noise, low-quality content | Deduplicate, filter by perplexity, quality-score data |
-| **Emergent capability surprises** | Capabilities appear or disappear at unexpected scale | Phase transitions in model behavior | Benchmark at multiple scales, don't extrapolate from small models |
+| Failure                           | Symptoms                                                        | Root Cause                                                    | Mitigation                                                        |
+| --------------------------------- | --------------------------------------------------------------- | ------------------------------------------------------------- | ----------------------------------------------------------------- |
+| **Compute budget misallocation**  | Over-parameterized model with insufficient data (or vice versa) | Ignoring Chinchilla scaling laws (20 tokens per parameter)    | Use Chinchilla-optimal ratios for compute allocation              |
+| **Data quality plateau**          | Loss stops decreasing despite more compute                      | Training data contains duplicates, noise, low-quality content | Deduplicate, filter by perplexity, quality-score data             |
+| **Emergent capability surprises** | Capabilities appear or disappear at unexpected scale            | Phase transitions in model behavior                           | Benchmark at multiple scales, don't extrapolate from small models |
 
 ---
 
@@ -277,12 +319,12 @@ PRE-TRAINING OBJECTIVE:
 
 ## ★ Recommended Resources
 
-| Type | Resource | Why |
-|------|----------|-----|
-| 📄 Paper | [Kaplan et al. "Scaling Laws for Neural Language Models" (2020)](https://arxiv.org/abs/2001.08361) | Original OpenAI scaling laws — compute, data, parameters |
-| 📄 Paper | [Hoffmann et al. "Chinchilla" (2022)](https://arxiv.org/abs/2203.15556) | Revised scaling: compute-optimal training needs more data than expected |
-| 🎥 Video | [Andrej Karpathy — "Let's Build GPT"](https://www.youtube.com/watch?v=kCc8FmEb1nY) | Build a language model from scratch — pretraining intuition |
-| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 2 | Practical understanding of model selection and scaling tradeoffs |
+| Type    | Resource                                                                                           | Why                                                                     |
+| ------- | -------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| 📄 Paper | [Kaplan et al. "Scaling Laws for Neural Language Models" (2020)](https://arxiv.org/abs/2001.08361) | Original OpenAI scaling laws — compute, data, parameters                |
+| 📄 Paper | [Hoffmann et al. "Chinchilla" (2022)](https://arxiv.org/abs/2203.15556)                            | Revised scaling: compute-optimal training needs more data than expected |
+| 🎥 Video | [Andrej Karpathy — "Let's Build GPT"](https://www.youtube.com/watch?v=kCc8FmEb1nY)                 | Build a language model from scratch — pretraining intuition             |
+| 📘 Book  | "AI Engineering" by Chip Huyen (2025), Ch 2                                                        | Practical understanding of model selection and scaling tradeoffs        |
 
 ## ★ Sources
 

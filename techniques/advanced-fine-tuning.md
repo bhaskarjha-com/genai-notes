@@ -9,7 +9,7 @@ parent: "fine-tuning.md"
 related: ["rl-alignment.md", "synthetic-data-and-data-engineering.md", "distillation-and-compression.md"]
 source: "Multiple sources - see Sources"
 created: 2026-04-12
-updated: 2026-04-14
+updated: 2026-04-15
 ---
 
 # Advanced Fine-Tuning for LLM Adaptation
@@ -173,13 +173,22 @@ Step 1: (Optional) Continued Pretraining on Domain Corpus
 Step 2: Supervised Fine-Tuning (SFT) on Instruction Data
         ↓
 Step 3: Preference Optimization (DPO/ORPO) on Preference Data
+        │   ORPO note: trains SFT + alignment in one pass — no reference model
         ↓
-Step 4: (Optional) GRPO on Reasoning Tasks with Verifiable Rewards
+Step 4: (Optional) GRPO/RLVR on Verifiable-Reward Tasks
+        │   RLVR: uses programmatic rewards (code tests, math checkers) instead
+        │   of human-ranked preferences — shift from LLM judge to objective rewards
         ↓
 Step 5: Targeted Evaluation (task success, safety, capability regression)
         ↓
 Step 6: Deployment Candidate
 ```
+
+**The 2026 shift**: RLVR (Reinforcement Learning with Verifiable Rewards) is increasingly replacing human preference labels for tasks with objective ground truth. Instead of labeled "chosen vs rejected" pairs, use a reward function that checks correctness:
+- Math: Does the expression evaluate to the right answer?
+- Code: Do the unit tests pass?
+- Structured output: Is the JSON schema valid?
+- Tool use: Did the tool call succeed?
 
 ---
 

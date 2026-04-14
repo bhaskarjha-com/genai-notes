@@ -60,19 +60,19 @@ The evaluation design should begin with:
 
 ### Evaluation Layers
 
-| Layer | What You Check | Example |
-|---|---|---|
-| **Component** | Does one stage work? | retrieval precision, schema validity |
-| **Task** | Did the workflow solve the task? | final answer correctness |
-| **System** | Is the product usable at scale? | latency, escalation rate, cost |
-| **Safety** | Did the system stay within policy? | refusal quality, data leakage checks |
+| Layer         | What You Check                     | Example                              |
+| ------------- | ---------------------------------- | ------------------------------------ |
+| **Component** | Does one stage work?               | retrieval precision, schema validity |
+| **Task**      | Did the workflow solve the task?   | final answer correctness             |
+| **System**    | Is the product usable at scale?    | latency, escalation rate, cost       |
+| **Safety**    | Did the system stay within policy? | refusal quality, data leakage checks |
 
 ### Offline vs Online Evaluation
 
-| Mode | Strength | Limitation |
-|---|---|---|
+| Mode              | Strength                             | Limitation                     |
+| ----------------- | ------------------------------------ | ------------------------------ |
 | **Offline evals** | Fast iteration, comparable baselines | Can drift away from real usage |
-| **Online evals** | Real behavior under real traffic | Harder to control and diagnose |
+| **Online evals**  | Real behavior under real traffic     | Harder to control and diagnose |
 
 You usually need both.
 
@@ -94,13 +94,13 @@ Split the dataset into:
 
 ### Common Scoring Methods
 
-| Method | Good For | Risk |
-|---|---|---|
-| **Exact match / rule-based** | Structured outputs | Too brittle for natural language |
-| **Rubric-based human review** | High-value quality signals | Slower and expensive |
-| **LLM-as-judge** | Scalable comparative review | Judge bias and instability |
-| **Reference-based metrics** | Narrow answer spaces | Weak for open-ended tasks |
-| **Task outcome metric** | Most realistic product view | Often harder to instrument |
+| Method                        | Good For                    | Risk                             |
+| ----------------------------- | --------------------------- | -------------------------------- |
+| **Exact match / rule-based**  | Structured outputs          | Too brittle for natural language |
+| **Rubric-based human review** | High-value quality signals  | Slower and expensive             |
+| **LLM-as-judge**              | Scalable comparative review | Judge bias and instability       |
+| **Reference-based metrics**   | Narrow answer spaces        | Weak for open-ended tasks        |
+| **Task outcome metric**       | Most realistic product view | Often harder to instrument       |
 
 ### LLM-As-Judge Best Practices
 
@@ -116,11 +116,11 @@ Do not use judge scores blindly. Spot-check them with humans, keep prompts versi
 
 RAG systems need at least three views:
 
-| Stage | Sample Questions |
-|---|---|
-| **Retrieval** | Did we fetch the right evidence? |
-| **Grounding** | Did the answer actually use the retrieved evidence? |
-| **Answer quality** | Was the final response helpful and complete? |
+| Stage              | Sample Questions                                    |
+| ------------------ | --------------------------------------------------- |
+| **Retrieval**      | Did we fetch the right evidence?                    |
+| **Grounding**      | Did the answer actually use the retrieved evidence? |
+| **Answer quality** | Was the final response helpful and complete?        |
 
 Representative tools and methods in this space were spot-checked for naming/currency in 2026-04, but the evaluation principles are more durable than any single framework.
 
@@ -158,13 +158,13 @@ For agents, score more than the final text:
 ---
 
 ## ◆ Quick Reference
-| Question | Better Eval Choice |
-|---|---|
-| Is JSON shape valid? | rule-based check |
-| Is this answer better than baseline? | pairwise judge or human review |
-| Is the answer grounded? | citation/grounding rubric + retrieval inspection |
-| Did the agent solve the workflow? | task-completion metric + trace review |
-| Is the product improving? | combine online outcome metrics with offline regressions |
+| Question                             | Better Eval Choice                                      |
+| ------------------------------------ | ------------------------------------------------------- |
+| Is JSON shape valid?                 | rule-based check                                        |
+| Is this answer better than baseline? | pairwise judge or human review                          |
+| Is the answer grounded?              | citation/grounding rubric + retrieval inspection        |
+| Did the agent solve the workflow?    | task-completion metric + trace review                   |
+| Is the product improving?            | combine online outcome metrics with offline regressions |
 
 ---
 
@@ -185,13 +185,67 @@ For agents, score more than the final text:
 
 ---
 
+## ★ Code & Implementation
+
+### LLM-as-Judge Evaluation Framework
+
+```python
+# pip install openai>=1.60
+# ⚠️ Last tested: 2026-04 | Requires: openai>=1.60, OPENAI_API_KEY env var
+from openai import OpenAI
+import json
+
+client = OpenAI()
+
+def llm_judge_eval(
+    question: str,
+    reference_answer: str,
+    model_answer: str,
+    criteria: list[str] | None = None,
+) -> dict:
+    """
+    Use GPT-4o-mini as a judge to score model_answer vs reference_answer.
+    Returns: {"score": 1-5, "reasoning": str, "criteria_scores": dict}
+    """
+    if criteria is None:
+        criteria = ["factual_accuracy", "completeness", "conciseness", "clarity"]
+
+    prompt = (
+        f"Evaluate the MODEL ANSWER vs REFERENCE ANSWER for the question below.\n\n"
+        f"QUESTION: {question}\n\n"
+        f"REFERENCE: {reference_answer}\n\n"
+        f"MODEL ANSWER: {model_answer}\n\n"
+        f"Score each criterion 1-5: {', '.join(criteria)}\n"
+        f"Then give an overall score 1-5.\n\n"
+        "JSON response only:\n"
+        '{"overall": 1-5, "reasoning": "...", "criteria": {"criterion": score}}'
+    )
+    resp = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[{"role": "user", "content": prompt}],
+        temperature=0,
+        response_format={"type": "json_object"},
+    )
+    result = json.loads(resp.choices[0].message.content)
+    return result
+
+# Example evaluation
+result = llm_judge_eval(
+    question="What is RAG and why is it used?",
+    reference_answer="RAG (Retrieval-Augmented Generation) combines retrieval of external documents with LLM generation to ground responses in current, accurate information and reduce hallucination.",
+    model_answer="RAG retrieves documents and feeds them to an LLM to improve answer accuracy.",
+)
+print(f"Score: {result['overall']}/5")
+print(f"Reasoning: {result['reasoning']}")
+```
+
 ## ★ Connections
-| Relationship | Topics |
-|---|---|
-| Builds on | [LLM Evaluation & Benchmarks](./evaluation-and-benchmarks.md), [Hallucination Detection & Mitigation](../llms/hallucination-detection.md), [Agent Evaluation & Observability](../agents/agent-evaluation.md) |
-| Leads to | [Monitoring & Observability for GenAI Systems](../production/monitoring-observability.md), [CI/CD for ML and LLM Systems](../production/cicd-for-ml.md) |
-| Compare with | Static benchmark tracking, ad hoc manual testing |
-| Cross-domain | Experiment design, analytics, QA |
+| Relationship | Topics                                                                                                                                                                                                       |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Builds on    | [LLM Evaluation & Benchmarks](./evaluation-and-benchmarks.md), [Hallucination Detection & Mitigation](../llms/hallucination-detection.md), [Agent Evaluation & Observability](../agents/agent-evaluation.md) |
+| Leads to     | [Monitoring & Observability for GenAI Systems](../production/monitoring-observability.md), [CI/CD for ML and LLM Systems](../production/cicd-for-ml.md)                                                      |
+| Compare with | Static benchmark tracking, ad hoc manual testing                                                                                                                                                             |
+| Cross-domain | Experiment design, analytics, QA                                                                                                                                                                             |
 
 
 ---
@@ -213,22 +267,22 @@ For agents, score more than the final text:
 
 ## ◆ Production Failure Modes
 
-| Failure | Symptoms | Root Cause | Mitigation |
-|---------|----------|------------|------------|
-| **Judge model bias** | LLM-as-judge favors verbose or same-family outputs | Position bias, verbosity bias, self-preference | Randomize order, normalize length, use different judge family |
-| **Eval-production gap** | Model passes eval suite but fails on production queries | Eval distribution doesn't match production | Continuously add production failures to eval set |
-| **Metric saturation** | All models score 90%+, no discrimination | Eval too easy, ceiling effect | Add adversarial and edge-case test cases, use harder benchmarks |
+| Failure                 | Symptoms                                                | Root Cause                                     | Mitigation                                                      |
+| ----------------------- | ------------------------------------------------------- | ---------------------------------------------- | --------------------------------------------------------------- |
+| **Judge model bias**    | LLM-as-judge favors verbose or same-family outputs      | Position bias, verbosity bias, self-preference | Randomize order, normalize length, use different judge family   |
+| **Eval-production gap** | Model passes eval suite but fails on production queries | Eval distribution doesn't match production     | Continuously add production failures to eval set                |
+| **Metric saturation**   | All models score 90%+, no discrimination                | Eval too easy, ceiling effect                  | Add adversarial and edge-case test cases, use harder benchmarks |
 ---
 
 
 ## ★ Recommended Resources
 
-| Type | Resource | Why |
-|------|----------|-----|
-| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 4 (Evaluation) | Best practical treatment of LLM evaluation |
-| 🔧 Hands-on | [RAGAS Documentation](https://docs.ragas.io/) | Framework for RAG evaluation metrics |
-| 📄 Paper | [Zheng et al. "Judging LLM-as-a-Judge" (2023)](https://arxiv.org/abs/2306.05685) | When and how to use LLMs to evaluate LLMs |
-| 🔧 Hands-on | [DeepEval Documentation](https://docs.confident-ai.com/) | Production LLM evaluation framework |
+| Type       | Resource                                                                         | Why                                        |
+| ---------- | -------------------------------------------------------------------------------- | ------------------------------------------ |
+| 📘 Book     | "AI Engineering" by Chip Huyen (2025), Ch 4 (Evaluation)                         | Best practical treatment of LLM evaluation |
+| 🔧 Hands-on | [RAGAS Documentation](https://docs.ragas.io/)                                    | Framework for RAG evaluation metrics       |
+| 📄 Paper    | [Zheng et al. "Judging LLM-as-a-Judge" (2023)](https://arxiv.org/abs/2306.05685) | When and how to use LLMs to evaluate LLMs  |
+| 🔧 Hands-on | [DeepEval Documentation](https://docs.confident-ai.com/)                         | Production LLM evaluation framework        |
 
 ## ★ Sources
 - RAGAS documentation

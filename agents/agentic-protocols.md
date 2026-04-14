@@ -317,26 +317,110 @@ MCP PRIMITIVES:
 
 ---
 
+## ★ Code & Implementation
+
+### MCP-Compatible Tool Server (FastMCP)
+
+```python
+# pip install fastmcp>=0.1 httpx>=0.27
+# ⚠️ Last tested: 2026-04 | Requires: fastmcp>=0.1
+# Model Context Protocol server â€” compatible with Claude Desktop, Cursor, custom agents
+
+from fastmcp import FastMCP
+import httpx
+
+mcp = FastMCP("demo-server")
+
+@mcp.tool()
+def get_weather(city: str) -> str:
+    """Get current weather for a city. Returns temperature and condition."""
+    # In production: call real weather API
+    return f"{city}: 22Â°C, partly cloudy (simulated)"
+
+@mcp.tool()
+def calculate(expression: str) -> str:
+    """Safely evaluate a math expression. Supports +, -, *, /, **, sqrt."""
+    import math
+    try:
+        result = eval(expression, {"__builtins__": {}}, {"sqrt": math.sqrt, "pi": math.pi})
+        return str(result)
+    except Exception as e:
+        return f"Error: {e}"
+
+@mcp.resource("docs://readme")
+def get_readme() -> str:
+    """Expose the project README as a resource."""
+    return "This is the project documentation (placeholder)."
+
+# Run: python server.py (starts on stdio for MCP clients)
+# or:  mcp.run(transport="sse")  for HTTP/SSE transport
+if __name__ == "__main__":
+    mcp.run()
+```
+
+### ReAct Agent Loop
+
+```python
+# ⚠️ Last tested: 2026-04 | Requires: openai>=1.60, OPENAI_API_KEY
+from openai import OpenAI
+import json
+
+client = OpenAI()
+
+TOOLS = [{
+    "type": "function",
+    "function": {
+        "name": "calculate",
+        "description": "Evaluate a math expression",
+        "parameters": {"type": "object", "properties": {
+            "expression": {"type": "string", "description": "e.g. '2 ** 10'"}
+        }, "required": ["expression"]},
+    }
+}]
+
+def calculate(expression: str) -> str:
+    import math
+    return str(eval(expression, {}, {"sqrt": math.sqrt}))
+
+def react_agent(user_query: str, max_steps: int = 5) -> str:
+    messages = [{"role": "user", "content": user_query}]
+    for step in range(max_steps):
+        resp = client.chat.completions.create(
+            model="gpt-4o-mini", messages=messages, tools=TOOLS, tool_choice="auto"
+        )
+        msg = resp.choices[0].message
+        messages.append(msg)
+        if not msg.tool_calls:
+            return msg.content   # final answer
+        for call in msg.tool_calls:
+            args   = json.loads(call.function.arguments)
+            result = calculate(**args)
+            messages.append({"role": "tool", "tool_call_id": call.id, "content": result})
+    return "Max steps reached"
+
+print(react_agent("What is 2 to the power of 10, times pi?"))
+```
+
 ## ★ Connections
 
-| Relationship | Topics                                                    |
-| ------------ | --------------------------------------------------------- |
+| Relationship | Topics                                                                                                                         |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------ |
 | Builds on    | [Function Calling And Structured Output](../techniques/function-calling-and-structured-output.md), [Ai Agents](./ai-agents.md) |
-| Leads to     | Production multi-agent systems, Enterprise AI             |
-| Compare with | REST APIs (static), GraphQL (query), gRPC (binary)        |
-| Cross-domain | Microservices architecture, API gateways, Service mesh    |
+| Leads to     | Production multi-agent systems, Enterprise AI                                                                                  |
+| Compare with | REST APIs (static), GraphQL (query), gRPC (binary)                                                                             |
+| Cross-domain | Microservices architecture, API gateways, Service mesh                                                                         |
 
 
 ---
 
 ## ◆ Production Failure Modes
 
-| Failure | Symptoms | Root Cause | Mitigation |
-|---------|----------|------------|------------|
-| **Protocol version mismatch** | Agent fails to connect to MCP server or A2A endpoint | Client/server on different protocol versions | Version negotiation in handshake, backward compat layer |
-| **Tool discovery overload** | Agent overwhelmed by too many available tools | Server exposes all tools without filtering | Server-side tool filtering, capability manifests per task |
-| **Auth token expiration** | Agent mid-workflow loses access to services | OAuth token TTL shorter than workflow | Token refresh middleware, proactive refresh before expiration |
-| **Serialization failures** | Complex tool inputs/outputs fail across protocol boundary | Non-JSON-serializable types, binary data | Schema validation at boundary, base64 for binary |
+| Failure                       | Symptoms                                                  | Root Cause                                   | Mitigation                                                    |
+| ----------------------------- | --------------------------------------------------------- | -------------------------------------------- | ------------------------------------------------------------- |
+| **Protocol version mismatch** | Agent fails to connect to MCP server or A2A endpoint      | Client/server on different protocol versions | Version negotiation in handshake, backward compat layer       |
+| **Tool discovery overload**   | Agent overwhelmed by too many available tools             | Server exposes all tools without filtering   | Server-side tool filtering, capability manifests per task     |
+| **Auth token expiration**     | Agent mid-workflow loses access to services               | OAuth token TTL shorter than workflow        | Token refresh middleware, proactive refresh before expiration |
+| **Serialization failures**    | Complex tool inputs/outputs fail across protocol boundary | Non-JSON-serializable types, binary data     | Schema validation at boundary, base64 for binary              |
 
 ---
 
@@ -357,12 +441,12 @@ MCP PRIMITIVES:
 
 ## ★ Recommended Resources
 
-| Type | Resource | Why |
-|------|----------|-----|
-| 🔧 Hands-on | [MCP Specification](https://modelcontextprotocol.io/) | The standard protocol for agent-tool communication |
-| 🔧 Hands-on | [Google A2A Protocol](https://google.github.io/A2A/) | Agent-to-agent communication protocol |
-| 🔧 Hands-on | [Google ADK Documentation](https://google.github.io/adk-docs/) | Google's Agent Development Kit |
-| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 7 | Agent protocols and inter-agent communication patterns |
+| Type       | Resource                                                       | Why                                                    |
+| ---------- | -------------------------------------------------------------- | ------------------------------------------------------ |
+| 🔧 Hands-on | [MCP Specification](https://modelcontextprotocol.io/)          | The standard protocol for agent-tool communication     |
+| 🔧 Hands-on | [Google A2A Protocol](https://google.github.io/A2A/)           | Agent-to-agent communication protocol                  |
+| 🔧 Hands-on | [Google ADK Documentation](https://google.github.io/adk-docs/) | Google's Agent Development Kit                         |
+| 📘 Book     | "AI Engineering" by Chip Huyen (2025), Ch 7                    | Agent protocols and inter-agent communication patterns |
 
 ## ★ Sources
 

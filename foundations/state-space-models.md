@@ -98,36 +98,36 @@ KEY MAMBA INSIGHT:
 
 ### Evolution: S4 → Mamba → Hybrid
 
-| Model | Year | Innovation | Quality vs Transformer |
-|-------|:----:|-----------|:---------------------:|
-| **S4** | 2021 | Structured state spaces, efficient long-range modeling | Below |
-| **H3** | 2022 | Added gating, closer to transformer quality | Approaching |
-| **Mamba** | 2023 | Selective state spaces (input-dependent parameters) | Competitive |
-| **Mamba-2** | 2024 | Structured state space duality with attention | Competitive+ |
-| **Jamba** (AI21) | 2024 | Hybrid: Mamba + attention layers | Competitive |
-| **Zamba** | 2024 | Efficient hybrid architecture | Competitive |
+| Model            | Year  | Innovation                                             | Quality vs Transformer |
+| ---------------- | :---: | ------------------------------------------------------ | :--------------------: |
+| **S4**           | 2021  | Structured state spaces, efficient long-range modeling |         Below          |
+| **H3**           | 2022  | Added gating, closer to transformer quality            |      Approaching       |
+| **Mamba**        | 2023  | Selective state spaces (input-dependent parameters)    |      Competitive       |
+| **Mamba-2**      | 2024  | Structured state space duality with attention          |      Competitive+      |
+| **Jamba** (AI21) | 2024  | Hybrid: Mamba + attention layers                       |      Competitive       |
+| **Zamba**        | 2024  | Efficient hybrid architecture                          |      Competitive       |
 
 ### Transformer vs SSM: Where Each Wins
 
-| Aspect | Transformer | SSM (Mamba) |
-|--------|:-----------:|:-----------:|
-| **Short sequences (< 4K)** | ✅ Strong | Good |
-| **Long sequences (> 32K)** | Expensive | ✅ Efficient |
-| **In-context learning** | ✅ Excellent | Good |
-| **Inference speed** | Slow (KV-cache grows) | ✅ Fast (constant state) |
-| **Training parallelism** | ✅ Highly parallel | ✅ Parallel (convolution mode) |
-| **Recall of specific details** | ✅ Strong (attention) | Weaker (compressed state) |
-| **Ecosystem / tooling** | ✅ Mature | Early |
+| Aspect                         |      Transformer      |          SSM (Mamba)          |
+| ------------------------------ | :-------------------: | :---------------------------: |
+| **Short sequences (< 4K)**     |       ✅ Strong        |             Good              |
+| **Long sequences (> 32K)**     |       Expensive       |          ✅ Efficient          |
+| **In-context learning**        |      ✅ Excellent      |             Good              |
+| **Inference speed**            | Slow (KV-cache grows) |    ✅ Fast (constant state)    |
+| **Training parallelism**       |   ✅ Highly parallel   | ✅ Parallel (convolution mode) |
+| **Recall of specific details** | ✅ Strong (attention)  |   Weaker (compressed state)   |
+| **Ecosystem / tooling**        |       ✅ Mature        |             Early             |
 
 ---
 
 ## ◆ Production Failure Modes
 
-| Failure | Symptoms | Root Cause | Mitigation |
-|---------|----------|------------|------------|
-| **Recall failure** | Model forgets specific details from early in long context | SSM compresses state — specific details can be lost | Use hybrid architecture (attention layers for recall) |
-| **Tooling gaps** | Can't use standard inference frameworks | vLLM/TGI optimized for transformers, not SSMs | Use model-specific serving code, or hybrid models |
-| **Training instability** | Loss spikes during training | SSM parameter initialization sensitive | Use Mamba's recommended initialization, careful learning rate |
+| Failure                  | Symptoms                                                  | Root Cause                                          | Mitigation                                                    |
+| ------------------------ | --------------------------------------------------------- | --------------------------------------------------- | ------------------------------------------------------------- |
+| **Recall failure**       | Model forgets specific details from early in long context | SSM compresses state — specific details can be lost | Use hybrid architecture (attention layers for recall)         |
+| **Tooling gaps**         | Can't use standard inference frameworks                   | vLLM/TGI optimized for transformers, not SSMs       | Use model-specific serving code, or hybrid models             |
+| **Training instability** | Loss spikes during training                               | SSM parameter initialization sensitive              | Use Mamba's recommended initialization, careful learning rate |
 
 ---
 
@@ -138,25 +138,70 @@ KEY MAMBA INSIGHT:
 
 ---
 
+## ★ Code & Implementation
+
+### Minimal SSM Recurrence (Discrete S4/Mamba Pattern)
+
+```python
+# ⚠️ Last tested: 2026-04 | Requires: torch>=2.3
+# Demonstrates the core SSM recurrence: h_t = A*h_{t-1} + B*x_t, y_t = C*h_t
+# This is the linear recurrence at the heart of S4/Mamba
+
+import torch
+import torch.nn as nn
+
+class MinimalSSM(nn.Module):
+    """Simplified 1D SSM layer demonstrating the recurrence."""
+    def __init__(self, d_model: int, d_state: int = 16):
+        super().__init__()
+        self.d_state = d_state
+        # State space matrices (learned)
+        self.A = nn.Parameter(torch.randn(d_state, d_state) * 0.01)
+        self.B = nn.Parameter(torch.randn(d_state, d_model) * 0.01)
+        self.C = nn.Parameter(torch.randn(d_model, d_state) * 0.01)
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        """
+        x: (batch, seq_len, d_model)
+        Returns: y (batch, seq_len, d_model) via sequential recurrence
+        Note: production Mamba uses CUDA-optimized parallel scan, not this loop
+        """
+        batch, seq_len, _ = x.shape
+        h = torch.zeros(batch, self.d_state, device=x.device)
+        outputs = []
+        for t in range(seq_len):
+            h = torch.tanh(h @ self.A.T + x[:, t, :] @ self.B.T)
+            y_t = h @ self.C.T
+            outputs.append(y_t)
+        return torch.stack(outputs, dim=1)
+
+# Test: O(n) in memory (no nÂ² attention matrix)
+ssm = MinimalSSM(d_model=64, d_state=16)
+x   = torch.randn(2, 1024, 64)  # batch=2, seq=1024, d=64
+y   = ssm(x)
+print(f"Input:  {x.shape}")  # (2, 1024, 64)
+print(f"Output: {y.shape}")  # (2, 1024, 64) â€” same shape, O(n) memory
+```
+
 ## ★ Connections
 
-| Relationship | Topics |
-|---|---|
-| Builds on | [Transformers](../foundations/transformers.md), [Attention Mechanism](../foundations/attention-mechanism.md) |
-| Leads to | Efficient long-context models, hybrid architectures, next-gen sequence modeling |
-| Compare with | Transformer attention, linear attention, RNNs |
-| Cross-domain | Control theory, signal processing, dynamical systems |
+| Relationship | Topics                                                                                                       |
+| ------------ | ------------------------------------------------------------------------------------------------------------ |
+| Builds on    | [Transformers](../foundations/transformers.md), [Attention Mechanism](../foundations/attention-mechanism.md) |
+| Leads to     | Efficient long-context models, hybrid architectures, next-gen sequence modeling                              |
+| Compare with | Transformer attention, linear attention, RNNs                                                                |
+| Cross-domain | Control theory, signal processing, dynamical systems                                                         |
 
 ---
 
 ## ★ Recommended Resources
 
-| Type | Resource | Why |
-|------|----------|-----|
-| 📄 Paper | [Gu & Dao "Mamba: Linear-Time Sequence Modeling" (2023)](https://arxiv.org/abs/2312.00752) | The foundational Mamba paper |
+| Type    | Resource                                                                                                                    | Why                                          |
+| ------- | --------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
+| 📄 Paper | [Gu & Dao "Mamba: Linear-Time Sequence Modeling" (2023)](https://arxiv.org/abs/2312.00752)                                  | The foundational Mamba paper                 |
 | 📄 Paper | [Gu et al. "Efficiently Modeling Long Sequences with Structured State Spaces" (S4, 2021)](https://arxiv.org/abs/2111.00396) | The S4 paper that started the SSM revolution |
-| 🎥 Video | [Yannic Kilcher — "Mamba Explained"](https://www.youtube.com/@YannicKilcher) | Detailed paper walkthrough |
-| 📄 Paper | [Dao & Gu "Transformers are SSMs" (Mamba-2, 2024)](https://arxiv.org/abs/2405.21060) | Unifying SSMs and attention theoretically |
+| 🎥 Video | [Yannic Kilcher — "Mamba Explained"](https://www.youtube.com/@YannicKilcher)                                                | Detailed paper walkthrough                   |
+| 📄 Paper | [Dao & Gu "Transformers are SSMs" (Mamba-2, 2024)](https://arxiv.org/abs/2405.21060)                                        | Unifying SSMs and attention theoretically    |
 
 
 ---

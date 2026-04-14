@@ -258,26 +258,89 @@ KEY METRICS:
 
 ---
 
+## ★ Code & Implementation
+
+### LLM Call Tracker (Latency + Token Logging)
+
+```python
+# pip install openai>=1.60
+# ⚠️ Last tested: 2026-04 | Requires: openai>=1.60, OPENAI_API_KEY env var
+import time, uuid, logging
+from openai import OpenAI
+
+logging.basicConfig(level=logging.INFO, format="%(asctime)s %(name)s %(levelname)s %(message)s")
+log = logging.getLogger("llmops")
+client = OpenAI()
+
+def tracked_completion(messages: list[dict], model: str = "gpt-4o-mini", **kw) -> str:
+    """Production-instrumented LLM call with trace/latency/token logging."""
+    trace_id = str(uuid.uuid4())[:8]
+    start = time.monotonic()
+    resp = client.chat.completions.create(model=model, messages=messages, **kw)
+    latency_ms = (time.monotonic() - start) * 1000
+    u = resp.usage
+    log.info(
+        "llm | trace=%s model=%s prompt_tok=%d completion_tok=%d total_tok=%d latency_ms=%.1f",
+        trace_id, model, u.prompt_tokens, u.completion_tokens, u.total_tokens, latency_ms,
+    )
+    return resp.choices[0].message.content
+
+result = tracked_completion(
+    [{"role": "user", "content": "Summarize RAG in one sentence."}],
+    max_tokens=80, temperature=0.3,
+)
+print(result)
+```
+
+### A/B Prompt Experiment
+
+```python
+# ⚠️ Last tested: 2026-04 | Requires: openai>=1.60, OPENAI_API_KEY
+import statistics
+
+def ab_eval(prompt_a: str, prompt_b: str, test_inputs: list[str]) -> None:
+    for label, system in [("A", prompt_a), ("B", prompt_b)]:
+        latencies, tokens = [], []
+        for user_input in test_inputs:
+            start = time.monotonic()
+            resp = client.chat.completions.create(
+                model="gpt-4o-mini",
+                messages=[{"role": "system", "content": system},
+                          {"role": "user",   "content": user_input}],
+                max_tokens=150, temperature=0,
+            )
+            latencies.append((time.monotonic() - start) * 1000)
+            tokens.append(resp.usage.total_tokens)
+        print(f"Variant {label}: median_ms={statistics.median(latencies):.0f} "
+              f"avg_tokens={statistics.mean(tokens):.1f}")
+
+ab_eval(
+    "You are a concise assistant. Answer in one sentence.",
+    "You are a helpful assistant.",
+    ["What is RAG?", "What is LoRA?", "What is MoE?"],
+)
+```
+
 ## ★ Connections
 
-| Relationship | Topics                                                                                                                   |
-| ------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| Relationship | Topics                                                                                                                                                                                         |
+| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Builds on    | [Llms Overview](../llms/llms-overview.md), [Evaluation And Benchmarks](../evaluation/evaluation-and-benchmarks.md), [Ethics Safety Alignment](../ethics-and-safety/ethics-safety-alignment.md) |
-| Leads to     | Enterprise AI deployment, Scalable AI systems                                                                            |
-| Compare with | Traditional MLOps (ML models), DevOps (software)                                                                         |
-| Cross-domain | Site Reliability Engineering, Platform engineering                                                                       |
+| Leads to     | Enterprise AI deployment, Scalable AI systems                                                                                                                                                  |
+| Compare with | Traditional MLOps (ML models), DevOps (software)                                                                                                                                               |
+| Cross-domain | Site Reliability Engineering, Platform engineering                                                                                                                                             |
 
 
 ---
 
 ## ◆ Production Failure Modes
 
-| Failure | Symptoms | Root Cause | Mitigation |
-|---------|----------|------------|------------|
-| **Prompt-model version skew** | Prompt templates break after model update | No versioning of prompt-model pairs | Prompt registry with model version pinning, integration tests |
-| **Shadow production drift** | Staging doesn't predict production quality | Staging data differs from production | Production traffic shadowing, online eval with guardrails |
-| **Eval regression undetected** | Shipped regression on long-tail queries | Eval suite too small | Growing eval set from production failures, stratified eval |
-| **Secret sprawl** | API keys hardcoded in configs | No secrets management | Vault/secrets manager, environment variables, key rotation |
+| Failure                        | Symptoms                                   | Root Cause                           | Mitigation                                                    |
+| ------------------------------ | ------------------------------------------ | ------------------------------------ | ------------------------------------------------------------- |
+| **Prompt-model version skew**  | Prompt templates break after model update  | No versioning of prompt-model pairs  | Prompt registry with model version pinning, integration tests |
+| **Shadow production drift**    | Staging doesn't predict production quality | Staging data differs from production | Production traffic shadowing, online eval with guardrails     |
+| **Eval regression undetected** | Shipped regression on long-tail queries    | Eval suite too small                 | Growing eval set from production failures, stratified eval    |
+| **Secret sprawl**              | API keys hardcoded in configs              | No secrets management                | Vault/secrets manager, environment variables, key rotation    |
 
 ---
 
@@ -298,12 +361,12 @@ KEY METRICS:
 
 ## ★ Recommended Resources
 
-| Type | Resource | Why |
-|------|----------|-----|
-| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 8-9 | Definitive treatment of LLMOps patterns |
-| 📘 Book | "Designing Machine Learning Systems" by Chip Huyen (2022) | MLOps foundations that LLMOps builds on |
-| 🔧 Hands-on | [LangSmith Documentation](https://docs.smith.langchain.com/) | Production LLM observability and evaluation platform |
-| 🎥 Video | [Chip Huyen — "Building LLM Applications for Production"](https://huyenchip.com/) | Practical LLMOps talk covering common pitfalls |
+| Type       | Resource                                                                          | Why                                                  |
+| ---------- | --------------------------------------------------------------------------------- | ---------------------------------------------------- |
+| 📘 Book     | "AI Engineering" by Chip Huyen (2025), Ch 8-9                                     | Definitive treatment of LLMOps patterns              |
+| 📘 Book     | "Designing Machine Learning Systems" by Chip Huyen (2022)                         | MLOps foundations that LLMOps builds on              |
+| 🔧 Hands-on | [LangSmith Documentation](https://docs.smith.langchain.com/)                      | Production LLM observability and evaluation platform |
+| 🎥 Video    | [Chip Huyen — "Building LLM Applications for Production"](https://huyenchip.com/) | Practical LLMOps talk covering common pitfalls       |
 
 ## ★ Sources
 

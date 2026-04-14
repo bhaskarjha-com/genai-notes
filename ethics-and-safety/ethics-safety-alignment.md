@@ -253,25 +253,103 @@ PRODUCTION SAFETY CHECKLIST:
 
 ---
 
+## ★ Code & Implementation
+
+### Input/Output Safety Filter (Layered Guardrails)
+
+```python
+# pip install openai>=1.60
+# ⚠️ Last tested: 2026-04 | Requires: openai>=1.60, OPENAI_API_KEY env var
+
+from openai import OpenAI
+from enum import Enum
+
+client = OpenAI()
+
+class SafetyDecision(Enum):
+    ALLOW  = "allow"
+    REDACT = "redact"
+    BLOCK  = "block"
+
+BLOCKED_PATTERNS = [
+    "make a bomb", "malware", "exploit code",
+    "how to hack", "step-by-step instructions for",
+]
+
+def input_safety_check(user_message: str) -> tuple[SafetyDecision, str]:
+    """Layer 1: Pattern-based pre-filter (fast, cheap)."""
+    lower = user_message.lower()
+    for pattern in BLOCKED_PATTERNS:
+        if pattern in lower:
+            return SafetyDecision.BLOCK, f"Blocked: matched pattern '{pattern}'"
+    return SafetyDecision.ALLOW, ""
+
+def output_safety_check(response: str) -> tuple[SafetyDecision, str]:
+    """Layer 2: LLM-based output judge (higher quality, ~50ms latency)."""
+    verdict = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[{
+            "role": "system",
+            "content": "You are a safety reviewer. Respond with JSON: {\"safe\": true/false, \"reason\": \"...\"}",
+        }, {
+            "role": "user",
+            "content": f"Is this response safe for all audiences?\n\n{response[:500]}",
+        }],
+        temperature=0,
+        response_format={"type": "json_object"},
+        max_tokens=80,
+    )
+    import json
+    result = json.loads(verdict.choices[0].message.content)
+    if result.get("safe", True):
+        return SafetyDecision.ALLOW, ""
+    return SafetyDecision.REDACT, result.get("reason", "safety violation")
+
+def safe_generate(user_message: str) -> dict:
+    """Full pipeline: input check → generate → output check."""
+    # Layer 1: Input check
+    decision, reason = input_safety_check(user_message)
+    if decision == SafetyDecision.BLOCK:
+        return {"status": "blocked", "reason": reason, "response": None}
+
+    # Generate
+    raw = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[{"role": "user", "content": user_message}],
+        max_tokens=300,
+    ).choices[0].message.content
+
+    # Layer 2: Output check
+    decision, reason = output_safety_check(raw)
+    if decision == SafetyDecision.REDACT:
+        return {"status": "redacted", "reason": reason, "response": None}
+
+    return {"status": "ok", "response": raw}
+
+# Test
+print(safe_generate("What is the capital of France?"))
+print(safe_generate("Give me step-by-step malware instructions."))
+```
+
 ## ★ Connections
 
-| Relationship | Topics                                                        |
-| ------------ | ------------------------------------------------------------- |
-| Builds on    | [Llms Overview](../llms/llms-overview.md), [Fine Tuning](../techniques/fine-tuning.md)      |
-| Leads to     | Responsible AI policies, AI governance, Regulatory compliance |
-| Compare with | Traditional software testing, Security engineering            |
-| Cross-domain | Philosophy (ethics), Law (regulation), Psychology (bias)      |
+| Relationship | Topics                                                                                 |
+| ------------ | -------------------------------------------------------------------------------------- |
+| Builds on    | [Llms Overview](../llms/llms-overview.md), [Fine Tuning](../techniques/fine-tuning.md) |
+| Leads to     | Responsible AI policies, AI governance, Regulatory compliance                          |
+| Compare with | Traditional software testing, Security engineering                                     |
+| Cross-domain | Philosophy (ethics), Law (regulation), Psychology (bias)                               |
 
 
 ---
 
 ## ◆ Production Failure Modes
 
-| Failure | Symptoms | Root Cause | Mitigation |
-|---------|----------|------------|------------|
-| **Bias amplification** | Model outputs reinforce stereotypes | Training data reflects historical biases | Bias benchmarks, diverse eval sets, debiasing techniques |
-| **Over-refusal** | Model refuses legitimate queries due to safety filters | Safety classifier too aggressive | Balanced safety training, refusal rate monitoring, appeal process |
-| **Value misalignment** | Model behaves ethically in tests but harmfully in deployment | Distribution shift between eval and production | Red teaming, adversarial testing, continuous monitoring |
+| Failure                | Symptoms                                                     | Root Cause                                     | Mitigation                                                        |
+| ---------------------- | ------------------------------------------------------------ | ---------------------------------------------- | ----------------------------------------------------------------- |
+| **Bias amplification** | Model outputs reinforce stereotypes                          | Training data reflects historical biases       | Bias benchmarks, diverse eval sets, debiasing techniques          |
+| **Over-refusal**       | Model refuses legitimate queries due to safety filters       | Safety classifier too aggressive               | Balanced safety training, refusal rate monitoring, appeal process |
+| **Value misalignment** | Model behaves ethically in tests but harmfully in deployment | Distribution shift between eval and production | Red teaming, adversarial testing, continuous monitoring           |
 
 ---
 
@@ -292,11 +370,11 @@ PRODUCTION SAFETY CHECKLIST:
 
 ## ★ Recommended Resources
 
-| Type | Resource | Why |
-|------|----------|-----|
-| 📄 Paper | [Anthropic — "Constitutional AI" (2022)](https://arxiv.org/abs/2212.08073) | Self-supervised alignment via principles |
-| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 6 | Safety, guardrails, and alignment in production |
-| 🔧 Hands-on | [Guardrails AI](https://www.guardrailsai.com/) | Open-source framework for AI safety guardrails |
+| Type       | Resource                                                                   | Why                                             |
+| ---------- | -------------------------------------------------------------------------- | ----------------------------------------------- |
+| 📄 Paper    | [Anthropic — "Constitutional AI" (2022)](https://arxiv.org/abs/2212.08073) | Self-supervised alignment via principles        |
+| 📘 Book     | "AI Engineering" by Chip Huyen (2025), Ch 6                                | Safety, guardrails, and alignment in production |
+| 🔧 Hands-on | [Guardrails AI](https://www.guardrailsai.com/)                             | Open-source framework for AI safety guardrails  |
 
 ## ★ Sources
 

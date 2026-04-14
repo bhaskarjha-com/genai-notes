@@ -258,26 +258,85 @@ QUALITY > QUANTITY:
 
 ---
 
+## ★ Code & Implementation
+
+### Synthetic Instruction Data Generator
+
+```python
+# pip install openai>=1.60
+# ⚠️ Last tested: 2026-04 | Requires: openai>=1.60, OPENAI_API_KEY env var
+from openai import OpenAI
+import json
+
+client = OpenAI()
+
+def generate_instruction_dataset(
+    domain: str,
+    num_examples: int = 10,
+    task_types: list[str] | None = None,
+) -> list[dict]:
+    """Generate synthetic instruction-response pairs for SFT fine-tuning."""
+    if task_types is None:
+        task_types = ["explain", "summarize", "compare", "give example", "list steps for"]
+
+    prompt = (
+        f"Generate {num_examples} diverse instruction-response pairs for the domain: '{domain}'.\n"
+        f"Use these task types: {', '.join(task_types)}.\n"
+        "Each pair should be high-quality and diverse.\n\n"
+        "JSON format only:\n"
+        '[{"instruction": "...", "response": "...", "task_type": "..."}, ...]'
+    )
+    resp = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[{"role": "user", "content": prompt}],
+        temperature=0.9,          # high diversity
+        max_tokens=3000,
+        response_format={"type": "json_object"},
+    )
+    # Parse response (model returns single JSON object with list inside)
+    raw = json.loads(resp.choices[0].message.content)
+    # Handle different keys the model might use
+    for key in ("items", "examples", "pairs", "data"):
+        if key in raw:
+            return raw[key]
+    return list(raw.values())[0] if raw else []
+
+# Generate RAG training data
+examples = generate_instruction_dataset(
+    domain="Retrieval-Augmented Generation for enterprise software",
+    num_examples=5,
+)
+for ex in examples[:3]:
+    print(f"[{ex.get('task_type', 'N/A')}] {ex['instruction'][:60]}...")
+    print(f"  → {ex['response'][:80]}...\n")
+
+# Save for fine-tuning
+with open("synthetic_sft_data.jsonl", "w") as f:
+    for ex in examples:
+        f.write(json.dumps(ex) + "\n")
+print(f"Saved {len(examples)} examples to synthetic_sft_data.jsonl")
+```
+
 ## ★ Connections
 
-| Relationship | Topics                                           |
-| ------------ | ------------------------------------------------ |
-| Builds on    | [Fine Tuning](./fine-tuning.md), [Tokenization](../foundations/tokenization.md) |
-| Leads to     | [Distillation And Compression](./distillation-and-compression.md), Better models  |
-| Compare with | Traditional ML data pipelines, Human annotation  |
-| Cross-domain | Data engineering, ETL pipelines, Data quality    |
+| Relationship | Topics                                                                           |
+| ------------ | -------------------------------------------------------------------------------- |
+| Builds on    | [Fine Tuning](./fine-tuning.md), [Tokenization](../foundations/tokenization.md)  |
+| Leads to     | [Distillation And Compression](./distillation-and-compression.md), Better models |
+| Compare with | Traditional ML data pipelines, Human annotation                                  |
+| Cross-domain | Data engineering, ETL pipelines, Data quality                                    |
 
 
 ---
 
 ## ◆ Production Failure Modes
 
-| Failure | Symptoms | Root Cause | Mitigation |
-|---------|----------|------------|------------|
-| **Model collapse** | Synthetic-data-trained model produces repetitive outputs | Training on data from same model family | Mix synthetic with real data (20%+ real), diverse generators |
-| **Distribution mismatch** | Model trained on synthetic data fails on real inputs | Synthetic data doesn't match production distribution | Validate against real data statistics, domain-specific generators |
-| **Quality amplification** | Errors in seed data get amplified through pipeline | No quality filtering on generated data | Multi-stage quality filtering, LLM-as-judge scoring |
-| **PII leakage** | Generated data contains memorized PII from training | Large models memorize training examples | Differential privacy, PII detection on output, canary tokens |
+| Failure                   | Symptoms                                                 | Root Cause                                           | Mitigation                                                        |
+| ------------------------- | -------------------------------------------------------- | ---------------------------------------------------- | ----------------------------------------------------------------- |
+| **Model collapse**        | Synthetic-data-trained model produces repetitive outputs | Training on data from same model family              | Mix synthetic with real data (20%+ real), diverse generators      |
+| **Distribution mismatch** | Model trained on synthetic data fails on real inputs     | Synthetic data doesn't match production distribution | Validate against real data statistics, domain-specific generators |
+| **Quality amplification** | Errors in seed data get amplified through pipeline       | No quality filtering on generated data               | Multi-stage quality filtering, LLM-as-judge scoring               |
+| **PII leakage**           | Generated data contains memorized PII from training      | Large models memorize training examples              | Differential privacy, PII detection on output, canary tokens      |
 
 ---
 
@@ -298,11 +357,11 @@ QUALITY > QUANTITY:
 
 ## ★ Recommended Resources
 
-| Type | Resource | Why |
-|------|----------|-----|
-| 📄 Paper | [Peng et al. "Instruction Tuning with GPT-4" (2023)](https://arxiv.org/abs/2304.03277) | Foundational approach to synthetic instruction data |
-| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 4 | Covers synthetic data for evaluation and training |
-| 🔧 Hands-on | [Argilla Documentation](https://docs.argilla.io/) | Platform for data labeling and synthetic data curation |
+| Type       | Resource                                                                               | Why                                                    |
+| ---------- | -------------------------------------------------------------------------------------- | ------------------------------------------------------ |
+| 📄 Paper    | [Peng et al. "Instruction Tuning with GPT-4" (2023)](https://arxiv.org/abs/2304.03277) | Foundational approach to synthetic instruction data    |
+| 📘 Book     | "AI Engineering" by Chip Huyen (2025), Ch 4                                            | Covers synthetic data for evaluation and training      |
+| 🔧 Hands-on | [Argilla Documentation](https://docs.argilla.io/)                                      | Platform for data labeling and synthetic data curation |
 
 ## ★ Sources
 

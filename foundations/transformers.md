@@ -225,6 +225,85 @@ Modern Scaling (LLaMA 4 Behemoth):
 
 ---
 
+## ★ Code & Implementation
+
+### Load and Run a Transformer-Based LLM (HuggingFace)
+
+```python
+# pip install transformers>=4.40 torch>=2.3
+# ⚠️ Last tested: 2026-04 | Requires: transformers>=4.40, torch>=2.3
+# CPU mode: runs slowly but works for learning. For GPU: set device_map="auto"
+
+import torch
+from transformers import AutoModelForCausalLM, AutoTokenizer
+
+model_id = "google/gemma-2-2b-it"  # ~5GB download; swap for any instruct model
+tokenizer = AutoTokenizer.from_pretrained(model_id)
+model = AutoModelForCausalLM.from_pretrained(
+    model_id,
+    torch_dtype=torch.bfloat16,
+    device_map="auto",             # auto-distributes to available GPU/CPU
+    attn_implementation="eager",   # use "flash_attention_2" on GPU with CUDA
+)
+
+prompt = [{"role": "user", "content": "Explain the transformer architecture in 3 sentences."}]
+inputs = tokenizer.apply_chat_template(
+    prompt, return_tensors="pt", add_generation_prompt=True
+).to(model.device)
+
+with torch.inference_mode():
+    outputs = model.generate(
+        inputs,
+        max_new_tokens=150,
+        temperature=0.7,
+        do_sample=True,
+        pad_token_id=tokenizer.eos_token_id,
+    )
+
+response = tokenizer.decode(outputs[0][inputs.shape[1]:], skip_special_tokens=True)
+print(response)
+```
+
+### Minimal Transformer Block in PyTorch
+
+```python
+# ⚠️ Last tested: 2026-04 | Requires: torch>=2.3
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+
+class TransformerBlock(nn.Module):
+    """Single transformer decoder block: MHA + FFN + residuals."""
+    def __init__(self, d_model: int = 512, n_heads: int = 8, d_ff: int = 2048):
+        super().__init__()
+        self.attn = nn.MultiheadAttention(d_model, n_heads, batch_first=True)
+        self.ffn  = nn.Sequential(
+            nn.Linear(d_model, d_ff), nn.GELU(), nn.Linear(d_ff, d_model)
+        )
+        self.norm1 = nn.LayerNorm(d_model)
+        self.norm2 = nn.LayerNorm(d_model)
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        seq_len = x.size(1)
+        # Causal mask: prevent attending to future tokens
+        causal_mask = torch.triu(torch.ones(seq_len, seq_len, device=x.device), diagonal=1).bool()
+        # Pre-norm (modern style: norm before attention, not after)
+        attn_out, _ = self.attn(self.norm1(x), self.norm1(x), self.norm1(x), attn_mask=causal_mask)
+        x = x + attn_out                   # residual connection
+        x = x + self.ffn(self.norm2(x))    # FFN + residual
+        return x
+
+# Test:
+block = TransformerBlock(d_model=64, n_heads=4, d_ff=256)
+dummy = torch.randn(2, 10, 64)  # batch=2, seq_len=10, d_model=64
+out = block(dummy)
+print(f"Input shape: {dummy.shape} → Output shape: {out.shape}")  # Should match
+```
+
+---
+
+
+
 ## ★ Connections
 
 | Relationship | Topics                                                                        |

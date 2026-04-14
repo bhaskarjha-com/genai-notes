@@ -59,10 +59,10 @@ It applies to engineers, researchers, and advanced learners. It is not limited t
 
 ### Paper Reading Passes
 
-| Pass | Goal |
-|---|---|
-| **Pass 1** | skim title, abstract, intro, figures, conclusion |
-| **Pass 2** | inspect method, data, evaluation, and baselines |
+| Pass       | Goal                                                         |
+| ---------- | ------------------------------------------------------------ |
+| **Pass 1** | skim title, abstract, intro, figures, conclusion             |
+| **Pass 2** | inspect method, data, evaluation, and baselines              |
 | **Pass 3** | analyze assumptions, implementation details, and limitations |
 
 ### What To Extract
@@ -79,13 +79,13 @@ Keep notes on:
 
 ### Common Failure Modes When Reading AI Papers
 
-| Failure | Why It Misleads |
-|---|---|
-| reading only abstract and charts | misses assumptions and setup |
-| trusting one benchmark | ignores generalization |
-| ignoring compute budget | hides practicality |
-| skipping baselines | cannot judge improvement quality |
-| missing ablations | unclear what truly mattered |
+| Failure                          | Why It Misleads                  |
+| -------------------------------- | -------------------------------- |
+| reading only abstract and charts | misses assumptions and setup     |
+| trusting one benchmark           | ignores generalization           |
+| ignoring compute budget          | hides practicality               |
+| skipping baselines               | cannot judge improvement quality |
+| missing ablations                | unclear what truly mattered      |
 
 ### Reproducibility Mindset
 
@@ -131,13 +131,13 @@ notes_to_capture:
 ---
 
 ## ◆ Quick Reference
-| If You Want To Know... | Read This Part First |
-|---|---|
-| what the paper claims | abstract and conclusion |
-| whether the result is credible | evaluation and baselines |
+| If You Want To Know...                | Read This Part First                    |
+| ------------------------------------- | --------------------------------------- |
+| what the paper claims                 | abstract and conclusion                 |
+| whether the result is credible        | evaluation and baselines                |
 | whether it will transfer to your work | assumptions, limitations, compute setup |
-| what actually caused gains | ablation section |
-| whether you can implement it | method + appendix/code |
+| what actually caused gains            | ablation section                        |
+| whether you can implement it          | method + appendix/code                  |
 
 ---
 
@@ -157,13 +157,66 @@ notes_to_capture:
 
 ---
 
+## ★ Code & Implementation
+
+### Paper Analysis Pipeline with LLM
+
+```python
+# pip install openai>=1.60 PyPDF2>=3
+# ⚠️ Last tested: 2026-04 | Requires: openai>=1.60, OPENAI_API_KEY, PyPDF2>=3
+from openai import OpenAI
+import PyPDF2, json
+
+client = OpenAI()
+
+def extract_text_from_pdf(pdf_path: str, max_chars: int = 8000) -> str:
+    """Extract text from a PDF (first N chars to fit in context)."""
+    reader = PyPDF2.PdfReader(pdf_path)
+    text   = " ".join(page.extract_text() or "" for page in reader.pages)
+    return text[:max_chars]
+
+def analyze_paper(paper_text: str) -> dict:
+    """Structured AI-powered paper analysis using the ACE framework."""
+    prompt = (
+        "Analyze this research paper and extract structured information.\n\n"
+        f"PAPER:\n{paper_text}\n\n"
+        "Return JSON with these fields:\n"
+        "- problem: what problem does it solve?\n"
+        "- method: what is the core method/approach?\n"
+        "- key_results: top 3 quantitative results\n"
+        "- limitations: what are the stated limitations?\n"
+        "- reproducibility: 1-5 score (5=fully reproducible)\n"
+        "- related_to: list 3 related techniques/papers\n"
+        "- one_line_summary: max 20 words\n"
+    )
+    resp = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[{"role": "user", "content": prompt}],
+        temperature=0,
+        response_format={"type": "json_object"},
+        max_tokens=600,
+    )
+    return json.loads(resp.choices[0].message.content)
+
+# Demo with a text snippet (replace with real PDF path)
+demo_text = """
+Title: Attention Is All You Need. We propose a new simple network architecture,
+the Transformer, based solely on attention mechanisms, dispensing with recurrence
+and convolutions entirely. On two machine translation tasks, it achieves state of
+the art results of 28.4 BLEU on WMT 2014 English-to-German translation and 41.0
+BLEU on the WMT 2014 English-to-French translation. Training took 3.5 days on 8 P100s.
+"""
+result = analyze_paper(demo_text)
+print(json.dumps(result, indent=2))
+```
+
 ## ★ Connections
-| Relationship | Topics |
-|---|---|
-| Builds on | [LLM Evaluation Deep Dive](../evaluation/llm-evaluation-deep-dive.md), [Mechanistic Interpretability](./interpretability.md) |
-| Leads to | applied research, model experimentation, deeper technical interviews |
-| Compare with | blog-post level understanding |
-| Cross-domain | scientific method, experimentation |
+| Relationship | Topics                                                                                                                       |
+| ------------ | ---------------------------------------------------------------------------------------------------------------------------- |
+| Builds on    | [LLM Evaluation Deep Dive](../evaluation/llm-evaluation-deep-dive.md), [Mechanistic Interpretability](./interpretability.md) |
+| Leads to     | applied research, model experimentation, deeper technical interviews                                                         |
+| Compare with | blog-post level understanding                                                                                                |
+| Cross-domain | scientific method, experimentation                                                                                           |
 
 
 ---
@@ -185,21 +238,21 @@ notes_to_capture:
 
 ## ◆ Production Failure Modes
 
-| Failure | Symptoms | Root Cause | Mitigation |
-|---------|----------|------------|------------|
-| **Reproducibility failure** | Cannot reproduce paper results in your environment | Missing implementation details, different hardware | Check official repos, contact authors, document environment exactly |
-| **Cherry-picked baselines** | Paper claims SOTA but uses weak baselines | Author incentive to show improvement | Compare against multiple recent baselines, reproduce yourself |
-| **Hype-driven adoption** | Team implements flashy paper technique that doesn't help | No evaluation against simpler alternatives | Always benchmark against simple baseline first |
+| Failure                     | Symptoms                                                 | Root Cause                                         | Mitigation                                                          |
+| --------------------------- | -------------------------------------------------------- | -------------------------------------------------- | ------------------------------------------------------------------- |
+| **Reproducibility failure** | Cannot reproduce paper results in your environment       | Missing implementation details, different hardware | Check official repos, contact authors, document environment exactly |
+| **Cherry-picked baselines** | Paper claims SOTA but uses weak baselines                | Author incentive to show improvement               | Compare against multiple recent baselines, reproduce yourself       |
+| **Hype-driven adoption**    | Team implements flashy paper technique that doesn't help | No evaluation against simpler alternatives         | Always benchmark against simple baseline first                      |
 ---
 
 
 ## ★ Recommended Resources
 
-| Type | Resource | Why |
-|------|----------|-----|
-| 🎥 Video | [Yannic Kilcher's Paper Explanations](https://www.youtube.com/@YannicKilcher) | Best ML paper walkthroughs on YouTube |
-| 🔧 Hands-on | [Semantic Scholar](https://www.semanticscholar.org/) | AI-powered paper search and citation graph |
-| 🔧 Hands-on | [Papers With Code](https://paperswithcode.com/) | Papers linked to implementations and benchmarks |
+| Type       | Resource                                                                      | Why                                             |
+| ---------- | ----------------------------------------------------------------------------- | ----------------------------------------------- |
+| 🎥 Video    | [Yannic Kilcher's Paper Explanations](https://www.youtube.com/@YannicKilcher) | Best ML paper walkthroughs on YouTube           |
+| 🔧 Hands-on | [Semantic Scholar](https://www.semanticscholar.org/)                          | AI-powered paper search and citation graph      |
+| 🔧 Hands-on | [Papers With Code](https://paperswithcode.com/)                               | Papers linked to implementations and benchmarks |
 
 ## ★ Sources
 - S. Keshav, "How to Read a Paper"

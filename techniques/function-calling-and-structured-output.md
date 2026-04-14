@@ -83,10 +83,13 @@ KEY: The LLM NEVER executes code. It only decides what to call.
      YOUR code runs the function. Safety is YOUR responsibility.
 ```
 
+## ★ Code & Implementation
+
 ### Function Calling API (OpenAI Pattern)
 
 ```python
-# ⚠️ Last tested: 2026-04
+# pip install openai>=1.60
+# ⚠️ Last tested: 2026-04 | Requires: openai>=1.60, OPENAI_API_KEY env var
 from openai import OpenAI
 import json
 

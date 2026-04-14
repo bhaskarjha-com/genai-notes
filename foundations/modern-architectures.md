@@ -291,25 +291,74 @@ WHICH MODELS USE WHAT:
 
 ---
 
+## ★ Code & Implementation
+
+### Compare SSM vs Transformer Throughput
+
+```python
+# pip install torch>=2.3 mamba-ssm>=1.2  (mamba-ssm requires CUDA)
+# ⚠️ Last tested: 2026-04 | Requires: torch>=2.3; mamba-ssm for Mamba models
+# For CPU-only demo: use PyTorch baseline only
+
+import torch, time
+
+def benchmark_inference(model, input_ids, n_runs: int = 10) -> float:
+    """Return median inference latency in ms."""
+    latencies = []
+    with torch.inference_mode():
+        for _ in range(n_runs):
+            start = time.monotonic()
+            model(input_ids)
+            latencies.append((time.monotonic() - start) * 1000)
+    latencies.sort()
+    return latencies[len(latencies) // 2]  # median
+
+# Transformer baseline (decoder-only, minimal)
+import torch.nn as nn
+
+class MiniTransformer(nn.Module):
+    def __init__(self, d=256, heads=4, layers=4, seq=512):
+        super().__init__()
+        self.embed = nn.Embedding(32000, d)
+        self.layers = nn.ModuleList([
+            nn.TransformerDecoderLayer(d, heads, batch_first=True)
+            for _ in range(layers)
+        ])
+        self.head = nn.Linear(d, 32000)
+
+    def forward(self, x):
+        h = self.embed(x)
+        mem = torch.zeros_like(h)  # dummy memory
+        for layer in self.layers:
+            h = layer(h, mem)
+        return self.head(h)
+
+model = MiniTransformer()
+ids   = torch.randint(0, 32000, (1, 512))
+lat   = benchmark_inference(model, ids)
+print(f"MiniTransformer (512 tokens): {lat:.1f}ms median")
+# Note: quadratic scaling â€” try seq=1024, 2048 to see latency grow
+```
+
 ## ★ Connections
 
-| Relationship | Topics                                                                                |
-| ------------ | ------------------------------------------------------------------------------------- |
+| Relationship | Topics                                                                                                                                                 |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Builds on    | [Transformers](./transformers.md), [Attention Mechanism](./attention-mechanism.md), [Linear Algebra For Ai](../prerequisites/linear-algebra-for-ai.md) |
-| Leads to     | [Llms Overview](../llms/llms-overview.md), [Inference Optimization](../inference/inference-optimization.md)                    |
-| Compare with | Original Transformer (2017), RNNs (sequential)                                        |
-| Cross-domain | Computer architecture (memory hierarchy), Sparse computation                          |
+| Leads to     | [Llms Overview](../llms/llms-overview.md), [Inference Optimization](../inference/inference-optimization.md)                                            |
+| Compare with | Original Transformer (2017), RNNs (sequential)                                                                                                         |
+| Cross-domain | Computer architecture (memory hierarchy), Sparse computation                                                                                           |
 
 
 ---
 
 ## ◆ Production Failure Modes
 
-| Failure | Symptoms | Root Cause | Mitigation |
-|---------|----------|------------|------------|
-| **Architecture-capability mismatch** | Selected architecture underperforms on task type | Using encoder-only for generation, decoder-only for classification | Architecture selection guide: encoder for classification, decoder for generation |
-| **MoE routing collapse** | Only 1-2 experts receive all tokens, others unused | Load balancing loss insufficient | Auxiliary load balancing loss, expert parallelism, capacity factors |
-| **Long-context degradation** | Quality drops beyond pre-training context window | Architecture doesn't support position extrapolation | RoPE scaling, ALiBi, progressive context extension |
+| Failure                              | Symptoms                                           | Root Cause                                                         | Mitigation                                                                       |
+| ------------------------------------ | -------------------------------------------------- | ------------------------------------------------------------------ | -------------------------------------------------------------------------------- |
+| **Architecture-capability mismatch** | Selected architecture underperforms on task type   | Using encoder-only for generation, decoder-only for classification | Architecture selection guide: encoder for classification, decoder for generation |
+| **MoE routing collapse**             | Only 1-2 experts receive all tokens, others unused | Load balancing loss insufficient                                   | Auxiliary load balancing loss, expert parallelism, capacity factors              |
+| **Long-context degradation**         | Quality drops beyond pre-training context window   | Architecture doesn't support position extrapolation                | RoPE scaling, ALiBi, progressive context extension                               |
 
 ---
 
@@ -330,12 +379,12 @@ WHICH MODELS USE WHAT:
 
 ## ★ Recommended Resources
 
-| Type | Resource | Why |
-|------|----------|-----|
-| 📄 Paper | [Gu & Dao "Mamba: Linear-Time Sequence Modeling" (2023)](https://arxiv.org/abs/2312.00752) | State-space models challenging transformers |
-| 📄 Paper | [Touvron et al. "LLaMA" (2023)](https://arxiv.org/abs/2302.13971) | Open-weight LLM architecture decisions explained |
-| 🎥 Video | [Yannic Kilcher — Architecture Breakdowns](https://www.youtube.com/@YannicKilcher) | Detailed paper walkthroughs of modern architectures |
-| 📘 Book | "Build a Large Language Model (From Scratch)" by Sebastian Raschka (2024) | End-to-end architecture implementation |
+| Type    | Resource                                                                                   | Why                                                 |
+| ------- | ------------------------------------------------------------------------------------------ | --------------------------------------------------- |
+| 📄 Paper | [Gu & Dao "Mamba: Linear-Time Sequence Modeling" (2023)](https://arxiv.org/abs/2312.00752) | State-space models challenging transformers         |
+| 📄 Paper | [Touvron et al. "LLaMA" (2023)](https://arxiv.org/abs/2302.13971)                          | Open-weight LLM architecture decisions explained    |
+| 🎥 Video | [Yannic Kilcher — Architecture Breakdowns](https://www.youtube.com/@YannicKilcher)         | Detailed paper walkthroughs of modern architectures |
+| 📘 Book  | "Build a Large Language Model (From Scratch)" by Sebastian Raschka (2024)                  | End-to-end architecture implementation              |
 
 ## ★ Sources
 

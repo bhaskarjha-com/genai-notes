@@ -155,14 +155,13 @@ Performance: Within 1-2% of full fine-tuning
 
 ---
 
-## ◆ Procedure / How-To
+## ★ Code & Implementation
 
 ### Fine-tuning with QLoRA (Step-by-Step)
 
 ```python
-# ⚠️ Last tested: 2026-04
-# 1. Install dependencies
-# pip install transformers peft bitsandbytes trl datasets accelerate
+# pip install transformers>=4.40 peft>=0.10 bitsandbytes>=0.42 trl>=0.8 datasets accelerate
+# ⚠️ Last tested: 2026-04 | Requires: GPU with CUDA (RTX 3080+ or A100)
 
 from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training

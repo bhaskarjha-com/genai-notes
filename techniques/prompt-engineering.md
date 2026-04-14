@@ -200,7 +200,105 @@ TEMPERATURE GUIDE:
 
 ---
 
+## ★ Code & Implementation
+
+### Structured Prompt Builder
+
+```python
+# pip install openai>=1.60
+# ⚠️ Last tested: 2026-04 | Requires: openai>=1.60, OPENAI_API_KEY env var
+from openai import OpenAI
+from dataclasses import dataclass
+
+client = OpenAI()
+
+@dataclass
+class PromptConfig:
+    """Structured prompt using the META framework."""
+    role: str        # Mission: what expert persona
+    context: str     # Context background
+    task: str        # Task: specific action
+    format: str      # Expected output format
+    examples: list[tuple[str, str]]  # (input, output) pairs for few-shot
+    constraints: str = ""            # what NOT to do
+
+def build_messages(user_input: str, config: PromptConfig) -> list[dict]:
+    """Build few-shot messages list from a PromptConfig."""
+    system = (
+        f"You are {config.role}.\n\n"
+        f"Context: {config.context}\n\n"
+        f"Task: {config.task}\n\n"
+        f"Output format: {config.format}"
+    )
+    if config.constraints:
+        system += f"\n\nConstraints: {config.constraints}"
+
+    messages = [{"role": "system", "content": system}]
+    # Few-shot examples
+    for example_input, example_output in config.examples:
+        messages.append({"role": "user", "content": example_input})
+        messages.append({"role": "assistant", "content": example_output})
+    # Actual query
+    messages.append({"role": "user", "content": user_input})
+    return messages
+
+# Example: Sentiment classifier with few-shot
+config = PromptConfig(
+    role="an expert sentiment analyst",
+    context="You are classifying customer feedback for a SaaS product.",
+    task="Classify the sentiment of the user's review.",
+    format='{"sentiment": "positive|negative|neutral", "confidence": 0.0-1.0, "reason": "..."}',
+    examples=[
+        ("This product is amazing!", '{"sentiment": "positive", "confidence": 0.97, "reason": "clear enthusiasm"}'),
+        ("Worst purchase ever.",     '{"sentiment": "negative", "confidence": 0.99, "reason": "strong negative language"}'),
+    ],
+    constraints="Only respond with valid JSON. No extra text.",
+)
+
+messages = build_messages("The onboarding is okay but the dashboard is confusing.", config)
+response = client.chat.completions.create(
+    model="gpt-4o-mini",
+    messages=messages,
+    temperature=0.0,   # deterministic for classification
+    max_tokens=100,
+)
+print(response.choices[0].message.content)
+# → {"sentiment": "negative", "confidence": 0.82, "reason": "mixed review, negative feature mentioned"}
+```
+
+### Chain-of-Thought vs Direct: Side-by-Side Test
+
+```python
+# ⚠️ Last tested: 2026-04 | Requires: openai>=1.60, OPENAI_API_KEY
+
+def compare_cot(question: str, model: str = "gpt-4o-mini") -> None:
+    """Compare direct vs chain-of-thought prompting on a reasoning question."""
+    # Direct prompt
+    direct = client.chat.completions.create(
+        model=model,
+        messages=[{"role": "user", "content": question}],
+        temperature=0, max_tokens=100,
+    )
+    # CoT prompt
+    cot = client.chat.completions.create(
+        model=model,
+        messages=[{"role": "user", "content": f"{question} Think step by step."}],
+        temperature=0, max_tokens=300,
+    )
+    print("=== DIRECT ===")
+    print(direct.choices[0].message.content)
+    print("\n=== CHAIN-OF-THOUGHT ===")
+    print(cot.choices[0].message.content)
+
+compare_cot("If a train travels 120km at 60km/h and then 90km at 45km/h, what is the total travel time?")
+# Direct: often gives wrong answer quickly
+# CoT: breaks into phases → gets 2h + 2h = 4h (correct)
+```
+
+---
+
 ## ★ Connections
+
 
 | Relationship | Topics                                                                |
 | ------------ | --------------------------------------------------------------------- |

@@ -60,23 +60,23 @@ Good AI product questions:
 
 ### Common AI Product Traps
 
-| Trap | Why It Fails |
-|---|---|
-| "Add AI because competitors do" | no clear user value |
-| benchmark obsession | capability is not product success |
-| no human fallback | trust collapses when errors happen |
-| no cost model | usage grows and margins disappear |
-| vague success metric | team cannot tell if the feature helps |
+| Trap                            | Why It Fails                          |
+| ------------------------------- | ------------------------------------- |
+| "Add AI because competitors do" | no clear user value                   |
+| benchmark obsession             | capability is not product success     |
+| no human fallback               | trust collapses when errors happen    |
+| no cost model                   | usage grows and margins disappear     |
+| vague success metric            | team cannot tell if the feature helps |
 
 ### Product Questions Unique To AI
 
-| Question | Why It Matters |
-|---|---|
+| Question                                     | Why It Matters                 |
+| -------------------------------------------- | ------------------------------ |
 | What can the model safely decide on its own? | determines automation boundary |
-| Where do users need transparency? | affects trust and adoption |
-| How do we collect feedback? | improves iteration |
-| What should happen on uncertainty? | drives fallback behavior |
-| How expensive is each success? | shapes route and monetization |
+| Where do users need transparency?            | affects trust and adoption     |
+| How do we collect feedback?                  | improves iteration             |
+| What should happen on uncertainty?           | drives fallback behavior       |
+| How expensive is each success?               | shapes route and monetization  |
 
 ### Metric Stack
 
@@ -99,11 +99,11 @@ Use more than one metric:
 
 ### Build vs Buy Thinking
 
-| Option | Best When | Risk |
-|---|---|---|
-| **Provider API** | speed and simplicity matter most | lock-in and pricing dependence |
-| **Managed platform** | enterprise controls and faster ops matter | platform constraints |
-| **Custom stack** | differentiation or control is critical | more engineering burden |
+| Option               | Best When                                 | Risk                           |
+| -------------------- | ----------------------------------------- | ------------------------------ |
+| **Provider API**     | speed and simplicity matter most          | lock-in and pricing dependence |
+| **Managed platform** | enterprise controls and faster ops matter | platform constraints           |
+| **Custom stack**     | differentiation or control is critical    | more engineering burden        |
 
 ### PM Heuristics For Engineers
 
@@ -143,13 +143,13 @@ launch_plan:
 ---
 
 ## ◆ Quick Reference
-| If You Are Unsure About... | Ask This |
-|---|---|
-| use case quality | what user pain disappears if this works? |
-| automation level | what happens when the model is wrong? |
-| launch readiness | do we have metrics, fallback, and owner visibility? |
-| ROI | what is the cost per successful task? |
-| prioritization | is this a real workflow improvement or a demo feature? |
+| If You Are Unsure About... | Ask This                                               |
+| -------------------------- | ------------------------------------------------------ |
+| use case quality           | what user pain disappears if this works?               |
+| automation level           | what happens when the model is wrong?                  |
+| launch readiness           | do we have metrics, fallback, and owner visibility?    |
+| ROI                        | what is the cost per successful task?                  |
+| prioritization             | is this a real workflow improvement or a demo feature? |
 
 ---
 
@@ -170,24 +170,78 @@ launch_plan:
 
 ---
 
+## ★ Code & Implementation
+
+### AI Feature Feasibility Scorecard
+
+```python
+# ⚠️ Last tested: 2026-04 | Requires: Python 3.10+ (stdlib only)
+from dataclasses import dataclass
+from typing import Literal
+
+@dataclass
+class AIFeatureFeasibility:
+    """Score an AI feature idea before committing engineering resources."""
+    name: str
+    # Rate each dimension 1 (low) to 5 (high)
+    data_availability:    int   # Is training/evaluation data available?
+    accuracy_requirement: int   # How much does accuracy matter? (5=critical)
+    latency_tolerance:    int   # How tolerant is the UX to latency? (5=very tolerant)
+    failure_impact:       int   # What is the impact of AI errors? (5=catastrophic → hard)
+    alternatives_exist:   int   # Do rule-based alternatives exist? (5=many → lower AI need)
+    user_ai_trust:        int   # How much do users trust AI in this context? (5=high trust)
+
+    def score(self) -> dict:
+        """Compute weighted feasibility score (0-100). >70 = green light."""
+        raw = (
+            self.data_availability * 20    # most critical factor
+            + (6 - self.accuracy_requirement) * 10  # higher req = harder
+            + self.latency_tolerance * 10
+            + (6 - self.failure_impact) * 15         # high failure cost = risky
+            + (6 - self.alternatives_exist) * 10     # alternatives exist = lower pain
+            + self.user_ai_trust * 10
+        ) / 75 * 100
+
+        confidence = "GREEN" if raw >= 70 else "YELLOW" if raw >= 50 else "RED"
+        return {
+            "name":       self.name,
+            "score":      round(raw, 1),
+            "confidence": confidence,
+            "guidance":   {
+                "GREEN":  "Proceed to prototype. Clear ROI path.",
+                "YELLOW": "Validate data quality and user acceptance first.",
+                "RED":    "Revisit problem framing. Consider rule-based approach.",
+            }[confidence],
+        }
+
+# Example: evaluate two AI features
+features = [
+    AIFeatureFeasibility("Email draft suggestions", 5, 2, 5, 1, 4, 5),
+    AIFeatureFeasibility("Autonomous loan decisions", 2, 5, 2, 5, 3, 1),
+]
+for f in features:
+    r = f.score()
+    print(f"{r['name']}: {r['score']:.0f}/100 ({r['confidence']}) â€” {r['guidance']}")
+```
+
 ## ★ Connections
-| Relationship | Topics |
-|---|---|
-| Builds on | [AI System Design for GenAI Applications](../production/ai-system-design.md), [LLM Evaluation Deep Dive](../evaluation/llm-evaluation-deep-dive.md) |
-| Leads to | AI PM, solution architecture, founder thinking |
-| Compare with | traditional PM, pure model benchmarking |
-| Cross-domain | UX, strategy, analytics |
+| Relationship | Topics                                                                                                                                              |
+| ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Builds on    | [AI System Design for GenAI Applications](../production/ai-system-design.md), [LLM Evaluation Deep Dive](../evaluation/llm-evaluation-deep-dive.md) |
+| Leads to     | AI PM, solution architecture, founder thinking                                                                                                      |
+| Compare with | traditional PM, pure model benchmarking                                                                                                             |
+| Cross-domain | UX, strategy, analytics                                                                                                                             |
 
 
 ---
 
 ## ◆ Production Failure Modes
 
-| Failure | Symptoms | Root Cause | Mitigation |
-|---------|----------|------------|------------|
-| **AI feature underutilization** | Feature shipped but <10% of users engage | No user research on actual pain points | User interviews, MVP testing, feature flags with metrics |
-| **Expectation gap** | Users expect perfect AI, disappointed by errors | No UX communication about AI limitations | Confidence indicators, graceful failure UX, manage expectations |
-| **Metric disconnect** | ML metrics improving but business KPIs flat | Optimizing wrong proxy metric | Map ML metrics to business outcomes, cohort analysis |
+| Failure                         | Symptoms                                        | Root Cause                               | Mitigation                                                      |
+| ------------------------------- | ----------------------------------------------- | ---------------------------------------- | --------------------------------------------------------------- |
+| **AI feature underutilization** | Feature shipped but <10% of users engage        | No user research on actual pain points   | User interviews, MVP testing, feature flags with metrics        |
+| **Expectation gap**             | Users expect perfect AI, disappointed by errors | No UX communication about AI limitations | Confidence indicators, graceful failure UX, manage expectations |
+| **Metric disconnect**           | ML metrics improving but business KPIs flat     | Optimizing wrong proxy metric            | Map ML metrics to business outcomes, cohort analysis            |
 
 ---
 
@@ -208,11 +262,11 @@ launch_plan:
 
 ## ★ Recommended Resources
 
-| Type | Resource | Why |
-|------|----------|-----|
-| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 1, 9 | Product thinking for AI applications |
-| 📘 Book | "The AI Product Manager's Handbook" by Buest (2023) | PM-specific AI guide |
-| 🎥 Video | [Lenny's Podcast — AI Product Management Episodes](https://www.lennyspodcast.com/) | PM perspectives on building with AI |
+| Type    | Resource                                                                           | Why                                  |
+| ------- | ---------------------------------------------------------------------------------- | ------------------------------------ |
+| 📘 Book  | "AI Engineering" by Chip Huyen (2025), Ch 1, 9                                     | Product thinking for AI applications |
+| 📘 Book  | "The AI Product Manager's Handbook" by Buest (2023)                                | PM-specific AI guide                 |
+| 🎥 Video | [Lenny's Podcast — AI Product Management Episodes](https://www.lennyspodcast.com/) | PM perspectives on building with AI  |
 
 ## ★ Sources
 - Reforge and product strategy material on AI products

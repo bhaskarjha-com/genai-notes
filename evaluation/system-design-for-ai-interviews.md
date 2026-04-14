@@ -61,23 +61,23 @@ It focuses on answer structure and trade-off language rather than implementation
 
 ### Questions To Clarify Early
 
-| Question | Why It Matters |
-|---|---|
-| Who are the users? | changes UX and safety bar |
-| What accuracy is required? | determines whether human review is needed |
-| Is latency interactive? | shapes serving and model choice |
-| What data is private or dynamic? | drives RAG, governance, and storage |
-| What is the budget? | affects routing and infra choices |
+| Question                         | Why It Matters                            |
+| -------------------------------- | ----------------------------------------- |
+| Who are the users?               | changes UX and safety bar                 |
+| What accuracy is required?       | determines whether human review is needed |
+| Is latency interactive?          | shapes serving and model choice           |
+| What data is private or dynamic? | drives RAG, governance, and storage       |
+| What is the budget?              | affects routing and infra choices         |
 
 ### Common AI Design Scenarios
 
-| Scenario | Likely Pattern |
-|---|---|
-| internal knowledge assistant | RAG + citations + observability |
-| coding copilot | retrieval + tool use + policy checks |
-| support automation | conversational system + workflow tools + escalation |
-| large-scale inference platform | serving, autoscaling, caching, cost control |
-| fraud or ranking service | classical ML or hybrid stack |
+| Scenario                       | Likely Pattern                                      |
+| ------------------------------ | --------------------------------------------------- |
+| internal knowledge assistant   | RAG + citations + observability                     |
+| coding copilot                 | retrieval + tool use + policy checks                |
+| support automation             | conversational system + workflow tools + escalation |
+| large-scale inference platform | serving, autoscaling, caching, cost control         |
+| fraud or ranking service       | classical ML or hybrid stack                        |
 
 ### Trade-Off Buckets To Always Mention
 
@@ -122,12 +122,12 @@ flowchart LR
 ---
 
 ## ◆ Quick Reference
-| If Asked To Design... | Mention Early |
-|---|---|
-| RAG assistant | data freshness, retrieval quality, groundedness |
-| agent workflow | tool permissions, observability, task success |
+| If Asked To Design...  | Mention Early                                   |
+| ---------------------- | ----------------------------------------------- |
+| RAG assistant          | data freshness, retrieval quality, groundedness |
+| agent workflow         | tool permissions, observability, task success   |
 | model-serving platform | latency, throughput, autoscaling, GPU economics |
-| enterprise AI feature | auth, tenancy, compliance, fallback behavior |
+| enterprise AI feature  | auth, tenancy, compliance, fallback behavior    |
 
 ---
 
@@ -147,24 +147,107 @@ flowchart LR
 
 ---
 
+## ★ Code & Implementation
+
+### System Design Interview: RAG Pipeline Scaffold
+
+```python
+# ⚠️ Last tested: 2026-04 | Requires: Python 3.10+ (stdlib only)
+# This is a code representation of an AI system design answer.
+# Use this structure to walk through a production RAG design in interviews.
+
+from dataclasses import dataclass, field
+from typing import Protocol
+
+# â”€â”€ Interface definitions (the design, not the implementation) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+class VectorStore(Protocol):
+    def upsert(self, docs: list[str], embeddings: list[list[float]]) -> None: ...
+    def query(self, embedding: list[float], top_k: int) -> list[str]: ...
+
+class EmbeddingModel(Protocol):
+    def embed(self, texts: list[str]) -> list[list[float]]: ...
+
+class LLM(Protocol):
+    def generate(self, messages: list[dict], max_tokens: int) -> str: ...
+
+# â”€â”€ Core RAG pipeline (design interview answer as code) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+@dataclass
+class RAGSystem:
+    """
+    Production RAG â€” key design decisions:
+    1. Chunking: 512 tokens, 20% overlap (balance context vs precision)
+    2. Embedding: text-embedding-3-small (dims=1536, cost-efficient)
+    3. Retrieval: top-5 chunks + BM25 hybrid (precision + recall)
+    4. Generation: gpt-4o-mini (quality) with 4000-token context
+    5. Guardrails: groundedness check + abstention at score < 0.7
+    """
+    vector_store:    VectorStore
+    embedder:        EmbeddingModel
+    llm:             LLM
+    chunk_size:      int = 512
+    chunk_overlap:   int = 102    # ~20%
+    top_k:           int = 5
+    min_ground_score: float = 0.7
+
+    def ingest(self, documents: list[str]) -> dict:
+        chunks = self._chunk_documents(documents)
+        embeddings = self.embedder.embed(chunks)
+        self.vector_store.upsert(chunks, embeddings)
+        return {"chunks_indexed": len(chunks)}
+
+    def query(self, user_query: str) -> dict:
+        q_emb   = self.embedder.embed([user_query])[0]
+        context = self.vector_store.query(q_emb, top_k=self.top_k)
+        answer  = self.llm.generate(
+            messages=[
+                {"role": "system", "content": "Answer ONLY from context. Say 'I don't know' if unsure."},
+                {"role": "user",   "content": f"Context:\n{chr(10).join(context)}\n\nQ: {user_query}"},
+            ],
+            max_tokens=400,
+        )
+        return {"answer": answer, "sources": context[:2]}  # return top 2 as citations
+
+    def _chunk_documents(self, docs: list[str]) -> list[str]:
+        chunks = []
+        for doc in docs:
+            words = doc.split()
+            step  = self.chunk_size - self.chunk_overlap
+            for i in range(0, len(words), step):
+                chunk = " ".join(words[i:i + self.chunk_size])
+                if chunk:
+                    chunks.append(chunk)
+        return chunks
+
+# Interview talking points:
+DESIGN_DECISIONS = {
+    "scaling":     "Horizontal scaling of inference; async ingestion pipeline",
+    "caching":     "Semantic cache on query embeddings (exact match L1, cosine L2)",
+    "monitoring":  "Track: retrieval recall@5, groundedness score, P95 latency, CSAT",
+    "failure_modes": "Empty retrieval → abstain; low groundedness → human escalation",
+    "cost":        "Batch embed during ingestion; cache hit rate target >60%",
+}
+for k, v in DESIGN_DECISIONS.items():
+    print(f"{k.upper():<18}: {v}")
+```
+
 ## ★ Connections
-| Relationship | Topics |
-|---|---|
-| Builds on | [AI System Design for GenAI Applications](../production/ai-system-design.md), [Model Serving for LLM Applications](../production/model-serving.md), [Monitoring & Observability for GenAI Systems](../production/monitoring-observability.md) |
-| Leads to | role-specific interview prep, architecture reviews |
-| Compare with | generic distributed-systems interviews |
-| Cross-domain | communication, product reasoning, platform thinking |
+| Relationship | Topics                                                                                                                                                                                                                                        |
+| ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Builds on    | [AI System Design for GenAI Applications](../production/ai-system-design.md), [Model Serving for LLM Applications](../production/model-serving.md), [Monitoring & Observability for GenAI Systems](../production/monitoring-observability.md) |
+| Leads to     | role-specific interview prep, architecture reviews                                                                                                                                                                                            |
+| Compare with | generic distributed-systems interviews                                                                                                                                                                                                        |
+| Cross-domain | communication, product reasoning, platform thinking                                                                                                                                                                                           |
 
 ---
 
 ## ◆ Production Failure Modes
 
-| Failure | Symptoms | Root Cause | Mitigation |
-|---------|----------|------------|------------|
-| **Over-engineering in design** | 30-minute answer covers infrastructure but misses requirements | Jumped to tools before clarifying the problem | Always start with 5 min of requirements, metrics, constraints |
-| **Missing evaluation story** | Interviewer asks "how do you know it works?" and candidate freezes | Forgot to plan evaluation as part of the design | Include eval from the start: offline metrics, online A/B, human review |
-| **No cost analysis** | "Just use GPT-4 for everything" | Didn't calculate cost at scale | Always estimate: requests/day × cost/request = monthly cost |
-| **Ignoring failure modes** | Design only covers happy path | No mention of latency spikes, model failures, or safety | Explicitly discuss: what breaks? how do you detect it? how do you recover? |
+| Failure                        | Symptoms                                                           | Root Cause                                              | Mitigation                                                                 |
+| ------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------- | -------------------------------------------------------------------------- |
+| **Over-engineering in design** | 30-minute answer covers infrastructure but misses requirements     | Jumped to tools before clarifying the problem           | Always start with 5 min of requirements, metrics, constraints              |
+| **Missing evaluation story**   | Interviewer asks "how do you know it works?" and candidate freezes | Forgot to plan evaluation as part of the design         | Include eval from the start: offline metrics, online A/B, human review     |
+| **No cost analysis**           | "Just use GPT-4 for everything"                                    | Didn't calculate cost at scale                          | Always estimate: requests/day × cost/request = monthly cost                |
+| **Ignoring failure modes**     | Design only covers happy path                                      | No mention of latency spikes, model failures, or safety | Explicitly discuss: what breaks? how do you detect it? how do you recover? |
 
 ---
 
@@ -186,13 +269,13 @@ flowchart LR
 
 ## ★ Recommended Resources
 
-| Type | Resource | Why |
-|------|----------|-----|
-| 📘 Book | "AI Engineering" by Chip Huyen (2025) | Covers AI system design end-to-end — the single best prep resource |
-| 📘 Book | "Designing Machine Learning Systems" by Chip Huyen (2022) | System design fundamentals — data, features, serving, monitoring |
-| 🎥 Video | [Alex Xu — "System Design Interview" Series](https://www.youtube.com/@ByteByteGo) | Best visual explanations of system design interview techniques |
-| 🔧 Hands-on | [AI System Design Practice Problems](https://www.educative.io/) | Structured practice with AI-specific system design prompts |
-| 📄 Paper | [Google "MLOps: Continuous delivery for ML"](https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning) | Production ML patterns frequently tested in interviews |
+| Type       | Resource                                                                                                                                                   | Why                                                                |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| 📘 Book     | "AI Engineering" by Chip Huyen (2025)                                                                                                                      | Covers AI system design end-to-end — the single best prep resource |
+| 📘 Book     | "Designing Machine Learning Systems" by Chip Huyen (2022)                                                                                                  | System design fundamentals — data, features, serving, monitoring   |
+| 🎥 Video    | [Alex Xu — "System Design Interview" Series](https://www.youtube.com/@ByteByteGo)                                                                          | Best visual explanations of system design interview techniques     |
+| 🔧 Hands-on | [AI System Design Practice Problems](https://www.educative.io/)                                                                                            | Structured practice with AI-specific system design prompts         |
+| 📄 Paper    | [Google "MLOps: Continuous delivery for ML"](https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning) | Production ML patterns frequently tested in interviews             |
 
 ---
 

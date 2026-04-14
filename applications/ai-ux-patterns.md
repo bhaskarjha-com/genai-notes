@@ -56,39 +56,39 @@ PILLAR 1: SPEED                    PILLAR 2: TRUST                  PILLAR 3: CO
 
 ### Core AI UX Patterns
 
-| Pattern | Problem It Solves | Example |
-|---------|------------------|---------|
-| **Streaming response** | 3-8 second wait feels slow | ChatGPT token-by-token rendering |
-| **Skeleton loading** | User doesn't know something is happening | Shimmer animation during model inference |
-| **Citation cards** | User can't verify AI claims | Perplexity-style inline source links |
-| **Confidence indicators** | Not all answers are equally reliable | Color-coded confidence bars |
-| **Suggested prompts** | Users don't know what to ask | Starter chips, autocomplete |
-| **Regeneration** | First answer wasn't good enough | "Try again" button with different seed |
-| **Inline editing** | AI was 90% right but needs correction | Editable responses with diff tracking |
-| **Progressive disclosure** | Too much information at once | Summary first, expandable details |
-| **Guardrail messaging** | AI refuses a request | Clear explanation of what's not possible and why |
-| **Feedback capture** | Need to improve model quality | Thumbs up/down, report, correction |
+| Pattern                    | Problem It Solves                        | Example                                          |
+| -------------------------- | ---------------------------------------- | ------------------------------------------------ |
+| **Streaming response**     | 3-8 second wait feels slow               | ChatGPT token-by-token rendering                 |
+| **Skeleton loading**       | User doesn't know something is happening | Shimmer animation during model inference         |
+| **Citation cards**         | User can't verify AI claims              | Perplexity-style inline source links             |
+| **Confidence indicators**  | Not all answers are equally reliable     | Color-coded confidence bars                      |
+| **Suggested prompts**      | Users don't know what to ask             | Starter chips, autocomplete                      |
+| **Regeneration**           | First answer wasn't good enough          | "Try again" button with different seed           |
+| **Inline editing**         | AI was 90% right but needs correction    | Editable responses with diff tracking            |
+| **Progressive disclosure** | Too much information at once             | Summary first, expandable details                |
+| **Guardrail messaging**    | AI refuses a request                     | Clear explanation of what's not possible and why |
+| **Feedback capture**       | Need to improve model quality            | Thumbs up/down, report, correction               |
 
 ### Anti-Patterns to Avoid
 
-| Anti-Pattern | Why It Hurts | Better Alternative |
-|-------------|-------------|-------------------|
-| **No loading state** | User thinks it's broken | Streaming + skeleton loading |
-| **Fake confidence** | Erodes trust when wrong | Show uncertainty explicitly |
-| **Wall of text** | Overwhelming, unreadable | Progressive disclosure, formatting |
-| **No attribution** | "The AI said so" isn't trustworthy | Citations with source links |
-| **No way to correct** | Users feel powerless | Edit, regenerate, and feedback buttons |
-| **Hiding AI involvement** | Users feel deceived | Be transparent about AI-generated content |
+| Anti-Pattern              | Why It Hurts                       | Better Alternative                        |
+| ------------------------- | ---------------------------------- | ----------------------------------------- |
+| **No loading state**      | User thinks it's broken            | Streaming + skeleton loading              |
+| **Fake confidence**       | Erodes trust when wrong            | Show uncertainty explicitly               |
+| **Wall of text**          | Overwhelming, unreadable           | Progressive disclosure, formatting        |
+| **No attribution**        | "The AI said so" isn't trustworthy | Citations with source links               |
+| **No way to correct**     | Users feel powerless               | Edit, regenerate, and feedback buttons    |
+| **Hiding AI involvement** | Users feel deceived                | Be transparent about AI-generated content |
 
 ---
 
 ## ◆ Production Failure Modes
 
-| Failure | Symptoms | Root Cause | Mitigation |
-|---------|----------|------------|------------|
-| **Trust erosion** | Users stop relying on AI answers | Confident wrong answers without citations | Add citations, confidence indicators, "I don't know" |
-| **Latency abandonment** | Users leave during model inference | No streaming, no loading indicator | Stream tokens, add skeleton loading |
-| **Feedback fatigue** | Users stop giving feedback | Too many feedback prompts, no visible impact | Make feedback easy (one click), show when it improves results |
+| Failure                 | Symptoms                           | Root Cause                                   | Mitigation                                                    |
+| ----------------------- | ---------------------------------- | -------------------------------------------- | ------------------------------------------------------------- |
+| **Trust erosion**       | Users stop relying on AI answers   | Confident wrong answers without citations    | Add citations, confidence indicators, "I don't know"          |
+| **Latency abandonment** | Users leave during model inference | No streaming, no loading indicator           | Stream tokens, add skeleton loading                           |
+| **Feedback fatigue**    | Users stop giving feedback         | Too many feedback prompts, no visible impact | Make feedback easy (one click), show when it improves results |
 
 ---
 
@@ -113,24 +113,103 @@ PILLAR 1: SPEED                    PILLAR 2: TRUST                  PILLAR 3: CO
 
 ---
 
+## ★ Code & Implementation
+
+### Streaming Response with Progressive Disclosure
+
+```python
+# pip install openai>=1.60 fastapi>=0.110 uvicorn>=0.29
+# ⚠️ Last tested: 2026-04 | Requires: openai>=1.60, OPENAI_API_KEY
+from fastapi import FastAPI
+from fastapi.responses import StreamingResponse
+from openai import OpenAI
+
+app    = FastAPI()
+client = OpenAI()
+
+@app.get("/stream")
+async def stream_response(question: str) -> StreamingResponse:
+    """Stream LLM tokens to the client as they arrive â€” core AI UX pattern."""
+    def token_generator():
+        stream = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[{"role": "user", "content": question}],
+            max_tokens=400,
+            stream=True,
+        )
+        for chunk in stream:
+            delta = chunk.choices[0].delta.content
+            if delta:
+                # Server-Sent Events format
+                yield f"data: {delta}\n\n"
+        yield "data: [DONE]\n\n"
+
+    return StreamingResponse(token_generator(), media_type="text/event-stream")
+
+# Frontend consumption (JavaScript):
+# const es = new EventSource(`/stream?question=What+is+RAG%3F`);
+# es.onmessage = (e) => {
+#   if (e.data === "[DONE]") { es.close(); return; }
+#   document.getElementById("output").textContent += e.data;
+# };
+```
+
+### Confidence Signaling Pattern
+
+```python
+# ⚠️ Last tested: 2026-04 | Requires: openai>=1.60, OPENAI_API_KEY
+import json
+from openai import OpenAI
+
+client = OpenAI()
+
+def answer_with_confidence(question: str) -> dict:
+    """Return answer annotated with confidence and uncertainty signals for UI."""
+    resp = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[{
+            "role": "system",
+            "content": (
+                "Answer questions and rate your confidence. "
+                "JSON only: {\"answer\": \"...\", \"confidence\": 0.0-1.0, "
+                "\"uncertainty_note\": \"null or brief caveat\", \"sources_likely\": [\"...\"]}"
+            )
+        }, {"role": "user", "content": question}],
+        temperature=0,
+        response_format={"type": "json_object"},
+    )
+    return json.loads(resp.choices[0].message.content)
+
+# UI mapping: confidence → indicator color
+def confidence_color(conf: float) -> str:
+    if conf >= 0.85: return "green"    # show normally
+    if conf >= 0.6:  return "yellow"   # show with "Verify this" note
+    return "red"                        # show with prominent "AI may be wrong" warning
+
+result = answer_with_confidence("What is the population of Mars?")
+print(f"Answer: {result['answer']}")
+print(f"Confidence: {result['confidence']:.0%} → {confidence_color(result['confidence'])}")
+print(f"Caveat: {result.get('uncertainty_note')}")
+```
+
 ## ★ Connections
 
-| Relationship | Topics |
-|---|---|
-| Builds on | [Conversational AI](./conversational-ai.md), [API Design](./api-design-for-ai.md) |
-| Leads to | AI product design, user research for AI, [AI Product Management](./ai-product-management-fundamentals.md) |
-| Compare with | Traditional software UX, mobile UX patterns |
-| Cross-domain | Product design, human-computer interaction, psychology |
+| Relationship | Topics                                                                                                    |
+| ------------ | --------------------------------------------------------------------------------------------------------- |
+| Builds on    | [Conversational AI](./conversational-ai.md), [API Design](./api-design-for-ai.md)                         |
+| Leads to     | AI product design, user research for AI, [AI Product Management](./ai-product-management-fundamentals.md) |
+| Compare with | Traditional software UX, mobile UX patterns                                                               |
+| Cross-domain | Product design, human-computer interaction, psychology                                                    |
 
 ---
 
 ## ★ Recommended Resources
 
-| Type | Resource | Why |
-|------|----------|-----|
-| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 1 | AI product design from an engineering perspective |
-| 🔧 Hands-on | [Google PAIR Guidelines](https://pair.withgoogle.com/) | Google's AI UX design principles |
-| 🔧 Hands-on | [Apple Human Interface Guidelines — Machine Learning](https://developer.apple.com/design/human-interface-guidelines/machine-learning) | Apple's AI UX design principles |
+| Type       | Resource                                                                                                                              | Why                                               |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
+| 📘 Book     | "AI Engineering" by Chip Huyen (2025), Ch 1                                                                                           | AI product design from an engineering perspective |
+| 🔧 Hands-on | [Google PAIR Guidelines](https://pair.withgoogle.com/)                                                                                | Google's AI UX design principles                  |
+| 🔧 Hands-on | [Apple Human Interface Guidelines — Machine Learning](https://developer.apple.com/design/human-interface-guidelines/machine-learning) | Apple's AI UX design principles                   |
 
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: "Inference Optimization"
-tags: [inference, quantization, speculative-decoding, kv-cache, serving, performance, genai]
+tags: [inference, quantization, speculative-decoding, kv-cache, serving, performance, sglang, radix-attention, pd-disaggregation, genai]
 type: concept
 difficulty: advanced
 status: published
@@ -9,7 +9,7 @@ parent: "../genai.md"
 related: ["../llms/llms-overview.md", "../tools-and-infra/tools-overview.md", "../foundations/transformers.md", "gpu-cuda-programming.md", "distributed-inference-and-serving-architecture.md", "../production/cost-optimization.md"]
 source: "Multiple papers and frameworks - see Sources"
 created: 2026-03-18
-updated: 2026-04-12
+updated: 2026-04-15
 ---
 
 # Inference Optimization
@@ -196,7 +196,79 @@ Stack them: 4-bit quant + vLLM + speculative decoding
             = 10x+ cheaper than naive FP16 serving
 ```
 
+### SGLang: RadixAttention Architecture (2026 Standard)
+
+```
+SGLang vs vLLM: Same goal, different KV cache management strategy.
+
+vLLM PagedAttention:
+┌──────────────────────────────────────────────────┐
+│  KV cache partitioned into fixed-size physical pages │
+│  Pages allocated per request, freed on completion    │
+│  Best for: diverse prompts, simple batch serving     │
+└──────────────────────────────────────────────────┘
+
+SGLang RadixAttention:
+┌──────────────────────────────────────────────────┐
+│  KV cache stored as a RADIX TREE (prefix trie)       │
+│  Common prefix → shared nodes across requests        │
+│  Automatic prefix matching at every request          │
+│                                                      │
+│  Request A: "System: You are a coder. User: Fix X"  │
+│  Request B: "System: You are a coder. User: Fix Y"  │
+│               └── Shared prefix cache ──┘            │
+│  Cache hit on system prompt + instruction preamble   │
+│  Only compute the unique suffix (X vs Y)             │
+└──────────────────────────────────────────────────┘
+```
+
+**When to use SGLang over vLLM**: prefix cache hit rate > 30% (RAG systems, multi-turn chat, agentic workloads with shared tool schemas). For diverse prompts with < 10% cache hits, vLLM's wider ecosystem often wins.
+
+| Workload | vLLM | SGLang | Reason |
+|---|---|---|---|
+| Simple batch Q&A (diverse prompts) | ✅ | Good | Both work; vLLM has wider ecosystem |
+| RAG pipeline (shared system prompt) | ⚠️ Manual | ✅ | RadixAttention auto-shares prefix context |
+| Multi-turn chat (shared history) | ⚠️ | ✅ | Radix tree naturally stores conversation cache |
+| Agentic loops (shared tool schemas) | ⚠️ | ✅ | High-repetition prefix = massive cache hits |
+
+### Prefill/Decode (P/D) Disaggregation
+
+```
+TRADITIONAL: One GPU handles BOTH phases
+┌──────────────────────────────────────────────┐
+│  GPU Node                                        │
+│  Prefill (compute-bound) ► Decode (memory-bound)  │
+│  Decode blocks new prefill requests!             │
+└──────────────────────────────────────────────┘
+
+P/D DISAGGREGATION: Specialized node clusters
+┌──────────────────────────────────────────────┐
+│  PREFILL NODES         KV xfer    DECODE NODES     │
+│  ┌──────────┐            │       ┌──────────┐  │
+│  │High-FLOP │────────►│        │High-BW   │  │
+│  │GPUs(H100)│            │        │GPUs(H200) │  │
+│  └──────────┘            │        └──────────┘  │
+│  Maximize FLOPS        cache      Maximize BW      │
+└──────────────────────────────────────────────┘
+Result: 2-4× higher cluster throughput at same cost.
+```
+
+**Implementations (2026)**: Distserve (OSDI 2024), vLLM KVTransfer API, NVIDIA Dynamo serving stack.
+
+### Speculative Decoding — 2026 State of the Art
+
+| Method | Key Innovation | Speedup |
+|---|---|---|
+| Standard speculative | Small draft + large verify | 2-3× |
+| **EAGLE-3** (2025) | Draft from target's intermediate layers; no separate model | 3-4× |
+| **P-EAGLE** | EAGLE + P/D disaggregation | Up to 5× |
+| **TurboSpec** | Dynamic disabling when acceptance rate drops | Avoids negative speedup |
+| SPECTRA (ACL 2025) | Training-free; any draft + any target | 2-2.5× |
+
+> **EAGLE-3 is the 2026 default**: zero memory overhead, no separate model to maintain, 3-4× real-world speedup.
+
 ---
+
 
 ## ◆ Formulas & Equations
 
@@ -239,6 +311,72 @@ LATENCY TARGETS (typical):
 - ⚠️ **Speculative decoding overhead**: If the draft model is too slow or inaccurate, speedup disappears. Draft model must be much smaller AND accurate.
 - ⚠️ **vLLM ≠ magic**: You still need to tune batch sizes, GPU memory allocation, and scheduling for your workload.
 - ⚠️ **Latency vs throughput tradeoff**: Optimizing for one often hurts the other. Know which matters for your use case.
+- ⚠️ **SGLang RadixAttention thrash**: If prompts are highly diverse, the radix tree evicts cache aggressively and you lose the benefit. Profile cache hit rate before committing.
+- ⚠️ **P/D disaggregation complexity**: Adds network hop for KV cache transfer. Requires high-bandwidth interconnect (NVLink, InfiniBand) to avoid bottleneck.
+
+---
+
+## ★ Code & Implementation
+
+### Start vLLM Server (OpenAI-Compatible)
+
+```bash
+# pip install vllm>=0.4.0
+# ⚠️ Last tested: 2026-04 | Requires: vllm>=0.4, CUDA GPU
+
+python -m vllm.entrypoints.openai.api_server \
+  --model google/gemma-2-2b-it \
+  --dtype bfloat16 \
+  --max-model-len 4096 \
+  --gpu-memory-utilization 0.85
+
+# Test via OpenAI client:
+# from openai import OpenAI
+# client = OpenAI(base_url="http://localhost:8000/v1", api_key="none")
+# r = client.chat.completions.create(model="google/gemma-2-2b-it",
+#       messages=[{"role": "user", "content": "Explain KV caching."}])
+# print(r.choices[0].message.content)
+```
+
+### Start SGLang Server (RadixAttention — Best for RAG/Agentic)
+
+```bash
+# pip install sglang[all]>=0.4.0
+# ⚠️ Last tested: 2026-04 | Requires: sglang>=0.4, CUDA GPU
+
+python -m sglang.launch_server \
+  --model-path google/gemma-2-2b-it \
+  --port 30000 \
+  --mem-fraction-static 0.85
+# RadixAttention prefix caching is automatic — no extra config needed
+# High prefix cache hit rate (RAG, agents) → SGLang outperforms vLLM
+```
+
+### Load Model with 4-bit Quantization
+
+```python
+# pip install transformers>=4.40 bitsandbytes>=0.43
+# ⚠️ Last tested: 2026-04 | Requires: transformers>=4.40, bitsandbytes>=0.43, CUDA GPU
+
+import torch
+from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
+
+bnb_config = BitsAndBytesConfig(
+    load_in_4bit=True,
+    bnb_4bit_compute_dtype=torch.bfloat16,
+    bnb_4bit_quant_type="nf4",        # NF4 = best quality for 4-bit
+    bnb_4bit_use_double_quant=True,   # Double quant reduces metadata overhead
+)
+
+model = AutoModelForCausalLM.from_pretrained(
+    "google/gemma-2-2b-it",
+    quantization_config=bnb_config,
+    device_map="auto",
+    attn_implementation="flash_attention_2",
+)
+tokenizer = AutoTokenizer.from_pretrained("google/gemma-2-2b-it")
+# LLaMA-70B: 140 GB in FP16 → ~35 GB with 4-bit (fits on single A100!)
+```
 
 ---
 
@@ -272,9 +410,11 @@ LATENCY TARGETS (typical):
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
 | **Quantization quality cliff** | INT4 model produces gibberish on certain inputs | Weight outliers in specific layers | Per-channel quantization (GPTQ), SmoothQuant, mixed precision |
-| **Speculative decoding mismatch** | Draft model rejects >50% of tokens, no speedup | Draft model too different from target | Use distilled draft model, tune acceptance threshold |
+| **Speculative decoding mismatch** | Draft model rejects >50% of tokens; no speedup | Draft model too different from target | Tune acceptance threshold; try EAGLE-3 (no separate draft model) |
 | **KV-cache OOM at batch** | Works for 1 request, OOM at batch size 8 | KV-cache scales linearly with batch size | Paged attention (vLLM), GQA/MQA, KV-cache quantization |
 | **Continuous batching stalls** | Throughput plateaus despite available GPU | Short sequences blocking slots for long ones | Preemptive scheduling, iteration-level batching |
+| **P/D disaggregation KV transfer latency** | Low throughput despite specialized nodes | KV cache transfer between prefill/decode nodes bottlenecks | High-bandwidth interconnect (NVLink, InfiniBand); compress KV before transfer |
+| **RadixAttention cache thrash** | High eviction rate; low cache hit ratio | Extremely diverse prompts exceed cache budget | Increase SGLang cache size; or switch to vLLM for truly diverse workloads |
 
 ---
 
@@ -299,7 +439,10 @@ LATENCY TARGETS (typical):
 |------|----------|-----|
 | 📄 Paper | [Dao et al. "FlashAttention-2" (2023)](https://arxiv.org/abs/2307.08691) | 2× faster attention — essential for production serving |
 | 📄 Paper | [Leviathan et al. "Speculative Decoding" (2022)](https://arxiv.org/abs/2211.17192) | Accelerate decoding without quality loss |
+| 📄 Paper | [Zheng et al. "SGLang" (2024)](https://arxiv.org/abs/2312.07104) | RadixAttention and efficient LLM serving |
+| 📄 Paper | [Li et al. "Distserve" (2024)](https://arxiv.org/abs/2401.09670) | Prefill/Decode disaggregation architecture |
 | 🔧 Hands-on | [vLLM Documentation](https://docs.vllm.ai/) | Production inference optimization in practice |
+| 🔧 Hands-on | [SGLang Documentation](https://sgl-project.github.io/) | RadixAttention and efficient serving |
 | 📘 Book | "Efficient Deep Learning" by Menghani (2024) | Comprehensive treatment of inference optimization techniques |
 
 ## ★ Sources
@@ -309,4 +452,8 @@ LATENCY TARGETS (typical):
 - Leviathan et al., "Fast Inference from Transformers via Speculative Decoding" (2023)
 - Kwon et al., "Efficient Memory Management for Large Language Model Serving with PagedAttention" (vLLM, 2023)
 - Dao, "FlashAttention" (2022) — https://arxiv.org/abs/2205.14135
+- Zheng et al., "SGLang: Efficient Execution of Structured Language Model Programs" (2024) — https://arxiv.org/abs/2312.07104
+- Li et al., "Distserve: Disaggregating Prefill and Decoding for Goodput-Optimized LLM Serving" (2024) — https://arxiv.org/abs/2401.09670
+- EAGLE-3: https://arxiv.org/abs/2503.01840
 - vLLM documentation — https://docs.vllm.ai
+- SGLang documentation — https://sgl-project.github.io

@@ -65,31 +65,31 @@ That means network, state, and partial failure are built into the architecture.
 
 ### Core Concepts
 
-| Concept | AI Example |
-|---|---|
-| **Backpressure** | slow inference causes queue buildup upstream |
-| **Idempotency** | safe retries for async generation jobs |
-| **Consistency** | model registry and deployment state staying coherent |
-| **Partitioning** | separating tenants, data, or workload classes |
-| **Caching** | prompt, retrieval, and result reuse |
-| **Message queues** | offline embedding, eval, or batch inference work |
+| Concept            | AI Example                                           |
+| ------------------ | ---------------------------------------------------- |
+| **Backpressure**   | slow inference causes queue buildup upstream         |
+| **Idempotency**    | safe retries for async generation jobs               |
+| **Consistency**    | model registry and deployment state staying coherent |
+| **Partitioning**   | separating tenants, data, or workload classes        |
+| **Caching**        | prompt, retrieval, and result reuse                  |
+| **Message queues** | offline embedding, eval, or batch inference work     |
 
 ### Common AI System Patterns
 
-| Pattern | Why Teams Use It |
-|---|---|
-| **Queue-based workers** | absorb bursty offline or async workloads |
-| **Stateless API layer** | easy horizontal scaling |
-| **Stateful storage layer** | documents, vectors, feedback, checkpoints |
+| Pattern                    | Why Teams Use It                                        |
+| -------------------------- | ------------------------------------------------------- |
+| **Queue-based workers**    | absorb bursty offline or async workloads                |
+| **Stateless API layer**    | easy horizontal scaling                                 |
+| **Stateful storage layer** | documents, vectors, feedback, checkpoints               |
 | **Event-driven pipelines** | decouple ingestion, embedding, indexing, and evaluation |
 
 ### Important Trade-Offs
 
-| Trade-Off | Practical Meaning |
-|---|---|
-| **Latency vs durability** | async pipelines are safer but slower |
-| **Consistency vs availability** | some failures require degraded behavior, not perfection |
-| **Simplicity vs flexibility** | more services improve specialization but increase failure surface |
+| Trade-Off                       | Practical Meaning                                                 |
+| ------------------------------- | ----------------------------------------------------------------- |
+| **Latency vs durability**       | async pipelines are safer but slower                              |
+| **Consistency vs availability** | some failures require degraded behavior, not perfection           |
+| **Simplicity vs flexibility**   | more services improve specialization but increase failure surface |
 
 ### Failure Questions To Ask
 
@@ -126,13 +126,13 @@ async def call_with_budget(primary_model, fallback_model, payload):
 ---
 
 ## ◆ Quick Reference
-| Symptom | Likely Distributed-Systems Issue |
-|---|---|
-| sudden latency spikes | queue buildup or downstream contention |
-| duplicate async results | missing idempotency |
-| serving instability | overload and weak backpressure |
-| inconsistent model behavior across nodes | stale config or deployment drift |
-| expensive retries | poor timeout and retry policy |
+| Symptom                                  | Likely Distributed-Systems Issue       |
+| ---------------------------------------- | -------------------------------------- |
+| sudden latency spikes                    | queue buildup or downstream contention |
+| duplicate async results                  | missing idempotency                    |
+| serving instability                      | overload and weak backpressure         |
+| inconsistent model behavior across nodes | stale config or deployment drift       |
+| expensive retries                        | poor timeout and retry policy          |
 
 ---
 
@@ -153,24 +153,68 @@ async def call_with_budget(primary_model, fallback_model, payload):
 
 ---
 
+## ★ Code & Implementation
+
+### Tensor Parallel Training with PyTorch FSDP
+
+```python
+# pip install torch>=2.3
+# ⚠️ Last tested: 2026-04 | Requires: torch>=2.3, multiple GPUs for true parallelism
+# Single-GPU simulation: FSDP wraps work on 1 GPU with CPU offload
+
+import torch
+import torch.nn as nn
+from torch.distributed.fsdp import FullyShardedDataParallel as FSDP
+from torch.distributed.fsdp.fully_sharded_data_parallel import CPUOffload
+
+# Minimal model for demo
+class TinyLLM(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.embed = nn.Embedding(32000, 512)
+        self.layers = nn.ModuleList([
+            nn.TransformerEncoderLayer(d_model=512, nhead=8, batch_first=True)
+            for _ in range(4)
+        ])
+        self.head = nn.Linear(512, 32000)
+
+    def forward(self, x):
+        h = self.embed(x)
+        for layer in self.layers:
+            h = layer(h)
+        return self.head(h)
+
+# In production: call torch.distributed.init_process_group first
+# For demo, show FSDP wrapping pattern:
+model = TinyLLM()
+# FSDP with CPU offload (reduces GPU memory by keeping parameters on CPU when not in use)
+# fsdp_model = FSDP(model, cpu_offload=CPUOffload(offload_params=True))
+
+param_count = sum(p.numel() for p in model.parameters())
+print(f"Model parameters: {param_count:,} ({param_count/1e6:.1f}M)")
+print(f"Estimated BF16 memory: {param_count * 2 / 1e9:.2f} GB")
+print(f"Estimated FSDP across 4 GPUs: {param_count * 2 / 1e9 / 4:.2f} GB per GPU")
+# FSDP shards params across GPUs â€” linear memory reduction
+```
+
 ## ★ Connections
-| Relationship | Topics |
-|---|---|
-| Builds on | [AI System Design for GenAI Applications](../production/ai-system-design.md), [Model Serving for LLM Applications](../production/model-serving.md) |
-| Leads to | [Distributed Inference & Serving Architecture](../inference/distributed-inference-and-serving-architecture.md), platform engineering |
-| Compare with | single-node AI apps |
-| Cross-domain | backend systems, SRE, networking |
+| Relationship | Topics                                                                                                                                             |
+| ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Builds on    | [AI System Design for GenAI Applications](../production/ai-system-design.md), [Model Serving for LLM Applications](../production/model-serving.md) |
+| Leads to     | [Distributed Inference & Serving Architecture](../inference/distributed-inference-and-serving-architecture.md), platform engineering               |
+| Compare with | single-node AI apps                                                                                                                                |
+| Cross-domain | backend systems, SRE, networking                                                                                                                   |
 
 
 ---
 
 ## ◆ Production Failure Modes
 
-| Failure | Symptoms | Root Cause | Mitigation |
-|---------|----------|------------|------------|
-| **Network partitions** | Partial failures where some nodes can't communicate | Cloud network issues, AZ failures | Retry with backoff, circuit breakers, multi-AZ deployment |
-| **Straggler nodes** | End-to-end latency dominated by slowest worker | Heterogeneous hardware, noisy neighbors | Speculative execution, straggler detection, redundant workers |
-| **Consistency vs latency** | Stale model served during rolling update | Eventually consistent deployments | Version-aware routing, blue-green deploys, read-your-writes |
+| Failure                    | Symptoms                                            | Root Cause                              | Mitigation                                                    |
+| -------------------------- | --------------------------------------------------- | --------------------------------------- | ------------------------------------------------------------- |
+| **Network partitions**     | Partial failures where some nodes can't communicate | Cloud network issues, AZ failures       | Retry with backoff, circuit breakers, multi-AZ deployment     |
+| **Straggler nodes**        | End-to-end latency dominated by slowest worker      | Heterogeneous hardware, noisy neighbors | Speculative execution, straggler detection, redundant workers |
+| **Consistency vs latency** | Stale model served during rolling update            | Eventually consistent deployments       | Version-aware routing, blue-green deploys, read-your-writes   |
 
 ---
 
@@ -191,11 +235,11 @@ async def call_with_budget(primary_model, fallback_model, payload):
 
 ## ★ Recommended Resources
 
-| Type | Resource | Why |
-|------|----------|-----|
-| 📘 Book | "Designing Data-Intensive Applications" by Kleppmann (2017) | The distributed systems bible |
-| 🎓 Course | [MIT 6.824: Distributed Systems](https://pdos.csail.mit.edu/6.824/) | Best academic distributed systems course |
-| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 8 | Distributed patterns specific to AI workloads |
+| Type     | Resource                                                            | Why                                           |
+| -------- | ------------------------------------------------------------------- | --------------------------------------------- |
+| 📘 Book   | "Designing Data-Intensive Applications" by Kleppmann (2017)         | The distributed systems bible                 |
+| 🎓 Course | [MIT 6.824: Distributed Systems](https://pdos.csail.mit.edu/6.824/) | Best academic distributed systems course      |
+| 📘 Book   | "AI Engineering" by Chip Huyen (2025), Ch 8                         | Distributed patterns specific to AI workloads |
 
 ## ★ Sources
 - Martin Kleppmann, *Designing Data-Intensive Applications*

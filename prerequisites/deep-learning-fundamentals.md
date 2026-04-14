@@ -282,25 +282,86 @@ METRICS TO MONITOR:
 
 ---
 
+## ★ Code & Implementation
+
+### Backpropagation from Scratch + PyTorch Comparison
+
+```python
+# pip install torch>=2.3
+# ⚠️ Last tested: 2026-04 | Requires: torch>=2.3
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+
+# â•â•â• Manual 2-layer MLP forward + backward â•â•â•
+torch.manual_seed(42)
+X = torch.randn(32, 10)      # 32 samples, 10 features
+y = torch.randint(0, 3, (32,))  # 3-class labels
+
+# Weights
+W1 = torch.randn(10, 64, requires_grad=True)
+b1 = torch.zeros(64,      requires_grad=True)
+W2 = torch.randn(64, 3,  requires_grad=True)
+b2 = torch.zeros(3,       requires_grad=True)
+
+lr = 1e-3
+for epoch in range(5):
+    # Forward
+    h   = F.relu(X @ W1 + b1)    # (32, 64)
+    out = h @ W2 + b2             # (32, 3)
+    loss = F.cross_entropy(out, y)
+
+    # Backward
+    loss.backward()
+
+    # SGD update
+    with torch.no_grad():
+        W1 -= lr * W1.grad; W1.grad.zero_()
+        b1 -= lr * b1.grad; b1.grad.zero_()
+        W2 -= lr * W2.grad; W2.grad.zero_()
+        b2 -= lr * b2.grad; b2.grad.zero_()
+
+    print(f"Epoch {epoch+1}: loss={loss.item():.4f}")
+
+# â•â•â• Same with nn.Module â•â•â• (idiomatic PyTorch)
+class MLP(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.net = nn.Sequential(
+            nn.Linear(10, 64), nn.ReLU(),
+            nn.Linear(64, 3),
+        )
+    def forward(self, x): return self.net(x)
+
+model     = MLP()
+optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
+for epoch in range(5):
+    optimizer.zero_grad()
+    loss = F.cross_entropy(model(X), y)
+    loss.backward()
+    optimizer.step()
+print(f"nn.Module final loss: {loss.item():.4f}")
+```
+
 ## ★ Connections
 
-| Relationship | Topics                                                                                                  |
-| ------------ | ------------------------------------------------------------------------------------------------------- |
-| Builds on    | [Neural Networks](./neural-networks.md), [Linear Algebra For Ai](./linear-algebra-for-ai.md), [Probability And Statistics](./probability-and-statistics.md)                          |
+| Relationship | Topics                                                                                                                                                        |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Builds on    | [Neural Networks](./neural-networks.md), [Linear Algebra For Ai](./linear-algebra-for-ai.md), [Probability And Statistics](./probability-and-statistics.md)   |
 | Leads to     | [Transformers](../foundations/transformers.md), [Fine Tuning](../techniques/fine-tuning.md), [Inference Optimization](../inference/inference-optimization.md) |
-| Compare with | Classical ML training (scikit-learn — much simpler)                                                     |
-| Cross-domain | Optimization theory, Numerical methods, Systems engineering                                             |
+| Compare with | Classical ML training (scikit-learn — much simpler)                                                                                                           |
+| Cross-domain | Optimization theory, Numerical methods, Systems engineering                                                                                                   |
 
 
 ---
 
 ## ◆ Production Failure Modes
 
-| Failure | Symptoms | Root Cause | Mitigation |
-|---------|----------|------------|------------|
-| **Vanishing/exploding gradients** | Training loss plateaus or diverges | Deep networks with poor initialization or no normalization | Layer normalization, residual connections, careful init |
-| **Overfitting on small datasets** | Training accuracy 99% but test accuracy 60% | Insufficient regularization, model too large for data | Dropout, weight decay, data augmentation, early stopping |
-| **Learning rate pathology** | Training never converges or oscillates | LR too high/low, no schedule | LR finder, cosine annealing, warmup + decay |
+| Failure                           | Symptoms                                    | Root Cause                                                 | Mitigation                                               |
+| --------------------------------- | ------------------------------------------- | ---------------------------------------------------------- | -------------------------------------------------------- |
+| **Vanishing/exploding gradients** | Training loss plateaus or diverges          | Deep networks with poor initialization or no normalization | Layer normalization, residual connections, careful init  |
+| **Overfitting on small datasets** | Training accuracy 99% but test accuracy 60% | Insufficient regularization, model too large for data      | Dropout, weight decay, data augmentation, early stopping |
+| **Learning rate pathology**       | Training never converges or oscillates      | LR too high/low, no schedule                               | LR finder, cosine annealing, warmup + decay              |
 
 ---
 
@@ -321,11 +382,11 @@ METRICS TO MONITOR:
 
 ## ★ Recommended Resources
 
-| Type | Resource | Why |
-|------|----------|-----|
-| 📘 Book | "Deep Learning" by Goodfellow, Bengio, Courville (2016) | The definitive deep learning textbook |
-| 🎓 Course | [fast.ai — Practical Deep Learning](https://course.fast.ai/) | Best practical introduction to deep learning |
-| 🎥 Video | [3Blue1Brown — "Neural Networks"](https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi) | Beautiful visual explanations of DL concepts |
+| Type     | Resource                                                                                                    | Why                                          |
+| -------- | ----------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
+| 📘 Book   | "Deep Learning" by Goodfellow, Bengio, Courville (2016)                                                     | The definitive deep learning textbook        |
+| 🎓 Course | [fast.ai — Practical Deep Learning](https://course.fast.ai/)                                                | Best practical introduction to deep learning |
+| 🎥 Video  | [3Blue1Brown — "Neural Networks"](https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi) | Beautiful visual explanations of DL concepts |
 
 ## ★ Sources
 

@@ -206,25 +206,82 @@ KEY METRICS:
 
 ---
 
+## ★ Code & Implementation
+
+### Speech-to-Text with Whisper + GPT Response
+
+```python
+# pip install openai>=1.60
+# ⚠️ Last tested: 2026-04 | Requires: openai>=1.60, OPENAI_API_KEY, a .wav/.mp3 file
+from openai import OpenAI
+from pathlib import Path
+
+client = OpenAI()
+
+def voice_pipeline(audio_file: str, system_prompt: str = "You are a helpful voice assistant.") -> dict:
+    """Full voice pipeline: STT → LLM → TTS."""
+    # Step 1: Speech → Text (Whisper)
+    with open(audio_file, "rb") as f:
+        transcript = client.audio.transcriptions.create(
+            model="whisper-1",
+            file=f,
+            language="en",    # omit for auto-detect
+        )
+    user_text = transcript.text
+    print(f"Transcribed: {user_text}")
+
+    # Step 2: Text → LLM Response
+    response = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[
+            {"role": "system", "content": system_prompt},
+            {"role": "user",   "content": user_text},
+        ],
+        max_tokens=200,
+    )
+    answer_text = response.choices[0].message.content
+    print(f"LLM Answer: {answer_text}")
+
+    # Step 3: Text → Speech (TTS)
+    speech = client.audio.speech.create(
+        model="tts-1",          # tts-1-hd for higher quality
+        voice="nova",           # alloy|echo|fable|onyx|nova|shimmer
+        input=answer_text,
+        response_format="mp3",
+    )
+    output_path = "response.mp3"
+    speech.stream_to_file(output_path)
+    return {"transcript": user_text, "answer": answer_text, "audio_file": output_path}
+
+# Streaming TTS (lower latency for real-time)
+def streaming_tts(text: str, output_path: str = "stream_output.mp3") -> None:
+    """Stream TTS bytes as they arrive â€” good for low-latency voice assistants."""
+    with client.audio.speech.with_streaming_response.create(
+        model="tts-1", voice="nova", input=text
+    ) as resp:
+        resp.stream_to_file(output_path)
+    print(f"Saved streaming TTS to {output_path}")
+```
+
 ## ★ Connections
 
-| Relationship | Topics                                                       |
-| ------------ | ------------------------------------------------------------ |
+| Relationship | Topics                                                                               |
+| ------------ | ------------------------------------------------------------------------------------ |
 | Builds on    | [Multimodal Ai](../multimodal/multimodal-ai.md), [Ai Agents](../agents/ai-agents.md) |
-| Leads to     | Conversational AI, Accessibility, IoT/Edge AI                |
-| Compare with | Text-based chatbots, Screen-based UI                         |
-| Cross-domain | Signal processing, Linguistics, UX design                    |
+| Leads to     | Conversational AI, Accessibility, IoT/Edge AI                                        |
+| Compare with | Text-based chatbots, Screen-based UI                                                 |
+| Cross-domain | Signal processing, Linguistics, UX design                                            |
 
 
 ---
 
 ## ◆ Production Failure Modes
 
-| Failure | Symptoms | Root Cause | Mitigation |
-|---------|----------|------------|------------|
-| **Latency kills UX** | Users hang up or disengage during voice interaction | STT + LLM + TTS pipeline too slow | Streaming STT/TTS, edge processing, speculative responses |
-| **Accent/dialect failures** | System fails on non-standard English or regional accents | STT trained on limited accent diversity | Accent-specific models, preprocessing, user adaptation |
-| **Turn-taking confusion** | System talks over user or has awkward pauses | No barge-in detection, fixed silence thresholds | Voice activity detection (VAD), adaptive silence detection |
+| Failure                     | Symptoms                                                 | Root Cause                                      | Mitigation                                                 |
+| --------------------------- | -------------------------------------------------------- | ----------------------------------------------- | ---------------------------------------------------------- |
+| **Latency kills UX**        | Users hang up or disengage during voice interaction      | STT + LLM + TTS pipeline too slow               | Streaming STT/TTS, edge processing, speculative responses  |
+| **Accent/dialect failures** | System fails on non-standard English or regional accents | STT trained on limited accent diversity         | Accent-specific models, preprocessing, user adaptation     |
+| **Turn-taking confusion**   | System talks over user or has awkward pauses             | No barge-in detection, fixed silence thresholds | Voice activity detection (VAD), adaptive silence detection |
 
 ---
 
@@ -245,11 +302,11 @@ KEY METRICS:
 
 ## ★ Recommended Resources
 
-| Type | Resource | Why |
-|------|----------|-----|
-| 🔧 Hands-on | [OpenAI Audio API](https://platform.openai.com/docs/guides/audio) | Production speech-to-text and text-to-speech |
-| 🔧 Hands-on | [ElevenLabs Documentation](https://elevenlabs.io/docs) | State-of-the-art voice synthesis |
-| 📄 Paper | [Radford et al. "Whisper" (2022)](https://arxiv.org/abs/2212.04356) | Robust speech recognition via large-scale supervision |
+| Type       | Resource                                                            | Why                                                   |
+| ---------- | ------------------------------------------------------------------- | ----------------------------------------------------- |
+| 🔧 Hands-on | [OpenAI Audio API](https://platform.openai.com/docs/guides/audio)   | Production speech-to-text and text-to-speech          |
+| 🔧 Hands-on | [ElevenLabs Documentation](https://elevenlabs.io/docs)              | State-of-the-art voice synthesis                      |
+| 📄 Paper    | [Radford et al. "Whisper" (2022)](https://arxiv.org/abs/2212.04356) | Robust speech recognition via large-scale supervision |
 
 ## ★ Sources
 

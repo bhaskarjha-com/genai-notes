@@ -198,25 +198,65 @@ RESEARCH GROUPS:
 
 ---
 
+## ★ Code & Implementation
+
+### Integrated Gradients (Feature Importance for LLMs)
+
+```python
+# pip install transformers>=4.40 torch>=2.3 captum>=0.7
+# ⚠️ Last tested: 2026-04 | Requires: transformers>=4.40, captum>=0.7
+import torch
+from transformers import AutoTokenizer, AutoModelForSequenceClassification
+from captum.attr import IntegratedGradients
+
+model_id  = "distilbert-base-uncased-finetuned-sst-2-english"
+tokenizer = AutoTokenizer.from_pretrained(model_id)
+model     = AutoModelForSequenceClassification.from_pretrained(model_id)
+model.eval()
+
+def predict(input_ids: torch.Tensor) -> torch.Tensor:
+    return model(input_ids).logits
+
+text   = "This movie is absolutely fantastic!"
+inputs = tokenizer(text, return_tensors="pt")
+ids    = inputs["input_ids"]          # (1, seq_len)
+tokens = tokenizer.convert_ids_to_tokens(ids[0])
+
+# Baseline: all-PAD tokens (neutral reference)
+baseline = torch.zeros_like(ids)
+
+ig = IntegratedGradients(predict)
+attrs, delta = ig.attribute(ids, baseline, target=1, return_convergence_delta=True)
+
+# attrs: (1, seq_len) â€” positive = contributes to POSITIVE class
+importance = attrs[0].detach().numpy()
+print(f"Convergence delta: {delta.item():.4e}  (should be near 0)")
+print("\nToken Attribution Scores:")
+for token, score in sorted(zip(tokens, importance), key=lambda x: -abs(x[1])):
+    bar = "â–ˆ" * int(abs(score) * 30)
+    sign = "+" if score > 0 else "-"
+    print(f"  {token:<15} {sign}{abs(score):.4f}  {bar}")
+```
+
 ## ★ Connections
 
-| Relationship | Topics                                                                                                            |
-| ------------ | ----------------------------------------------------------------------------------------------------------------- |
+| Relationship | Topics                                                                                                                                                                     |
+| ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Builds on    | [Transformers](../foundations/transformers.md), [Neural Networks](../prerequisites/neural-networks.md), [Linear Algebra For Ai](../prerequisites/linear-algebra-for-ai.md) |
-| Leads to     | AI safety, [Ethics Safety Alignment](../ethics-and-safety/ethics-safety-alignment.md), Trustworthy AI                                       |
-| Compare with | Behavioral evaluation (external), Explainable AI (XAI, surface-level)                                             |
-| Cross-domain | Neuroscience, Reverse engineering, Complex systems                                                                |
+| Leads to     | AI safety, [Ethics Safety Alignment](../ethics-and-safety/ethics-safety-alignment.md), Trustworthy AI                                                                      |
+| Compare with | Behavioral evaluation (external), Explainable AI (XAI, surface-level)                                                                                                      |
+| Cross-domain | Neuroscience, Reverse engineering, Complex systems                                                                                                                         |
 
 
 ---
 
 ## ◆ Production Failure Modes
 
-| Failure | Symptoms | Root Cause | Mitigation |
-|---------|----------|------------|------------|
-| **Explanation infidelity** | Explanation doesn't match actual model reasoning | Post-hoc explanations approximate, not exact | Mechanistic interpretability, circuit-level analysis |
-| **Feature attribution noise** | Saliency maps highlight irrelevant tokens | Gradient saturation, adversarial sensitivity | Integrated gradients, multiple attribution methods, sanity checks |
-| **Interpretability theater** | Explanations satisfy auditors but don't reveal real risks | Using simple metrics as proxy for understanding | Causal interventions, ablation studies, not just correlation |
+| Failure                       | Symptoms                                                  | Root Cause                                      | Mitigation                                                        |
+| ----------------------------- | --------------------------------------------------------- | ----------------------------------------------- | ----------------------------------------------------------------- |
+| **Explanation infidelity**    | Explanation doesn't match actual model reasoning          | Post-hoc explanations approximate, not exact    | Mechanistic interpretability, circuit-level analysis              |
+| **Feature attribution noise** | Saliency maps highlight irrelevant tokens                 | Gradient saturation, adversarial sensitivity    | Integrated gradients, multiple attribution methods, sanity checks |
+| **Interpretability theater**  | Explanations satisfy auditors but don't reveal real risks | Using simple metrics as proxy for understanding | Causal interventions, ablation studies, not just correlation      |
 
 ---
 
@@ -237,11 +277,11 @@ RESEARCH GROUPS:
 
 ## ★ Recommended Resources
 
-| Type | Resource | Why |
-|------|----------|-----|
-| 📄 Paper | [Olah et al. "Zoom In" (2020)](https://distill.pub/2020/circuits/zoom-in/) | Beautiful interactive visualization of neural network features |
-| 📄 Paper | [Anthropic — "Scaling Monosemanticity" (2023)](https://transformer-circuits.pub/2023/monosemantic-features/) | Extracting interpretable features from language models |
-| 🎥 Video | [3Blue1Brown — "Neural Networks"](https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi) | Visual intuition for neural network internals |
+| Type    | Resource                                                                                                     | Why                                                            |
+| ------- | ------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------- |
+| 📄 Paper | [Olah et al. "Zoom In" (2020)](https://distill.pub/2020/circuits/zoom-in/)                                   | Beautiful interactive visualization of neural network features |
+| 📄 Paper | [Anthropic — "Scaling Monosemanticity" (2023)](https://transformer-circuits.pub/2023/monosemantic-features/) | Extracting interpretable features from language models         |
+| 🎥 Video | [3Blue1Brown — "Neural Networks"](https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi)  | Visual intuition for neural network internals                  |
 
 ## ★ Sources
 

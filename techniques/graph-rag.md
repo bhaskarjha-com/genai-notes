@@ -224,26 +224,76 @@ KNOWLEDGE GRAPH TOOLS:
 
 ---
 
+## ★ Code & Implementation
+
+### Mini Knowledge Graph RAG with NetworkX
+
+```python
+# pip install openai>=1.60 networkx>=3.2
+# ⚠️ Last tested: 2026-04 | Requires: openai>=1.60, networkx>=3.2, OPENAI_API_KEY
+from openai import OpenAI
+import networkx as nx
+import json
+
+client = OpenAI()
+
+# Build a small knowledge graph
+G = nx.DiGraph()
+G.add_edges_from([
+    ("Transformer",  "Self-Attention",         {"relation": "uses"}),
+    ("Self-Attention","Query-Key-Value",        {"relation": "implements"}),
+    ("BERT",         "Transformer",            {"relation": "is_based_on"}),
+    ("GPT",          "Transformer",            {"relation": "is_based_on"}),
+    ("RAG",          "Transformer",            {"relation": "uses"}),
+    ("RAG",          "Vector Database",        {"relation": "retrieves_from"}),
+    ("LoRA",         "Transformer",            {"relation": "adapts"}),
+])
+
+def graph_context(query_entity: str, hops: int = 2) -> str:
+    """Extract k-hop neighborhood from graph as context for LLM."""
+    if query_entity not in G:
+        return f"Entity '{query_entity}' not in knowledge graph."
+    nodes = nx.ego_graph(G, query_entity, radius=hops)
+    triples = [(u, G[u][v]["relation"], v) for u, v in nodes.edges()]
+    return "\n".join(f"{u} --[{r}]--> {v}" for u, r, v in triples)
+
+def graph_rag_query(question: str, entity: str) -> str:
+    context = graph_context(entity, hops=2)
+    resp = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[
+            {"role": "system", "content": "Answer based on the knowledge graph context."},
+            {"role": "user",   "content": f"Graph Context:\n{context}\n\nQuestion: {question}"},
+        ],
+        temperature=0, max_tokens=200,
+    )
+    return resp.choices[0].message.content
+
+print(graph_context("RAG", hops=2))
+print("\n---")
+print(graph_rag_query("What components does RAG rely on?", entity="RAG"))
+```
+
 ## ★ Connections
 
-| Relationship | Topics                                                          |
-| ------------ | --------------------------------------------------------------- |
+| Relationship | Topics                                                                                                           |
+| ------------ | ---------------------------------------------------------------------------------------------------------------- |
 | Builds on    | [Rag](./rag.md), [Vector Databases](../tools-and-infra/vector-databases.md), [Ai Agents](../agents/ai-agents.md) |
-| Leads to     | Enterprise knowledge systems, Compliance AI                     |
-| Compare with | Standard RAG (similarity only), Long context (no retrieval)     |
-| Cross-domain | Graph databases, Knowledge management, Information retrieval    |
+| Leads to     | Enterprise knowledge systems, Compliance AI                                                                      |
+| Compare with | Standard RAG (similarity only), Long context (no retrieval)                                                      |
+| Cross-domain | Graph databases, Knowledge management, Information retrieval                                                     |
 
 
 ---
 
 ## ◆ Production Failure Modes
 
-| Failure | Symptoms | Root Cause | Mitigation |
-|---------|----------|------------|------------|
-| **Graph construction drift** | Knowledge graph becomes stale while source docs update | No incremental graph update pipeline | Event-driven graph refresh, diff-based entity extraction |
-| **Entity resolution failures** | Same entity appears as multiple nodes ("OpenAI" vs "openai") | No entity normalization step | Fuzzy matching, canonical entity index, embedding-based dedup |
-| **Sparse subgraph retrieval** | Queries return disconnected nodes with no relationships | Query doesn't map to graph structure | Hybrid retrieval (vector + graph), community detection |
-| **Triple extraction noise** | Garbage relationships pollute the graph | LLM hallucination during entity/relation extraction | Confidence thresholds, human-in-the-loop for high-value domains |
+| Failure                        | Symptoms                                                     | Root Cause                                          | Mitigation                                                      |
+| ------------------------------ | ------------------------------------------------------------ | --------------------------------------------------- | --------------------------------------------------------------- |
+| **Graph construction drift**   | Knowledge graph becomes stale while source docs update       | No incremental graph update pipeline                | Event-driven graph refresh, diff-based entity extraction        |
+| **Entity resolution failures** | Same entity appears as multiple nodes ("OpenAI" vs "openai") | No entity normalization step                        | Fuzzy matching, canonical entity index, embedding-based dedup   |
+| **Sparse subgraph retrieval**  | Queries return disconnected nodes with no relationships      | Query doesn't map to graph structure                | Hybrid retrieval (vector + graph), community detection          |
+| **Triple extraction noise**    | Garbage relationships pollute the graph                      | LLM hallucination during entity/relation extraction | Confidence thresholds, human-in-the-loop for high-value domains |
 
 ---
 
@@ -264,11 +314,11 @@ KNOWLEDGE GRAPH TOOLS:
 
 ## ★ Recommended Resources
 
-| Type | Resource | Why |
-|------|----------|-----|
-| 📄 Paper | [Edge et al. "Graph RAG" (Microsoft, 2024)](https://arxiv.org/abs/2404.16130) | The paper that introduced graph-based RAG architecture |
-| 🔧 Hands-on | [Microsoft GraphRAG](https://github.com/microsoft/graphrag) | Open-source Graph RAG implementation |
-| 🔧 Hands-on | [Neo4j GenAI Documentation](https://neo4j.com/docs/genai/) | Graph database + LLM integration patterns |
+| Type       | Resource                                                                      | Why                                                    |
+| ---------- | ----------------------------------------------------------------------------- | ------------------------------------------------------ |
+| 📄 Paper    | [Edge et al. "Graph RAG" (Microsoft, 2024)](https://arxiv.org/abs/2404.16130) | The paper that introduced graph-based RAG architecture |
+| 🔧 Hands-on | [Microsoft GraphRAG](https://github.com/microsoft/graphrag)                   | Open-source Graph RAG implementation                   |
+| 🔧 Hands-on | [Neo4j GenAI Documentation](https://neo4j.com/docs/genai/)                    | Graph database + LLM integration patterns              |
 
 ## ★ Sources
 

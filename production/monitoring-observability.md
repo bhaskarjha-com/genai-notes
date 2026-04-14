@@ -51,12 +51,12 @@ This note focuses on production telemetry for LLM apps, RAG systems, and agents.
 ## ★ Deep Dive
 ### The Four Telemetry Layers
 
-| Layer | What You Track | Example Signals |
-|---|---|---|
-| **Infrastructure** | Service health | CPU, GPU, memory, request rate, errors |
-| **Runtime** | Model-call behavior | TTFT, tokens/sec, retries, tool latency |
-| **Quality** | Output usefulness | groundedness, rubric score, retrieval relevance |
-| **Business** | User outcome | resolution rate, conversion, retention, escalations |
+| Layer              | What You Track      | Example Signals                                     |
+| ------------------ | ------------------- | --------------------------------------------------- |
+| **Infrastructure** | Service health      | CPU, GPU, memory, request rate, errors              |
+| **Runtime**        | Model-call behavior | TTFT, tokens/sec, retries, tool latency             |
+| **Quality**        | Output usefulness   | groundedness, rubric score, retrieval relevance     |
+| **Business**       | User outcome        | resolution rate, conversion, retention, escalations |
 
 ### Why GenAI Needs Traces
 
@@ -73,25 +73,25 @@ Without traces, teams see only "the answer was bad" and have no clue where the f
 
 ### What To Capture Per Request
 
-| Signal | Reason |
-|---|---|
-| Input metadata | tenant, route, model, prompt version |
-| Retrieval context | documents returned, scores, chunk ids |
-| Model metadata | latency, token usage, finish reason |
-| Tool events | tool selected, tool latency, tool result summary |
-| Validation outcome | schema pass/fail, policy pass/fail |
-| User outcome | thumbs up/down, escalation, retry |
+| Signal             | Reason                                           |
+| ------------------ | ------------------------------------------------ |
+| Input metadata     | tenant, route, model, prompt version             |
+| Retrieval context  | documents returned, scores, chunk ids            |
+| Model metadata     | latency, token usage, finish reason              |
+| Tool events        | tool selected, tool latency, tool result summary |
+| Validation outcome | schema pass/fail, policy pass/fail               |
+| User outcome       | thumbs up/down, escalation, retry                |
 
 ### Production Metrics That Matter
 
-| Metric | Why It Matters |
-|---|---|
-| **P95 latency** | Better user experience indicator than average latency |
-| **Cost per successful task** | More meaningful than cost per request |
-| **Groundedness rate** | Useful for knowledge-heavy assistants |
-| **Tool success rate** | Critical for agents and workflow systems |
-| **Fallback frequency** | Reveals overload or low-confidence issues |
-| **Human escalation rate** | Strong proxy for trust and failure severity |
+| Metric                       | Why It Matters                                        |
+| ---------------------------- | ----------------------------------------------------- |
+| **P95 latency**              | Better user experience indicator than average latency |
+| **Cost per successful task** | More meaningful than cost per request                 |
+| **Groundedness rate**        | Useful for knowledge-heavy assistants                 |
+| **Tool success rate**        | Critical for agents and workflow systems              |
+| **Fallback frequency**       | Reveals overload or low-confidence issues             |
+| **Human escalation rate**    | Strong proxy for trust and failure severity           |
 
 ### Alerts You Actually Want
 
@@ -151,13 +151,13 @@ Last verified for example categories and ecosystem naming: 2026-04.
 ---
 
 ## ◆ Quick Reference
-| If You Need To Diagnose... | Inspect First |
-|---|---|
-| Slow answers | Trace timings across retrieval, model, and tools |
-| Expensive answers | token usage, routing policy, retries, prompt size |
-| Bad facts | retrieval payload, citations, groundedness checks |
-| Broken agents | trajectory trace and tool-call outcomes |
-| User dissatisfaction | feedback-linked traces and failure clusters |
+| If You Need To Diagnose... | Inspect First                                     |
+| -------------------------- | ------------------------------------------------- |
+| Slow answers               | Trace timings across retrieval, model, and tools  |
+| Expensive answers          | token usage, routing policy, retries, prompt size |
+| Bad facts                  | retrieval payload, citations, groundedness checks |
+| Broken agents              | trajectory trace and tool-call outcomes           |
+| User dissatisfaction       | feedback-linked traces and failure clusters       |
 
 ---
 
@@ -178,25 +178,62 @@ Last verified for example categories and ecosystem naming: 2026-04.
 
 ---
 
+## ★ Code & Implementation
+
+### LLM Metrics with Prometheus
+
+```python
+# pip install openai>=1.60 prometheus_client>=0.20
+# ⚠️ Last tested: 2026-04 | Requires: openai>=1.60, prometheus_client>=0.20
+import time
+from openai import OpenAI
+from prometheus_client import Counter, Histogram, start_http_server
+
+REQUEST_COUNT = Counter("llm_requests_total", "LLM API calls", ["model", "status"])
+LATENCY_HIST  = Histogram("llm_latency_seconds", "LLM latency", ["model"],
+                           buckets=[0.1, 0.5, 1, 2, 5, 10, 30])
+TOKEN_COUNTER = Counter("llm_tokens_total", "LLM tokens", ["model", "type"])
+
+client = OpenAI()
+start_http_server(9090)  # Prometheus scrapes :9090/metrics
+
+def monitored_call(messages: list[dict], model: str = "gpt-4o-mini") -> str:
+    start = time.monotonic()
+    try:
+        resp = client.chat.completions.create(model=model, messages=messages, max_tokens=200)
+        REQUEST_COUNT.labels(model=model, status="success").inc()
+        TOKEN_COUNTER.labels(model=model, type="prompt").inc(resp.usage.prompt_tokens)
+        TOKEN_COUNTER.labels(model=model, type="completion").inc(resp.usage.completion_tokens)
+        return resp.choices[0].message.content
+    except Exception:
+        REQUEST_COUNT.labels(model=model, status="error").inc()
+        raise
+    finally:
+        LATENCY_HIST.labels(model=model).observe(time.monotonic() - start)
+
+print(monitored_call([{"role": "user", "content": "What is observability?"}]))
+# Grafana dashboard: connect to Prometheus → visualize p50/p95 latency + error rate
+```
+
 ## ★ Connections
-| Relationship | Topics |
-|---|---|
-| Builds on | [LLMOps & Production Deployment](./llmops.md), [Agent Evaluation & Observability](../agents/agent-evaluation.md), [LLM Evaluation Deep Dive](../evaluation/llm-evaluation-deep-dive.md) |
-| Leads to | [CI/CD for ML and LLM Systems](./cicd-for-ml.md), [Cost Optimization for GenAI Systems](./cost-optimization.md) |
-| Compare with | Traditional APM and log-only monitoring |
-| Cross-domain | SRE, analytics engineering, experimentation |
+| Relationship | Topics                                                                                                                                                                                  |
+| ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Builds on    | [LLMOps & Production Deployment](./llmops.md), [Agent Evaluation & Observability](../agents/agent-evaluation.md), [LLM Evaluation Deep Dive](../evaluation/llm-evaluation-deep-dive.md) |
+| Leads to     | [CI/CD for ML and LLM Systems](./cicd-for-ml.md), [Cost Optimization for GenAI Systems](./cost-optimization.md)                                                                         |
+| Compare with | Traditional APM and log-only monitoring                                                                                                                                                 |
+| Cross-domain | SRE, analytics engineering, experimentation                                                                                                                                             |
 
 
 ---
 
 ## ◆ Production Failure Modes
 
-| Failure | Symptoms | Root Cause | Mitigation |
-|---------|----------|------------|------------|
-| **Alert fatigue** | Team ignores alerts because too many are non-actionable | Thresholds too sensitive, no severity tiers | Tiered alerting (P0-P3), alert correlation, runbook links |
-| **Metric cardinality explosion** | Monitoring system slows or crashes | Unbounded label values (per-user metrics) | Bounded label sets, metric aggregation, pre-aggregated dashboards |
-| **LLM quality blind spots** | Quality degrades but no alert fires | Only tracking latency/throughput, not output quality | LLM-as-judge sampling, drift detection, user feedback loops |
-| **Log volume cost** | Logging costs exceed inference costs | Logging full prompts/completions at volume | Log sampling (1-5%), structured logging, retention policies |
+| Failure                          | Symptoms                                                | Root Cause                                           | Mitigation                                                        |
+| -------------------------------- | ------------------------------------------------------- | ---------------------------------------------------- | ----------------------------------------------------------------- |
+| **Alert fatigue**                | Team ignores alerts because too many are non-actionable | Thresholds too sensitive, no severity tiers          | Tiered alerting (P0-P3), alert correlation, runbook links         |
+| **Metric cardinality explosion** | Monitoring system slows or crashes                      | Unbounded label values (per-user metrics)            | Bounded label sets, metric aggregation, pre-aggregated dashboards |
+| **LLM quality blind spots**      | Quality degrades but no alert fires                     | Only tracking latency/throughput, not output quality | LLM-as-judge sampling, drift detection, user feedback loops       |
+| **Log volume cost**              | Logging costs exceed inference costs                    | Logging full prompts/completions at volume           | Log sampling (1-5%), structured logging, retention policies       |
 
 ---
 
@@ -217,12 +254,12 @@ Last verified for example categories and ecosystem naming: 2026-04.
 
 ## ★ Recommended Resources
 
-| Type | Resource | Why |
-|------|----------|-----|
-| 🔧 Hands-on | [LangSmith Documentation](https://docs.smith.langchain.com/) | Production LLM observability platform |
-| 🔧 Hands-on | [Arize Phoenix](https://docs.arize.com/phoenix/) | Open-source LLM observability and evaluation |
-| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 9 | Monitoring patterns specific to AI systems |
-| 🎥 Video | [Shreya Shankar — "Rethinking ML Monitoring"](https://www.shreya-shankar.com/) | Data quality monitoring for ML systems |
+| Type       | Resource                                                                       | Why                                          |
+| ---------- | ------------------------------------------------------------------------------ | -------------------------------------------- |
+| 🔧 Hands-on | [LangSmith Documentation](https://docs.smith.langchain.com/)                   | Production LLM observability platform        |
+| 🔧 Hands-on | [Arize Phoenix](https://docs.arize.com/phoenix/)                               | Open-source LLM observability and evaluation |
+| 📘 Book     | "AI Engineering" by Chip Huyen (2025), Ch 9                                    | Monitoring patterns specific to AI systems   |
+| 🎥 Video    | [Shreya Shankar — "Rethinking ML Monitoring"](https://www.shreya-shankar.com/) | Data quality monitoring for ML systems       |
 
 ## ★ Sources
 - Langfuse documentation

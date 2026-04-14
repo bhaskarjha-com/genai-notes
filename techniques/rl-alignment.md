@@ -329,27 +329,82 @@ KEY FORMULAS:
 
 ---
 
+## ★ Code & Implementation
+
+### DPO Training Data Format + Trainer Setup
+
+```python
+# pip install transformers>=4.40 trl>=0.8 datasets peft>=0.10
+# ⚠️ Last tested: 2026-04 | Requires: GPU, trl>=0.8, HuggingFace login
+from datasets import Dataset
+from trl import DPOTrainer, DPOConfig
+from transformers import AutoModelForCausalLM, AutoTokenizer
+from peft import LoraConfig
+
+# DPO data format: prompt + chosen response + rejected response
+dpo_data = [
+    {
+        "prompt":   "What is the capital of France?",
+        "chosen":   "The capital of France is Paris.",
+        "rejected": "France is a country in Europe.",
+    },
+    {
+        "prompt":   "Summarize the transformer architecture.",
+        "chosen":   "Transformers use self-attention to process sequences in parallel, enabling long-range dependency capture without recurrence.",
+        "rejected": "Transformers are neural networks used for NLP tasks.",
+    },
+]
+dataset = Dataset.from_list(dpo_data)
+
+model_id  = "google/gemma-2-2b-it"     # small model for demo
+tokenizer = AutoTokenizer.from_pretrained(model_id)
+model     = AutoModelForCausalLM.from_pretrained(model_id)
+
+lora_config = LoraConfig(r=8, lora_alpha=16, target_modules=["q_proj", "v_proj"])
+
+config = DPOConfig(
+    output_dir="./dpo-output",
+    num_train_epochs=1,
+    per_device_train_batch_size=1,
+    learning_rate=5e-6,
+    beta=0.1,           # KL penalty coefficient â€” higher = closer to reference model
+    logging_steps=5,
+)
+
+trainer = DPOTrainer(
+    model=model,
+    ref_model=None,        # None = use PEFT reference internally
+    args=config,
+    train_dataset=dataset,
+    tokenizer=tokenizer,
+    peft_config=lora_config,
+)
+# trainer.train()  # Uncomment to train (requires GPU)
+print("DPO trainer initialized. Dataset:", dataset)
+print("Beta (KL coeff):", config.beta)
+```
+
 ## ★ Connections
 
-| Relationship | Topics                                                                                                    |
-| ------------ | --------------------------------------------------------------------------------------------------------- |
+| Relationship | Topics                                                                                                                                                 |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Builds on    | [Fine Tuning](./fine-tuning.md) (SFT stage), [Deep Learning Fundamentals](../prerequisites/deep-learning-fundamentals.md) (optimization)               |
 | Leads to     | [Reasoning Models](../llms/reasoning-models.md) (GRPO → R1), [Ethics Safety Alignment](../ethics-and-safety/ethics-safety-alignment.md) (safety layer) |
-| Compare with | Constitutional AI (Anthropic's approach), Self-play                                                       |
-| Cross-domain | Game theory, Behavioural economics (KTO), Curriculum learning                                             |
+| Compare with | Constitutional AI (Anthropic's approach), Self-play                                                                                                    |
+| Cross-domain | Game theory, Behavioural economics (KTO), Curriculum learning                                                                                          |
 
 
 ---
 
 ## ◆ Production Failure Modes
 
-| Failure | Symptoms | Root Cause | Mitigation |
-|---------|----------|------------|------------|
-| **Reward model overoptimization** | High reward scores but sycophantic or robotic outputs | Policy exploits reward model weaknesses | KL divergence penalty, reward model ensembles, periodic human eval |
-| **Mode collapse** | Model produces same style/format regardless of prompt | Insufficient exploration, overly strong optimization | Temperature tuning, entropy bonus, diverse training prompts |
-| **Alignment tax** | Model becomes "safe" but less capable or helpful | Over-cautious refusal behavior | Balanced training data (helpful + harmless), capability benchmarks |
-| **Preference data bias** | Model reflects annotator biases, not user preferences | Homogeneous annotator pool, unclear guidelines | Diverse annotators, inter-annotator agreement checks |
-| **PPO training instability** | Loss diverges, reward spikes then crashes | Hyperparameter sensitivity (clip ratio, GAE lambda) | DPO for stability, gradient clipping, careful PPO tuning |
+| Failure                           | Symptoms                                              | Root Cause                                           | Mitigation                                                         |
+| --------------------------------- | ----------------------------------------------------- | ---------------------------------------------------- | ------------------------------------------------------------------ |
+| **Reward model overoptimization** | High reward scores but sycophantic or robotic outputs | Policy exploits reward model weaknesses              | KL divergence penalty, reward model ensembles, periodic human eval |
+| **Mode collapse**                 | Model produces same style/format regardless of prompt | Insufficient exploration, overly strong optimization | Temperature tuning, entropy bonus, diverse training prompts        |
+| **Alignment tax**                 | Model becomes "safe" but less capable or helpful      | Over-cautious refusal behavior                       | Balanced training data (helpful + harmless), capability benchmarks |
+| **Preference data bias**          | Model reflects annotator biases, not user preferences | Homogeneous annotator pool, unclear guidelines       | Diverse annotators, inter-annotator agreement checks               |
+| **PPO training instability**      | Loss diverges, reward spikes then crashes             | Hyperparameter sensitivity (clip ratio, GAE lambda)  | DPO for stability, gradient clipping, careful PPO tuning           |
 
 ---
 
@@ -381,12 +436,12 @@ KEY FORMULAS:
 
 ## ★ Recommended Resources
 
-| Type | Resource | Why |
-|------|----------|-----|
-| 📄 Paper | [Ouyang et al. "InstructGPT" (2022)](https://arxiv.org/abs/2203.02155) | Definitive RLHF paper — SFT → RM → PPO pipeline |
-| 📄 Paper | [Rafailov et al. "DPO" (2023)](https://arxiv.org/abs/2305.18290) | DPO as simpler alternative to PPO |
-| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 5 | Covers RLHF, DPO, and alignment in production context |
-| 🎥 Video | [Hugging Face — "RLHF Explained"](https://huggingface.co/blog/rlhf) | Clear visual walkthrough of the RLHF pipeline |
+| Type    | Resource                                                               | Why                                                   |
+| ------- | ---------------------------------------------------------------------- | ----------------------------------------------------- |
+| 📄 Paper | [Ouyang et al. "InstructGPT" (2022)](https://arxiv.org/abs/2203.02155) | Definitive RLHF paper — SFT → RM → PPO pipeline       |
+| 📄 Paper | [Rafailov et al. "DPO" (2023)](https://arxiv.org/abs/2305.18290)       | DPO as simpler alternative to PPO                     |
+| 📘 Book  | "AI Engineering" by Chip Huyen (2025), Ch 5                            | Covers RLHF, DPO, and alignment in production context |
+| 🎥 Video | [Hugging Face — "RLHF Explained"](https://huggingface.co/blog/rlhf)    | Clear visual walkthrough of the RLHF pipeline         |
 
 ## ★ Sources
 

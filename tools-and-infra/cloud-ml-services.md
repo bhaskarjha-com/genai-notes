@@ -53,39 +53,39 @@ Last verified for major platform naming and positioning: 2026-04.
 ## ★ Deep Dive
 ### What Managed Platforms Usually Provide
 
-| Capability | Examples |
-|---|---|
-| **Development** | notebooks, prompt studios, SDKs |
-| **Training** | managed jobs, tuning, distributed runs |
-| **Model management** | registry, versioning, approval workflows |
-| **Deployment** | endpoints, scaling, online and batch inference |
-| **Observability** | logs, traces, metrics, monitoring |
-| **Governance** | IAM, audit, approval, policy controls |
+| Capability           | Examples                                       |
+| -------------------- | ---------------------------------------------- |
+| **Development**      | notebooks, prompt studios, SDKs                |
+| **Training**         | managed jobs, tuning, distributed runs         |
+| **Model management** | registry, versioning, approval workflows       |
+| **Deployment**       | endpoints, scaling, online and batch inference |
+| **Observability**    | logs, traces, metrics, monitoring              |
+| **Governance**       | IAM, audit, approval, policy controls          |
 
 ### Major Platform Families
 
-| Platform | Short Description | Typical Strength |
-|---|---|---|
-| **AWS SageMaker AI** | Broad managed ML/AI platform on AWS | strong AWS integration and end-to-end workflow support |
-| **Google Vertex AI** | Unified platform for ML and GenAI on GCP | strong generative AI, model garden, and GCP workflow integration |
-| **Azure AI Foundry + Azure ML** | Microsoft's platform family for AI apps, agents, and ML workflows | strong enterprise governance and Microsoft ecosystem fit |
+| Platform                        | Short Description                                                 | Typical Strength                                                 |
+| ------------------------------- | ----------------------------------------------------------------- | ---------------------------------------------------------------- |
+| **AWS SageMaker AI**            | Broad managed ML/AI platform on AWS                               | strong AWS integration and end-to-end workflow support           |
+| **Google Vertex AI**            | Unified platform for ML and GenAI on GCP                          | strong generative AI, model garden, and GCP workflow integration |
+| **Azure AI Foundry + Azure ML** | Microsoft's platform family for AI apps, agents, and ML workflows | strong enterprise governance and Microsoft ecosystem fit         |
 
 ### How To Compare Platforms
 
-| Question | Why It Matters |
-|---|---|
-| Does the team already live in this cloud? | biggest practical force in most decisions |
-| Do we need managed training, managed inference, or both? | some teams only need part of the stack |
-| How strong are governance and identity needs? | enterprise adoption depends on this |
-| Are we building classic ML, GenAI apps, or both? | platform depth differs by workload |
-| How much portability do we need? | affects lock-in risk |
+| Question                                                 | Why It Matters                            |
+| -------------------------------------------------------- | ----------------------------------------- |
+| Does the team already live in this cloud?                | biggest practical force in most decisions |
+| Do we need managed training, managed inference, or both? | some teams only need part of the stack    |
+| How strong are governance and identity needs?            | enterprise adoption depends on this       |
+| Are we building classic ML, GenAI apps, or both?         | platform depth differs by workload        |
+| How much portability do we need?                         | affects lock-in risk                      |
 
 ### Typical Adoption Patterns
 
-| Pattern | Example |
-|---|---|
-| **All-in platform** | training, registry, deployment, monitoring in one cloud |
-| **Hybrid** | managed training plus custom serving stack |
+| Pattern                | Example                                                              |
+| ---------------------- | -------------------------------------------------------------------- |
+| **All-in platform**    | training, registry, deployment, monitoring in one cloud              |
+| **Hybrid**             | managed training plus custom serving stack                           |
 | **Managed GenAI only** | prompt tooling and model access on cloud, custom app layer elsewhere |
 
 ### When Managed Platforms Shine
@@ -118,13 +118,13 @@ az ml online-endpoint list
 ---
 
 ## ◆ Quick Reference
-| Need | Good Direction |
-|---|---|
-| already on AWS | evaluate SageMaker AI first |
-| already on GCP | evaluate Vertex AI first |
+| Need                                  | Good Direction                               |
+| ------------------------------------- | -------------------------------------------- |
+| already on AWS                        | evaluate SageMaker AI first                  |
+| already on GCP                        | evaluate Vertex AI first                     |
 | already on Microsoft enterprise stack | evaluate Azure AI Foundry and Azure ML first |
-| need full custom control | managed platform may be partial, not primary |
-| need enterprise governance fast | managed platform usually helps |
+| need full custom control              | managed platform may be partial, not primary |
+| need enterprise governance fast       | managed platform usually helps               |
 
 ---
 
@@ -145,24 +145,66 @@ az ml online-endpoint list
 
 ---
 
+## ★ Code & Implementation
+
+### Multi-Cloud LLM API Comparison
+
+```python
+# pip install openai>=1.60 anthropic>=0.40 google-generativeai>=0.8
+# ⚠️ Last tested: 2026-04 | Requires: OPENAI_API_KEY, ANTHROPIC_API_KEY, GOOGLE_API_KEY env vars
+import os, time
+from openai    import OpenAI
+import anthropic
+import google.generativeai as genai
+
+prompt = "Explain the difference between RAG and fine-tuning in 2 sentences."
+
+# OpenAI (Azure-compatible: set base_url to Azure endpoint)
+oai   = OpenAI()
+start = time.monotonic()
+oai_r = oai.chat.completions.create(
+    model="gpt-4o-mini",
+    messages=[{"role": "user", "content": prompt}],
+    max_tokens=120,
+)
+print(f"OpenAI ({time.monotonic()-start:.2f}s): {oai_r.choices[0].message.content[:100]}")
+
+# Anthropic Claude
+ant   = anthropic.Anthropic()
+start = time.monotonic()
+ant_r = ant.messages.create(
+    model="claude-3-5-haiku-20241022",
+    max_tokens=120,
+    messages=[{"role": "user", "content": prompt}],
+)
+print(f"Anthropic ({time.monotonic()-start:.2f}s): {ant_r.content[0].text[:100]}")
+
+# Google Gemini
+genai.configure(api_key=os.environ["GOOGLE_API_KEY"])
+gem   = genai.GenerativeModel("gemini-2.0-flash")
+start = time.monotonic()
+gem_r = gem.generate_content(prompt)
+print(f"Gemini ({time.monotonic()-start:.2f}s): {gem_r.text[:100]}")
+```
+
 ## ★ Connections
-| Relationship | Topics |
-|---|---|
-| Builds on | [GenAI Tools & Infrastructure](./tools-overview.md), [LLMOps & Production Deployment](../production/llmops.md) |
-| Leads to | experiment tracking, registry workflows, managed deployment patterns |
-| Compare with | self-hosted platform engineering |
-| Cross-domain | cloud architecture, governance, platform strategy |
+| Relationship | Topics                                                                                                         |
+| ------------ | -------------------------------------------------------------------------------------------------------------- |
+| Builds on    | [GenAI Tools & Infrastructure](./tools-overview.md), [LLMOps & Production Deployment](../production/llmops.md) |
+| Leads to     | experiment tracking, registry workflows, managed deployment patterns                                           |
+| Compare with | self-hosted platform engineering                                                                               |
+| Cross-domain | cloud architecture, governance, platform strategy                                                              |
 
 
 ---
 
 ## ◆ Production Failure Modes
 
-| Failure | Symptoms | Root Cause | Mitigation |
-|---------|----------|------------|------------|
-| **Vendor lock-in** | Cannot migrate workloads between clouds | Proprietary APIs, custom runtimes | Use open standards (ONNX, containers), abstract service layer |
-| **Cost overrun** | Monthly bill 5-10x expected | Idle GPU instances, no auto-shutdown | Spot instances, auto-scaling to zero, budget alerts |
-| **Region availability** | GPU instance type unavailable in target region | Limited GPU supply in specific regions | Multi-region fallback, reserved capacity, spot pools |
+| Failure                 | Symptoms                                       | Root Cause                             | Mitigation                                                    |
+| ----------------------- | ---------------------------------------------- | -------------------------------------- | ------------------------------------------------------------- |
+| **Vendor lock-in**      | Cannot migrate workloads between clouds        | Proprietary APIs, custom runtimes      | Use open standards (ONNX, containers), abstract service layer |
+| **Cost overrun**        | Monthly bill 5-10x expected                    | Idle GPU instances, no auto-shutdown   | Spot instances, auto-scaling to zero, budget alerts           |
+| **Region availability** | GPU instance type unavailable in target region | Limited GPU supply in specific regions | Multi-region fallback, reserved capacity, spot pools          |
 
 ---
 
@@ -183,11 +225,11 @@ az ml online-endpoint list
 
 ## ★ Recommended Resources
 
-| Type | Resource | Why |
-|------|----------|-----|
-| 🔧 Hands-on | [AWS Bedrock Documentation](https://docs.aws.amazon.com/bedrock/) | Multi-model API access on AWS |
-| 🔧 Hands-on | [Google Vertex AI Documentation](https://cloud.google.com/vertex-ai/docs) | Google's unified ML platform |
-| 🔧 Hands-on | [Azure AI Studio](https://learn.microsoft.com/en-us/azure/ai-studio/) | Microsoft's AI development platform |
+| Type       | Resource                                                                  | Why                                 |
+| ---------- | ------------------------------------------------------------------------- | ----------------------------------- |
+| 🔧 Hands-on | [AWS Bedrock Documentation](https://docs.aws.amazon.com/bedrock/)         | Multi-model API access on AWS       |
+| 🔧 Hands-on | [Google Vertex AI Documentation](https://cloud.google.com/vertex-ai/docs) | Google's unified ML platform        |
+| 🔧 Hands-on | [Azure AI Studio](https://learn.microsoft.com/en-us/azure/ai-studio/)     | Microsoft's AI development platform |
 
 ## ★ Sources
 - AWS SageMaker AI documentation and overview pages

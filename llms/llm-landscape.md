@@ -9,7 +9,7 @@ parent: "../genai.md"
 related: ["llms-overview.md", "reasoning-models.md", "../foundations/modern-architectures.md"]
 source: "Web research — March 2026"
 created: 2026-03-22
-updated: 2026-04-12
+updated: 2026-04-15
 ---
 
 # LLM Landscape & Model Selection (March 2026)
@@ -94,13 +94,36 @@ Meta 2026 roadmap: **Mango** (generative video) + **Avocado** (reasoning LLM)
 | Model                | By         | Key Feature                                          |
 | -------------------- | ---------- | ---------------------------------------------------- |
 | **DeepSeek-V3 / R1** | DeepSeek   | Cost-efficient reasoning, GRPO training, open-source |
+| **Gemma 4 (E2B/E4B)** | Google DeepMind | Ultra-efficient; audio input; April 2, 2026 |
+| **Gemma 4 (26B MoE)** | Google DeepMind | Multimodal (vision+video+audio); hybrid attention; 256K context |
+| **Gemma 4 (31B Dense)** | Google DeepMind | Dense flagship; thinking mode; 256K context; best open-weight reasoning |
 | **Mistral Large 2**  | Mistral AI | European, strong multilingual, 128K context          |
 | **Qwen 2.5**         | Alibaba    | Leading Chinese LLM, strong code + math              |
 | **Grok-3**           | xAI        | Real-time X/Twitter data, humor-capable              |
 
 ---
 
-## ★ The Comparison
+### Gemma 4 Family (April 2, 2026) — Architecture Deep Dive
+
+Gemma 4 represents a major architectural shift from Gemma 3. Key innovations:
+
+| Variant | Params | Context | Modalities | Key Feature |
+|---|---|---|---|---|
+| **Gemma 4 E2B** | 2B | 64K | Text + Audio | Embedded; mobile/edge; audio understanding |
+| **Gemma 4 E4B** | 4B | 64K | Text + Audio | Embedded; improved reasoning over E2B |
+| **Gemma 4 26B** | 26B (MoE) | 256K | Text + Vision + Video + Audio | Hybrid attention (local+global); sharing KV cache across heads |
+| **Gemma 4 31B** | 31B (Dense) | 256K | Text + Vision + Video + Audio | Thinking mode; best open-weight reasoning; 2026 benchmark leader |
+
+**Architecture innovations**:
+- **Hybrid Attention**: alternates local (sliding window) and global (full) attention layers for O(n) local + full context at key positions
+- **Dual RoPE**: separate positional encodings for local vs global attention layers
+- **PLE (Per-Layer Embeddings)**: distinct learned embeddings per decoder layer instead of tied across all layers
+- **Shared KV Cache**: multiple attention heads share the same key-value cache; reduces KV memory by 3-4x vs standard MHA
+
+**Available via**: Google AI Studio, Vertex AI, Ollama (ollama pull gemma4), Hugging Face
+
+---
+
 
 ### By Capability (March 2026)
 
@@ -175,7 +198,54 @@ START: What's your use case?
 - **A**: Depends on constraints. For highest quality: Claude Opus 4.6 (1M context, best at following complex instructions with citations). For cost efficiency: GPT-5.4 mini (near GPT-5.4 quality at fraction of cost). For data privacy: LLaMA 4 Scout self-hosted (10M context, fits on 1 H100). For multimodal RAG: Gemini 3.1 Pro (native vision for image documents). In practice, use a cheaper model for retrieval/routing and a powerful model for generation.
 
 - **Q**: Open source vs closed source — when?
-- **A**: Closed (GPT-5.4, Claude) when: you need cutting-edge capability, have budget, want zero-ops, and your data policies allow API calls. Open (LLaMA 4, DeepSeek) when: data must stay on-premise (healthcare, finance, government), you need fine-tuning beyond what APIs allow, or cost at scale is prohibitive. Trend in 2026: open models are 6-12 months behind closed but closing the gap fast.
+- **A**: Closed (GPT-5.4, Claude) when: you need cutting-edge capability, have budget, want zero-ops, and your data policies allow API calls. Open (LLaMA 4, Gemma 4, DeepSeek) when: data must stay on-premise (healthcare, finance, government), you need fine-tuning beyond what APIs allow, or cost at scale is prohibitive. Trend in 2026: Gemma 4 31B and LLaMA 4 Scout are competitive with mid-tier closed models while being fully self-hostable.
+
+---
+
+## ★ Code & Implementation
+
+### Multi-Provider LLM API Comparison
+
+```python
+# pip install openai>=1.60 anthropic>=0.40 google-generativeai>=0.8
+# ⚠️ Last tested: 2026-04 | Requires: openai>=1.60, anthropic>=0.40, google-generativeai>=0.8
+# Set: OPENAI_API_KEY, ANTHROPIC_API_KEY, GOOGLE_API_KEY env vars
+
+import os
+from openai import OpenAI
+import anthropic
+import google.generativeai as genai
+
+prompt = "Explain the transformer attention mechanism in 3 sentences."
+
+# OpenAI
+oai_client = OpenAI()
+oai = oai_client.chat.completions.create(
+    model="gpt-4o-mini",  # Replace with gpt-5.4 for frontier
+    messages=[{"role": "user", "content": prompt}],
+    max_tokens=200,
+)
+print("OpenAI:", oai.choices[0].message.content[:100])
+
+# Anthropic
+ant_client = anthropic.Anthropic()
+ant = ant_client.messages.create(
+    model="claude-3-5-haiku-20241022",  # Replace with claude-sonnet-4-6 for frontier
+    max_tokens=200,
+    messages=[{"role": "user", "content": prompt}],
+)
+print("Anthropic:", ant.content[0].text[:100])
+
+# Google Gemini
+genai.configure(api_key=os.environ["GOOGLE_API_KEY"])
+gem = genai.GenerativeModel("gemini-2.0-flash")  # Replace with gemini-3.1-pro for frontier
+res = gem.generate_content(prompt)
+print("Gemini:", res.text[:100])
+
+# Self-hosted Gemma 4 via Ollama (free, no API key):
+# ollama pull gemma4  (downloads ~20GB for the 26B MoE variant)
+# curl http://localhost:11434/api/generate -d '{"model": "gemma4", "prompt": "..."}'
+```
 
 ---
 

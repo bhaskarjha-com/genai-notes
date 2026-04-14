@@ -191,25 +191,84 @@ U-Net Structure:
 
 ---
 
+## ★ Code & Implementation
+
+### Image Generation with DALL-E 3 / Stable Diffusion
+
+```python
+# pip install openai>=1.60 diffusers>=0.27 torch>=2.3
+# ⚠️ Last tested: 2026-04 | DALL-E requires: openai>=1.60, OPENAI_API_KEY
+#                        | SD requires: diffusers>=0.27, GPU recommended
+
+# â•â•â• Method 1: DALL-E 3 via OpenAI API â•â•â•
+from openai import OpenAI
+client = OpenAI()
+
+response = client.images.generate(
+    model="dall-e-3",
+    prompt="A photorealistic transformer robot made of glowing neural connections, dramatic lighting",
+    size="1024x1024",
+    quality="standard",
+    n=1,
+)
+image_url = response.data[0].url
+print(f"DALL-E 3 image URL: {image_url}")
+# Note: URL expires after ~1 hour; download immediately
+
+# â•â•â• Method 2: Stable Diffusion (local, free) â•â•â•
+# Requires: CUDA GPU with 6GB+ VRAM
+# from diffusers import StableDiffusionPipeline
+# import torch
+#
+# pipe = StableDiffusionPipeline.from_pretrained(
+#     "runwayml/stable-diffusion-v1-5",
+#     torch_dtype=torch.float16,
+# ).to("cuda")
+#
+# image = pipe(
+#     "A photorealistic transformer robot",
+#     num_inference_steps=20,  # quality vs speed tradeoff
+#     guidance_scale=7.5,      # prompt adherence vs diversity
+# ).images[0]
+# image.save("output.png")
+
+# â•â•â• Conceptual DDPM Noise Scheduling â•â•â•
+import torch
+import math
+
+def cosine_beta_schedule(timesteps: int = 1000) -> torch.Tensor:
+    """Cosine noise schedule (Improved DDPM, Ho et al. 2022)."""
+    steps = torch.arange(timesteps + 1, dtype=torch.float64)
+    s     = 0.008  # small offset to prevent singularity at t=0
+    alphas_bar = torch.cos(((steps / timesteps) + s) / (1 + s) * math.pi * 0.5) ** 2
+    alphas_bar = alphas_bar / alphas_bar[0]
+    betas      = 1 - (alphas_bar[1:] / alphas_bar[:-1])
+    return betas.clamp(0, 0.999)
+
+betas = cosine_beta_schedule(1000)
+print(f"Beta schedule: t=0 → {betas[0]:.6f}, t=500 → {betas[500]:.4f}, t=999 → {betas[-1]:.4f}")
+# Noise is added gradually â€” early steps add tiny noise, late steps add lots
+```
+
 ## ★ Connections
 
-| Relationship | Topics                                                                    |
-| ------------ | ------------------------------------------------------------------------- |
+| Relationship | Topics                                                                                   |
+| ------------ | ---------------------------------------------------------------------------------------- |
 | Builds on    | [Transformers](../foundations/transformers.md) (attention in U-Net), VAEs (latent space) |
-| Leads to     | Video generation (Sora), 3D generation, Audio diffusion                   |
-| Compare with | GANs (adversarial), VAEs (variational), Autoregressive image models       |
-| Cross-domain | Physics (thermodynamic diffusion), Stochastic processes                   |
+| Leads to     | Video generation (Sora), 3D generation, Audio diffusion                                  |
+| Compare with | GANs (adversarial), VAEs (variational), Autoregressive image models                      |
+| Cross-domain | Physics (thermodynamic diffusion), Stochastic processes                                  |
 
 
 ---
 
 ## ◆ Production Failure Modes
 
-| Failure | Symptoms | Root Cause | Mitigation |
-|---------|----------|------------|------------|
-| **Prompt-image misalignment** | Generated image doesn't match text prompt | Model struggles with spatial relationships and counting | Negative prompts, prompt engineering, ControlNet guidance |
-| **NSFW content generation** | Inappropriate content despite safety filters | Safety classifier misses novel attack vectors | Multi-layer safety classifiers, NSFW model fine-tuning |
-| **Consistency across generations** | Same prompt produces wildly different styles | No seed management, no style conditioning | Fixed seeds for reproducibility, style-conditioned LoRA |
+| Failure                            | Symptoms                                     | Root Cause                                              | Mitigation                                                |
+| ---------------------------------- | -------------------------------------------- | ------------------------------------------------------- | --------------------------------------------------------- |
+| **Prompt-image misalignment**      | Generated image doesn't match text prompt    | Model struggles with spatial relationships and counting | Negative prompts, prompt engineering, ControlNet guidance |
+| **NSFW content generation**        | Inappropriate content despite safety filters | Safety classifier misses novel attack vectors           | Multi-layer safety classifiers, NSFW model fine-tuning    |
+| **Consistency across generations** | Same prompt produces wildly different styles | No seed management, no style conditioning               | Fixed seeds for reproducibility, style-conditioned LoRA   |
 
 ---
 
@@ -230,12 +289,12 @@ U-Net Structure:
 
 ## ★ Recommended Resources
 
-| Type | Resource | Why |
-|------|----------|-----|
-| 📄 Paper | [Ho et al. "Denoising Diffusion Probabilistic Models" (2020)](https://arxiv.org/abs/2006.11239) | Foundational diffusion model paper |
-| 📄 Paper | [Rombach et al. "Latent Diffusion Models" (2022)](https://arxiv.org/abs/2112.10752) | Stable Diffusion architecture paper |
-| 🎥 Video | [Yannic Kilcher — "Diffusion Models"](https://www.youtube.com/@YannicKilcher) | Clear explanation of the diffusion process |
-| 🔧 Hands-on | [HuggingFace Diffusers Library](https://huggingface.co/docs/diffusers/) | Production diffusion model library |
+| Type       | Resource                                                                                        | Why                                        |
+| ---------- | ----------------------------------------------------------------------------------------------- | ------------------------------------------ |
+| 📄 Paper    | [Ho et al. "Denoising Diffusion Probabilistic Models" (2020)](https://arxiv.org/abs/2006.11239) | Foundational diffusion model paper         |
+| 📄 Paper    | [Rombach et al. "Latent Diffusion Models" (2022)](https://arxiv.org/abs/2112.10752)             | Stable Diffusion architecture paper        |
+| 🎥 Video    | [Yannic Kilcher — "Diffusion Models"](https://www.youtube.com/@YannicKilcher)                   | Clear explanation of the diffusion process |
+| 🔧 Hands-on | [HuggingFace Diffusers Library](https://huggingface.co/docs/diffusers/)                         | Production diffusion model library         |
 
 ## ★ Sources
 

@@ -243,26 +243,100 @@ COST COMPARISON (per 1M input tokens, approximate):
 
 ---
 
+## ★ Code & Implementation
+
+### Dynamic Context Window Manager
+
+```python
+# pip install openai>=1.60 tiktoken>=0.6
+# ⚠️ Last tested: 2026-04 | Requires: openai>=1.60, tiktoken>=0.6, OPENAI_API_KEY
+import tiktoken
+from openai import OpenAI
+from dataclasses import dataclass, field
+
+client = OpenAI()
+enc    = tiktoken.encoding_for_model("gpt-4o")
+
+def count_tokens(text: str) -> int:
+    return len(enc.encode(text))
+
+@dataclass
+class ContextManager:
+    """Manages context window budget across system prompt, history, and retrieved docs."""
+    model: str         = "gpt-4o-mini"
+    context_limit: int = 8192       # safe limit (model max - output buffer)
+    system_prompt: str = "You are a helpful assistant."
+    history:       list[dict] = field(default_factory=list)
+
+    @property
+    def _system_tokens(self) -> int:
+        return count_tokens(self.system_prompt)
+
+    def add_user_message(self, content: str, context_docs: list[str] | None = None) -> list[dict]:
+        """Build a messages list that fits within the context limit."""
+        # Build the user message with retrieved context
+        if context_docs:
+            context_str = "\n\n".join(f"[Doc {i+1}]: {d}" for i, d in enumerate(context_docs))
+            full_content = f"Context:\n{context_str}\n\nQuestion: {content}"
+        else:
+            full_content = content
+
+        # Truncate history to fit in budget
+        budget = self.context_limit - self._system_tokens - count_tokens(full_content) - 200
+        trimmed_history = []
+        history_tokens = 0
+        for msg in reversed(self.history):
+            t = count_tokens(msg["content"])
+            if history_tokens + t > budget:
+                break
+            trimmed_history.insert(0, msg)
+            history_tokens += t
+
+        messages = (
+            [{"role": "system", "content": self.system_prompt}]
+            + trimmed_history
+            + [{"role": "user", "content": full_content}]
+        )
+        used_tokens = self._system_tokens + history_tokens + count_tokens(full_content)
+        print(f"Context: {used_tokens}/{self.context_limit} tokens ({len(trimmed_history)} history msgs)")
+        return messages
+
+    def chat(self, user_input: str, context_docs: list[str] | None = None) -> str:
+        messages = self.add_user_message(user_input, context_docs)
+        resp = client.chat.completions.create(
+            model=self.model, messages=messages, max_tokens=500
+        )
+        answer = resp.choices[0].message.content
+        self.history.append({"role": "user",      "content": user_input})
+        self.history.append({"role": "assistant",  "content": answer})
+        return answer
+
+# Example
+cm = ContextManager(system_prompt="You are a concise ML expert.")
+r  = cm.chat("What is RAG?", context_docs=["RAG combines retrieval with generation to ground LLM answers."])
+print(r)
+```
+
 ## ★ Connections
 
-| Relationship | Topics                                                             |
-| ------------ | ------------------------------------------------------------------ |
-| Builds on    | [Rag](./rag.md), [Prompt Engineering](./prompt-engineering.md), [Tokenization](../foundations/tokenization.md)   |
-| Leads to     | [Llmops](../production/llmops.md) (cost management), Better AI applications |
-| Compare with | Traditional search, Knowledge bases                                |
-| Cross-domain | Information retrieval, Memory management, Caching systems          |
+| Relationship | Topics                                                                                                         |
+| ------------ | -------------------------------------------------------------------------------------------------------------- |
+| Builds on    | [Rag](./rag.md), [Prompt Engineering](./prompt-engineering.md), [Tokenization](../foundations/tokenization.md) |
+| Leads to     | [Llmops](../production/llmops.md) (cost management), Better AI applications                                    |
+| Compare with | Traditional search, Knowledge bases                                                                            |
+| Cross-domain | Information retrieval, Memory management, Caching systems                                                      |
 
 
 ---
 
 ## ◆ Production Failure Modes
 
-| Failure | Symptoms | Root Cause | Mitigation |
-|---------|----------|------------|------------|
-| **Lost-in-the-middle** | Model ignores information in the middle of long contexts | Attention distribution bias (U-shaped) | Place critical info at start/end, use structural markers |
-| **Context window waste** | 128K tokens used when 8K suffices, causing latency/cost spikes | No context budget management | Token counting, dynamic context assembly, cache control |
-| **Instruction-context conflict** | System prompt and retrieved context give contradictory guidance | No priority hierarchy between instruction types | Explicit priority layers, context deduplication |
-| **Prompt injection via context** | User-supplied context contains adversarial instructions | Untrusted content injected into prompt | Input sanitization, delimiter enforcement, separate user/system context |
+| Failure                          | Symptoms                                                        | Root Cause                                      | Mitigation                                                              |
+| -------------------------------- | --------------------------------------------------------------- | ----------------------------------------------- | ----------------------------------------------------------------------- |
+| **Lost-in-the-middle**           | Model ignores information in the middle of long contexts        | Attention distribution bias (U-shaped)          | Place critical info at start/end, use structural markers                |
+| **Context window waste**         | 128K tokens used when 8K suffices, causing latency/cost spikes  | No context budget management                    | Token counting, dynamic context assembly, cache control                 |
+| **Instruction-context conflict** | System prompt and retrieved context give contradictory guidance | No priority hierarchy between instruction types | Explicit priority layers, context deduplication                         |
+| **Prompt injection via context** | User-supplied context contains adversarial instructions         | Untrusted content injected into prompt          | Input sanitization, delimiter enforcement, separate user/system context |
 
 ---
 
@@ -295,11 +369,11 @@ COST COMPARISON (per 1M input tokens, approximate):
 
 ## ★ Recommended Resources
 
-| Type | Resource | Why |
-|------|----------|-----|
-| 🔧 Hands-on | [Anthropic Prompt Engineering Guide](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering) | Best practical guide to context window management |
-| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 5 | Covers prompt and context design patterns systematically |
-| 🎥 Video | [Simon Willison — "Context Engineering"](https://simonwillison.net/) | Practical insights on managing LLM context |
+| Type       | Resource                                                                                                      | Why                                                      |
+| ---------- | ------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- |
+| 🔧 Hands-on | [Anthropic Prompt Engineering Guide](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering) | Best practical guide to context window management        |
+| 📘 Book     | "AI Engineering" by Chip Huyen (2025), Ch 5                                                                   | Covers prompt and context design patterns systematically |
+| 🎥 Video    | [Simon Willison — "Context Engineering"](https://simonwillison.net/)                                          | Practical insights on managing LLM context               |
 
 ## ★ Sources
 

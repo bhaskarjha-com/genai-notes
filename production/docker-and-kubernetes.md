@@ -62,14 +62,14 @@ Containers give you a predictable runtime boundary.
 
 ### Docker Building Blocks
 
-| Concept | What It Does | Why It Matters |
-|---|---|---|
-| **Image** | Immutable packaged filesystem + config | What you build and deploy |
-| **Container** | Running instance of an image | What actually serves traffic |
-| **Dockerfile** | Build recipe | Encodes reproducibility |
-| **Registry** | Stores images | Enables CI/CD and rollbacks |
-| **Volume** | Persistent storage | Avoid baking mutable data into images |
-| **Network** | Container connectivity | Important for gateways, vector DBs, and tracing |
+| Concept        | What It Does                           | Why It Matters                                  |
+| -------------- | -------------------------------------- | ----------------------------------------------- |
+| **Image**      | Immutable packaged filesystem + config | What you build and deploy                       |
+| **Container**  | Running instance of an image           | What actually serves traffic                    |
+| **Dockerfile** | Build recipe                           | Encodes reproducibility                         |
+| **Registry**   | Stores images                          | Enables CI/CD and rollbacks                     |
+| **Volume**     | Persistent storage                     | Avoid baking mutable data into images           |
+| **Network**    | Container connectivity                 | Important for gateways, vector DBs, and tracing |
 
 ### Container Design Rules for GenAI
 
@@ -99,25 +99,25 @@ CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
 
 ### Core Kubernetes Objects
 
-| Object | Purpose | AI Example |
-|---|---|---|
-| **Pod** | Smallest deployable unit | One API server or inference worker |
-| **Deployment** | Manages rolling updates for stateless workloads | LLM gateway replicas |
-| **Service** | Stable internal network endpoint | Route traffic to pods |
-| **ConfigMap** | Non-secret config | Feature flags, model route settings |
-| **Secret** | Sensitive config | API keys, database credentials |
-| **Job/CronJob** | Batch or scheduled work | Offline eval runs, embedding sync |
-| **HorizontalPodAutoscaler** | Adjust replica count | Scale API gateways on traffic |
-| **Ingress/Gateway** | External traffic entry | Public API or internal portal |
+| Object                      | Purpose                                         | AI Example                          |
+| --------------------------- | ----------------------------------------------- | ----------------------------------- |
+| **Pod**                     | Smallest deployable unit                        | One API server or inference worker  |
+| **Deployment**              | Manages rolling updates for stateless workloads | LLM gateway replicas                |
+| **Service**                 | Stable internal network endpoint                | Route traffic to pods               |
+| **ConfigMap**               | Non-secret config                               | Feature flags, model route settings |
+| **Secret**                  | Sensitive config                                | API keys, database credentials      |
+| **Job/CronJob**             | Batch or scheduled work                         | Offline eval runs, embedding sync   |
+| **HorizontalPodAutoscaler** | Adjust replica count                            | Scale API gateways on traffic       |
+| **Ingress/Gateway**         | External traffic entry                          | Public API or internal portal       |
 
 ### Deployment Patterns
 
-| Pattern | When To Use | Notes |
-|---|---|---|
-| **Single container on VM** | Early prototype or low-traffic internal app | Lowest ops overhead |
-| **Docker Compose** | Local integration testing | Good for app + vector DB + tracing stack |
-| **Kubernetes deployment** | Multi-service or team-managed production | Standard platform choice |
-| **Kubernetes + GPU nodes** | Self-hosted model serving | Requires GPU scheduling and cost controls |
+| Pattern                    | When To Use                                 | Notes                                     |
+| -------------------------- | ------------------------------------------- | ----------------------------------------- |
+| **Single container on VM** | Early prototype or low-traffic internal app | Lowest ops overhead                       |
+| **Docker Compose**         | Local integration testing                   | Good for app + vector DB + tracing stack  |
+| **Kubernetes deployment**  | Multi-service or team-managed production    | Standard platform choice                  |
+| **Kubernetes + GPU nodes** | Self-hosted model serving                   | Requires GPU scheduling and cost controls |
 
 ### GPU Scheduling in Kubernetes
 
@@ -176,14 +176,14 @@ Do not adopt Kubernetes only because it feels "more production."
 ---
 
 ## ◆ Quick Reference
-| Situation | Better First Move |
-|---|---|
-| Shipping a prototype | Docker on one VM or managed platform |
-| Reproducing dev and CI environments | Docker |
-| Running several services together locally | Docker Compose |
-| Rolling updates and autoscaling | Kubernetes Deployment + HPA |
-| Offline evaluation jobs | Kubernetes Job or CronJob |
-| Expensive GPU workloads | Separate GPU node pools and strict autoscaling |
+| Situation                                 | Better First Move                              |
+| ----------------------------------------- | ---------------------------------------------- |
+| Shipping a prototype                      | Docker on one VM or managed platform           |
+| Reproducing dev and CI environments       | Docker                                         |
+| Running several services together locally | Docker Compose                                 |
+| Rolling updates and autoscaling           | Kubernetes Deployment + HPA                    |
+| Offline evaluation jobs                   | Kubernetes Job or CronJob                      |
+| Expensive GPU workloads                   | Separate GPU node pools and strict autoscaling |
 
 ---
 
@@ -204,25 +204,109 @@ Do not adopt Kubernetes only because it feels "more production."
 
 ---
 
+## ★ Code & Implementation
+
+### Containerize a FastAPI LLM Service
+
+```dockerfile
+# Dockerfile â€” production LLM API service
+# ⚠️ Last tested: 2026-04 | Requires: Docker 24+
+FROM python:3.12-slim
+
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+ENV PORT=8080
+EXPOSE 8080
+
+# Non-root user for security
+RUN useradd -m appuser && chown -R appuser /app
+USER appuser
+
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080", "--workers", "4"]
+```
+
+```python
+# main.py â€” FastAPI LLM endpoint
+# pip install fastapi>=0.110 uvicorn>=0.29 openai>=1.60 pydantic>=2
+# ⚠️ Last tested: 2026-04
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
+from openai import OpenAI, APIError
+import os
+
+app    = FastAPI(title="LLM API")
+client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
+
+class ChatRequest(BaseModel):
+    message: str
+    model: str = "gpt-4o-mini"
+    max_tokens: int = 200
+
+class ChatResponse(BaseModel):
+    response: str
+    model: str
+    tokens_used: int
+
+@app.post("/chat", response_model=ChatResponse)
+async def chat(req: ChatRequest) -> ChatResponse:
+    try:
+        resp = client.chat.completions.create(
+            model=req.model,
+            messages=[{"role": "user", "content": req.message}],
+            max_tokens=req.max_tokens,
+        )
+    except APIError as e:
+        raise HTTPException(status_code=502, detail=str(e))
+    return ChatResponse(
+        response=resp.choices[0].message.content,
+        model=resp.model,
+        tokens_used=resp.usage.total_tokens,
+    )
+
+@app.get("/health")
+async def health() -> dict:
+    return {"status": "ok"}
+```
+
+```yaml
+# docker-compose.yml for local development + testing
+version: "3.9"
+services:
+  llm-api:
+    build: .
+    ports: ["8080:8080"]
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+```
+
 ## ★ Connections
-| Relationship | Topics |
-|---|---|
-| Builds on | [LLMOps & Production Deployment](./llmops.md), [AI System Design for GenAI Applications](./ai-system-design.md) |
-| Leads to | [Model Serving for LLM Applications](./model-serving.md), [Monitoring & Observability for GenAI Systems](./monitoring-observability.md), [CI/CD for ML and LLM Systems](./cicd-for-ml.md) |
-| Compare with | Managed PaaS deployment, serverless inference |
-| Cross-domain | DevOps, platform engineering, SRE |
+| Relationship | Topics                                                                                                                                                                                    |
+| ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Builds on    | [LLMOps & Production Deployment](./llmops.md), [AI System Design for GenAI Applications](./ai-system-design.md)                                                                           |
+| Leads to     | [Model Serving for LLM Applications](./model-serving.md), [Monitoring & Observability for GenAI Systems](./monitoring-observability.md), [CI/CD for ML and LLM Systems](./cicd-for-ml.md) |
+| Compare with | Managed PaaS deployment, serverless inference                                                                                                                                             |
+| Cross-domain | DevOps, platform engineering, SRE                                                                                                                                                         |
 
 
 ---
 
 ## ◆ Production Failure Modes
 
-| Failure | Symptoms | Root Cause | Mitigation |
-|---------|----------|------------|------------|
-| **GPU scheduling failures** | Pods stuck in Pending, no GPU assigned | Insufficient GPU node pool, no resource quotas | Node auto-scaling, quotas, GPU sharing (MIG, time-slicing) |
-| **Image size explosion** | 15GB+ container images, slow pulls | CUDA runtime + model weights in image | Multi-stage builds, model weights via volume mount |
-| **OOM kills during inference** | Container killed mid-request | Memory limit too low for model + KV-cache | Profile actual memory, set limits 20% above peak |
-| **Health check false positives** | K8s restarts healthy pods | Health check doesn't verify GPU readiness | Custom health endpoint with test inference |
+| Failure                          | Symptoms                               | Root Cause                                     | Mitigation                                                 |
+| -------------------------------- | -------------------------------------- | ---------------------------------------------- | ---------------------------------------------------------- |
+| **GPU scheduling failures**      | Pods stuck in Pending, no GPU assigned | Insufficient GPU node pool, no resource quotas | Node auto-scaling, quotas, GPU sharing (MIG, time-slicing) |
+| **Image size explosion**         | 15GB+ container images, slow pulls     | CUDA runtime + model weights in image          | Multi-stage builds, model weights via volume mount         |
+| **OOM kills during inference**   | Container killed mid-request           | Memory limit too low for model + KV-cache      | Profile actual memory, set limits 20% above peak           |
+| **Health check false positives** | K8s restarts healthy pods              | Health check doesn't verify GPU readiness      | Custom health endpoint with test inference                 |
 
 ---
 
@@ -243,12 +327,12 @@ Do not adopt Kubernetes only because it feels "more production."
 
 ## ★ Recommended Resources
 
-| Type | Resource | Why |
-|------|----------|-----|
-| 🔧 Hands-on | [Docker Official Documentation](https://docs.docker.com/) | Container fundamentals for ML deployment |
-| 🔧 Hands-on | [Kubernetes for ML (Kubeflow)](https://www.kubeflow.org/docs/) | ML-specific Kubernetes orchestration |
-| 📘 Book | "Kubernetes in Action" by Luksa (2020) | Comprehensive K8s reference |
-| 🎥 Video | [TechWorld with Nana — "Docker + K8s"](https://www.youtube.com/@TechWorldwithNana) | Best beginner-friendly container tutorials |
+| Type       | Resource                                                                           | Why                                        |
+| ---------- | ---------------------------------------------------------------------------------- | ------------------------------------------ |
+| 🔧 Hands-on | [Docker Official Documentation](https://docs.docker.com/)                          | Container fundamentals for ML deployment   |
+| 🔧 Hands-on | [Kubernetes for ML (Kubeflow)](https://www.kubeflow.org/docs/)                     | ML-specific Kubernetes orchestration       |
+| 📘 Book     | "Kubernetes in Action" by Luksa (2020)                                             | Comprehensive K8s reference                |
+| 🎥 Video    | [TechWorld with Nana — "Docker + K8s"](https://www.youtube.com/@TechWorldwithNana) | Best beginner-friendly container tutorials |
 
 ## ★ Sources
 - Docker documentation - https://docs.docker.com

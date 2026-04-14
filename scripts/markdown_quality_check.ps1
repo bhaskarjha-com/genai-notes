@@ -16,16 +16,39 @@ $tabCharacters = New-Object System.Collections.Generic.List[string]
 $h1Issues = New-Object System.Collections.Generic.List[string]
 $codeFenceIssues = New-Object System.Collections.Generic.List[string]
 $mojibakeIssues = New-Object System.Collections.Generic.List[string]
-$mojibakeMarkers = @(
-    [char]0x00C3,
-    [char]0x00C2,
-    [char]0x00E2,
-    [char]0x00F0,
-    [char]0x00C5,
-    [char]0x00CB,
-    [char]0x017D,
-    [char]0x00CF
-)
+
+# Byte-level UTF-8 validation: detects actual encoding corruption
+# instead of heuristic single-character matching (which false-positives
+# on em-dashes, degree signs, arrows, and box-drawing characters).
+function Test-ValidUtf8 {
+    param([byte[]]$Bytes)
+    $i = 0
+    while ($i -lt $Bytes.Length) {
+        $b = $Bytes[$i]
+        if ($b -le 0x7F) { $i++; continue }                        # ASCII
+        elseif (($b -band 0xE0) -eq 0xC0) {                         # 2-byte: 110xxxxx
+            if ($b -lt 0xC2) { return $false }                       # overlong
+            if ($i + 1 -ge $Bytes.Length) { return $false }
+            if (($Bytes[$i+1] -band 0xC0) -ne 0x80) { return $false }
+            $i += 2
+        }
+        elseif (($b -band 0xF0) -eq 0xE0) {                         # 3-byte: 1110xxxx
+            if ($i + 2 -ge $Bytes.Length) { return $false }
+            if (($Bytes[$i+1] -band 0xC0) -ne 0x80) { return $false }
+            if (($Bytes[$i+2] -band 0xC0) -ne 0x80) { return $false }
+            $i += 3
+        }
+        elseif (($b -band 0xF8) -eq 0xF0) {                         # 4-byte: 11110xxx
+            if ($i + 3 -ge $Bytes.Length) { return $false }
+            if (($Bytes[$i+1] -band 0xC0) -ne 0x80) { return $false }
+            if (($Bytes[$i+2] -band 0xC0) -ne 0x80) { return $false }
+            if (($Bytes[$i+3] -band 0xC0) -ne 0x80) { return $false }
+            $i += 4
+        }
+        else { return $false }                                       # invalid lead byte
+    }
+    return $true
+}
 
 foreach ($file in $markdownFiles) {
     $relativePath = $file.FullName.Substring($repoRoot.Length + 1)
@@ -42,10 +65,16 @@ foreach ($file in $markdownFiles) {
         }
     }
 
-    $rawText = Get-Content -LiteralPath $file.FullName -Raw -Encoding utf8
-    if ($mojibakeMarkers | Where-Object { $rawText.Contains($_) }) {
+    $rawBytes = [System.IO.File]::ReadAllBytes($file.FullName)
+    # Strip UTF-8 BOM if present
+    if ($rawBytes.Length -ge 3 -and $rawBytes[0] -eq 0xEF -and $rawBytes[1] -eq 0xBB -and $rawBytes[2] -eq 0xBF) {
+        $rawBytes = $rawBytes[3..($rawBytes.Length - 1)]
+    }
+    if (-not (Test-ValidUtf8 -Bytes $rawBytes)) {
         $mojibakeIssues.Add($relativePath)
     }
+
+    $rawText = Get-Content -LiteralPath $file.FullName -Raw -Encoding utf8
 
     $textWithoutFrontmatter = [regex]::Replace($rawText, '^(?s)---\r?\n.*?\r?\n---\r?\n', '')
     $textWithoutCode = [regex]::Replace($textWithoutFrontmatter, '(?ms)```.*?```', '')

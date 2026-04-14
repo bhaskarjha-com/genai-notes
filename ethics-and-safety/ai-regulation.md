@@ -318,8 +318,8 @@ else:
 
 ### Exercise 1: EU AI Act Risk Classification
 
-**Goal**: Classify a portfolio of AI features against EU AI Act risk tiers  
-**Time**: 45 minutes  
+**Goal**: Classify a portfolio of AI features against EU AI Act risk tiers
+**Time**: 45 minutes
 **Steps**:
 1. Pick 5 AI features from your product (or hypothetical)
 2. For each: identify use case, affected users, and decision impact
@@ -331,8 +331,8 @@ else:
 
 ### Exercise 2: Build a Governance Record Validator
 
-**Goal**: Extend the code example above into a production-ready compliance check  
-**Time**: 60 minutes  
+**Goal**: Extend the code example above into a production-ready compliance check
+**Time**: 60 minutes
 **Steps**:
 1. Add Annex III category mapping (creditworthiness, employment, education, etc.)
 2. Add GPAI model FLOPs threshold check

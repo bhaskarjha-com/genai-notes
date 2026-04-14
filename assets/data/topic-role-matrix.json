@@ -1,1336 +1,1336 @@
 {
-    "Roles":  [
-                  {
-                      "Id":  "agentic-ai-engineer",
-                      "Title":  "Agentic AI Engineer",
-                      "PrimaryTrack":  "B",
-                      "MustCount":  21,
-                      "GoodCount":  5,
-                      "OptionalCount":  17,
-                      "NotRelevantCount":  31
-                  },
-                  {
-                      "Id":  "ai-engineer",
-                      "Title":  "AI Engineer",
-                      "PrimaryTrack":  "A",
-                      "MustCount":  21,
-                      "GoodCount":  2,
-                      "OptionalCount":  7,
-                      "NotRelevantCount":  44
-                  },
-                  {
-                      "Id":  "genai-engineer",
-                      "Title":  "Generative AI Engineer",
-                      "PrimaryTrack":  "B",
-                      "MustCount":  21,
-                      "GoodCount":  3,
-                      "OptionalCount":  16,
-                      "NotRelevantCount":  34
-                  },
-                  {
-                      "Id":  "llm-engineer",
-                      "Title":  "LLM Engineer",
-                      "PrimaryTrack":  "B",
-                      "MustCount":  21,
-                      "GoodCount":  3,
-                      "OptionalCount":  16,
-                      "NotRelevantCount":  34
-                  },
-                  {
-                      "Id":  "ml-engineer",
-                      "Title":  "ML Engineer",
-                      "PrimaryTrack":  "C",
-                      "MustCount":  27,
-                      "GoodCount":  5,
-                      "OptionalCount":  1,
-                      "NotRelevantCount":  41
-                  },
-                  {
-                      "Id":  "mlops-engineer",
-                      "Title":  "MLOps / LLMOps Engineer",
-                      "PrimaryTrack":  "C",
-                      "MustCount":  27,
-                      "GoodCount":  5,
-                      "OptionalCount":  2,
-                      "NotRelevantCount":  40
-                  },
-                  {
-                      "Id":  "rag-engineer",
-                      "Title":  "RAG Engineer",
-                      "PrimaryTrack":  "B",
-                      "MustCount":  21,
-                      "GoodCount":  3,
-                      "OptionalCount":  16,
-                      "NotRelevantCount":  34
-                  },
-                  {
-                      "Id":  "README",
-                      "Title":  "Individual Role Guides",
-                      "PrimaryTrack":  null,
-                      "MustCount":  19,
-                      "GoodCount":  0,
-                      "OptionalCount":  0,
-                      "NotRelevantCount":  55
+  "Roles": [
+          {
+            "Id": "agentic-ai-engineer",
+            "Title": "Agentic AI Engineer",
+            "PrimaryTrack": "B",
+            "MustCount": 21,
+            "GoodCount": 5,
+            "OptionalCount": 17,
+            "NotRelevantCount": 31
+          },
+          {
+            "Id": "ai-engineer",
+            "Title": "AI Engineer",
+            "PrimaryTrack": "A",
+            "MustCount": 21,
+            "GoodCount": 2,
+            "OptionalCount": 7,
+            "NotRelevantCount": 44
+          },
+          {
+            "Id": "genai-engineer",
+            "Title": "Generative AI Engineer",
+            "PrimaryTrack": "B",
+            "MustCount": 21,
+            "GoodCount": 3,
+            "OptionalCount": 16,
+            "NotRelevantCount": 34
+          },
+          {
+            "Id": "llm-engineer",
+            "Title": "LLM Engineer",
+            "PrimaryTrack": "B",
+            "MustCount": 21,
+            "GoodCount": 3,
+            "OptionalCount": 16,
+            "NotRelevantCount": 34
+          },
+          {
+            "Id": "ml-engineer",
+            "Title": "ML Engineer",
+            "PrimaryTrack": "C",
+            "MustCount": 27,
+            "GoodCount": 5,
+            "OptionalCount": 1,
+            "NotRelevantCount": 41
+          },
+          {
+            "Id": "mlops-engineer",
+            "Title": "MLOps / LLMOps Engineer",
+            "PrimaryTrack": "C",
+            "MustCount": 27,
+            "GoodCount": 5,
+            "OptionalCount": 2,
+            "NotRelevantCount": 40
+          },
+          {
+            "Id": "rag-engineer",
+            "Title": "RAG Engineer",
+            "PrimaryTrack": "B",
+            "MustCount": 21,
+            "GoodCount": 3,
+            "OptionalCount": 16,
+            "NotRelevantCount": 34
+          },
+          {
+            "Id": "README",
+            "Title": "Individual Role Guides",
+            "PrimaryTrack": null,
+            "MustCount": 19,
+            "GoodCount": 0,
+            "OptionalCount": 0,
+            "NotRelevantCount": 55
+          }
+        ],
+  "Topics": [
+          {
+            "Path": "applications/ai-product-management-fundamentals.md",
+            "Title": "AI Product Management Fundamentals",
+            "Folder": "applications",
+            "Difficulty": "intermediate",
+            "SitePath": "applications/ai-product-management-fundamentals.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Not Relevant",
+                    "ai-engineer": "Optional",
+                    "genai-engineer": "Not Relevant",
+                    "llm-engineer": "Not Relevant",
+                    "ml-engineer": "Not Relevant",
+                    "mlops-engineer": "Not Relevant",
+                    "rag-engineer": "Not Relevant",
+                    "README": "Not Relevant"
                   }
-              ],
-    "Topics":  [
-                   {
-                       "Path":  "applications/ai-product-management-fundamentals.md",
-                       "Title":  "AI Product Management Fundamentals",
-                       "Folder":  "applications",
-                       "Difficulty":  "intermediate",
-                       "SitePath":  "applications/ai-product-management-fundamentals.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Not Relevant",
-                                        "ai-engineer":  "Optional",
-                                        "genai-engineer":  "Not Relevant",
-                                        "llm-engineer":  "Not Relevant",
-                                        "ml-engineer":  "Not Relevant",
-                                        "mlops-engineer":  "Not Relevant",
-                                        "rag-engineer":  "Not Relevant",
-                                        "README":  "Not Relevant"
-                                    }
-                   },
-                   {
-                       "Path":  "applications/ai-ux-patterns.md",
-                       "Title":  "AI UX Patterns",
-                       "Folder":  "applications",
-                       "Difficulty":  "intermediate",
-                       "SitePath":  "applications/ai-ux-patterns.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Optional",
-                                        "ai-engineer":  "Not Relevant",
-                                        "genai-engineer":  "Optional",
-                                        "llm-engineer":  "Optional",
-                                        "ml-engineer":  "Not Relevant",
-                                        "mlops-engineer":  "Not Relevant",
-                                        "rag-engineer":  "Optional",
-                                        "README":  "Not Relevant"
-                                    }
-                   },
-                   {
-                       "Path":  "applications/api-design-for-ai.md",
-                       "Title":  "API Design for AI Applications",
-                       "Folder":  "applications",
-                       "Difficulty":  "intermediate",
-                       "SitePath":  "applications/api-design-for-ai.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Good",
-                                        "ai-engineer":  "Optional",
-                                        "genai-engineer":  "Not Relevant",
-                                        "llm-engineer":  "Not Relevant",
-                                        "ml-engineer":  "Not Relevant",
-                                        "mlops-engineer":  "Not Relevant",
-                                        "rag-engineer":  "Not Relevant",
-                                        "README":  "Not Relevant"
-                                    }
-                   },
-                   {
-                       "Path":  "applications/code-generation.md",
-                       "Title":  "Code Generation \u0026 AI-Assisted Development",
-                       "Folder":  "applications",
-                       "Difficulty":  "intermediate",
-                       "SitePath":  "applications/code-generation.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Not Relevant",
-                                        "ai-engineer":  "Optional",
-                                        "genai-engineer":  "Not Relevant",
-                                        "llm-engineer":  "Not Relevant",
-                                        "ml-engineer":  "Not Relevant",
-                                        "mlops-engineer":  "Not Relevant",
-                                        "rag-engineer":  "Not Relevant",
-                                        "README":  "Not Relevant"
-                                    }
-                   },
-                   {
-                       "Path":  "applications/conversational-ai.md",
-                       "Title":  "Conversational AI \u0026 Dialogue Systems",
-                       "Folder":  "applications",
-                       "Difficulty":  "intermediate",
-                       "SitePath":  "applications/conversational-ai.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Good",
-                                        "ai-engineer":  "Optional",
-                                        "genai-engineer":  "Not Relevant",
-                                        "llm-engineer":  "Not Relevant",
-                                        "ml-engineer":  "Not Relevant",
-                                        "mlops-engineer":  "Not Relevant",
-                                        "rag-engineer":  "Not Relevant",
-                                        "README":  "Not Relevant"
-                                    }
-                   },
-                   {
-                       "Path":  "applications/voice-ai.md",
-                       "Title":  "Voice AI \u0026 Speech",
-                       "Folder":  "applications",
-                       "Difficulty":  "intermediate",
-                       "SitePath":  "applications/voice-ai.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Not Relevant",
-                                        "ai-engineer":  "Optional",
-                                        "genai-engineer":  "Not Relevant",
-                                        "llm-engineer":  "Not Relevant",
-                                        "ml-engineer":  "Not Relevant",
-                                        "mlops-engineer":  "Not Relevant",
-                                        "rag-engineer":  "Not Relevant",
-                                        "README":  "Not Relevant"
-                                    }
-                   },
-                   {
-                       "Path":  "ethics-and-safety/adversarial-ml-and-ai-security.md",
-                       "Title":  "Adversarial ML \u0026 AI Security",
-                       "Folder":  "ethics-and-safety",
-                       "Difficulty":  "advanced",
-                       "SitePath":  "ethics-and-safety/adversarial-ml-and-ai-security.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Good",
-                                        "ai-engineer":  "Not Relevant",
-                                        "genai-engineer":  "Not Relevant",
-                                        "llm-engineer":  "Not Relevant",
-                                        "ml-engineer":  "Not Relevant",
-                                        "mlops-engineer":  "Not Relevant",
-                                        "rag-engineer":  "Not Relevant",
-                                        "README":  "Not Relevant"
-                                    }
-                   },
-                   {
-                       "Path":  "ethics-and-safety/ai-regulation.md",
-                       "Title":  "AI Regulation for Builders",
-                       "Folder":  "ethics-and-safety",
-                       "Difficulty":  "advanced",
-                       "SitePath":  "ethics-and-safety/ai-regulation.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Not Relevant",
-                                        "ai-engineer":  "Not Relevant",
-                                        "genai-engineer":  "Not Relevant",
-                                        "llm-engineer":  "Not Relevant",
-                                        "ml-engineer":  "Not Relevant",
-                                        "mlops-engineer":  "Good",
-                                        "rag-engineer":  "Not Relevant",
-                                        "README":  "Not Relevant"
-                                    }
-                   },
-                   {
-                       "Path":  "ethics-and-safety/ethics-safety-alignment.md",
-                       "Title":  "Ethics, Safety \u0026 Alignment",
-                       "Folder":  "ethics-and-safety",
-                       "Difficulty":  "intermediate",
-                       "SitePath":  "ethics-and-safety/ethics-safety-alignment.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Not Relevant",
-                                        "ai-engineer":  "Not Relevant",
-                                        "genai-engineer":  "Not Relevant",
-                                        "llm-engineer":  "Not Relevant",
-                                        "ml-engineer":  "Not Relevant",
-                                        "mlops-engineer":  "Not Relevant",
-                                        "rag-engineer":  "Not Relevant",
-                                        "README":  "Not Relevant"
-                                    }
-                   },
-                   {
-                       "Path":  "ethics-and-safety/owasp-llm-top-10.md",
-                       "Title":  "OWASP Top 10 for LLM Applications",
-                       "Folder":  "ethics-and-safety",
-                       "Difficulty":  "intermediate",
-                       "SitePath":  "ethics-and-safety/owasp-llm-top-10.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Not Relevant",
-                                        "ai-engineer":  "Not Relevant",
-                                        "genai-engineer":  "Not Relevant",
-                                        "llm-engineer":  "Not Relevant",
-                                        "ml-engineer":  "Not Relevant",
-                                        "mlops-engineer":  "Not Relevant",
-                                        "rag-engineer":  "Not Relevant",
-                                        "README":  "Not Relevant"
-                                    }
-                   },
-                   {
-                       "Path":  "ethics-and-safety/prompt-injection-deep-dive.md",
-                       "Title":  "Prompt Injection Deep Dive",
-                       "Folder":  "ethics-and-safety",
-                       "Difficulty":  "advanced",
-                       "SitePath":  "ethics-and-safety/prompt-injection-deep-dive.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Not Relevant",
-                                        "ai-engineer":  "Not Relevant",
-                                        "genai-engineer":  "Not Relevant",
-                                        "llm-engineer":  "Not Relevant",
-                                        "ml-engineer":  "Not Relevant",
-                                        "mlops-engineer":  "Not Relevant",
-                                        "rag-engineer":  "Not Relevant",
-                                        "README":  "Not Relevant"
-                                    }
-                   },
-                   {
-                       "Path":  "evaluation/evaluation-and-benchmarks.md",
-                       "Title":  "LLM Evaluation \u0026 Benchmarks",
-                       "Folder":  "evaluation",
-                       "Difficulty":  "intermediate",
-                       "SitePath":  "evaluation/evaluation-and-benchmarks.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Must",
-                                        "ai-engineer":  "Must",
-                                        "genai-engineer":  "Must",
-                                        "llm-engineer":  "Must",
-                                        "ml-engineer":  "Must",
-                                        "mlops-engineer":  "Must",
-                                        "rag-engineer":  "Must",
-                                        "README":  "Must"
-                                    }
-                   },
-                   {
-                       "Path":  "evaluation/llm-evaluation-deep-dive.md",
-                       "Title":  "LLM Evaluation Deep Dive",
-                       "Folder":  "evaluation",
-                       "Difficulty":  "advanced",
-                       "SitePath":  "evaluation/llm-evaluation-deep-dive.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Optional",
-                                        "ai-engineer":  "Not Relevant",
-                                        "genai-engineer":  "Optional",
-                                        "llm-engineer":  "Optional",
-                                        "ml-engineer":  "Not Relevant",
-                                        "mlops-engineer":  "Not Relevant",
-                                        "rag-engineer":  "Optional",
-                                        "README":  "Not Relevant"
-                                    }
-                   },
-                   {
-                       "Path":  "evaluation/retrieval-evaluation.md",
-                       "Title":  "Retrieval Evaluation",
-                       "Folder":  "evaluation",
-                       "Difficulty":  "advanced",
-                       "SitePath":  "evaluation/retrieval-evaluation.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Optional",
-                                        "ai-engineer":  "Not Relevant",
-                                        "genai-engineer":  "Optional",
-                                        "llm-engineer":  "Optional",
-                                        "ml-engineer":  "Not Relevant",
-                                        "mlops-engineer":  "Not Relevant",
-                                        "rag-engineer":  "Optional",
-                                        "README":  "Not Relevant"
-                                    }
-                   },
-                   {
-                       "Path":  "evaluation/system-design-for-ai-interviews.md",
-                       "Title":  "System Design for AI Interviews",
-                       "Folder":  "evaluation",
-                       "Difficulty":  "advanced",
-                       "SitePath":  "evaluation/system-design-for-ai-interviews.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Not Relevant",
-                                        "ai-engineer":  "Not Relevant",
-                                        "genai-engineer":  "Not Relevant",
-                                        "llm-engineer":  "Not Relevant",
-                                        "ml-engineer":  "Not Relevant",
-                                        "mlops-engineer":  "Good",
-                                        "rag-engineer":  "Not Relevant",
-                                        "README":  "Not Relevant"
-                                    }
-                   },
-                   {
-                       "Path":  "foundations/attention-mechanism.md",
-                       "Title":  "Attention Mechanism",
-                       "Folder":  "foundations",
-                       "Difficulty":  "intermediate",
-                       "SitePath":  "foundations/attention-mechanism.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Must",
-                                        "ai-engineer":  "Must",
-                                        "genai-engineer":  "Must",
-                                        "llm-engineer":  "Must",
-                                        "ml-engineer":  "Must",
-                                        "mlops-engineer":  "Must",
-                                        "rag-engineer":  "Must",
-                                        "README":  "Must"
-                                    }
-                   },
-                   {
-                       "Path":  "foundations/attention-deep-dive.md",
-                       "Title":  "Attention Mechanism Deep Dive",
-                       "Folder":  "foundations",
-                       "Difficulty":  "expert",
-                       "SitePath":  "foundations/attention-deep-dive.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Not Relevant",
-                                        "ai-engineer":  "Not Relevant",
-                                        "genai-engineer":  "Not Relevant",
-                                        "llm-engineer":  "Not Relevant",
-                                        "ml-engineer":  "Not Relevant",
-                                        "mlops-engineer":  "Not Relevant",
-                                        "rag-engineer":  "Not Relevant",
-                                        "README":  "Not Relevant"
-                                    }
-                   },
-                   {
-                       "Path":  "foundations/embeddings.md",
-                       "Title":  "Embeddings",
-                       "Folder":  "foundations",
-                       "Difficulty":  "intermediate",
-                       "SitePath":  "foundations/embeddings.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Must",
-                                        "ai-engineer":  "Must",
-                                        "genai-engineer":  "Must",
-                                        "llm-engineer":  "Must",
-                                        "ml-engineer":  "Must",
-                                        "mlops-engineer":  "Must",
-                                        "rag-engineer":  "Must",
-                                        "README":  "Must"
-                                    }
-                   },
-                   {
-                       "Path":  "foundations/modern-architectures.md",
-                       "Title":  "Modern LLM Architectures",
-                       "Folder":  "foundations",
-                       "Difficulty":  "advanced",
-                       "SitePath":  "foundations/modern-architectures.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Must",
-                                        "ai-engineer":  "Must",
-                                        "genai-engineer":  "Must",
-                                        "llm-engineer":  "Must",
-                                        "ml-engineer":  "Must",
-                                        "mlops-engineer":  "Must",
-                                        "rag-engineer":  "Must",
-                                        "README":  "Must"
-                                    }
-                   },
-                   {
-                       "Path":  "foundations/scaling-laws-and-pretraining.md",
-                       "Title":  "Scaling Laws \u0026 Pre-training",
-                       "Folder":  "foundations",
-                       "Difficulty":  "advanced",
-                       "SitePath":  "foundations/scaling-laws-and-pretraining.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Must",
-                                        "ai-engineer":  "Must",
-                                        "genai-engineer":  "Must",
-                                        "llm-engineer":  "Must",
-                                        "ml-engineer":  "Must",
-                                        "mlops-engineer":  "Must",
-                                        "rag-engineer":  "Must",
-                                        "README":  "Must"
-                                    }
-                   },
-                   {
-                       "Path":  "foundations/state-space-models.md",
-                       "Title":  "State Space Models",
-                       "Folder":  "foundations",
-                       "Difficulty":  "expert",
-                       "SitePath":  "foundations/state-space-models.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Not Relevant",
-                                        "ai-engineer":  "Not Relevant",
-                                        "genai-engineer":  "Not Relevant",
-                                        "llm-engineer":  "Not Relevant",
-                                        "ml-engineer":  "Not Relevant",
-                                        "mlops-engineer":  "Not Relevant",
-                                        "rag-engineer":  "Not Relevant",
-                                        "README":  "Not Relevant"
-                                    }
-                   },
-                   {
-                       "Path":  "foundations/tokenization.md",
-                       "Title":  "Tokenization",
-                       "Folder":  "foundations",
-                       "Difficulty":  "intermediate",
-                       "SitePath":  "foundations/tokenization.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Must",
-                                        "ai-engineer":  "Must",
-                                        "genai-engineer":  "Must",
-                                        "llm-engineer":  "Must",
-                                        "ml-engineer":  "Must",
-                                        "mlops-engineer":  "Must",
-                                        "rag-engineer":  "Must",
-                                        "README":  "Must"
-                                    }
-                   },
-                   {
-                       "Path":  "foundations/transformers.md",
-                       "Title":  "Transformers",
-                       "Folder":  "foundations",
-                       "Difficulty":  "intermediate",
-                       "SitePath":  "foundations/transformers.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Must",
-                                        "ai-engineer":  "Must",
-                                        "genai-engineer":  "Must",
-                                        "llm-engineer":  "Must",
-                                        "ml-engineer":  "Must",
-                                        "mlops-engineer":  "Must",
-                                        "rag-engineer":  "Must",
-                                        "README":  "Must"
-                                    }
-                   },
-                   {
-                       "Path":  "inference/distributed-inference-and-serving-architecture.md",
-                       "Title":  "Distributed Inference \u0026 Serving Architecture",
-                       "Folder":  "inference",
-                       "Difficulty":  "expert",
-                       "SitePath":  "inference/distributed-inference-and-serving-architecture.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Not Relevant",
-                                        "ai-engineer":  "Not Relevant",
-                                        "genai-engineer":  "Not Relevant",
-                                        "llm-engineer":  "Not Relevant",
-                                        "ml-engineer":  "Good",
-                                        "mlops-engineer":  "Good",
-                                        "rag-engineer":  "Not Relevant",
-                                        "README":  "Not Relevant"
-                                    }
-                   },
-                   {
-                       "Path":  "inference/gpu-cuda-programming.md",
-                       "Title":  "GPU \u0026 CUDA Programming for AI Engineers",
-                       "Folder":  "inference",
-                       "Difficulty":  "expert",
-                       "SitePath":  "inference/gpu-cuda-programming.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Not Relevant",
-                                        "ai-engineer":  "Not Relevant",
-                                        "genai-engineer":  "Not Relevant",
-                                        "llm-engineer":  "Not Relevant",
-                                        "ml-engineer":  "Good",
-                                        "mlops-engineer":  "Not Relevant",
-                                        "rag-engineer":  "Not Relevant",
-                                        "README":  "Not Relevant"
-                                    }
-                   },
-                   {
-                       "Path":  "inference/inference-optimization.md",
-                       "Title":  "Inference Optimization",
-                       "Folder":  "inference",
-                       "Difficulty":  "advanced",
-                       "SitePath":  "inference/inference-optimization.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Not Relevant",
-                                        "ai-engineer":  "Good",
-                                        "genai-engineer":  "Not Relevant",
-                                        "llm-engineer":  "Must",
-                                        "ml-engineer":  "Good",
-                                        "mlops-engineer":  "Optional",
-                                        "rag-engineer":  "Not Relevant",
-                                        "README":  "Not Relevant"
-                                    }
-                   },
-                   {
-                       "Path":  "llms/hallucination-detection.md",
-                       "Title":  "Hallucination Detection \u0026 Mitigation",
-                       "Folder":  "llms",
-                       "Difficulty":  "advanced",
-                       "SitePath":  "llms/hallucination-detection.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Good",
-                                        "ai-engineer":  "Not Relevant",
-                                        "genai-engineer":  "Good",
-                                        "llm-engineer":  "Good",
-                                        "ml-engineer":  "Not Relevant",
-                                        "mlops-engineer":  "Not Relevant",
-                                        "rag-engineer":  "Good",
-                                        "README":  "Not Relevant"
-                                    }
-                   },
-                   {
-                       "Path":  "llms/llms-overview.md",
-                       "Title":  "Large Language Models (LLMs)",
-                       "Folder":  "llms",
-                       "Difficulty":  "intermediate",
-                       "SitePath":  "llms/llms-overview.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Must",
-                                        "ai-engineer":  "Must",
-                                        "genai-engineer":  "Must",
-                                        "llm-engineer":  "Must",
-                                        "ml-engineer":  "Must",
-                                        "mlops-engineer":  "Must",
-                                        "rag-engineer":  "Must",
-                                        "README":  "Must"
-                                    }
-                   },
-                   {
-                       "Path":  "llms/llm-landscape.md",
-                       "Title":  "LLM Landscape \u0026 Model Selection",
-                       "Folder":  "llms",
-                       "Difficulty":  "intermediate",
-                       "SitePath":  "llms/llm-landscape.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Not Relevant",
-                                        "ai-engineer":  "Not Relevant",
-                                        "genai-engineer":  "Not Relevant",
-                                        "llm-engineer":  "Not Relevant",
-                                        "ml-engineer":  "Not Relevant",
-                                        "mlops-engineer":  "Not Relevant",
-                                        "rag-engineer":  "Not Relevant",
-                                        "README":  "Not Relevant"
-                                    }
-                   },
-                   {
-                       "Path":  "llms/reasoning-models.md",
-                       "Title":  "Reasoning Models \u0026 Test-Time Compute",
-                       "Folder":  "llms",
-                       "Difficulty":  "advanced",
-                       "SitePath":  "llms/reasoning-models.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Not Relevant",
-                                        "ai-engineer":  "Not Relevant",
-                                        "genai-engineer":  "Not Relevant",
-                                        "llm-engineer":  "Not Relevant",
-                                        "ml-engineer":  "Not Relevant",
-                                        "mlops-engineer":  "Not Relevant",
-                                        "rag-engineer":  "Not Relevant",
-                                        "README":  "Not Relevant"
-                                    }
-                   },
-                   {
-                       "Path":  "multimodal/computer-vision-fundamentals.md",
-                       "Title":  "Computer Vision Fundamentals for AI Builders",
-                       "Folder":  "multimodal",
-                       "Difficulty":  "intermediate",
-                       "SitePath":  "multimodal/computer-vision-fundamentals.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Not Relevant",
-                                        "ai-engineer":  "Not Relevant",
-                                        "genai-engineer":  "Not Relevant",
-                                        "llm-engineer":  "Not Relevant",
-                                        "ml-engineer":  "Not Relevant",
-                                        "mlops-engineer":  "Not Relevant",
-                                        "rag-engineer":  "Not Relevant",
-                                        "README":  "Not Relevant"
-                                    }
-                   },
-                   {
-                       "Path":  "multimodal/diffusion-models.md",
-                       "Title":  "Diffusion Models",
-                       "Folder":  "multimodal",
-                       "Difficulty":  "advanced",
-                       "SitePath":  "multimodal/diffusion-models.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Not Relevant",
-                                        "ai-engineer":  "Not Relevant",
-                                        "genai-engineer":  "Not Relevant",
-                                        "llm-engineer":  "Not Relevant",
-                                        "ml-engineer":  "Not Relevant",
-                                        "mlops-engineer":  "Not Relevant",
-                                        "rag-engineer":  "Not Relevant",
-                                        "README":  "Not Relevant"
-                                    }
-                   },
-                   {
-                       "Path":  "multimodal/multimodal-ai.md",
-                       "Title":  "Multimodal AI",
-                       "Folder":  "multimodal",
-                       "Difficulty":  "intermediate",
-                       "SitePath":  "multimodal/multimodal-ai.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Not Relevant",
-                                        "ai-engineer":  "Not Relevant",
-                                        "genai-engineer":  "Not Relevant",
-                                        "llm-engineer":  "Not Relevant",
-                                        "ml-engineer":  "Not Relevant",
-                                        "mlops-engineer":  "Not Relevant",
-                                        "rag-engineer":  "Not Relevant",
-                                        "README":  "Not Relevant"
-                                    }
-                   },
-                   {
-                       "Path":  "prerequisites/deep-learning-fundamentals.md",
-                       "Title":  "Deep Learning Fundamentals",
-                       "Folder":  "prerequisites",
-                       "Difficulty":  "intermediate",
-                       "SitePath":  "prerequisites/deep-learning-fundamentals.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Must",
-                                        "ai-engineer":  "Must",
-                                        "genai-engineer":  "Must",
-                                        "llm-engineer":  "Must",
-                                        "ml-engineer":  "Must",
-                                        "mlops-engineer":  "Must",
-                                        "rag-engineer":  "Must",
-                                        "README":  "Must"
-                                    }
-                   },
-                   {
-                       "Path":  "prerequisites/linear-algebra-for-ai.md",
-                       "Title":  "Linear Algebra for AI",
-                       "Folder":  "prerequisites",
-                       "Difficulty":  "beginner",
-                       "SitePath":  "prerequisites/linear-algebra-for-ai.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Must",
-                                        "ai-engineer":  "Must",
-                                        "genai-engineer":  "Must",
-                                        "llm-engineer":  "Must",
-                                        "ml-engineer":  "Must",
-                                        "mlops-engineer":  "Must",
-                                        "rag-engineer":  "Must",
-                                        "README":  "Must"
-                                    }
-                   },
-                   {
-                       "Path":  "prerequisites/neural-networks.md",
-                       "Title":  "Neural Networks",
-                       "Folder":  "prerequisites",
-                       "Difficulty":  "beginner",
-                       "SitePath":  "prerequisites/neural-networks.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Must",
-                                        "ai-engineer":  "Must",
-                                        "genai-engineer":  "Must",
-                                        "llm-engineer":  "Must",
-                                        "ml-engineer":  "Must",
-                                        "mlops-engineer":  "Must",
-                                        "rag-engineer":  "Must",
-                                        "README":  "Must"
-                                    }
-                   },
-                   {
-                       "Path":  "prerequisites/nlp-fundamentals.md",
-                       "Title":  "NLP Fundamentals",
-                       "Folder":  "prerequisites",
-                       "Difficulty":  "beginner",
-                       "SitePath":  "prerequisites/nlp-fundamentals.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Must",
-                                        "ai-engineer":  "Must",
-                                        "genai-engineer":  "Must",
-                                        "llm-engineer":  "Must",
-                                        "ml-engineer":  "Must",
-                                        "mlops-engineer":  "Must",
-                                        "rag-engineer":  "Must",
-                                        "README":  "Must"
-                                    }
-                   },
-                   {
-                       "Path":  "prerequisites/probability-and-statistics.md",
-                       "Title":  "Probability \u0026 Statistics for AI",
-                       "Folder":  "prerequisites",
-                       "Difficulty":  "beginner",
-                       "SitePath":  "prerequisites/probability-and-statistics.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Must",
-                                        "ai-engineer":  "Must",
-                                        "genai-engineer":  "Must",
-                                        "llm-engineer":  "Must",
-                                        "ml-engineer":  "Must",
-                                        "mlops-engineer":  "Must",
-                                        "rag-engineer":  "Must",
-                                        "README":  "Must"
-                                    }
-                   },
-                   {
-                       "Path":  "prerequisites/python-for-ai.md",
-                       "Title":  "Python for AI",
-                       "Folder":  "prerequisites",
-                       "Difficulty":  "beginner",
-                       "SitePath":  "prerequisites/python-for-ai.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Must",
-                                        "ai-engineer":  "Must",
-                                        "genai-engineer":  "Must",
-                                        "llm-engineer":  "Must",
-                                        "ml-engineer":  "Must",
-                                        "mlops-engineer":  "Must",
-                                        "rag-engineer":  "Must",
-                                        "README":  "Must"
-                                    }
-                   },
-                   {
-                       "Path":  "production/ai-system-design.md",
-                       "Title":  "AI System Design for GenAI Applications",
-                       "Folder":  "production",
-                       "Difficulty":  "advanced",
-                       "SitePath":  "production/ai-system-design.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Must",
-                                        "ai-engineer":  "Must",
-                                        "genai-engineer":  "Good",
-                                        "llm-engineer":  "Not Relevant",
-                                        "ml-engineer":  "Not Relevant",
-                                        "mlops-engineer":  "Not Relevant",
-                                        "rag-engineer":  "Good",
-                                        "README":  "Not Relevant"
-                                    }
-                   },
-                   {
-                       "Path":  "production/cicd-for-ml.md",
-                       "Title":  "CI/CD for ML and LLM Systems",
-                       "Folder":  "production",
-                       "Difficulty":  "advanced",
-                       "SitePath":  "production/cicd-for-ml.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Not Relevant",
-                                        "ai-engineer":  "Not Relevant",
-                                        "genai-engineer":  "Not Relevant",
-                                        "llm-engineer":  "Not Relevant",
-                                        "ml-engineer":  "Must",
-                                        "mlops-engineer":  "Must",
-                                        "rag-engineer":  "Not Relevant",
-                                        "README":  "Not Relevant"
-                                    }
-                   },
-                   {
-                       "Path":  "production/classical-ml-for-genai.md",
-                       "Title":  "Classical ML for GenAI Builders",
-                       "Folder":  "production",
-                       "Difficulty":  "intermediate",
-                       "SitePath":  "production/classical-ml-for-genai.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Not Relevant",
-                                        "ai-engineer":  "Not Relevant",
-                                        "genai-engineer":  "Not Relevant",
-                                        "llm-engineer":  "Not Relevant",
-                                        "ml-engineer":  "Must",
-                                        "mlops-engineer":  "Optional",
-                                        "rag-engineer":  "Not Relevant",
-                                        "README":  "Not Relevant"
-                                    }
-                   },
-                   {
-                       "Path":  "production/cost-optimization.md",
-                       "Title":  "Cost Optimization for GenAI Systems",
-                       "Folder":  "production",
-                       "Difficulty":  "advanced",
-                       "SitePath":  "production/cost-optimization.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Optional",
-                                        "ai-engineer":  "Not Relevant",
-                                        "genai-engineer":  "Optional",
-                                        "llm-engineer":  "Optional",
-                                        "ml-engineer":  "Optional",
-                                        "mlops-engineer":  "Must",
-                                        "rag-engineer":  "Optional",
-                                        "README":  "Not Relevant"
-                                    }
-                   },
-                   {
-                       "Path":  "production/data-flywheel-design.md",
-                       "Title":  "Data Flywheel Design",
-                       "Folder":  "production",
-                       "Difficulty":  "advanced",
-                       "SitePath":  "production/data-flywheel-design.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Optional",
-                                        "ai-engineer":  "Not Relevant",
-                                        "genai-engineer":  "Optional",
-                                        "llm-engineer":  "Optional",
-                                        "ml-engineer":  "Not Relevant",
-                                        "mlops-engineer":  "Not Relevant",
-                                        "rag-engineer":  "Optional",
-                                        "README":  "Not Relevant"
-                                    }
-                   },
-                   {
-                       "Path":  "production/docker-and-kubernetes.md",
-                       "Title":  "Docker \u0026 Kubernetes for GenAI Deployment",
-                       "Folder":  "production",
-                       "Difficulty":  "intermediate",
-                       "SitePath":  "production/docker-and-kubernetes.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Not Relevant",
-                                        "ai-engineer":  "Not Relevant",
-                                        "genai-engineer":  "Not Relevant",
-                                        "llm-engineer":  "Not Relevant",
-                                        "ml-engineer":  "Must",
-                                        "mlops-engineer":  "Must",
-                                        "rag-engineer":  "Not Relevant",
-                                        "README":  "Not Relevant"
-                                    }
-                   },
-                   {
-                       "Path":  "production/document-parsing-and-extraction.md",
-                       "Title":  "Document Parsing \u0026 Extraction",
-                       "Folder":  "production",
-                       "Difficulty":  "intermediate",
-                       "SitePath":  "production/document-parsing-and-extraction.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Optional",
-                                        "ai-engineer":  "Not Relevant",
-                                        "genai-engineer":  "Optional",
-                                        "llm-engineer":  "Optional",
-                                        "ml-engineer":  "Not Relevant",
-                                        "mlops-engineer":  "Not Relevant",
-                                        "rag-engineer":  "Optional",
-                                        "README":  "Not Relevant"
-                                    }
-                   },
-                   {
-                       "Path":  "production/guardrails-and-content-filtering.md",
-                       "Title":  "Guardrails \u0026 Content Filtering",
-                       "Folder":  "production",
-                       "Difficulty":  "advanced",
-                       "SitePath":  "production/guardrails-and-content-filtering.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Optional",
-                                        "ai-engineer":  "Not Relevant",
-                                        "genai-engineer":  "Optional",
-                                        "llm-engineer":  "Optional",
-                                        "ml-engineer":  "Not Relevant",
-                                        "mlops-engineer":  "Not Relevant",
-                                        "rag-engineer":  "Optional",
-                                        "README":  "Not Relevant"
-                                    }
-                   },
-                   {
-                       "Path":  "production/latency-and-throughput-engineering.md",
-                       "Title":  "Latency \u0026 Throughput Engineering for AI Systems",
-                       "Folder":  "production",
-                       "Difficulty":  "advanced",
-                       "SitePath":  "production/latency-and-throughput-engineering.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Not Relevant",
-                                        "ai-engineer":  "Not Relevant",
-                                        "genai-engineer":  "Not Relevant",
-                                        "llm-engineer":  "Not Relevant",
-                                        "ml-engineer":  "Good",
-                                        "mlops-engineer":  "Good",
-                                        "rag-engineer":  "Not Relevant",
-                                        "README":  "Not Relevant"
-                                    }
-                   },
-                   {
-                       "Path":  "production/llm-routing-and-model-selection.md",
-                       "Title":  "LLM Routing \u0026 Model Selection",
-                       "Folder":  "production",
-                       "Difficulty":  "advanced",
-                       "SitePath":  "production/llm-routing-and-model-selection.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Optional",
-                                        "ai-engineer":  "Not Relevant",
-                                        "genai-engineer":  "Optional",
-                                        "llm-engineer":  "Optional",
-                                        "ml-engineer":  "Not Relevant",
-                                        "mlops-engineer":  "Not Relevant",
-                                        "rag-engineer":  "Optional",
-                                        "README":  "Not Relevant"
-                                    }
-                   },
-                   {
-                       "Path":  "production/llmops.md",
-                       "Title":  "LLMOps \u0026 Production Deployment",
-                       "Folder":  "production",
-                       "Difficulty":  "intermediate",
-                       "SitePath":  "production/llmops.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Must",
-                                        "ai-engineer":  "Must",
-                                        "genai-engineer":  "Must",
-                                        "llm-engineer":  "Optional",
-                                        "ml-engineer":  "Must",
-                                        "mlops-engineer":  "Must",
-                                        "rag-engineer":  "Good",
-                                        "README":  "Not Relevant"
-                                    }
-                   },
-                   {
-                       "Path":  "production/model-serving.md",
-                       "Title":  "Model Serving for LLM Applications",
-                       "Folder":  "production",
-                       "Difficulty":  "advanced",
-                       "SitePath":  "production/model-serving.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Optional",
-                                        "ai-engineer":  "Not Relevant",
-                                        "genai-engineer":  "Optional",
-                                        "llm-engineer":  "Optional",
-                                        "ml-engineer":  "Must",
-                                        "mlops-engineer":  "Must",
-                                        "rag-engineer":  "Optional",
-                                        "README":  "Not Relevant"
-                                    }
-                   },
-                   {
-                       "Path":  "production/monitoring-observability.md",
-                       "Title":  "Monitoring \u0026 Observability for GenAI Systems",
-                       "Folder":  "production",
-                       "Difficulty":  "advanced",
-                       "SitePath":  "production/monitoring-observability.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Good",
-                                        "ai-engineer":  "Not Relevant",
-                                        "genai-engineer":  "Optional",
-                                        "llm-engineer":  "Optional",
-                                        "ml-engineer":  "Must",
-                                        "mlops-engineer":  "Must",
-                                        "rag-engineer":  "Optional",
-                                        "README":  "Not Relevant"
-                                    }
-                   },
-                   {
-                       "Path":  "research-frontiers/distributed-training.md",
-                       "Title":  "Distributed Training \u0026 Training Infrastructure",
-                       "Folder":  "research-frontiers",
-                       "Difficulty":  "expert",
-                       "SitePath":  "research-frontiers/distributed-training.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Not Relevant",
-                                        "ai-engineer":  "Not Relevant",
-                                        "genai-engineer":  "Not Relevant",
-                                        "llm-engineer":  "Not Relevant",
-                                        "ml-engineer":  "Not Relevant",
-                                        "mlops-engineer":  "Not Relevant",
-                                        "rag-engineer":  "Not Relevant",
-                                        "README":  "Not Relevant"
-                                    }
-                   },
-                   {
-                       "Path":  "research-frontiers/interpretability.md",
-                       "Title":  "Mechanistic Interpretability",
-                       "Folder":  "research-frontiers",
-                       "Difficulty":  "expert",
-                       "SitePath":  "research-frontiers/interpretability.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Not Relevant",
-                                        "ai-engineer":  "Not Relevant",
-                                        "genai-engineer":  "Not Relevant",
-                                        "llm-engineer":  "Not Relevant",
-                                        "ml-engineer":  "Not Relevant",
-                                        "mlops-engineer":  "Not Relevant",
-                                        "rag-engineer":  "Not Relevant",
-                                        "README":  "Not Relevant"
-                                    }
-                   },
-                   {
-                       "Path":  "research-frontiers/research-methodology-and-paper-reading.md",
-                       "Title":  "Research Methodology \u0026 Paper Reading for AI",
-                       "Folder":  "research-frontiers",
-                       "Difficulty":  "advanced",
-                       "SitePath":  "research-frontiers/research-methodology-and-paper-reading.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Not Relevant",
-                                        "ai-engineer":  "Not Relevant",
-                                        "genai-engineer":  "Not Relevant",
-                                        "llm-engineer":  "Not Relevant",
-                                        "ml-engineer":  "Not Relevant",
-                                        "mlops-engineer":  "Not Relevant",
-                                        "rag-engineer":  "Not Relevant",
-                                        "README":  "Not Relevant"
-                                    }
-                   },
-                   {
-                       "Path":  "genai.md",
-                       "Title":  "Generative AI",
-                       "Folder":  "root",
-                       "Difficulty":  "beginner",
-                       "SitePath":  "genai.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Not Relevant",
-                                        "ai-engineer":  "Not Relevant",
-                                        "genai-engineer":  "Not Relevant",
-                                        "llm-engineer":  "Not Relevant",
-                                        "ml-engineer":  "Not Relevant",
-                                        "mlops-engineer":  "Not Relevant",
-                                        "rag-engineer":  "Not Relevant",
-                                        "README":  "Not Relevant"
-                                    }
-                   },
-                   {
-                       "Path":  "techniques/advanced-fine-tuning.md",
-                       "Title":  "Advanced Fine-Tuning for LLM Adaptation",
-                       "Folder":  "techniques",
-                       "Difficulty":  "expert",
-                       "SitePath":  "techniques/advanced-fine-tuning.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Optional",
-                                        "ai-engineer":  "Good",
-                                        "genai-engineer":  "Must",
-                                        "llm-engineer":  "Must",
-                                        "ml-engineer":  "Not Relevant",
-                                        "mlops-engineer":  "Not Relevant",
-                                        "rag-engineer":  "Optional",
-                                        "README":  "Not Relevant"
-                                    }
-                   },
-                   {
-                       "Path":  "techniques/context-engineering.md",
-                       "Title":  "Context Engineering \u0026 Long Context",
-                       "Folder":  "techniques",
-                       "Difficulty":  "intermediate",
-                       "SitePath":  "techniques/context-engineering.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Must",
-                                        "ai-engineer":  "Must",
-                                        "genai-engineer":  "Must",
-                                        "llm-engineer":  "Must",
-                                        "ml-engineer":  "Must",
-                                        "mlops-engineer":  "Must",
-                                        "rag-engineer":  "Must",
-                                        "README":  "Must"
-                                    }
-                   },
-                   {
-                       "Path":  "techniques/continual-learning.md",
-                       "Title":  "Continual Learning \u0026 Lifelong AI",
-                       "Folder":  "techniques",
-                       "Difficulty":  "advanced",
-                       "SitePath":  "techniques/continual-learning.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Not Relevant",
-                                        "ai-engineer":  "Not Relevant",
-                                        "genai-engineer":  "Not Relevant",
-                                        "llm-engineer":  "Not Relevant",
-                                        "ml-engineer":  "Not Relevant",
-                                        "mlops-engineer":  "Not Relevant",
-                                        "rag-engineer":  "Not Relevant",
-                                        "README":  "Not Relevant"
-                                    }
-                   },
-                   {
-                       "Path":  "techniques/embedding-fine-tuning.md",
-                       "Title":  "Embedding Fine-Tuning",
-                       "Folder":  "techniques",
-                       "Difficulty":  "advanced",
-                       "SitePath":  "techniques/embedding-fine-tuning.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Optional",
-                                        "ai-engineer":  "Not Relevant",
-                                        "genai-engineer":  "Optional",
-                                        "llm-engineer":  "Optional",
-                                        "ml-engineer":  "Not Relevant",
-                                        "mlops-engineer":  "Not Relevant",
-                                        "rag-engineer":  "Optional",
-                                        "README":  "Not Relevant"
-                                    }
-                   },
-                   {
-                       "Path":  "techniques/fine-tuning.md",
-                       "Title":  "Fine-Tuning LLMs",
-                       "Folder":  "techniques",
-                       "Difficulty":  "advanced",
-                       "SitePath":  "techniques/fine-tuning.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Must",
-                                        "ai-engineer":  "Must",
-                                        "genai-engineer":  "Must",
-                                        "llm-engineer":  "Must",
-                                        "ml-engineer":  "Must",
-                                        "mlops-engineer":  "Must",
-                                        "rag-engineer":  "Must",
-                                        "README":  "Must"
-                                    }
-                   },
-                   {
-                       "Path":  "techniques/function-calling-and-structured-output.md",
-                       "Title":  "Function Calling, Structured Output \u0026 Tool Use",
-                       "Folder":  "techniques",
-                       "Difficulty":  "intermediate",
-                       "SitePath":  "techniques/function-calling-and-structured-output.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Must",
-                                        "ai-engineer":  "Must",
-                                        "genai-engineer":  "Must",
-                                        "llm-engineer":  "Must",
-                                        "ml-engineer":  "Must",
-                                        "mlops-engineer":  "Must",
-                                        "rag-engineer":  "Must",
-                                        "README":  "Must"
-                                    }
-                   },
-                   {
-                       "Path":  "techniques/graph-rag.md",
-                       "Title":  "Graph RAG \u0026 Advanced Retrieval",
-                       "Folder":  "techniques",
-                       "Difficulty":  "advanced",
-                       "SitePath":  "techniques/graph-rag.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Optional",
-                                        "ai-engineer":  "Optional",
-                                        "genai-engineer":  "Good",
-                                        "llm-engineer":  "Optional",
-                                        "ml-engineer":  "Not Relevant",
-                                        "mlops-engineer":  "Not Relevant",
-                                        "rag-engineer":  "Must",
-                                        "README":  "Not Relevant"
-                                    }
-                   },
-                   {
-                       "Path":  "techniques/distillation-and-compression.md",
-                       "Title":  "Knowledge Distillation \u0026 Model Compression",
-                       "Folder":  "techniques",
-                       "Difficulty":  "advanced",
-                       "SitePath":  "techniques/distillation-and-compression.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Optional",
-                                        "ai-engineer":  "Not Relevant",
-                                        "genai-engineer":  "Optional",
-                                        "llm-engineer":  "Good",
-                                        "ml-engineer":  "Not Relevant",
-                                        "mlops-engineer":  "Not Relevant",
-                                        "rag-engineer":  "Optional",
-                                        "README":  "Not Relevant"
-                                    }
-                   },
-                   {
-                       "Path":  "techniques/long-context-engineering.md",
-                       "Title":  "Long-Context Engineering",
-                       "Folder":  "techniques",
-                       "Difficulty":  "advanced",
-                       "SitePath":  "techniques/long-context-engineering.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Optional",
-                                        "ai-engineer":  "Not Relevant",
-                                        "genai-engineer":  "Optional",
-                                        "llm-engineer":  "Optional",
-                                        "ml-engineer":  "Not Relevant",
-                                        "mlops-engineer":  "Not Relevant",
-                                        "rag-engineer":  "Optional",
-                                        "README":  "Not Relevant"
-                                    }
-                   },
-                   {
-                       "Path":  "techniques/prompt-engineering.md",
-                       "Title":  "Prompt Engineering",
-                       "Folder":  "techniques",
-                       "Difficulty":  "beginner",
-                       "SitePath":  "techniques/prompt-engineering.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Must",
-                                        "ai-engineer":  "Must",
-                                        "genai-engineer":  "Must",
-                                        "llm-engineer":  "Must",
-                                        "ml-engineer":  "Must",
-                                        "mlops-engineer":  "Must",
-                                        "rag-engineer":  "Must",
-                                        "README":  "Must"
-                                    }
-                   },
-                   {
-                       "Path":  "techniques/rl-alignment.md",
-                       "Title":  "Reinforcement Learning for LLM Alignment",
-                       "Folder":  "techniques",
-                       "Difficulty":  "advanced",
-                       "SitePath":  "techniques/rl-alignment.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Optional",
-                                        "ai-engineer":  "Not Relevant",
-                                        "genai-engineer":  "Optional",
-                                        "llm-engineer":  "Good",
-                                        "ml-engineer":  "Not Relevant",
-                                        "mlops-engineer":  "Not Relevant",
-                                        "rag-engineer":  "Optional",
-                                        "README":  "Not Relevant"
-                                    }
-                   },
-                   {
-                       "Path":  "techniques/rag.md",
-                       "Title":  "Retrieval-Augmented Generation (RAG)",
-                       "Folder":  "techniques",
-                       "Difficulty":  "intermediate",
-                       "SitePath":  "techniques/rag.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Must",
-                                        "ai-engineer":  "Must",
-                                        "genai-engineer":  "Must",
-                                        "llm-engineer":  "Must",
-                                        "ml-engineer":  "Must",
-                                        "mlops-engineer":  "Must",
-                                        "rag-engineer":  "Must",
-                                        "README":  "Must"
-                                    }
-                   },
-                   {
-                       "Path":  "techniques/synthetic-data-and-data-engineering.md",
-                       "Title":  "Synthetic Data \u0026 Data Engineering for LLMs",
-                       "Folder":  "techniques",
-                       "Difficulty":  "intermediate",
-                       "SitePath":  "techniques/synthetic-data-and-data-engineering.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Optional",
-                                        "ai-engineer":  "Not Relevant",
-                                        "genai-engineer":  "Optional",
-                                        "llm-engineer":  "Optional",
-                                        "ml-engineer":  "Not Relevant",
-                                        "mlops-engineer":  "Not Relevant",
-                                        "rag-engineer":  "Optional",
-                                        "README":  "Not Relevant"
-                                    }
-                   },
-                   {
-                       "Path":  "tools-and-infra/cloud-ml-services.md",
-                       "Title":  "Cloud ML Services \u0026 Managed AI Platforms",
-                       "Folder":  "tools-and-infra",
-                       "Difficulty":  "intermediate",
-                       "SitePath":  "tools-and-infra/cloud-ml-services.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Not Relevant",
-                                        "ai-engineer":  "Not Relevant",
-                                        "genai-engineer":  "Not Relevant",
-                                        "llm-engineer":  "Not Relevant",
-                                        "ml-engineer":  "Must",
-                                        "mlops-engineer":  "Must",
-                                        "rag-engineer":  "Not Relevant",
-                                        "README":  "Not Relevant"
-                                    }
-                   },
-                   {
-                       "Path":  "tools-and-infra/distributed-systems-for-ai.md",
-                       "Title":  "Distributed Systems Fundamentals for AI",
-                       "Folder":  "tools-and-infra",
-                       "Difficulty":  "advanced",
-                       "SitePath":  "tools-and-infra/distributed-systems-for-ai.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Not Relevant",
-                                        "ai-engineer":  "Not Relevant",
-                                        "genai-engineer":  "Not Relevant",
-                                        "llm-engineer":  "Not Relevant",
-                                        "ml-engineer":  "Good",
-                                        "mlops-engineer":  "Good",
-                                        "rag-engineer":  "Not Relevant",
-                                        "README":  "Not Relevant"
-                                    }
-                   },
-                   {
-                       "Path":  "tools-and-infra/tools-overview.md",
-                       "Title":  "GenAI Tools \u0026 Infrastructure",
-                       "Folder":  "tools-and-infra",
-                       "Difficulty":  "intermediate",
-                       "SitePath":  "tools-and-infra/tools-overview.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Not Relevant",
-                                        "ai-engineer":  "Not Relevant",
-                                        "genai-engineer":  "Not Relevant",
-                                        "llm-engineer":  "Not Relevant",
-                                        "ml-engineer":  "Not Relevant",
-                                        "mlops-engineer":  "Not Relevant",
-                                        "rag-engineer":  "Not Relevant",
-                                        "README":  "Not Relevant"
-                                    }
-                   },
-                   {
-                       "Path":  "tools-and-infra/ml-experiment-and-data-management.md",
-                       "Title":  "ML Experiment \u0026 Data Management",
-                       "Folder":  "tools-and-infra",
-                       "Difficulty":  "intermediate",
-                       "SitePath":  "tools-and-infra/ml-experiment-and-data-management.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Not Relevant",
-                                        "ai-engineer":  "Not Relevant",
-                                        "genai-engineer":  "Not Relevant",
-                                        "llm-engineer":  "Not Relevant",
-                                        "ml-engineer":  "Must",
-                                        "mlops-engineer":  "Must",
-                                        "rag-engineer":  "Not Relevant",
-                                        "README":  "Not Relevant"
-                                    }
-                   },
-                   {
-                       "Path":  "tools-and-infra/vector-databases.md",
-                       "Title":  "Vector Databases",
-                       "Folder":  "tools-and-infra",
-                       "Difficulty":  "intermediate",
-                       "SitePath":  "tools-and-infra/vector-databases.html",
-                       "Statuses":  {
-                                        "agentic-ai-engineer":  "Optional",
-                                        "ai-engineer":  "Optional",
-                                        "genai-engineer":  "Optional",
-                                        "llm-engineer":  "Optional",
-                                        "ml-engineer":  "Not Relevant",
-                                        "mlops-engineer":  "Not Relevant",
-                                        "rag-engineer":  "Must",
-                                        "README":  "Not Relevant"
-                                    }
-                   }
-               ]
+          },
+          {
+            "Path": "applications/ai-ux-patterns.md",
+            "Title": "AI UX Patterns",
+            "Folder": "applications",
+            "Difficulty": "intermediate",
+            "SitePath": "applications/ai-ux-patterns.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Optional",
+                    "ai-engineer": "Not Relevant",
+                    "genai-engineer": "Optional",
+                    "llm-engineer": "Optional",
+                    "ml-engineer": "Not Relevant",
+                    "mlops-engineer": "Not Relevant",
+                    "rag-engineer": "Optional",
+                    "README": "Not Relevant"
+                  }
+          },
+          {
+            "Path": "applications/api-design-for-ai.md",
+            "Title": "API Design for AI Applications",
+            "Folder": "applications",
+            "Difficulty": "intermediate",
+            "SitePath": "applications/api-design-for-ai.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Good",
+                    "ai-engineer": "Optional",
+                    "genai-engineer": "Not Relevant",
+                    "llm-engineer": "Not Relevant",
+                    "ml-engineer": "Not Relevant",
+                    "mlops-engineer": "Not Relevant",
+                    "rag-engineer": "Not Relevant",
+                    "README": "Not Relevant"
+                  }
+          },
+          {
+            "Path": "applications/code-generation.md",
+            "Title": "Code Generation \u0026 AI-Assisted Development",
+            "Folder": "applications",
+            "Difficulty": "intermediate",
+            "SitePath": "applications/code-generation.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Not Relevant",
+                    "ai-engineer": "Optional",
+                    "genai-engineer": "Not Relevant",
+                    "llm-engineer": "Not Relevant",
+                    "ml-engineer": "Not Relevant",
+                    "mlops-engineer": "Not Relevant",
+                    "rag-engineer": "Not Relevant",
+                    "README": "Not Relevant"
+                  }
+          },
+          {
+            "Path": "applications/conversational-ai.md",
+            "Title": "Conversational AI \u0026 Dialogue Systems",
+            "Folder": "applications",
+            "Difficulty": "intermediate",
+            "SitePath": "applications/conversational-ai.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Good",
+                    "ai-engineer": "Optional",
+                    "genai-engineer": "Not Relevant",
+                    "llm-engineer": "Not Relevant",
+                    "ml-engineer": "Not Relevant",
+                    "mlops-engineer": "Not Relevant",
+                    "rag-engineer": "Not Relevant",
+                    "README": "Not Relevant"
+                  }
+          },
+          {
+            "Path": "applications/voice-ai.md",
+            "Title": "Voice AI \u0026 Speech",
+            "Folder": "applications",
+            "Difficulty": "intermediate",
+            "SitePath": "applications/voice-ai.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Not Relevant",
+                    "ai-engineer": "Optional",
+                    "genai-engineer": "Not Relevant",
+                    "llm-engineer": "Not Relevant",
+                    "ml-engineer": "Not Relevant",
+                    "mlops-engineer": "Not Relevant",
+                    "rag-engineer": "Not Relevant",
+                    "README": "Not Relevant"
+                  }
+          },
+          {
+            "Path": "ethics-and-safety/adversarial-ml-and-ai-security.md",
+            "Title": "Adversarial ML \u0026 AI Security",
+            "Folder": "ethics-and-safety",
+            "Difficulty": "advanced",
+            "SitePath": "ethics-and-safety/adversarial-ml-and-ai-security.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Good",
+                    "ai-engineer": "Not Relevant",
+                    "genai-engineer": "Not Relevant",
+                    "llm-engineer": "Not Relevant",
+                    "ml-engineer": "Not Relevant",
+                    "mlops-engineer": "Not Relevant",
+                    "rag-engineer": "Not Relevant",
+                    "README": "Not Relevant"
+                  }
+          },
+          {
+            "Path": "ethics-and-safety/ai-regulation.md",
+            "Title": "AI Regulation for Builders",
+            "Folder": "ethics-and-safety",
+            "Difficulty": "advanced",
+            "SitePath": "ethics-and-safety/ai-regulation.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Not Relevant",
+                    "ai-engineer": "Not Relevant",
+                    "genai-engineer": "Not Relevant",
+                    "llm-engineer": "Not Relevant",
+                    "ml-engineer": "Not Relevant",
+                    "mlops-engineer": "Good",
+                    "rag-engineer": "Not Relevant",
+                    "README": "Not Relevant"
+                  }
+          },
+          {
+            "Path": "ethics-and-safety/ethics-safety-alignment.md",
+            "Title": "Ethics, Safety \u0026 Alignment",
+            "Folder": "ethics-and-safety",
+            "Difficulty": "intermediate",
+            "SitePath": "ethics-and-safety/ethics-safety-alignment.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Not Relevant",
+                    "ai-engineer": "Not Relevant",
+                    "genai-engineer": "Not Relevant",
+                    "llm-engineer": "Not Relevant",
+                    "ml-engineer": "Not Relevant",
+                    "mlops-engineer": "Not Relevant",
+                    "rag-engineer": "Not Relevant",
+                    "README": "Not Relevant"
+                  }
+          },
+          {
+            "Path": "ethics-and-safety/owasp-llm-top-10.md",
+            "Title": "OWASP Top 10 for LLM Applications",
+            "Folder": "ethics-and-safety",
+            "Difficulty": "intermediate",
+            "SitePath": "ethics-and-safety/owasp-llm-top-10.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Not Relevant",
+                    "ai-engineer": "Not Relevant",
+                    "genai-engineer": "Not Relevant",
+                    "llm-engineer": "Not Relevant",
+                    "ml-engineer": "Not Relevant",
+                    "mlops-engineer": "Not Relevant",
+                    "rag-engineer": "Not Relevant",
+                    "README": "Not Relevant"
+                  }
+          },
+          {
+            "Path": "ethics-and-safety/prompt-injection-deep-dive.md",
+            "Title": "Prompt Injection Deep Dive",
+            "Folder": "ethics-and-safety",
+            "Difficulty": "advanced",
+            "SitePath": "ethics-and-safety/prompt-injection-deep-dive.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Not Relevant",
+                    "ai-engineer": "Not Relevant",
+                    "genai-engineer": "Not Relevant",
+                    "llm-engineer": "Not Relevant",
+                    "ml-engineer": "Not Relevant",
+                    "mlops-engineer": "Not Relevant",
+                    "rag-engineer": "Not Relevant",
+                    "README": "Not Relevant"
+                  }
+          },
+          {
+            "Path": "evaluation/evaluation-and-benchmarks.md",
+            "Title": "LLM Evaluation \u0026 Benchmarks",
+            "Folder": "evaluation",
+            "Difficulty": "intermediate",
+            "SitePath": "evaluation/evaluation-and-benchmarks.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Must",
+                    "ai-engineer": "Must",
+                    "genai-engineer": "Must",
+                    "llm-engineer": "Must",
+                    "ml-engineer": "Must",
+                    "mlops-engineer": "Must",
+                    "rag-engineer": "Must",
+                    "README": "Must"
+                  }
+          },
+          {
+            "Path": "evaluation/llm-evaluation-deep-dive.md",
+            "Title": "LLM Evaluation Deep Dive",
+            "Folder": "evaluation",
+            "Difficulty": "advanced",
+            "SitePath": "evaluation/llm-evaluation-deep-dive.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Optional",
+                    "ai-engineer": "Not Relevant",
+                    "genai-engineer": "Optional",
+                    "llm-engineer": "Optional",
+                    "ml-engineer": "Not Relevant",
+                    "mlops-engineer": "Not Relevant",
+                    "rag-engineer": "Optional",
+                    "README": "Not Relevant"
+                  }
+          },
+          {
+            "Path": "evaluation/retrieval-evaluation.md",
+            "Title": "Retrieval Evaluation",
+            "Folder": "evaluation",
+            "Difficulty": "advanced",
+            "SitePath": "evaluation/retrieval-evaluation.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Optional",
+                    "ai-engineer": "Not Relevant",
+                    "genai-engineer": "Optional",
+                    "llm-engineer": "Optional",
+                    "ml-engineer": "Not Relevant",
+                    "mlops-engineer": "Not Relevant",
+                    "rag-engineer": "Optional",
+                    "README": "Not Relevant"
+                  }
+          },
+          {
+            "Path": "evaluation/system-design-for-ai-interviews.md",
+            "Title": "System Design for AI Interviews",
+            "Folder": "evaluation",
+            "Difficulty": "advanced",
+            "SitePath": "evaluation/system-design-for-ai-interviews.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Not Relevant",
+                    "ai-engineer": "Not Relevant",
+                    "genai-engineer": "Not Relevant",
+                    "llm-engineer": "Not Relevant",
+                    "ml-engineer": "Not Relevant",
+                    "mlops-engineer": "Good",
+                    "rag-engineer": "Not Relevant",
+                    "README": "Not Relevant"
+                  }
+          },
+          {
+            "Path": "foundations/attention-mechanism.md",
+            "Title": "Attention Mechanism",
+            "Folder": "foundations",
+            "Difficulty": "intermediate",
+            "SitePath": "foundations/attention-mechanism.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Must",
+                    "ai-engineer": "Must",
+                    "genai-engineer": "Must",
+                    "llm-engineer": "Must",
+                    "ml-engineer": "Must",
+                    "mlops-engineer": "Must",
+                    "rag-engineer": "Must",
+                    "README": "Must"
+                  }
+          },
+          {
+            "Path": "foundations/attention-deep-dive.md",
+            "Title": "Attention Mechanism Deep Dive",
+            "Folder": "foundations",
+            "Difficulty": "expert",
+            "SitePath": "foundations/attention-deep-dive.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Not Relevant",
+                    "ai-engineer": "Not Relevant",
+                    "genai-engineer": "Not Relevant",
+                    "llm-engineer": "Not Relevant",
+                    "ml-engineer": "Not Relevant",
+                    "mlops-engineer": "Not Relevant",
+                    "rag-engineer": "Not Relevant",
+                    "README": "Not Relevant"
+                  }
+          },
+          {
+            "Path": "foundations/embeddings.md",
+            "Title": "Embeddings",
+            "Folder": "foundations",
+            "Difficulty": "intermediate",
+            "SitePath": "foundations/embeddings.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Must",
+                    "ai-engineer": "Must",
+                    "genai-engineer": "Must",
+                    "llm-engineer": "Must",
+                    "ml-engineer": "Must",
+                    "mlops-engineer": "Must",
+                    "rag-engineer": "Must",
+                    "README": "Must"
+                  }
+          },
+          {
+            "Path": "foundations/modern-architectures.md",
+            "Title": "Modern LLM Architectures",
+            "Folder": "foundations",
+            "Difficulty": "advanced",
+            "SitePath": "foundations/modern-architectures.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Must",
+                    "ai-engineer": "Must",
+                    "genai-engineer": "Must",
+                    "llm-engineer": "Must",
+                    "ml-engineer": "Must",
+                    "mlops-engineer": "Must",
+                    "rag-engineer": "Must",
+                    "README": "Must"
+                  }
+          },
+          {
+            "Path": "foundations/scaling-laws-and-pretraining.md",
+            "Title": "Scaling Laws \u0026 Pre-training",
+            "Folder": "foundations",
+            "Difficulty": "advanced",
+            "SitePath": "foundations/scaling-laws-and-pretraining.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Must",
+                    "ai-engineer": "Must",
+                    "genai-engineer": "Must",
+                    "llm-engineer": "Must",
+                    "ml-engineer": "Must",
+                    "mlops-engineer": "Must",
+                    "rag-engineer": "Must",
+                    "README": "Must"
+                  }
+          },
+          {
+            "Path": "foundations/state-space-models.md",
+            "Title": "State Space Models",
+            "Folder": "foundations",
+            "Difficulty": "expert",
+            "SitePath": "foundations/state-space-models.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Not Relevant",
+                    "ai-engineer": "Not Relevant",
+                    "genai-engineer": "Not Relevant",
+                    "llm-engineer": "Not Relevant",
+                    "ml-engineer": "Not Relevant",
+                    "mlops-engineer": "Not Relevant",
+                    "rag-engineer": "Not Relevant",
+                    "README": "Not Relevant"
+                  }
+          },
+          {
+            "Path": "foundations/tokenization.md",
+            "Title": "Tokenization",
+            "Folder": "foundations",
+            "Difficulty": "intermediate",
+            "SitePath": "foundations/tokenization.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Must",
+                    "ai-engineer": "Must",
+                    "genai-engineer": "Must",
+                    "llm-engineer": "Must",
+                    "ml-engineer": "Must",
+                    "mlops-engineer": "Must",
+                    "rag-engineer": "Must",
+                    "README": "Must"
+                  }
+          },
+          {
+            "Path": "foundations/transformers.md",
+            "Title": "Transformers",
+            "Folder": "foundations",
+            "Difficulty": "intermediate",
+            "SitePath": "foundations/transformers.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Must",
+                    "ai-engineer": "Must",
+                    "genai-engineer": "Must",
+                    "llm-engineer": "Must",
+                    "ml-engineer": "Must",
+                    "mlops-engineer": "Must",
+                    "rag-engineer": "Must",
+                    "README": "Must"
+                  }
+          },
+          {
+            "Path": "inference/distributed-inference-and-serving-architecture.md",
+            "Title": "Distributed Inference \u0026 Serving Architecture",
+            "Folder": "inference",
+            "Difficulty": "expert",
+            "SitePath": "inference/distributed-inference-and-serving-architecture.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Not Relevant",
+                    "ai-engineer": "Not Relevant",
+                    "genai-engineer": "Not Relevant",
+                    "llm-engineer": "Not Relevant",
+                    "ml-engineer": "Good",
+                    "mlops-engineer": "Good",
+                    "rag-engineer": "Not Relevant",
+                    "README": "Not Relevant"
+                  }
+          },
+          {
+            "Path": "inference/gpu-cuda-programming.md",
+            "Title": "GPU \u0026 CUDA Programming for AI Engineers",
+            "Folder": "inference",
+            "Difficulty": "expert",
+            "SitePath": "inference/gpu-cuda-programming.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Not Relevant",
+                    "ai-engineer": "Not Relevant",
+                    "genai-engineer": "Not Relevant",
+                    "llm-engineer": "Not Relevant",
+                    "ml-engineer": "Good",
+                    "mlops-engineer": "Not Relevant",
+                    "rag-engineer": "Not Relevant",
+                    "README": "Not Relevant"
+                  }
+          },
+          {
+            "Path": "inference/inference-optimization.md",
+            "Title": "Inference Optimization",
+            "Folder": "inference",
+            "Difficulty": "advanced",
+            "SitePath": "inference/inference-optimization.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Not Relevant",
+                    "ai-engineer": "Good",
+                    "genai-engineer": "Not Relevant",
+                    "llm-engineer": "Must",
+                    "ml-engineer": "Good",
+                    "mlops-engineer": "Optional",
+                    "rag-engineer": "Not Relevant",
+                    "README": "Not Relevant"
+                  }
+          },
+          {
+            "Path": "llms/hallucination-detection.md",
+            "Title": "Hallucination Detection \u0026 Mitigation",
+            "Folder": "llms",
+            "Difficulty": "advanced",
+            "SitePath": "llms/hallucination-detection.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Good",
+                    "ai-engineer": "Not Relevant",
+                    "genai-engineer": "Good",
+                    "llm-engineer": "Good",
+                    "ml-engineer": "Not Relevant",
+                    "mlops-engineer": "Not Relevant",
+                    "rag-engineer": "Good",
+                    "README": "Not Relevant"
+                  }
+          },
+          {
+            "Path": "llms/llms-overview.md",
+            "Title": "Large Language Models (LLMs)",
+            "Folder": "llms",
+            "Difficulty": "intermediate",
+            "SitePath": "llms/llms-overview.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Must",
+                    "ai-engineer": "Must",
+                    "genai-engineer": "Must",
+                    "llm-engineer": "Must",
+                    "ml-engineer": "Must",
+                    "mlops-engineer": "Must",
+                    "rag-engineer": "Must",
+                    "README": "Must"
+                  }
+          },
+          {
+            "Path": "llms/llm-landscape.md",
+            "Title": "LLM Landscape \u0026 Model Selection",
+            "Folder": "llms",
+            "Difficulty": "intermediate",
+            "SitePath": "llms/llm-landscape.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Not Relevant",
+                    "ai-engineer": "Not Relevant",
+                    "genai-engineer": "Not Relevant",
+                    "llm-engineer": "Not Relevant",
+                    "ml-engineer": "Not Relevant",
+                    "mlops-engineer": "Not Relevant",
+                    "rag-engineer": "Not Relevant",
+                    "README": "Not Relevant"
+                  }
+          },
+          {
+            "Path": "llms/reasoning-models.md",
+            "Title": "Reasoning Models \u0026 Test-Time Compute",
+            "Folder": "llms",
+            "Difficulty": "advanced",
+            "SitePath": "llms/reasoning-models.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Not Relevant",
+                    "ai-engineer": "Not Relevant",
+                    "genai-engineer": "Not Relevant",
+                    "llm-engineer": "Not Relevant",
+                    "ml-engineer": "Not Relevant",
+                    "mlops-engineer": "Not Relevant",
+                    "rag-engineer": "Not Relevant",
+                    "README": "Not Relevant"
+                  }
+          },
+          {
+            "Path": "multimodal/computer-vision-fundamentals.md",
+            "Title": "Computer Vision Fundamentals for AI Builders",
+            "Folder": "multimodal",
+            "Difficulty": "intermediate",
+            "SitePath": "multimodal/computer-vision-fundamentals.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Not Relevant",
+                    "ai-engineer": "Not Relevant",
+                    "genai-engineer": "Not Relevant",
+                    "llm-engineer": "Not Relevant",
+                    "ml-engineer": "Not Relevant",
+                    "mlops-engineer": "Not Relevant",
+                    "rag-engineer": "Not Relevant",
+                    "README": "Not Relevant"
+                  }
+          },
+          {
+            "Path": "multimodal/diffusion-models.md",
+            "Title": "Diffusion Models",
+            "Folder": "multimodal",
+            "Difficulty": "advanced",
+            "SitePath": "multimodal/diffusion-models.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Not Relevant",
+                    "ai-engineer": "Not Relevant",
+                    "genai-engineer": "Not Relevant",
+                    "llm-engineer": "Not Relevant",
+                    "ml-engineer": "Not Relevant",
+                    "mlops-engineer": "Not Relevant",
+                    "rag-engineer": "Not Relevant",
+                    "README": "Not Relevant"
+                  }
+          },
+          {
+            "Path": "multimodal/multimodal-ai.md",
+            "Title": "Multimodal AI",
+            "Folder": "multimodal",
+            "Difficulty": "intermediate",
+            "SitePath": "multimodal/multimodal-ai.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Not Relevant",
+                    "ai-engineer": "Not Relevant",
+                    "genai-engineer": "Not Relevant",
+                    "llm-engineer": "Not Relevant",
+                    "ml-engineer": "Not Relevant",
+                    "mlops-engineer": "Not Relevant",
+                    "rag-engineer": "Not Relevant",
+                    "README": "Not Relevant"
+                  }
+          },
+          {
+            "Path": "prerequisites/deep-learning-fundamentals.md",
+            "Title": "Deep Learning Fundamentals",
+            "Folder": "prerequisites",
+            "Difficulty": "intermediate",
+            "SitePath": "prerequisites/deep-learning-fundamentals.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Must",
+                    "ai-engineer": "Must",
+                    "genai-engineer": "Must",
+                    "llm-engineer": "Must",
+                    "ml-engineer": "Must",
+                    "mlops-engineer": "Must",
+                    "rag-engineer": "Must",
+                    "README": "Must"
+                  }
+          },
+          {
+            "Path": "prerequisites/linear-algebra-for-ai.md",
+            "Title": "Linear Algebra for AI",
+            "Folder": "prerequisites",
+            "Difficulty": "beginner",
+            "SitePath": "prerequisites/linear-algebra-for-ai.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Must",
+                    "ai-engineer": "Must",
+                    "genai-engineer": "Must",
+                    "llm-engineer": "Must",
+                    "ml-engineer": "Must",
+                    "mlops-engineer": "Must",
+                    "rag-engineer": "Must",
+                    "README": "Must"
+                  }
+          },
+          {
+            "Path": "prerequisites/neural-networks.md",
+            "Title": "Neural Networks",
+            "Folder": "prerequisites",
+            "Difficulty": "beginner",
+            "SitePath": "prerequisites/neural-networks.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Must",
+                    "ai-engineer": "Must",
+                    "genai-engineer": "Must",
+                    "llm-engineer": "Must",
+                    "ml-engineer": "Must",
+                    "mlops-engineer": "Must",
+                    "rag-engineer": "Must",
+                    "README": "Must"
+                  }
+          },
+          {
+            "Path": "prerequisites/nlp-fundamentals.md",
+            "Title": "NLP Fundamentals",
+            "Folder": "prerequisites",
+            "Difficulty": "beginner",
+            "SitePath": "prerequisites/nlp-fundamentals.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Must",
+                    "ai-engineer": "Must",
+                    "genai-engineer": "Must",
+                    "llm-engineer": "Must",
+                    "ml-engineer": "Must",
+                    "mlops-engineer": "Must",
+                    "rag-engineer": "Must",
+                    "README": "Must"
+                  }
+          },
+          {
+            "Path": "prerequisites/probability-and-statistics.md",
+            "Title": "Probability \u0026 Statistics for AI",
+            "Folder": "prerequisites",
+            "Difficulty": "beginner",
+            "SitePath": "prerequisites/probability-and-statistics.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Must",
+                    "ai-engineer": "Must",
+                    "genai-engineer": "Must",
+                    "llm-engineer": "Must",
+                    "ml-engineer": "Must",
+                    "mlops-engineer": "Must",
+                    "rag-engineer": "Must",
+                    "README": "Must"
+                  }
+          },
+          {
+            "Path": "prerequisites/python-for-ai.md",
+            "Title": "Python for AI",
+            "Folder": "prerequisites",
+            "Difficulty": "beginner",
+            "SitePath": "prerequisites/python-for-ai.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Must",
+                    "ai-engineer": "Must",
+                    "genai-engineer": "Must",
+                    "llm-engineer": "Must",
+                    "ml-engineer": "Must",
+                    "mlops-engineer": "Must",
+                    "rag-engineer": "Must",
+                    "README": "Must"
+                  }
+          },
+          {
+            "Path": "production/ai-system-design.md",
+            "Title": "AI System Design for GenAI Applications",
+            "Folder": "production",
+            "Difficulty": "advanced",
+            "SitePath": "production/ai-system-design.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Must",
+                    "ai-engineer": "Must",
+                    "genai-engineer": "Good",
+                    "llm-engineer": "Not Relevant",
+                    "ml-engineer": "Not Relevant",
+                    "mlops-engineer": "Not Relevant",
+                    "rag-engineer": "Good",
+                    "README": "Not Relevant"
+                  }
+          },
+          {
+            "Path": "production/cicd-for-ml.md",
+            "Title": "CI/CD for ML and LLM Systems",
+            "Folder": "production",
+            "Difficulty": "advanced",
+            "SitePath": "production/cicd-for-ml.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Not Relevant",
+                    "ai-engineer": "Not Relevant",
+                    "genai-engineer": "Not Relevant",
+                    "llm-engineer": "Not Relevant",
+                    "ml-engineer": "Must",
+                    "mlops-engineer": "Must",
+                    "rag-engineer": "Not Relevant",
+                    "README": "Not Relevant"
+                  }
+          },
+          {
+            "Path": "production/classical-ml-for-genai.md",
+            "Title": "Classical ML for GenAI Builders",
+            "Folder": "production",
+            "Difficulty": "intermediate",
+            "SitePath": "production/classical-ml-for-genai.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Not Relevant",
+                    "ai-engineer": "Not Relevant",
+                    "genai-engineer": "Not Relevant",
+                    "llm-engineer": "Not Relevant",
+                    "ml-engineer": "Must",
+                    "mlops-engineer": "Optional",
+                    "rag-engineer": "Not Relevant",
+                    "README": "Not Relevant"
+                  }
+          },
+          {
+            "Path": "production/cost-optimization.md",
+            "Title": "Cost Optimization for GenAI Systems",
+            "Folder": "production",
+            "Difficulty": "advanced",
+            "SitePath": "production/cost-optimization.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Optional",
+                    "ai-engineer": "Not Relevant",
+                    "genai-engineer": "Optional",
+                    "llm-engineer": "Optional",
+                    "ml-engineer": "Optional",
+                    "mlops-engineer": "Must",
+                    "rag-engineer": "Optional",
+                    "README": "Not Relevant"
+                  }
+          },
+          {
+            "Path": "production/data-flywheel-design.md",
+            "Title": "Data Flywheel Design",
+            "Folder": "production",
+            "Difficulty": "advanced",
+            "SitePath": "production/data-flywheel-design.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Optional",
+                    "ai-engineer": "Not Relevant",
+                    "genai-engineer": "Optional",
+                    "llm-engineer": "Optional",
+                    "ml-engineer": "Not Relevant",
+                    "mlops-engineer": "Not Relevant",
+                    "rag-engineer": "Optional",
+                    "README": "Not Relevant"
+                  }
+          },
+          {
+            "Path": "production/docker-and-kubernetes.md",
+            "Title": "Docker \u0026 Kubernetes for GenAI Deployment",
+            "Folder": "production",
+            "Difficulty": "intermediate",
+            "SitePath": "production/docker-and-kubernetes.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Not Relevant",
+                    "ai-engineer": "Not Relevant",
+                    "genai-engineer": "Not Relevant",
+                    "llm-engineer": "Not Relevant",
+                    "ml-engineer": "Must",
+                    "mlops-engineer": "Must",
+                    "rag-engineer": "Not Relevant",
+                    "README": "Not Relevant"
+                  }
+          },
+          {
+            "Path": "production/document-parsing-and-extraction.md",
+            "Title": "Document Parsing \u0026 Extraction",
+            "Folder": "production",
+            "Difficulty": "intermediate",
+            "SitePath": "production/document-parsing-and-extraction.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Optional",
+                    "ai-engineer": "Not Relevant",
+                    "genai-engineer": "Optional",
+                    "llm-engineer": "Optional",
+                    "ml-engineer": "Not Relevant",
+                    "mlops-engineer": "Not Relevant",
+                    "rag-engineer": "Optional",
+                    "README": "Not Relevant"
+                  }
+          },
+          {
+            "Path": "production/guardrails-and-content-filtering.md",
+            "Title": "Guardrails \u0026 Content Filtering",
+            "Folder": "production",
+            "Difficulty": "advanced",
+            "SitePath": "production/guardrails-and-content-filtering.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Optional",
+                    "ai-engineer": "Not Relevant",
+                    "genai-engineer": "Optional",
+                    "llm-engineer": "Optional",
+                    "ml-engineer": "Not Relevant",
+                    "mlops-engineer": "Not Relevant",
+                    "rag-engineer": "Optional",
+                    "README": "Not Relevant"
+                  }
+          },
+          {
+            "Path": "production/latency-and-throughput-engineering.md",
+            "Title": "Latency \u0026 Throughput Engineering for AI Systems",
+            "Folder": "production",
+            "Difficulty": "advanced",
+            "SitePath": "production/latency-and-throughput-engineering.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Not Relevant",
+                    "ai-engineer": "Not Relevant",
+                    "genai-engineer": "Not Relevant",
+                    "llm-engineer": "Not Relevant",
+                    "ml-engineer": "Good",
+                    "mlops-engineer": "Good",
+                    "rag-engineer": "Not Relevant",
+                    "README": "Not Relevant"
+                  }
+          },
+          {
+            "Path": "production/llm-routing-and-model-selection.md",
+            "Title": "LLM Routing \u0026 Model Selection",
+            "Folder": "production",
+            "Difficulty": "advanced",
+            "SitePath": "production/llm-routing-and-model-selection.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Optional",
+                    "ai-engineer": "Not Relevant",
+                    "genai-engineer": "Optional",
+                    "llm-engineer": "Optional",
+                    "ml-engineer": "Not Relevant",
+                    "mlops-engineer": "Not Relevant",
+                    "rag-engineer": "Optional",
+                    "README": "Not Relevant"
+                  }
+          },
+          {
+            "Path": "production/llmops.md",
+            "Title": "LLMOps \u0026 Production Deployment",
+            "Folder": "production",
+            "Difficulty": "intermediate",
+            "SitePath": "production/llmops.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Must",
+                    "ai-engineer": "Must",
+                    "genai-engineer": "Must",
+                    "llm-engineer": "Optional",
+                    "ml-engineer": "Must",
+                    "mlops-engineer": "Must",
+                    "rag-engineer": "Good",
+                    "README": "Not Relevant"
+                  }
+          },
+          {
+            "Path": "production/model-serving.md",
+            "Title": "Model Serving for LLM Applications",
+            "Folder": "production",
+            "Difficulty": "advanced",
+            "SitePath": "production/model-serving.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Optional",
+                    "ai-engineer": "Not Relevant",
+                    "genai-engineer": "Optional",
+                    "llm-engineer": "Optional",
+                    "ml-engineer": "Must",
+                    "mlops-engineer": "Must",
+                    "rag-engineer": "Optional",
+                    "README": "Not Relevant"
+                  }
+          },
+          {
+            "Path": "production/monitoring-observability.md",
+            "Title": "Monitoring \u0026 Observability for GenAI Systems",
+            "Folder": "production",
+            "Difficulty": "advanced",
+            "SitePath": "production/monitoring-observability.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Good",
+                    "ai-engineer": "Not Relevant",
+                    "genai-engineer": "Optional",
+                    "llm-engineer": "Optional",
+                    "ml-engineer": "Must",
+                    "mlops-engineer": "Must",
+                    "rag-engineer": "Optional",
+                    "README": "Not Relevant"
+                  }
+          },
+          {
+            "Path": "research-frontiers/distributed-training.md",
+            "Title": "Distributed Training \u0026 Training Infrastructure",
+            "Folder": "research-frontiers",
+            "Difficulty": "expert",
+            "SitePath": "research-frontiers/distributed-training.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Not Relevant",
+                    "ai-engineer": "Not Relevant",
+                    "genai-engineer": "Not Relevant",
+                    "llm-engineer": "Not Relevant",
+                    "ml-engineer": "Not Relevant",
+                    "mlops-engineer": "Not Relevant",
+                    "rag-engineer": "Not Relevant",
+                    "README": "Not Relevant"
+                  }
+          },
+          {
+            "Path": "research-frontiers/interpretability.md",
+            "Title": "Mechanistic Interpretability",
+            "Folder": "research-frontiers",
+            "Difficulty": "expert",
+            "SitePath": "research-frontiers/interpretability.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Not Relevant",
+                    "ai-engineer": "Not Relevant",
+                    "genai-engineer": "Not Relevant",
+                    "llm-engineer": "Not Relevant",
+                    "ml-engineer": "Not Relevant",
+                    "mlops-engineer": "Not Relevant",
+                    "rag-engineer": "Not Relevant",
+                    "README": "Not Relevant"
+                  }
+          },
+          {
+            "Path": "research-frontiers/research-methodology-and-paper-reading.md",
+            "Title": "Research Methodology \u0026 Paper Reading for AI",
+            "Folder": "research-frontiers",
+            "Difficulty": "advanced",
+            "SitePath": "research-frontiers/research-methodology-and-paper-reading.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Not Relevant",
+                    "ai-engineer": "Not Relevant",
+                    "genai-engineer": "Not Relevant",
+                    "llm-engineer": "Not Relevant",
+                    "ml-engineer": "Not Relevant",
+                    "mlops-engineer": "Not Relevant",
+                    "rag-engineer": "Not Relevant",
+                    "README": "Not Relevant"
+                  }
+          },
+          {
+            "Path": "genai.md",
+            "Title": "Generative AI",
+            "Folder": "root",
+            "Difficulty": "beginner",
+            "SitePath": "genai.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Not Relevant",
+                    "ai-engineer": "Not Relevant",
+                    "genai-engineer": "Not Relevant",
+                    "llm-engineer": "Not Relevant",
+                    "ml-engineer": "Not Relevant",
+                    "mlops-engineer": "Not Relevant",
+                    "rag-engineer": "Not Relevant",
+                    "README": "Not Relevant"
+                  }
+          },
+          {
+            "Path": "techniques/advanced-fine-tuning.md",
+            "Title": "Advanced Fine-Tuning for LLM Adaptation",
+            "Folder": "techniques",
+            "Difficulty": "expert",
+            "SitePath": "techniques/advanced-fine-tuning.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Optional",
+                    "ai-engineer": "Good",
+                    "genai-engineer": "Must",
+                    "llm-engineer": "Must",
+                    "ml-engineer": "Not Relevant",
+                    "mlops-engineer": "Not Relevant",
+                    "rag-engineer": "Optional",
+                    "README": "Not Relevant"
+                  }
+          },
+          {
+            "Path": "techniques/context-engineering.md",
+            "Title": "Context Engineering \u0026 Long Context",
+            "Folder": "techniques",
+            "Difficulty": "intermediate",
+            "SitePath": "techniques/context-engineering.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Must",
+                    "ai-engineer": "Must",
+                    "genai-engineer": "Must",
+                    "llm-engineer": "Must",
+                    "ml-engineer": "Must",
+                    "mlops-engineer": "Must",
+                    "rag-engineer": "Must",
+                    "README": "Must"
+                  }
+          },
+          {
+            "Path": "techniques/continual-learning.md",
+            "Title": "Continual Learning \u0026 Lifelong AI",
+            "Folder": "techniques",
+            "Difficulty": "advanced",
+            "SitePath": "techniques/continual-learning.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Not Relevant",
+                    "ai-engineer": "Not Relevant",
+                    "genai-engineer": "Not Relevant",
+                    "llm-engineer": "Not Relevant",
+                    "ml-engineer": "Not Relevant",
+                    "mlops-engineer": "Not Relevant",
+                    "rag-engineer": "Not Relevant",
+                    "README": "Not Relevant"
+                  }
+          },
+          {
+            "Path": "techniques/embedding-fine-tuning.md",
+            "Title": "Embedding Fine-Tuning",
+            "Folder": "techniques",
+            "Difficulty": "advanced",
+            "SitePath": "techniques/embedding-fine-tuning.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Optional",
+                    "ai-engineer": "Not Relevant",
+                    "genai-engineer": "Optional",
+                    "llm-engineer": "Optional",
+                    "ml-engineer": "Not Relevant",
+                    "mlops-engineer": "Not Relevant",
+                    "rag-engineer": "Optional",
+                    "README": "Not Relevant"
+                  }
+          },
+          {
+            "Path": "techniques/fine-tuning.md",
+            "Title": "Fine-Tuning LLMs",
+            "Folder": "techniques",
+            "Difficulty": "advanced",
+            "SitePath": "techniques/fine-tuning.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Must",
+                    "ai-engineer": "Must",
+                    "genai-engineer": "Must",
+                    "llm-engineer": "Must",
+                    "ml-engineer": "Must",
+                    "mlops-engineer": "Must",
+                    "rag-engineer": "Must",
+                    "README": "Must"
+                  }
+          },
+          {
+            "Path": "techniques/function-calling-and-structured-output.md",
+            "Title": "Function Calling, Structured Output \u0026 Tool Use",
+            "Folder": "techniques",
+            "Difficulty": "intermediate",
+            "SitePath": "techniques/function-calling-and-structured-output.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Must",
+                    "ai-engineer": "Must",
+                    "genai-engineer": "Must",
+                    "llm-engineer": "Must",
+                    "ml-engineer": "Must",
+                    "mlops-engineer": "Must",
+                    "rag-engineer": "Must",
+                    "README": "Must"
+                  }
+          },
+          {
+            "Path": "techniques/graph-rag.md",
+            "Title": "Graph RAG \u0026 Advanced Retrieval",
+            "Folder": "techniques",
+            "Difficulty": "advanced",
+            "SitePath": "techniques/graph-rag.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Optional",
+                    "ai-engineer": "Optional",
+                    "genai-engineer": "Good",
+                    "llm-engineer": "Optional",
+                    "ml-engineer": "Not Relevant",
+                    "mlops-engineer": "Not Relevant",
+                    "rag-engineer": "Must",
+                    "README": "Not Relevant"
+                  }
+          },
+          {
+            "Path": "techniques/distillation-and-compression.md",
+            "Title": "Knowledge Distillation \u0026 Model Compression",
+            "Folder": "techniques",
+            "Difficulty": "advanced",
+            "SitePath": "techniques/distillation-and-compression.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Optional",
+                    "ai-engineer": "Not Relevant",
+                    "genai-engineer": "Optional",
+                    "llm-engineer": "Good",
+                    "ml-engineer": "Not Relevant",
+                    "mlops-engineer": "Not Relevant",
+                    "rag-engineer": "Optional",
+                    "README": "Not Relevant"
+                  }
+          },
+          {
+            "Path": "techniques/long-context-engineering.md",
+            "Title": "Long-Context Engineering",
+            "Folder": "techniques",
+            "Difficulty": "advanced",
+            "SitePath": "techniques/long-context-engineering.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Optional",
+                    "ai-engineer": "Not Relevant",
+                    "genai-engineer": "Optional",
+                    "llm-engineer": "Optional",
+                    "ml-engineer": "Not Relevant",
+                    "mlops-engineer": "Not Relevant",
+                    "rag-engineer": "Optional",
+                    "README": "Not Relevant"
+                  }
+          },
+          {
+            "Path": "techniques/prompt-engineering.md",
+            "Title": "Prompt Engineering",
+            "Folder": "techniques",
+            "Difficulty": "beginner",
+            "SitePath": "techniques/prompt-engineering.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Must",
+                    "ai-engineer": "Must",
+                    "genai-engineer": "Must",
+                    "llm-engineer": "Must",
+                    "ml-engineer": "Must",
+                    "mlops-engineer": "Must",
+                    "rag-engineer": "Must",
+                    "README": "Must"
+                  }
+          },
+          {
+            "Path": "techniques/rl-alignment.md",
+            "Title": "Reinforcement Learning for LLM Alignment",
+            "Folder": "techniques",
+            "Difficulty": "advanced",
+            "SitePath": "techniques/rl-alignment.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Optional",
+                    "ai-engineer": "Not Relevant",
+                    "genai-engineer": "Optional",
+                    "llm-engineer": "Good",
+                    "ml-engineer": "Not Relevant",
+                    "mlops-engineer": "Not Relevant",
+                    "rag-engineer": "Optional",
+                    "README": "Not Relevant"
+                  }
+          },
+          {
+            "Path": "techniques/rag.md",
+            "Title": "Retrieval-Augmented Generation (RAG)",
+            "Folder": "techniques",
+            "Difficulty": "intermediate",
+            "SitePath": "techniques/rag.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Must",
+                    "ai-engineer": "Must",
+                    "genai-engineer": "Must",
+                    "llm-engineer": "Must",
+                    "ml-engineer": "Must",
+                    "mlops-engineer": "Must",
+                    "rag-engineer": "Must",
+                    "README": "Must"
+                  }
+          },
+          {
+            "Path": "techniques/synthetic-data-and-data-engineering.md",
+            "Title": "Synthetic Data \u0026 Data Engineering for LLMs",
+            "Folder": "techniques",
+            "Difficulty": "intermediate",
+            "SitePath": "techniques/synthetic-data-and-data-engineering.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Optional",
+                    "ai-engineer": "Not Relevant",
+                    "genai-engineer": "Optional",
+                    "llm-engineer": "Optional",
+                    "ml-engineer": "Not Relevant",
+                    "mlops-engineer": "Not Relevant",
+                    "rag-engineer": "Optional",
+                    "README": "Not Relevant"
+                  }
+          },
+          {
+            "Path": "tools-and-infra/cloud-ml-services.md",
+            "Title": "Cloud ML Services \u0026 Managed AI Platforms",
+            "Folder": "tools-and-infra",
+            "Difficulty": "intermediate",
+            "SitePath": "tools-and-infra/cloud-ml-services.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Not Relevant",
+                    "ai-engineer": "Not Relevant",
+                    "genai-engineer": "Not Relevant",
+                    "llm-engineer": "Not Relevant",
+                    "ml-engineer": "Must",
+                    "mlops-engineer": "Must",
+                    "rag-engineer": "Not Relevant",
+                    "README": "Not Relevant"
+                  }
+          },
+          {
+            "Path": "tools-and-infra/distributed-systems-for-ai.md",
+            "Title": "Distributed Systems Fundamentals for AI",
+            "Folder": "tools-and-infra",
+            "Difficulty": "advanced",
+            "SitePath": "tools-and-infra/distributed-systems-for-ai.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Not Relevant",
+                    "ai-engineer": "Not Relevant",
+                    "genai-engineer": "Not Relevant",
+                    "llm-engineer": "Not Relevant",
+                    "ml-engineer": "Good",
+                    "mlops-engineer": "Good",
+                    "rag-engineer": "Not Relevant",
+                    "README": "Not Relevant"
+                  }
+          },
+          {
+            "Path": "tools-and-infra/tools-overview.md",
+            "Title": "GenAI Tools \u0026 Infrastructure",
+            "Folder": "tools-and-infra",
+            "Difficulty": "intermediate",
+            "SitePath": "tools-and-infra/tools-overview.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Not Relevant",
+                    "ai-engineer": "Not Relevant",
+                    "genai-engineer": "Not Relevant",
+                    "llm-engineer": "Not Relevant",
+                    "ml-engineer": "Not Relevant",
+                    "mlops-engineer": "Not Relevant",
+                    "rag-engineer": "Not Relevant",
+                    "README": "Not Relevant"
+                  }
+          },
+          {
+            "Path": "tools-and-infra/ml-experiment-and-data-management.md",
+            "Title": "ML Experiment \u0026 Data Management",
+            "Folder": "tools-and-infra",
+            "Difficulty": "intermediate",
+            "SitePath": "tools-and-infra/ml-experiment-and-data-management.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Not Relevant",
+                    "ai-engineer": "Not Relevant",
+                    "genai-engineer": "Not Relevant",
+                    "llm-engineer": "Not Relevant",
+                    "ml-engineer": "Must",
+                    "mlops-engineer": "Must",
+                    "rag-engineer": "Not Relevant",
+                    "README": "Not Relevant"
+                  }
+          },
+          {
+            "Path": "tools-and-infra/vector-databases.md",
+            "Title": "Vector Databases",
+            "Folder": "tools-and-infra",
+            "Difficulty": "intermediate",
+            "SitePath": "tools-and-infra/vector-databases.html",
+            "Statuses": {
+                    "agentic-ai-engineer": "Optional",
+                    "ai-engineer": "Optional",
+                    "genai-engineer": "Optional",
+                    "llm-engineer": "Optional",
+                    "ml-engineer": "Not Relevant",
+                    "mlops-engineer": "Not Relevant",
+                    "rag-engineer": "Must",
+                    "README": "Not Relevant"
+                  }
+          }
+        ]
 }

@@ -333,6 +333,43 @@ function Normalize-DeckField {
     return $clean.Trim()
 }
 
+function ConvertTo-NormalizedJson {
+    param([object]$Data)
+
+    $raw = ConvertTo-Json $Data -Depth 8
+
+    # Normalize line endings to LF
+    $raw = $raw.Replace("`r`n", "`n")
+
+    # Normalize PS 5.1 formatting to match PS Core 7.x:
+    # PS 5.1: 4-space indent, extra spaces after colons ("key":  "value")
+    # PS Core: 2-space indent, single space after colons ("key": "value")
+    $lines = $raw -split "`n"
+    $normalized = New-Object System.Collections.Generic.List[string]
+
+    foreach ($line in $lines) {
+        # Convert leading groups of 4 spaces to 2 spaces
+        $match = [regex]::Match($line, '^( +)')
+        if ($match.Success) {
+            $indent = $match.Groups[1].Value
+            $newIndent = ' ' * ([int]($indent.Length / 4) * 2)
+            # Handle odd indentation from PS 5.1 array alignment
+            if ($indent.Length % 4 -ne 0) {
+                $newIndent = ' ' * ([int][Math]::Ceiling($indent.Length / 4) * 2)
+            }
+            $rest = $line.Substring($indent.Length)
+            $line = $newIndent + $rest
+        }
+
+        # Normalize extra spaces after colon in key-value pairs ("key":  "value" -> "key": "value")
+        $line = [regex]::Replace($line, '(?<=":)\s{2,}', ' ')
+
+        $normalized.Add($line)
+    }
+
+    return ($normalized -join "`n")
+}
+
 function Write-Utf8File {
     param(
         [string]$Path,
@@ -344,6 +381,8 @@ function Write-Utf8File {
         New-Item -ItemType Directory -Path $directory -Force | Out-Null
     }
 
+    # Normalize line endings to LF for cross-platform consistency
+    $Content = $Content.Replace("`r`n", "`n")
     [System.IO.File]::WriteAllText($Path, $Content, [System.Text.UTF8Encoding]::new($false))
 }
 
@@ -1057,9 +1096,9 @@ if (-not (Test-Path -LiteralPath $assetsDataDir)) {
     New-Item -ItemType Directory -Path $assetsDataDir -Force | Out-Null
 }
 
-Write-Utf8File -Path (Join-Path $assetsDataDir "knowledge-graph.json") -Content ((ConvertTo-Json $graphData -Depth 8))
-Write-Utf8File -Path (Join-Path $assetsDataDir "topic-role-matrix.json") -Content ((ConvertTo-Json $matrixData -Depth 8))
-Write-Utf8File -Path (Join-Path $assetsDataDir "learning-path.json") -Content ((ConvertTo-Json $learningPathData -Depth 8))
+Write-Utf8File -Path (Join-Path $assetsDataDir "knowledge-graph.json") -Content (ConvertTo-NormalizedJson $graphData)
+Write-Utf8File -Path (Join-Path $assetsDataDir "topic-role-matrix.json") -Content (ConvertTo-NormalizedJson $matrixData)
+Write-Utf8File -Path (Join-Path $assetsDataDir "learning-path.json") -Content (ConvertTo-NormalizedJson $learningPathData)
 Write-Utf8File -Path (Join-Path $repoRoot "generated/topic-role-relevance-matrix.md") -Content (($matrixLines -join "`n") + "`n")
 Write-Utf8File -Path (Join-Path $repoRoot "downloads/anki/README.md") -Content (($ankiReadmeLines -join "`n") + "`n")
 Write-Utf8File -Path (Join-Path $repoRoot "downloads/progress/README.md") -Content (($progressReadmeLines -join "`n") + "`n")

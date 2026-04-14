@@ -3,6 +3,16 @@
 All notable changes to this repository will be documented in this file.
 
 ## [Unreleased]
+
+### Added (April 2026 Remediation - Phase 6)
+- **Phase 6: CI hardening - Code & Implementation now a blocking gate**
+  - `scripts/check_content_compliance.ps1`: promoted `## ★ Code & Implementation`
+    check from informational warning to hard blocking CI gate
+  - All 4 compliance dimensions now enforced (`exit 1` on any failure):
+    Production Failure Modes, Hands-On Exercises, Code & Implementation, OWASP stale terms
+  - CI contract: any new intermediate+ note without a Code section blocks merge
+  - Label updated from `[non-blocking until Phase 6]` to `[ENFORCED - Phase 6 gate]`
+
 ### Added (April 2026 Remediation — Phase 4 and 5)
 - **Phase 4: Frontier content injection**
   - `techniques/advanced-fine-tuning.md`: RLVR and ORPO sections with 2026-04 ground truth

@@ -56,7 +56,7 @@ foreach ($dir in $dirs) {
         if (-not ($content -match "Hands-On Exercises|## ◆ Hands-On Exercises")) {
             $missingEx.Add("$relPath ($difficulty)")
         }
-        # Code section: reported but NOT blocking until Phase 6 (after all 45 notes are fixed)
+        # Code section: ENFORCED as of Phase 6 — all intermediate+ notes must have this section
         if (-not ($content -match "Code & Implementation|Code \u0026 Implementation")) {
             $missingCode.Add("$relPath ($difficulty)")
         }
@@ -69,7 +69,7 @@ Write-Host "--------------------------"
 Write-Host "Intermediate+ notes checked:          $totalChecked"
 Write-Host ("Missing Production Failure Modes:     {0}" -f $missingFM.Count)
 Write-Host ("Missing Hands-On Exercises:           {0}" -f $missingEx.Count)
-Write-Host ("Missing Code & Implementation:        {0}  [non-blocking until Phase 6]" -f $missingCode.Count)
+Write-Host ("Missing Code & Implementation:        {0}  [ENFORCED - Phase 6 gate]" -f $missingCode.Count)
 Write-Host ("Stale OWASP 2023 terms:               {0}" -f $staleOwasp.Count)
 
 if ($missingFM.Count -gt 0) {
@@ -84,7 +84,7 @@ if ($missingEx.Count -gt 0) {
 }
 if ($missingCode.Count -gt 0) {
     Write-Host ""
-    Write-Host "Notes missing Code & Implementation (non-blocking):"
+    Write-Host "BLOCKING: Notes missing 'Code and Implementation' section:"
     $missingCode | Sort-Object | ForEach-Object { Write-Host "  - $_" }
 }
 if ($staleOwasp.Count -gt 0) {
@@ -94,8 +94,8 @@ if ($staleOwasp.Count -gt 0) {
 }
 
 # ── Exit logic ─────────────────────────────────────────────────────────────────
-# missingCode is informational only until all 45 code sections are added (Phase 6)
-if ($missingFM.Count -gt 0 -or $missingEx.Count -gt 0 -or $staleOwasp.Count -gt 0) {
+# Phase 6: All four dimensions are now enforced blocking gates.
+if ($missingFM.Count -gt 0 -or $missingEx.Count -gt 0 -or $missingCode.Count -gt 0 -or $staleOwasp.Count -gt 0) {
     exit 1
 }
 exit 0

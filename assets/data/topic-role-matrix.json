@@ -1,6 +1,15 @@
 {
   "Roles": [
     {
+      "Id": "README",
+      "Title": "Individual Role Guides",
+      "PrimaryTrack": null,
+      "MustCount": 19,
+      "GoodCount": 0,
+      "OptionalCount": 0,
+      "NotRelevantCount": 55
+    },
+    {
       "Id": "agentic-ai-engineer",
       "Title": "Agentic AI Engineer",
       "PrimaryTrack": "B",
@@ -62,15 +71,6 @@
       "GoodCount": 3,
       "OptionalCount": 16,
       "NotRelevantCount": 34
-    },
-    {
-      "Id": "README",
-      "Title": "Individual Role Guides",
-      "PrimaryTrack": null,
-      "MustCount": 19,
-      "GoodCount": 0,
-      "OptionalCount": 0,
-      "NotRelevantCount": 55
     }
   ],
   "Topics": [
@@ -81,14 +81,14 @@
       "Difficulty": "intermediate",
       "SitePath": "applications/ai-product-management-fundamentals.html",
       "Statuses": {
+        "README": "Not Relevant",
         "agentic-ai-engineer": "Not Relevant",
         "ai-engineer": "Optional",
         "genai-engineer": "Not Relevant",
         "llm-engineer": "Not Relevant",
         "ml-engineer": "Not Relevant",
         "mlops-engineer": "Not Relevant",
-        "rag-engineer": "Not Relevant",
-        "README": "Not Relevant"
+        "rag-engineer": "Not Relevant"
       }
     },
     {
@@ -98,14 +98,14 @@
       "Difficulty": "intermediate",
       "SitePath": "applications/ai-ux-patterns.html",
       "Statuses": {
+        "README": "Not Relevant",
         "agentic-ai-engineer": "Optional",
         "ai-engineer": "Not Relevant",
         "genai-engineer": "Optional",
         "llm-engineer": "Optional",
         "ml-engineer": "Not Relevant",
         "mlops-engineer": "Not Relevant",
-        "rag-engineer": "Optional",
-        "README": "Not Relevant"
+        "rag-engineer": "Optional"
       }
     },
     {
@@ -115,14 +115,14 @@
       "Difficulty": "intermediate",
       "SitePath": "applications/api-design-for-ai.html",
       "Statuses": {
+        "README": "Not Relevant",
         "agentic-ai-engineer": "Good",
         "ai-engineer": "Optional",
         "genai-engineer": "Not Relevant",
         "llm-engineer": "Not Relevant",
         "ml-engineer": "Not Relevant",
         "mlops-engineer": "Not Relevant",
-        "rag-engineer": "Not Relevant",
-        "README": "Not Relevant"
+        "rag-engineer": "Not Relevant"
       }
     },
     {
@@ -132,14 +132,14 @@
       "Difficulty": "intermediate",
       "SitePath": "applications/code-generation.html",
       "Statuses": {
+        "README": "Not Relevant",
         "agentic-ai-engineer": "Not Relevant",
         "ai-engineer": "Optional",
         "genai-engineer": "Not Relevant",
         "llm-engineer": "Not Relevant",
         "ml-engineer": "Not Relevant",
         "mlops-engineer": "Not Relevant",
-        "rag-engineer": "Not Relevant",
-        "README": "Not Relevant"
+        "rag-engineer": "Not Relevant"
       }
     },
     {
@@ -149,14 +149,14 @@
       "Difficulty": "intermediate",
       "SitePath": "applications/conversational-ai.html",
       "Statuses": {
+        "README": "Not Relevant",
         "agentic-ai-engineer": "Good",
         "ai-engineer": "Optional",
         "genai-engineer": "Not Relevant",
         "llm-engineer": "Not Relevant",
         "ml-engineer": "Not Relevant",
         "mlops-engineer": "Not Relevant",
-        "rag-engineer": "Not Relevant",
-        "README": "Not Relevant"
+        "rag-engineer": "Not Relevant"
       }
     },
     {
@@ -166,31 +166,14 @@
       "Difficulty": "intermediate",
       "SitePath": "applications/voice-ai.html",
       "Statuses": {
+        "README": "Not Relevant",
         "agentic-ai-engineer": "Not Relevant",
         "ai-engineer": "Optional",
         "genai-engineer": "Not Relevant",
         "llm-engineer": "Not Relevant",
         "ml-engineer": "Not Relevant",
         "mlops-engineer": "Not Relevant",
-        "rag-engineer": "Not Relevant",
-        "README": "Not Relevant"
-      }
-    },
-    {
-      "Path": "ethics-and-safety/adversarial-ml-and-ai-security.md",
-      "Title": "Adversarial ML & AI Security",
-      "Folder": "ethics-and-safety",
-      "Difficulty": "advanced",
-      "SitePath": "ethics-and-safety/adversarial-ml-and-ai-security.html",
-      "Statuses": {
-        "agentic-ai-engineer": "Good",
-        "ai-engineer": "Not Relevant",
-        "genai-engineer": "Not Relevant",
-        "llm-engineer": "Not Relevant",
-        "ml-engineer": "Not Relevant",
-        "mlops-engineer": "Not Relevant",
-        "rag-engineer": "Not Relevant",
-        "README": "Not Relevant"
+        "rag-engineer": "Not Relevant"
       }
     },
     {
@@ -200,14 +183,31 @@
       "Difficulty": "advanced",
       "SitePath": "ethics-and-safety/ai-regulation.html",
       "Statuses": {
+        "README": "Not Relevant",
         "agentic-ai-engineer": "Not Relevant",
         "ai-engineer": "Not Relevant",
         "genai-engineer": "Not Relevant",
         "llm-engineer": "Not Relevant",
         "ml-engineer": "Not Relevant",
         "mlops-engineer": "Good",
-        "rag-engineer": "Not Relevant",
-        "README": "Not Relevant"
+        "rag-engineer": "Not Relevant"
+      }
+    },
+    {
+      "Path": "ethics-and-safety/adversarial-ml-and-ai-security.md",
+      "Title": "Adversarial ML & AI Security",
+      "Folder": "ethics-and-safety",
+      "Difficulty": "advanced",
+      "SitePath": "ethics-and-safety/adversarial-ml-and-ai-security.html",
+      "Statuses": {
+        "README": "Not Relevant",
+        "agentic-ai-engineer": "Good",
+        "ai-engineer": "Not Relevant",
+        "genai-engineer": "Not Relevant",
+        "llm-engineer": "Not Relevant",
+        "ml-engineer": "Not Relevant",
+        "mlops-engineer": "Not Relevant",
+        "rag-engineer": "Not Relevant"
       }
     },
     {
@@ -217,14 +217,14 @@
       "Difficulty": "intermediate",
       "SitePath": "ethics-and-safety/ethics-safety-alignment.html",
       "Statuses": {
+        "README": "Not Relevant",
         "agentic-ai-engineer": "Not Relevant",
         "ai-engineer": "Not Relevant",
         "genai-engineer": "Not Relevant",
         "llm-engineer": "Not Relevant",
         "ml-engineer": "Not Relevant",
         "mlops-engineer": "Not Relevant",
-        "rag-engineer": "Not Relevant",
-        "README": "Not Relevant"
+        "rag-engineer": "Not Relevant"
       }
     },
     {
@@ -234,14 +234,14 @@
       "Difficulty": "intermediate",
       "SitePath": "ethics-and-safety/owasp-llm-top-10.html",
       "Statuses": {
+        "README": "Not Relevant",
         "agentic-ai-engineer": "Not Relevant",
         "ai-engineer": "Not Relevant",
         "genai-engineer": "Not Relevant",
         "llm-engineer": "Not Relevant",
         "ml-engineer": "Not Relevant",
         "mlops-engineer": "Not Relevant",
-        "rag-engineer": "Not Relevant",
-        "README": "Not Relevant"
+        "rag-engineer": "Not Relevant"
       }
     },
     {
@@ -251,14 +251,14 @@
       "Difficulty": "advanced",
       "SitePath": "ethics-and-safety/prompt-injection-deep-dive.html",
       "Statuses": {
+        "README": "Not Relevant",
         "agentic-ai-engineer": "Not Relevant",
         "ai-engineer": "Not Relevant",
         "genai-engineer": "Not Relevant",
         "llm-engineer": "Not Relevant",
         "ml-engineer": "Not Relevant",
         "mlops-engineer": "Not Relevant",
-        "rag-engineer": "Not Relevant",
-        "README": "Not Relevant"
+        "rag-engineer": "Not Relevant"
       }
     },
     {
@@ -268,14 +268,14 @@
       "Difficulty": "intermediate",
       "SitePath": "evaluation/evaluation-and-benchmarks.html",
       "Statuses": {
+        "README": "Must",
         "agentic-ai-engineer": "Must",
         "ai-engineer": "Must",
         "genai-engineer": "Must",
         "llm-engineer": "Must",
         "ml-engineer": "Must",
         "mlops-engineer": "Must",
-        "rag-engineer": "Must",
-        "README": "Must"
+        "rag-engineer": "Must"
       }
     },
     {
@@ -285,14 +285,14 @@
       "Difficulty": "advanced",
       "SitePath": "evaluation/llm-evaluation-deep-dive.html",
       "Statuses": {
+        "README": "Not Relevant",
         "agentic-ai-engineer": "Optional",
         "ai-engineer": "Not Relevant",
         "genai-engineer": "Optional",
         "llm-engineer": "Optional",
         "ml-engineer": "Not Relevant",
         "mlops-engineer": "Not Relevant",
-        "rag-engineer": "Optional",
-        "README": "Not Relevant"
+        "rag-engineer": "Optional"
       }
     },
     {
@@ -302,14 +302,14 @@
       "Difficulty": "advanced",
       "SitePath": "evaluation/retrieval-evaluation.html",
       "Statuses": {
+        "README": "Not Relevant",
         "agentic-ai-engineer": "Optional",
         "ai-engineer": "Not Relevant",
         "genai-engineer": "Optional",
         "llm-engineer": "Optional",
         "ml-engineer": "Not Relevant",
         "mlops-engineer": "Not Relevant",
-        "rag-engineer": "Optional",
-        "README": "Not Relevant"
+        "rag-engineer": "Optional"
       }
     },
     {
@@ -319,14 +319,14 @@
       "Difficulty": "advanced",
       "SitePath": "evaluation/system-design-for-ai-interviews.html",
       "Statuses": {
+        "README": "Not Relevant",
         "agentic-ai-engineer": "Not Relevant",
         "ai-engineer": "Not Relevant",
         "genai-engineer": "Not Relevant",
         "llm-engineer": "Not Relevant",
         "ml-engineer": "Not Relevant",
         "mlops-engineer": "Good",
-        "rag-engineer": "Not Relevant",
-        "README": "Not Relevant"
+        "rag-engineer": "Not Relevant"
       }
     },
     {
@@ -336,14 +336,14 @@
       "Difficulty": "intermediate",
       "SitePath": "foundations/attention-mechanism.html",
       "Statuses": {
+        "README": "Must",
         "agentic-ai-engineer": "Must",
         "ai-engineer": "Must",
         "genai-engineer": "Must",
         "llm-engineer": "Must",
         "ml-engineer": "Must",
         "mlops-engineer": "Must",
-        "rag-engineer": "Must",
-        "README": "Must"
+        "rag-engineer": "Must"
       }
     },
     {
@@ -353,14 +353,14 @@
       "Difficulty": "expert",
       "SitePath": "foundations/attention-deep-dive.html",
       "Statuses": {
+        "README": "Not Relevant",
         "agentic-ai-engineer": "Not Relevant",
         "ai-engineer": "Not Relevant",
         "genai-engineer": "Not Relevant",
         "llm-engineer": "Not Relevant",
         "ml-engineer": "Not Relevant",
         "mlops-engineer": "Not Relevant",
-        "rag-engineer": "Not Relevant",
-        "README": "Not Relevant"
+        "rag-engineer": "Not Relevant"
       }
     },
     {
@@ -370,14 +370,14 @@
       "Difficulty": "intermediate",
       "SitePath": "foundations/embeddings.html",
       "Statuses": {
+        "README": "Must",
         "agentic-ai-engineer": "Must",
         "ai-engineer": "Must",
         "genai-engineer": "Must",
         "llm-engineer": "Must",
         "ml-engineer": "Must",
         "mlops-engineer": "Must",
-        "rag-engineer": "Must",
-        "README": "Must"
+        "rag-engineer": "Must"
       }
     },
     {
@@ -387,14 +387,14 @@
       "Difficulty": "advanced",
       "SitePath": "foundations/modern-architectures.html",
       "Statuses": {
+        "README": "Must",
         "agentic-ai-engineer": "Must",
         "ai-engineer": "Must",
         "genai-engineer": "Must",
         "llm-engineer": "Must",
         "ml-engineer": "Must",
         "mlops-engineer": "Must",
-        "rag-engineer": "Must",
-        "README": "Must"
+        "rag-engineer": "Must"
       }
     },
     {
@@ -404,14 +404,14 @@
       "Difficulty": "advanced",
       "SitePath": "foundations/scaling-laws-and-pretraining.html",
       "Statuses": {
+        "README": "Must",
         "agentic-ai-engineer": "Must",
         "ai-engineer": "Must",
         "genai-engineer": "Must",
         "llm-engineer": "Must",
         "ml-engineer": "Must",
         "mlops-engineer": "Must",
-        "rag-engineer": "Must",
-        "README": "Must"
+        "rag-engineer": "Must"
       }
     },
     {
@@ -421,14 +421,14 @@
       "Difficulty": "expert",
       "SitePath": "foundations/state-space-models.html",
       "Statuses": {
+        "README": "Not Relevant",
         "agentic-ai-engineer": "Not Relevant",
         "ai-engineer": "Not Relevant",
         "genai-engineer": "Not Relevant",
         "llm-engineer": "Not Relevant",
         "ml-engineer": "Not Relevant",
         "mlops-engineer": "Not Relevant",
-        "rag-engineer": "Not Relevant",
-        "README": "Not Relevant"
+        "rag-engineer": "Not Relevant"
       }
     },
     {
@@ -438,14 +438,14 @@
       "Difficulty": "intermediate",
       "SitePath": "foundations/tokenization.html",
       "Statuses": {
+        "README": "Must",
         "agentic-ai-engineer": "Must",
         "ai-engineer": "Must",
         "genai-engineer": "Must",
         "llm-engineer": "Must",
         "ml-engineer": "Must",
         "mlops-engineer": "Must",
-        "rag-engineer": "Must",
-        "README": "Must"
+        "rag-engineer": "Must"
       }
     },
     {
@@ -455,14 +455,14 @@
       "Difficulty": "intermediate",
       "SitePath": "foundations/transformers.html",
       "Statuses": {
+        "README": "Must",
         "agentic-ai-engineer": "Must",
         "ai-engineer": "Must",
         "genai-engineer": "Must",
         "llm-engineer": "Must",
         "ml-engineer": "Must",
         "mlops-engineer": "Must",
-        "rag-engineer": "Must",
-        "README": "Must"
+        "rag-engineer": "Must"
       }
     },
     {
@@ -472,14 +472,14 @@
       "Difficulty": "expert",
       "SitePath": "inference/distributed-inference-and-serving-architecture.html",
       "Statuses": {
+        "README": "Not Relevant",
         "agentic-ai-engineer": "Not Relevant",
         "ai-engineer": "Not Relevant",
         "genai-engineer": "Not Relevant",
         "llm-engineer": "Not Relevant",
         "ml-engineer": "Good",
         "mlops-engineer": "Good",
-        "rag-engineer": "Not Relevant",
-        "README": "Not Relevant"
+        "rag-engineer": "Not Relevant"
       }
     },
     {
@@ -489,14 +489,14 @@
       "Difficulty": "expert",
       "SitePath": "inference/gpu-cuda-programming.html",
       "Statuses": {
+        "README": "Not Relevant",
         "agentic-ai-engineer": "Not Relevant",
         "ai-engineer": "Not Relevant",
         "genai-engineer": "Not Relevant",
         "llm-engineer": "Not Relevant",
         "ml-engineer": "Good",
         "mlops-engineer": "Not Relevant",
-        "rag-engineer": "Not Relevant",
-        "README": "Not Relevant"
+        "rag-engineer": "Not Relevant"
       }
     },
     {
@@ -506,14 +506,14 @@
       "Difficulty": "advanced",
       "SitePath": "inference/inference-optimization.html",
       "Statuses": {
+        "README": "Not Relevant",
         "agentic-ai-engineer": "Not Relevant",
         "ai-engineer": "Good",
         "genai-engineer": "Not Relevant",
         "llm-engineer": "Must",
         "ml-engineer": "Good",
         "mlops-engineer": "Optional",
-        "rag-engineer": "Not Relevant",
-        "README": "Not Relevant"
+        "rag-engineer": "Not Relevant"
       }
     },
     {
@@ -523,31 +523,14 @@
       "Difficulty": "advanced",
       "SitePath": "llms/hallucination-detection.html",
       "Statuses": {
+        "README": "Not Relevant",
         "agentic-ai-engineer": "Good",
         "ai-engineer": "Not Relevant",
         "genai-engineer": "Good",
         "llm-engineer": "Good",
         "ml-engineer": "Not Relevant",
         "mlops-engineer": "Not Relevant",
-        "rag-engineer": "Good",
-        "README": "Not Relevant"
-      }
-    },
-    {
-      "Path": "llms/llms-overview.md",
-      "Title": "Large Language Models (LLMs)",
-      "Folder": "llms",
-      "Difficulty": "intermediate",
-      "SitePath": "llms/llms-overview.html",
-      "Statuses": {
-        "agentic-ai-engineer": "Must",
-        "ai-engineer": "Must",
-        "genai-engineer": "Must",
-        "llm-engineer": "Must",
-        "ml-engineer": "Must",
-        "mlops-engineer": "Must",
-        "rag-engineer": "Must",
-        "README": "Must"
+        "rag-engineer": "Good"
       }
     },
     {
@@ -557,14 +540,31 @@
       "Difficulty": "intermediate",
       "SitePath": "llms/llm-landscape.html",
       "Statuses": {
+        "README": "Not Relevant",
         "agentic-ai-engineer": "Not Relevant",
         "ai-engineer": "Not Relevant",
         "genai-engineer": "Not Relevant",
         "llm-engineer": "Not Relevant",
         "ml-engineer": "Not Relevant",
         "mlops-engineer": "Not Relevant",
-        "rag-engineer": "Not Relevant",
-        "README": "Not Relevant"
+        "rag-engineer": "Not Relevant"
+      }
+    },
+    {
+      "Path": "llms/llms-overview.md",
+      "Title": "Large Language Models (LLMs)",
+      "Folder": "llms",
+      "Difficulty": "intermediate",
+      "SitePath": "llms/llms-overview.html",
+      "Statuses": {
+        "README": "Must",
+        "agentic-ai-engineer": "Must",
+        "ai-engineer": "Must",
+        "genai-engineer": "Must",
+        "llm-engineer": "Must",
+        "ml-engineer": "Must",
+        "mlops-engineer": "Must",
+        "rag-engineer": "Must"
       }
     },
     {
@@ -574,14 +574,14 @@
       "Difficulty": "advanced",
       "SitePath": "llms/reasoning-models.html",
       "Statuses": {
+        "README": "Not Relevant",
         "agentic-ai-engineer": "Not Relevant",
         "ai-engineer": "Not Relevant",
         "genai-engineer": "Not Relevant",
         "llm-engineer": "Not Relevant",
         "ml-engineer": "Not Relevant",
         "mlops-engineer": "Not Relevant",
-        "rag-engineer": "Not Relevant",
-        "README": "Not Relevant"
+        "rag-engineer": "Not Relevant"
       }
     },
     {
@@ -591,14 +591,14 @@
       "Difficulty": "intermediate",
       "SitePath": "multimodal/computer-vision-fundamentals.html",
       "Statuses": {
+        "README": "Not Relevant",
         "agentic-ai-engineer": "Not Relevant",
         "ai-engineer": "Not Relevant",
         "genai-engineer": "Not Relevant",
         "llm-engineer": "Not Relevant",
         "ml-engineer": "Not Relevant",
         "mlops-engineer": "Not Relevant",
-        "rag-engineer": "Not Relevant",
-        "README": "Not Relevant"
+        "rag-engineer": "Not Relevant"
       }
     },
     {
@@ -608,14 +608,14 @@
       "Difficulty": "advanced",
       "SitePath": "multimodal/diffusion-models.html",
       "Statuses": {
+        "README": "Not Relevant",
         "agentic-ai-engineer": "Not Relevant",
         "ai-engineer": "Not Relevant",
         "genai-engineer": "Not Relevant",
         "llm-engineer": "Not Relevant",
         "ml-engineer": "Not Relevant",
         "mlops-engineer": "Not Relevant",
-        "rag-engineer": "Not Relevant",
-        "README": "Not Relevant"
+        "rag-engineer": "Not Relevant"
       }
     },
     {
@@ -625,14 +625,14 @@
       "Difficulty": "intermediate",
       "SitePath": "multimodal/multimodal-ai.html",
       "Statuses": {
+        "README": "Not Relevant",
         "agentic-ai-engineer": "Not Relevant",
         "ai-engineer": "Not Relevant",
         "genai-engineer": "Not Relevant",
         "llm-engineer": "Not Relevant",
         "ml-engineer": "Not Relevant",
         "mlops-engineer": "Not Relevant",
-        "rag-engineer": "Not Relevant",
-        "README": "Not Relevant"
+        "rag-engineer": "Not Relevant"
       }
     },
     {
@@ -642,14 +642,14 @@
       "Difficulty": "intermediate",
       "SitePath": "prerequisites/deep-learning-fundamentals.html",
       "Statuses": {
+        "README": "Must",
         "agentic-ai-engineer": "Must",
         "ai-engineer": "Must",
         "genai-engineer": "Must",
         "llm-engineer": "Must",
         "ml-engineer": "Must",
         "mlops-engineer": "Must",
-        "rag-engineer": "Must",
-        "README": "Must"
+        "rag-engineer": "Must"
       }
     },
     {
@@ -659,31 +659,14 @@
       "Difficulty": "beginner",
       "SitePath": "prerequisites/linear-algebra-for-ai.html",
       "Statuses": {
+        "README": "Must",
         "agentic-ai-engineer": "Must",
         "ai-engineer": "Must",
         "genai-engineer": "Must",
         "llm-engineer": "Must",
         "ml-engineer": "Must",
         "mlops-engineer": "Must",
-        "rag-engineer": "Must",
-        "README": "Must"
-      }
-    },
-    {
-      "Path": "prerequisites/neural-networks.md",
-      "Title": "Neural Networks",
-      "Folder": "prerequisites",
-      "Difficulty": "beginner",
-      "SitePath": "prerequisites/neural-networks.html",
-      "Statuses": {
-        "agentic-ai-engineer": "Must",
-        "ai-engineer": "Must",
-        "genai-engineer": "Must",
-        "llm-engineer": "Must",
-        "ml-engineer": "Must",
-        "mlops-engineer": "Must",
-        "rag-engineer": "Must",
-        "README": "Must"
+        "rag-engineer": "Must"
       }
     },
     {
@@ -693,14 +676,31 @@
       "Difficulty": "beginner",
       "SitePath": "prerequisites/nlp-fundamentals.html",
       "Statuses": {
+        "README": "Must",
         "agentic-ai-engineer": "Must",
         "ai-engineer": "Must",
         "genai-engineer": "Must",
         "llm-engineer": "Must",
         "ml-engineer": "Must",
         "mlops-engineer": "Must",
-        "rag-engineer": "Must",
-        "README": "Must"
+        "rag-engineer": "Must"
+      }
+    },
+    {
+      "Path": "prerequisites/neural-networks.md",
+      "Title": "Neural Networks",
+      "Folder": "prerequisites",
+      "Difficulty": "beginner",
+      "SitePath": "prerequisites/neural-networks.html",
+      "Statuses": {
+        "README": "Must",
+        "agentic-ai-engineer": "Must",
+        "ai-engineer": "Must",
+        "genai-engineer": "Must",
+        "llm-engineer": "Must",
+        "ml-engineer": "Must",
+        "mlops-engineer": "Must",
+        "rag-engineer": "Must"
       }
     },
     {
@@ -710,14 +710,14 @@
       "Difficulty": "beginner",
       "SitePath": "prerequisites/probability-and-statistics.html",
       "Statuses": {
+        "README": "Must",
         "agentic-ai-engineer": "Must",
         "ai-engineer": "Must",
         "genai-engineer": "Must",
         "llm-engineer": "Must",
         "ml-engineer": "Must",
         "mlops-engineer": "Must",
-        "rag-engineer": "Must",
-        "README": "Must"
+        "rag-engineer": "Must"
       }
     },
     {
@@ -727,14 +727,14 @@
       "Difficulty": "beginner",
       "SitePath": "prerequisites/python-for-ai.html",
       "Statuses": {
+        "README": "Must",
         "agentic-ai-engineer": "Must",
         "ai-engineer": "Must",
         "genai-engineer": "Must",
         "llm-engineer": "Must",
         "ml-engineer": "Must",
         "mlops-engineer": "Must",
-        "rag-engineer": "Must",
-        "README": "Must"
+        "rag-engineer": "Must"
       }
     },
     {
@@ -744,14 +744,14 @@
       "Difficulty": "advanced",
       "SitePath": "production/ai-system-design.html",
       "Statuses": {
+        "README": "Not Relevant",
         "agentic-ai-engineer": "Must",
         "ai-engineer": "Must",
         "genai-engineer": "Good",
         "llm-engineer": "Not Relevant",
         "ml-engineer": "Not Relevant",
         "mlops-engineer": "Not Relevant",
-        "rag-engineer": "Good",
-        "README": "Not Relevant"
+        "rag-engineer": "Good"
       }
     },
     {
@@ -761,14 +761,14 @@
       "Difficulty": "advanced",
       "SitePath": "production/cicd-for-ml.html",
       "Statuses": {
+        "README": "Not Relevant",
         "agentic-ai-engineer": "Not Relevant",
         "ai-engineer": "Not Relevant",
         "genai-engineer": "Not Relevant",
         "llm-engineer": "Not Relevant",
         "ml-engineer": "Must",
         "mlops-engineer": "Must",
-        "rag-engineer": "Not Relevant",
-        "README": "Not Relevant"
+        "rag-engineer": "Not Relevant"
       }
     },
     {
@@ -778,14 +778,14 @@
       "Difficulty": "intermediate",
       "SitePath": "production/classical-ml-for-genai.html",
       "Statuses": {
+        "README": "Not Relevant",
         "agentic-ai-engineer": "Not Relevant",
         "ai-engineer": "Not Relevant",
         "genai-engineer": "Not Relevant",
         "llm-engineer": "Not Relevant",
         "ml-engineer": "Must",
         "mlops-engineer": "Optional",
-        "rag-engineer": "Not Relevant",
-        "README": "Not Relevant"
+        "rag-engineer": "Not Relevant"
       }
     },
     {
@@ -795,14 +795,14 @@
       "Difficulty": "advanced",
       "SitePath": "production/cost-optimization.html",
       "Statuses": {
+        "README": "Not Relevant",
         "agentic-ai-engineer": "Optional",
         "ai-engineer": "Not Relevant",
         "genai-engineer": "Optional",
         "llm-engineer": "Optional",
         "ml-engineer": "Optional",
         "mlops-engineer": "Must",
-        "rag-engineer": "Optional",
-        "README": "Not Relevant"
+        "rag-engineer": "Optional"
       }
     },
     {
@@ -812,14 +812,14 @@
       "Difficulty": "advanced",
       "SitePath": "production/data-flywheel-design.html",
       "Statuses": {
+        "README": "Not Relevant",
         "agentic-ai-engineer": "Optional",
         "ai-engineer": "Not Relevant",
         "genai-engineer": "Optional",
         "llm-engineer": "Optional",
         "ml-engineer": "Not Relevant",
         "mlops-engineer": "Not Relevant",
-        "rag-engineer": "Optional",
-        "README": "Not Relevant"
+        "rag-engineer": "Optional"
       }
     },
     {
@@ -829,14 +829,14 @@
       "Difficulty": "intermediate",
       "SitePath": "production/docker-and-kubernetes.html",
       "Statuses": {
+        "README": "Not Relevant",
         "agentic-ai-engineer": "Not Relevant",
         "ai-engineer": "Not Relevant",
         "genai-engineer": "Not Relevant",
         "llm-engineer": "Not Relevant",
         "ml-engineer": "Must",
         "mlops-engineer": "Must",
-        "rag-engineer": "Not Relevant",
-        "README": "Not Relevant"
+        "rag-engineer": "Not Relevant"
       }
     },
     {
@@ -846,14 +846,14 @@
       "Difficulty": "intermediate",
       "SitePath": "production/document-parsing-and-extraction.html",
       "Statuses": {
+        "README": "Not Relevant",
         "agentic-ai-engineer": "Optional",
         "ai-engineer": "Not Relevant",
         "genai-engineer": "Optional",
         "llm-engineer": "Optional",
         "ml-engineer": "Not Relevant",
         "mlops-engineer": "Not Relevant",
-        "rag-engineer": "Optional",
-        "README": "Not Relevant"
+        "rag-engineer": "Optional"
       }
     },
     {
@@ -863,31 +863,14 @@
       "Difficulty": "advanced",
       "SitePath": "production/guardrails-and-content-filtering.html",
       "Statuses": {
+        "README": "Not Relevant",
         "agentic-ai-engineer": "Optional",
         "ai-engineer": "Not Relevant",
         "genai-engineer": "Optional",
         "llm-engineer": "Optional",
         "ml-engineer": "Not Relevant",
         "mlops-engineer": "Not Relevant",
-        "rag-engineer": "Optional",
-        "README": "Not Relevant"
-      }
-    },
-    {
-      "Path": "production/latency-and-throughput-engineering.md",
-      "Title": "Latency & Throughput Engineering for AI Systems",
-      "Folder": "production",
-      "Difficulty": "advanced",
-      "SitePath": "production/latency-and-throughput-engineering.html",
-      "Statuses": {
-        "agentic-ai-engineer": "Not Relevant",
-        "ai-engineer": "Not Relevant",
-        "genai-engineer": "Not Relevant",
-        "llm-engineer": "Not Relevant",
-        "ml-engineer": "Good",
-        "mlops-engineer": "Good",
-        "rag-engineer": "Not Relevant",
-        "README": "Not Relevant"
+        "rag-engineer": "Optional"
       }
     },
     {
@@ -897,14 +880,14 @@
       "Difficulty": "advanced",
       "SitePath": "production/llm-routing-and-model-selection.html",
       "Statuses": {
+        "README": "Not Relevant",
         "agentic-ai-engineer": "Optional",
         "ai-engineer": "Not Relevant",
         "genai-engineer": "Optional",
         "llm-engineer": "Optional",
         "ml-engineer": "Not Relevant",
         "mlops-engineer": "Not Relevant",
-        "rag-engineer": "Optional",
-        "README": "Not Relevant"
+        "rag-engineer": "Optional"
       }
     },
     {
@@ -914,14 +897,31 @@
       "Difficulty": "intermediate",
       "SitePath": "production/llmops.html",
       "Statuses": {
+        "README": "Not Relevant",
         "agentic-ai-engineer": "Must",
         "ai-engineer": "Must",
         "genai-engineer": "Must",
         "llm-engineer": "Optional",
         "ml-engineer": "Must",
         "mlops-engineer": "Must",
-        "rag-engineer": "Good",
-        "README": "Not Relevant"
+        "rag-engineer": "Good"
+      }
+    },
+    {
+      "Path": "production/latency-and-throughput-engineering.md",
+      "Title": "Latency & Throughput Engineering for AI Systems",
+      "Folder": "production",
+      "Difficulty": "advanced",
+      "SitePath": "production/latency-and-throughput-engineering.html",
+      "Statuses": {
+        "README": "Not Relevant",
+        "agentic-ai-engineer": "Not Relevant",
+        "ai-engineer": "Not Relevant",
+        "genai-engineer": "Not Relevant",
+        "llm-engineer": "Not Relevant",
+        "ml-engineer": "Good",
+        "mlops-engineer": "Good",
+        "rag-engineer": "Not Relevant"
       }
     },
     {
@@ -931,14 +931,14 @@
       "Difficulty": "advanced",
       "SitePath": "production/model-serving.html",
       "Statuses": {
+        "README": "Not Relevant",
         "agentic-ai-engineer": "Optional",
         "ai-engineer": "Not Relevant",
         "genai-engineer": "Optional",
         "llm-engineer": "Optional",
         "ml-engineer": "Must",
         "mlops-engineer": "Must",
-        "rag-engineer": "Optional",
-        "README": "Not Relevant"
+        "rag-engineer": "Optional"
       }
     },
     {
@@ -948,14 +948,14 @@
       "Difficulty": "advanced",
       "SitePath": "production/monitoring-observability.html",
       "Statuses": {
+        "README": "Not Relevant",
         "agentic-ai-engineer": "Good",
         "ai-engineer": "Not Relevant",
         "genai-engineer": "Optional",
         "llm-engineer": "Optional",
         "ml-engineer": "Must",
         "mlops-engineer": "Must",
-        "rag-engineer": "Optional",
-        "README": "Not Relevant"
+        "rag-engineer": "Optional"
       }
     },
     {
@@ -965,14 +965,14 @@
       "Difficulty": "expert",
       "SitePath": "research-frontiers/distributed-training.html",
       "Statuses": {
+        "README": "Not Relevant",
         "agentic-ai-engineer": "Not Relevant",
         "ai-engineer": "Not Relevant",
         "genai-engineer": "Not Relevant",
         "llm-engineer": "Not Relevant",
         "ml-engineer": "Not Relevant",
         "mlops-engineer": "Not Relevant",
-        "rag-engineer": "Not Relevant",
-        "README": "Not Relevant"
+        "rag-engineer": "Not Relevant"
       }
     },
     {
@@ -982,14 +982,14 @@
       "Difficulty": "expert",
       "SitePath": "research-frontiers/interpretability.html",
       "Statuses": {
+        "README": "Not Relevant",
         "agentic-ai-engineer": "Not Relevant",
         "ai-engineer": "Not Relevant",
         "genai-engineer": "Not Relevant",
         "llm-engineer": "Not Relevant",
         "ml-engineer": "Not Relevant",
         "mlops-engineer": "Not Relevant",
-        "rag-engineer": "Not Relevant",
-        "README": "Not Relevant"
+        "rag-engineer": "Not Relevant"
       }
     },
     {
@@ -999,14 +999,14 @@
       "Difficulty": "advanced",
       "SitePath": "research-frontiers/research-methodology-and-paper-reading.html",
       "Statuses": {
+        "README": "Not Relevant",
         "agentic-ai-engineer": "Not Relevant",
         "ai-engineer": "Not Relevant",
         "genai-engineer": "Not Relevant",
         "llm-engineer": "Not Relevant",
         "ml-engineer": "Not Relevant",
         "mlops-engineer": "Not Relevant",
-        "rag-engineer": "Not Relevant",
-        "README": "Not Relevant"
+        "rag-engineer": "Not Relevant"
       }
     },
     {
@@ -1016,14 +1016,14 @@
       "Difficulty": "beginner",
       "SitePath": "genai.html",
       "Statuses": {
+        "README": "Not Relevant",
         "agentic-ai-engineer": "Not Relevant",
         "ai-engineer": "Not Relevant",
         "genai-engineer": "Not Relevant",
         "llm-engineer": "Not Relevant",
         "ml-engineer": "Not Relevant",
         "mlops-engineer": "Not Relevant",
-        "rag-engineer": "Not Relevant",
-        "README": "Not Relevant"
+        "rag-engineer": "Not Relevant"
       }
     },
     {
@@ -1033,14 +1033,14 @@
       "Difficulty": "expert",
       "SitePath": "techniques/advanced-fine-tuning.html",
       "Statuses": {
+        "README": "Not Relevant",
         "agentic-ai-engineer": "Optional",
         "ai-engineer": "Good",
         "genai-engineer": "Must",
         "llm-engineer": "Must",
         "ml-engineer": "Not Relevant",
         "mlops-engineer": "Not Relevant",
-        "rag-engineer": "Optional",
-        "README": "Not Relevant"
+        "rag-engineer": "Optional"
       }
     },
     {
@@ -1050,14 +1050,14 @@
       "Difficulty": "intermediate",
       "SitePath": "techniques/context-engineering.html",
       "Statuses": {
+        "README": "Must",
         "agentic-ai-engineer": "Must",
         "ai-engineer": "Must",
         "genai-engineer": "Must",
         "llm-engineer": "Must",
         "ml-engineer": "Must",
         "mlops-engineer": "Must",
-        "rag-engineer": "Must",
-        "README": "Must"
+        "rag-engineer": "Must"
       }
     },
     {
@@ -1067,14 +1067,14 @@
       "Difficulty": "advanced",
       "SitePath": "techniques/continual-learning.html",
       "Statuses": {
+        "README": "Not Relevant",
         "agentic-ai-engineer": "Not Relevant",
         "ai-engineer": "Not Relevant",
         "genai-engineer": "Not Relevant",
         "llm-engineer": "Not Relevant",
         "ml-engineer": "Not Relevant",
         "mlops-engineer": "Not Relevant",
-        "rag-engineer": "Not Relevant",
-        "README": "Not Relevant"
+        "rag-engineer": "Not Relevant"
       }
     },
     {
@@ -1084,14 +1084,14 @@
       "Difficulty": "advanced",
       "SitePath": "techniques/embedding-fine-tuning.html",
       "Statuses": {
+        "README": "Not Relevant",
         "agentic-ai-engineer": "Optional",
         "ai-engineer": "Not Relevant",
         "genai-engineer": "Optional",
         "llm-engineer": "Optional",
         "ml-engineer": "Not Relevant",
         "mlops-engineer": "Not Relevant",
-        "rag-engineer": "Optional",
-        "README": "Not Relevant"
+        "rag-engineer": "Optional"
       }
     },
     {
@@ -1101,14 +1101,14 @@
       "Difficulty": "advanced",
       "SitePath": "techniques/fine-tuning.html",
       "Statuses": {
+        "README": "Must",
         "agentic-ai-engineer": "Must",
         "ai-engineer": "Must",
         "genai-engineer": "Must",
         "llm-engineer": "Must",
         "ml-engineer": "Must",
         "mlops-engineer": "Must",
-        "rag-engineer": "Must",
-        "README": "Must"
+        "rag-engineer": "Must"
       }
     },
     {
@@ -1118,14 +1118,14 @@
       "Difficulty": "intermediate",
       "SitePath": "techniques/function-calling-and-structured-output.html",
       "Statuses": {
+        "README": "Must",
         "agentic-ai-engineer": "Must",
         "ai-engineer": "Must",
         "genai-engineer": "Must",
         "llm-engineer": "Must",
         "ml-engineer": "Must",
         "mlops-engineer": "Must",
-        "rag-engineer": "Must",
-        "README": "Must"
+        "rag-engineer": "Must"
       }
     },
     {
@@ -1135,14 +1135,14 @@
       "Difficulty": "advanced",
       "SitePath": "techniques/graph-rag.html",
       "Statuses": {
+        "README": "Not Relevant",
         "agentic-ai-engineer": "Optional",
         "ai-engineer": "Optional",
         "genai-engineer": "Good",
         "llm-engineer": "Optional",
         "ml-engineer": "Not Relevant",
         "mlops-engineer": "Not Relevant",
-        "rag-engineer": "Must",
-        "README": "Not Relevant"
+        "rag-engineer": "Must"
       }
     },
     {
@@ -1152,14 +1152,14 @@
       "Difficulty": "advanced",
       "SitePath": "techniques/distillation-and-compression.html",
       "Statuses": {
+        "README": "Not Relevant",
         "agentic-ai-engineer": "Optional",
         "ai-engineer": "Not Relevant",
         "genai-engineer": "Optional",
         "llm-engineer": "Good",
         "ml-engineer": "Not Relevant",
         "mlops-engineer": "Not Relevant",
-        "rag-engineer": "Optional",
-        "README": "Not Relevant"
+        "rag-engineer": "Optional"
       }
     },
     {
@@ -1169,14 +1169,14 @@
       "Difficulty": "advanced",
       "SitePath": "techniques/long-context-engineering.html",
       "Statuses": {
+        "README": "Not Relevant",
         "agentic-ai-engineer": "Optional",
         "ai-engineer": "Not Relevant",
         "genai-engineer": "Optional",
         "llm-engineer": "Optional",
         "ml-engineer": "Not Relevant",
         "mlops-engineer": "Not Relevant",
-        "rag-engineer": "Optional",
-        "README": "Not Relevant"
+        "rag-engineer": "Optional"
       }
     },
     {
@@ -1186,14 +1186,14 @@
       "Difficulty": "beginner",
       "SitePath": "techniques/prompt-engineering.html",
       "Statuses": {
+        "README": "Must",
         "agentic-ai-engineer": "Must",
         "ai-engineer": "Must",
         "genai-engineer": "Must",
         "llm-engineer": "Must",
         "ml-engineer": "Must",
         "mlops-engineer": "Must",
-        "rag-engineer": "Must",
-        "README": "Must"
+        "rag-engineer": "Must"
       }
     },
     {
@@ -1203,14 +1203,14 @@
       "Difficulty": "advanced",
       "SitePath": "techniques/rl-alignment.html",
       "Statuses": {
+        "README": "Not Relevant",
         "agentic-ai-engineer": "Optional",
         "ai-engineer": "Not Relevant",
         "genai-engineer": "Optional",
         "llm-engineer": "Good",
         "ml-engineer": "Not Relevant",
         "mlops-engineer": "Not Relevant",
-        "rag-engineer": "Optional",
-        "README": "Not Relevant"
+        "rag-engineer": "Optional"
       }
     },
     {
@@ -1220,14 +1220,14 @@
       "Difficulty": "intermediate",
       "SitePath": "techniques/rag.html",
       "Statuses": {
+        "README": "Must",
         "agentic-ai-engineer": "Must",
         "ai-engineer": "Must",
         "genai-engineer": "Must",
         "llm-engineer": "Must",
         "ml-engineer": "Must",
         "mlops-engineer": "Must",
-        "rag-engineer": "Must",
-        "README": "Must"
+        "rag-engineer": "Must"
       }
     },
     {
@@ -1237,14 +1237,14 @@
       "Difficulty": "intermediate",
       "SitePath": "techniques/synthetic-data-and-data-engineering.html",
       "Statuses": {
+        "README": "Not Relevant",
         "agentic-ai-engineer": "Optional",
         "ai-engineer": "Not Relevant",
         "genai-engineer": "Optional",
         "llm-engineer": "Optional",
         "ml-engineer": "Not Relevant",
         "mlops-engineer": "Not Relevant",
-        "rag-engineer": "Optional",
-        "README": "Not Relevant"
+        "rag-engineer": "Optional"
       }
     },
     {
@@ -1254,14 +1254,14 @@
       "Difficulty": "intermediate",
       "SitePath": "tools-and-infra/cloud-ml-services.html",
       "Statuses": {
+        "README": "Not Relevant",
         "agentic-ai-engineer": "Not Relevant",
         "ai-engineer": "Not Relevant",
         "genai-engineer": "Not Relevant",
         "llm-engineer": "Not Relevant",
         "ml-engineer": "Must",
         "mlops-engineer": "Must",
-        "rag-engineer": "Not Relevant",
-        "README": "Not Relevant"
+        "rag-engineer": "Not Relevant"
       }
     },
     {
@@ -1271,14 +1271,14 @@
       "Difficulty": "advanced",
       "SitePath": "tools-and-infra/distributed-systems-for-ai.html",
       "Statuses": {
+        "README": "Not Relevant",
         "agentic-ai-engineer": "Not Relevant",
         "ai-engineer": "Not Relevant",
         "genai-engineer": "Not Relevant",
         "llm-engineer": "Not Relevant",
         "ml-engineer": "Good",
         "mlops-engineer": "Good",
-        "rag-engineer": "Not Relevant",
-        "README": "Not Relevant"
+        "rag-engineer": "Not Relevant"
       }
     },
     {
@@ -1288,14 +1288,14 @@
       "Difficulty": "intermediate",
       "SitePath": "tools-and-infra/tools-overview.html",
       "Statuses": {
+        "README": "Not Relevant",
         "agentic-ai-engineer": "Not Relevant",
         "ai-engineer": "Not Relevant",
         "genai-engineer": "Not Relevant",
         "llm-engineer": "Not Relevant",
         "ml-engineer": "Not Relevant",
         "mlops-engineer": "Not Relevant",
-        "rag-engineer": "Not Relevant",
-        "README": "Not Relevant"
+        "rag-engineer": "Not Relevant"
       }
     },
     {
@@ -1305,14 +1305,14 @@
       "Difficulty": "intermediate",
       "SitePath": "tools-and-infra/ml-experiment-and-data-management.html",
       "Statuses": {
+        "README": "Not Relevant",
         "agentic-ai-engineer": "Not Relevant",
         "ai-engineer": "Not Relevant",
         "genai-engineer": "Not Relevant",
         "llm-engineer": "Not Relevant",
         "ml-engineer": "Must",
         "mlops-engineer": "Must",
-        "rag-engineer": "Not Relevant",
-        "README": "Not Relevant"
+        "rag-engineer": "Not Relevant"
       }
     },
     {
@@ -1322,14 +1322,14 @@
       "Difficulty": "intermediate",
       "SitePath": "tools-and-infra/vector-databases.html",
       "Statuses": {
+        "README": "Not Relevant",
         "agentic-ai-engineer": "Optional",
         "ai-engineer": "Optional",
         "genai-engineer": "Optional",
         "llm-engineer": "Optional",
         "ml-engineer": "Not Relevant",
         "mlops-engineer": "Not Relevant",
-        "rag-engineer": "Must",
-        "README": "Not Relevant"
+        "rag-engineer": "Must"
       }
     }
   ]

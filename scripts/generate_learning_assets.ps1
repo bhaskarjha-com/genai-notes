@@ -333,6 +333,75 @@ function Normalize-DeckField {
     return $clean.Trim()
 }
 
+# Cross-platform deterministic sort: PS 5.1 uses culture-aware sorting
+# (ignores hyphens) while PS Core uses ordinal. This ensures identical
+# order regardless of platform.
+function Sort-Ordinal {
+    param(
+        [Parameter(ValueFromPipeline)]
+        [object[]]$InputObject,
+        [string[]]$Property,
+        [switch]$Unique
+    )
+
+    begin { $items = New-Object System.Collections.Generic.List[object] }
+    process { foreach ($obj in $InputObject) { if ($null -ne $obj) { $items.Add($obj) } } }
+    end {
+        if ($Property) {
+            $count = $items.Count
+            $arr = New-Object object[] $count
+            $keys = New-Object string[] $count
+            for ($idx = 0; $idx -lt $count; $idx++) {
+                $arr[$idx] = $items[$idx]
+                $keyParts = New-Object string[] $Property.Count
+                for ($p = 0; $p -lt $Property.Count; $p++) {
+                    $propName = $Property[$p]
+                    $val = $items[$idx].$propName
+                    $keyParts[$p] = if ($null -ne $val) { [string]$val } else { "" }
+                }
+                $keys[$idx] = $keyParts -join "`0"
+            }
+            # Sort with ordinal comparison
+            for ($i = 0; $i -lt $count - 1; $i++) {
+                for ($j = 0; $j -lt $count - $i - 1; $j++) {
+                    if ([string]::CompareOrdinal($keys[$j], $keys[$j+1]) -gt 0) {
+                        $tmp = $arr[$j]; $arr[$j] = $arr[$j+1]; $arr[$j+1] = $tmp
+                        $tmp = $keys[$j]; $keys[$j] = $keys[$j+1]; $keys[$j+1] = $tmp
+                    }
+                }
+            }
+            $sorted = $arr
+        }
+        else {
+            $count = $items.Count
+            $sorted = New-Object string[] $count
+            for ($idx = 0; $idx -lt $count; $idx++) {
+                $sorted[$idx] = [string]$items[$idx]
+            }
+            [array]::Sort($sorted, [System.StringComparer]::Ordinal)
+        }
+        if ($Unique) {
+            $seen = New-Object System.Collections.Generic.HashSet[string]
+            foreach ($item in $sorted) {
+                $ukey = [string]$item
+                if ($Property) {
+                    $ukeyParts = New-Object string[] $Property.Count
+                    for ($p = 0; $p -lt $Property.Count; $p++) {
+                        $propName = $Property[$p]
+                        $val = $item.$propName
+                        $ukeyParts[$p] = if ($null -ne $val) { [string]$val } else { "" }
+                    }
+                    $ukey = $ukeyParts -join "|"
+                }
+                if ($seen.Add($ukey)) { $item }
+            }
+        }
+        else {
+            $sorted
+        }
+    }
+}
+
 function Format-JsonValue {
     param(
         [object]$Value,
@@ -612,7 +681,7 @@ function Get-RoleGuideData {
     )
 
     $roles = New-Object System.Collections.Generic.List[object]
-    $roleFiles = Get-ChildItem -LiteralPath $RolesDirectory -File -Filter *.md | Sort-Object Name
+    $roleFiles = Get-ChildItem -LiteralPath $RolesDirectory -File -Filter *.md | Sort-Ordinal -Property Name
 
     foreach ($file in $roleFiles) {
         $rawText = Read-Utf8File -Path $file.FullName
@@ -688,7 +757,7 @@ foreach ($dir in $topicDirs) {
 
 $noteFiles.Add((Join-Path $repoRoot "genai.md"))
 
-foreach ($fullPath in ($noteFiles | Sort-Object -Unique)) {
+foreach ($fullPath in ($noteFiles | Sort-Ordinal -Unique)) {
     $rawText = Read-Utf8File -Path $fullPath
     $parts = Get-FrontmatterParts -Text $rawText
     $status = Get-FrontmatterScalar -Frontmatter $parts.Raw -Key "status"
@@ -807,7 +876,7 @@ foreach ($edge in $edgeMap.Values) {
     $degreeMap[$edge.Target]++
 }
 
-$graphNodes = $publishedNotes | Sort-Object Folder, Title | ForEach-Object {
+$graphNodes = $publishedNotes | Sort-Ordinal -Property Folder, Title | ForEach-Object {
     [pscustomobject]@{
         Id = $_.Path
         Title = $_.Title
@@ -823,14 +892,14 @@ $graphNodes = $publishedNotes | Sort-Object Folder, Title | ForEach-Object {
 $graphData = [pscustomobject]@{
     NodeCount = $graphNodes.Count
     EdgeCount = $edgeMap.Count
-    Folders = @($graphNodes.Folder | Sort-Object -Unique)
-    Difficulties = @($graphNodes.Difficulty | Where-Object { $_ } | Sort-Object -Unique)
+    Folders = @($graphNodes.Folder | Sort-Ordinal -Unique)
+    Difficulties = @($graphNodes.Difficulty | Where-Object { $_ } | Sort-Ordinal -Unique)
     Tracks = @(
         @("Foundation") +
-        ($learningPath.Tracks | ForEach-Object { $_.Id } | Sort-Object -Unique)
+        ($learningPath.Tracks | ForEach-Object { $_.Id } | Sort-Ordinal -Unique)
     )
     Nodes = @($graphNodes | ForEach-Object { $_ })
-    Links = @($edgeMap.Values | Sort-Object Source, Target, Relation)
+    Links = @($edgeMap.Values | Sort-Ordinal -Property Source, Target, Relation)
 }
 
 $foundationNotePaths = @(
@@ -846,7 +915,7 @@ foreach ($track in $learningPath.Tracks) {
 
 $matrixTopics = New-Object System.Collections.Generic.List[object]
 
-foreach ($note in ($publishedNotes | Sort-Object Folder, Title)) {
+foreach ($note in ($publishedNotes | Sort-Ordinal -Property Folder, Title)) {
     $statuses = [ordered]@{}
     foreach ($role in $roles) {
         $status = "Not Relevant"
@@ -946,7 +1015,7 @@ $ankiDeckDefinitions.Add([pscustomobject]@{
 $ankiDeckDefinitions.Add([pscustomobject]@{
     FileName = "universal-foundation.tsv"
     Label = "Universal Foundation"
-    NotePaths = @($foundationNotePaths | Sort-Object -Unique)
+    NotePaths = @($foundationNotePaths | Sort-Ordinal -Unique)
     Description = "Interview-angle cards from the Part 1 universal foundation."
 })
 
@@ -964,7 +1033,7 @@ foreach ($track in $learningPath.Tracks) {
     $ankiDeckDefinitions.Add([pscustomobject]@{
         FileName = "$($track.Slug).tsv"
         Label = $track.Title
-        NotePaths = @($trackPaths | Sort-Object -Unique)
+        NotePaths = @($trackPaths | Sort-Ordinal -Unique)
         Description = "Universal foundation plus the role-cluster notes from $($track.Title)."
     })
 }
@@ -973,7 +1042,7 @@ $ankiCatalogRows = New-Object System.Collections.Generic.List[object]
 foreach ($deck in $ankiDeckDefinitions) {
     $deckNotes = @(
         $deck.NotePaths |
-        Sort-Object -Unique |
+        Sort-Ordinal -Unique |
         ForEach-Object {
             if ($notesByPath.ContainsKey($_)) {
                 $notesByPath[$_]
@@ -982,10 +1051,10 @@ foreach ($deck in $ankiDeckDefinitions) {
     )
 
     $rows = New-Object System.Collections.Generic.List[string]
-    foreach ($note in ($deckNotes | Sort-Object Title, Path)) {
+    foreach ($note in ($deckNotes | Sort-Ordinal -Property Title, Path)) {
         foreach ($pair in $note.InterviewPairs) {
             $front = Normalize-DeckField -Value $pair.Question
-            $tagText = (($note.Tags + @($note.Folder) + $note.Tracks) | Where-Object { $_ } | ForEach-Object { $_.ToString() } | Sort-Object -Unique) -join ", "
+            $tagText = (($note.Tags + @($note.Folder) + $note.Tracks) | Where-Object { $_ } | ForEach-Object { $_.ToString() } | Sort-Ordinal -Unique) -join ", "
             $back = Normalize-DeckField -Value (
                 "{0}`n`nSource: {1}`nTags: {2}" -f
                 $pair.Answer,

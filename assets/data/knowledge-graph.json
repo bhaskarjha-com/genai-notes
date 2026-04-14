@@ -153,24 +153,6 @@
       "Degree": 2
     },
     {
-      "Id": "ethics-and-safety/adversarial-ml-and-ai-security.md",
-      "Title": "Adversarial ML & AI Security",
-      "Folder": "ethics-and-safety",
-      "Difficulty": "advanced",
-      "Tags": [
-        "security",
-        "adversarial-ml",
-        "prompt-injection",
-        "jailbreaks",
-        "red-teaming"
-      ],
-      "Tracks": [
-        "E"
-      ],
-      "SitePath": "ethics-and-safety/adversarial-ml-and-ai-security.html",
-      "Degree": 6
-    },
-    {
       "Id": "ethics-and-safety/ai-regulation.md",
       "Title": "AI Regulation for Builders",
       "Folder": "ethics-and-safety",
@@ -188,6 +170,24 @@
       ],
       "SitePath": "ethics-and-safety/ai-regulation.html",
       "Degree": 4
+    },
+    {
+      "Id": "ethics-and-safety/adversarial-ml-and-ai-security.md",
+      "Title": "Adversarial ML & AI Security",
+      "Folder": "ethics-and-safety",
+      "Difficulty": "advanced",
+      "Tags": [
+        "security",
+        "adversarial-ml",
+        "prompt-injection",
+        "jailbreaks",
+        "red-teaming"
+      ],
+      "Tracks": [
+        "E"
+      ],
+      "SitePath": "ethics-and-safety/adversarial-ml-and-ai-security.html",
+      "Degree": 6
     },
     {
       "Id": "ethics-and-safety/ethics-safety-alignment.md",
@@ -556,6 +556,25 @@
       "Degree": 7
     },
     {
+      "Id": "llms/llm-landscape.md",
+      "Title": "LLM Landscape & Model Selection",
+      "Folder": "llms",
+      "Difficulty": "intermediate",
+      "Tags": [
+        "llm-comparison",
+        "gpt-5",
+        "gemini-3",
+        "claude-4",
+        "llama-4",
+        "model-selection",
+        "open-vs-closed",
+        "genai"
+      ],
+      "Tracks": [],
+      "SitePath": "llms/llm-landscape.html",
+      "Degree": 5
+    },
+    {
       "Id": "llms/llms-overview.md",
       "Title": "Large Language Models (LLMs)",
       "Folder": "llms",
@@ -574,25 +593,6 @@
       ],
       "SitePath": "llms/llms-overview.html",
       "Degree": 28
-    },
-    {
-      "Id": "llms/llm-landscape.md",
-      "Title": "LLM Landscape & Model Selection",
-      "Folder": "llms",
-      "Difficulty": "intermediate",
-      "Tags": [
-        "llm-comparison",
-        "gpt-5",
-        "gemini-3",
-        "claude-4",
-        "llama-4",
-        "model-selection",
-        "open-vs-closed",
-        "genai"
-      ],
-      "Tracks": [],
-      "SitePath": "llms/llm-landscape.html",
-      "Degree": 5
     },
     {
       "Id": "llms/reasoning-models.md",
@@ -705,26 +705,6 @@
       "Degree": 11
     },
     {
-      "Id": "prerequisites/neural-networks.md",
-      "Title": "Neural Networks",
-      "Folder": "prerequisites",
-      "Difficulty": "beginner",
-      "Tags": [
-        "neural-networks",
-        "perceptron",
-        "backpropagation",
-        "activation",
-        "cnn",
-        "rnn",
-        "genai-prerequisite"
-      ],
-      "Tracks": [
-        "Foundation"
-      ],
-      "SitePath": "prerequisites/neural-networks.html",
-      "Degree": 12
-    },
-    {
       "Id": "prerequisites/nlp-fundamentals.md",
       "Title": "NLP Fundamentals",
       "Folder": "prerequisites",
@@ -743,6 +723,26 @@
       ],
       "SitePath": "prerequisites/nlp-fundamentals.html",
       "Degree": 5
+    },
+    {
+      "Id": "prerequisites/neural-networks.md",
+      "Title": "Neural Networks",
+      "Folder": "prerequisites",
+      "Difficulty": "beginner",
+      "Tags": [
+        "neural-networks",
+        "perceptron",
+        "backpropagation",
+        "activation",
+        "cnn",
+        "rnn",
+        "genai-prerequisite"
+      ],
+      "Tracks": [
+        "Foundation"
+      ],
+      "SitePath": "prerequisites/neural-networks.html",
+      "Degree": 12
     },
     {
       "Id": "prerequisites/probability-and-statistics.md",
@@ -937,25 +937,6 @@
       "Degree": 4
     },
     {
-      "Id": "production/latency-and-throughput-engineering.md",
-      "Title": "Latency & Throughput Engineering for AI Systems",
-      "Folder": "production",
-      "Difficulty": "advanced",
-      "Tags": [
-        "latency",
-        "throughput",
-        "performance",
-        "queueing",
-        "production",
-        "llmops"
-      ],
-      "Tracks": [
-        "C"
-      ],
-      "SitePath": "production/latency-and-throughput-engineering.html",
-      "Degree": 6
-    },
-    {
       "Id": "production/llm-routing-and-model-selection.md",
       "Title": "LLM Routing & Model Selection",
       "Folder": "production",
@@ -994,6 +975,25 @@
       ],
       "SitePath": "production/llmops.html",
       "Degree": 13
+    },
+    {
+      "Id": "production/latency-and-throughput-engineering.md",
+      "Title": "Latency & Throughput Engineering for AI Systems",
+      "Folder": "production",
+      "Difficulty": "advanced",
+      "Tags": [
+        "latency",
+        "throughput",
+        "performance",
+        "queueing",
+        "production",
+        "llmops"
+      ],
+      "Tracks": [
+        "C"
+      ],
+      "SitePath": "production/latency-and-throughput-engineering.html",
+      "Degree": 6
     },
     {
       "Id": "production/model-serving.md",
@@ -2303,21 +2303,6 @@
       "Relation": "builds-on"
     },
     {
-      "Source": "production/llmops.md",
-      "Target": "ethics-and-safety/ethics-safety-alignment.md",
-      "Relation": "builds-on"
-    },
-    {
-      "Source": "production/llmops.md",
-      "Target": "evaluation/evaluation-and-benchmarks.md",
-      "Relation": "builds-on"
-    },
-    {
-      "Source": "production/llmops.md",
-      "Target": "llms/llms-overview.md",
-      "Relation": "builds-on"
-    },
-    {
       "Source": "production/llm-routing-and-model-selection.md",
       "Target": "llms/llm-landscape.md",
       "Relation": "builds-on"
@@ -2330,6 +2315,21 @@
     {
       "Source": "production/llm-routing-and-model-selection.md",
       "Target": "production/model-serving.md",
+      "Relation": "builds-on"
+    },
+    {
+      "Source": "production/llmops.md",
+      "Target": "ethics-and-safety/ethics-safety-alignment.md",
+      "Relation": "builds-on"
+    },
+    {
+      "Source": "production/llmops.md",
+      "Target": "evaluation/evaluation-and-benchmarks.md",
+      "Relation": "builds-on"
+    },
+    {
+      "Source": "production/llmops.md",
+      "Target": "llms/llms-overview.md",
       "Relation": "builds-on"
     },
     {

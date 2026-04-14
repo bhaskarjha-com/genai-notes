@@ -333,41 +333,79 @@ function Normalize-DeckField {
     return $clean.Trim()
 }
 
-function ConvertTo-NormalizedJson {
-    param([object]$Data)
+function Format-JsonValue {
+    param(
+        [object]$Value,
+        [int]$Depth = 0
+    )
 
-    $raw = ConvertTo-Json $Data -Depth 8
+    $indent = "  " * $Depth
+    $childIndent = "  " * ($Depth + 1)
 
-    # Normalize line endings to LF
-    $raw = $raw.Replace("`r`n", "`n")
-
-    # Normalize PS 5.1 formatting to match PS Core 7.x:
-    # PS 5.1: 4-space indent, extra spaces after colons ("key":  "value")
-    # PS Core: 2-space indent, single space after colons ("key": "value")
-    $lines = $raw -split "`n"
-    $normalized = New-Object System.Collections.Generic.List[string]
-
-    foreach ($line in $lines) {
-        # Convert leading groups of 4 spaces to 2 spaces
-        $match = [regex]::Match($line, '^( +)')
-        if ($match.Success) {
-            $indent = $match.Groups[1].Value
-            $newIndent = ' ' * ([int]($indent.Length / 4) * 2)
-            # Handle odd indentation from PS 5.1 array alignment
-            if ($indent.Length % 4 -ne 0) {
-                $newIndent = ' ' * ([int][Math]::Ceiling($indent.Length / 4) * 2)
-            }
-            $rest = $line.Substring($indent.Length)
-            $line = $newIndent + $rest
-        }
-
-        # Normalize extra spaces after colon in key-value pairs ("key":  "value" -> "key": "value")
-        $line = [regex]::Replace($line, '(?<=":)\s{2,}', ' ')
-
-        $normalized.Add($line)
+    if ($null -eq $Value) {
+        return "null"
     }
 
-    return ($normalized -join "`n")
+    if ($Value -is [bool]) {
+        return if ($Value) { "true" } else { "false" }
+    }
+
+    if ($Value -is [int] -or $Value -is [long] -or $Value -is [double] -or $Value -is [decimal] -or $Value -is [float]) {
+        return $Value.ToString([System.Globalization.CultureInfo]::InvariantCulture)
+    }
+
+    if ($Value -is [string]) {
+        $escaped = $Value.Replace('\', '\\').Replace('"', '\"').Replace("`n", '\n').Replace("`r", '\r').Replace("`t", '\t')
+        return "`"$escaped`""
+    }
+
+    if ($Value -is [System.Collections.IList] -or $Value -is [array]) {
+        if ($Value.Count -eq 0) {
+            return "[]"
+        }
+        $items = New-Object System.Collections.Generic.List[string]
+        foreach ($item in $Value) {
+            $items.Add("$childIndent$(Format-JsonValue $item ($Depth + 1))")
+        }
+        return "[`n$($items -join ",`n")`n$indent]"
+    }
+
+    # Handle ordered hashtable / PSCustomObject / hashtable
+    $keys = New-Object System.Collections.Generic.List[string]
+    $values = @{}
+
+    if ($Value -is [System.Collections.Specialized.OrderedDictionary] -or $Value -is [hashtable]) {
+        foreach ($key in $Value.Keys) {
+            $keys.Add([string]$key)
+            $values[[string]$key] = $Value[$key]
+        }
+    }
+    elseif ($Value -is [pscustomobject]) {
+        foreach ($prop in $Value.PSObject.Properties) {
+            $keys.Add($prop.Name)
+            $values[$prop.Name] = $prop.Value
+        }
+    }
+    else {
+        return "`"$($Value.ToString())`""
+    }
+
+    if ($keys.Count -eq 0) {
+        return "{}"
+    }
+
+    $entries = New-Object System.Collections.Generic.List[string]
+    foreach ($key in $keys) {
+        $escapedKey = $key.Replace('\', '\\').Replace('"', '\"')
+        $val = Format-JsonValue $values[$key] ($Depth + 1)
+        $entries.Add("$childIndent`"$escapedKey`": $val")
+    }
+    return "{`n$($entries -join ",`n")`n$indent}"
+}
+
+function ConvertTo-NormalizedJson {
+    param([object]$Data)
+    return Format-JsonValue $Data 0
 }
 
 function Write-Utf8File {

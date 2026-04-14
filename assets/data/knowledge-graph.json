@@ -163,7 +163,8 @@
         "eu-ai-act",
         "nist",
         "compliance",
-        "responsible-ai"
+        "responsible-ai",
+        "digital-omnibus"
       ],
       "Tracks": [
         "E"
@@ -220,7 +221,9 @@
         "security",
         "llm-top-10",
         "genai-security",
-        "risks"
+        "risks",
+        "prompt-injection",
+        "vector-security"
       ],
       "Tracks": [
         "E"
@@ -528,6 +531,9 @@
         "kv-cache",
         "serving",
         "performance",
+        "sglang",
+        "radix-attention",
+        "pd-disaggregation",
         "genai"
       ],
       "Tracks": [

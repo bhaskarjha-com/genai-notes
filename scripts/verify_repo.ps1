@@ -153,7 +153,7 @@ foreach ($file in $allMarkdownFiles) {
     $bodyWithoutCode = [regex]::Replace($body, '(?ms)```.*?```', '')
     $relativePath = Get-RepoRelativePath -RootPath $repoRoot -TargetPath $file.FullName
 
-    if ($relativePath -ne "CONTRIBUTING.md") {
+    if ($relativePath -notlike "*CONTRIBUTING.md") {
         $markdownMatches = [regex]::Matches($bodyWithoutCode, '(?<!\!)\[[^\]]+\]\(([^)]+)\)')
         foreach ($match in $markdownMatches) {
             $target = $match.Groups[1].Value.Trim()

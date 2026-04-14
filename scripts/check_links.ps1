@@ -101,11 +101,9 @@ foreach ($file in $allMarkdownFiles) {
         }
     }
 
-    if ($relativePath -like "*CONTRIBUTING.md") {
-        continue
-    }
-
     $bodyWithoutCode = [regex]::Replace($body, '(?ms)```.*?```', '')
+    # Also strip inline code spans so example links like `[text](path.md)` aren't parsed
+    $bodyWithoutCode = [regex]::Replace($bodyWithoutCode, '`[^`]+`', '')
     $markdownMatches = [regex]::Matches($bodyWithoutCode, '(?<!\!)\[[^\]]+\]\(([^)]+)\)')
     foreach ($match in $markdownMatches) {
         $resolved = Resolve-DocTarget -SourcePath $file.FullName -Target $match.Groups[1].Value.Trim()

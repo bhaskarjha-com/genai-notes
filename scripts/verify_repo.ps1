@@ -151,24 +151,24 @@ foreach ($file in $allMarkdownFiles) {
     }
 
     $bodyWithoutCode = [regex]::Replace($body, '(?ms)```.*?```', '')
+    # Also strip inline code spans so example links like `[text](path.md)` aren't parsed
+    $bodyWithoutCode = [regex]::Replace($bodyWithoutCode, '`[^`]+`', '')
     $relativePath = Get-RepoRelativePath -RootPath $repoRoot -TargetPath $file.FullName
 
-    if ($relativePath -notlike "*CONTRIBUTING.md") {
-        $markdownMatches = [regex]::Matches($bodyWithoutCode, '(?<!\!)\[[^\]]+\]\(([^)]+)\)')
-        foreach ($match in $markdownMatches) {
-            $target = $match.Groups[1].Value.Trim()
-            $resolved = Resolve-DocTarget -SourcePath $file.FullName -Target $target
-            if ($resolved -and -not (Test-Path -LiteralPath $resolved)) {
-                $relative = Get-RepoRelativePath -RootPath $repoRoot -TargetPath $file.FullName
-                $brokenBodyLinks.Add("$relative -> $target")
-            }
-        }
-
-        $wikiInBody = [regex]::Matches($bodyWithoutCode, '\[\[([^\]]+)\]\]')
-        foreach ($match in $wikiInBody) {
+    $markdownMatches = [regex]::Matches($bodyWithoutCode, '(?<!\!)\[[^\]]+\]\(([^)]+)\)')
+    foreach ($match in $markdownMatches) {
+        $target = $match.Groups[1].Value.Trim()
+        $resolved = Resolve-DocTarget -SourcePath $file.FullName -Target $target
+        if ($resolved -and -not (Test-Path -LiteralPath $resolved)) {
             $relative = Get-RepoRelativePath -RootPath $repoRoot -TargetPath $file.FullName
-            $bodyWikiLinks.Add("$relative -> $($match.Groups[1].Value)")
+            $brokenBodyLinks.Add("$relative -> $target")
         }
+    }
+
+    $wikiInBody = [regex]::Matches($bodyWithoutCode, '\[\[([^\]]+)\]\]')
+    foreach ($match in $wikiInBody) {
+        $relative = Get-RepoRelativePath -RootPath $repoRoot -TargetPath $file.FullName
+        $bodyWikiLinks.Add("$relative -> $($match.Groups[1].Value)")
     }
 
     $statusMatch = [regex]::Match($frontmatter, '(?m)^status:\s*(.+?)\s*$')

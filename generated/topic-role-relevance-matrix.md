@@ -8,7 +8,7 @@ Legend: Must, Good, Optional, Not Relevant.
 |---|---|---|---|---|---|---|---|---|---|
 | [AI Agents](../agents/ai-agents.md) | agents | Must | Must | Must | Must | Must | Must | Must | Must |
 | [Agent Evaluation & Observability](../agents/agent-evaluation.md) | agents | Not Relevant | Must | Good | Optional | Optional | Not Relevant | Not Relevant | Optional |
-| [Agent Memory Systems](../agents/agent-memory.md) | agents | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant |
+| [Agent Memory Systems](../agents/agent-memory.md) | agents | Not Relevant | Optional | Not Relevant | Optional | Optional | Not Relevant | Not Relevant | Optional |
 | [Agentic Protocols & Frameworks](../agents/agentic-protocols.md) | agents | Not Relevant | Must | Optional | Good | Optional | Not Relevant | Not Relevant | Optional |
 | [Multi-Agent Architectures](../agents/multi-agent-architectures.md) | agents | Not Relevant | Must | Good | Optional | Optional | Not Relevant | Not Relevant | Optional |
 | [AI Product Management Fundamentals](../applications/ai-product-management-fundamentals.md) | applications | Not Relevant | Not Relevant | Optional | Not Relevant | Not Relevant | Not Relevant | Not Relevant | Not Relevant |

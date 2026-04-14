@@ -387,6 +387,16 @@
           "MarkdownLink": "../agents/agent-evaluation.md"
         },
         {
+          "Path": "agents/agent-memory.md",
+          "Title": "Agent Memory Systems",
+          "Label": "agent-memory",
+          "Folder": "agents",
+          "Difficulty": "advanced",
+          "EstTime": "3h",
+          "SitePath": "agents/agent-memory.html",
+          "MarkdownLink": "../agents/agent-memory.md"
+        },
+        {
           "Path": "agents/agentic-protocols.md",
           "Title": "Agentic Protocols & Frameworks",
           "Label": "agentic-protocols",

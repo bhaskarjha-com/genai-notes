@@ -36,6 +36,7 @@
 - [ ] [Graph RAG & Advanced Retrieval](../../techniques/graph-rag.md) - 3h
 - [ ] [Multi-Agent Architectures](../../agents/multi-agent-architectures.md) - 3h
 - [ ] [Agent Evaluation & Observability](../../agents/agent-evaluation.md) - 3h
+- [ ] [Agent Memory Systems](../../agents/agent-memory.md) - 3h
 - [ ] [Agentic Protocols & Frameworks](../../agents/agentic-protocols.md) - 4h
 - [ ] [Advanced Fine-Tuning for LLM Adaptation](../../techniques/advanced-fine-tuning.md) - 4h
 - [ ] [Reinforcement Learning for LLM Alignment](../../techniques/rl-alignment.md) - 4h

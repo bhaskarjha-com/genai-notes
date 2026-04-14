@@ -3,6 +3,7 @@ $ErrorActionPreference = "Stop"
 $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
 
 $contentDirs = @(
+    "agents",
     "applications",
     "career",
     "ethics-and-safety",
@@ -19,6 +20,7 @@ $contentDirs = @(
 )
 
 $standardNoteDirs = @(
+    "agents",
     "applications",
     "ethics-and-safety",
     "evaluation",

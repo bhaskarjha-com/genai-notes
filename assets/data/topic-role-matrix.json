@@ -15,8 +15,8 @@
       "PrimaryTrack": "B",
       "MustCount": 25,
       "GoodCount": 5,
-      "OptionalCount": 17,
-      "NotRelevantCount": 32
+      "OptionalCount": 18,
+      "NotRelevantCount": 31
     },
     {
       "Id": "ai-engineer",
@@ -33,8 +33,8 @@
       "PrimaryTrack": "B",
       "MustCount": 22,
       "GoodCount": 4,
-      "OptionalCount": 18,
-      "NotRelevantCount": 35
+      "OptionalCount": 19,
+      "NotRelevantCount": 34
     },
     {
       "Id": "llm-engineer",
@@ -42,8 +42,8 @@
       "PrimaryTrack": "B",
       "MustCount": 22,
       "GoodCount": 3,
-      "OptionalCount": 19,
-      "NotRelevantCount": 35
+      "OptionalCount": 20,
+      "NotRelevantCount": 34
     },
     {
       "Id": "ml-engineer",
@@ -69,8 +69,8 @@
       "PrimaryTrack": "B",
       "MustCount": 22,
       "GoodCount": 3,
-      "OptionalCount": 19,
-      "NotRelevantCount": 35
+      "OptionalCount": 20,
+      "NotRelevantCount": 34
     }
   ],
   "Topics": [
@@ -116,13 +116,13 @@
       "SitePath": "agents/agent-memory.html",
       "Statuses": {
         "README": "Not Relevant",
-        "agentic-ai-engineer": "Not Relevant",
+        "agentic-ai-engineer": "Optional",
         "ai-engineer": "Not Relevant",
-        "genai-engineer": "Not Relevant",
-        "llm-engineer": "Not Relevant",
+        "genai-engineer": "Optional",
+        "llm-engineer": "Optional",
         "ml-engineer": "Not Relevant",
         "mlops-engineer": "Not Relevant",
-        "rag-engineer": "Not Relevant"
+        "rag-engineer": "Optional"
       }
     },
     {

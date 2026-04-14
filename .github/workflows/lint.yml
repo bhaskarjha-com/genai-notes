@@ -31,3 +31,7 @@ jobs:
       - name: Check content compliance (failure modes + exercises)
         shell: pwsh
         run: ./scripts/check_content_compliance.ps1
+
+      - name: Check content freshness (Phase 6 gate)
+        shell: pwsh
+        run: ./scripts/check_freshness.ps1

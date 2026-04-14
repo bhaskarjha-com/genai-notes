@@ -9,7 +9,7 @@ parent: "ai-agents.md"
 related: ["ai-agents.md", "multi-agent-architectures.md", "../techniques/rag.md", "../techniques/context-engineering.md"]
 source: "Multiple — see Sources"
 created: 2026-04-14
-updated: 2026-04-14
+updated: 2026-04-15
 ---
 
 # Agent Memory Systems
@@ -79,7 +79,16 @@ PROCEDURAL MEMORY                     TOOLS + LEARNED BEHAVIORS
   "How to do things"                    Tool definitions, few-shot examples,
   Capacity: skills                      fine-tuned behaviors
   Duration: permanent                   Duration: permanent
+
+GRAPH-BASED MEMORY                    KNOWLEDGE GRAPH STORE
+  "Relationships between things"         Entities + typed edges ("User → works at → Acme")
+  Capacity: structured, scalable         Neo4j, Kuzu, in-memory graph
+  Duration: permanent                    Best for: complex domain reasoning, entity traversal
 ```
+
+> **2026 Benchmark**: LOCOMO (Long-Context Memory) is the emerging standard for evaluating
+> agent memory quality across sessions. It tests recall, contradiction detection, and temporal
+> reasoning over 50+ turn conversations. Use it to compare memory implementations.
 
 ### Memory Architecture Patterns
 

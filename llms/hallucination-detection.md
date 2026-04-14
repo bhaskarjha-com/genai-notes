@@ -197,7 +197,7 @@ def check_groundedness(answer: str, context_chunks: list[str], threshold: float 
     result["grounded"] = result["score"] >= threshold
     return result
 
-# Wrong year â€” should be flagged
+# Wrong year - should be flagged
 context = ["The Eiffel Tower was built in 1889 and stands 330 meters tall."]
 answer  = "The Eiffel Tower was built in 1890."
 check   = check_groundedness(answer, context)
@@ -225,6 +225,41 @@ def self_consistency_check(question: str, n: int = 5) -> dict:
 
 r = self_consistency_check("What year was the Eiffel Tower built?")
 print(f"{r['answer']} ({r['consistency']:.0%} agreement, confident={r['confident']})")
+```
+
+### RAGAS Faithfulness Score (LLM-as-Judge for RAG Groundedness)
+
+```python
+# pip install ragas>=0.2 openai>=1.60
+# ⚠️ Last tested: 2026-04 | Requires: ragas>=0.2, OPENAI_API_KEY
+
+from ragas import evaluate
+from ragas.metrics import faithfulness, answer_relevancy
+from datasets import Dataset
+
+eval_data = Dataset.from_dict({
+    "question": [
+        "When was the Eiffel Tower built?",
+        "What is the capital of Germany?",
+    ],
+    "answer": [
+        "The Eiffel Tower was built in 1890.",    # Hallucinated (should be 1889)
+        "The capital of Germany is Berlin.",       # Correct
+    ],
+    "contexts": [
+        ["The Eiffel Tower was built in 1889 and stands 330 meters tall."],
+        ["Berlin is the capital and largest city of Germany."],
+    ],
+    "ground_truth": [
+        "The Eiffel Tower was built in 1889.",
+        "Berlin is the capital of Germany.",
+    ],
+})
+
+result = evaluate(dataset=eval_data, metrics=[faithfulness, answer_relevancy])
+print(result)
+# faithfulness ~0.5 (1890 hallucination penalizes), answer_relevancy ~0.95
+# result.to_pandas() shows per-row breakdown
 ```
 
 ## ★ Connections
@@ -260,6 +295,10 @@ print(f"{r['answer']} ({r['consistency']:.0%} agreement, confident={r['confident
 | **False positive refusals**  | System flags accurate responses as hallucinations    | Detection threshold too aggressive     | Calibrate thresholds on domain data, multi-method consensus         |
 | **Confident hallucinations** | Model hallucinates with high confidence scores       | Confidence ≠ correctness for LLMs      | Retrieval grounding, self-consistency checks, citation verification |
 | **Detection latency**        | Real-time hallucination check adds 2-5s per response | Detection method too compute-intensive | Lightweight pre-filter, async verification, batch checking          |
+| **Judge model hallucination** | LLM-as-judge marks correct answers as hallucinated  | Judge model itself is not grounded     | Provide evidence to the judge; ensemble multiple judges             |
+| **Domain drift**             | Detection accuracy degrades on new document types    | Detector calibrated on different corpus | Domain-specific threshold calibration, periodic re-evaluation      |
+| **Self-consistency collapse** | All N samples agree on a wrong systematic answer    | Model has systematic bias on this fact | Combine with retrieval grounding; never rely on consistency alone   |
+
 ---
 
 

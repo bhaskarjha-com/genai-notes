@@ -92,7 +92,7 @@ if ($StaleNotes.Count -gt 0) {
 }
 
 if ($MissingVerified.Count -gt 0) {
-    Write-Host "`n📋 MISSING 'last_verified' FIELD ($($MissingVerified.Count) notes):" -ForegroundColor Yellow
+    Write-Host "`nMISSING 'last_verified' FIELD ($($MissingVerified.Count) notes):" -ForegroundColor Yellow
     $MissingVerified | ForEach-Object { Write-Host "   $_" }
 }
 
@@ -102,3 +102,15 @@ Write-Host "  Stable threshold:      $StableThresholdMonths months"
 Write-Host "  Total stale:           $($StaleNotes.Count)"
 Write-Host "  Missing last_verified: $($MissingVerified.Count)"
 Write-Host "───────────────────────────────────────────────`n"
+
+# ── Phase 6.1: CI exit gate ───────────────────────────────────────────────────
+# Grace threshold: allow up to 3 stale notes before blocking CI.
+# This prevents a single aging note from halting all PRs while still
+# catching systematic neglect (4+ stale notes = real signal to act).
+$GraceThresholdCount = 3
+if ($StaleNotes.Count -gt $GraceThresholdCount) {
+    Write-Host "CI FAILURE: $($StaleNotes.Count) stale notes exceeds threshold of $GraceThresholdCount." -ForegroundColor Red
+    Write-Host "Update 'last_verified' and 'updated' frontmatter in stale notes before merging." -ForegroundColor Red
+    exit 1
+}
+exit 0

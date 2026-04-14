@@ -9,7 +9,7 @@ parent: "../genai.md"
 related: ["fine-tuning.md", "../llms/llms-overview.md", "../agents/ai-agents.md"]
 source: "Lewis et al., 2020 + latest hybrid RAG techniques"
 created: 2026-03-18
-updated: 2026-04-11
+updated: 2026-04-15
 ---
 
 # Retrieval-Augmented Generation (RAG)
@@ -156,11 +156,206 @@ Basic RAG
        ├── Re-ranking (Cohere Rerank, cross-encoders)
        ├── Query Transformation (HyDE, multi-query, step-back)
        ├── Self-RAG (model decides when to retrieve)
-       ├── CRAG (Corrective RAG — verify retrieval quality)
+       ├── Late Chunking (embed full doc, pool after)           ← 2025-2026 standard
+       ├── Contextual Retrieval (LLM-enrich each chunk)        ← Anthropic 2024→standard
+       ├── Corrective RAG / CRAG (grade + re-retrieve/search)  ← 2026 agentic pattern
        └→ Agentic RAG
             ├── Tool-calling RAG (agent decides what to search)
             ├── Multi-source RAG (different DBs, APIs, web)
             └── Multi-step RAG (iterative retrieval-reasoning loops)
+```
+
+### Late Chunking (2025-2026 Standard for Long-Doc Retrieval)
+
+**Problem with traditional chunking**: Splitting first loses cross-chunk context. A chunk about "the CEO's decision" has no embedding signal about *which company* or *which decision* if those appear in earlier paragraphs.
+
+**Late Chunking** reverses the order:
+
+```
+Traditional:  Document → Chunk → Embed each chunk → Store
+Late:         Document → Embed FULL document (token-level) → Pool tokens per logical chunk → Store
+
+Result: Each chunk's embedding retains context from the surrounding document.
+```
+
+```python
+# pip install transformers>=4.45 torch>=2.3
+# ⚠️ Last tested: 2026-04 | Requires: jina-embeddings-v3 or nomic-embed-text-v2
+# PSEUDOCODE — illustrative of the late chunking concept
+
+from transformers import AutoTokenizer, AutoModel
+import torch
+
+def late_chunking_embed(document: str, chunk_boundaries: list[tuple[int,int]], model_name: str = "jinaai/jina-embeddings-v3"):
+    """Embed at token level, then pool into chunk-level embeddings."""
+    tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
+    model = AutoModel.from_pretrained(model_name, trust_remote_code=True)
+
+    # 1. Tokenize the FULL document (not individual chunks)
+    inputs = tokenizer(document, return_tensors="pt", truncation=True, max_length=8192)
+
+    with torch.no_grad():
+        # 2. Get token-level embeddings (contextually aware of full document)
+        outputs = model(**inputs)
+        token_embeddings = outputs.last_hidden_state[0]  # shape: [n_tokens, hidden_dim]
+
+    # 3. Pool token embeddings per logical chunk boundary
+    chunk_embeddings = []
+    tokens = tokenizer.convert_ids_to_tokens(inputs["input_ids"][0])
+    for char_start, char_end in chunk_boundaries:
+        # Find token indices corresponding to this char range
+        token_start, token_end = char_to_token_range(inputs, char_start, char_end)
+        chunk_vec = token_embeddings[token_start:token_end].mean(dim=0)  # mean pool
+        chunk_embeddings.append(chunk_vec)
+    return chunk_embeddings
+
+# Supported models: jinaai/jina-embeddings-v3, nomic-ai/nomic-embed-text-v2-moe
+```
+
+**When to use**: Long documents (reports, legal docs, books) where a chunk's meaning depends on earlier context. Outperforms standard chunking by 10-20% on multi-hop retrieval benchmarks.
+
+### Contextual Retrieval (Anthropic, 2024 → 2026 Production Standard)
+
+**Problem**: BM25 and semantic search fail when chunks use pronouns or references ("the approach," "this method") without repeating the noun.
+
+**Solution**: Use an LLM to prepend a *context string* to each chunk before embedding.
+
+```python
+# pip install anthropic>=0.34
+# ⚠️ Last tested: 2026-04 | Requires: anthropic>=0.34, ANTHROPIC_API_KEY
+# Cost note: use prompt caching — cache the full document, vary only per chunk
+
+import anthropic
+
+client = anthropic.Anthropic()
+
+CONTEXT_PROMPT = """<document>
+{full_document}
+</document>
+Here is the chunk we want to situate within the whole document:
+<chunk>
+{chunk_content}
+</chunk>
+Please give a short succinct context (1-2 sentences) to situate this chunk within the overall document
+for the purpose of improving search retrieval. Answer only with the succinct context."""
+
+def add_chunk_context(full_document: str, chunk: str) -> str:
+    """Prepend LLM-generated context to a chunk before embedding."""
+    response = client.messages.create(
+        model="claude-3-5-haiku-20241022",  # cheapest Haiku for speed
+        max_tokens=150,
+        messages=[{"role": "user", "content": CONTEXT_PROMPT.format(
+            full_document=full_document,
+            chunk_content=chunk
+        )}]
+    )
+    context = response.content[0].text.strip()
+    return f"{context}\n\n{chunk}"  # prepend context, embed the combined string
+
+# Cost optimization: use prompt caching on the document prefix
+# Anthropic claims 49% retrieval improvement + 67% with hybrid (BM25 + semantic)
+enriched_chunk = add_chunk_context(full_document="...", chunk="This approach...")
+```
+
+### Corrective RAG / CRAG — Grade → Decide → Act
+
+When retrieved chunks are irrelevant, CRAG falls back to web search or query reformulation:
+
+```
+Query
+  ↓
+[Retrieve] → chunks
+  ↓
+[Grade each chunk: RELEVANT / IRRELEVANT / AMBIGUOUS]
+  ↓
+If ALL irrelevant → [Web Search] or [Reformulate Query] → [Re-retrieve]
+If SOME relevant → [Filter to relevant chunks only]
+  ↓
+[Generate answer from filtered/searched context]
+```
+
+```python
+# ⚠️ Last tested: 2026-04 | Requires: openai>=1.60
+# PSEUDOCODE — the grading + fallback pattern
+
+from openai import OpenAI
+import json
+
+client = OpenAI()
+
+def grade_chunk_relevance(question: str, chunk: str) -> str:
+    """Grade retrieved chunk as relevant or not. Returns 'yes' or 'no'."""
+    resp = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[{
+            "role": "user",
+            "content": (
+                f"Is the following document relevant to answering the question?\n\n"
+                f"Question: {question}\n\nDocument: {chunk[:500]}\n\n"
+                f"Answer with JSON: {{\"relevant\": true/false}}"
+            )
+        }],
+        temperature=0,
+        response_format={"type": "json_object"},
+    )
+    result = json.loads(resp.choices[0].message.content)
+    return "yes" if result.get("relevant") else "no"
+
+def corrective_rag(question: str, retrieved_chunks: list[str], web_search_fn=None) -> str:
+    """CRAG: filter irrelevant chunks, fall back to web search if needed."""
+    relevant = [c for c in retrieved_chunks if grade_chunk_relevance(question, c) == "yes"]
+
+    if not relevant:
+        # Fall back to web search (tavily, serper, brave search APIs)
+        if web_search_fn:
+            relevant = web_search_fn(question)
+        else:
+            return "I don't have reliable information to answer this."
+
+    context = "\n\n".join(relevant)
+    resp = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[
+            {"role": "system", "content": "Answer based on context only. Be concise."},
+            {"role": "user", "content": f"Context:\n{context}\n\nQuestion: {question}"}
+        ]
+    )
+    return resp.choices[0].message.content
+```
+
+### Reciprocal Rank Fusion (RRF) — Combining Multiple Retrieval Lists
+
+RRF merges ranked lists from multiple retrieval methods (semantic + BM25 + metadata) without needing score normalization:
+
+```
+RRF(document d) = Σ_i  1 / (k + rank_i(d))
+  where: k = 60 (constant, empirically validated), rank_i = rank in list i
+```
+
+```python
+# ⚠️ Last tested: 2026-04 | Requires: Python 3.10+ (stdlib only)
+from collections import defaultdict
+
+def reciprocal_rank_fusion(ranked_lists: list[list[str]], k: int = 60) -> list[tuple[str, float]]:
+    """
+    Combine multiple ranked retrieval lists using RRF.
+    Input: list of lists, each sorted by relevance (best first).
+    Output: combined list sorted by fused score (best first).
+    """
+    scores: dict[str, float] = defaultdict(float)
+    for ranked_list in ranked_lists:
+        for rank, doc_id in enumerate(ranked_list, start=1):
+            scores[doc_id] += 1.0 / (k + rank)
+    return sorted(scores.items(), key=lambda x: x[1], reverse=True)
+
+# Example: combine semantic search + BM25 results
+semantic_results = ["doc_3", "doc_1", "doc_7", "doc_2", "doc_5"]  # ordered by cosine sim
+bm25_results     = ["doc_1", "doc_3", "doc_8", "doc_5", "doc_4"]  # ordered by BM25 score
+
+fused = reciprocal_rank_fusion([semantic_results, bm25_results])
+top_5 = [doc_id for doc_id, _ in fused[:5]]
+print(f"Fused top-5: {top_5}")
+# → doc_1 and doc_3 both appear in both lists at high ranks → RRF promotes them
 ```
 
 ### RAG vs Fine-tuning vs Long Context
@@ -345,9 +540,11 @@ EVALUATION TOOLS:
 |---------|----------|------------|------------|
 | **Context poisoning** | LLM generates confidently wrong answers with citations | Irrelevant or contradictory chunks retrieved | Reranking layer (cross-encoder), relevance score thresholds |
 | **Stale embeddings** | Correct docs exist but aren't retrieved | New docs added without re-embedding, index not refreshed | Incremental indexing pipeline, TTL on embeddings |
-| **Chunk boundary loss** | Answers miss key information that spans two chunks | Important context split across chunk boundaries | Overlapping chunks, parent-document retrieval, semantic chunking |
+| **Chunk boundary loss** | Answers miss key information that spans two chunks | Important context split across chunk boundaries | Overlapping chunks, parent-document retrieval, Late Chunking |
 | **Retrieval drift** | Quality degrades over weeks without code changes | User query distribution shifts away from test queries | Continuous retrieval eval (MRR/nDCG), query log monitoring |
 | **Context window overflow** | Token limit errors or truncated context | Too many chunks retrieved, no length management | Dynamic k selection, token-budget-aware retrieval |
+| **Chunk context loss** | Answers miss cross-chunk references ("this approach") | Chunks embedded without surrounding document context | Contextual Retrieval (LLM-enrich) or Late Chunking |
+| **Retrieval grade blindness** | CRAG/Adaptive RAG degrades without grader feedback | No mechanism to detect and correct poor retrieval | Add relevance grader node; fall back to web search on low scores |
 
 ---
 

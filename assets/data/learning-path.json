@@ -615,6 +615,16 @@
           "EstTime": "2h",
           "SitePath": "applications/ai-ux-patterns.html",
           "MarkdownLink": "../applications/ai-ux-patterns.md"
+        },
+        {
+          "Path": "techniques/model-merging.md",
+          "Title": "Model Merging",
+          "Label": "model-merging",
+          "Folder": "techniques",
+          "Difficulty": "advanced",
+          "EstTime": "3h",
+          "SitePath": "techniques/model-merging.html",
+          "MarkdownLink": "../techniques/model-merging.md"
         }
       ]
     },
@@ -892,6 +902,16 @@
           "EstTime": "3h",
           "SitePath": "foundations/state-space-models.html",
           "MarkdownLink": "../foundations/state-space-models.md"
+        },
+        {
+          "Path": "techniques/model-merging.md",
+          "Title": "Model Merging",
+          "Label": "model-merging",
+          "Folder": "techniques",
+          "Difficulty": "advanced",
+          "EstTime": "3h",
+          "SitePath": "techniques/model-merging.html",
+          "MarkdownLink": "../techniques/model-merging.md"
         }
       ]
     },

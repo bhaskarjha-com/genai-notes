@@ -340,6 +340,8 @@ def get_weather(city: str) -> str:
 @mcp.tool()
 def calculate(expression: str) -> str:
     """Safely evaluate a math expression. Supports +, -, *, /, **, sqrt."""
+    # ⚠️ SECURITY: eval() with restricted builtins used for demo. In production,
+    # use a safe expression parser like `simpleeval` or `numexpr`.
     import math
     try:
         result = eval(expression, {"__builtins__": {}}, {"sqrt": math.sqrt, "pi": math.pi})
@@ -379,6 +381,7 @@ TOOLS = [{
 }]
 
 def calculate(expression: str) -> str:
+    # ⚠️ SECURITY: eval() used for demo. In production, use `simpleeval` or `numexpr`.
     import math
     return str(eval(expression, {}, {"sqrt": math.sqrt}))
 

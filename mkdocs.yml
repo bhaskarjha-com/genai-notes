@@ -156,6 +156,7 @@ nav:
           - Embedding Fine-Tuning: techniques/embedding-fine-tuning.md
           - Long-Context Engineering: techniques/long-context-engineering.md
           - Structured Outputs: techniques/structured-outputs.md
+          - Model Merging: techniques/model-merging.md
       - Agents:
           - AI Agents: agents/ai-agents.md
           - Multi-Agent Architectures: agents/multi-agent-architectures.md

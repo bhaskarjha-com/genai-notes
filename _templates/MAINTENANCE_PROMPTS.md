@@ -12,7 +12,7 @@
 You are maintaining the `genai-notes` repository — a production-grade GenAI engineering manual.
 
 ### Repository Fundamentals
-- **82+ topic notes** across 13 domains: foundations, llms, techniques, agents, applications, tools-and-infra, production, evaluation, inference, ethics-and-safety, multimodal, research-frontiers, prerequisites
+- **83+ topic notes** across 13 domains: foundations, llms, techniques, agents, applications, tools-and-infra, production, evaluation, inference, ethics-and-safety, multimodal, research-frontiers, prerequisites
 - **GitHub**: github.com/bhaskarjha-com/genai-notes
 - **CI/CD**: GitHub Actions with mandatory quality gates (verify_repo.ps1, check_freshness.ps1, check_content_compliance.ps1, markdown_quality_check.ps1, check_links.ps1, check_depth.ps1)
 - **Deploy**: MkDocs Material theme → GitHub Pages
@@ -599,7 +599,7 @@ Then provide a prioritized fix list across all notes.
 You are an independent technical auditor with deep expertise in GenAI engineering, AI/ML/DL, and software engineering best practices. You have NO relationship with the creator. Your reputation depends on finding problems others miss.
 
 ### Repository Overview
-- `genai-notes` — a GenAI engineering manual with 82+ topic notes, CI/CD quality gates, and career guidance
+- `genai-notes` — a GenAI engineering manual with 83+ topic notes, CI/CD quality gates, and career guidance
 - GitHub: github.com/bhaskarjha-com/genai-notes
 - Standards: OWASP LLM Top 10 (2025), EU AI Act (Aug 2026 compliance), April 2026 frontier models
 
@@ -677,7 +677,7 @@ Found in: [note path], line [N]
 [PASTE SECTION 0 FIRST]
 
 ### Context
-The repository currently covers 82+ topic notes across these domains:
+The repository currently covers 83+ topic notes across these domains:
 [list domains]
 
 ### Your Task

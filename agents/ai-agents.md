@@ -204,6 +204,8 @@ def search_web(query: str) -> str:
 @tool
 def calculator(expression: str) -> str:
     """Evaluate a math expression."""
+    # ⚠️ SECURITY: eval() used for demo only. In production, use a safe
+    # expression parser like `simpleeval` or `numexpr`. Never eval() untrusted input.
     return str(eval(expression))
 
 # Create LLM with tools

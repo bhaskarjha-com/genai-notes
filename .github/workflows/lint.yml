@@ -40,6 +40,18 @@ jobs:
         shell: pwsh
         run: ./scripts/check_links.ps1
 
-      - name: Check code depth (Phase 7 gate — warnings only)
+      - name: Check code depth (Phase 7 gate)
         shell: pwsh
         run: ./scripts/check_depth.ps1
+
+      - name: Verify generated assets are current
+        shell: pwsh
+        run: |
+          ./scripts/generate_learning_assets.ps1
+          $diff = git diff --name-only -- assets/data/ downloads/ generated/
+          if ($diff) {
+            Write-Host "ERROR: Generated assets are stale. Run generate_learning_assets.ps1 and commit."
+            $diff | ForEach-Object { Write-Host "  $_" }
+            exit 1
+          }
+          Write-Host "Generated assets are up to date."

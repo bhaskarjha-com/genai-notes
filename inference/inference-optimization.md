@@ -60,7 +60,7 @@ AUTOREGRESSIVE GENERATION IS SEQUENTIAL:
   "The" → "capital" → "of" → "France" → "is" → "Paris" → "."
 
   Each token requires a FULL forward pass through the model.
-  GPT-5 (rumored ~1T params): Each forward pass = massive computation.
+  GPT-5.4 (frontier scale): Each forward pass = massive computation.
   100-token response = 100 sequential forward passes.
 
 TWO PHASES:
@@ -164,10 +164,64 @@ SPECULATIVE DECODING (fast):
   └──────────┘    └──────────┘    └──────────────┘
 ```
 
-**2025-2026 advances:**
-- **Universal Speculative Acceleration**: Any draft model can accelerate any target model (Intel Labs, 2025)
-- **SPECTRA**: Training-free speculative decoding (ACL 2025)
-- **Mirror-SD**: Parallel speculation + verification
+**Speculative Decoding Techniques (2025-2026):**
+
+| Technique | Method | Training Required | Typical Speedup | Deployment Maturity |
+|-----------|--------|:-----------------:|:---------------:|:-------------------:|
+| **EAGLE-3** | Draft head (2-5% of target model params), feature fusion, tree-based candidate verification | Yes (lightweight head training) | 2-3x | Production (vLLM, SGLang) |
+| **Medusa** | Multiple prediction heads on target model, each predicts k tokens ahead | Yes (head fine-tuning) | 1.5-2.5x | Production |
+| **SPECTRA** | Training-free, uses n-gram + small model ensemble for drafting | No | 1.5-2x | Research → Production |
+| **Self-Speculative** | Model drafts from its own early layers (early exit) | No | 1.3-1.8x | Experimental |
+
+```
+ENABLING SPECULATIVE DECODING IN VLLM:
+
+  # Start vLLM with speculative decoding enabled
+  python -m vllm.entrypoints.openai.api_server \
+    --model meta-llama/Llama-3.2-70B-Instruct \
+    --speculative-model meta-llama/Llama-3.2-8B-Instruct \
+    --num-speculative-tokens 5 \
+    --use-v2-block-manager
+
+  # Key flags:
+  #   --speculative-model       Draft model (smaller, same tokenizer)
+  #   --num-speculative-tokens   How many tokens to draft per step (3-7)
+  #   --speculative-draft-tensor-parallel-size  TP for draft model
+
+  # SGLang equivalent:
+  python -m sglang.launch_server \
+    --model meta-llama/Llama-3.2-70B-Instruct \
+    --speculative-algorithm EAGLE \
+    --speculative-eagle-path eagle-head-weights/
+```
+
+### Edge & On-Device Inference
+
+Running LLMs on consumer hardware, mobile devices, and edge GPUs.
+
+| Stack | Hardware | Best For | Key Feature |
+|-------|----------|----------|-------------|
+| **Ollama** | macOS/Linux/Windows | Local LLM experimentation | One-command setup, model registry |
+| **MLX** | Apple Silicon (M1-M4) | macOS-native inference | UMA advantage, Metal acceleration |
+| **llama.cpp / GGUF** | CPU + optional GPU | Universal local inference | Pure C++, no Python dependencies |
+| **ExecuTorch** | iOS / Android | Mobile deployment | PyTorch mobile runtime |
+
+```
+EDGE MODEL SELECTION (April 2026):
+
+  Device Memory    Recommended Models              Quantization
+  ──────────       ──────────────────              ────────────
+  4 GB             Gemma 4 E2B (2B), Phi-4-mini    Q4_K_M
+  8 GB             Gemma 4 E4B (4B), LLaMA 3.2 3B  Q4_K_M / Q5_K_M
+  16 GB            Gemma 4 26B MoE, Mistral 7B     Q4_K_M
+  32 GB            LLaMA 3.2 8B, Gemma 4 31B       Q5_K_M / Q6_K
+  64 GB+           LLaMA 3.2 70B                   Q4_K_M
+
+  APPLE SILICON UMA ADVANTAGE:
+    CPU and GPU share the same memory pool (Unified Memory Architecture)
+    No PCIe transfer bottleneck → faster KV cache access
+    M4 Max (128GB) can run 70B models at Q4 comfortably
+```
 
 ### Other Key Techniques
 
@@ -321,8 +375,8 @@ LATENCY TARGETS (typical):
 ### Start vLLM Server (OpenAI-Compatible)
 
 ```bash
-# pip install vllm>=2.0.0
-# ⚠️ Last tested: 2026-04 | Requires: vllm>=2.0, CUDA GPU
+# pip install vllm>=0.8
+# ⚠️ Last tested: 2026-04 | Requires: vllm>=0.8, CUDA GPU
 
 python -m vllm.entrypoints.openai.api_server \
   --model google/gemma-2-2b-it \

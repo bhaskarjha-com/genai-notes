@@ -57,3 +57,4 @@
 - [ ] [Document Parsing & Extraction](../../production/document-parsing-and-extraction.md) - 2h
 - [ ] [Data Flywheel Design](../../production/data-flywheel-design.md) - 2h
 - [ ] [AI UX Patterns](../../applications/ai-ux-patterns.md) - 2h
+- [ ] [Model Merging](../../techniques/model-merging.md) - 3h

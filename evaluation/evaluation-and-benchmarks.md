@@ -144,9 +144,52 @@ RAG Evaluation = Separate what went wrong WHERE
 | **Benchmarks**        | Run standardized test sets          | Reproducible, comparable | Saturated, gameable                |
 | **Human evaluation**  | Humans rate outputs                 | Gold standard            | Expensive, slow, subjective        |
 | **LLM-as-Judge**      | Use GPT-5.4/Claude to judge outputs | Scalable, cheap          | Self-preference bias, inconsistent |
+| **Crowdsourced Arena** | Blind head-to-head user comparisons | Most "real-world" signal, contamination-resistant | Slow to converge, conversational format only |
 | **A/B Testing**       | Real users compare variants         | Real-world signal        | Need traffic, slow                 |
 | **Automated metrics** | BLEU, ROUGE, perplexity             | Fast, cheap              | Don't capture quality well         |
 | **Red teaming**       | Adversarial testing for safety      | Catches edge cases       | Requires expertise                 |
+
+### Arena-Based Evaluation (LMSYS Chatbot Arena)
+
+The gold standard for real-world model comparison. Users chat with two anonymous models side-by-side and vote which is better. Key properties:
+
+```
+HOW CHATBOT ARENA WORKS:
+
+  1. User visits arena, types a prompt
+  2. Two ANONYMOUS models respond (user doesn't know which)
+  3. User votes: Model A wins / Model B wins / Tie
+  4. ELO rating updated (like chess rankings)
+  5. After enough votes, model identity revealed
+
+WHY IT'S THE GOLD STANDARD:
+  ✓ Contamination-resistant (prompts are user-generated, dynamic)
+  ✓ Real-world signal (actual users, not curated test sets)
+  ✓ Covers open-ended quality (creativity, helpfulness, nuance)
+  ✗ Slow to converge (needs 1000s of votes for stable rankings)
+  ✗ Only tests conversational ability (not coding, math, safety)
+
+ELO RANKINGS (April 2026 — illustrative):
+  GPT-5.4:           ~1350
+  Claude Opus 4.6:   ~1345
+  Gemini 3.1 Pro:    ~1330
+  GPT-5.4 mini:      ~1280
+  LLaMA 4 Maverick:  ~1260
+```
+
+### Benchmark Contamination Detection
+
+Contamination = benchmark data leaked into training data, inflating scores.
+
+| Detection Method | How It Works | Effectiveness |
+|-----------------|--------------|---------------|
+| **Canary questions** | Insert unique, never-published questions into eval set | High — if model "knows" the answer, it's contaminated |
+| **Temporal splits** | Use questions created AFTER model's training cutoff | High — model can't have seen them |
+| **N-gram overlap** | Check training data for exact benchmark question matches | Medium — misses paraphrases |
+| **Rephrasing attacks** | Rephrase benchmark questions; check if model scores drop | High — contaminated models overfit to exact wording |
+| **Membership inference** | Statistical test: does model "remember" specific examples? | Medium — requires calibration |
+
+**Best practice**: Always supplement static benchmarks with dynamic evaluation (LiveBench, Chatbot Arena, or your own held-out eval set refreshed monthly).
 
 ### Evaluation Tools & Platforms
 
@@ -159,6 +202,7 @@ RAG Evaluation = Separate what went wrong WHERE
 | **Phoenix** (Arize)       | Open-source              | Observability + tracing           |
 | **Promptfoo**             | Open-source CLI          | Prompt testing & comparison       |
 | **lm-evaluation-harness** | Open-source (EleutherAI) | Running academic benchmarks       |
+| **LMSYS Chatbot Arena**   | Crowdsourced platform    | Real-world human preference ranking |
 
 ---
 
@@ -170,12 +214,15 @@ RAG Evaluation = Separate what went wrong WHERE
 from ragas import evaluate
 from ragas.metrics import faithfulness, answer_relevancy, context_precision
 
-result = evaluate(
-    dataset=your_eval_dataset,  # Questions + retrieved contexts + answers + ground truth
-    metrics=[faithfulness, answer_relevancy, context_precision],
-)
-print(result)
+try:
+    result = evaluate(
+        dataset=your_eval_dataset,  # Questions + retrieved contexts + answers + ground truth
+        metrics=[faithfulness, answer_relevancy, context_precision],
+    )
+    print(result)
 # {'faithfulness': 0.87, 'answer_relevancy': 0.92, 'context_precision': 0.78}
+except Exception as e:
+    print(f"Evaluation failed: {e}")  # Production: retry or fall back to subset
 
 # ═══ DEEPEVAL: Unit Tests for LLMs ═══
 from deepeval import assert_test
@@ -291,3 +338,6 @@ BENCHMARK SATURATION WARNING:
 - DeepEval documentation — https://docs.confident-ai.com
 - LiveBench — https://livebench.ai
 - EleutherAI lm-evaluation-harness — https://github.com/EleutherAI/lm-evaluation-harness
+- Chiang et al., "Chatbot Arena: An Open Platform for Evaluating LLMs by Human Preference" (2024) — https://arxiv.org/abs/2403.04132
+- LMSYS Chatbot Arena — https://chat.lmsys.org/
+

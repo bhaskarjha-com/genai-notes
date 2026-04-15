@@ -1,12 +1,12 @@
 # 🧠 GenAI Study Notes
 
-> Comprehensive, structured study notes for Generative AI — from prerequisites to frontier research. **78 curriculum-ordered notes.** Career-mapped to 31 AI/ML roles. AI-generated, human-reviewed.
+> Comprehensive, structured study notes for Generative AI — from prerequisites to frontier research. **83 curriculum-ordered notes.** Career-mapped to 31 AI/ML roles. AI-generated, human-reviewed.
 
 [![Repo Quality](https://github.com/bhaskarjha-com/genai-notes/actions/workflows/lint.yml/badge.svg?branch=master)](https://github.com/bhaskarjha-com/genai-notes/actions/workflows/lint.yml)
 [![Docs Site](https://github.com/bhaskarjha-com/genai-notes/actions/workflows/deploy.yml/badge.svg?branch=master)](https://github.com/bhaskarjha-com/genai-notes/actions/workflows/deploy.yml)
 [![Link Check](https://github.com/bhaskarjha-com/genai-notes/actions/workflows/links.yml/badge.svg?branch=master)](https://github.com/bhaskarjha-com/genai-notes/actions/workflows/links.yml)
 ![License](https://img.shields.io/badge/license-CC--BY--4.0-blue)
-![Notes](https://img.shields.io/badge/notes-78-brightgreen)
+![Notes](https://img.shields.io/badge/notes-83-brightgreen)
 
 📖 **[Browse the Docs Site →](https://bhaskarjha-com.github.io/genai-notes/)**
 
@@ -79,23 +79,23 @@ Use [genai.md](genai.md) as the root GenAI overview note, then browse the folder
 
 ## 📚 What's Covered
 
-Current snapshot: **78 topic notes** across 13 knowledge directories, a root [genai.md](genai.md) overview, dedicated and grouped career guidance, generated learner tooling, and reusable templates.
+Current snapshot: **83 topic notes** across 13 knowledge directories, a root [genai.md](genai.md) overview, dedicated and grouped career guidance, generated learner tooling, and reusable templates.
 
 ```text
 genai-notes/
-├── prerequisites/        (6 notes)   math, deep learning, and NLP prerequisites
-├── foundations/          (8 notes)   transformer and representation fundamentals
-├── llms/                 (4 notes)   model behavior, selection, and failure modes
-├── techniques/           (13 notes)  prompting, RAG, fine-tuning, agents, and adaptation
-├── applications/         (6 notes)   applied product and interface patterns
-├── tools-and-infra/      (5 notes)   tooling, data, cloud, and systems foundations
-├── production/           (13 notes)  serving, ops, CI/CD, reliability, and system design
-├── evaluation/           (4 notes)   benchmarks, deep-dive evaluation, interview prep
-├── inference/            (3 notes)   optimization, GPUs, and distributed serving
-├── ethics-and-safety/    (5 notes)   governance, regulation, and security
-├── multimodal/           (3 notes)   multimodal and computer-vision fundamentals
-├── research-frontiers/   (3 notes)   interpretability, training, and research practice
-├── agents/               (5 notes)   AI agents, multi-agent, protocols, and evaluation
+├── prerequisites/        (7 notes)   math, deep learning, and NLP prerequisites
+├── foundations/          (9 notes)   transformer and representation fundamentals
+├── llms/                 (5 notes)   model behavior, selection, and failure modes
+├── techniques/           (16 notes)  prompting, RAG, fine-tuning, merging, and adaptation
+├── applications/         (8 notes)   applied product and interface patterns
+├── tools-and-infra/      (6 notes)   tooling, data, cloud, and systems foundations
+├── production/           (14 notes)  serving, ops, CI/CD, reliability, and system design
+├── evaluation/           (5 notes)   benchmarks, deep-dive evaluation, interview prep
+├── inference/            (4 notes)   optimization, GPUs, and distributed serving
+├── ethics-and-safety/    (7 notes)   governance, regulation, and security
+├── multimodal/           (4 notes)   multimodal and computer-vision fundamentals
+├── research-frontiers/   (4 notes)   interpretability, training, and research practice
+├── agents/               (6 notes)   AI agents, multi-agent, protocols, and evaluation
 ├── career/                           universal role map, dedicated + grouped guides
 ├── learner-tools/                    docs-site learner tooling pages
 ├── downloads/                        generated decks and progress checklists

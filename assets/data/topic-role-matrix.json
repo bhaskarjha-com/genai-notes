@@ -7,7 +7,7 @@
       "MustCount": 20,
       "GoodCount": 0,
       "OptionalCount": 0,
-      "NotRelevantCount": 62
+      "NotRelevantCount": 63
     },
     {
       "Id": "agentic-ai-engineer",
@@ -15,7 +15,7 @@
       "PrimaryTrack": "B",
       "MustCount": 25,
       "GoodCount": 5,
-      "OptionalCount": 18,
+      "OptionalCount": 19,
       "NotRelevantCount": 34
     },
     {
@@ -25,7 +25,7 @@
       "MustCount": 22,
       "GoodCount": 4,
       "OptionalCount": 10,
-      "NotRelevantCount": 46
+      "NotRelevantCount": 47
     },
     {
       "Id": "genai-engineer",
@@ -33,7 +33,7 @@
       "PrimaryTrack": "B",
       "MustCount": 22,
       "GoodCount": 4,
-      "OptionalCount": 19,
+      "OptionalCount": 20,
       "NotRelevantCount": 37
     },
     {
@@ -42,7 +42,7 @@
       "PrimaryTrack": "B",
       "MustCount": 22,
       "GoodCount": 3,
-      "OptionalCount": 20,
+      "OptionalCount": 21,
       "NotRelevantCount": 37
     },
     {
@@ -52,7 +52,7 @@
       "MustCount": 28,
       "GoodCount": 5,
       "OptionalCount": 1,
-      "NotRelevantCount": 48
+      "NotRelevantCount": 49
     },
     {
       "Id": "mlops-engineer",
@@ -61,7 +61,7 @@
       "MustCount": 28,
       "GoodCount": 5,
       "OptionalCount": 2,
-      "NotRelevantCount": 47
+      "NotRelevantCount": 48
     },
     {
       "Id": "rag-engineer",
@@ -69,7 +69,7 @@
       "PrimaryTrack": "B",
       "MustCount": 22,
       "GoodCount": 3,
-      "OptionalCount": 20,
+      "OptionalCount": 21,
       "NotRelevantCount": 37
     }
   ],
@@ -1287,6 +1287,23 @@
       "Folder": "techniques",
       "Difficulty": "advanced",
       "SitePath": "techniques/long-context-engineering.html",
+      "Statuses": {
+        "README": "Not Relevant",
+        "agentic-ai-engineer": "Optional",
+        "ai-engineer": "Not Relevant",
+        "genai-engineer": "Optional",
+        "llm-engineer": "Optional",
+        "ml-engineer": "Not Relevant",
+        "mlops-engineer": "Not Relevant",
+        "rag-engineer": "Optional"
+      }
+    },
+    {
+      "Path": "techniques/model-merging.md",
+      "Title": "Model Merging",
+      "Folder": "techniques",
+      "Difficulty": "advanced",
+      "SitePath": "techniques/model-merging.html",
       "Statuses": {
         "README": "Not Relevant",
         "agentic-ai-engineer": "Optional",

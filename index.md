@@ -9,7 +9,7 @@ hide:
 <div class="landing-hero">
   <p class="landing-kicker">Curriculum-ordered. Career-mapped. GitHub-native.</p>
   <p class="landing-copy">
-    The production-grade GenAI engineering manual. 78 structured study notes spanning 13 domains — from linear algebra prerequisites through autonomous agent orchestration and frontier research. Each note is a self-contained 30–60 minute session combining theory, production code, failure modes, and interview preparation. Career-mapped to 31 AI/ML roles across 5 specialization tracks.
+    The production-grade GenAI engineering manual. 83 structured study notes spanning 13 domains — from linear algebra prerequisites through autonomous agent orchestration and frontier research. Each note is a self-contained 30–60 minute session combining theory, production code, failure modes, and interview preparation. Career-mapped to 31 AI/ML roles across 5 specialization tracks.
   </p>
   <div class="landing-actions">
     <a class="md-button md-button--primary" href="LEARNING_PATH.html" style="border-radius: 999px; padding: 0.75rem 1.75rem; font-weight: 700;">Start Learning Path</a>
@@ -31,14 +31,14 @@ hide:
   </a>
   <a class="tool-card" href="genai.html">
     <strong>🔍 Topic Reference</strong>
-    <span>Already know what you need? Jump directly to any of 78 topics via the master scope map. Every note links to prerequisites and next steps.</span>
+    <span>Already know what you need? Jump directly to any of 83 topics via the master scope map. Every note links to prerequisites and next steps.</span>
   </a>
 </div>
 
 ## By the Numbers
 
 <div class="stats-strip">
-  <div class="stat-card"><strong>78</strong><span>Topic Notes</span></div>
+  <div class="stat-card"><strong>83</strong><span>Topic Notes</span></div>
   <div class="stat-card"><strong>7</strong><span>Role Guides</span></div>
   <div class="stat-card"><strong>5</strong><span>Career Tracks</span></div>
   <div class="stat-card"><strong>4</strong><span>Interactive Tools</span></div>
@@ -53,7 +53,7 @@ hide:
   </a>
   <a class="tool-card" href="learner-tools/knowledge-graph.html">
     <strong>🕸️ Knowledge Graph</strong>
-    <span>Interactive D3.js force-directed graph of all 78 notes and 250+ connections. Discover prerequisite chains and concept relationships visually.</span>
+    <span>Interactive D3.js force-directed graph of all 83 notes and 250+ connections. Discover prerequisite chains and concept relationships visually.</span>
   </a>
   <a class="tool-card" href="learner-tools/topic-role-matrix.html">
     <strong>📊 Topic–Role Matrix</strong>

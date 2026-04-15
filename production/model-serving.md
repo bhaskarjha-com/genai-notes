@@ -175,8 +175,8 @@ python -m vllm.entrypoints.openai.api_server \
 ### vLLM Server Setup (OpenAI-Compatible)
 
 ```bash
-# pip install vllm>=2.0
-# ⚠️ Last tested: 2026-04 | Requires: CUDA GPU, vllm>=2.0
+# pip install vllm>=0.8
+# ⚠️ Last tested: 2026-04 | Requires: CUDA GPU, vllm>=0.8
 
 python -m vllm.entrypoints.openai.api_server \
   --model meta-llama/Llama-3.2-8B-Instruct \

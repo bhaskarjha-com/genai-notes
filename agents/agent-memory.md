@@ -186,6 +186,65 @@ Store structured relationships between entities.
 | **Cons** | Complex to build, extraction accuracy matters, graph maintenance |
 | **Best for** | Domain-specific agents (medical, legal, research), relationship-heavy contexts |
 
+### Pattern 5: Virtual Context Memory (Letta / MemGPT)
+
+An OS-inspired approach where the agent manages its own memory via tool calls — reading, writing, and searching memory tiers autonomously.
+
+| Aspect | Detail |
+|--------|--------|
+| **How** | Three-tier memory hierarchy managed by the agent itself via memory tools |
+| **Capacity** | Unlimited — agent pages data in/out of context as needed |
+| **Pros** | Self-organizing, handles arbitrarily long histories, agent decides what to remember |
+| **Cons** | Extra LLM calls for memory management, complexity, requires reliable tool use |
+| **Best for** | Long-running agents, personalized assistants, agents that must learn over weeks/months |
+
+```
+LETTA / MEMGPT ARCHITECTURE:
+
+  ┌─────────────────────────────────────────────────────────┐
+  │                   AGENT CONTEXT WINDOW                   │
+  │                                                         │
+  │  ┌─────────────────────────────────────────────────┐   │
+  │  │  CORE MEMORY (always in context)                 │   │
+  │  │  - System persona + user profile blocks          │   │
+  │  │  - Agent can self-edit: core_memory_replace()    │   │
+  │  │  Capacity: ~2K tokens (curated, high-value)      │   │
+  │  └─────────────────────────────────────────────────┘   │
+  │                         │                               │
+  │                    pages in/out                          │
+  │                         │                               │
+  │  ┌─────────────────────────────────────────────────┐   │
+  │  │  RECALL MEMORY (conversation search)             │   │
+  │  │  - Full conversation log, searchable             │   │
+  │  │  - Agent calls: conversation_search(query)       │   │
+  │  │  Capacity: unlimited (retrieval-based)           │   │
+  │  └─────────────────────────────────────────────────┘   │
+  │                         │                               │
+  │  ┌─────────────────────────────────────────────────┐   │
+  │  │  ARCHIVAL MEMORY (persistent knowledge store)    │   │
+  │  │  - Long-term facts, documents, learned knowledge │   │
+  │  │  - Agent calls: archival_memory_insert/search()  │   │
+  │  │  Capacity: unlimited (vector DB backed)          │   │
+  │  └─────────────────────────────────────────────────┘   │
+  └─────────────────────────────────────────────────────────┘
+
+KEY INSIGHT: The agent is its own memory manager.
+  - It decides what to remember (archival_memory_insert)
+  - It decides what to recall (conversation_search, archival_memory_search)
+  - It maintains its own profile (core_memory_replace)
+  - Unlike RAG: memory writes are autonomous, not just retrieval
+```
+
+**Letta vs Mem0 (2026 landscape):**
+
+| Aspect | Letta (MemGPT) | Mem0 |
+|--------|----------------|------|
+| **Approach** | OS-inspired, agent self-manages memory via tools | Automated memory extraction + retrieval layer |
+| **Control** | Agent decides what to store/retrieve | System automatically extracts and stores memories |
+| **Architecture** | Three-tier (core/recall/archival) | Key-value memory with embedding search |
+| **Best for** | Agents needing autonomous memory management | Simpler "remember user preferences" use cases |
+| **Maturity** | Production runtime (Letta Cloud + open-source) | Open-source library + hosted API |
+
 ---
 
 ## ★ Code & Implementation
@@ -267,15 +326,20 @@ class SemanticMemory:
     
     def _embed(self, text: str) -> np.ndarray:
         """Get embedding for text."""
-        response = client.embeddings.create(
-            model="text-embedding-3-small",
-            input=text,
-        )
-        return np.array(response.data[0].embedding)
+        # Production: add tenacity @retry(wait=wait_exponential(min=1, max=10), stop=stop_after_attempt(3))
+        try:
+            response = client.embeddings.create(
+                model="text-embedding-3-small",
+                input=text,
+            )
+            return np.array(response.data[0].embedding)
+        except Exception as e:
+            # Production: log error, fall back to cached embedding or raise
+            raise RuntimeError(f"Embedding API call failed: {e}") from e
     
     def store(self, content: str, metadata: dict = None):
         """Store a memory with its embedding."""
-        embedding = self._embed(content)
+        embedding = self._embed(content)  # May raise on API failure
         self.memories.append({
             "content": content,
             "timestamp": datetime.now().isoformat(),
@@ -332,6 +396,7 @@ MEMORY PATTERN DECISION GUIDE:
   Long conversation (20-200 turns)?     → Summarization memory
   Cross-session personalization?        → Semantic memory (vector store)
   Complex domain relationships?         → Knowledge graph memory
+  Agent-managed long-term memory?       → Letta / MemGPT (virtual context)
   Production multi-user system?         → Vector store + structured user profiles
   
 MEMORY STORAGE OPTIONS:
@@ -412,6 +477,8 @@ MEMORY SIZING:
 | 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 7 | Covers agent memory patterns in production context |
 | 🔧 Hands-on | [LangGraph Memory Tutorial](https://langchain-ai.github.io/langgraph/concepts/memory/) | Official guide to checkpointing and memory in LangGraph |
 | 🔧 Hands-on | [Mem0 Library](https://github.com/mem0ai/mem0) | Open-source long-term memory layer for AI agents |
+| 🔧 Hands-on | [Letta (MemGPT)](https://github.com/letta-ai/letta) | Virtual context memory runtime — agent self-manages memory tiers |
+| 📄 Paper | [Packer et al. "MemGPT" (2023)](https://arxiv.org/abs/2310.08560) | OS-inspired virtual context management for LLM agents |
 | 📄 Paper | [Park et al. "Generative Agents" (2023)](https://arxiv.org/abs/2304.03442) | Stanford's simulation of memory-enabled AI agents in a virtual world |
 
 ---
@@ -420,6 +487,8 @@ MEMORY SIZING:
 
 - LangGraph Documentation — https://langchain-ai.github.io/langgraph/
 - Mem0 Documentation — https://docs.mem0.ai/
+- Letta (MemGPT) Documentation — https://docs.letta.com/
+- Packer et al. "MemGPT: Towards LLMs as Operating Systems" (2023) — https://arxiv.org/abs/2310.08560
 - Park et al. "Generative Agents: Interactive Simulacra of Human Behavior" (2023)
 - [AI Agents](./ai-agents.md)
 - [RAG](../techniques/rag.md)

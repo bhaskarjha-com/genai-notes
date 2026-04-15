@@ -45,3 +45,4 @@
 - [ ] [Reasoning Models & Test-Time Compute](../../llms/reasoning-models.md) - 3h
 - [ ] [Attention Mechanism Deep Dive](../../foundations/attention-deep-dive.md) - 4h
 - [ ] [State Space Models](../../foundations/state-space-models.md) - 3h
+- [ ] [Model Merging](../../techniques/model-merging.md) - 3h

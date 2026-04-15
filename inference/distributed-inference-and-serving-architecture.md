@@ -159,8 +159,8 @@ That introduces trade-offs in cache reuse, model synchronization, and observabil
 ### vLLM Distributed Serving
 
 ```python
-# pip install vllm>=2.0
-# ⚠️ Last tested: 2026-04 | Requires: vllm>=2.0
+# pip install vllm>=0.8
+# ⚠️ Last tested: 2026-04 | Requires: vllm>=0.8
 
 # Launch vLLM with tensor parallelism across 4 GPUs
 # Command line:

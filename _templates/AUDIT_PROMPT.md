@@ -14,7 +14,7 @@
 
 ## Context You Must Know First
 
-This is a **GenAI engineering manual** — 82+ topic notes covering prerequisites
+This is a **GenAI engineering manual** — 83+ topic notes covering prerequisites
 through frontier research, organized for career-track learning. It is NOT a blog,
 NOT a tutorial collection. It is a structured reference with automated quality
 enforcement.

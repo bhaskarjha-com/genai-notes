@@ -214,7 +214,7 @@ The core insight: **Next-token prediction at scale produces emergent capabilitie
 | Relationship | Topics                                                                                                              |
 | ------------ | ------------------------------------------------------------------------------------------------------------------- |
 | Builds on    | [Transformers](./foundations/transformers.md), [Attention Mechanism](./foundations/attention-mechanism.md)                                               |
-| Leads to     | [Large Language Models (LLMs)](./llms/llms-overview.md), [Diffusion Models](./multimodal/diffusion-models.md), [Retrieval-Augmented Generation (RAG)](./techniques/rag.md), [AI Agents](./agents/ai-agents.md) |
+| Leads to     | [Large Language Models (LLMs)](./llms/llms-overview.md), [Diffusion Models](./multimodal/diffusion-models.md), [Retrieval-Augmented Generation (RAG)](./techniques/rag.md), [AI Agents](./agents/ai-agents.md), [Model Merging](./techniques/model-merging.md) |
 | Compare with | Traditional ML (discriminative models), Rule-based AI                                                               |
 | Cross-domain | Neuroscience (how brains generate), Information Theory                                                              |
 
@@ -222,14 +222,14 @@ The core insight: **Next-token prediction at scale produces emergent capabilitie
 
 ## ○ Notes
 
-### The Current Competitive Landscape (March 2026 Snapshot)
+### The Current Competitive Landscape (April 2026 Snapshot)
 
 Verify current vendor model lineups with the official release notes before using this section for decisions.
 
 | Company       | Latest Model             | Strength                                  |
 | ------------- | ------------------------ | ----------------------------------------- |
 | **OpenAI**    | GPT-5.4 Pro              | Unified reasoning + multimodal            |
-| **Anthropic** | Claude Opus 4.6          | Best for coding + agents                  |
+| **Anthropic** | Claude Opus 4.6 (+ Mythos Preview) | Best for coding + agents         |
 | **Google**    | Gemini 3.1 Pro           | Largest context (2M tokens), science      |
 | **Meta**      | LLaMA 4 (Scout/Maverick) | Best open-weight, MoE architecture        |
 | **Mistral**   | Mistral Large            | Strong European open alternative          |

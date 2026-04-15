@@ -294,6 +294,7 @@ for block in resp.content:
 ```python
 # pip install outlines transformers torch
 # ⚠️ Last tested: 2026-04 | Requires: outlines>=0.1, transformers>=4.48, GPU recommended
+# Note: For API-based models, use outlines.from_openai(client, "model") instead
 import outlines
 
 model = outlines.models.transformers("microsoft/Phi-3-mini-4k-instruct")

@@ -139,13 +139,13 @@ REASONING MODEL:
 └─────────────────────────────────────────────────────┘
 ```
 
-### Major Reasoning Models (March 2026)
+### Major Reasoning Models (April 2026)
 
 | Model                             | Company   | Key Feature                              | Access |
 | --------------------------------- | --------- | ---------------------------------------- | ------ |
 | **o1**                            | OpenAI    | First reasoning model, PhD-level science | API    |
 | **o3**                            | OpenAI    | Stronger reasoning, variable compute     | API    |
-| **o4-mini**                       | OpenAI    | Cost-effective reasoning, fast           | API    |
+| **GPT-5.4 mini**                  | OpenAI    | Cost-effective reasoning, fast (adaptive thinking) | API    |
 | **DeepSeek-R1**                   | DeepSeek  | Open-weight, competitive with o1         | Open   |
 | **QwQ**                           | Alibaba   | Open reasoning model                     | Open   |
 | **Gemini 3.1 Deep Think**         | Google    | Complex technical reasoning, multimodal  | API    |
@@ -241,11 +241,11 @@ REASONING MODEL DECISION TREE:
     NO  → Use standard LLM (GPT-5.4, Claude Sonnet 4.6)
 
   Is latency critical?
-    YES → Use standard LLM or o4-mini
+    YES → Use standard LLM or GPT-5.4 mini
     NO  → Reasoning model is fine
 
   Is cost critical?
-    YES → o4-mini or DeepSeek-R1 (open, self-host)
+    YES → GPT-5.4 mini or DeepSeek-R1 (open, self-host)
     NO  → o3 with high reasoning effort
 
 KEY NUMBERS:
@@ -334,4 +334,4 @@ KEY NUMBERS:
 - OpenAI, "Learning to Reason with LLMs" (o1 blog post, Sep 2024)
 - DeepSeek, "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning" (Jan 2025)
 - Snell et al., "Scaling LLM Test-Time Compute" (2024)
-- OpenAI o3, o4-mini release announcements (2025)
+- OpenAI o3 release announcement (2025), GPT-5.4 mini (March 2026)

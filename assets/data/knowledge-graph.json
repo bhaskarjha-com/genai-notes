@@ -1,6 +1,6 @@
 {
-  "NodeCount": 82,
-  "EdgeCount": 295,
+  "NodeCount": 83,
+  "EdgeCount": 301,
   "Folders": [
     "agents",
     "applications",
@@ -681,7 +681,7 @@
         "C"
       ],
       "SitePath": "inference/inference-optimization.html",
-      "Degree": 14
+      "Degree": 15
     },
     {
       "Id": "llms/hallucination-detection.md",
@@ -719,7 +719,7 @@
       ],
       "Tracks": [],
       "SitePath": "llms/llm-landscape.html",
-      "Degree": 5
+      "Degree": 6
     },
     {
       "Id": "llms/llms-overview.md",
@@ -1255,7 +1255,7 @@
       ],
       "Tracks": [],
       "SitePath": "genai.html",
-      "Degree": 6
+      "Degree": 7
     },
     {
       "Id": "techniques/advanced-fine-tuning.md",
@@ -1275,7 +1275,7 @@
         "D"
       ],
       "SitePath": "techniques/advanced-fine-tuning.html",
-      "Degree": 6
+      "Degree": 7
     },
     {
       "Id": "techniques/context-engineering.md",
@@ -1348,7 +1348,7 @@
         "Foundation"
       ],
       "SitePath": "techniques/fine-tuning.html",
-      "Degree": 16
+      "Degree": 17
     },
     {
       "Id": "techniques/function-calling-and-structured-output.md",
@@ -1408,7 +1408,7 @@
         "D"
       ],
       "SitePath": "techniques/distillation-and-compression.html",
-      "Degree": 5
+      "Degree": 6
     },
     {
       "Id": "techniques/long-context-engineering.md",
@@ -1428,6 +1428,28 @@
       ],
       "SitePath": "techniques/long-context-engineering.html",
       "Degree": 3
+    },
+    {
+      "Id": "techniques/model-merging.md",
+      "Title": "Model Merging",
+      "Folder": "techniques",
+      "Difficulty": "advanced",
+      "Tags": [
+        "model-merging",
+        "ties",
+        "dare",
+        "slerp",
+        "mergekit",
+        "fine-tuning",
+        "open-weight",
+        "genai"
+      ],
+      "Tracks": [
+        "B",
+        "D"
+      ],
+      "SitePath": "techniques/model-merging.html",
+      "Degree": 6
     },
     {
       "Id": "techniques/prompt-engineering.md",
@@ -2147,6 +2169,11 @@
     {
       "Source": "genai.md",
       "Target": "multimodal/diffusion-models.md",
+      "Relation": "leads-to"
+    },
+    {
+      "Source": "genai.md",
+      "Target": "techniques/model-merging.md",
       "Relation": "leads-to"
     },
     {
@@ -2947,6 +2974,31 @@
     {
       "Source": "techniques/long-context-engineering.md",
       "Target": "techniques/rag.md",
+      "Relation": "builds-on"
+    },
+    {
+      "Source": "techniques/model-merging.md",
+      "Target": "inference/inference-optimization.md",
+      "Relation": "leads-to"
+    },
+    {
+      "Source": "techniques/model-merging.md",
+      "Target": "llms/llm-landscape.md",
+      "Relation": "leads-to"
+    },
+    {
+      "Source": "techniques/model-merging.md",
+      "Target": "techniques/advanced-fine-tuning.md",
+      "Relation": "builds-on"
+    },
+    {
+      "Source": "techniques/model-merging.md",
+      "Target": "techniques/distillation-and-compression.md",
+      "Relation": "builds-on"
+    },
+    {
+      "Source": "techniques/model-merging.md",
+      "Target": "techniques/fine-tuning.md",
       "Relation": "builds-on"
     },
     {

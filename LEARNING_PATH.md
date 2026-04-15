@@ -113,6 +113,7 @@ Target roles: GenAI Engineer, LLM Engineer, Agentic AI Engineer, RAG Engineer, A
 | B22 | [document-parsing-and-extraction](production/document-parsing-and-extraction.md) | 2h |
 | B23 | [data-flywheel-design](production/data-flywheel-design.md) | 2h |
 | B24 | [ai-ux-patterns](applications/ai-ux-patterns.md) | 2h |
+| B25 | [model-merging](techniques/model-merging.md) | 3h |
 
 External skills: System design, Docker, Kubernetes, async programming
 
@@ -156,6 +157,7 @@ Target roles: Foundation Model Engineer, Research Scientist, Applied Scientist, 
 | D10 | [reasoning-models](llms/reasoning-models.md) | 3h |
 | D11 | [attention-deep-dive](foundations/attention-deep-dive.md) | 4h |
 | D12 | [state-space-models](foundations/state-space-models.md) | 3h |
+| D13 | [model-merging](techniques/model-merging.md) | 3h |
 
 External skills: C++, CUDA, distributed training, JAX, paper reading, reproducibility discipline
 

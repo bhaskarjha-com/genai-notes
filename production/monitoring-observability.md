@@ -117,6 +117,26 @@ The specific platform mix changes frequently, but the stable categories are:
 
 Last verified for example categories and ecosystem naming: 2026-04.
 
+### Observability Platform Comparison (April 2026)
+
+| Platform | Primary Strength | Ideal For | Key Advantage | Deployment |
+|----------|-----------------|-----------|---------------|:----------:|
+| **Langfuse** | Tracing + prompt management | Self-hosted privacy, open-source teams | Full control, generous free tier, OTel-compatible | Self-hosted / Cloud |
+| **Arize Phoenix** | ML + LLM observability | Teams already using Arize for ML monitoring | Unified ML+LLM observability, notebook-friendly | Open-source |
+| **Braintrust** | Eval-first CI/CD integration | Teams shipping fast with eval gates | Prompt playground, dataset management, scoring API | Cloud |
+| **LangSmith** | LangChain-native tracing | LangChain/LangGraph users | Deep integration with LangChain ecosystem | Cloud |
+| **Latitude** | Issue lifecycle management | Teams focused on failure triage workflows | Issue → root cause → fix lifecycle tracking | Cloud |
+
+```
+PLATFORM DECISION GUIDE:
+
+  Using LangChain/LangGraph?         → LangSmith (deepest integration)
+  Need self-hosted / data residency? → Langfuse (open-source, self-hosted)
+  Already using Arize for ML?        → Phoenix (unified ML + LLM)
+  Eval-gated CI/CD is the priority?  → Braintrust (eval → deploy pipeline)
+  Starting from scratch?             → Langfuse (best free tier, OTel-native)
+```
+
 ### Example Trace Schema
 
 ```json
@@ -213,6 +233,39 @@ def monitored_call(messages: list[dict], model: str = "gpt-4o-mini") -> str:
 
 print(monitored_call([{"role": "user", "content": "What is observability?"}]))
 # Grafana dashboard: connect to Prometheus → visualize p50/p95 latency + error rate
+```
+
+### LLM Tracing with Langfuse
+
+```python
+# pip install langfuse>=2.0 openai>=1.60
+# ⚠️ Last tested: 2026-04 | Requires: langfuse>=2.0, openai>=1.60
+# Set env: LANGFUSE_PUBLIC_KEY, LANGFUSE_SECRET_KEY, LANGFUSE_HOST (if self-hosted)
+
+from langfuse.decorators import observe, langfuse_context
+from openai import OpenAI
+
+client = OpenAI()
+
+@observe()  # Automatically creates a trace with latency, token usage, and cost
+def answer_question(user_question: str, model: str = "gpt-4o-mini") -> str:
+    """Traced LLM call — appears in Langfuse dashboard with full metadata."""
+    # Tag the trace for filtering in the dashboard
+    langfuse_context.update_current_observation(
+        metadata={"prompt_version": "support-v7", "route": "qa-pipeline"},
+    )
+    response = client.chat.completions.create(
+        model=model,
+        messages=[{"role": "user", "content": user_question}],
+        max_tokens=200,
+    )
+    return response.choices[0].message.content
+
+# Usage — each call creates a trace visible in Langfuse UI
+result = answer_question("What are the key metrics for LLM observability?")
+print(result)
+# Dashboard shows: latency, token usage, cost, model, prompt version per trace
+# Filter by: model, route, user, score, time range
 ```
 
 ## ★ Connections

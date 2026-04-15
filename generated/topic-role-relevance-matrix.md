@@ -78,6 +78,7 @@ Legend: Must, Good, Optional, Not Relevant.
 | [Graph RAG & Advanced Retrieval](../techniques/graph-rag.md) | techniques | Not Relevant | Optional | Optional | Good | Optional | Not Relevant | Not Relevant | Must |
 | [Knowledge Distillation & Model Compression](../techniques/distillation-and-compression.md) | techniques | Not Relevant | Optional | Not Relevant | Optional | Good | Not Relevant | Not Relevant | Optional |
 | [Long-Context Engineering](../techniques/long-context-engineering.md) | techniques | Not Relevant | Optional | Not Relevant | Optional | Optional | Not Relevant | Not Relevant | Optional |
+| [Model Merging](../techniques/model-merging.md) | techniques | Not Relevant | Optional | Not Relevant | Optional | Optional | Not Relevant | Not Relevant | Optional |
 | [Prompt Engineering](../techniques/prompt-engineering.md) | techniques | Must | Must | Must | Must | Must | Must | Must | Must |
 | [Reinforcement Learning for LLM Alignment](../techniques/rl-alignment.md) | techniques | Not Relevant | Optional | Not Relevant | Optional | Good | Not Relevant | Not Relevant | Optional |
 | [Retrieval-Augmented Generation (RAG)](../techniques/rag.md) | techniques | Must | Must | Must | Must | Must | Must | Must | Must |

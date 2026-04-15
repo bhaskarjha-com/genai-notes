@@ -7,12 +7,12 @@ status: published
 last_verified: 2026-04
 parent: "../genai.md"
 related: ["llms-overview.md", "reasoning-models.md", "../foundations/modern-architectures.md"]
-source: "Web research — March 2026"
+source: "Web research — April 2026"
 created: 2026-03-22
 updated: 2026-04-15
 ---
 
-# LLM Landscape & Model Selection (March 2026)
+# LLM Landscape & Model Selection (April 2026)
 
 > ✨ **Bit**: In 2023, GPT-4 was the only frontier model. In March 2026, there are 6+ frontier providers, each with 5+ model variants. Choosing the right model is now a genuine engineering decision — not just "use GPT."
 
@@ -47,7 +47,7 @@ Last verified for the March 2026 market snapshot: 2026-04.
 
 ## ★ Deep Dive
 
-### The Frontier Models (March 2026)
+### The Frontier Models (April 2026)
 
 ### OpenAI — GPT-5 Family
 
@@ -60,6 +60,7 @@ Last verified for the March 2026 market snapshot: 2026-04.
 | **GPT-5.4 nano**     | Mar 17, 2026 | —         | Cheapest, fastest: classification, extraction       |
 | **GPT-5.3 Instant**  | Mar 3, 2026  | —         | Rapid conversational responses                      |
 | **GPT-5.3-Codex**    | Feb 5, 2026  | —         | Coding agent (Copilot default)                      |
+| **GPT-5.4-Cyber**    | Apr 14, 2026 | 1M        | Defensive cybersecurity (limited access via TAC program) |
 
 ### Google — Gemini 3 Family
 
@@ -69,6 +70,7 @@ Last verified for the March 2026 market snapshot: 2026-04.
 | **Gemini 3.1 Flash-Lite**  | Mar 3, 2026  | —       | Cost-efficient, high throughput, Pro-level quality |
 | **Gemini 3.1 Deep Think**  | 2026         | —       | Complex technical problems (AI Ultra subscribers)  |
 | **Gemini 3.1 Flash Image** | Feb 26, 2026 | —       | High-efficiency image generation                   |
+| **Gemini 3.1 Flash Live** | Mar 26, 2026 | —       | Real-time audio-to-audio, powers Search Live       |
 
 Available in: Gemini API, AI Studio, **Gemini CLI**, **Antigravity**, Vertex AI, NotebookLM
 
@@ -78,6 +80,7 @@ Available in: Gemini API, AI Studio, **Gemini CLI**, **Antigravity**, Vertex AI,
 | --------------------- | ------------ | --------- | ------------------------------------------------ |
 | **Claude Opus 4.6**   | Feb 5, 2026  | 1M tokens | Most capable: code, analysis, long-doc reasoning |
 | **Claude Sonnet 4.6** | Feb 17, 2026 | 1M tokens | Balanced: default for claude.ai, Claude Cowork   |
+| **Claude Mythos** (Preview) | Apr 7, 2026 | —     | Gated research preview (~50 orgs, Project Glasswing, defensive cyber) |
 
 ### Meta — LLaMA 4 Family (Open-Source)
 

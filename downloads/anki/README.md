@@ -13,12 +13,12 @@
 
 | Deck | Cards | Source Notes | Description |
 |---|---:|---:|---|
-| [Master Deck](./master-deck.tsv) | 178 | 82 | All interview-angle cards from all published topic notes. |
+| [Master Deck](./master-deck.tsv) | 180 | 83 | All interview-angle cards from all published topic notes. |
 | [Universal Foundation](./universal-foundation.tsv) | 47 | 20 | Interview-angle cards from the Part 1 universal foundation. |
 | [Track A - Application and Integration Builder](./track-a-application-and-integration-builder.tsv) | 75 | 33 | Universal foundation plus the role-cluster notes from Track A - Application and Integration Builder. |
-| [Track B - AI Systems and Orchestration Engineer](./track-b-ai-systems-and-orchestration-engineer.tsv) | 93 | 44 | Universal foundation plus the role-cluster notes from Track B - AI Systems and Orchestration Engineer. |
+| [Track B - AI Systems and Orchestration Engineer](./track-b-ai-systems-and-orchestration-engineer.tsv) | 95 | 45 | Universal foundation plus the role-cluster notes from Track B - AI Systems and Orchestration Engineer. |
 | [Track C - ML and Production Engineer](./track-c-ml-and-production-engineer.tsv) | 73 | 32 | Universal foundation plus the role-cluster notes from Track C - ML and Production Engineer. |
-| [Track D - Research and Foundation Model](./track-d-research-and-foundation-model.tsv) | 68 | 30 | Universal foundation plus the role-cluster notes from Track D - Research and Foundation Model. |
+| [Track D - Research and Foundation Model](./track-d-research-and-foundation-model.tsv) | 70 | 31 | Universal foundation plus the role-cluster notes from Track D - Research and Foundation Model. |
 | [Track E - Safety, Ethics and Governance](./track-e-safety-ethics-and-governance.tsv) | 66 | 28 | Universal foundation plus the role-cluster notes from Track E - Safety, Ethics and Governance. |
 
 These decks are generated from the Interview Angles sections in the published topic notes.

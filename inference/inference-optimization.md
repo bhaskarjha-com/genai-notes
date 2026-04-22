@@ -1,20 +1,7 @@
 ---
 title: Inference Optimization
-aliases:
-  - Inference
-  - Quantization
-  - Speculative Decoding
-tags:
-  - inference
-  - quantization
-  - speculative-decoding
-  - kv-cache
-  - serving
-  - performance
-  - sglang
-  - radix-attention
-  - pd-disaggregation
-  - genai
+aliases: ["Inference", "Quantization", "Speculative Decoding"]
+tags: [inference, quantization, speculative-decoding, kv-cache, serving, performance, sglang, radix-attention, pd-disaggregation, genai]
 type: concept
 difficulty: advanced
 status: published

@@ -1,5 +1,6 @@
 ---
 title: "Data Flywheel Design"
+aliases: ["Data Flywheel", "Feedback Loop"]
 tags: [data-flywheel, feedback-loops, production, llmops, continuous-improvement]
 type: procedure
 difficulty: advanced
@@ -7,26 +8,26 @@ status: published
 last_verified: 2026-04
 parent: "llmops.md"
 related: ["monitoring-observability.md", "../evaluation/llm-evaluation-deep-dive.md", "../techniques/fine-tuning.md", "../techniques/synthetic-data-and-data-engineering.md"]
-source: "Multiple — see Sources"
+source: "Multiple â€” see Sources"
 created: 2026-04-14
 updated: 2026-04-14
 ---
 
 # Data Flywheel Design
 
-> ✨ **Bit**: The best AI systems don't just answer questions — they learn from every interaction. A data flywheel turns user feedback, corrections, and behavioral signals into training data that makes the system better, which attracts more users, generating more data. This is the moat.
+> âœ¨ **Bit**: The best AI systems don't just answer questions â€” they learn from every interaction. A data flywheel turns user feedback, corrections, and behavioral signals into training data that makes the system better, which attracts more users, generating more data. This is the moat.
 
 ---
 
-## ★ TL;DR
+## â˜… TL;DR
 
 - **What**: A self-reinforcing loop where user interactions generate data that improves the AI system, which improves user experience, generating more data
-- **Why**: Static AI systems degrade over time as user needs evolve. Flywheels create compounding improvement — the competitive advantage that separates products from prototypes.
-- **Key point**: The flywheel has 4 stages: collect signals → curate data → improve model/retrieval → measure impact → repeat.
+- **Why**: Static AI systems degrade over time as user needs evolve. Flywheels create compounding improvement â€” the competitive advantage that separates products from prototypes.
+- **Key point**: The flywheel has 4 stages: collect signals â†’ curate data â†’ improve model/retrieval â†’ measure impact â†’ repeat.
 
 ---
 
-## ★ Overview
+## â˜… Overview
 
 ### Definition
 
@@ -44,34 +45,34 @@ Covers: Flywheel architecture, signal collection (implicit/explicit), data curat
 
 ---
 
-## ★ Deep Dive
+## â˜… Deep Dive
 
 ### The Flywheel Loop
 
 ```
-┌──────────────────────────────────────────────────────┐
-│                  DATA FLYWHEEL                        │
-│                                                       │
-│    ┌─────────┐     ┌─────────────┐     ┌──────────┐ │
-│    │  USERS  │────►│   COLLECT   │────►│  CURATE  │ │
-│    │  USE    │     │   SIGNALS   │     │   DATA   │ │
-│    │  PRODUCT│     │             │     │          │ │
-│    └────▲────┘     └─────────────┘     └────┬─────┘ │
-│         │                                    │       │
-│         │          ┌─────────────┐           │       │
-│         │          │   MEASURE   │           │       │
-│         └──────────│   IMPACT    │◄──────────┘       │
-│                    │             │     ┌──────────┐  │
-│                    └──────┬──────┘     │ IMPROVE  │  │
-│                           └───────────│  SYSTEM  │  │
-│                                       └──────────┘  │
-│                                                       │
-│  Each revolution makes the system better:             │
-│    Week 1:  70% task success rate                     │
-│    Month 1: 78% (from collected corrections)          │
-│    Month 3: 85% (from fine-tuned model)              │
-│    Month 6: 91% (from curated retrieval + prompts)   │
-└──────────────────────────────────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚                  DATA FLYWHEEL                        â”‚
+â”‚                                                       â”‚
+â”‚    â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”     â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”     â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”‚
+â”‚    â”‚  USERS  â”‚â”€â”€â”€â”€â–ºâ”‚   COLLECT   â”‚â”€â”€â”€â”€â–ºâ”‚  CURATE  â”‚ â”‚
+â”‚    â”‚  USE    â”‚     â”‚   SIGNALS   â”‚     â”‚   DATA   â”‚ â”‚
+â”‚    â”‚  PRODUCTâ”‚     â”‚             â”‚     â”‚          â”‚ â”‚
+â”‚    â””â”€â”€â”€â”€â–²â”€â”€â”€â”€â”˜     â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜     â””â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”˜ â”‚
+â”‚         â”‚                                    â”‚       â”‚
+â”‚         â”‚          â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”           â”‚       â”‚
+â”‚         â”‚          â”‚   MEASURE   â”‚           â”‚       â”‚
+â”‚         â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”‚   IMPACT    â”‚â—„â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜       â”‚
+â”‚                    â”‚             â”‚     â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”‚
+â”‚                    â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”˜     â”‚ IMPROVE  â”‚  â”‚
+â”‚                           â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”‚  SYSTEM  â”‚  â”‚
+â”‚                                       â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â”‚
+â”‚                                                       â”‚
+â”‚  Each revolution makes the system better:             â”‚
+â”‚    Week 1:  70% task success rate                     â”‚
+â”‚    Month 1: 78% (from collected corrections)          â”‚
+â”‚    Month 3: 85% (from fine-tuned model)              â”‚
+â”‚    Month 6: 91% (from curated retrieval + prompts)   â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ### Signal Types
@@ -91,37 +92,37 @@ Covers: Flywheel architecture, signal collection (implicit/explicit), data curat
 ```
 IMPROVEMENT TARGETS (ordered by ease and impact):
 
-  1. PROMPT REFINEMENT        ← Easiest, fastest
+  1. PROMPT REFINEMENT        â† Easiest, fastest
      Use failures to improve system prompts
      Timeline: days
      
-  2. RETRIEVAL QUALITY        ← High ROI
+  2. RETRIEVAL QUALITY        â† High ROI
      Add user-validated docs to corpus
      Fix chunking for failed retrievals
      Timeline: days-weeks
      
-  3. EXAMPLE CURATION         ← Medium effort
+  3. EXAMPLE CURATION         â† Medium effort
      Add successful interactions as few-shot examples
      Timeline: weeks
      
-  4. EMBEDDING FINE-TUNING    ← Moderate effort
+  4. EMBEDDING FINE-TUNING    â† Moderate effort
      Fine-tune embeddings on domain query-doc pairs
      Timeline: weeks
      
-  5. MODEL FINE-TUNING        ← Highest effort, highest impact
+  5. MODEL FINE-TUNING        â† Highest effort, highest impact
      Train on curated (input, ideal_output) pairs
      Timeline: months
 ```
 
 ---
 
-## ★ Code & Implementation
+## â˜… Code & Implementation
 
 ### Feedback Collection Pipeline
 
 ```python
 # pip install fastapi>=0.110 sqlalchemy>=2.0
-# ⚠️ Last tested: 2026-04 | Requires: fastapi>=0.110
+# âš ï¸ Last tested: 2026-04 | Requires: fastapi>=0.110
 
 from fastapi import FastAPI
 from pydantic import BaseModel
@@ -181,7 +182,7 @@ async def get_training_candidates(min_quality: str = "high"):
 
 ---
 
-## ◆ Production Failure Modes
+## â—† Production Failure Modes
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
@@ -192,14 +193,14 @@ async def get_training_candidates(min_quality: str = "high"):
 
 ---
 
-## ○ Interview Angles
+## â—‹ Interview Angles
 
 - **Q**: How would you build a system that improves from user feedback?
-- **A**: I'd design a 4-stage data flywheel. Stage 1: Collect both explicit signals (thumbs up/down, user edits) and implicit signals (regeneration, session abandonment) from every interaction. Stage 2: Curate — user corrections become the highest-quality training data; thumbs-up responses become positive examples; thumbs-down + regeneration patterns reveal failure modes. Stage 3: Improve iteratively — start with prompt refinements (days), then retrieval improvements (weeks), then embedding fine-tuning (weeks), then model fine-tuning quarterly. Stage 4: Measure impact with A/B tests — compare flywheel-improved version vs control. I'd target 2-5% quality improvement per month, compounding over time.
+- **A**: I'd design a 4-stage data flywheel. Stage 1: Collect both explicit signals (thumbs up/down, user edits) and implicit signals (regeneration, session abandonment) from every interaction. Stage 2: Curate â€” user corrections become the highest-quality training data; thumbs-up responses become positive examples; thumbs-down + regeneration patterns reveal failure modes. Stage 3: Improve iteratively â€” start with prompt refinements (days), then retrieval improvements (weeks), then embedding fine-tuning (weeks), then model fine-tuning quarterly. Stage 4: Measure impact with A/B tests â€” compare flywheel-improved version vs control. I'd target 2-5% quality improvement per month, compounding over time.
 
 ---
 
-## ◆ Hands-On Exercises
+## â—† Hands-On Exercises
 
 ### Exercise 1: Design a Flywheel for a Support Chatbot
 
@@ -207,14 +208,14 @@ async def get_training_candidates(min_quality: str = "high"):
 **Time**: 30 minutes
 **Steps**:
 1. List all signals you'd collect (at least 5 explicit + 5 implicit)
-2. Design the data curation pipeline (which signals → which training data)
+2. Design the data curation pipeline (which signals â†’ which training data)
 3. Prioritize 3 improvement actions for month 1, 3, and 6
 4. Define success metrics for each stage
 **Expected Output**: Flywheel architecture diagram with metrics plan
 
 ---
 
-## ★ Connections
+## â˜… Connections
 
 | Relationship | Topics |
 |---|---|
@@ -225,17 +226,17 @@ async def get_training_candidates(min_quality: str = "high"):
 
 ---
 
-## ★ Recommended Resources
+## â˜… Recommended Resources
 
 | Type | Resource | Why |
 |------|----------|-----|
-| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 9 | Data flywheels and continuous improvement patterns |
-| 📘 Book | "Designing Machine Learning Systems" by Chip Huyen (2022), Ch 9 | Data distribution shifts and continuous learning |
-| 🎥 Video | [Hamel Husain — "Your AI Product Needs a Data Flywheel"](https://hamel.dev/) | Practical flywheel implementation advice |
+| ðŸ“˜ Book | "AI Engineering" by Chip Huyen (2025), Ch 9 | Data flywheels and continuous improvement patterns |
+| ðŸ“˜ Book | "Designing Machine Learning Systems" by Chip Huyen (2022), Ch 9 | Data distribution shifts and continuous learning |
+| ðŸŽ¥ Video | [Hamel Husain â€” "Your AI Product Needs a Data Flywheel"](https://hamel.dev/) | Practical flywheel implementation advice |
 
 ---
 
-## ★ Sources
+## â˜… Sources
 
 - Huyen, C. "AI Engineering" (2025)
 - Huyen, C. "Designing Machine Learning Systems" (2022)

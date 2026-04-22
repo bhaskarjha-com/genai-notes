@@ -1,5 +1,6 @@
 ---
 title: "Knowledge Distillation & Model Compression"
+aliases: ["Distillation", "Model Compression", "Pruning"]
 tags: [distillation, compression, pruning, teacher-student, efficiency, genai]
 type: concept
 difficulty: advanced
@@ -7,18 +8,18 @@ status: published
 last_verified: 2026-04
 parent: "../genai.md"
 related: ["fine-tuning.md", "../inference/inference-optimization.md", "../foundations/modern-architectures.md"]
-source: "Multiple — see Sources"
+source: "Multiple â€” see Sources"
 created: 2026-03-22
 updated: 2026-04-11
 ---
 
 # Knowledge Distillation & Model Compression
 
-> ✨ **Bit**: GPT-4 knows a lot, but it's enormous and expensive. Distillation is like a PhD student learning from a professor — the student ends up much smaller but captures most of the professor's knowledge. That's how Phi-3 (3.8B) can compete with models 100x its size.
+> âœ¨ **Bit**: GPT-4 knows a lot, but it's enormous and expensive. Distillation is like a PhD student learning from a professor â€” the student ends up much smaller but captures most of the professor's knowledge. That's how Phi-3 (3.8B) can compete with models 100x its size.
 
 ---
 
-## ★ TL;DR
+## â˜… TL;DR
 
 - **What**: Techniques to create smaller, faster, cheaper models that retain the capabilities of larger ones
 - **Why**: You can't run GPT-4 on a phone. But you CAN distill its knowledge into a 7B model that runs anywhere.
@@ -26,7 +27,7 @@ updated: 2026-04-11
 
 ---
 
-## ★ Overview
+## â˜… Overview
 
 ### Definition
 
@@ -47,43 +48,43 @@ Covers distillation and pruning. For quantization (INT4/INT8/FP8), see [Inferenc
 
 ---
 
-## ★ Deep Dive
+## â˜… Deep Dive
 
 ### The Distillation Framework
 
 ```
-┌─────────────────────────────────────────────────┐
-│            KNOWLEDGE DISTILLATION                │
-│                                                 │
-│  TEACHER (large, expensive)                      │
-│  ┌──────────────────────┐                        │
-│  │  GPT-4 / R1 / 70B   │                        │
-│  │  Input: "What is AI?"│                        │
-│  │  Output distribution:│                        │
-│  │    AI:     0.35      │ ← "Soft labels"        │
-│  │    ML:     0.25      │    Rich information!    │
-│  │    robot:  0.15      │    "AI and ML are       │
-│  │    code:   0.10      │     related" is encoded │
-│  │    other:  0.15      │     in these probs.     │
-│  └──────────┬───────────┘                        │
-│             │ soft probabilities                  │
-│             ▼                                    │
-│  STUDENT (small, efficient)                      │
-│  ┌──────────────────────┐                        │
-│  │  7B / 3B / 1B model  │                        │
-│  │  Learns to match the │                        │
-│  │  teacher's soft       │                        │
-│  │  distribution, not   │                        │
-│  │  just the right      │                        │
-│  │  answer              │                        │
-│  └──────────────────────┘                        │
-│                                                 │
-│  LOSS = α × KL(teacher_soft, student_soft)      │
-│       + (1-α) × CrossEntropy(student, labels)   │
-│                                                 │
-│  Temperature T → softens distributions          │
-│  Higher T → more "dark knowledge" transfer      │
-└─────────────────────────────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚            KNOWLEDGE DISTILLATION                â”‚
+â”‚                                                 â”‚
+â”‚  TEACHER (large, expensive)                      â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”                        â”‚
+â”‚  â”‚  GPT-4 / R1 / 70B   â”‚                        â”‚
+â”‚  â”‚  Input: "What is AI?"â”‚                        â”‚
+â”‚  â”‚  Output distribution:â”‚                        â”‚
+â”‚  â”‚    AI:     0.35      â”‚ â† "Soft labels"        â”‚
+â”‚  â”‚    ML:     0.25      â”‚    Rich information!    â”‚
+â”‚  â”‚    robot:  0.15      â”‚    "AI and ML are       â”‚
+â”‚  â”‚    code:   0.10      â”‚     related" is encoded â”‚
+â”‚  â”‚    other:  0.15      â”‚     in these probs.     â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜                        â”‚
+â”‚             â”‚ soft probabilities                  â”‚
+â”‚             â–¼                                    â”‚
+â”‚  STUDENT (small, efficient)                      â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”                        â”‚
+â”‚  â”‚  7B / 3B / 1B model  â”‚                        â”‚
+â”‚  â”‚  Learns to match the â”‚                        â”‚
+â”‚  â”‚  teacher's soft       â”‚                        â”‚
+â”‚  â”‚  distribution, not   â”‚                        â”‚
+â”‚  â”‚  just the right      â”‚                        â”‚
+â”‚  â”‚  answer              â”‚                        â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜                        â”‚
+â”‚                                                 â”‚
+â”‚  LOSS = Î± Ã— KL(teacher_soft, student_soft)      â”‚
+â”‚       + (1-Î±) Ã— CrossEntropy(student, labels)   â”‚
+â”‚                                                 â”‚
+â”‚  Temperature T â†’ softens distributions          â”‚
+â”‚  Higher T â†’ more "dark knowledge" transfer      â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ### Types of Distillation
@@ -93,9 +94,9 @@ Covers distillation and pruning. For quantization (INT4/INT8/FP8), see [Inferenc
 | **Response-based**    | Student mimics teacher's output distribution              | Classic: soft label matching   |
 | **Feature-based**     | Student mimics teacher's intermediate representations     | Match hidden layer activations |
 | **Relation-based**    | Student learns relationships between samples              | Contrastive distillation       |
-| **Rationale-based**   | Teacher generates step-by-step reasoning as training data | DeepSeek-R1 → R1-Distill-Qwen  |
+| **Rationale-based**   | Teacher generates step-by-step reasoning as training data | DeepSeek-R1 â†’ R1-Distill-Qwen  |
 | **Multi-teacher**     | Multiple teachers guide one student                       | Ensemble knowledge transfer    |
-| **Self-distillation** | Model teaches itself (larger layers → smaller)            | Born-again networks            |
+| **Self-distillation** | Model teaches itself (larger layers â†’ smaller)            | Born-again networks            |
 
 ### Rationale Distillation (Modern LLM Pattern)
 
@@ -112,9 +113,9 @@ The most common pattern in 2025-2026:
      Student (7B) trained on (input, reasoning + answer) pairs
 
   This is how:
-    DeepSeek-R1 → R1-Distill-Qwen-14B, R1-Distill-Llama-70B
-    GPT-4 → Alpaca/Vicuna (early 2023, simpler version)
-    GPT-4 → Phi-3 (via synthetic data distillation)
+    DeepSeek-R1 â†’ R1-Distill-Qwen-14B, R1-Distill-Llama-70B
+    GPT-4 â†’ Alpaca/Vicuna (early 2023, simpler version)
+    GPT-4 â†’ Phi-3 (via synthetic data distillation)
 ```
 
 ### Other Compression Techniques
@@ -122,8 +123,8 @@ The most common pattern in 2025-2026:
 ```
 PRUNING: Remove unimportant weights/neurons/layers
 
-  Before:  ●─●─●─●─●    (all connections active)
-  After:   ●─ ─●─ ─●    (weak connections removed)
+  Before:  â—â”€â—â”€â—â”€â—â”€â—    (all connections active)
+  After:   â—â”€ â”€â—â”€ â”€â—    (weak connections removed)
 
   Types:
   - Unstructured: Remove individual weights (sparse matrix)
@@ -136,7 +137,7 @@ PRUNING: Remove unimportant weights/neurons/layers
 
 QUANTIZATION: Reduce number precision
   (covered in detail in [Inference Optimization](../inference/inference-optimization.md))
-  FP32 → FP16 → INT8 → INT4
+  FP32 â†’ FP16 â†’ INT8 â†’ INT4
   Each step: ~2x smaller, slight quality trade-off
 
 
@@ -168,24 +169,24 @@ ARCHITECTURE CHANGES:
 
 ---
 
-## ◆ Quick Reference
+## â—† Quick Reference
 
 ```
 DISTILLATION DECISION TREE:
   Need to deploy on edge/mobile?
-    → Quantize (INT4) + distill to small model
+    â†’ Quantize (INT4) + distill to small model
 
   Need reasoning capability in small model?
-    → Rationale distillation from o1/R1
+    â†’ Rationale distillation from o1/R1
 
   Need domain-specific small model?
-    → Fine-tune small model on teacher-generated domain data
+    â†’ Fine-tune small model on teacher-generated domain data
 
   Need fastest possible inference?
-    → Distill + quantize + prune (all three)
+    â†’ Distill + quantize + prune (all three)
 
 KEY INSIGHT:
-  Distillation ≠ just fine-tuning on outputs.
+  Distillation â‰  just fine-tuning on outputs.
   The soft probability distribution contains MORE information
   than hard labels. "AI" at 0.35 and "ML" at 0.25 tells the
   student that AI and ML are related. Hard label "AI" doesn't.
@@ -193,32 +194,32 @@ KEY INSIGHT:
 
 ---
 
-## ○ Gotchas & Common Mistakes
+## â—‹ Gotchas & Common Mistakes
 
-- ⚠️ **Distilling from API outputs may violate ToS**: OpenAI/Anthropic prohibit using their outputs to train competing models. Check terms.
-- ⚠️ **Not everything transfers**: Distillation works best for surface knowledge. Deep reasoning and world knowledge transfer is harder.
-- ⚠️ **Model collapse risk**: Repeated distillation (distilling distilled models) degrades quality. Use the original teacher.
-- ⚠️ **Temperature matters**: Too low T → student only learns top predictions. Too high T → noise. T=2-4 is typical.
+- âš ï¸ **Distilling from API outputs may violate ToS**: OpenAI/Anthropic prohibit using their outputs to train competing models. Check terms.
+- âš ï¸ **Not everything transfers**: Distillation works best for surface knowledge. Deep reasoning and world knowledge transfer is harder.
+- âš ï¸ **Model collapse risk**: Repeated distillation (distilling distilled models) degrades quality. Use the original teacher.
+- âš ï¸ **Temperature matters**: Too low T â†’ student only learns top predictions. Too high T â†’ noise. T=2-4 is typical.
 
 ---
 
-## ○ Interview Angles
+## â—‹ Interview Angles
 
 - **Q**: How does knowledge distillation work?
-- **A**: A large "teacher" model's soft probability outputs (including relationships between classes) are used as training targets for a smaller "student" model. The student learns to match the teacher's full output distribution using KL divergence loss, not just the correct answer. This transfers "dark knowledge" — the teacher's implicit understanding of which concepts are similar.
+- **A**: A large "teacher" model's soft probability outputs (including relationships between classes) are used as training targets for a smaller "student" model. The student learns to match the teacher's full output distribution using KL divergence loss, not just the correct answer. This transfers "dark knowledge" â€” the teacher's implicit understanding of which concepts are similar.
 
 - **Q**: How is DeepSeek-R1-Distill created?
 - **A**: DeepSeek-R1 (671B MoE) generates reasoning chains for thousands of problems. These (input, reasoning_chain + answer) pairs become fine-tuning data for smaller models like Qwen-14B. The small model literally learns to REASON like R1 by mimicking its step-by-step thinking.
 
 ---
 
-## ★ Code & Implementation
+## â˜… Code & Implementation
 
-### Knowledge Distillation: Teacher → Student Loss
+### Knowledge Distillation: Teacher â†’ Student Loss
 
 ```python
 # pip install torch>=2.3 transformers>=4.40
-# ⚠️ Last tested: 2026-04 | Requires: torch>=2.3
+# âš ï¸ Last tested: 2026-04 | Requires: torch>=2.3
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -262,7 +263,7 @@ labels         = torch.randint(0, vocab, (batch, seq))
 loss = distillation_loss(student_logits, teacher_logits, labels)
 print(f"Distillation loss: {loss.item():.4f}")
 
-# GGUF Quantization check (inference only — requires llama.cpp)
+# GGUF Quantization check (inference only â€” requires llama.cpp)
 # After downloading a GGUF model:
 # from llama_cpp import Llama
 # llm = Llama(model_path="./model.gguf", n_ctx=2048)
@@ -270,7 +271,7 @@ print(f"Distillation loss: {loss.item():.4f}")
 # print(output["choices"][0]["text"])
 ```
 
-## ★ Connections
+## â˜… Connections
 
 | Relationship | Topics                                                                                                        |
 | ------------ | ------------------------------------------------------------------------------------------------------------- |
@@ -282,7 +283,7 @@ print(f"Distillation loss: {loss.item():.4f}")
 
 ---
 
-## ◆ Production Failure Modes
+## â—† Production Failure Modes
 
 | Failure                   | Symptoms                                                                   | Root Cause                                 | Mitigation                                                     |
 | ------------------------- | -------------------------------------------------------------------------- | ------------------------------------------ | -------------------------------------------------------------- |
@@ -293,7 +294,7 @@ print(f"Distillation loss: {loss.item():.4f}")
 
 ---
 
-## ◆ Hands-On Exercises
+## â—† Hands-On Exercises
 
 ### Exercise 1: Quantize and Benchmark at Multiple Precisions
 
@@ -308,17 +309,17 @@ print(f"Distillation loss: {loss.item():.4f}")
 ---
 
 
-## ★ Recommended Resources
+## â˜… Recommended Resources
 
 | Type    | Resource                                                                                           | Why                                               |
 | ------- | -------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
-| 📄 Paper | [Hinton et al. "Distilling Knowledge in Neural Networks" (2015)](https://arxiv.org/abs/1503.02531) | The foundational knowledge distillation paper     |
-| 📄 Paper | [Dettmers et al. "GPTQ" (2022)](https://arxiv.org/abs/2210.17323)                                  | Post-training quantization for large models       |
-| 📘 Book  | "Efficient Deep Learning" by Menghani (2024)                                                       | Comprehensive treatment of compression techniques |
+| ðŸ“„ Paper | [Hinton et al. "Distilling Knowledge in Neural Networks" (2015)](https://arxiv.org/abs/1503.02531) | The foundational knowledge distillation paper     |
+| ðŸ“„ Paper | [Dettmers et al. "GPTQ" (2022)](https://arxiv.org/abs/2210.17323)                                  | Post-training quantization for large models       |
+| ðŸ“˜ Book  | "Efficient Deep Learning" by Menghani (2024)                                                       | Comprehensive treatment of compression techniques |
 
-## ★ Sources
+## â˜… Sources
 
-- Hinton et al., "Distilling the Knowledge in a Neural Network" (2015) — the original paper
+- Hinton et al., "Distilling the Knowledge in a Neural Network" (2015) â€” the original paper
 - DeepSeek, "DeepSeek-R1 Distilled Models" (2025)
 - Microsoft, "Phi-3 Technical Report" (2024)
 - Gou et al., "Knowledge Distillation: A Survey" (2021)

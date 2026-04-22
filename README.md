@@ -3,7 +3,7 @@
 > Comprehensive, structured study notes for Generative AI — from prerequisites to frontier research. **83 curriculum-ordered notes.** Career-mapped to 31 AI/ML roles. AI-generated, human-reviewed.
 
 [![Repo Quality](https://github.com/bhaskarjha-com/genai-notes/actions/workflows/lint.yml/badge.svg?branch=master)](https://github.com/bhaskarjha-com/genai-notes/actions/workflows/lint.yml)
-[![Docs Site](https://github.com/bhaskarjha-com/genai-notes/actions/workflows/deploy.yml/badge.svg?branch=master)](https://github.com/bhaskarjha-com/genai-notes/actions/workflows/deploy.yml)
+[![Docs Site|154](https://github.com/bhaskarjha-com/genai-notes/actions/workflows/deploy.yml/badge.svg?branch=master)](https://github.com/bhaskarjha-com/genai-notes/actions/workflows/deploy.yml)
 [![Link Check](https://github.com/bhaskarjha-com/genai-notes/actions/workflows/links.yml/badge.svg?branch=master)](https://github.com/bhaskarjha-com/genai-notes/actions/workflows/links.yml)
 ![License](https://img.shields.io/badge/license-CC--BY--4.0-blue)
 ![Notes](https://img.shields.io/badge/notes-83-brightgreen)
@@ -28,9 +28,9 @@
 
 ## What This Is
 
-This repository is a public collection of structured GenAI study notes in plain markdown. Each topic is designed as a self-contained 30–60 minute study session that combines theory, code, terminology, comparisons, gotchas, and interview angles.
+This repository is a public collection of structured GenAI study notes in plain markdown, published as a full-featured docs site at **[bhaskarjha-com.github.io/genai-notes](https://bhaskarjha-com.github.io/genai-notes/)**. Each topic is designed as a self-contained 30–60 minute study session that combines theory, code, terminology, comparisons, gotchas, and interview angles.
 
-The repo is organized by learning sequence rather than alphabetically. You can study linearly, jump in by role, or use individual notes as a portable reference in GitHub, Obsidian, or any markdown editor.
+The repo is organized by learning sequence rather than alphabetically. You can browse the docs site for the best reading experience, open the repo as an Obsidian vault for graph-based exploration, study linearly via the Learning Path, jump in by role, or use individual notes as a portable reference in GitHub or any markdown editor.
 
 ---
 
@@ -45,9 +45,11 @@ Then pick your path:
 
 | Path | Start Here | Best For |
 |------|-----------|----------|
+| **Docs site** | [bhaskarjha-com.github.io/genai-notes](https://bhaskarjha-com.github.io/genai-notes/) | Best reading experience — search, nav, dark mode |
 | **Linear study** | [LEARNING_PATH.md](LEARNING_PATH.md) | Systematic coverage, universal foundation + role tracks |
 | **Role-based study** | [career/roles/](career/roles/README.md) | Jump to your target role's curated learning path |
 | **Topic reference** | [genai.md](genai.md) | Browse the full scope map and dive into any topic |
+| **Obsidian vault** | Open this folder in [Obsidian](https://obsidian.md/) | Graph view, backlinks, local-first study |
 
 ---
 
@@ -74,6 +76,23 @@ If your target role is more specialized or niche, use the grouped guides linked 
 ### Path 3: Topic Reference
 
 Use [genai.md](genai.md) as the root GenAI overview note, then browse the folders below for deeper dives.
+
+### Path 4: Obsidian Vault
+
+This repo works as an [Obsidian](https://obsidian.md/) vault out of the box — pre-configured with graph colors and excluded folders.
+
+**Setup** (one-time):
+1. Install [Obsidian](https://obsidian.md/) (free)
+2. Open Obsidian → **"Open folder as vault"** → select this repo's root folder
+3. That's it — the committed `.obsidian/` config handles the rest
+
+**What you get:**
+- **Graph View** (`Ctrl+G`) — 83 notes + 300 connections, color-coded by domain
+- **Backlinks** — click any note to see every note that links to it
+- **Quick Open** (`Ctrl+O`) — type any topic name to jump instantly
+- **Local-first** — works offline, your data stays on your machine
+
+> **Note**: If you create or edit notes in Obsidian, always use standard markdown links (`[text](path.md)`), not wiki-links (`[[text]]`). The CI pipeline will reject wiki-links. The included `.obsidian/app.json` config enforces this by default.
 
 ---
 

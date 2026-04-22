@@ -1,5 +1,6 @@
 ---
 title: "Code Generation & AI-Assisted Development"
+aliases: ["Code Gen", "Copilot", "AI Coding"]
 tags: [code-generation, copilot, cursor, antigravity, gemini-cli, claude-code, windsurf, devin, coding-agents, genai]
 type: procedure
 difficulty: intermediate
@@ -7,26 +8,26 @@ status: published
 last_verified: 2026-04
 parent: "../genai.md"
 related: ["../agents/ai-agents.md", "../agents/agentic-protocols.md", "../llms/llms-overview.md"]
-source: "Multiple — see Sources"
+source: "Multiple â€” see Sources"
 created: 2026-03-22
 updated: 2026-04-14
 ---
 
 # Code Generation & AI-Assisted Development
 
-> ✨ **Bit**: In 2024, AI wrote code suggestions. In 2026, AI writes entire features, debugs across codebases, runs tests, and deploys — while you review the PR. We went from autocomplete to autonomous coding agents in 2 years.
+> âœ¨ **Bit**: In 2024, AI wrote code suggestions. In 2026, AI writes entire features, debugs across codebases, runs tests, and deploys â€” while you review the PR. We went from autocomplete to autonomous coding agents in 2 years.
 
 ---
 
-## ★ TL;DR
+## â˜… TL;DR
 
-- **What**: AI tools that write, debug, refactor, test, and deploy code — from autocomplete to fully autonomous agents
+- **What**: AI tools that write, debug, refactor, test, and deploy code â€” from autocomplete to fully autonomous agents
 - **Why**: AI coding tools are the single largest productivity multiplier in software engineering. Every major company now mandates one.
 - **Key point**: The landscape has shifted from "AI suggests code" to "AI-first IDEs" where the agent IS the primary developer and you're the reviewer. March 2026 = the agent era.
 
 ---
 
-## ★ Overview
+## â˜… Overview
 
 ### Definition
 
@@ -56,7 +57,7 @@ ERA 3: MULTI-FILE AGENTS (2024-2025)
   "Make changes across multiple files"
   Codebase-aware, can reason about architecture
 
-ERA 4: AGENT-FIRST IDES (2025-2026) ← WE ARE HERE
+ERA 4: AGENT-FIRST IDES (2025-2026) â† WE ARE HERE
   Antigravity, Gemini CLI, Claude Code, Cursor Agent
   "Autonomous agents that plan, code, test, debug"
   Full lifecycle, multi-agent orchestration
@@ -65,11 +66,11 @@ ERA 4: AGENT-FIRST IDES (2025-2026) ← WE ARE HERE
 
 ---
 
-## ★ Deep Dive
+## â˜… Deep Dive
 
 ### Major Tools & Platforms (March 2026)
 
-#### 1. Google Antigravity ⭐
+#### 1. Google Antigravity â­
 
 ```
 TYPE: AI-first IDE (VS Code fork)
@@ -86,7 +87,7 @@ KEY FEATURES:
 
 WHY IT MATTERS:
   First IDE designed around agents from the ground up.
-  You don't code WITH AI — you DELEGATE TO agents.
+  You don't code WITH AI â€” you DELEGATE TO agents.
   Manager View lets you run 5 agents on different tasks
   at the same time, each working on separate features.
 
@@ -102,10 +103,10 @@ BY: Google (open-source)
 MODELS: Gemini 3.1 Pro, Gemini 3 Flash
 
 KEY FEATURES:
-  - ReAct loop: reasons about code → executes actions → observes
+  - ReAct loop: reasons about code â†’ executes actions â†’ observes
   - File manipulation, command execution, debugging
   - Plan Mode (March 2026): creates structured plans before coding
-  - Works in any terminal — no IDE needed
+  - Works in any terminal â€” no IDE needed
   - Generous free tier for individual developers
   - MCP support for connecting external tools
 
@@ -214,18 +215,18 @@ BEST FOR: Delegating complete tasks/tickets
 
 | Tool            | Type               | Multi-Agent    | MCP | Terminal  | Free?         | Best For                   |
 | --------------- | ------------------ | -------------- | --- | --------- | ------------- | -------------------------- |
-| **Antigravity** | IDE                | ✅ Manager View | ✅   | Via agent | ✅ (preview)   | Agent-first development    |
-| **Gemini CLI**  | Terminal           | ❌              | ✅   | ✅ Native  | ✅ (free tier) | Terminal-native devs       |
-| **Claude Code** | Terminal/IDE       | ❌              | ✅   | ✅ Native  | ❌ (API costs) | Large codebase refactoring |
-| **Cursor**      | IDE                | ❌              | ✅   | Via agent | Freemium      | AI-enhanced VS Code        |
-| **Copilot**     | Extension/Platform | ✅              | ✅   | Via agent | Free student  | GitHub ecosystem           |
-| **Windsurf**    | IDE                | ❌              | ✅   | Via agent | Freemium      | Budget-conscious devs      |
-| **Devin**       | Autonomous agent   | ❌              | ❌   | ✅ Own env | ❌             | Full task delegation       |
+| **Antigravity** | IDE                | âœ… Manager View | âœ…   | Via agent | âœ… (preview)   | Agent-first development    |
+| **Gemini CLI**  | Terminal           | âŒ              | âœ…   | âœ… Native  | âœ… (free tier) | Terminal-native devs       |
+| **Claude Code** | Terminal/IDE       | âŒ              | âœ…   | âœ… Native  | âŒ (API costs) | Large codebase refactoring |
+| **Cursor**      | IDE                | âŒ              | âœ…   | Via agent | Freemium      | AI-enhanced VS Code        |
+| **Copilot**     | Extension/Platform | âœ…              | âœ…   | Via agent | Free student  | GitHub ecosystem           |
+| **Windsurf**    | IDE                | âŒ              | âœ…   | Via agent | Freemium      | Budget-conscious devs      |
+| **Devin**       | Autonomous agent   | âŒ              | âŒ   | âœ… Own env | âŒ             | Full task delegation       |
 
 ### Coding Model Benchmarks
 
 ```
-SWE-BENCH (VERIFIED) — Resolve real GitHub issues:
+SWE-BENCH (VERIFIED) â€” Resolve real GitHub issues:
   Claude Opus 4.6       ~58%
   GPT-5.3-Codex         ~55%
   Gemini 3.1 Pro        ~52%
@@ -236,7 +237,7 @@ SWE-BENCH (VERIFIED) — Resolve real GitHub issues:
   (Human average:       ~35%)
   (2024 best agent:     ~33%)
 
-POLYGLOT BENCH — Multi-language code generation:
+POLYGLOT BENCH â€” Multi-language code generation:
   GPT-5.3-Codex leads in Python, JavaScript, TypeScript
   Claude Opus 4.6 leads in Rust, Go, complex architectures
   Gemini 3.1 Pro leads in Java, Kotlin (Android), Dart (Flutter)
@@ -245,50 +246,50 @@ POLYGLOT BENCH — Multi-language code generation:
 ### How AI Coding Agents Work
 
 ```
-┌──────────────────────────────────────────────────────┐
-│           AI CODING AGENT ARCHITECTURE                │
-│                                                      │
-│  1. UNDERSTAND THE TASK                              │
-│     Read: issue description, codebase context,       │
-│     relevant files, test files, documentation        │
-│                                                      │
-│  2. PLAN                                             │
-│     Identify files to modify/create                  │
-│     Plan the sequence of changes                     │
-│     Consider edge cases and tests                    │
-│                                                      │
-│  3. IMPLEMENT                                        │
-│     Write/modify code across multiple files          │
-│     Use language server for type checking             │
-│     Reference existing patterns in the codebase      │
-│                                                      │
-│  4. VERIFY                                           │
-│     Run existing tests                               │
-│     Write new tests for new code                     │
-│     Run linters and type checkers                    │
-│     Check for regressions                            │
-│                                                      │
-│  5. ITERATE                                          │
-│     If tests fail → read errors → fix → re-run      │
-│     If lint fails → fix → re-run                     │
-│     Loop until all checks pass                       │
-│                                                      │
-│  6. PRESENT                                          │
-│     Show diff to human reviewer                      │
-│     Explain reasoning behind decisions               │
-│     Human approves or requests changes               │
-└──────────────────────────────────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚           AI CODING AGENT ARCHITECTURE                â”‚
+â”‚                                                      â”‚
+â”‚  1. UNDERSTAND THE TASK                              â”‚
+â”‚     Read: issue description, codebase context,       â”‚
+â”‚     relevant files, test files, documentation        â”‚
+â”‚                                                      â”‚
+â”‚  2. PLAN                                             â”‚
+â”‚     Identify files to modify/create                  â”‚
+â”‚     Plan the sequence of changes                     â”‚
+â”‚     Consider edge cases and tests                    â”‚
+â”‚                                                      â”‚
+â”‚  3. IMPLEMENT                                        â”‚
+â”‚     Write/modify code across multiple files          â”‚
+â”‚     Use language server for type checking             â”‚
+â”‚     Reference existing patterns in the codebase      â”‚
+â”‚                                                      â”‚
+â”‚  4. VERIFY                                           â”‚
+â”‚     Run existing tests                               â”‚
+â”‚     Write new tests for new code                     â”‚
+â”‚     Run linters and type checkers                    â”‚
+â”‚     Check for regressions                            â”‚
+â”‚                                                      â”‚
+â”‚  5. ITERATE                                          â”‚
+â”‚     If tests fail â†’ read errors â†’ fix â†’ re-run      â”‚
+â”‚     If lint fails â†’ fix â†’ re-run                     â”‚
+â”‚     Loop until all checks pass                       â”‚
+â”‚                                                      â”‚
+â”‚  6. PRESENT                                          â”‚
+â”‚     Show diff to human reviewer                      â”‚
+â”‚     Explain reasoning behind decisions               â”‚
+â”‚     Human approves or requests changes               â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ---
 
-## ★ Code & Implementation
+## â˜… Code & Implementation
 
 ### Custom MCP Tool for a Coding Agent
 
 ```python
 # pip install mcp>=1.0
-# ⚠️ Last tested: 2026-04 | Requires: mcp>=1.0
+# âš ï¸ Last tested: 2026-04 | Requires: mcp>=1.0
 
 from mcp.server import Server
 from mcp.types import Tool, TextContent
@@ -319,7 +320,7 @@ async def lint_file(file_path: str) -> list[TextContent]:
     )
     issues = json.loads(result.stdout) if result.stdout else []
     if not issues:
-        return [TextContent(type="text", text="No lint issues found ✓")]
+        return [TextContent(type="text", text="No lint issues found âœ“")]
     
     summary = "\n".join(f"  L{i['location']['row']}: {i['code']} {i['message']}" for i in issues)
     return [TextContent(type="text", text=f"Found {len(issues)} issues:\n{summary}")]
@@ -331,7 +332,7 @@ async def get_type_errors(file_path: str) -> list[TextContent]:
         ["python", "-m", "mypy", file_path, "--no-color"],
         capture_output=True, text=True,
     )
-    return [TextContent(type="text", text=result.stdout or "No type errors ✓")]
+    return [TextContent(type="text", text=result.stdout or "No type errors âœ“")]
 
 # Run the MCP server (agents connect to this via stdio or SSE)
 if __name__ == "__main__":
@@ -356,12 +357,12 @@ if __name__ == "__main__":
 ## Coding Standards
 - All functions must have type hints (Python) or TypeScript types
 - All public functions must have docstrings
-- No `any` type in TypeScript — use proper generics
+- No `any` type in TypeScript â€” use proper generics
 - Error handling: use Result types, never bare except/catch
 - Tests: minimum 1 test per public function, use fixtures
 
 ## Architecture Rules
-- Backend: domain-driven design (service → repository → model)
+- Backend: domain-driven design (service â†’ repository â†’ model)
 - Never import from one domain into another directly
 - All API responses use Pydantic models with examples
 - Database: async SQLAlchemy with Alembic migrations
@@ -375,7 +376,7 @@ if __name__ == "__main__":
 
 ---
 
-## ◆ Production Failure Modes
+## â—† Production Failure Modes
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
@@ -388,16 +389,16 @@ if __name__ == "__main__":
 
 ---
 
-## ◆ Quick Reference
+## â—† Quick Reference
 
 ```
 WHICH TOOL TO USE:
-  Want agent-first IDE?          → Antigravity
-  Prefer terminal?               → Gemini CLI (Google) or Claude Code (Anthropic)
-  Want VS Code + AI?             → Cursor
-  Already on GitHub?             → Copilot
-  Want free?                     → Windsurf or Gemini CLI
-  Delegate entire tickets?       → Devin
+  Want agent-first IDE?          â†’ Antigravity
+  Prefer terminal?               â†’ Gemini CLI (Google) or Claude Code (Anthropic)
+  Want VS Code + AI?             â†’ Cursor
+  Already on GitHub?             â†’ Copilot
+  Want free?                     â†’ Windsurf or Gemini CLI
+  Delegate entire tickets?       â†’ Devin
 
 CODING MODELS:
   Best code-specific model:      GPT-5.3-Codex
@@ -406,34 +407,34 @@ CODING MODELS:
   Best open-source:              DeepSeek-Coder-V3, CodeLlama
 
 KEY TREND (2026):
-  "Vibe coding" — describe what you want in natural language,
+  "Vibe coding" â€” describe what you want in natural language,
   the agent writes it. You review diffs, not write code.
 ```
 
 ---
 
-## ○ Gotchas & Common Mistakes
+## â—‹ Gotchas & Common Mistakes
 
-- ⚠️ **Blindly accepting AI code**: AI code can be subtly wrong. ALWAYS review diffs, run tests, and understand what changed.
-- ⚠️ **Context is everything**: AI coding quality depends heavily on what context it has. Good system prompts, .cursorrules files, and MCP connections dramatically improve output.
-- ⚠️ **Security risks**: AI-generated code may contain vulnerabilities, outdated patterns, or leaked secrets. Run security scans.
-- ⚠️ **Hallucinated APIs**: AI may use APIs that don't exist or have changed. Verify imports and function signatures.
-- ⚠️ **License compliance**: Code trained on open-source may reproduce copyrighted snippets. Check with your legal team.
-- ⚠️ **Over-delegation**: Fully autonomous agents can make architectural decisions you disagree with. Set clear constraints upfront.
+- âš ï¸ **Blindly accepting AI code**: AI code can be subtly wrong. ALWAYS review diffs, run tests, and understand what changed.
+- âš ï¸ **Context is everything**: AI coding quality depends heavily on what context it has. Good system prompts, .cursorrules files, and MCP connections dramatically improve output.
+- âš ï¸ **Security risks**: AI-generated code may contain vulnerabilities, outdated patterns, or leaked secrets. Run security scans.
+- âš ï¸ **Hallucinated APIs**: AI may use APIs that don't exist or have changed. Verify imports and function signatures.
+- âš ï¸ **License compliance**: Code trained on open-source may reproduce copyrighted snippets. Check with your legal team.
+- âš ï¸ **Over-delegation**: Fully autonomous agents can make architectural decisions you disagree with. Set clear constraints upfront.
 
 ---
 
-## ○ Interview Angles
+## â—‹ Interview Angles
 
 - **Q**: How do modern AI coding agents work?
-- **A**: They follow a plan-act-observe loop: (1) understand the task by reading the codebase context, (2) plan which files to change, (3) implement changes across multiple files, (4) run tests and linters to verify, (5) iterate on failures, (6) present a diff for human review. Tools like Antigravity and Cursor provide IDE integration, while Gemini CLI and Claude Code work from the terminal. The key differentiator in 2026 is MCP support — agents can connect to databases, APIs, and external tools.
+- **A**: They follow a plan-act-observe loop: (1) understand the task by reading the codebase context, (2) plan which files to change, (3) implement changes across multiple files, (4) run tests and linters to verify, (5) iterate on failures, (6) present a diff for human review. Tools like Antigravity and Cursor provide IDE integration, while Gemini CLI and Claude Code work from the terminal. The key differentiator in 2026 is MCP support â€” agents can connect to databases, APIs, and external tools.
 
 - **Q**: Compare Copilot, Cursor, and Antigravity.
-- **A**: Copilot is a platform (extension + agent) best for GitHub-native workflows — evolved from autocomplete to multi-agent orchestration. Cursor is a VS Code fork with AI deeply integrated (Composer for multi-file edits, Supermaven for autocomplete) — best for developers who want AI-enhanced traditional editing. Antigravity is agent-first — designed around delegating to autonomous agents with a Manager View for orchestrating multiple agents simultaneously — best for developers who want to direct rather than write code.
+- **A**: Copilot is a platform (extension + agent) best for GitHub-native workflows â€” evolved from autocomplete to multi-agent orchestration. Cursor is a VS Code fork with AI deeply integrated (Composer for multi-file edits, Supermaven for autocomplete) â€” best for developers who want AI-enhanced traditional editing. Antigravity is agent-first â€” designed around delegating to autonomous agents with a Manager View for orchestrating multiple agents simultaneously â€” best for developers who want to direct rather than write code.
 
 ---
 
-## ◆ Hands-On Exercises
+## â—† Hands-On Exercises
 
 ### Exercise 1: Compare AI Coding Tools
 
@@ -454,12 +455,12 @@ KEY TREND (2026):
 1. Use the MCP code example above as a starting point
 2. Add tools for your specific workflow (e.g., database migration, docker commands)
 3. Connect it to your IDE agent (Cursor MCP config or Antigravity)
-4. Test: ask the agent to "run tests and fix any failures" — does it use your MCP tools?
+4. Test: ask the agent to "run tests and fix any failures" â€” does it use your MCP tools?
 **Expected Output**: Working MCP server with 3+ custom tools, connected to your coding agent
 
 ---
 
-## ★ Connections
+## â˜… Connections
 
 | Relationship | Topics                                                                                      |
 | ------------ | ------------------------------------------------------------------------------------------- |
@@ -470,27 +471,27 @@ KEY TREND (2026):
 
 ---
 
-## ★ Recommended Resources
+## â˜… Recommended Resources
 
 | Type | Resource | Why |
 |------|----------|-----|
-| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 7 (Agents) | Practical treatment of coding agents and tool-use patterns |
-| 🔧 Hands-on | [MCP Specification & Tutorials](https://modelcontextprotocol.io/) | Learn the protocol that connects coding agents to external tools |
-| 🎥 Video | [Andrej Karpathy — "Intro to LLMs"](https://www.youtube.com/watch?v=zjkBMFhNj_g) | Foundational understanding of how the models behind coding agents work |
-| 📄 Paper | [Jimenez et al. "SWE-bench"](https://arxiv.org/abs/2310.06770) | The benchmark that defines how we measure coding agent capability |
-| 🔧 Hands-on | [Cursor Documentation](https://docs.cursor.com/) | Best docs for understanding AI-IDE integration patterns |
-| 🔧 Hands-on | [Gemini CLI Getting Started](https://github.com/google-gemini/gemini-cli) | Fastest way to try terminal-based agentic coding |
+| ðŸ“˜ Book | "AI Engineering" by Chip Huyen (2025), Ch 7 (Agents) | Practical treatment of coding agents and tool-use patterns |
+| ðŸ”§ Hands-on | [MCP Specification & Tutorials](https://modelcontextprotocol.io/) | Learn the protocol that connects coding agents to external tools |
+| ðŸŽ¥ Video | [Andrej Karpathy â€” "Intro to LLMs"](https://www.youtube.com/watch?v=zjkBMFhNj_g) | Foundational understanding of how the models behind coding agents work |
+| ðŸ“„ Paper | [Jimenez et al. "SWE-bench"](https://arxiv.org/abs/2310.06770) | The benchmark that defines how we measure coding agent capability |
+| ðŸ”§ Hands-on | [Cursor Documentation](https://docs.cursor.com/) | Best docs for understanding AI-IDE integration patterns |
+| ðŸ”§ Hands-on | [Gemini CLI Getting Started](https://github.com/google-gemini/gemini-cli) | Fastest way to try terminal-based agentic coding |
 
 ---
 
-## ★ Sources
+## â˜… Sources
 
-- Google Antigravity — https://antigravity-ide.com
-- Gemini CLI — https://github.com/google-gemini/gemini-cli
-- Claude Code — https://claude.ai/code
-- Cursor — https://cursor.com
-- GitHub Copilot — https://github.com/features/copilot
-- Windsurf — https://windsurf.com
-- Devin — https://devin.ai
-- SWE-Bench results — https://www.swebench.com
-- MCP Specification — https://modelcontextprotocol.io/
+- Google Antigravity â€” https://antigravity-ide.com
+- Gemini CLI â€” https://github.com/google-gemini/gemini-cli
+- Claude Code â€” https://claude.ai/code
+- Cursor â€” https://cursor.com
+- GitHub Copilot â€” https://github.com/features/copilot
+- Windsurf â€” https://windsurf.com
+- Devin â€” https://devin.ai
+- SWE-Bench results â€” https://www.swebench.com
+- MCP Specification â€” https://modelcontextprotocol.io/

@@ -1,5 +1,6 @@
 ---
 title: "AI System Design for GenAI Applications"
+aliases: ["System Design", "AI Architecture"]
 tags: [system-design, ai-architecture, genai, production, llmops]
 type: reference
 difficulty: advanced
@@ -18,14 +19,14 @@ updated: 2026-04-12
 
 ---
 
-## ★ TL;DR
+## â˜… TL;DR
 - **What**: A design framework for building reliable GenAI systems in production
 - **Why**: Most failures come from orchestration, retrieval, serving, and guardrails, not from the base model alone
 - **Key point**: Good AI system design optimizes for the whole loop: request -> grounding -> generation -> verification -> monitoring
 
 ---
 
-## ★ Overview
+## â˜… Overview
 ### Definition
 
 **AI system design** is the practice of translating a GenAI product requirement into a production architecture that meets quality, safety, latency, availability, and cost targets.
@@ -49,7 +50,7 @@ This note covers architecture patterns, design trade-offs, bottlenecks, and inte
 
 ---
 
-## ★ Deep Dive
+## â˜… Deep Dive
 ### Core Architecture Layers
 
 ```text
@@ -166,7 +167,7 @@ When asked to design a GenAI system, structure the answer like this:
 
 ---
 
-## ◆ Quick Reference
+## â—† Quick Reference
 | Problem                        | First Design Move                                         |
 | ------------------------------ | --------------------------------------------------------- |
 | Hallucinations on private data | Add retrieval and citations                               |
@@ -177,7 +178,7 @@ When asked to design a GenAI system, structure the answer like this:
 
 ---
 
-## ○ Gotchas & Common Mistakes
+## â—‹ Gotchas & Common Mistakes
 - Do not start with multi-agent systems unless a single-agent or RAG design clearly fails
 - A strong model cannot rescue a bad retrieval pipeline
 - Low latency and high autonomy usually pull in opposite directions
@@ -185,7 +186,7 @@ When asked to design a GenAI system, structure the answer like this:
 
 ---
 
-## ○ Interview Angles
+## â—‹ Interview Angles
 - **Q**: When would you choose RAG over fine-tuning?
 - **A**: When the knowledge changes often, needs citations, or comes from private documents. Fine-tuning is better when the behavior itself must change consistently.
 
@@ -194,13 +195,13 @@ When asked to design a GenAI system, structure the answer like this:
 
 ---
 
-## ★ Code & Implementation
+## â˜… Code & Implementation
 
 ### Production RAG System Scaffold
 
 ```python
 # pip install openai>=1.60 chromadb>=0.5
-# ⚠️ Last tested: 2026-04 | Requires: openai>=1.60, chromadb>=0.5, OPENAI_API_KEY env var
+# âš ï¸ Last tested: 2026-04 | Requires: openai>=1.60, chromadb>=0.5, OPENAI_API_KEY env var
 from openai import OpenAI
 import chromadb
 
@@ -242,7 +243,7 @@ index_documents([
 print(rag_query("How does RAG work?"))
 ```
 
-## ★ Connections
+## â˜… Connections
 | Relationship | Topics                                                                                                                                                                                |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Builds on    | [LLMOps & Production Deployment](./llmops.md), [Retrieval-Augmented Generation (RAG)](../techniques/rag.md), [AI Agents](../agents/ai-agents.md)                                      |
@@ -253,7 +254,7 @@ print(rag_query("How does RAG work?"))
 
 ---
 
-## ◆ Hands-On Exercises
+## â—† Hands-On Exercises
 
 ### Exercise 1: Design an AI System Architecture
 
@@ -268,7 +269,7 @@ print(rag_query("How does RAG work?"))
 
 ---
 
-## ◆ Production Failure Modes
+## â—† Production Failure Modes
 
 | Failure                     | Symptoms                                          | Root Cause                              | Mitigation                                                   |
 | --------------------------- | ------------------------------------------------- | --------------------------------------- | ------------------------------------------------------------ |
@@ -278,16 +279,16 @@ print(rag_query("How does RAG work?"))
 ---
 
 
-## ★ Recommended Resources
+## â˜… Recommended Resources
 
 | Type       | Resource                                                                                                                           | Why                                    |
 | ---------- | ---------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
-| 📘 Book     | "AI Engineering" by Chip Huyen (2025)                                                                                              | End-to-end AI system design reference  |
-| 📘 Book     | "Designing Machine Learning Systems" by Chip Huyen (2022)                                                                          | Foundational ML system design patterns |
-| 🎥 Video    | [Alex Xu — System Design Interview Series](https://www.youtube.com/@ByteByteGo)                                                    | Visual system design explanations      |
-| 🔧 Hands-on | [Google MLOps Guide](https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning) | Production ML architecture patterns    |
+| ðŸ“˜ Book     | "AI Engineering" by Chip Huyen (2025)                                                                                              | End-to-end AI system design reference  |
+| ðŸ“˜ Book     | "Designing Machine Learning Systems" by Chip Huyen (2022)                                                                          | Foundational ML system design patterns |
+| ðŸŽ¥ Video    | [Alex Xu â€” System Design Interview Series](https://www.youtube.com/@ByteByteGo)                                                    | Visual system design explanations      |
+| ðŸ”§ Hands-on | [Google MLOps Guide](https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning) | Production ML architecture patterns    |
 
-## ★ Sources
+## â˜… Sources
 - Chip Huyen, *Designing Machine Learning Systems*
 - Google Cloud Architecture Center guidance for AI systems
 - AWS Well-Architected guidance for ML and generative AI workloads

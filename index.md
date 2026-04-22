@@ -18,7 +18,7 @@ hide:
   </div>
 </div>
 
-## Three Ways In
+## Four Ways In
 
 <div class="landing-grid">
   <a class="tool-card" href="LEARNING_PATH.html">
@@ -32,6 +32,10 @@ hide:
   <a class="tool-card" href="genai.html">
     <strong>🔍 Topic Reference</strong>
     <span>Already know what you need? Jump directly to any of 83 topics via the master scope map. Every note links to prerequisites and next steps.</span>
+  </a>
+  <a class="tool-card" href="https://github.com/bhaskarjha-com/genai-notes#path-4-obsidian-vault">
+    <strong>📎 Obsidian Vault</strong>
+    <span>Clone the repo and open it as an Obsidian vault. Pre-configured with graph colors, backlinks, and excluded folders. Works offline.</span>
   </a>
 </div>
 

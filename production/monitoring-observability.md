@@ -1,5 +1,6 @@
 ---
 title: "Monitoring & Observability for GenAI Systems"
+aliases: ["Observability", "LLM Monitoring", "Langfuse"]
 tags: [monitoring, observability, tracing, evals, llmops, production]
 type: reference
 difficulty: advanced
@@ -18,14 +19,14 @@ updated: 2026-04-12
 
 ---
 
-## ★ TL;DR
+## â˜… TL;DR
 - **What**: The tracing, metrics, logs, and feedback loops used to understand AI behavior in production.
 - **Why**: GenAI systems can be "up" while still being wrong, unsafe, or too expensive.
 - **Key point**: You need both system telemetry and quality telemetry.
 
 ---
 
-## ★ Overview
+## â˜… Overview
 ### Definition
 
 **Monitoring** tracks known signals such as latency and error rates. **Observability** adds enough telemetry to investigate unknown failures, regressions, and user-quality breakdowns.
@@ -48,7 +49,7 @@ This note focuses on production telemetry for LLM apps, RAG systems, and agents.
 
 ---
 
-## ★ Deep Dive
+## â˜… Deep Dive
 ### The Four Telemetry Layers
 
 | Layer              | What You Track      | Example Signals                                     |
@@ -125,16 +126,16 @@ Last verified for example categories and ecosystem naming: 2026-04.
 | **Arize Phoenix** | ML + LLM observability | Teams already using Arize for ML monitoring | Unified ML+LLM observability, notebook-friendly | Open-source |
 | **Braintrust** | Eval-first CI/CD integration | Teams shipping fast with eval gates | Prompt playground, dataset management, scoring API | Cloud |
 | **LangSmith** | LangChain-native tracing | LangChain/LangGraph users | Deep integration with LangChain ecosystem | Cloud |
-| **Latitude** | Issue lifecycle management | Teams focused on failure triage workflows | Issue → root cause → fix lifecycle tracking | Cloud |
+| **Latitude** | Issue lifecycle management | Teams focused on failure triage workflows | Issue â†’ root cause â†’ fix lifecycle tracking | Cloud |
 
 ```
 PLATFORM DECISION GUIDE:
 
-  Using LangChain/LangGraph?         → LangSmith (deepest integration)
-  Need self-hosted / data residency? → Langfuse (open-source, self-hosted)
-  Already using Arize for ML?        → Phoenix (unified ML + LLM)
-  Eval-gated CI/CD is the priority?  → Braintrust (eval → deploy pipeline)
-  Starting from scratch?             → Langfuse (best free tier, OTel-native)
+  Using LangChain/LangGraph?         â†’ LangSmith (deepest integration)
+  Need self-hosted / data residency? â†’ Langfuse (open-source, self-hosted)
+  Already using Arize for ML?        â†’ Phoenix (unified ML + LLM)
+  Eval-gated CI/CD is the priority?  â†’ Braintrust (eval â†’ deploy pipeline)
+  Starting from scratch?             â†’ Langfuse (best free tier, OTel-native)
 ```
 
 ### Example Trace Schema
@@ -170,7 +171,7 @@ PLATFORM DECISION GUIDE:
 
 ---
 
-## ◆ Quick Reference
+## â—† Quick Reference
 | If You Need To Diagnose... | Inspect First                                     |
 | -------------------------- | ------------------------------------------------- |
 | Slow answers               | Trace timings across retrieval, model, and tools  |
@@ -181,7 +182,7 @@ PLATFORM DECISION GUIDE:
 
 ---
 
-## ○ Gotchas & Common Mistakes
+## â—‹ Gotchas & Common Mistakes
 - Logging raw prompts and documents can create privacy and security problems.
 - Dashboards without trace drill-down rarely solve semantic failures.
 - Teams often track cost per request but ignore cost per successful task.
@@ -189,7 +190,7 @@ PLATFORM DECISION GUIDE:
 
 ---
 
-## ○ Interview Angles
+## â—‹ Interview Angles
 - **Q**: Why is observability harder for LLM systems than for normal APIs?
 - **A**: Because correctness is not binary. The system can return a 200 response and still be wrong, unsafe, or unhelpful. You need traceable context, output quality signals, and user feedback, not just uptime metrics.
 
@@ -198,13 +199,13 @@ PLATFORM DECISION GUIDE:
 
 ---
 
-## ★ Code & Implementation
+## â˜… Code & Implementation
 
 ### LLM Metrics with Prometheus
 
 ```python
 # pip install openai>=1.60 prometheus_client>=0.20
-# ⚠️ Last tested: 2026-04 | Requires: openai>=1.60, prometheus_client>=0.20
+# âš ï¸ Last tested: 2026-04 | Requires: openai>=1.60, prometheus_client>=0.20
 import time
 from openai import OpenAI
 from prometheus_client import Counter, Histogram, start_http_server
@@ -232,14 +233,14 @@ def monitored_call(messages: list[dict], model: str = "gpt-4o-mini") -> str:
         LATENCY_HIST.labels(model=model).observe(time.monotonic() - start)
 
 print(monitored_call([{"role": "user", "content": "What is observability?"}]))
-# Grafana dashboard: connect to Prometheus → visualize p50/p95 latency + error rate
+# Grafana dashboard: connect to Prometheus â†’ visualize p50/p95 latency + error rate
 ```
 
 ### LLM Tracing with Langfuse
 
 ```python
 # pip install langfuse>=2.0 openai>=1.60
-# ⚠️ Last tested: 2026-04 | Requires: langfuse>=2.0, openai>=1.60
+# âš ï¸ Last tested: 2026-04 | Requires: langfuse>=2.0, openai>=1.60
 # Set env: LANGFUSE_PUBLIC_KEY, LANGFUSE_SECRET_KEY, LANGFUSE_HOST (if self-hosted)
 
 from langfuse.decorators import observe, langfuse_context
@@ -249,7 +250,7 @@ client = OpenAI()
 
 @observe()  # Automatically creates a trace with latency, token usage, and cost
 def answer_question(user_question: str, model: str = "gpt-4o-mini") -> str:
-    """Traced LLM call — appears in Langfuse dashboard with full metadata."""
+    """Traced LLM call â€” appears in Langfuse dashboard with full metadata."""
     # Tag the trace for filtering in the dashboard
     langfuse_context.update_current_observation(
         metadata={"prompt_version": "support-v7", "route": "qa-pipeline"},
@@ -261,14 +262,14 @@ def answer_question(user_question: str, model: str = "gpt-4o-mini") -> str:
     )
     return response.choices[0].message.content
 
-# Usage — each call creates a trace visible in Langfuse UI
+# Usage â€” each call creates a trace visible in Langfuse UI
 result = answer_question("What are the key metrics for LLM observability?")
 print(result)
 # Dashboard shows: latency, token usage, cost, model, prompt version per trace
 # Filter by: model, route, user, score, time range
 ```
 
-## ★ Connections
+## â˜… Connections
 | Relationship | Topics                                                                                                                                                                                  |
 | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Builds on    | [LLMOps & Production Deployment](./llmops.md), [Agent Evaluation & Observability](../agents/agent-evaluation.md), [LLM Evaluation Deep Dive](../evaluation/llm-evaluation-deep-dive.md) |
@@ -279,7 +280,7 @@ print(result)
 
 ---
 
-## ◆ Production Failure Modes
+## â—† Production Failure Modes
 
 | Failure                          | Symptoms                                                | Root Cause                                           | Mitigation                                                        |
 | -------------------------------- | ------------------------------------------------------- | ---------------------------------------------------- | ----------------------------------------------------------------- |
@@ -290,7 +291,7 @@ print(result)
 
 ---
 
-## ◆ Hands-On Exercises
+## â—† Hands-On Exercises
 
 ### Exercise 1: Build an LLM Monitoring Dashboard
 
@@ -305,16 +306,16 @@ print(result)
 ---
 
 
-## ★ Recommended Resources
+## â˜… Recommended Resources
 
 | Type       | Resource                                                                       | Why                                          |
 | ---------- | ------------------------------------------------------------------------------ | -------------------------------------------- |
-| 🔧 Hands-on | [LangSmith Documentation](https://docs.smith.langchain.com/)                   | Production LLM observability platform        |
-| 🔧 Hands-on | [Arize Phoenix](https://docs.arize.com/phoenix/)                               | Open-source LLM observability and evaluation |
-| 📘 Book     | "AI Engineering" by Chip Huyen (2025), Ch 9                                    | Monitoring patterns specific to AI systems   |
-| 🎥 Video    | [Shreya Shankar — "Rethinking ML Monitoring"](https://www.shreya-shankar.com/) | Data quality monitoring for ML systems       |
+| ðŸ”§ Hands-on | [LangSmith Documentation](https://docs.smith.langchain.com/)                   | Production LLM observability platform        |
+| ðŸ”§ Hands-on | [Arize Phoenix](https://docs.arize.com/phoenix/)                               | Open-source LLM observability and evaluation |
+| ðŸ“˜ Book     | "AI Engineering" by Chip Huyen (2025), Ch 9                                    | Monitoring patterns specific to AI systems   |
+| ðŸŽ¥ Video    | [Shreya Shankar â€” "Rethinking ML Monitoring"](https://www.shreya-shankar.com/) | Data quality monitoring for ML systems       |
 
-## ★ Sources
+## â˜… Sources
 - Langfuse documentation
 - LangSmith documentation
 - Arize Phoenix documentation

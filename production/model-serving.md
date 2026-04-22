@@ -1,5 +1,6 @@
 ---
 title: "Model Serving for LLM Applications"
+aliases: ["Model Serving", "vLLM", "TGI", "Inference Server"]
 tags: [serving, vllm, triton, tgi, inference, llmops, production]
 type: reference
 difficulty: advanced
@@ -18,14 +19,14 @@ updated: 2026-04-12
 
 ---
 
-## ★ TL;DR
+## â˜… TL;DR
 - **What**: The systems and patterns used to expose models as production endpoints.
 - **Why**: A strong model with weak serving still feels slow, flaky, and expensive.
 - **Key point**: Serving is a scheduling and systems problem, not just a "wrap it in FastAPI" problem.
 
 ---
 
-## ★ Overview
+## â˜… Overview
 ### Definition
 
 **Model serving** is the runtime layer that accepts requests, prepares inputs, executes inference, and returns outputs under production constraints.
@@ -48,7 +49,7 @@ This note covers serving architectures, runtime choices, and operational trade-o
 
 ---
 
-## ★ Deep Dive
+## â˜… Deep Dive
 ### Serving Request Path
 
 ```text
@@ -142,7 +143,7 @@ python -m vllm.entrypoints.openai.api_server \
 
 ---
 
-## ◆ Quick Reference
+## â—† Quick Reference
 | Problem             | First Serving Move                                         |
 | ------------------- | ---------------------------------------------------------- |
 | High API cost       | Evaluate self-hosting or smaller-model routing             |
@@ -153,7 +154,7 @@ python -m vllm.entrypoints.openai.api_server \
 
 ---
 
-## ○ Gotchas & Common Mistakes
+## â—‹ Gotchas & Common Mistakes
 - Teams often blame the model when the real bottleneck is gateway design or retrieval latency.
 - A single serving stack for every workload usually performs badly.
 - OpenAI-compatible APIs simplify clients but do not remove serving complexity.
@@ -161,7 +162,7 @@ python -m vllm.entrypoints.openai.api_server \
 
 ---
 
-## ○ Interview Angles
+## â—‹ Interview Angles
 - **Q**: What is the difference between inference optimization and model serving?
 - **A**: Inference optimization focuses on making the core generation path more efficient, for example quantization or KV-cache improvements. Model serving covers the full production runtime around that path, including APIs, routing, scheduling, scaling, and failure handling.
 
@@ -170,13 +171,13 @@ python -m vllm.entrypoints.openai.api_server \
 
 ---
 
-## ★ Code & Implementation
+## â˜… Code & Implementation
 
 ### vLLM Server Setup (OpenAI-Compatible)
 
 ```bash
 # pip install vllm>=0.8
-# ⚠️ Last tested: 2026-04 | Requires: CUDA GPU, vllm>=0.8
+# âš ï¸ Last tested: 2026-04 | Requires: CUDA GPU, vllm>=0.8
 
 python -m vllm.entrypoints.openai.api_server \
   --model meta-llama/Llama-3.2-8B-Instruct \
@@ -187,9 +188,9 @@ python -m vllm.entrypoints.openai.api_server \
 ```
 
 ```python
-# Query the vLLM server — identical to OpenAI API
+# Query the vLLM server â€” identical to OpenAI API
 # pip install openai>=1.60
-# ⚠️ Last tested: 2026-04
+# âš ï¸ Last tested: 2026-04
 from openai import OpenAI
 import time
 
@@ -208,7 +209,7 @@ elapsed = time.monotonic() - start
 print(f"{len(prompts)} requests in {elapsed:.1f}s = {len(prompts)/elapsed:.1f} req/s")
 ```
 
-## ★ Connections
+## â˜… Connections
 | Relationship | Topics                                                                                                                                                                                                     |
 | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Builds on    | [Inference Optimization](../inference/inference-optimization.md), [Docker & Kubernetes for GenAI Deployment](./docker-and-kubernetes.md), [AI System Design for GenAI Applications](./ai-system-design.md) |
@@ -224,7 +225,7 @@ print(f"{len(prompts)} requests in {elapsed:.1f}s = {len(prompts)/elapsed:.1f} r
 
 ```python
 # pip install fastapi>=0.110 uvicorn>=0.29 httpx>=0.27
-# ⚠️ Last tested: 2026-04 | Requires: fastapi>=0.110, httpx>=0.27
+# âš ï¸ Last tested: 2026-04 | Requires: fastapi>=0.110, httpx>=0.27
 import asyncio, time, statistics
 from fastapi import FastAPI
 from pydantic import BaseModel
@@ -285,7 +286,7 @@ async def load_test(base_url: str, num_requests: int = 20, concurrency: int = 5)
 ```
 
 ---
-## ◆ Production Failure Modes
+## â—† Production Failure Modes
 
 | Failure                            | Symptoms                                      | Root Cause                                      | Mitigation                                      |
 | ---------------------------------- | --------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
@@ -296,7 +297,7 @@ async def load_test(base_url: str, num_requests: int = 20, concurrency: int = 5)
 
 ---
 
-## ◆ Hands-On Exercises
+## â—† Hands-On Exercises
 
 ### Exercise 1: Deploy and Benchmark a Model Server
 
@@ -311,16 +312,16 @@ async def load_test(base_url: str, num_requests: int = 20, concurrency: int = 5)
 ---
 
 
-## ★ Recommended Resources
+## â˜… Recommended Resources
 
 | Type       | Resource                                                                    | Why                                       |
 | ---------- | --------------------------------------------------------------------------- | ----------------------------------------- |
-| 🔧 Hands-on | [vLLM Documentation](https://docs.vllm.ai/)                                 | Best open-source LLM serving engine       |
-| 🔧 Hands-on | [TGI Documentation](https://huggingface.co/docs/text-generation-inference/) | HuggingFace's production serving solution |
-| 📄 Paper    | [Kwon et al. "PagedAttention" (2023)](https://arxiv.org/abs/2309.06180)     | KV-cache management that powers vLLM      |
-| 📘 Book     | "AI Engineering" by Chip Huyen (2025), Ch 8                                 | Model serving patterns for production     |
+| ðŸ”§ Hands-on | [vLLM Documentation](https://docs.vllm.ai/)                                 | Best open-source LLM serving engine       |
+| ðŸ”§ Hands-on | [TGI Documentation](https://huggingface.co/docs/text-generation-inference/) | HuggingFace's production serving solution |
+| ðŸ“„ Paper    | [Kwon et al. "PagedAttention" (2023)](https://arxiv.org/abs/2309.06180)     | KV-cache management that powers vLLM      |
+| ðŸ“˜ Book     | "AI Engineering" by Chip Huyen (2025), Ch 8                                 | Model serving patterns for production     |
 
-## ★ Sources
+## â˜… Sources
 - vLLM documentation - https://docs.vllm.ai
 - Hugging Face Text Generation Inference documentation
 - NVIDIA Triton Inference Server documentation

@@ -1,5 +1,6 @@
 ---
 title: "Distributed Systems Fundamentals for AI"
+aliases: ["Distributed Systems", "MapReduce", "Spark"]
 tags: [distributed-systems, queues, consistency, scaling, infrastructure]
 type: concept
 difficulty: advanced
@@ -18,14 +19,14 @@ updated: 2026-04-12
 
 ---
 
-## ★ TL;DR
+## â˜… TL;DR
 - **What**: The distributed-systems ideas most relevant to AI and GenAI platforms.
 - **Why**: Production AI systems are built from many networked components, and their failures are often distributed-systems failures.
 - **Key point**: Reliability comes from flow control, state management, and graceful degradation as much as from model quality.
 
 ---
 
-## ★ Overview
+## â˜… Overview
 ### Definition
 
 **Distributed systems** are systems whose components communicate over a network while coordinating work, state, and failure handling.
@@ -48,7 +49,7 @@ This note is practical and AI-oriented. It focuses on service boundaries, queues
 
 ---
 
-## ★ Deep Dive
+## â˜… Deep Dive
 ### Why AI Systems Become Distributed
 
 A production GenAI request might touch:
@@ -110,7 +111,7 @@ That means network, state, and partial failure are built into the architecture.
 ### Example: Timeout, Concurrency, And Fallback
 
 ```python
-# ⚠️ Last tested: 2026-04
+# âš ï¸ Last tested: 2026-04
 import asyncio
 
 semaphore = asyncio.Semaphore(32)
@@ -125,7 +126,7 @@ async def call_with_budget(primary_model, fallback_model, payload):
 
 ---
 
-## ◆ Quick Reference
+## â—† Quick Reference
 | Symptom                                  | Likely Distributed-Systems Issue       |
 | ---------------------------------------- | -------------------------------------- |
 | sudden latency spikes                    | queue buildup or downstream contention |
@@ -136,7 +137,7 @@ async def call_with_budget(primary_model, fallback_model, payload):
 
 ---
 
-## ○ Gotchas & Common Mistakes
+## â—‹ Gotchas & Common Mistakes
 - A "microservice" split can hurt more than it helps if the system is small.
 - Retries without idempotency create expensive duplicates.
 - Teams often treat queues as free buffers instead of operational surfaces.
@@ -144,7 +145,7 @@ async def call_with_budget(primary_model, fallback_model, payload):
 
 ---
 
-## ○ Interview Angles
+## â—‹ Interview Angles
 - **Q**: Why do AI systems need distributed-systems knowledge?
 - **A**: Because production AI is composed of many interacting services with partial failure, variable latency, and expensive state transitions. Reliability depends on queueing, retry policy, caching, and graceful degradation.
 
@@ -153,13 +154,13 @@ async def call_with_budget(primary_model, fallback_model, payload):
 
 ---
 
-## ★ Code & Implementation
+## â˜… Code & Implementation
 
 ### Tensor Parallel Training with PyTorch FSDP
 
 ```python
 # pip install torch>=2.3
-# ⚠️ Last tested: 2026-04 | Requires: torch>=2.3, multiple GPUs for true parallelism
+# âš ï¸ Last tested: 2026-04 | Requires: torch>=2.3, multiple GPUs for true parallelism
 # Single-GPU simulation: FSDP wraps work on 1 GPU with CPU offload
 
 import torch
@@ -194,10 +195,10 @@ param_count = sum(p.numel() for p in model.parameters())
 print(f"Model parameters: {param_count:,} ({param_count/1e6:.1f}M)")
 print(f"Estimated BF16 memory: {param_count * 2 / 1e9:.2f} GB")
 print(f"Estimated FSDP across 4 GPUs: {param_count * 2 / 1e9 / 4:.2f} GB per GPU")
-# FSDP shards params across GPUs — linear memory reduction
+# FSDP shards params across GPUs â€” linear memory reduction
 ```
 
-## ★ Connections
+## â˜… Connections
 | Relationship | Topics                                                                                                                                             |
 | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Builds on    | [AI System Design for GenAI Applications](../production/ai-system-design.md), [Model Serving for LLM Applications](../production/model-serving.md) |
@@ -208,7 +209,7 @@ print(f"Estimated FSDP across 4 GPUs: {param_count * 2 / 1e9 / 4:.2f} GB per GPU
 
 ---
 
-## ◆ Production Failure Modes
+## â—† Production Failure Modes
 
 | Failure                    | Symptoms                                            | Root Cause                              | Mitigation                                                    |
 | -------------------------- | --------------------------------------------------- | --------------------------------------- | ------------------------------------------------------------- |
@@ -218,14 +219,14 @@ print(f"Estimated FSDP across 4 GPUs: {param_count * 2 / 1e9 / 4:.2f} GB per GPU
 
 ---
 
-## ◆ Hands-On Exercises
+## â—† Hands-On Exercises
 
 ### Exercise 1: Simulate Distributed Failures
 
 **Goal**: Build fault tolerance into a multi-service AI pipeline
 **Time**: 30 minutes
 **Steps**:
-1. Build a 3-service pipeline (embed → retrieve → generate) with FastAPI
+1. Build a 3-service pipeline (embed â†’ retrieve â†’ generate) with FastAPI
 2. Add circuit breakers (tenacity or pybreaker) to each service call
 3. Simulate failures by killing each service in turn
 4. Verify graceful degradation instead of cascading failures
@@ -233,15 +234,15 @@ print(f"Estimated FSDP across 4 GPUs: {param_count * 2 / 1e9 / 4:.2f} GB per GPU
 ---
 
 
-## ★ Recommended Resources
+## â˜… Recommended Resources
 
 | Type     | Resource                                                            | Why                                           |
 | -------- | ------------------------------------------------------------------- | --------------------------------------------- |
-| 📘 Book   | "Designing Data-Intensive Applications" by Kleppmann (2017)         | The distributed systems bible                 |
-| 🎓 Course | [MIT 6.824: Distributed Systems](https://pdos.csail.mit.edu/6.824/) | Best academic distributed systems course      |
-| 📘 Book   | "AI Engineering" by Chip Huyen (2025), Ch 8                         | Distributed patterns specific to AI workloads |
+| ðŸ“˜ Book   | "Designing Data-Intensive Applications" by Kleppmann (2017)         | The distributed systems bible                 |
+| ðŸŽ“ Course | [MIT 6.824: Distributed Systems](https://pdos.csail.mit.edu/6.824/) | Best academic distributed systems course      |
+| ðŸ“˜ Book   | "AI Engineering" by Chip Huyen (2025), Ch 8                         | Distributed patterns specific to AI workloads |
 
-## ★ Sources
+## â˜… Sources
 - Martin Kleppmann, *Designing Data-Intensive Applications*
 - cloud architecture guidance for resilient systems
 - [AI System Design for GenAI Applications](../production/ai-system-design.md)

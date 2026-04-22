@@ -1,0 +1,19 @@
+{
+  "userIgnoreFilters": [
+    "scripts/",
+    "assets/data/",
+    "downloads/",
+    "generated/",
+    ".github/",
+    "_templates/",
+    "site/",
+    "docs/",
+    ".tmp/",
+    ".venv/",
+    "drafts/"
+  ],
+  "attachmentFolderPath": "assets",
+  "showUnsupportedFiles": false,
+  "newLinkFormat": "relative",
+  "useMarkdownLinks": true
+}

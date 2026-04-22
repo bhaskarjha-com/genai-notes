@@ -1,5 +1,6 @@
 ---
 title: "Classical ML for GenAI Builders"
+aliases: ["Classical ML", "XGBoost", "Traditional ML"]
 tags: [classical-ml, xgboost, sklearn, ranking, routing, production]
 type: procedure
 difficulty: intermediate
@@ -14,23 +15,23 @@ updated: 2026-04-14
 
 # Classical ML for GenAI Builders
 
-> ✨ **Bit**: Not every AI problem needs an LLM. Often the best GenAI system quietly depends on a $0.001/request XGBoost model doing the hard work around the edge, while the $0.03/request LLM gets all the credit.
+> âœ¨ **Bit**: Not every AI problem needs an LLM. Often the best GenAI system quietly depends on a $0.001/request XGBoost model doing the hard work around the edge, while the $0.03/request LLM gets all the credit.
 
 ---
 
-## ★ TL;DR
+## â˜… TL;DR
 
 - **What**: The role of traditional ML methods (logistic regression, gradient boosting, ranking models) as supporting components in GenAI systems
-- **Why**: LLMs are powerful but expensive ($0.01-$0.10/request), slow (1-3s latency), and unnecessary for many narrow decisions. Classical ML is 100-1000× cheaper and faster.
-- **Key point**: Production GenAI systems are hybrids — use classical ML for routing, ranking, classification, and anomaly detection; reserve LLMs for generation and reasoning.
+- **Why**: LLMs are powerful but expensive ($0.01-$0.10/request), slow (1-3s latency), and unnecessary for many narrow decisions. Classical ML is 100-1000Ã— cheaper and faster.
+- **Key point**: Production GenAI systems are hybrids â€” use classical ML for routing, ranking, classification, and anomaly detection; reserve LLMs for generation and reasoning.
 
 ---
 
-## ★ Overview
+## â˜… Overview
 
 ### Definition
 
-**Classical ML in GenAI** refers to supervised and unsupervised methods (outside the main LLM generation step) that handle narrow, structured prediction tasks in AI product pipelines — routing requests, ranking results, classifying intent, detecting anomalies, and making cost-sensitive decisions.
+**Classical ML in GenAI** refers to supervised and unsupervised methods (outside the main LLM generation step) that handle narrow, structured prediction tasks in AI product pipelines â€” routing requests, ranking results, classifying intent, detecting anomalies, and making cost-sensitive decisions.
 
 ### Scope
 
@@ -51,49 +52,49 @@ This note does NOT teach all of machine learning. It explains where simpler mode
 
 ---
 
-## ★ Deep Dive
+## â˜… Deep Dive
 
 ### Where Classical ML Fits in GenAI Systems
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                     GenAI SYSTEM ARCHITECTURE                    │
-│                                                                  │
-│  User Request                                                    │
-│       │                                                          │
-│       ▼                                                          │
-│  ┌─────────────┐     Classical ML                                │
-│  │  CLASSIFIER │ ◄── Intent classification, toxicity detection   │
-│  │  (XGBoost)  │     Topic routing, language detection            │
-│  └──────┬──────┘                                                  │
-│         │                                                         │
-│         ▼                                                         │
-│  ┌─────────────┐     Classical ML                                 │
-│  │   ROUTER    │ ◄── Model selection (cheap→expensive cascade)   │
-│  │  (LogReg)   │     Prompt template routing                      │
-│  └──────┬──────┘                                                  │
-│         │                                                         │
-│         ▼                                                         │
-│  ┌─────────────┐     [LLM or Retrieval]                          │
-│  │  RETRIEVAL  │     Generate embeddings, search, answer          │
-│  │  + LLM      │                                                  │
-│  └──────┬──────┘                                                  │
-│         │                                                         │
-│         ▼                                                         │
-│  ┌─────────────┐     Classical ML                                 │
-│  │  RERANKER   │ ◄── Cross-encoder or XGBoost reranking          │
-│  │  (XGBoost)  │     Relevance scoring, quality filtering         │
-│  └──────┬──────┘                                                  │
-│         │                                                         │
-│         ▼                                                         │
-│  ┌─────────────┐     Classical ML                                 │
-│  │  GUARDRAILS │ ◄── Toxicity classifier, PII detector           │
-│  │  (SVM/LR)   │     Hallucination probability scoring            │
-│  └──────┬──────┘                                                  │
-│         │                                                         │
-│         ▼                                                         │
-│  Response to User                                                │
-└─────────────────────────────────────────────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚                     GenAI SYSTEM ARCHITECTURE                    â”‚
+â”‚                                                                  â”‚
+â”‚  User Request                                                    â”‚
+â”‚       â”‚                                                          â”‚
+â”‚       â–¼                                                          â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”     Classical ML                                â”‚
+â”‚  â”‚  CLASSIFIER â”‚ â—„â”€â”€ Intent classification, toxicity detection   â”‚
+â”‚  â”‚  (XGBoost)  â”‚     Topic routing, language detection            â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”˜                                                  â”‚
+â”‚         â”‚                                                         â”‚
+â”‚         â–¼                                                         â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”     Classical ML                                 â”‚
+â”‚  â”‚   ROUTER    â”‚ â—„â”€â”€ Model selection (cheapâ†’expensive cascade)   â”‚
+â”‚  â”‚  (LogReg)   â”‚     Prompt template routing                      â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”˜                                                  â”‚
+â”‚         â”‚                                                         â”‚
+â”‚         â–¼                                                         â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”     [LLM or Retrieval]                          â”‚
+â”‚  â”‚  RETRIEVAL  â”‚     Generate embeddings, search, answer          â”‚
+â”‚  â”‚  + LLM      â”‚                                                  â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”˜                                                  â”‚
+â”‚         â”‚                                                         â”‚
+â”‚         â–¼                                                         â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”     Classical ML                                 â”‚
+â”‚  â”‚  RERANKER   â”‚ â—„â”€â”€ Cross-encoder or XGBoost reranking          â”‚
+â”‚  â”‚  (XGBoost)  â”‚     Relevance scoring, quality filtering         â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”˜                                                  â”‚
+â”‚         â”‚                                                         â”‚
+â”‚         â–¼                                                         â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”     Classical ML                                 â”‚
+â”‚  â”‚  GUARDRAILS â”‚ â—„â”€â”€ Toxicity classifier, PII detector           â”‚
+â”‚  â”‚  (SVM/LR)   â”‚     Hallucination probability scoring            â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”˜                                                  â”‚
+â”‚         â”‚                                                         â”‚
+â”‚         â–¼                                                         â”‚
+â”‚  Response to User                                                â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ### The 6 Patterns of Classical ML in GenAI
@@ -107,14 +108,14 @@ This note does NOT teach all of machine learning. It explains where simpler mode
 | **5. Intent Classification** | Classify user intent for routing | FastText, XGBoost | Deterministic, testable, cheap |
 | **6. Feature Extraction** | Create features for downstream ML | TF-IDF, Custom transformers | Structured input for other models |
 
-### Pattern 1: Request Router — The Most Important Classical ML Pattern
+### Pattern 1: Request Router â€” The Most Important Classical ML Pattern
 
 **Problem**: You have 3 models (GPT-4o at $0.03/req, GPT-4o-mini at $0.003/req, and a cached response at $0.000). Route each request to the cheapest model that can handle it.
 
 **Architecture**:
 ```
-User Request → [Feature Extraction] → [Router Classifier] → Model A/B/C
-                                            │
+User Request â†’ [Feature Extraction] â†’ [Router Classifier] â†’ Model A/B/C
+                                            â”‚
                                       Trained on:
                                       - request length
                                       - topic embedding similarity
@@ -128,8 +129,8 @@ User Request → [Feature Extraction] → [Router Classifier] → Model A/B/C
 **Why XGBoost for reranking instead of LLM?**:
 - Takes < 10ms for 100 documents (vs 2000ms for LLM-based reranking)
 - Can incorporate non-semantic features (recency, popularity, user history)
-- Deterministic — same input always gives same ranking
-- Cheaper by 1000× at scale
+- Deterministic â€” same input always gives same ranking
+- Cheaper by 1000Ã— at scale
 
 ### Cost Comparison: Classical ML vs LLM
 
@@ -139,17 +140,17 @@ User Request → [Feature Extraction] → [Router Classifier] → Model A/B/C
 | Routing decision | $0.001 | $0.02 | 3ms | 800ms |
 | Reranking (20 docs) | $0.002 | $0.05 | 15ms | 2000ms |
 | Toxicity check | $0.001 | $0.01 | 5ms | 600ms |
-| **1M req/day total** | **$5,000/day** | **$90,000/day** | — | — |
+| **1M req/day total** | **$5,000/day** | **$90,000/day** | â€” | â€” |
 
 ---
 
-## ★ Code & Implementation
+## â˜… Code & Implementation
 
 ### Request Router with scikit-learn
 
 ```python
 # pip install scikit-learn>=1.3 numpy>=1.24
-# ⚠️ Last tested: 2026-04 | Requires: scikit-learn>=1.3
+# âš ï¸ Last tested: 2026-04 | Requires: scikit-learn>=1.3
 
 import numpy as np
 from sklearn.linear_model import LogisticRegression
@@ -192,7 +193,7 @@ router = Pipeline([
 
 # In production, use cross_val_score with more data:
 # scores = cross_val_score(router, X_train, y_train, cv=5, scoring="accuracy")
-# print(f"Router accuracy: {scores.mean():.2f} ± {scores.std():.2f}")
+# print(f"Router accuracy: {scores.mean():.2f} Â± {scores.std():.2f}")
 
 router.fit(X_train, y_train)
 
@@ -209,7 +210,7 @@ print(f"Route to: {model_names[tier]}")
 
 ```python
 # pip install xgboost>=2.0 scikit-learn>=1.3
-# ⚠️ Last tested: 2026-04 | Requires: xgboost>=2.0
+# âš ï¸ Last tested: 2026-04 | Requires: xgboost>=2.0
 
 import xgboost as xgb
 import numpy as np
@@ -246,7 +247,7 @@ reranker = xgb.XGBClassifier(
 
 # Evaluate with cross-validation
 scores = cross_val_score(reranker, X_train, y_train, cv=5, scoring="accuracy")
-print(f"Reranker accuracy: {scores.mean():.2f} ± {scores.std():.2f}")
+print(f"Reranker accuracy: {scores.mean():.2f} Â± {scores.std():.2f}")
 
 reranker.fit(X_train, y_train)
 
@@ -266,7 +267,7 @@ def rerank_documents(query: str, documents: list[dict]) -> list[dict]:
 
 ```python
 # pip install numpy>=1.24 scipy>=1.10
-# ⚠️ Last tested: 2026-04 | Requires: numpy>=1.24, scipy>=1.10
+# âš ï¸ Last tested: 2026-04 | Requires: numpy>=1.24, scipy>=1.10
 
 import numpy as np
 from scipy import stats
@@ -317,24 +318,24 @@ print(test.evaluate())
 
 ---
 
-## ◆ Quick Reference
+## â—† Quick Reference
 
 ```
 WHEN TO USE CLASSICAL ML vs LLM:
 
   Use Classical ML when:
-    ✓ Decision is narrow and well-defined (classify, route, rank, detect)
-    ✓ Latency < 10ms required
-    ✓ Cost-sensitive (>100K requests/day)
-    ✓ Need deterministic, testable behavior
-    ✓ Structured input data available
-    ✓ Labels available for supervised training
+    âœ“ Decision is narrow and well-defined (classify, route, rank, detect)
+    âœ“ Latency < 10ms required
+    âœ“ Cost-sensitive (>100K requests/day)
+    âœ“ Need deterministic, testable behavior
+    âœ“ Structured input data available
+    âœ“ Labels available for supervised training
 
   Use LLM when:
-    ✓ Task requires language understanding/generation
-    ✓ Open-ended or creative output needed
-    ✓ Few/zero-shot (no labeled training data)
-    ✓ Context-dependent reasoning
+    âœ“ Task requires language understanding/generation
+    âœ“ Open-ended or creative output needed
+    âœ“ Few/zero-shot (no labeled training data)
+    âœ“ Context-dependent reasoning
 
 COMMON MODELS BY TASK:
   Classification:  LogisticRegression, XGBoost, LightGBM
@@ -347,38 +348,38 @@ COMMON MODELS BY TASK:
 
 ---
 
-## ◆ Production Failure Modes
+## â—† Production Failure Modes
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
 | **Model staleness** | Router accuracy drops over weeks | User request patterns shift, model not retrained | Schedule weekly retraining, monitor drift metrics |
 | **Feature drift** | Reranker quality degrades without model change | Input data distribution shifts (new content types, new users) | Feature distribution monitoring, drift alerts |
 | **Label leakage** | Model looks great in training, fails in production | Training features contain information from the target | Strict temporal train/test splits, feature audit |
-| **Cascade amplification** | Router misroute → wrong model → bad output → bad user rating | Error in early classifier propagates through pipeline | Add confidence thresholds, fallback to expensive model when uncertain |
+| **Cascade amplification** | Router misroute â†’ wrong model â†’ bad output â†’ bad user rating | Error in early classifier propagates through pipeline | Add confidence thresholds, fallback to expensive model when uncertain |
 | **Cold start** | New topics/intents get consistently misrouted | No training data for new categories | Zero-shot LLM fallback for low-confidence classifications |
 
 ---
 
-## ○ Gotchas & Common Mistakes
+## â—‹ Gotchas & Common Mistakes
 
-- ⚠️ **"We'll just use the LLM for everything"**: This is the most expensive mistake in GenAI. A $0.001 classifier beats a $0.03 LLM call for binary decisions.
-- ⚠️ **Forgetting to retrain**: Classical models need fresh data. Set up automated retraining pipelines, not manual reruns.
-- ⚠️ **Overfitting the router**: A router trained on 100 examples will fail on the 101st pattern. Start simple (LogReg), add complexity only when you have enough data.
-- ⚠️ **Ignoring calibration**: A classifier that says "90% confident" but is only right 60% of the time is worse than useless for routing decisions. Calibrate probabilities.
+- âš ï¸ **"We'll just use the LLM for everything"**: This is the most expensive mistake in GenAI. A $0.001 classifier beats a $0.03 LLM call for binary decisions.
+- âš ï¸ **Forgetting to retrain**: Classical models need fresh data. Set up automated retraining pipelines, not manual reruns.
+- âš ï¸ **Overfitting the router**: A router trained on 100 examples will fail on the 101st pattern. Start simple (LogReg), add complexity only when you have enough data.
+- âš ï¸ **Ignoring calibration**: A classifier that says "90% confident" but is only right 60% of the time is worse than useless for routing decisions. Calibrate probabilities.
 
 ---
 
-## ○ Interview Angles
+## â—‹ Interview Angles
 
 - **Q**: Where does classical ML fit in a GenAI system?
-- **A**: Classical ML handles the narrow, structured, cost-sensitive decisions around the LLM core. The most common patterns are: (1) request routing — classifying which model tier handles each request, saving 80%+ on API costs, (2) reranking — scoring and sorting retrieved documents faster than LLM-based reranking, (3) quality gates — fast pass/fail classifiers on LLM output before returning to users, (4) anomaly detection — flagging unusual requests or outputs for human review. The key insight is that production GenAI systems are hybrids: the LLM handles generation and reasoning, while classical models handle the structured decisions that need to be fast, cheap, and deterministic.
+- **A**: Classical ML handles the narrow, structured, cost-sensitive decisions around the LLM core. The most common patterns are: (1) request routing â€” classifying which model tier handles each request, saving 80%+ on API costs, (2) reranking â€” scoring and sorting retrieved documents faster than LLM-based reranking, (3) quality gates â€” fast pass/fail classifiers on LLM output before returning to users, (4) anomaly detection â€” flagging unusual requests or outputs for human review. The key insight is that production GenAI systems are hybrids: the LLM handles generation and reasoning, while classical models handle the structured decisions that need to be fast, cheap, and deterministic.
 
 - **Q**: How would you design a model routing system?
-- **A**: I'd start by defining 3 tiers: cached responses (free), small model (cheap), and large model (expensive). Feature engineering would extract request complexity indicators: length, question count, topic embedding, tool requirements, and context size. I'd train a logistic regression initially (simple, interpretable, fast to iterate) and upgrade to XGBoost once I have enough labeled data (1000+ examples). The labeling strategy: run all requests through the large model for a week, then label each request with the cheapest tier that achieved acceptable quality (measured by user satisfaction or LLM-judge score). Critical: add a confidence threshold — if the router is < 70% confident, default to the expensive model. This avoids the worst failure mode (misrouting a complex request to a cheap model).
+- **A**: I'd start by defining 3 tiers: cached responses (free), small model (cheap), and large model (expensive). Feature engineering would extract request complexity indicators: length, question count, topic embedding, tool requirements, and context size. I'd train a logistic regression initially (simple, interpretable, fast to iterate) and upgrade to XGBoost once I have enough labeled data (1000+ examples). The labeling strategy: run all requests through the large model for a week, then label each request with the cheapest tier that achieved acceptable quality (measured by user satisfaction or LLM-judge score). Critical: add a confidence threshold â€” if the router is < 70% confident, default to the expensive model. This avoids the worst failure mode (misrouting a complex request to a cheap model).
 
 ---
 
-## ◆ Hands-On Exercises
+## â—† Hands-On Exercises
 
 ### Exercise 1: Build a Request Router
 
@@ -389,7 +390,7 @@ COMMON MODELS BY TASK:
 2. Label each as "simple" (can use small model) or "complex" (needs large model)
 3. Extract features (length, word count, complexity keywords, question marks)
 4. Train LogisticRegression and XGBoost, compare with cross-validation
-5. Analyze feature importances — which features matter most?
+5. Analyze feature importances â€” which features matter most?
 **Expected Output**: Two trained classifiers with accuracy comparison and feature importance plot
 
 ### Exercise 2: Cost Savings Calculator
@@ -406,7 +407,7 @@ COMMON MODELS BY TASK:
 
 ---
 
-## ★ Connections
+## â˜… Connections
 
 | Relationship | Topics |
 |---|---|
@@ -417,24 +418,24 @@ COMMON MODELS BY TASK:
 
 ---
 
-## ★ Recommended Resources
+## â˜… Recommended Resources
 
 | Type | Resource | Why |
 |------|----------|-----|
-| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 4 (Evaluation) | Covers hybrid ML+LLM evaluation patterns and when to use classical ML |
-| 📘 Book | "Designing Machine Learning Systems" by Chip Huyen (2022), Ch 6-8 | Definitive treatment of feature engineering, model selection, and deployment for production ML |
-| 🔧 Hands-on | [scikit-learn User Guide](https://scikit-learn.org/stable/user_guide.html) | Gold standard documentation for classical ML — classification, evaluation, pipelines |
-| 🔧 Hands-on | [XGBoost Tutorials](https://xgboost.readthedocs.io/en/latest/tutorials/) | Practical guide to gradient boosting, the workhorse of tabular ML |
-| 📄 Paper | [Ding et al. "RouteLLM: Learning to Route LLMs" (2024)](https://arxiv.org/abs/2406.18665) | Academic treatment of LLM routing as a classical ML problem |
-| 🎥 Video | [StatQuest — XGBoost](https://www.youtube.com/watch?v=OtD8wVaFm6E) | Best visual explanation of gradient boosting fundamentals |
-| 🎓 Course | [fast.ai — "Practical Machine Learning"](https://course.fast.ai/) | Excellent practical introduction to classical ML with modern tools |
+| ðŸ“˜ Book | "AI Engineering" by Chip Huyen (2025), Ch 4 (Evaluation) | Covers hybrid ML+LLM evaluation patterns and when to use classical ML |
+| ðŸ“˜ Book | "Designing Machine Learning Systems" by Chip Huyen (2022), Ch 6-8 | Definitive treatment of feature engineering, model selection, and deployment for production ML |
+| ðŸ”§ Hands-on | [scikit-learn User Guide](https://scikit-learn.org/stable/user_guide.html) | Gold standard documentation for classical ML â€” classification, evaluation, pipelines |
+| ðŸ”§ Hands-on | [XGBoost Tutorials](https://xgboost.readthedocs.io/en/latest/tutorials/) | Practical guide to gradient boosting, the workhorse of tabular ML |
+| ðŸ“„ Paper | [Ding et al. "RouteLLM: Learning to Route LLMs" (2024)](https://arxiv.org/abs/2406.18665) | Academic treatment of LLM routing as a classical ML problem |
+| ðŸŽ¥ Video | [StatQuest â€” XGBoost](https://www.youtube.com/watch?v=OtD8wVaFm6E) | Best visual explanation of gradient boosting fundamentals |
+| ðŸŽ“ Course | [fast.ai â€” "Practical Machine Learning"](https://course.fast.ai/) | Excellent practical introduction to classical ML with modern tools |
 
 ---
 
-## ★ Sources
+## â˜… Sources
 
-- scikit-learn documentation — https://scikit-learn.org/
-- XGBoost documentation — https://xgboost.readthedocs.io/
+- scikit-learn documentation â€” https://scikit-learn.org/
+- XGBoost documentation â€” https://xgboost.readthedocs.io/
 - Ding et al. "RouteLLM: Learning to Route LLMs with Preference Data" (2024)
-- Huyen, C. "AI Engineering" (2025) — hybrid ML+LLM systems discussion
+- Huyen, C. "AI Engineering" (2025) â€” hybrid ML+LLM systems discussion
 - Huyen, C. "Designing Machine Learning Systems" (2022)

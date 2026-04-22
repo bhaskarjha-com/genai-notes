@@ -1,5 +1,6 @@
 ---
 title: "CI/CD for ML and LLM Systems"
+aliases: ["CI/CD", "MLOps Pipeline"]
 tags: [cicd, mlops, llmops, deployment, testing, automation]
 type: procedure
 difficulty: advanced
@@ -18,14 +19,14 @@ updated: 2026-04-14
 
 ---
 
-## ★ TL;DR
+## â˜… TL;DR
 - **What**: The automation pipeline for testing, packaging, validating, and releasing ML and LLM systems.
 - **Why**: AI changes can silently degrade quality, safety, or cost while all unit tests still pass.
 - **Key point**: CI/CD for AI must validate behavior, not just syntax and infrastructure.
 
 ---
 
-## ★ Overview
+## â˜… Overview
 ### Definition
 
 **CI/CD for AI systems** extends normal software delivery with model, prompt, dataset, and evaluation checks.
@@ -48,7 +49,7 @@ This note covers the delivery path for GenAI services and ML-backed applications
 
 ---
 
-## ★ Deep Dive
+## â˜… Deep Dive
 ### What Changes in AI Systems
 
 The delivery pipeline may need to track changes in:
@@ -135,7 +136,7 @@ jobs:
 
 ---
 
-## ◆ Quick Reference
+## â—† Quick Reference
 | Change Type           | Minimum Checks                                        |
 | --------------------- | ----------------------------------------------------- |
 | Prompt change         | offline evals, cost diff, formatting checks           |
@@ -146,7 +147,7 @@ jobs:
 
 ---
 
-## ○ Gotchas & Common Mistakes
+## â—‹ Gotchas & Common Mistakes
 - Unit tests alone can create false confidence.
 - A better benchmark score can still be a worse product outcome.
 - Teams often forget to version datasets and prompts.
@@ -154,7 +155,7 @@ jobs:
 
 ---
 
-## ○ Interview Angles
+## â—‹ Interview Angles
 - **Q**: What makes CI/CD for LLM systems different from regular CI/CD?
 - **A**: The output behavior is probabilistic and influenced by prompts, models, and datasets, so the pipeline needs evaluation gates, cost checks, and rollout safety beyond normal software tests.
 
@@ -163,13 +164,13 @@ jobs:
 
 ---
 
-## ★ Code & Implementation
+## â˜… Code & Implementation
 
 ### LLM Eval CI Gate (pytest)
 
 ```python
 # pip install openai>=1.60 pytest>=8
-# ⚠️ Last tested: 2026-04 | Requires: openai>=1.60, OPENAI_API_KEY
+# âš ï¸ Last tested: 2026-04 | Requires: openai>=1.60, OPENAI_API_KEY
 # Save as tests/test_llm_quality.py and run: pytest tests/ -v
 
 import re, pytest
@@ -203,7 +204,7 @@ class TestLLMQualityGate:
         assert expected.lower() in resp.lower(), f"Expected {expected!r} in: {resp}"
 ```
 
-## ★ Connections
+## â˜… Connections
 | Relationship | Topics                                                                                                                                                                                                                       |
 | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Builds on    | [LLM Evaluation Deep Dive](../evaluation/llm-evaluation-deep-dive.md), [Monitoring & Observability for GenAI Systems](./monitoring-observability.md), [Docker & Kubernetes for GenAI Deployment](./docker-and-kubernetes.md) |
@@ -213,7 +214,7 @@ class TestLLMQualityGate:
 
 ---
 
-## ◆ Production Failure Modes
+## â—† Production Failure Modes
 
 | Failure                       | Symptoms                                    | Root Cause                                        | Mitigation                                                                |
 | ----------------------------- | ------------------------------------------- | ------------------------------------------------- | ------------------------------------------------------------------------- |
@@ -224,7 +225,7 @@ class TestLLMQualityGate:
 
 ---
 
-## ◆ Hands-On Exercises
+## â—† Hands-On Exercises
 
 ### Exercise 1: Build an AI CI Pipeline
 
@@ -239,20 +240,20 @@ class TestLLMQualityGate:
 
 ---
 
-## ★ Recommended Resources
+## â˜… Recommended Resources
 
 | Type       | Resource                                                                       | Why                                                             |
 | ---------- | ------------------------------------------------------------------------------ | --------------------------------------------------------------- |
-| 📘 Book     | "Designing Machine Learning Systems" by Chip Huyen (2022), Ch 9 (Deployment)   | Best treatment of ML deployment patterns and release strategies |
-| 🔧 Hands-on | [GitHub Actions for ML](https://docs.github.com/en/actions)                    | CI/CD platform most accessible for ML teams                     |
-| 🔧 Hands-on | [MLflow Model Registry](https://mlflow.org/docs/latest/model-registry.html)    | Model versioning and stage transitions                          |
-| 🎥 Video    | [Shreya Shankar — "Rethinking ML Monitoring"](https://www.shreya-shankar.com/) | How to detect quality regressions in production ML              |
+| ðŸ“˜ Book     | "Designing Machine Learning Systems" by Chip Huyen (2022), Ch 9 (Deployment)   | Best treatment of ML deployment patterns and release strategies |
+| ðŸ”§ Hands-on | [GitHub Actions for ML](https://docs.github.com/en/actions)                    | CI/CD platform most accessible for ML teams                     |
+| ðŸ”§ Hands-on | [MLflow Model Registry](https://mlflow.org/docs/latest/model-registry.html)    | Model versioning and stage transitions                          |
+| ðŸŽ¥ Video    | [Shreya Shankar â€” "Rethinking ML Monitoring"](https://www.shreya-shankar.com/) | How to detect quality regressions in production ML              |
 
 ---
 
-## ★ Sources
+## â˜… Sources
 
-- GitHub Actions documentation — https://docs.github.com/en/actions
-- Argo CD documentation — https://argo-cd.readthedocs.io/
-- MLflow documentation — https://mlflow.org/docs/
+- GitHub Actions documentation â€” https://docs.github.com/en/actions
+- Argo CD documentation â€” https://argo-cd.readthedocs.io/
+- MLflow documentation â€” https://mlflow.org/docs/
 - [LLMOps & Production Deployment](./llmops.md)

@@ -67,6 +67,7 @@ Every note starts with YAML frontmatter:
 ```yaml
 ---
 title: "Topic Name"
+aliases: ["Short Name", "Acronym"]
 tags: [relevant, tags]
 type: concept|tool|theory|procedure|entity|reference
 difficulty: beginner|intermediate|advanced|expert
@@ -80,7 +81,9 @@ updated: YYYY-MM-DD
 ---
 ```
 
-> **`last_verified`** (new): The month when time-sensitive content (model names, framework versions, benchmark scores) was last fact-checked.
+> **`aliases`**: Short names, acronyms, or alternative terms (e.g., `["RAG", "Retrieval-Augmented Generation"]`). Powers Obsidian Quick Open (`Ctrl+O`) search.
+
+> **`last_verified`**: The month when time-sensitive content (model names, framework versions, benchmark scores) was last fact-checked.
 
 ## Code Standards
 
@@ -105,18 +108,23 @@ All code samples must follow these standards:
 
 ## Link Format
 
-| Location | Format | Why |
-|----------|--------|-----|
-| Frontmatter (`parent`, `related`) | `wiki-link.md` | Metadata; benefits Obsidian graph view |
-| Body text, Connections, Scope tables | `[display text](path.md)` | Must render as clickable links on GitHub |
+All links — frontmatter and body — use standard markdown format:
+
+| Location | Format | Example |
+|----------|--------|----------|
+| Frontmatter (`parent`) | Relative path string | `parent: "../genai.md"` |
+| Frontmatter (`related`) | YAML list of relative paths | `related: ["./related-topic.md"]` |
+| Body text, Connections, Scope tables | Standard markdown link | `[display text](path.md)` |
+
+> **Note**: Wiki-links (`[[...]]`) are **not used** anywhere in this repo. The CI pipeline (`check_links.ps1`) will reject them.
 
 ## Submitting Changes
 
 1. Fork the repo
 2. Create a branch (`feature/topic-name` or `fix/issue-description`)
 3. Make your changes following the template and standards above
-4. Regenerate learner assets: `make generate` (Windows without make: `pwsh scripts/generate_learning_assets.ps1`)
-5. Verify the repo: `make verify` (Windows without make: `pwsh scripts/verify_repo.ps1`)
+4. Regenerate learner assets: `pwsh scripts/generate_learning_assets.ps1`
+5. Verify the repo: `pwsh scripts/verify_repo.ps1`
 6. Submit a PR with a clear description of what changed and why
 
 ## Questions?

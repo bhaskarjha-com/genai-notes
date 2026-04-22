@@ -1,5 +1,6 @@
 ---
 title: "Docker & Kubernetes for GenAI Deployment"
+aliases: ["Docker", "Kubernetes", "K8s", "Containers"]
 tags: [docker, kubernetes, containers, deployment, llmops, production]
 type: procedure
 difficulty: intermediate
@@ -18,14 +19,14 @@ updated: 2026-04-12
 
 ---
 
-## ★ TL;DR
+## â˜… TL;DR
 - **What**: The core deployment stack for packaging, shipping, and scaling AI services.
 - **Why**: Most production AI systems fail on environment drift, weak rollout practices, or poor scaling long before they fail on model quality.
 - **Key point**: Use Docker to standardize runtime; use Kubernetes when you need repeatable multi-instance operations, autoscaling, and infrastructure policy.
 
 ---
 
-## ★ Overview
+## â˜… Overview
 ### Definition
 
 **Docker** packages an application and its dependencies into a portable container image. **Kubernetes** schedules and manages those containers across a cluster.
@@ -48,7 +49,7 @@ This note covers the practical concepts an AI engineer needs: image design, cont
 
 ---
 
-## ★ Deep Dive
+## â˜… Deep Dive
 ### Why Containers Matter for AI
 
 AI apps are unusually dependency-heavy:
@@ -175,7 +176,7 @@ Do not adopt Kubernetes only because it feels "more production."
 
 ---
 
-## ◆ Quick Reference
+## â—† Quick Reference
 | Situation                                 | Better First Move                              |
 | ----------------------------------------- | ---------------------------------------------- |
 | Shipping a prototype                      | Docker on one VM or managed platform           |
@@ -187,7 +188,7 @@ Do not adopt Kubernetes only because it feels "more production."
 
 ---
 
-## ○ Gotchas & Common Mistakes
+## â—‹ Gotchas & Common Mistakes
 - Large model downloads can make pod startup painfully slow; plan warmup and image strategy.
 - "One huge container" creates noisy failure domains and painful deploys.
 - Kubernetes does not fix bad serving architecture; it only manages it.
@@ -195,7 +196,7 @@ Do not adopt Kubernetes only because it feels "more production."
 
 ---
 
-## ○ Interview Angles
+## â—‹ Interview Angles
 - **Q**: When would you choose Kubernetes for a GenAI system?
 - **A**: When the system has multiple independently scaled services, controlled rollouts, background jobs, observability requirements, or self-hosted inference that needs GPU scheduling. For smaller systems, a managed platform or simple container deployment may be better.
 
@@ -204,13 +205,13 @@ Do not adopt Kubernetes only because it feels "more production."
 
 ---
 
-## ★ Code & Implementation
+## â˜… Code & Implementation
 
 ### Containerize a FastAPI LLM Service
 
 ```dockerfile
-# Dockerfile — production LLM API service
-# ⚠️ Last tested: 2026-04 | Requires: Docker 24+
+# Dockerfile â€” production LLM API service
+# âš ï¸ Last tested: 2026-04 | Requires: Docker 24+
 FROM python:3.12-slim
 
 WORKDIR /app
@@ -230,9 +231,9 @@ CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080", "--workers", 
 ```
 
 ```python
-# main.py — FastAPI LLM endpoint
+# main.py â€” FastAPI LLM endpoint
 # pip install fastapi>=0.110 uvicorn>=0.29 openai>=1.60 pydantic>=2
-# ⚠️ Last tested: 2026-04
+# âš ï¸ Last tested: 2026-04
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from openai import OpenAI, APIError
@@ -288,7 +289,7 @@ services:
       retries: 3
 ```
 
-## ★ Connections
+## â˜… Connections
 | Relationship | Topics                                                                                                                                                                                    |
 | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Builds on    | [LLMOps & Production Deployment](./llmops.md), [AI System Design for GenAI Applications](./ai-system-design.md)                                                                           |
@@ -299,7 +300,7 @@ services:
 
 ---
 
-## ◆ Production Failure Modes
+## â—† Production Failure Modes
 
 | Failure                          | Symptoms                               | Root Cause                                     | Mitigation                                                 |
 | -------------------------------- | -------------------------------------- | ---------------------------------------------- | ---------------------------------------------------------- |
@@ -310,7 +311,7 @@ services:
 
 ---
 
-## ◆ Hands-On Exercises
+## â—† Hands-On Exercises
 
 ### Exercise 1: Containerize a Model Server
 
@@ -325,16 +326,16 @@ services:
 ---
 
 
-## ★ Recommended Resources
+## â˜… Recommended Resources
 
 | Type       | Resource                                                                           | Why                                        |
 | ---------- | ---------------------------------------------------------------------------------- | ------------------------------------------ |
-| 🔧 Hands-on | [Docker Official Documentation](https://docs.docker.com/)                          | Container fundamentals for ML deployment   |
-| 🔧 Hands-on | [Kubernetes for ML (Kubeflow)](https://www.kubeflow.org/docs/)                     | ML-specific Kubernetes orchestration       |
-| 📘 Book     | "Kubernetes in Action" by Luksa (2020)                                             | Comprehensive K8s reference                |
-| 🎥 Video    | [TechWorld with Nana — "Docker + K8s"](https://www.youtube.com/@TechWorldwithNana) | Best beginner-friendly container tutorials |
+| ðŸ”§ Hands-on | [Docker Official Documentation](https://docs.docker.com/)                          | Container fundamentals for ML deployment   |
+| ðŸ”§ Hands-on | [Kubernetes for ML (Kubeflow)](https://www.kubeflow.org/docs/)                     | ML-specific Kubernetes orchestration       |
+| ðŸ“˜ Book     | "Kubernetes in Action" by Luksa (2020)                                             | Comprehensive K8s reference                |
+| ðŸŽ¥ Video    | [TechWorld with Nana â€” "Docker + K8s"](https://www.youtube.com/@TechWorldwithNana) | Best beginner-friendly container tutorials |
 
-## ★ Sources
+## â˜… Sources
 - Docker documentation - https://docs.docker.com
 - Kubernetes documentation - https://kubernetes.io/docs
 - NVIDIA Kubernetes device plugin documentation

@@ -1,5 +1,6 @@
 ---
 title: "Distributed Inference & Serving Architecture"
+aliases: ["Distributed Inference", "Tensor Parallelism"]
 tags: [distributed-inference, serving, scaling, kv-cache, architecture, inference]
 type: reference
 difficulty: expert
@@ -18,14 +19,14 @@ updated: 2026-04-12
 
 ---
 
-## ★ TL;DR
+## â˜… TL;DR
 - **What**: The system design patterns used to scale inference across multiple machines and accelerators.
 - **Why**: Large-model serving hits limits in memory, concurrency, and cost that one process or one GPU cannot handle cleanly.
 - **Key point**: Distributed inference is about routing, sharding, batching, and locality as much as model execution itself.
 
 ---
 
-## ★ Overview
+## â˜… Overview
 ### Definition
 
 **Distributed inference** is the execution of inference workloads across multiple processes, machines, or accelerators while coordinating requests, model state, and performance goals.
@@ -48,7 +49,7 @@ This note covers the architecture view of scaled serving, not the internals of a
 
 ---
 
-## ★ Deep Dive
+## â˜… Deep Dive
 ### Common Distributed Serving Shapes
 
 | Pattern | Why Teams Use It |
@@ -117,7 +118,7 @@ That introduces trade-offs in cache reuse, model synchronization, and observabil
 
 ---
 
-## ◆ Quick Reference
+## â—† Quick Reference
 | Problem | First Architecture Move |
 |---|---|
 | one GPU cannot hold the model | use model sharding or a smaller/quantized model |
@@ -128,14 +129,14 @@ That introduces trade-offs in cache reuse, model synchronization, and observabil
 
 ---
 
-## ○ Gotchas & Common Mistakes
+## â—‹ Gotchas & Common Mistakes
 - More replicas do not fix memory-fit problems.
 - Throughput optimization can damage interactive latency.
 - Cache design is often the hidden determinant of real performance.
 
 ---
 
-## ○ Interview Angles
+## â—‹ Interview Angles
 - **Q**: What is the difference between scaling replicas and sharding a model?
 - **A**: Replica scaling duplicates the full serving stack to handle more requests, while model sharding splits one model across multiple devices because it is too large or too expensive to serve as one unit.
 
@@ -144,7 +145,7 @@ That introduces trade-offs in cache reuse, model synchronization, and observabil
 
 ---
 
-## ★ Connections
+## â˜… Connections
 | Relationship | Topics |
 |---|---|
 | Builds on | [Inference Optimization](./inference-optimization.md), [Model Serving for LLM Applications](../production/model-serving.md), [Distributed Systems Fundamentals for AI](../tools-and-infra/distributed-systems-for-ai.md) |
@@ -154,13 +155,13 @@ That introduces trade-offs in cache reuse, model synchronization, and observabil
 
 ---
 
-## ★ Code & Implementation
+## â˜… Code & Implementation
 
 ### vLLM Distributed Serving
 
 ```python
 # pip install vllm>=0.8
-# ⚠️ Last tested: 2026-04 | Requires: vllm>=0.8
+# âš ï¸ Last tested: 2026-04 | Requires: vllm>=0.8
 
 # Launch vLLM with tensor parallelism across 4 GPUs
 # Command line:
@@ -190,7 +191,7 @@ print(response.choices[0].message.content)
 ### Multi-GPU Health Monitor
 
 ```python
-# ⚠️ Last tested: 2026-04 | Requires: nvidia-ml-py3 (pynvml), Python 3.10+
+# âš ï¸ Last tested: 2026-04 | Requires: nvidia-ml-py3 (pynvml), Python 3.10+
 import pynvml
 from dataclasses import dataclass
 
@@ -237,7 +238,7 @@ def check_gpu_health(max_temp: int = 85, min_free_gb: float = 2.0) -> list[GPUHe
 ### Prefill/Decode Disaggregation Router
 
 ```python
-# ⚠️ Last tested: 2026-04 | Requires: Python 3.10+ (architecture pattern)
+# âš ï¸ Last tested: 2026-04 | Requires: Python 3.10+ (architecture pattern)
 # P/D disaggregation: separate GPU pools for prefill (compute-bound) vs decode (memory-bound)
 # Reference: DistServe (2024), Splitwise (2024)
 from dataclasses import dataclass, field
@@ -286,19 +287,19 @@ print(f"Total:   {result['total_ms']}ms")
 
 ---
 
-## ◆ Production Failure Modes
+## â—† Production Failure Modes
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
 | **KV-cache OOM** | Server rejects new requests, GPU memory exhausted | Too many concurrent long-context requests | Set max_model_len, implement request queuing, monitor cache utilization |
-| **Tail latency spike** | P99 latency 10× worse than P50 | One long request blocks batch, straggler GPU | Length-aware scheduling, separate long/short request queues |
+| **Tail latency spike** | P99 latency 10Ã— worse than P50 | One long request blocks batch, straggler GPU | Length-aware scheduling, separate long/short request queues |
 | **GPU fragmentation** | Low utilization despite high demand | Requests don't fill GPU batches efficiently | Dynamic batching (vLLM continuous batching), right-size GPU allocation |
 | **Cascade failure** | All replicas go down simultaneously | Shared dependency failure, no circuit breakers | Health checks, circuit breakers, graceful degradation |
 | **NCCL timeout** | Training/serving hangs silently for minutes | Network partition between GPUs, slow interconnect | NCCL timeout tuning, heartbeat monitoring, automatic restart |
 
 ---
 
-## ◆ Hands-On Exercises
+## â—† Hands-On Exercises
 
 ### Exercise 1: Benchmark Serving Throughput
 
@@ -324,20 +325,20 @@ print(f"Total:   {result['total_ms']}ms")
 
 ---
 
-## ★ Recommended Resources
+## â˜… Recommended Resources
 
 | Type | Resource | Why |
 |------|----------|-----|
-| 🔧 Hands-on | [vLLM Documentation](https://docs.vllm.ai/) | Best open-source LLM serving engine — PagedAttention, continuous batching |
-| 🔧 Hands-on | [TGI Documentation](https://huggingface.co/docs/text-generation-inference/) | HuggingFace’s production serving engine |
-| 📄 Paper | [Kwon et al. "PagedAttention" (vLLM, 2023)](https://arxiv.org/abs/2309.06180) | The paper that revolutionized KV-cache management for LLM serving |
-| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 8 | Covers serving architecture, batching, and scaling patterns |
+| ðŸ”§ Hands-on | [vLLM Documentation](https://docs.vllm.ai/) | Best open-source LLM serving engine â€” PagedAttention, continuous batching |
+| ðŸ”§ Hands-on | [TGI Documentation](https://huggingface.co/docs/text-generation-inference/) | HuggingFaceâ€™s production serving engine |
+| ðŸ“„ Paper | [Kwon et al. "PagedAttention" (vLLM, 2023)](https://arxiv.org/abs/2309.06180) | The paper that revolutionized KV-cache management for LLM serving |
+| ðŸ“˜ Book | "AI Engineering" by Chip Huyen (2025), Ch 8 | Covers serving architecture, batching, and scaling patterns |
 
 ---
 
-## ★ Sources
+## â˜… Sources
 
-- vLLM documentation — https://docs.vllm.ai/
-- TGI documentation — https://huggingface.co/docs/text-generation-inference/
+- vLLM documentation â€” https://docs.vllm.ai/
+- TGI documentation â€” https://huggingface.co/docs/text-generation-inference/
 - [Inference Optimization](./inference-optimization.md)
 - [Distributed Systems Fundamentals for AI](../tools-and-infra/distributed-systems-for-ai.md)

@@ -1,5 +1,6 @@
 ---
 title: "Mechanistic Interpretability"
+aliases: ["Interpretability", "Explainability", "XAI", "Mechanistic"]
 tags: [interpretability, mech-interp, superposition, sparse-autoencoders, circuits, genai]
 type: concept
 difficulty: expert
@@ -7,30 +8,30 @@ status: published
 last_verified: 2026-04
 parent: "../genai.md"
 related: ["../ethics-and-safety/ethics-safety-alignment.md", "../foundations/transformers.md", "../llms/llms-overview.md"]
-source: "Anthropic, OpenAI — see Sources"
+source: "Anthropic, OpenAI â€” see Sources"
 created: 2026-03-22
 updated: 2026-04-11
 ---
 
 # Mechanistic Interpretability
 
-> ✨ **Bit**: We built AGI-approaching systems and we have NO IDEA what's happening inside them. Mechanistic interpretability is reverse-engineering neural networks — finding the "circuits" that implement specific capabilities. It's neuroscience, but for artificial brains.
+> âœ¨ **Bit**: We built AGI-approaching systems and we have NO IDEA what's happening inside them. Mechanistic interpretability is reverse-engineering neural networks â€” finding the "circuits" that implement specific capabilities. It's neuroscience, but for artificial brains.
 
 ---
 
-## ★ TL;DR
+## â˜… TL;DR
 
-- **What**: Understanding WHAT individual neurons, attention heads, and circuits in neural networks actually do — reverse-engineering the model's internal algorithms
+- **What**: Understanding WHAT individual neurons, attention heads, and circuits in neural networks actually do â€” reverse-engineering the model's internal algorithms
 - **Why**: We can't trust what we can't understand. AI safety REQUIRES understanding model internals. Also: Anthropic's biggest research bet.
-- **Key point**: Models represent features in "superposition" — a single neuron encodes MANY concepts simultaneously. Sparse autoencoders can extract these hidden features.
+- **Key point**: Models represent features in "superposition" â€” a single neuron encodes MANY concepts simultaneously. Sparse autoencoders can extract these hidden features.
 
 ---
 
-## ★ Overview
+## â˜… Overview
 
 ### Definition
 
-**Mechanistic interpretability** (mech-interp) aims to understand neural networks by identifying the specific computations that neurons, attention heads, and circuits perform. It's different from "behavioral" interpretability (what the model does) — mech-interp focuses on HOW it does it internally.
+**Mechanistic interpretability** (mech-interp) aims to understand neural networks by identifying the specific computations that neurons, attention heads, and circuits perform. It's different from "behavioral" interpretability (what the model does) â€” mech-interp focuses on HOW it does it internally.
 
 ### Scope
 
@@ -45,7 +46,7 @@ Frontier research. This is not needed for building apps but shows deep technical
 
 ---
 
-## ★ Deep Dive
+## â˜… Deep Dive
 
 ### Key Concepts
 
@@ -54,27 +55,27 @@ SUPERPOSITION:
   The biggest insight in mech-interp.
 
   Problem: A model with 768 neurons represents > 768 concepts.
-  How? SUPERPOSITION — multiple features share the same neurons.
+  How? SUPERPOSITION â€” multiple features share the same neurons.
 
   Analogy: Storing 1,000 songs on 100 CDs using compression.
   Each CD contributes a little to many songs.
 
-  ┌─────────────────────────────────────────────┐
-  │  Neuron 42 responds to:                     │
-  │    "Python code"    (activation: 0.7)       │
-  │    "Snakes"         (activation: 0.3)       │
-  │    "British comedy" (activation: 0.1)       │
-  │                                             │
-  │  These features are SUPERPOSED in one neuron│
-  │  The model uses directions in activation    │
-  │  space, not individual neurons, to encode   │
-  │  concepts.                                  │
-  └─────────────────────────────────────────────┘
+  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+  â”‚  Neuron 42 responds to:                     â”‚
+  â”‚    "Python code"    (activation: 0.7)       â”‚
+  â”‚    "Snakes"         (activation: 0.3)       â”‚
+  â”‚    "British comedy" (activation: 0.1)       â”‚
+  â”‚                                             â”‚
+  â”‚  These features are SUPERPOSED in one neuronâ”‚
+  â”‚  The model uses directions in activation    â”‚
+  â”‚  space, not individual neurons, to encode   â”‚
+  â”‚  concepts.                                  â”‚
+  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 
 
 FEATURES:
   The actual concepts the model represents internally.
-  Not neurons — features are DIRECTIONS in activation space.
+  Not neurons â€” features are DIRECTIONS in activation space.
 
   Example features found via sparse autoencoders:
   - "This text is in French"
@@ -88,7 +89,7 @@ CIRCUITS:
   Connected patterns of features that implement specific behaviors.
 
   Example: "Indirect Object Identification" circuit
-  "Mary gave the book to ___" → [John]
+  "Mary gave the book to ___" â†’ [John]
 
   Attention head A finds "Mary" (subject)
   Attention head B finds "John" (recipient)
@@ -105,31 +106,31 @@ HOW TO EXTRACT FEATURES FROM SUPERPOSITION:
   Problem: Neurons are polysemantic (respond to many things).
   Solution: Train a sparse autoencoder to decompose activations.
 
-  ┌────────────────────────────────────────────┐
-  │  Model activation (768-dim)                │
-  │         │                                  │
-  │         ▼                                  │
-  │  ┌──────────────┐                          │
-  │  │ ENCODER       │  768 → 65,536 dimensions│
-  │  │ (expand)      │  (overcomplete)         │
-  │  └──────┬───────┘                          │
-  │         │  + sparsity constraint            │
-  │         │  (only ~100 of 65K neurons active)│
-  │         ▼                                  │
-  │  ┌──────────────┐                          │
-  │  │ SPARSE HIDDEN │  Most are ZERO          │
-  │  │ FEATURES      │  Active ones =          │
-  │  │               │  interpretable features │
-  │  └──────┬───────┘                          │
-  │         ▼                                  │
-  │  ┌──────────────┐                          │
-  │  │ DECODER       │  65,536 → 768           │
-  │  │ (reconstruct) │  Reconstruct original   │
-  │  └──────────────┘                          │
-  │                                            │
-  │  Training: minimize reconstruction error   │
-  │            + sparsity penalty              │
-  └────────────────────────────────────────────┘
+  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+  â”‚  Model activation (768-dim)                â”‚
+  â”‚         â”‚                                  â”‚
+  â”‚         â–¼                                  â”‚
+  â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”                          â”‚
+  â”‚  â”‚ ENCODER       â”‚  768 â†’ 65,536 dimensionsâ”‚
+  â”‚  â”‚ (expand)      â”‚  (overcomplete)         â”‚
+  â”‚  â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”˜                          â”‚
+  â”‚         â”‚  + sparsity constraint            â”‚
+  â”‚         â”‚  (only ~100 of 65K neurons active)â”‚
+  â”‚         â–¼                                  â”‚
+  â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”                          â”‚
+  â”‚  â”‚ SPARSE HIDDEN â”‚  Most are ZERO          â”‚
+  â”‚  â”‚ FEATURES      â”‚  Active ones =          â”‚
+  â”‚  â”‚               â”‚  interpretable features â”‚
+  â”‚  â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”˜                          â”‚
+  â”‚         â–¼                                  â”‚
+  â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”                          â”‚
+  â”‚  â”‚ DECODER       â”‚  65,536 â†’ 768           â”‚
+  â”‚  â”‚ (reconstruct) â”‚  Reconstruct original   â”‚
+  â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜                          â”‚
+  â”‚                                            â”‚
+  â”‚  Training: minimize reconstruction error   â”‚
+  â”‚            + sparsity penalty              â”‚
+  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 
   Result: Each of the 65K sparse neurons corresponds
   to ONE interpretable feature (ideally).
@@ -152,7 +153,7 @@ HOW TO EXTRACT FEATURES FROM SUPERPOSITION:
 
 | Discovery              | Who                | What                                                                     |
 | ---------------------- | ------------------ | ------------------------------------------------------------------------ |
-| **Induction heads**    | Anthropic (2022)   | Attention heads that implement in-context learning ("A B ... A → B")     |
+| **Induction heads**    | Anthropic (2022)   | Attention heads that implement in-context learning ("A B ... A â†’ B")     |
 | **Golden Gate Claude** | Anthropic (2024)   | Amplifying the "Golden Gate Bridge" feature made Claude obsessed with it |
 | **10M features**       | Anthropic (2024)   | Extracted 10M interpretable features from Claude 3 Sonnet via SAEs       |
 | **ROME**               | Meng et al. (2022) | Located and edited specific facts in GPT models                          |
@@ -160,7 +161,7 @@ HOW TO EXTRACT FEATURES FROM SUPERPOSITION:
 
 ---
 
-## ◆ Quick Reference
+## â—† Quick Reference
 
 ```
 WHY IT MATTERS FOR SAFETY:
@@ -188,23 +189,23 @@ RESEARCH GROUPS:
 
 ---
 
-## ○ Interview Angles
+## â—‹ Interview Angles
 
 - **Q**: What is superposition in neural networks?
-- **A**: Neural networks represent more concepts (features) than they have neurons. Features are encoded as DIRECTIONS in activation space, not individual neurons. Multiple features share the same neurons through superposition — similar to how compressed audio encodes many frequencies in fewer data points. Sparse autoencoders can decompose these back into individual features.
+- **A**: Neural networks represent more concepts (features) than they have neurons. Features are encoded as DIRECTIONS in activation space, not individual neurons. Multiple features share the same neurons through superposition â€” similar to how compressed audio encodes many frequencies in fewer data points. Sparse autoencoders can decompose these back into individual features.
 
 - **Q**: Why does mechanistic interpretability matter for AI safety?
-- **A**: We need to understand what models are doing internally — not just what they output. Mech-interp can detect deceptive behavior (features that activate during strategic dishonesty), verify alignment (the model genuinely follows safety training, not just surface compliance), and enable targeted interventions (edit specific behaviors without retraining).
+- **A**: We need to understand what models are doing internally â€” not just what they output. Mech-interp can detect deceptive behavior (features that activate during strategic dishonesty), verify alignment (the model genuinely follows safety training, not just surface compliance), and enable targeted interventions (edit specific behaviors without retraining).
 
 ---
 
-## ★ Code & Implementation
+## â˜… Code & Implementation
 
 ### Integrated Gradients (Feature Importance for LLMs)
 
 ```python
 # pip install transformers>=4.40 torch>=2.3 captum>=0.7
-# ⚠️ Last tested: 2026-04 | Requires: transformers>=4.40, captum>=0.7
+# âš ï¸ Last tested: 2026-04 | Requires: transformers>=4.40, captum>=0.7
 import torch
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from captum.attr import IntegratedGradients
@@ -228,17 +229,17 @@ baseline = torch.zeros_like(ids)
 ig = IntegratedGradients(predict)
 attrs, delta = ig.attribute(ids, baseline, target=1, return_convergence_delta=True)
 
-# attrs: (1, seq_len) — positive = contributes to POSITIVE class
+# attrs: (1, seq_len) â€” positive = contributes to POSITIVE class
 importance = attrs[0].detach().numpy()
 print(f"Convergence delta: {delta.item():.4e}  (should be near 0)")
 print("\nToken Attribution Scores:")
 for token, score in sorted(zip(tokens, importance), key=lambda x: -abs(x[1])):
-    bar = "â–ˆ" * int(abs(score) * 30)
+    bar = "Ã¢â€“Ë†" * int(abs(score) * 30)
     sign = "+" if score > 0 else "-"
     print(f"  {token:<15} {sign}{abs(score):.4f}  {bar}")
 ```
 
-## ★ Connections
+## â˜… Connections
 
 | Relationship | Topics                                                                                                                                                                     |
 | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -250,7 +251,7 @@ for token, score in sorted(zip(tokens, importance), key=lambda x: -abs(x[1])):
 
 ---
 
-## ◆ Production Failure Modes
+## â—† Production Failure Modes
 
 | Failure                       | Symptoms                                                  | Root Cause                                      | Mitigation                                                        |
 | ----------------------------- | --------------------------------------------------------- | ----------------------------------------------- | ----------------------------------------------------------------- |
@@ -260,7 +261,7 @@ for token, score in sorted(zip(tokens, importance), key=lambda x: -abs(x[1])):
 
 ---
 
-## ◆ Hands-On Exercises
+## â—† Hands-On Exercises
 
 ### Exercise 1: Probe a Model's Internal Representations
 
@@ -275,18 +276,18 @@ for token, score in sorted(zip(tokens, importance), key=lambda x: -abs(x[1])):
 ---
 
 
-## ★ Recommended Resources
+## â˜… Recommended Resources
 
 | Type    | Resource                                                                                                     | Why                                                            |
 | ------- | ------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------- |
-| 📄 Paper | [Olah et al. "Zoom In" (2020)](https://distill.pub/2020/circuits/zoom-in/)                                   | Beautiful interactive visualization of neural network features |
-| 📄 Paper | [Anthropic — "Scaling Monosemanticity" (2023)](https://transformer-circuits.pub/2023/monosemantic-features/) | Extracting interpretable features from language models         |
-| 🎥 Video | [3Blue1Brown — "Neural Networks"](https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi)  | Visual intuition for neural network internals                  |
+| ðŸ“„ Paper | [Olah et al. "Zoom In" (2020)](https://distill.pub/2020/circuits/zoom-in/)                                   | Beautiful interactive visualization of neural network features |
+| ðŸ“„ Paper | [Anthropic â€” "Scaling Monosemanticity" (2023)](https://transformer-circuits.pub/2023/monosemantic-features/) | Extracting interpretable features from language models         |
+| ðŸŽ¥ Video | [3Blue1Brown â€” "Neural Networks"](https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi)  | Visual intuition for neural network internals                  |
 
-## ★ Sources
+## â˜… Sources
 
-- Anthropic, "Scaling Monosemanticity" (2024) — https://transformer-circuits.pub/2024/scaling-monosemanticity/
+- Anthropic, "Scaling Monosemanticity" (2024) â€” https://transformer-circuits.pub/2024/scaling-monosemanticity/
 - Anthropic, "A Mathematical Framework for Transformer Circuits" (2021)
 - Neel Nanda, "200 Concrete Open Problems in Mechanistic Interpretability" (2022)
-- TransformerLens library — https://github.com/neelnanda-io/TransformerLens
+- TransformerLens library â€” https://github.com/neelnanda-io/TransformerLens
 - Meng et al., "Locating and Editing Factual Associations in GPT" (ROME, 2022)

@@ -1,5 +1,6 @@
 ---
 title: "Agent Evaluation & Observability"
+aliases: ["Agent Eval", "Agent Testing"]
 tags: [agent-eval, observability, tracing, evaluation, genai-techniques]
 type: reference
 difficulty: advanced
@@ -14,11 +15,11 @@ updated: 2026-04-14
 
 # Agent Evaluation & Observability
 
-> ✨ **Bit**: A chatbot either knows the answer or hallucinates — you can catch that with one metric. An agent? It plans, selects tools, reads results, retries, backs off, re-plans, and then answers. If you only check the final answer, you're grading a cross-country road trip by looking at the parking job.
+> âœ¨ **Bit**: A chatbot either knows the answer or hallucinates â€” you can catch that with one metric. An agent? It plans, selects tools, reads results, retries, backs off, re-plans, and then answers. If you only check the final answer, you're grading a cross-country road trip by looking at the parking job.
 
 ---
 
-## ★ TL;DR
+## â˜… TL;DR
 
 - **What**: The metrics, traces, and evaluation workflows used to measure agent quality in offline and online settings
 - **Why**: Final-answer accuracy alone hides tool misuse, looping, latency blowups, and unsafe behavior
@@ -26,7 +27,7 @@ updated: 2026-04-14
 
 ---
 
-## ★ Overview
+## â˜… Overview
 
 ### Definition
 
@@ -45,7 +46,7 @@ This note covers trace design, offline and online evaluation, common metrics, co
 
 ---
 
-## ★ Deep Dive
+## â˜… Deep Dive
 
 ### What To Measure
 
@@ -155,12 +156,12 @@ Median cost per task:        $0.031
 
 ---
 
-## ◆ Code & Implementation
+## â—† Code & Implementation
 
 ### Traced Agent Evaluation with LangSmith
 
 ```python
-# ⚠️ Last tested: 2026-04 | Requires: langsmith>=0.3, openai>=1.60
+# âš ï¸ Last tested: 2026-04 | Requires: langsmith>=0.3, openai>=1.60
 # pip install langsmith openai
 
 from langsmith import Client, traceable
@@ -169,7 +170,7 @@ import json
 
 client = Client()
 
-# ═══ 1. Define a traced agent task ═══
+# â•â•â• 1. Define a traced agent task â•â•â•
 @traceable(name="support-agent-task", tags=["eval-suite-v2"])
 def run_agent(task: str, allowed_tools: list[str]) -> dict:
     """
@@ -188,7 +189,7 @@ def run_agent(task: str, allowed_tools: list[str]) -> dict:
     }
 
 
-# ═══ 2. Score trajectory programmatically ═══
+# â•â•â• 2. Score trajectory programmatically â•â•â•
 def score_trajectory(run_output: dict) -> dict:
     """Score an agent run on multiple trajectory dimensions."""
     steps = run_output.get("steps", 0)
@@ -216,7 +217,7 @@ def score_trajectory(run_output: dict) -> dict:
     }
 
 
-# ═══ 3. Run evaluation ═══
+# â•â•â• 3. Run evaluation â•â•â•
 result = run_agent(
     task="Process refund for order #12345",
     allowed_tools=["lookup_order", "check_refund_policy", "process_refund", "escalate"],
@@ -236,7 +237,7 @@ print(json.dumps(scores, indent=2))
 ### LLM-as-Judge for Agent Trajectories
 
 ```python
-# ⚠️ Last tested: 2026-04 | Requires: openai>=1.60
+# âš ï¸ Last tested: 2026-04 | Requires: openai>=1.60
 # Use an LLM to grade trajectory quality when rubrics are insufficient
 
 from openai import OpenAI
@@ -274,7 +275,7 @@ def judge_trajectory(task: str, trace: str) -> dict:
 
 ---
 
-## ◆ Quick Reference
+## â—† Quick Reference
 
 | If You See | Investigate |
 |---|---|
@@ -286,18 +287,18 @@ def judge_trajectory(task: str, trace: str) -> dict:
 
 ---
 
-## ○ Gotchas & Common Mistakes
+## â—‹ Gotchas & Common Mistakes
 
-- ⚠️ Final-answer grading alone will miss most agent failures
-- ⚠️ Online feedback without trace context is hard to act on
-- ⚠️ Judge-model scores should be grounded in evidence, not only style
-- ⚠️ Good observability requires stable metadata schemas — version them or traces become incomparable across releases
-- ⚠️ Non-determinism is a feature of LLMs but a bug in evaluation — always pin temperature=0 and use seeds for offline eval suites
-- ⚠️ Don't confuse observability with logging — observability means you can reconstruct the full trajectory from stored data; logging means you printed some text
+- âš ï¸ Final-answer grading alone will miss most agent failures
+- âš ï¸ Online feedback without trace context is hard to act on
+- âš ï¸ Judge-model scores should be grounded in evidence, not only style
+- âš ï¸ Good observability requires stable metadata schemas â€” version them or traces become incomparable across releases
+- âš ï¸ Non-determinism is a feature of LLMs but a bug in evaluation â€” always pin temperature=0 and use seeds for offline eval suites
+- âš ï¸ Don't confuse observability with logging â€” observability means you can reconstruct the full trajectory from stored data; logging means you printed some text
 
 ---
 
-## ○ Interview Angles
+## â—‹ Interview Angles
 
 - **Q**: How would you evaluate an agent beyond task success?
 - **A**: I would score the trajectory: tool selection, tool arguments, retry behavior, safety, latency, cost, and whether the final answer actually used the evidence produced during execution. I'd build a composite score weighing task completion (40%), tool precision (30%), and cost efficiency (30%), and track regression across prompt/model changes.
@@ -309,11 +310,11 @@ def judge_trajectory(task: str, trace: str) -> dict:
 - **A**: Three approaches: (1) Pin temperature=0 and use seed parameters for reproducible runs, (2) Run each eval task 3-5 times and report median + variance, (3) Use majority-vote scoring where a task "passes" only if 3/5 runs succeed. For production monitoring, track distributions, not point estimates.
 
 - **Q**: When should you use LLM-as-Judge vs programmatic scoring?
-- **A**: Programmatic scoring (tool precision, step count, cost) is faster, cheaper, and more reproducible — use it for everything you can formalize. LLM-as-Judge fills the gap for subjective quality: tone, helpfulness, groundedness. In practice, use both: programmatic scores gate the CI pipeline, LLM-Judge scores provide qualitative insight for manual review of borderline cases.
+- **A**: Programmatic scoring (tool precision, step count, cost) is faster, cheaper, and more reproducible â€” use it for everything you can formalize. LLM-as-Judge fills the gap for subjective quality: tone, helpfulness, groundedness. In practice, use both: programmatic scores gate the CI pipeline, LLM-Judge scores provide qualitative insight for manual review of borderline cases.
 
 ---
 
-## ★ Connections
+## â˜… Connections
 
 | Relationship | Topics |
 |---|---|
@@ -325,7 +326,7 @@ def judge_trajectory(task: str, trace: str) -> dict:
 
 ---
 
-## ◆ Hands-On Exercises
+## â—† Hands-On Exercises
 
 ### Exercise 1: Build an Agent Evaluation Harness
 
@@ -347,12 +348,12 @@ def judge_trajectory(task: str, trace: str) -> dict:
 1. Capture 5 agent traces (mix of good and bad runs)
 2. Implement the `judge_trajectory` function from the code example above
 3. Run the judge on all 5 traces
-4. Compare judge scores with your manual assessment — calibrate the prompt
+4. Compare judge scores with your manual assessment â€” calibrate the prompt
 **Expected Output**: JSON scores for each trace with reasoning, plus a calibration analysis
 
 ---
 
-## ◆ Production Failure Modes
+## â—† Production Failure Modes
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
@@ -366,18 +367,18 @@ def judge_trajectory(task: str, trace: str) -> dict:
 ---
 
 
-## ★ Recommended Resources
+## â˜… Recommended Resources
 
 | Type | Resource | Why |
 |------|----------|-----|
-| 📄 Paper | [Jimenez et al. "SWE-bench" (2023)](https://arxiv.org/abs/2310.06770) | Benchmark for evaluating coding agents on real GitHub issues |
-| 📄 Paper | [Zhuge et al. "Agent-as-a-Judge" (2024)](https://arxiv.org/abs/2410.10934) | Using agentic systems as evaluators for other agents |
-| 🔧 Hands-on | [LangSmith Evaluations](https://docs.smith.langchain.com/) | Production agent evaluation and tracing |
-| 🔧 Hands-on | [Langfuse](https://langfuse.com/docs) | Open-source LLM observability and evaluation |
-| 🔧 Hands-on | [Braintrust](https://www.braintrust.dev/docs) | Eval-focused observability for LLM applications |
-| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 7 | Agent evaluation patterns and metrics |
+| ðŸ“„ Paper | [Jimenez et al. "SWE-bench" (2023)](https://arxiv.org/abs/2310.06770) | Benchmark for evaluating coding agents on real GitHub issues |
+| ðŸ“„ Paper | [Zhuge et al. "Agent-as-a-Judge" (2024)](https://arxiv.org/abs/2410.10934) | Using agentic systems as evaluators for other agents |
+| ðŸ”§ Hands-on | [LangSmith Evaluations](https://docs.smith.langchain.com/) | Production agent evaluation and tracing |
+| ðŸ”§ Hands-on | [Langfuse](https://langfuse.com/docs) | Open-source LLM observability and evaluation |
+| ðŸ”§ Hands-on | [Braintrust](https://www.braintrust.dev/docs) | Eval-focused observability for LLM applications |
+| ðŸ“˜ Book | "AI Engineering" by Chip Huyen (2025), Ch 7 | Agent evaluation patterns and metrics |
 
-## ★ Sources
+## â˜… Sources
 
 - LangSmith evaluation concepts documentation
 - Langfuse open-source observability documentation

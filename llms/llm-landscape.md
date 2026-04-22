@@ -1,5 +1,6 @@
 ---
 title: "LLM Landscape & Model Selection"
+aliases: ["Model Comparison", "GPT vs Claude vs Gemini"]
 tags: [llm-comparison, gpt-5, gemini-3, claude-4, llama-4, model-selection, open-vs-closed, genai]
 type: reference
 difficulty: intermediate
@@ -7,26 +8,26 @@ status: published
 last_verified: 2026-04
 parent: "../genai.md"
 related: ["llms-overview.md", "reasoning-models.md", "../foundations/modern-architectures.md"]
-source: "Web research — April 2026"
+source: "Web research â€” April 2026"
 created: 2026-03-22
 updated: 2026-04-15
 ---
 
 # LLM Landscape & Model Selection (April 2026)
 
-> ✨ **Bit**: In 2023, GPT-4 was the only frontier model. In March 2026, there are 6+ frontier providers, each with 5+ model variants. Choosing the right model is now a genuine engineering decision — not just "use GPT."
+> âœ¨ **Bit**: In 2023, GPT-4 was the only frontier model. In March 2026, there are 6+ frontier providers, each with 5+ model variants. Choosing the right model is now a genuine engineering decision â€” not just "use GPT."
 
 ---
 
-## ★ TL;DR
+## â˜… TL;DR
 
 - **What**: A comparison of current frontier LLMs and guidance for selecting the right model
-- **Why**: Interviewers ask "which model would you choose for X?" and "open vs closed?" — you need specifics, not generalities
+- **Why**: Interviewers ask "which model would you choose for X?" and "open vs closed?" â€” you need specifics, not generalities
 - **Key point**: There's no single best model. GPT-5.4 for general tasks, Claude Opus 4.6 for long code, Gemini 3.1 for multimodal, LLaMA 4 for self-hosting. Model selection is about TRADEOFFS.
 
 ---
 
-## ★ Overview
+## â˜… Overview
 
 ### Definition
 
@@ -45,11 +46,11 @@ Last verified for the March 2026 market snapshot: 2026-04.
 
 ---
 
-## ★ Deep Dive
+## â˜… Deep Dive
 
 ### The Frontier Models (April 2026)
 
-### OpenAI — GPT-5 Family
+### OpenAI â€” GPT-5 Family
 
 | Model                | Released     | Context   | Best For                                            |
 | -------------------- | ------------ | --------- | --------------------------------------------------- |
@@ -57,38 +58,38 @@ Last verified for the March 2026 market snapshot: 2026-04.
 | **GPT-5.4 Thinking** | Mar 2026     | 1M        | Analytical tasks, shows reasoning steps             |
 | **GPT-5.4 Pro**      | Mar 2026     | 1M        | Highest accuracy (slower, expensive)                |
 | **GPT-5.4 mini**     | Mar 17, 2026 | 1M        | High-volume, cost-efficient, near GPT-5.4 quality   |
-| **GPT-5.4 nano**     | Mar 17, 2026 | —         | Cheapest, fastest: classification, extraction       |
-| **GPT-5.3 Instant**  | Mar 3, 2026  | —         | Rapid conversational responses                      |
-| **GPT-5.3-Codex**    | Feb 5, 2026  | —         | Coding agent (Copilot default)                      |
+| **GPT-5.4 nano**     | Mar 17, 2026 | â€”         | Cheapest, fastest: classification, extraction       |
+| **GPT-5.3 Instant**  | Mar 3, 2026  | â€”         | Rapid conversational responses                      |
+| **GPT-5.3-Codex**    | Feb 5, 2026  | â€”         | Coding agent (Copilot default)                      |
 | **GPT-5.4-Cyber**    | Apr 14, 2026 | 1M        | Defensive cybersecurity (limited access via TAC program) |
 
-### Google — Gemini 3 Family
+### Google â€” Gemini 3 Family
 
 | Model                      | Released     | Context | Best For                                           |
 | -------------------------- | ------------ | ------- | -------------------------------------------------- |
 | **Gemini 3.1 Pro**         | Feb 19, 2026 | 1M+     | Advanced reasoning (3-tier thinking), multimodal   |
-| **Gemini 3.1 Flash-Lite**  | Mar 3, 2026  | —       | Cost-efficient, high throughput, Pro-level quality |
-| **Gemini 3.1 Deep Think**  | 2026         | —       | Complex technical problems (AI Ultra subscribers)  |
-| **Gemini 3.1 Flash Image** | Feb 26, 2026 | —       | High-efficiency image generation                   |
-| **Gemini 3.1 Flash Live** | Mar 26, 2026 | —       | Real-time audio-to-audio, powers Search Live       |
+| **Gemini 3.1 Flash-Lite**  | Mar 3, 2026  | â€”       | Cost-efficient, high throughput, Pro-level quality |
+| **Gemini 3.1 Deep Think**  | 2026         | â€”       | Complex technical problems (AI Ultra subscribers)  |
+| **Gemini 3.1 Flash Image** | Feb 26, 2026 | â€”       | High-efficiency image generation                   |
+| **Gemini 3.1 Flash Live** | Mar 26, 2026 | â€”       | Real-time audio-to-audio, powers Search Live       |
 
 Available in: Gemini API, AI Studio, **Gemini CLI**, **Antigravity**, Vertex AI, NotebookLM
 
-### Anthropic — Claude 4.x Family
+### Anthropic â€” Claude 4.x Family
 
 | Model                 | Released     | Context   | Best For                                         |
 | --------------------- | ------------ | --------- | ------------------------------------------------ |
 | **Claude Opus 4.6**   | Feb 5, 2026  | 1M tokens | Most capable: code, analysis, long-doc reasoning |
 | **Claude Sonnet 4.6** | Feb 17, 2026 | 1M tokens | Balanced: default for claude.ai, Claude Cowork   |
-| **Claude Mythos** (Preview) | Apr 7, 2026 | —     | Gated research preview (~50 orgs, Project Glasswing, defensive cyber) |
+| **Claude Mythos** (Preview) | Apr 7, 2026 | â€”     | Gated research preview (~50 orgs, Project Glasswing, defensive cyber) |
 
-### Meta — LLaMA 4 Family (Open-Source)
+### Meta â€” LLaMA 4 Family (Open-Source)
 
 | Model                | Params                                     | Context    | Best For                                      |
 | -------------------- | ------------------------------------------ | ---------- | --------------------------------------------- |
 | **LLaMA 4 Scout**    | 17B active / 109B total (MoE, 16 experts)  | 10M tokens | Efficiency, single H100, huge context         |
 | **LLaMA 4 Maverick** | 17B active / 400B total (MoE, 128 experts) | 1M tokens  | Performance, multimodal, open-weight flagship |
-| **LLaMA 4 Behemoth** | 288B active / 2T total                     | —          | Teacher model (still training, not released)  |
+| **LLaMA 4 Behemoth** | 288B active / 2T total                     | â€”          | Teacher model (still training, not released)  |
 
 Meta 2026 roadmap: **Mango** (generative video) + **Avocado** (reasoning LLM)
 
@@ -106,7 +107,7 @@ Meta 2026 roadmap: **Mango** (generative video) + **Avocado** (reasoning LLM)
 
 ---
 
-### Gemma 4 Family (April 2, 2026) — Architecture Deep Dive
+### Gemma 4 Family (April 2, 2026) â€” Architecture Deep Dive
 
 Gemma 4 represents a major architectural shift from Gemma 3. Key innovations:
 
@@ -147,71 +148,71 @@ Gemma 4 represents a major architectural shift from Gemma 3. Key innovations:
 CLOSED SOURCE (API-only):           OPEN SOURCE / WEIGHTS:
   GPT-5.4, Claude 4.6, Gemini 3.1   LLaMA 4, DeepSeek, Qwen, Mistral
 
-  ✅ Highest capability              ✅ Full control over deployment
-  ✅ Managed, zero-ops               ✅ No vendor lock-in
-  ✅ Continuously updated            ✅ Fine-tunable (LoRA, full)
-  ✅ Safety/alignment built in       ✅ Data stays on your infra
-  ❌ Data leaves your infra          ❌ You manage inference infra
-  ❌ Vendor lock-in                  ❌ 6-12 months behind frontier
-  ❌ Costs scale linearly            ❌ Safety is YOUR responsibility
-  ❌ Can't fine-tune deeply          ❌ Less multimodal capability
+  âœ… Highest capability              âœ… Full control over deployment
+  âœ… Managed, zero-ops               âœ… No vendor lock-in
+  âœ… Continuously updated            âœ… Fine-tunable (LoRA, full)
+  âœ… Safety/alignment built in       âœ… Data stays on your infra
+  âŒ Data leaves your infra          âŒ You manage inference infra
+  âŒ Vendor lock-in                  âŒ 6-12 months behind frontier
+  âŒ Costs scale linearly            âŒ Safety is YOUR responsibility
+  âŒ Can't fine-tune deeply          âŒ Less multimodal capability
 ```
 
 ---
 
-## ◆ Model Selection Decision Tree
+## â—† Model Selection Decision Tree
 
 ```
 START: What's your use case?
-  │
-  ├── Simple classification, extraction, routing
-  │   → GPT-5.4 nano or mini (cheapest, fastest)
-  │
-  ├── General chat / customer support
-  │   → Claude Sonnet 4.6 or GPT-5.4 (balanced)
-  │
-  ├── Complex coding / large codebase
-  │   → Claude Opus 4.6 (best reasoning for code)
-  │   → GPT-5.3-Codex (if using Copilot)
-  │
-  ├── Math / science / reasoning
-  │   → GPT-5.4 Thinking or Gemini 3.1 Deep Think
-  │
-  ├── Multimodal (images, video, audio input)
-  │   → Gemini 3.1 Pro (native multimodal, best)
-  │
-  ├── Data must stay on-premise / regulated industry
-  │   → LLaMA 4 Scout/Maverick (self-host)
-  │   → Qwen 2.5 (if Asian market)
-  │
-  ├── High volume / cost-sensitive
-  │   → GPT-5.4 nano < mini < Gemini Flash-Lite
-  │   → Self-host LLaMA 4 Scout (1 GPU, 10M context!)
-  │
-  └── Research / experimental
-      → DeepSeek (cost-efficient frontier)
-      → Multiple models (benchmark on YOUR data)
+  â”‚
+  â”œâ”€â”€ Simple classification, extraction, routing
+  â”‚   â†’ GPT-5.4 nano or mini (cheapest, fastest)
+  â”‚
+  â”œâ”€â”€ General chat / customer support
+  â”‚   â†’ Claude Sonnet 4.6 or GPT-5.4 (balanced)
+  â”‚
+  â”œâ”€â”€ Complex coding / large codebase
+  â”‚   â†’ Claude Opus 4.6 (best reasoning for code)
+  â”‚   â†’ GPT-5.3-Codex (if using Copilot)
+  â”‚
+  â”œâ”€â”€ Math / science / reasoning
+  â”‚   â†’ GPT-5.4 Thinking or Gemini 3.1 Deep Think
+  â”‚
+  â”œâ”€â”€ Multimodal (images, video, audio input)
+  â”‚   â†’ Gemini 3.1 Pro (native multimodal, best)
+  â”‚
+  â”œâ”€â”€ Data must stay on-premise / regulated industry
+  â”‚   â†’ LLaMA 4 Scout/Maverick (self-host)
+  â”‚   â†’ Qwen 2.5 (if Asian market)
+  â”‚
+  â”œâ”€â”€ High volume / cost-sensitive
+  â”‚   â†’ GPT-5.4 nano < mini < Gemini Flash-Lite
+  â”‚   â†’ Self-host LLaMA 4 Scout (1 GPU, 10M context!)
+  â”‚
+  â””â”€â”€ Research / experimental
+      â†’ DeepSeek (cost-efficient frontier)
+      â†’ Multiple models (benchmark on YOUR data)
 ```
 
 ---
 
-## ○ Interview Angles
+## â—‹ Interview Angles
 
 - **Q**: Which LLM would you choose for a production RAG system?
 - **A**: Depends on constraints. For highest quality: Claude Opus 4.6 (1M context, best at following complex instructions with citations). For cost efficiency: GPT-5.4 mini (near GPT-5.4 quality at fraction of cost). For data privacy: LLaMA 4 Scout self-hosted (10M context, fits on 1 H100). For multimodal RAG: Gemini 3.1 Pro (native vision for image documents). In practice, use a cheaper model for retrieval/routing and a powerful model for generation.
 
-- **Q**: Open source vs closed source — when?
+- **Q**: Open source vs closed source â€” when?
 - **A**: Closed (GPT-5.4, Claude) when: you need cutting-edge capability, have budget, want zero-ops, and your data policies allow API calls. Open (LLaMA 4, Gemma 4, DeepSeek) when: data must stay on-premise (healthcare, finance, government), you need fine-tuning beyond what APIs allow, or cost at scale is prohibitive. Trend in 2026: Gemma 4 31B and LLaMA 4 Scout are competitive with mid-tier closed models while being fully self-hostable.
 
 ---
 
-## ★ Code & Implementation
+## â˜… Code & Implementation
 
 ### Multi-Provider LLM API Comparison
 
 ```python
 # pip install openai>=1.60 anthropic>=0.40 google-generativeai>=0.8
-# ⚠️ Last tested: 2026-04 | Requires: openai>=1.60, anthropic>=0.40, google-generativeai>=0.8
+# âš ï¸ Last tested: 2026-04 | Requires: openai>=1.60, anthropic>=0.40, google-generativeai>=0.8
 # Set: OPENAI_API_KEY, ANTHROPIC_API_KEY, GOOGLE_API_KEY env vars
 
 import os
@@ -252,7 +253,7 @@ print("Gemini:", res.text[:100])
 
 ---
 
-## ★ Connections
+## â˜… Connections
 
 | Relationship | Topics |
 | ------------ | ------ |
@@ -264,17 +265,17 @@ print("Gemini:", res.text[:100])
 
 ---
 
-## ◆ Production Failure Modes
+## â—† Production Failure Modes
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
 | **Model selection bias** | Team always picks the largest/newest model | No structured evaluation against requirements | Decision matrix: cost, latency, quality, compliance constraints |
 | **API deprecation** | Production breaks when provider sunsets model version | No model version pinning or migration plan | Pin versions, monitor deprecation notices, abstract provider |
-| **Benchmark ≠ production** | Top benchmark model underperforms on your task | Benchmarks don't represent your distribution | Custom eval on your data before committing |
+| **Benchmark â‰  production** | Top benchmark model underperforms on your task | Benchmarks don't represent your distribution | Custom eval on your data before committing |
 
 ---
 
-## ◆ Hands-On Exercises
+## â—† Hands-On Exercises
 
 ### Exercise 1: Build a Model Selection Matrix
 
@@ -289,18 +290,18 @@ print("Gemini:", res.text[:100])
 ---
 
 
-## ★ Recommended Resources
+## â˜… Recommended Resources
 
 | Type | Resource | Why |
 |------|----------|-----|
-| 🔧 Hands-on | [LMSYS Chatbot Arena](https://chat.lmsys.org/) | Live human-evaluated model rankings |
-| 🔧 Hands-on | [Artificial Analysis](https://artificialanalysis.ai/) | Speed, price, and quality comparisons across LLM providers |
-| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 2 | Model selection framework for practitioners |
+| ðŸ”§ Hands-on | [LMSYS Chatbot Arena](https://chat.lmsys.org/) | Live human-evaluated model rankings |
+| ðŸ”§ Hands-on | [Artificial Analysis](https://artificialanalysis.ai/) | Speed, price, and quality comparisons across LLM providers |
+| ðŸ“˜ Book | "AI Engineering" by Chip Huyen (2025), Ch 2 | Model selection framework for practitioners |
 
-## ★ Sources
+## â˜… Sources
 
-- OpenAI model releases — https://openai.com/index
-- Google DeepMind Gemini — https://deepmind.google/technologies/gemini/
-- Anthropic Claude — https://anthropic.com
+- OpenAI model releases â€” https://openai.com/index
+- Google DeepMind Gemini â€” https://deepmind.google/technologies/gemini/
+- Anthropic Claude â€” https://anthropic.com
 - Meta LLaMA 4 announcement (April 2025)
-- Chatbot Arena / LMSYS leaderboard — https://chat.lmsys.org
+- Chatbot Arena / LMSYS leaderboard â€” https://chat.lmsys.org

@@ -1,5 +1,6 @@
 ---
 title: "Cost Optimization for GenAI Systems"
+aliases: ["Cost Optimization", "LLM Cost", "Token Economics"]
 tags: [cost, optimization, token-cost, routing, caching, llmops, production]
 type: procedure
 difficulty: advanced
@@ -18,14 +19,14 @@ updated: 2026-04-14
 
 ---
 
-## ★ TL;DR
+## â˜… TL;DR
 - **What**: The design and operational practices used to reduce the cost of running AI systems without unacceptable quality loss.
 - **Why**: Token, compute, and infrastructure costs can erase product margin quickly.
 - **Key point**: The biggest savings usually come from architecture and routing decisions, not from tiny prompt tweaks.
 
 ---
 
-## ★ Overview
+## â˜… Overview
 ### Definition
 
 **Cost optimization** is the disciplined process of improving quality-per-dollar across model calls, retrieval, serving, storage, and operations.
@@ -48,7 +49,7 @@ This note focuses on production GenAI economics: request shaping, model routing,
 
 ---
 
-## ★ Deep Dive
+## â˜… Deep Dive
 ### Where The Money Goes
 
 Common cost buckets:
@@ -130,7 +131,7 @@ Self-hosting is not automatically cheaper. It becomes attractive only when workl
 
 ---
 
-## ◆ Quick Reference
+## â—† Quick Reference
 | Cost Problem | Better First Move |
 |---|---|
 | Large bills from simple requests | add model routing |
@@ -141,7 +142,7 @@ Self-hosting is not automatically cheaper. It becomes attractive only when workl
 
 ---
 
-## ○ Gotchas & Common Mistakes
+## â—‹ Gotchas & Common Mistakes
 - Cheapest model is not cheapest if failure rates explode.
 - Teams often optimize token counts while ignoring failed-task cost.
 - Caching can create stale or incorrect outputs if scope and invalidation are weak.
@@ -149,7 +150,7 @@ Self-hosting is not automatically cheaper. It becomes attractive only when workl
 
 ---
 
-## ○ Interview Angles
+## â—‹ Interview Angles
 - **Q**: What are the biggest cost levers in a GenAI application?
 - **A**: Model routing, context control, caching, retrieval discipline, and serving choices. Small prompt tweaks help, but architecture decisions usually dominate the savings.
 
@@ -158,7 +159,7 @@ Self-hosting is not automatically cheaper. It becomes attractive only when workl
 
 ---
 
-## ★ Connections
+## â˜… Connections
 | Relationship | Topics |
 |---|---|
 | Builds on | [Model Serving for LLM Applications](./model-serving.md), [Inference Optimization](../inference/inference-optimization.md), [Monitoring & Observability for GenAI Systems](./monitoring-observability.md) |
@@ -168,13 +169,13 @@ Self-hosting is not automatically cheaper. It becomes attractive only when workl
 
 ---
 
-## ◆ Code & Implementation
+## â—† Code & Implementation
 
 ### Token Cost Calculator
 
 ```python
 # No external dependencies required
-# ⚠️ Last tested: 2026-04
+# âš ï¸ Last tested: 2026-04
 
 # Pricing as of April 2026 (per 1M tokens)
 PRICING = {
@@ -218,18 +219,18 @@ for model in PRICING:
 
 ---
 
-## ◆ Production Failure Modes
+## â—† Production Failure Modes
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
-| **Silent cost explosion** | Monthly bill 5× higher than expected | Context window bloat, no token monitoring | Per-request cost tracking, budget alerts at 80% |
+| **Silent cost explosion** | Monthly bill 5Ã— higher than expected | Context window bloat, no token monitoring | Per-request cost tracking, budget alerts at 80% |
 | **Cache poisoning** | Users get wrong cached answers | Semantic cache too aggressive, poor invalidation | Tighter similarity threshold, cache TTL, user-specific cache keys |
 | **Routing misclassification** | Cheap model fails on complex queries, retries hit expensive model | Router not trained on edge cases | Confidence threshold on router, fallback cost tracking |
 | **Stale cost assumptions** | Optimization based on old pricing, provider changed rates | API pricing changes quarterly | Automate pricing checks, use provider cost APIs |
 
 ---
 
-## ◆ Hands-On Exercises
+## â—† Hands-On Exercises
 
 ### Exercise 1: Cost Audit
 
@@ -244,18 +245,18 @@ for model in PRICING:
 
 ---
 
-## ★ Recommended Resources
+## â˜… Recommended Resources
 
 | Type | Resource | Why |
 |------|----------|-----|
-| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 9 (AI Engineering Architecture) | Covers cost-aware system design and model routing patterns |
-| 🔧 Hands-on | [OpenAI Usage Dashboard](https://platform.openai.com/usage) | Real-time cost tracking for API users |
-| 🎥 Video | [FinOps for AI/ML](https://www.finops.org/wg/ai-ml/) | FinOps Foundation's framework for managing AI infrastructure costs |
-| 📄 Paper | [Ding et al. "RouteLLM" (2024)](https://arxiv.org/abs/2406.18665) | Academic approach to cost-aware model routing |
+| ðŸ“˜ Book | "AI Engineering" by Chip Huyen (2025), Ch 9 (AI Engineering Architecture) | Covers cost-aware system design and model routing patterns |
+| ðŸ”§ Hands-on | [OpenAI Usage Dashboard](https://platform.openai.com/usage) | Real-time cost tracking for API users |
+| ðŸŽ¥ Video | [FinOps for AI/ML](https://www.finops.org/wg/ai-ml/) | FinOps Foundation's framework for managing AI infrastructure costs |
+| ðŸ“„ Paper | [Ding et al. "RouteLLM" (2024)](https://arxiv.org/abs/2406.18665) | Academic approach to cost-aware model routing |
 
 ---
 
-## ★ Sources
+## â˜… Sources
 
 - [Inference Optimization](../inference/inference-optimization.md)
 - [LLMOps & Production Deployment](./llmops.md)

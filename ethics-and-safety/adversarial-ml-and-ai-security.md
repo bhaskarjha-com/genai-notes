@@ -1,5 +1,6 @@
 ---
 title: "Adversarial ML & AI Security"
+aliases: ["Adversarial ML", "AI Security", "Red Teaming"]
 tags: [security, adversarial-ml, prompt-injection, jailbreaks, red-teaming]
 type: reference
 difficulty: advanced
@@ -18,14 +19,14 @@ updated: 2026-04-14
 
 ---
 
-## ★ TL;DR
+## â˜… TL;DR
 - **What**: The study of attacks against AI systems and the controls used to defend them.
 - **Why**: LLM apps can leak data, misuse tools, follow malicious instructions, or become gateways into other systems.
 - **Key point**: Treat the full AI application as the security boundary, not just the model.
 
 ---
 
-## ★ Overview
+## â˜… Overview
 ### Definition
 
 **Adversarial ML** covers attacks that manipulate model inputs, training data, behavior, or surrounding infrastructure. In GenAI, this includes prompt injection, data poisoning, insecure tool use, and misuse of autonomous workflows.
@@ -48,7 +49,7 @@ This note is application-focused. It covers practical threat categories and defe
 
 ---
 
-## ★ Deep Dive
+## â˜… Deep Dive
 ### Common Threat Families
 
 | Threat | Example |
@@ -117,7 +118,7 @@ tools:
 
 ---
 
-## ◆ Quick Reference
+## â—† Quick Reference
 | Risk | First Defense |
 |---|---|
 | prompt injection | context isolation and strict tool policy |
@@ -128,7 +129,7 @@ tools:
 
 ---
 
-## ○ Gotchas & Common Mistakes
+## â—‹ Gotchas & Common Mistakes
 - A strong system prompt is not a security boundary.
 - Output validation matters even when the model is "usually right."
 - Security issues often appear at system integration points, not in the model alone.
@@ -136,7 +137,7 @@ tools:
 
 ---
 
-## ○ Interview Angles
+## â—‹ Interview Angles
 - **Q**: Why is prompt injection a security problem and not only a quality problem?
 - **A**: Because malicious instructions can manipulate system behavior, trigger data leakage, or cause unauthorized actions through tools and downstream systems. That makes it part of the application's security surface.
 
@@ -145,7 +146,7 @@ tools:
 
 ---
 
-## ★ Connections
+## â˜… Connections
 | Relationship | Topics |
 |---|---|
 | Builds on | [Ethics, Safety & Alignment](./ethics-safety-alignment.md), [AI Regulation for Builders](./ai-regulation.md) |
@@ -155,13 +156,13 @@ tools:
 
 ---
 
-## ★ Code & Implementation
+## â˜… Code & Implementation
 
 ### Basic Prompt Injection Detection
 
 ```python
 # pip install openai>=1.0
-# ⚠️ Last tested: 2026-04 | Requires: openai>=1.0
+# âš ï¸ Last tested: 2026-04 | Requires: openai>=1.0
 
 import re
 from openai import OpenAI
@@ -211,7 +212,7 @@ print(detect_injection("What's the weather in Paris?"))
 
 ---
 
-## ◆ Production Failure Modes
+## â—† Production Failure Modes
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
@@ -222,7 +223,7 @@ print(detect_injection("What's the weather in Paris?"))
 
 ---
 
-## ◆ Hands-On Exercises
+## â—† Hands-On Exercises
 
 ### Exercise 1: Red Team Your Own App
 
@@ -238,20 +239,20 @@ print(detect_injection("What's the weather in Paris?"))
 
 ---
 
-## ★ Recommended Resources
+## â˜… Recommended Resources
 
 | Type | Resource | Why |
 |------|----------|-----|
-| 🔧 Hands-on | [OWASP Top 10 for LLMs](https://owasp.org/www-project-top-10-for-large-language-model-applications/) | The definitive security checklist for LLM applications |
-| 📄 Paper | [Greshake et al. "Prompt Injection Attacks" (2023)](https://arxiv.org/abs/2302.12173) | First systematic study of indirect prompt injection |
-| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 6 (Defense) | Practical guardrails and safety patterns for production AI |
-| 🎥 Video | [Simon Willison — Prompt Injection Talks](https://simonwillison.net/) | Best practical coverage of prompt injection risks and defenses |
+| ðŸ”§ Hands-on | [OWASP Top 10 for LLMs](https://owasp.org/www-project-top-10-for-large-language-model-applications/) | The definitive security checklist for LLM applications |
+| ðŸ“„ Paper | [Greshake et al. "Prompt Injection Attacks" (2023)](https://arxiv.org/abs/2302.12173) | First systematic study of indirect prompt injection |
+| ðŸ“˜ Book | "AI Engineering" by Chip Huyen (2025), Ch 6 (Defense) | Practical guardrails and safety patterns for production AI |
+| ðŸŽ¥ Video | [Simon Willison â€” Prompt Injection Talks](https://simonwillison.net/) | Best practical coverage of prompt injection risks and defenses |
 
 ---
 
-## ★ Sources
+## â˜… Sources
 
-- OWASP GenAI Security Project — https://owasp.org/www-project-top-10-for-large-language-model-applications/
-- NIST AI Risk Management Framework — https://www.nist.gov/artificial-intelligence/ai-risk-management-framework
+- OWASP GenAI Security Project â€” https://owasp.org/www-project-top-10-for-large-language-model-applications/
+- NIST AI Risk Management Framework â€” https://www.nist.gov/artificial-intelligence/ai-risk-management-framework
 - Greshake et al. "Not what you've signed up for" (2023)
 - [AI Regulation for Builders](./ai-regulation.md)

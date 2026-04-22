@@ -1,5 +1,6 @@
 ---
 title: "Retrieval Evaluation"
+aliases: ["Retrieval Eval", "NDCG", "MRR"]
 tags: [retrieval, evaluation, rag, search, metrics, mrr, ndcg]
 type: procedure
 difficulty: advanced
@@ -7,26 +8,26 @@ status: published
 last_verified: 2026-04
 parent: "evaluation-and-benchmarks.md"
 related: ["../techniques/rag.md", "../techniques/graph-rag.md", "llm-evaluation-deep-dive.md", "../tools-and-infra/vector-databases.md"]
-source: "Multiple — see Sources"
+source: "Multiple â€” see Sources"
 created: 2026-04-14
 updated: 2026-04-14
 ---
 
 # Retrieval Evaluation
 
-> ✨ **Bit**: If your RAG system retrieves the wrong documents, no amount of prompt engineering will fix the answer. Retrieval evaluation measures whether the right information reaches the model — the most neglected and most impactful part of RAG quality.
+> âœ¨ **Bit**: If your RAG system retrieves the wrong documents, no amount of prompt engineering will fix the answer. Retrieval evaluation measures whether the right information reaches the model â€” the most neglected and most impactful part of RAG quality.
 
 ---
 
-## ★ TL;DR
+## â˜… TL;DR
 
-- **What**: Metrics and methods for measuring retrieval quality in RAG systems — precision, recall, MRR, nDCG, and end-to-end RAG evaluation
+- **What**: Metrics and methods for measuring retrieval quality in RAG systems â€” precision, recall, MRR, nDCG, and end-to-end RAG evaluation
 - **Why**: Most RAG failures are retrieval failures. If irrelevant chunks reach the model, it hallucinates or refuses. Measuring retrieval quality separately from generation quality is essential.
 - **Key point**: Evaluate retrieval independently from generation. A perfect LLM can't help if retrieval gives it the wrong documents.
 
 ---
 
-## ★ Overview
+## â˜… Overview
 
 ### Definition
 
@@ -38,13 +39,13 @@ Covers: Core retrieval metrics (precision@k, recall@k, MRR, nDCG), RAG-specific 
 
 ### Prerequisites
 
-- [RAG](../techniques/rag.md) — retrieval architecture
-- [LLM Evaluation Deep Dive](./llm-evaluation-deep-dive.md) — generation evaluation
-- [Vector Databases](../tools-and-infra/vector-databases.md) — retrieval infrastructure
+- [RAG](../techniques/rag.md) â€” retrieval architecture
+- [LLM Evaluation Deep Dive](./llm-evaluation-deep-dive.md) â€” generation evaluation
+- [Vector Databases](../tools-and-infra/vector-databases.md) â€” retrieval infrastructure
 
 ---
 
-## ★ Deep Dive
+## â˜… Deep Dive
 
 ### The Two-Stage RAG Evaluation Framework
 
@@ -53,7 +54,7 @@ RAG EVALUATION = RETRIEVAL QUALITY + GENERATION QUALITY
 
   RETRIEVAL METRICS           GENERATION METRICS
   (independent of LLM)        (depends on retrieval)
-  ─────────────────           ──────────────────
+  â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€           â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   Precision@K                 Answer correctness
   Recall@K                    Faithfulness (grounded in context)
   MRR                         Answer relevance
@@ -79,17 +80,17 @@ RAG EVALUATION = RETRIEVAL QUALITY + GENERATION QUALITY
 ```
 nDCG@K = DCG@K / IDCG@K
 
-  DCG@K  = Σ (relevance_i / log2(rank_i + 1))  for i = 1 to K
+  DCG@K  = Î£ (relevance_i / log2(rank_i + 1))  for i = 1 to K
   IDCG@K = DCG@K with perfect ranking (most relevant first)
 
   EXAMPLE:
   Query: "What is attention in transformers?"
   Retrieved docs (relevance: 0=irrelevant, 1=somewhat, 2=highly):
 
-  Rank 1: "Attention mechanism explained" → relevance 2
-  Rank 2: "CNN architectures"             → relevance 0
-  Rank 3: "Self-attention in BERT"        → relevance 2
-  Rank 4: "Transformer training tips"     → relevance 1
+  Rank 1: "Attention mechanism explained" â†’ relevance 2
+  Rank 2: "CNN architectures"             â†’ relevance 0
+  Rank 3: "Self-attention in BERT"        â†’ relevance 2
+  Rank 4: "Transformer training tips"     â†’ relevance 1
 
   DCG@4  = 2/log2(2) + 0/log2(3) + 2/log2(4) + 1/log2(5)
          = 2.0 + 0.0 + 1.0 + 0.43 = 3.43
@@ -112,13 +113,13 @@ nDCG@K = DCG@K / IDCG@K
 
 ---
 
-## ★ Code & Implementation
+## â˜… Code & Implementation
 
 ### Retrieval Evaluation Suite
 
 ```python
 # pip install numpy>=1.24
-# ⚠️ Last tested: 2026-04 | No external API needed
+# âš ï¸ Last tested: 2026-04 | No external API needed
 
 import numpy as np
 from typing import Optional
@@ -203,13 +204,13 @@ for metric, value in results.items():
 
 ---
 
-## ◆ Quick Reference
+## â—† Quick Reference
 
 ```
 RETRIEVAL QUALITY BENCHMARKS:
 
   Metric        | Poor    | Acceptable | Good    | Excellent
-  ──────────────|─────────|───────────|─────────|──────────
+  â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€|â”€â”€â”€â”€â”€â”€â”€â”€â”€|â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€|â”€â”€â”€â”€â”€â”€â”€â”€â”€|â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   Precision@5   | < 0.30  | 0.30-0.50 | 0.50-0.70 | > 0.70
   Recall@5      | < 0.40  | 0.40-0.60 | 0.60-0.80 | > 0.80
   Hit Rate@5    | < 0.60  | 0.60-0.80 | 0.80-0.90 | > 0.90
@@ -226,7 +227,7 @@ IF RETRIEVAL IS BAD, FIX THIS FIRST:
 
 ---
 
-## ◆ Production Failure Modes
+## â—† Production Failure Modes
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
@@ -236,14 +237,14 @@ IF RETRIEVAL IS BAD, FIX THIS FIRST:
 
 ---
 
-## ○ Interview Angles
+## â—‹ Interview Angles
 
 - **Q**: How would you evaluate a RAG system?
-- **A**: I'd evaluate in two stages. Stage 1: Retrieval quality — I'd create a labeled dataset of 100+ queries with known relevant documents, then measure Precision@5, Recall@5, MRR, and nDCG. If retrieval metrics are poor (< 0.5 precision), I'd fix retrieval before touching the LLM. Stage 2: End-to-end — using RAGAS metrics (context relevance, faithfulness, answer correctness) to evaluate the full pipeline. I'd run this on every prompt/model change as a regression check. For production, I'd add online metrics: user feedback (thumbs up/down), citation click-through rate, and "I don't know" rate.
+- **A**: I'd evaluate in two stages. Stage 1: Retrieval quality â€” I'd create a labeled dataset of 100+ queries with known relevant documents, then measure Precision@5, Recall@5, MRR, and nDCG. If retrieval metrics are poor (< 0.5 precision), I'd fix retrieval before touching the LLM. Stage 2: End-to-end â€” using RAGAS metrics (context relevance, faithfulness, answer correctness) to evaluate the full pipeline. I'd run this on every prompt/model change as a regression check. For production, I'd add online metrics: user feedback (thumbs up/down), citation click-through rate, and "I don't know" rate.
 
 ---
 
-## ◆ Hands-On Exercises
+## â—† Hands-On Exercises
 
 ### Exercise 1: Build a Retrieval Eval Suite
 
@@ -253,13 +254,13 @@ IF RETRIEVAL IS BAD, FIX THIS FIRST:
 1. Create 20 test queries with labeled relevant documents
 2. Run your retrieval system on all 20 queries
 3. Calculate Precision@5, Recall@5, MRR, and Hit Rate using the code above
-4. Identify the 5 worst queries — what went wrong with retrieval?
+4. Identify the 5 worst queries â€” what went wrong with retrieval?
 5. Try one improvement (better chunking, reranking, hybrid search) and re-measure
 **Expected Output**: Before/after metrics table, analysis of failure patterns
 
 ---
 
-## ★ Connections
+## â˜… Connections
 
 | Relationship | Topics |
 |---|---|
@@ -270,20 +271,20 @@ IF RETRIEVAL IS BAD, FIX THIS FIRST:
 
 ---
 
-## ★ Recommended Resources
+## â˜… Recommended Resources
 
 | Type | Resource | Why |
 |------|----------|-----|
-| 🔧 Hands-on | [RAGAS Documentation](https://docs.ragas.io/) | Production RAG evaluation framework |
-| 📄 Paper | [Barnett et al. "Seven Failure Points of RAG" (2024)](https://arxiv.org/abs/2401.05856) | Systematic analysis of where RAG systems fail |
-| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 4 | Retrieval evaluation as part of the RAG quality stack |
-| 🔧 Hands-on | [DeepEval](https://docs.confident-ai.com/) | Open-source LLM + retrieval evaluation framework |
+| ðŸ”§ Hands-on | [RAGAS Documentation](https://docs.ragas.io/) | Production RAG evaluation framework |
+| ðŸ“„ Paper | [Barnett et al. "Seven Failure Points of RAG" (2024)](https://arxiv.org/abs/2401.05856) | Systematic analysis of where RAG systems fail |
+| ðŸ“˜ Book | "AI Engineering" by Chip Huyen (2025), Ch 4 | Retrieval evaluation as part of the RAG quality stack |
+| ðŸ”§ Hands-on | [DeepEval](https://docs.confident-ai.com/) | Open-source LLM + retrieval evaluation framework |
 
 ---
 
-## ★ Sources
+## â˜… Sources
 
 - Barnett et al. "Seven Failure Points When Engineering a RAG System" (2024)
-- RAGAS Documentation — https://docs.ragas.io/
+- RAGAS Documentation â€” https://docs.ragas.io/
 - Manning et al. "Introduction to Information Retrieval" (2008), Ch 8
 - [RAG](../techniques/rag.md)

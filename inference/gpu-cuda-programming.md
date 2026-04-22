@@ -1,5 +1,6 @@
 ---
 title: "GPU & CUDA Programming for AI Engineers"
+aliases: ["GPU", "CUDA", "GPU Programming"]
 tags: [gpu, cuda, kernels, memory, performance, ai-infra, inference]
 type: procedure
 difficulty: expert
@@ -18,14 +19,14 @@ updated: 2026-04-14
 
 ---
 
-## ★ TL;DR
+## â˜… TL;DR
 - **What**: The hardware and programming concepts behind GPU-accelerated AI workloads.
 - **Why**: Many training and inference bottlenecks make sense only if you understand memory hierarchy, parallel execution, and kernel behavior.
 - **Key point**: In AI systems, moving data efficiently is often harder than doing the math.
 
 ---
 
-## ★ Overview
+## â˜… Overview
 ### Definition
 
 A **GPU** is a massively parallel processor optimized for throughput-oriented numeric computation. **CUDA** is NVIDIA's programming model and toolchain for writing GPU-accelerated programs.
@@ -48,7 +49,7 @@ This note gives AI engineers a practical systems view: how GPU execution works, 
 
 ---
 
-## ★ Deep Dive
+## â˜… Deep Dive
 ### GPU Mental Model
 
 GPUs are built for many operations in parallel:
@@ -141,7 +142,7 @@ Ask:
 
 ---
 
-## ◆ Quick Reference
+## â—† Quick Reference
 | Question | Heuristic |
 |---|---|
 | Slow decode on large model | suspect memory bandwidth or KV-cache behavior |
@@ -152,7 +153,7 @@ Ask:
 
 ---
 
-## ○ Gotchas & Common Mistakes
+## â—‹ Gotchas & Common Mistakes
 - GPU utilization percentages are useful but incomplete.
 - Compute throughput and memory throughput are different bottlenecks.
 - Kernel-level optimization is usually wasted if the higher-level architecture is wrong.
@@ -160,7 +161,7 @@ Ask:
 
 ---
 
-## ○ Interview Angles
+## â—‹ Interview Angles
 - **Q**: Why are LLM decode steps often memory-bound?
 - **A**: Each generated token requires repeatedly loading weights and KV-cache state, so memory movement can dominate arithmetic. That is why layout, caching, and serving-engine design matter so much.
 
@@ -169,7 +170,7 @@ Ask:
 
 ---
 
-## ★ Connections
+## â˜… Connections
 | Relationship | Topics |
 |---|---|
 | Builds on | [Transformers](../foundations/transformers.md), [Inference Optimization](./inference-optimization.md) |
@@ -179,13 +180,13 @@ Ask:
 
 ---
 
-## ★ Code & Implementation
+## â˜… Code & Implementation
 
 ### GPU Memory Profiling with PyTorch
 
 ```python
 # pip install torch>=2.0
-# ⚠️ Last tested: 2026-04 | Requires: torch>=2.0
+# âš ï¸ Last tested: 2026-04 | Requires: torch>=2.0
 
 import torch
 
@@ -218,7 +219,7 @@ gpu_memory_report()  # After
 
 # Expected output:
 # GPU: NVIDIA A100 80GB
-# Allocated: 15.20 GB  (8B params × 2 bytes)
+# Allocated: 15.20 GB  (8B params Ã— 2 bytes)
 # Reserved:  16.00 GB
 # Peak:      15.20 GB
 # Total:     80.00 GB
@@ -227,7 +228,7 @@ gpu_memory_report()  # After
 
 ---
 
-## ◆ Production Failure Modes
+## â—† Production Failure Modes
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
@@ -238,7 +239,7 @@ gpu_memory_report()  # After
 
 ---
 
-## ◆ Hands-On Exercises
+## â—† Hands-On Exercises
 
 ### Exercise 1: GPU Memory Estimation
 
@@ -247,27 +248,27 @@ gpu_memory_report()  # After
 **Steps**:
 1. Calculate memory for a 7B model in fp32, fp16, int8, and int4
 2. With the model loaded in bf16, estimate remaining memory for KV-cache
-3. Calculate max batch size × sequence length that fits in remaining memory
+3. Calculate max batch size Ã— sequence length that fits in remaining memory
 4. Compare your estimates with actual usage using the profiling code above
 **Expected Output**: Memory estimation table matching real GPU measurements within 10%
 
 ---
 
-## ★ Recommended Resources
+## â˜… Recommended Resources
 
 | Type | Resource | Why |
 |------|----------|-----|
-| 🎓 Course | [NVIDIA CUDA Programming Guide](https://docs.nvidia.com/cuda/cuda-c-programming-guide/) | Official reference for CUDA concepts and programming model |
-| 🎓 Course | [Stanford CS149: Parallel Computing](http://cs149.stanford.edu/) | Deep dive into GPU parallelism, memory hierarchy, and scheduling |
-| 📄 Paper | [Dao et al. "FlashAttention" (2022)](https://arxiv.org/abs/2205.14135) | Shows how IO-aware kernel design transforms attention performance |
-| 🔧 Hands-on | [NVIDIA Nsight Systems / Compute](https://developer.nvidia.com/nsight-systems) | Essential GPU profiling tools for identifying bottlenecks |
-| 🎥 Video | [Jeremy Howard — "CUDA Programming" (fast.ai)](https://course.fast.ai/) | Practical introduction to CUDA for ML engineers |
+| ðŸŽ“ Course | [NVIDIA CUDA Programming Guide](https://docs.nvidia.com/cuda/cuda-c-programming-guide/) | Official reference for CUDA concepts and programming model |
+| ðŸŽ“ Course | [Stanford CS149: Parallel Computing](http://cs149.stanford.edu/) | Deep dive into GPU parallelism, memory hierarchy, and scheduling |
+| ðŸ“„ Paper | [Dao et al. "FlashAttention" (2022)](https://arxiv.org/abs/2205.14135) | Shows how IO-aware kernel design transforms attention performance |
+| ðŸ”§ Hands-on | [NVIDIA Nsight Systems / Compute](https://developer.nvidia.com/nsight-systems) | Essential GPU profiling tools for identifying bottlenecks |
+| ðŸŽ¥ Video | [Jeremy Howard â€” "CUDA Programming" (fast.ai)](https://course.fast.ai/) | Practical introduction to CUDA for ML engineers |
 
 ---
 
-## ★ Sources
+## â˜… Sources
 
-- NVIDIA CUDA Programming Guide — https://docs.nvidia.com/cuda/
-- NVIDIA Nsight Documentation — https://developer.nvidia.com/nsight-systems
+- NVIDIA CUDA Programming Guide â€” https://docs.nvidia.com/cuda/
+- NVIDIA Nsight Documentation â€” https://developer.nvidia.com/nsight-systems
 - Dao et al. "FlashAttention: Fast and Memory-Efficient Exact Attention" (2022)
 - [Inference Optimization](./inference-optimization.md)

@@ -1,5 +1,6 @@
 ---
 title: "API Design for AI Applications"
+aliases: ["AI API", "API Design"]
 tags: [api, rest, streaming, webhooks, async, ai-architecture, applications]
 type: reference
 difficulty: intermediate
@@ -18,14 +19,14 @@ updated: 2026-04-14
 
 ---
 
-## ★ TL;DR
+## â˜… TL;DR
 - **What**: The design patterns for building application-facing APIs around AI systems.
 - **Why**: Poor API design leaks model quirks, makes clients brittle, and turns AI product iteration into integration pain.
 - **Key point**: Design APIs around product tasks and operational constraints, not around raw model endpoints alone.
 
 ---
 
-## ★ Overview
+## â˜… Overview
 ### Definition
 
 An **AI application API** is the contract between clients and an AI-backed service. It defines request shape, response shape, streaming behavior, error semantics, and operational guarantees.
@@ -48,7 +49,7 @@ This note focuses on product-facing APIs, not provider SDK specifics. It covers 
 
 ---
 
-## ★ Deep Dive
+## â˜… Deep Dive
 ### Core Design Questions
 
 Ask:
@@ -140,7 +141,7 @@ Do not force clients to track every prompt revision.
 
 ---
 
-## ◆ Quick Reference
+## â—† Quick Reference
 | Need | Better Design Choice |
 |---|---|
 | interactive chat | streaming endpoint |
@@ -151,7 +152,7 @@ Do not force clients to track every prompt revision.
 
 ---
 
-## ○ Gotchas & Common Mistakes
+## â—‹ Gotchas & Common Mistakes
 - Raw provider payload passthrough creates long-term client pain.
 - Streaming is not always better if the task is short and structured.
 - Hidden prompt changes can look like API regressions to downstream teams.
@@ -159,7 +160,7 @@ Do not force clients to track every prompt revision.
 
 ---
 
-## ○ Interview Angles
+## â—‹ Interview Angles
 - **Q**: What should an AI API return besides the answer?
 - **A**: Usually a request id, status or finish reason, and optionally citations or usage metadata depending on the product. Those fields make debugging, billing, and trust much easier.
 
@@ -168,7 +169,7 @@ Do not force clients to track every prompt revision.
 
 ---
 
-## ★ Connections
+## â˜… Connections
 | Relationship | Topics |
 |---|---|
 | Builds on | [AI System Design for GenAI Applications](../production/ai-system-design.md), [Model Serving for LLM Applications](../production/model-serving.md) |
@@ -178,13 +179,13 @@ Do not force clients to track every prompt revision.
 
 ---
 
-## ★ Code & Implementation
+## â˜… Code & Implementation
 
 ### FastAPI AI Endpoint with Streaming
 
 ```python
 # pip install fastapi>=0.110 uvicorn>=0.27 openai>=1.0
-# ⚠️ Last tested: 2026-04 | Requires: fastapi>=0.110
+# âš ï¸ Last tested: 2026-04 | Requires: fastapi>=0.110
 
 from fastapi import FastAPI
 from fastapi.responses import StreamingResponse
@@ -236,18 +237,18 @@ async def chat_stream(request: dict):
 
 ---
 
-## ◆ Production Failure Modes
+## â—† Production Failure Modes
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
 | **Provider passthrough leak** | Client breaks when model changes | Raw provider response exposed to clients | Wrap in stable response schema, version the contract |
-| **Retry storm** | 10× traffic spike after transient failure | Client retries without backoff, server returns 500 for rate limits | Use 429 with Retry-After header, implement client-side exponential backoff |
+| **Retry storm** | 10Ã— traffic spike after transient failure | Client retries without backoff, server returns 500 for rate limits | Use 429 with Retry-After header, implement client-side exponential backoff |
 | **Streaming disconnect** | User sees partial response, no error | Long SSE stream interrupted by proxy/LB timeout | Heartbeat pings, configurable timeouts, client reconnection logic |
 | **Schema drift** | Downstream automation breaks silently | Prompt change alters output structure | Use structured output / JSON schema enforcement, version schemas |
 
 ---
 
-## ◆ Hands-On Exercises
+## â—† Hands-On Exercises
 
 ### Exercise 1: Design an AI API Contract
 
@@ -263,20 +264,20 @@ async def chat_stream(request: dict):
 
 ---
 
-## ★ Recommended Resources
+## â˜… Recommended Resources
 
 | Type | Resource | Why |
 |------|----------|-----|
-| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 8 | API design patterns for AI-backed services |
-| 🔧 Hands-on | [OpenAI API Reference](https://platform.openai.com/docs/api-reference) | Gold standard for AI API design — study their schema, streaming, and error patterns |
-| 🔧 Hands-on | [FastAPI Documentation](https://fastapi.tiangolo.com/) | Best Python framework for building AI APIs with auto-documentation |
-| 📄 Paper | [Google API Design Guide](https://cloud.google.com/apis/design) | Industry-standard API design principles applicable to AI services |
+| ðŸ“˜ Book | "AI Engineering" by Chip Huyen (2025), Ch 8 | API design patterns for AI-backed services |
+| ðŸ”§ Hands-on | [OpenAI API Reference](https://platform.openai.com/docs/api-reference) | Gold standard for AI API design â€” study their schema, streaming, and error patterns |
+| ðŸ”§ Hands-on | [FastAPI Documentation](https://fastapi.tiangolo.com/) | Best Python framework for building AI APIs with auto-documentation |
+| ðŸ“„ Paper | [Google API Design Guide](https://cloud.google.com/apis/design) | Industry-standard API design principles applicable to AI services |
 
 ---
 
-## ★ Sources
+## â˜… Sources
 
-- OpenAPI Specification — https://spec.openapis.org/
-- Google API Design Guide — https://cloud.google.com/apis/design
-- OpenAI API Reference — https://platform.openai.com/docs/api-reference
+- OpenAPI Specification â€” https://spec.openapis.org/
+- Google API Design Guide â€” https://cloud.google.com/apis/design
+- OpenAI API Reference â€” https://platform.openai.com/docs/api-reference
 - [AI System Design](../production/ai-system-design.md)

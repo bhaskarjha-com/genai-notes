@@ -1,5 +1,6 @@
 ---
 title: "Scaling Laws & Pre-training"
+aliases: ["Scaling Laws", "Chinchilla", "Pretraining"]
 tags: [scaling-laws, pre-training, chinchilla, compute, training, data-mix, genai]
 type: concept
 difficulty: advanced
@@ -7,26 +8,26 @@ status: published
 last_verified: 2026-04
 parent: "../genai.md"
 related: ["transformers.md", "../llms/llms-overview.md", "modern-architectures.md"]
-source: "Multiple — see Sources"
+source: "Multiple â€” see Sources"
 created: 2026-03-22
 updated: 2026-04-11
 ---
 
 # Scaling Laws & Pre-training
 
-> ✨ **Bit**: GPT-5.4 cost hundreds of millions of dollars to train. Not because the algorithm is complex — it's literally next-token prediction — but because you need ~25,000 GPUs running for months on trillions of tokens. The secret of LLMs is embarrassingly simple: scale.
+> âœ¨ **Bit**: GPT-5.4 cost hundreds of millions of dollars to train. Not because the algorithm is complex â€” it's literally next-token prediction â€” but because you need ~25,000 GPUs running for months on trillions of tokens. The secret of LLMs is embarrassingly simple: scale.
 
 ---
 
-## ★ TL;DR
+## â˜… TL;DR
 
 - **What**: The process of training an LLM from scratch on internet-scale data, and the mathematical laws predicting how performance improves with more compute, data, and parameters
-- **Why**: Understanding pre-training explains WHY bigger models are better, HOW training costs scale, and WHEN to stop training — critical for anyone building or evaluating LLMs
+- **Why**: Understanding pre-training explains WHY bigger models are better, HOW training costs scale, and WHEN to stop training â€” critical for anyone building or evaluating LLMs
 - **Key point**: Chinchilla showed training a SMALLER model on MORE data beats a bigger model on less data. This insight reshaped the entire industry.
 
 ---
 
-## ★ Overview
+## â˜… Overview
 
 ### Definition
 
@@ -43,58 +44,58 @@ This note focuses on the economics, mechanics, and trade-offs of pre-training at
 
 ---
 
-## ★ Deep Dive
+## â˜… Deep Dive
 
 ### The Pre-training Pipeline
 
 ```
-┌──────────────────────────────────────────────────────┐
-│         HOW AN LLM IS ACTUALLY TRAINED                │
-│                                                      │
-│  1. DATA COLLECTION                                  │
-│     Crawl the internet: CommonCrawl, Wikipedia,      │
-│     books, code (GitHub), research papers, forums    │
-│     Scale: 10-15 TRILLION tokens typical (2025-2026) │
-│                                                      │
-│  2. DATA CLEANING & FILTERING                        │
-│     Deduplication (exact + fuzzy matching)            │
-│     Quality filtering (classifier-based)             │
-│     Toxicity/PII removal                             │
-│     Language identification and balancing             │
-│     Cost: Months of engineering, underrated          │
-│                                                      │
-│  3. TOKENIZATION                                     │
-│     BPE tokenizer trained on the data                │
-│     Vocabulary: 32K-256K tokens                      │
-│     See: ../foundations/tokenization.md               │
-│                                                      │
-│  4. DATA MIX RATIOS (secret sauce)                   │
-│     ┌───────────────────────────────────┐            │
-│     │ Web text:      ~50-60%            │            │
-│     │ Code (GitHub): ~15-25%            │            │
-│     │ Books:         ~5-10%             │            │
-│     │ Scientific:    ~5-10%             │            │
-│     │ Math:          ~3-5%              │            │
-│     │ Multilingual:  ~10-20%            │            │
-│     │ Conversation:  ~3-5%              │            │
-│     └───────────────────────────────────┘            │
-│     These ratios MASSIVELY affect capabilities       │
-│     More code → better reasoning (!)                 │
-│                                                      │
-│  5. TRAINING                                         │
-│     Objective: Predict the next token                │
-│     Hardware: 10K-100K GPUs (H100/H200/B200)         │
-│     Duration: 2-6 months                             │
-│     Cost: $50M-$500M+ per training run               │
-│     Infrastructure: NVIDIA NVLink, InfiniBand,       │
-│       distributed training (FSDP, DeepSpeed, Megatron)│
-│                                                      │
-│  6. MONITORING                                       │
-│     Track: loss curves, learning rate, gradient norms │
-│     Handle: loss spikes (restart from checkpoint)    │
-│     Checkpoint every N steps (recover from crashes)  │
-│     Evaluate on held-out benchmarks periodically     │
-└──────────────────────────────────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚         HOW AN LLM IS ACTUALLY TRAINED                â”‚
+â”‚                                                      â”‚
+â”‚  1. DATA COLLECTION                                  â”‚
+â”‚     Crawl the internet: CommonCrawl, Wikipedia,      â”‚
+â”‚     books, code (GitHub), research papers, forums    â”‚
+â”‚     Scale: 10-15 TRILLION tokens typical (2025-2026) â”‚
+â”‚                                                      â”‚
+â”‚  2. DATA CLEANING & FILTERING                        â”‚
+â”‚     Deduplication (exact + fuzzy matching)            â”‚
+â”‚     Quality filtering (classifier-based)             â”‚
+â”‚     Toxicity/PII removal                             â”‚
+â”‚     Language identification and balancing             â”‚
+â”‚     Cost: Months of engineering, underrated          â”‚
+â”‚                                                      â”‚
+â”‚  3. TOKENIZATION                                     â”‚
+â”‚     BPE tokenizer trained on the data                â”‚
+â”‚     Vocabulary: 32K-256K tokens                      â”‚
+â”‚     See: ../foundations/tokenization.md               â”‚
+â”‚                                                      â”‚
+â”‚  4. DATA MIX RATIOS (secret sauce)                   â”‚
+â”‚     â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”            â”‚
+â”‚     â”‚ Web text:      ~50-60%            â”‚            â”‚
+â”‚     â”‚ Code (GitHub): ~15-25%            â”‚            â”‚
+â”‚     â”‚ Books:         ~5-10%             â”‚            â”‚
+â”‚     â”‚ Scientific:    ~5-10%             â”‚            â”‚
+â”‚     â”‚ Math:          ~3-5%              â”‚            â”‚
+â”‚     â”‚ Multilingual:  ~10-20%            â”‚            â”‚
+â”‚     â”‚ Conversation:  ~3-5%              â”‚            â”‚
+â”‚     â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜            â”‚
+â”‚     These ratios MASSIVELY affect capabilities       â”‚
+â”‚     More code â†’ better reasoning (!)                 â”‚
+â”‚                                                      â”‚
+â”‚  5. TRAINING                                         â”‚
+â”‚     Objective: Predict the next token                â”‚
+â”‚     Hardware: 10K-100K GPUs (H100/H200/B200)         â”‚
+â”‚     Duration: 2-6 months                             â”‚
+â”‚     Cost: $50M-$500M+ per training run               â”‚
+â”‚     Infrastructure: NVIDIA NVLink, InfiniBand,       â”‚
+â”‚       distributed training (FSDP, DeepSpeed, Megatron)â”‚
+â”‚                                                      â”‚
+â”‚  6. MONITORING                                       â”‚
+â”‚     Track: loss curves, learning rate, gradient norms â”‚
+â”‚     Handle: loss spikes (restart from checkpoint)    â”‚
+â”‚     Checkpoint every N steps (recover from crashes)  â”‚
+â”‚     Evaluate on held-out benchmarks periodically     â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ### Scaling Laws
@@ -107,12 +108,12 @@ THE CORE INSIGHT (Kaplan et al., 2020):
     2. Amount of training data (D)
     3. Amount of compute (C)
 
-  L(C) ∝ C^(-0.05)  (loss decreases with compute)
-  L(N) ∝ N^(-0.076) (loss decreases with parameters)
-  L(D) ∝ D^(-0.095) (loss decreases with data)
+  L(C) âˆ C^(-0.05)  (loss decreases with compute)
+  L(N) âˆ N^(-0.076) (loss decreases with parameters)
+  L(D) âˆ D^(-0.095) (loss decreases with data)
 
   WHAT THIS MEANS:
-  - 10x more compute → predictable improvement
+  - 10x more compute â†’ predictable improvement
   - Returns diminish but NEVER stop (no plateau found yet)
   - You can PREDICT a model's quality before training it
 ```
@@ -124,32 +125,32 @@ THE GAME-CHANGER:
 
   OpenAI's approach (2020-2022): "Make models BIGGER"
     GPT-3: 175B params, trained on 300B tokens
-    Bigger model, less data → expensive inference
+    Bigger model, less data â†’ expensive inference
 
   DeepMind's Chinchilla finding:
     "For a given compute budget, you should train a
      SMALLER model on MORE data"
 
   THE RULE:
-    Optimal tokens ≈ 20 × parameters
+    Optimal tokens â‰ˆ 20 Ã— parameters
 
-    Model Size    │ Optimal Data | GPT-3 Used | Chinchilla
-    ──────────────┼──────────────┼────────────┼──────────
-    10B params    │ 200B tokens  │ (N/A)      │ ✓
-    70B params    │ 1.4T tokens  │ 300B (!)   │ ✗ undertrained
-    175B params   │ 3.5T tokens  │ 300B (!)   │ ✗ MASSIVELY undertrained
+    Model Size    â”‚ Optimal Data | GPT-3 Used | Chinchilla
+    â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    10B params    â”‚ 200B tokens  â”‚ (N/A)      â”‚ âœ“
+    70B params    â”‚ 1.4T tokens  â”‚ 300B (!)   â”‚ âœ— undertrained
+    175B params   â”‚ 3.5T tokens  â”‚ 300B (!)   â”‚ âœ— MASSIVELY undertrained
 
   IMPACT:
     GPT-3 was 10x undertrained by this rule!
     LLaMA (Meta, 2023): 65B model trained on 1.4T tokens
-      → Matched GPT-3 175B with 3x fewer parameters!
+      â†’ Matched GPT-3 175B with 3x fewer parameters!
 
   POST-CHINCHILLA (2024-2026):
     Industry shifted to "over-training" small models:
     Train way beyond the Chinchilla-optimal point
     because inference cost matters more than training cost.
 
-    LLaMA 3 8B: trained on 15T tokens (1875× params!)
+    LLaMA 3 8B: trained on 15T tokens (1875Ã— params!)
     Reason: Train once (expensive), run forever (cheap)
 ```
 
@@ -158,7 +159,7 @@ THE GAME-CHANGER:
 ```
 HARDWARE (2025-2026 training runs):
 
-  GPU: NVIDIA H100 (80GB) → H200 (141GB) → B200/GB300
+  GPU: NVIDIA H100 (80GB) â†’ H200 (141GB) â†’ B200/GB300
 
   Typical cluster:
     GPT-5.x training:    ~25,000+ H100s
@@ -202,18 +203,18 @@ COMMON FAILURES:
                      Fix: careful deduplication, held-out evaluation
 
   5. Instability at scale: Training becomes chaotic at 100B+ params
-                     Fix: bf16 precision, μP (maximal update parametrization)
+                     Fix: bf16 precision, Î¼P (maximal update parametrization)
 ```
 
 ---
 
-## ◆ Quick Reference
+## â—† Quick Reference
 
 ```
 SCALING RULES OF THUMB:
-  Chinchilla:     tokens ≈ 20× parameters (compute-optimal)
-  Over-training:  tokens ≈ 100-2000× params (inference-optimal)
-  10× compute:    ~5% loss reduction (reliable)
+  Chinchilla:     tokens â‰ˆ 20Ã— parameters (compute-optimal)
+  Over-training:  tokens â‰ˆ 100-2000Ã— params (inference-optimal)
+  10Ã— compute:    ~5% loss reduction (reliable)
 
 TRAINING COST COMPONENTS:
   GPU hours:       60-80% of total cost
@@ -228,22 +229,22 @@ PRE-TRAINING OBJECTIVE:
 
 ---
 
-## ○ Interview Angles
+## â—‹ Interview Angles
 
 - **Q**: Explain the Chinchilla scaling laws.
-- **A**: For a fixed compute budget, there's an optimal ratio of model size to training data. Chinchilla showed the optimal is ~20 tokens per parameter. GPT-3 (175B params, 300B tokens) was massively undertrained — a 70B model on 1.4T tokens would match it. This led to LLaMA's approach: smaller models, much more data. In 2025-2026, industry "over-trains" beyond Chinchilla-optimal because inference cost (running the model) matters more than training cost (one-time).
+- **A**: For a fixed compute budget, there's an optimal ratio of model size to training data. Chinchilla showed the optimal is ~20 tokens per parameter. GPT-3 (175B params, 300B tokens) was massively undertrained â€” a 70B model on 1.4T tokens would match it. This led to LLaMA's approach: smaller models, much more data. In 2025-2026, industry "over-trains" beyond Chinchilla-optimal because inference cost (running the model) matters more than training cost (one-time).
 
 - **Q**: How is a large language model pre-trained?
 - **A**: (1) Collect trillions of tokens from internet, books, code. (2) Clean and deduplicate aggressively. (3) Train a BPE tokenizer. (4) Set data mix ratios (web, code, books, math). (5) Train using next-token prediction on 10K-100K GPUs for 2-6 months using distributed parallelism (data, tensor, pipeline). (6) Monitor loss curves, handle spikes, checkpoint regularly. Cost: $10M-$500M+ per run.
 
 ---
 
-## ★ Code & Implementation
+## â˜… Code & Implementation
 
 ### Chinchilla Optimal Token Calculator
 
 ```python
-# ⚠️ Last tested: 2026-04 | Requires: Python 3.10+ (stdlib only)
+# âš ï¸ Last tested: 2026-04 | Requires: Python 3.10+ (stdlib only)
 # Chinchilla paper (Hoffmann et al. 2022): optimal training = 20 tokens per parameter
 
 def chinchilla_optimal(params: float, budget_override: float | None = None) -> dict:
@@ -277,10 +278,10 @@ for model_name, params in [
     )
 
 # Note: Modern models (LLaMA 3, Gemma 3) over-train by 5-10x for better
-# inference efficiency — Chinchilla is the floor, not the ceiling.
+# inference efficiency â€” Chinchilla is the floor, not the ceiling.
 ```
 
-## ★ Connections
+## â˜… Connections
 
 | Relationship | Topics                                                                                                          |
 | ------------ | --------------------------------------------------------------------------------------------------------------- |
@@ -292,7 +293,7 @@ for model_name, params in [
 
 ---
 
-## ◆ Production Failure Modes
+## â—† Production Failure Modes
 
 | Failure                           | Symptoms                                                        | Root Cause                                                    | Mitigation                                                        |
 | --------------------------------- | --------------------------------------------------------------- | ------------------------------------------------------------- | ----------------------------------------------------------------- |
@@ -302,7 +303,7 @@ for model_name, params in [
 
 ---
 
-## ◆ Hands-On Exercises
+## â—† Hands-On Exercises
 
 ### Exercise 1: Plot Your Own Scaling Law
 
@@ -317,16 +318,16 @@ for model_name, params in [
 ---
 
 
-## ★ Recommended Resources
+## â˜… Recommended Resources
 
 | Type    | Resource                                                                                           | Why                                                                     |
 | ------- | -------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| 📄 Paper | [Kaplan et al. "Scaling Laws for Neural Language Models" (2020)](https://arxiv.org/abs/2001.08361) | Original OpenAI scaling laws — compute, data, parameters                |
-| 📄 Paper | [Hoffmann et al. "Chinchilla" (2022)](https://arxiv.org/abs/2203.15556)                            | Revised scaling: compute-optimal training needs more data than expected |
-| 🎥 Video | [Andrej Karpathy — "Let's Build GPT"](https://www.youtube.com/watch?v=kCc8FmEb1nY)                 | Build a language model from scratch — pretraining intuition             |
-| 📘 Book  | "AI Engineering" by Chip Huyen (2025), Ch 2                                                        | Practical understanding of model selection and scaling tradeoffs        |
+| ðŸ“„ Paper | [Kaplan et al. "Scaling Laws for Neural Language Models" (2020)](https://arxiv.org/abs/2001.08361) | Original OpenAI scaling laws â€” compute, data, parameters                |
+| ðŸ“„ Paper | [Hoffmann et al. "Chinchilla" (2022)](https://arxiv.org/abs/2203.15556)                            | Revised scaling: compute-optimal training needs more data than expected |
+| ðŸŽ¥ Video | [Andrej Karpathy â€” "Let's Build GPT"](https://www.youtube.com/watch?v=kCc8FmEb1nY)                 | Build a language model from scratch â€” pretraining intuition             |
+| ðŸ“˜ Book  | "AI Engineering" by Chip Huyen (2025), Ch 2                                                        | Practical understanding of model selection and scaling tradeoffs        |
 
-## ★ Sources
+## â˜… Sources
 
 - Kaplan et al., "Scaling Laws for Neural Language Models" (2020)
 - Hoffmann et al., "Training Compute-Optimal Large Language Models" (Chinchilla, 2022)

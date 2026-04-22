@@ -1,5 +1,6 @@
 ---
 title: "AI Product Management Fundamentals"
+aliases: ["AI PM", "AI Product Management"]
 tags: [ai-product-management, product, strategy, evaluation, applications]
 type: reference
 difficulty: intermediate
@@ -18,14 +19,14 @@ updated: 2026-04-12
 
 ---
 
-## ★ TL;DR
+## â˜… TL;DR
 - **What**: The product-thinking layer for identifying, shaping, and delivering useful AI features.
 - **Why**: Many AI projects fail because the product problem is vague even when the model is impressive.
 - **Key point**: The product manager's job is to turn model possibility into reliable user value.
 
 ---
 
-## ★ Overview
+## â˜… Overview
 ### Definition
 
 **AI product management** combines normal product work with AI-specific concerns such as probabilistic behavior, evaluation, trust, data access, and human oversight.
@@ -48,7 +49,7 @@ This note is for technical learners who want product fluency. It covers use-case
 
 ---
 
-## ★ Deep Dive
+## â˜… Deep Dive
 ### Start With The User Problem
 
 Good AI product questions:
@@ -142,7 +143,7 @@ launch_plan:
 
 ---
 
-## ◆ Quick Reference
+## â—† Quick Reference
 | If You Are Unsure About... | Ask This                                               |
 | -------------------------- | ------------------------------------------------------ |
 | use case quality           | what user pain disappears if this works?               |
@@ -153,7 +154,7 @@ launch_plan:
 
 ---
 
-## ○ Gotchas & Common Mistakes
+## â—‹ Gotchas & Common Mistakes
 - Strong demos can hide weak repeat usage.
 - Product-market fit and model capability are different questions.
 - Users often prefer slower but more trustworthy AI.
@@ -161,7 +162,7 @@ launch_plan:
 
 ---
 
-## ○ Interview Angles
+## â—‹ Interview Angles
 - **Q**: How do you decide whether an AI feature is worth building?
 - **A**: I start with the user workflow and measurable outcome, then test whether AI materially improves that workflow at an acceptable quality, trust, and cost level. If it does not, I narrow the scope or avoid the feature.
 
@@ -170,12 +171,12 @@ launch_plan:
 
 ---
 
-## ★ Code & Implementation
+## â˜… Code & Implementation
 
 ### AI Feature Feasibility Scorecard
 
 ```python
-# ⚠️ Last tested: 2026-04 | Requires: Python 3.10+ (stdlib only)
+# âš ï¸ Last tested: 2026-04 | Requires: Python 3.10+ (stdlib only)
 from dataclasses import dataclass
 from typing import Literal
 
@@ -187,8 +188,8 @@ class AIFeatureFeasibility:
     data_availability:    int   # Is training/evaluation data available?
     accuracy_requirement: int   # How much does accuracy matter? (5=critical)
     latency_tolerance:    int   # How tolerant is the UX to latency? (5=very tolerant)
-    failure_impact:       int   # What is the impact of AI errors? (5=catastrophic → hard)
-    alternatives_exist:   int   # Do rule-based alternatives exist? (5=many → lower AI need)
+    failure_impact:       int   # What is the impact of AI errors? (5=catastrophic â†’ hard)
+    alternatives_exist:   int   # Do rule-based alternatives exist? (5=many â†’ lower AI need)
     user_ai_trust:        int   # How much do users trust AI in this context? (5=high trust)
 
     def score(self) -> dict:
@@ -221,10 +222,10 @@ features = [
 ]
 for f in features:
     r = f.score()
-    print(f"{r['name']}: {r['score']:.0f}/100 ({r['confidence']}) — {r['guidance']}")
+    print(f"{r['name']}: {r['score']:.0f}/100 ({r['confidence']}) â€” {r['guidance']}")
 ```
 
-## ★ Connections
+## â˜… Connections
 | Relationship | Topics                                                                                                                                              |
 | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Builds on    | [AI System Design for GenAI Applications](../production/ai-system-design.md), [LLM Evaluation Deep Dive](../evaluation/llm-evaluation-deep-dive.md) |
@@ -235,7 +236,7 @@ for f in features:
 
 ---
 
-## ◆ Production Failure Modes
+## â—† Production Failure Modes
 
 | Failure                         | Symptoms                                        | Root Cause                               | Mitigation                                                      |
 | ------------------------------- | ----------------------------------------------- | ---------------------------------------- | --------------------------------------------------------------- |
@@ -245,7 +246,7 @@ for f in features:
 
 ---
 
-## ◆ Hands-On Exercises
+## â—† Hands-On Exercises
 
 ### Exercise 1: Write an AI Product Brief
 
@@ -260,15 +261,15 @@ for f in features:
 ---
 
 
-## ★ Recommended Resources
+## â˜… Recommended Resources
 
 | Type    | Resource                                                                           | Why                                  |
 | ------- | ---------------------------------------------------------------------------------- | ------------------------------------ |
-| 📘 Book  | "AI Engineering" by Chip Huyen (2025), Ch 1, 9                                     | Product thinking for AI applications |
-| 📘 Book  | "The AI Product Manager's Handbook" by Buest (2023)                                | PM-specific AI guide                 |
-| 🎥 Video | [Lenny's Podcast — AI Product Management Episodes](https://www.lennyspodcast.com/) | PM perspectives on building with AI  |
+| ðŸ“˜ Book  | "AI Engineering" by Chip Huyen (2025), Ch 1, 9                                     | Product thinking for AI applications |
+| ðŸ“˜ Book  | "The AI Product Manager's Handbook" by Buest (2023)                                | PM-specific AI guide                 |
+| ðŸŽ¥ Video | [Lenny's Podcast â€” AI Product Management Episodes](https://www.lennyspodcast.com/) | PM perspectives on building with AI  |
 
-## ★ Sources
+## â˜… Sources
 - Reforge and product strategy material on AI products
 - [AI System Design for GenAI Applications](../production/ai-system-design.md)
 - [LLM Evaluation Deep Dive](../evaluation/llm-evaluation-deep-dive.md)

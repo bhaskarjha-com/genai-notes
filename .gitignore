@@ -5,10 +5,18 @@ drafts/
 # link_converter.py is a script that converts links from one format to another, and is not part of the main project.
 link_converter.py
 
-# Local docs build output and local Python environments
+# Local docs build output, local Python environments, and Obsidian volatile files
 docs/
 site/
 .venv/
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/plugins/
+.obsidian/themes/
+.obsidian/hotkeys.json
+.obsidian/community-plugins.json
+.obsidian/core-plugins.json
+.obsidian/core-plugins-migration.json
 __pycache__/
 .tmp/
 .uv-cache/

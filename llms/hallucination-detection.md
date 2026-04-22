@@ -1,5 +1,6 @@
 ---
 title: "Hallucination Detection & Mitigation"
+aliases: ["Hallucinations", "Factual Grounding"]
 tags: [hallucination, groundedness, factuality, reliability, llm]
 type: concept
 difficulty: advanced
@@ -18,14 +19,14 @@ updated: 2026-04-12
 
 ---
 
-## ★ TL;DR
+## â˜… TL;DR
 - **What**: Methods to detect and reduce unsupported, fabricated, or overconfident model outputs
 - **Why**: Hallucination is one of the main blockers to production trust in GenAI systems
 - **Key point**: The best fix is usually system-level grounding and verification, not just a better prompt
 
 ---
 
-## ★ Overview
+## â˜… Overview
 ### Definition
 
 A **hallucination** is an output that is fluent and plausible but unsupported by the available evidence, tool results, or real-world facts.
@@ -49,7 +50,7 @@ This note covers hallucination types, detection methods, mitigation strategies, 
 
 ---
 
-## ★ Deep Dive
+## â˜… Deep Dive
 ### Useful Taxonomy
 
 | Type                    | Description                                                | Example                                                |
@@ -119,7 +120,7 @@ User request
 ### Simple Groundedness Pattern
 
 ```python
-# ⚠️ Last tested: 2026-04
+# âš ï¸ Last tested: 2026-04
 def answer_with_check(query, context_chunks, llm, verifier):
     draft = llm.generate(query=query, context=context_chunks)
     verdict = verifier.score(answer=draft, evidence=context_chunks)
@@ -140,7 +141,7 @@ def answer_with_check(query, context_chunks, llm, verifier):
 
 ---
 
-## ◆ Quick Reference
+## â—† Quick Reference
 | Signal                               | Interpretation                     |
 | ------------------------------------ | ---------------------------------- |
 | High fluency + low evidence coverage | Likely hallucination risk          |
@@ -150,7 +151,7 @@ def answer_with_check(query, context_chunks, llm, verifier):
 
 ---
 
-## ○ Gotchas & Common Mistakes
+## â—‹ Gotchas & Common Mistakes
 - "Lower temperature" is not a full hallucination strategy
 - Fine-tuning can improve style while still preserving factual failure modes
 - A judge model can also hallucinate if it is not grounded on evidence
@@ -158,7 +159,7 @@ def answer_with_check(query, context_chunks, llm, verifier):
 
 ---
 
-## ○ Interview Angles
+## â—‹ Interview Angles
 - **Q**: What is the most effective way to reduce hallucination in enterprise assistants?
 - **A**: Ground the answer on retrieval or tool outputs, require evidence in the response path, and add a post-generation verification step with abstention when confidence is low.
 
@@ -167,13 +168,13 @@ def answer_with_check(query, context_chunks, llm, verifier):
 
 ---
 
-## ★ Code & Implementation
+## â˜… Code & Implementation
 
 ### Production Groundedness Checker with Abstention
 
 ```python
 # pip install openai>=1.60
-# ⚠️ Last tested: 2026-04 | Requires: openai>=1.60, OPENAI_API_KEY env var
+# âš ï¸ Last tested: 2026-04 | Requires: openai>=1.60, OPENAI_API_KEY env var
 from openai import OpenAI
 import json
 
@@ -208,7 +209,7 @@ print(f"Unsupported: {check.get('unsupported_claims', [])}")
 ### Self-Consistency Check (Reference-Free)
 
 ```python
-# ⚠️ Last tested: 2026-04 | Requires: openai>=1.60, OPENAI_API_KEY
+# âš ï¸ Last tested: 2026-04 | Requires: openai>=1.60, OPENAI_API_KEY
 from collections import Counter
 
 def self_consistency_check(question: str, n: int = 5) -> dict:
@@ -231,7 +232,7 @@ print(f"{r['answer']} ({r['consistency']:.0%} agreement, confident={r['confident
 
 ```python
 # pip install ragas>=0.2 openai>=1.60
-# ⚠️ Last tested: 2026-04 | Requires: ragas>=0.2, OPENAI_API_KEY
+# âš ï¸ Last tested: 2026-04 | Requires: ragas>=0.2, OPENAI_API_KEY
 
 from ragas import evaluate
 from ragas.metrics import faithfulness, answer_relevancy
@@ -262,7 +263,7 @@ print(result)
 # result.to_pandas() shows per-row breakdown
 ```
 
-## ★ Connections
+## â˜… Connections
 | Relationship | Topics                                                                                                                                                                                                                                     |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Builds on    | [Large Language Models (LLMs)](./llms-overview.md), [Retrieval-Augmented Generation (RAG)](../techniques/rag.md), [LLM Evaluation & Benchmarks](../evaluation/evaluation-and-benchmarks.md)                                                |
@@ -273,7 +274,7 @@ print(result)
 
 ---
 
-## ◆ Hands-On Exercises
+## â—† Hands-On Exercises
 
 ### Exercise 1: Build a Hallucination Detection Pipeline
 
@@ -288,12 +289,12 @@ print(result)
 
 ---
 
-## ◆ Production Failure Modes
+## â—† Production Failure Modes
 
 | Failure                      | Symptoms                                             | Root Cause                             | Mitigation                                                          |
 | ---------------------------- | ---------------------------------------------------- | -------------------------------------- | ------------------------------------------------------------------- |
 | **False positive refusals**  | System flags accurate responses as hallucinations    | Detection threshold too aggressive     | Calibrate thresholds on domain data, multi-method consensus         |
-| **Confident hallucinations** | Model hallucinates with high confidence scores       | Confidence ≠ correctness for LLMs      | Retrieval grounding, self-consistency checks, citation verification |
+| **Confident hallucinations** | Model hallucinates with high confidence scores       | Confidence â‰  correctness for LLMs      | Retrieval grounding, self-consistency checks, citation verification |
 | **Detection latency**        | Real-time hallucination check adds 2-5s per response | Detection method too compute-intensive | Lightweight pre-filter, async verification, batch checking          |
 | **Judge model hallucination** | LLM-as-judge marks correct answers as hallucinated  | Judge model itself is not grounded     | Provide evidence to the judge; ensemble multiple judges             |
 | **Domain drift**             | Detection accuracy degrades on new document types    | Detector calibrated on different corpus | Domain-specific threshold calibration, periodic re-evaluation      |
@@ -302,15 +303,15 @@ print(result)
 ---
 
 
-## ★ Recommended Resources
+## â˜… Recommended Resources
 
 | Type       | Resource                                                                      | Why                                                    |
 | ---------- | ----------------------------------------------------------------------------- | ------------------------------------------------------ |
-| 📄 Paper    | [Min et al. "FActScore" (2023)](https://arxiv.org/abs/2305.14251)             | Fine-grained factuality scoring for LLM outputs        |
-| 📘 Book     | "AI Engineering" by Chip Huyen (2025), Ch 4                                   | Hallucination detection as part of evaluation strategy |
-| 🔧 Hands-on | [Vectara HHEM](https://huggingface.co/vectara/hallucination_evaluation_model) | Open-source hallucination evaluation model             |
+| ðŸ“„ Paper    | [Min et al. "FActScore" (2023)](https://arxiv.org/abs/2305.14251)             | Fine-grained factuality scoring for LLM outputs        |
+| ðŸ“˜ Book     | "AI Engineering" by Chip Huyen (2025), Ch 4                                   | Hallucination detection as part of evaluation strategy |
+| ðŸ”§ Hands-on | [Vectara HHEM](https://huggingface.co/vectara/hallucination_evaluation_model) | Open-source hallucination evaluation model             |
 
-## ★ Sources
+## â˜… Sources
 - SelfCheckGPT paper
 - RAGAS documentation
 - NLI / entailment literature for factual verification

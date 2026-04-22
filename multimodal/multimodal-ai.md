@@ -1,5 +1,6 @@
 ---
 title: "Multimodal AI"
+aliases: ["Multimodal", "Vision-Language", "VLM"]
 tags: [multimodal, vision-language, text-to-video, text-to-audio, sora, veo, genai]
 type: concept
 difficulty: intermediate
@@ -14,11 +15,11 @@ updated: 2026-04-12
 
 # Multimodal AI
 
-> ✨ **Bit**: We see, hear, read, and speak in multiple modalities simultaneously. Multimodal AI does the same — one model that understands text, images, audio, and video together. It's the closest AI has come to how humans actually perceive the world.
+> âœ¨ **Bit**: We see, hear, read, and speak in multiple modalities simultaneously. Multimodal AI does the same â€” one model that understands text, images, audio, and video together. It's the closest AI has come to how humans actually perceive the world.
 
 ---
 
-## ★ TL;DR
+## â˜… TL;DR
 
 - **What**: AI systems that process and generate across multiple data types (text, image, audio, video) in a unified model
 - **Why**: The real world is multimodal. Text-only AI is limited. Multimodal = richer understanding + more useful outputs
@@ -26,11 +27,11 @@ updated: 2026-04-12
 
 ---
 
-## ★ Overview
+## â˜… Overview
 
 ### Definition
 
-**Multimodal AI** refers to models that can understand, combine, and generate content across multiple modalities — text, images, audio, video, code, and structured data — within a single system, rather than requiring separate specialized models for each.
+**Multimodal AI** refers to models that can understand, combine, and generate content across multiple modalities â€” text, images, audio, video, code, and structured data â€” within a single system, rather than requiring separate specialized models for each.
 
 ### Scope
 
@@ -47,28 +48,28 @@ Last verified for frontier-model and product examples in this note: 2026-04.
 
 ### Prerequisites
 
-- [Llms Overview](../llms/llms-overview.md) — the text foundation
-- [Transformers](../foundations/transformers.md) — attention across modalities
+- [Llms Overview](../llms/llms-overview.md) â€” the text foundation
+- [Transformers](../foundations/transformers.md) â€” attention across modalities
 
 ---
 
-## ★ Deep Dive
+## â˜… Deep Dive
 
 ### The Multimodal Spectrum
 
 ```
 LEVEL 1: Multi-input (understand)
-  Text + Image → Answer
-  "What's in this photo?" → "A cat sitting on a laptop"
+  Text + Image â†’ Answer
+  "What's in this photo?" â†’ "A cat sitting on a laptop"
   Models: GPT-5.4, Gemini 3.1 Pro, Claude Opus 4.6 (vision)
 
 LEVEL 2: Multi-output (generate)
-  Text → Image + Audio + Video
-  "Create a video of a sunset" → [video file]
+  Text â†’ Image + Audio + Video
+  "Create a video of a sunset" â†’ [video file]
   Models: Sora, Veo, DALL-E
 
 LEVEL 3: Omni (understand + generate across all)
-  Text ↔ Image ↔ Audio ↔ Video (any direction)
+  Text â†” Image â†” Audio â†” Video (any direction)
   "Describe this image, then create a video extending it with music"
   Models: GPT-5.4 (omni), Gemini 3.1 Pro (emerging)
 
@@ -81,21 +82,21 @@ LEVEL 4: Real-time interactive (emerging 2026)
 ### How Multimodal Models Work
 
 ```
-┌────────────────────────────────────────────────────────┐
-│              MULTIMODAL ARCHITECTURE                    │
-│                                                        │
-│  Image ──► [Vision Encoder] ──► Image tokens ──┐       │
-│                                                │       │
-│  Text  ──► [Tokenizer]      ──► Text tokens  ──┤       │
-│                                                │──► [LLM    │
-│  Audio ──► [Audio Encoder]  ──► Audio tokens ──┤    Backbone]│
-│                                                │       │
-│  Video ──► [Frame Encoder]  ──► Video tokens ──┘       │
-│                                                        │
-│  Output: Text / Image tokens / Audio tokens            │
-│          ↓                                             │
-│  [Decoder for each modality]                           │
-└────────────────────────────────────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚              MULTIMODAL ARCHITECTURE                    â”‚
+â”‚                                                        â”‚
+â”‚  Image â”€â”€â–º [Vision Encoder] â”€â”€â–º Image tokens â”€â”€â”       â”‚
+â”‚                                                â”‚       â”‚
+â”‚  Text  â”€â”€â–º [Tokenizer]      â”€â”€â–º Text tokens  â”€â”€â”¤       â”‚
+â”‚                                                â”‚â”€â”€â–º [LLM    â”‚
+â”‚  Audio â”€â”€â–º [Audio Encoder]  â”€â”€â–º Audio tokens â”€â”€â”¤    Backbone]â”‚
+â”‚                                                â”‚       â”‚
+â”‚  Video â”€â”€â–º [Frame Encoder]  â”€â”€â–º Video tokens â”€â”€â”˜       â”‚
+â”‚                                                        â”‚
+â”‚  Output: Text / Image tokens / Audio tokens            â”‚
+â”‚          â†“                                             â”‚
+â”‚  [Decoder for each modality]                           â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 
 KEY IDEA: Convert everything into tokens, process with shared
 Transformer backbone, decode to target modality.
@@ -103,7 +104,7 @@ Transformer backbone, decode to target modality.
 
 ### Vision-Language Models (VLMs)
 
-The most mature multimodal capability — models that understand images:
+The most mature multimodal capability â€” models that understand images:
 
 | Model                            | Vision Capabilities                                         | Context     |
 | -------------------------------- | ----------------------------------------------------------- | ----------- |
@@ -116,7 +117,7 @@ The most mature multimodal capability — models that understand images:
 **Common use cases:**
 - Document/receipt understanding (OCR + reasoning)
 - Chart and graph analysis
-- UI screenshot → code generation
+- UI screenshot â†’ code generation
 - Medical image analysis
 - Visual question answering
 
@@ -151,9 +152,9 @@ The most mature multimodal capability — models that understand images:
 ```
 CLIP (Contrastive Language-Image Pre-training):
 
-  "A photo of a cat"  ──► [Text Encoder]  ──► Text embedding
-                                                    ↕ (should be close)
-  [actual cat photo]   ──► [Image Encoder] ──► Image embedding
+  "A photo of a cat"  â”€â”€â–º [Text Encoder]  â”€â”€â–º Text embedding
+                                                    â†• (should be close)
+  [actual cat photo]   â”€â”€â–º [Image Encoder] â”€â”€â–º Image embedding
 
   Trained on 400M image-text pairs from the internet.
   Result: Text and images in the SAME vector space.
@@ -167,23 +168,23 @@ CLIP (Contrastive Language-Image Pre-training):
 
 ---
 
-## ◆ Types & Classifications
+## â—† Types & Classifications
 
-| Type                    | Input → Output             | Example Models                | Key Challenge                  |
+| Type                    | Input â†’ Output             | Example Models                | Key Challenge                  |
 | ----------------------- | -------------------------- | ----------------------------- | ------------------------------ |
-| **Image Understanding** | Image+Text → Text          | GPT-5, Gemini 3, Claude 4     | Fine-grained visual reasoning  |
-| **Image Generation**    | Text → Image               | DALL-E 3, SD, Midjourney      | Prompt adherence, consistency  |
-| **Video Generation**    | Text/Image → Video         | Sora 2, Veo 3.1               | Physics, temporal consistency  |
-| **Voice/TTS**           | Text → Speech              | ElevenLabs, Bark              | Natural prosody, emotion       |
-| **Music Generation**    | Text → Music               | Suno, Udio                    | Musical structure, lyrics      |
-| **Document AI**         | Document → Structured Data | GPT-5, Gemini (document mode) | Table extraction, layout       |
-| **Omni**                | Any → Any                  | GPT-5 (omni mode)             | Maintaining quality across all |
+| **Image Understanding** | Image+Text â†’ Text          | GPT-5, Gemini 3, Claude 4     | Fine-grained visual reasoning  |
+| **Image Generation**    | Text â†’ Image               | DALL-E 3, SD, Midjourney      | Prompt adherence, consistency  |
+| **Video Generation**    | Text/Image â†’ Video         | Sora 2, Veo 3.1               | Physics, temporal consistency  |
+| **Voice/TTS**           | Text â†’ Speech              | ElevenLabs, Bark              | Natural prosody, emotion       |
+| **Music Generation**    | Text â†’ Music               | Suno, Udio                    | Musical structure, lyrics      |
+| **Document AI**         | Document â†’ Structured Data | GPT-5, Gemini (document mode) | Table extraction, layout       |
+| **Omni**                | Any â†’ Any                  | GPT-5 (omni mode)             | Maintaining quality across all |
 
 ---
 
-## ◆ Strengths vs Limitations
+## â—† Strengths vs Limitations
 
-| ✅ Strengths                                      | ❌ Limitations                                  |
+| âœ… Strengths                                      | âŒ Limitations                                  |
 | ------------------------------------------------ | ---------------------------------------------- |
 | More natural interaction (like humans do)        | Much more compute-intensive than text-only     |
 | Richer understanding (see + read + hear)         | Video generation still has artifacts           |
@@ -193,55 +194,55 @@ CLIP (Contrastive Language-Image Pre-training):
 
 ---
 
-## ◆ Quick Reference
+## â—† Quick Reference
 
 ```
 WHAT'S MATURE (production-ready):
-  ✅ Image understanding (VLMs) — all frontier models
-  ✅ Image generation — Stable Diffusion, DALL-E, Midjourney
-  ✅ Text-to-speech — ElevenLabs
-  ✅ Document AI — Gemini, GPT-5
+  âœ… Image understanding (VLMs) â€” all frontier models
+  âœ… Image generation â€” Stable Diffusion, DALL-E, Midjourney
+  âœ… Text-to-speech â€” ElevenLabs
+  âœ… Document AI â€” Gemini, GPT-5
 
 WHAT'S EMERGING (usable but imperfect):
-  ⚠️ Text-to-video — Sora 2, Veo 3 (impressive but artifacts)
-  ⚠️ Music generation — Suno, Udio
-  ⚠️ Real-time multimodal — voice+video chat
+  âš ï¸ Text-to-video â€” Sora 2, Veo 3 (impressive but artifacts)
+  âš ï¸ Music generation â€” Suno, Udio
+  âš ï¸ Real-time multimodal â€” voice+video chat
 
 WHAT'S EARLY (research/demos):
-  🔬 3D generation from text
-  🔬 Real-time interactive video
-  🔬 Full omni models (any-to-any)
+  ðŸ”¬ 3D generation from text
+  ðŸ”¬ Real-time interactive video
+  ðŸ”¬ Full omni models (any-to-any)
 ```
 
 ---
 
-## ○ Gotchas & Common Mistakes
+## â—‹ Gotchas & Common Mistakes
 
-- ⚠️ **"Multimodal" doesn't mean "good at everything"**: A model great at text+image may be mediocre at audio. Check per-modality benchmarks.
-- ⚠️ **Token cost**: Images = many tokens. A single image can consume 1K-5K tokens of context. Video = massively more.
-- ⚠️ **Deepfake risk**: Realistic video/audio generation = major potential for misuse. Always consider ethical implications.
-- ⚠️ **Temporal consistency**: Video models still struggle with consistent faces, physics, and object permanence across frames.
-- ⚠️ **Not magic**: "Make me a professional 30-second ad" is still too complex for single-prompt generation.
+- âš ï¸ **"Multimodal" doesn't mean "good at everything"**: A model great at text+image may be mediocre at audio. Check per-modality benchmarks.
+- âš ï¸ **Token cost**: Images = many tokens. A single image can consume 1K-5K tokens of context. Video = massively more.
+- âš ï¸ **Deepfake risk**: Realistic video/audio generation = major potential for misuse. Always consider ethical implications.
+- âš ï¸ **Temporal consistency**: Video models still struggle with consistent faces, physics, and object permanence across frames.
+- âš ï¸ **Not magic**: "Make me a professional 30-second ad" is still too complex for single-prompt generation.
 
 ---
 
-## ○ Interview Angles
+## â—‹ Interview Angles
 
 - **Q**: How do multimodal models process images?
 - **A**: Images are encoded by a vision encoder (like ViT) into a sequence of "visual tokens," similar to text tokens. These are concatenated with text tokens and processed by the same Transformer backbone. Cross-attention allows the model to reason about both text and visual information together.
 
 - **Q**: Why is native multimodality important vs bolting vision onto a text model?
-- **A**: Bolted-on vision (early GPT-4V approach) processes modalities separately and aligns them — creating artifacts. Native multimodality (Gemini, LLaMA 4) trains on all modalities from the start, creating deeper cross-modal understanding and more natural integration.
+- **A**: Bolted-on vision (early GPT-4V approach) processes modalities separately and aligns them â€” creating artifacts. Native multimodality (Gemini, LLaMA 4) trains on all modalities from the start, creating deeper cross-modal understanding and more natural integration.
 
 ---
 
-## ★ Code & Implementation
+## â˜… Code & Implementation
 
 ### Vision + Text with GPT-4o (Image Analysis)
 
 ```python
 # pip install openai>=1.60 Pillow>=10
-# ⚠️ Last tested: 2026-04 | Requires: openai>=1.60, OPENAI_API_KEY env var
+# âš ï¸ Last tested: 2026-04 | Requires: openai>=1.60, OPENAI_API_KEY env var
 import base64
 from pathlib import Path
 from openai import OpenAI
@@ -285,7 +286,7 @@ response = client.chat.completions.create(
 print(response.choices[0].message.content)
 ```
 
-## ★ Connections
+## â˜… Connections
 
 | Relationship | Topics                                                                                                                                           |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -297,7 +298,7 @@ print(response.choices[0].message.content)
 
 ---
 
-## ◆ Production Failure Modes
+## â—† Production Failure Modes
 
 | Failure                        | Symptoms                                                 | Root Cause                                  | Mitigation                                                          |
 | ------------------------------ | -------------------------------------------------------- | ------------------------------------------- | ------------------------------------------------------------------- |
@@ -307,7 +308,7 @@ print(response.choices[0].message.content)
 
 ---
 
-## ◆ Hands-On Exercises
+## â—† Hands-On Exercises
 
 ### Exercise 1: Build a Multimodal Document Analyzer
 
@@ -322,16 +323,16 @@ print(response.choices[0].message.content)
 ---
 
 
-## ★ Recommended Resources
+## â˜… Recommended Resources
 
 | Type       | Resource                                                                                 | Why                                                     |
 | ---------- | ---------------------------------------------------------------------------------------- | ------------------------------------------------------- |
-| 📄 Paper    | [OpenAI "GPT-4V System Card" (2023)](https://cdn.openai.com/papers/GPTV_System_Card.pdf) | How multimodal capabilities are evaluated and deployed  |
-| 📄 Paper    | [Radford et al. "CLIP" (2021)](https://arxiv.org/abs/2103.00020)                         | Foundational vision-language alignment paper            |
-| 📘 Book     | "AI Engineering" by Chip Huyen (2025), Ch 3                                              | Multimodal model capabilities and application patterns  |
-| 🔧 Hands-on | [Google Gemini API Docs](https://ai.google.dev/docs)                                     | Production multimodal API with vision, audio, and video |
+| ðŸ“„ Paper    | [OpenAI "GPT-4V System Card" (2023)](https://cdn.openai.com/papers/GPTV_System_Card.pdf) | How multimodal capabilities are evaluated and deployed  |
+| ðŸ“„ Paper    | [Radford et al. "CLIP" (2021)](https://arxiv.org/abs/2103.00020)                         | Foundational vision-language alignment paper            |
+| ðŸ“˜ Book     | "AI Engineering" by Chip Huyen (2025), Ch 3                                              | Multimodal model capabilities and application patterns  |
+| ðŸ”§ Hands-on | [Google Gemini API Docs](https://ai.google.dev/docs)                                     | Production multimodal API with vision, audio, and video |
 
-## ★ Sources
+## â˜… Sources
 
 - OpenAI Sora documentation (2024-2025)
 - Google Veo release notes (2025-2026)

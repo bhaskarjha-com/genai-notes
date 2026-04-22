@@ -1,5 +1,6 @@
 ---
 title: "Document Parsing & Extraction"
+aliases: ["Document Parsing", "PDF Extraction"]
 tags: [document-parsing, pdf, ocr, extraction, rag, chunking, production]
 type: procedure
 difficulty: intermediate
@@ -7,26 +8,26 @@ status: published
 last_verified: 2026-04
 parent: "llmops.md"
 related: ["../techniques/rag.md", "../techniques/context-engineering.md", "../tools-and-infra/vector-databases.md"]
-source: "Multiple — see Sources"
+source: "Multiple â€” see Sources"
 created: 2026-04-14
 updated: 2026-04-14
 ---
 
 # Document Parsing & Extraction
 
-> ✨ **Bit**: RAG is only as good as its parsed documents. If your PDF parser turns a table into gibberish or loses headings, no embedding model or LLM can recover that information. Document parsing is the unglamorous foundation that makes or breaks retrieval quality.
+> âœ¨ **Bit**: RAG is only as good as its parsed documents. If your PDF parser turns a table into gibberish or loses headings, no embedding model or LLM can recover that information. Document parsing is the unglamorous foundation that makes or breaks retrieval quality.
 
 ---
 
-## ★ TL;DR
+## â˜… TL;DR
 
 - **What**: The pipeline for extracting structured text from unstructured documents (PDFs, Word, HTML, scans) for use in RAG and AI systems
-- **Why**: 90% of enterprise data lives in documents. Poor parsing → poor chunks → poor retrieval → hallucinations. Garbage in, garbage out.
+- **Why**: 90% of enterprise data lives in documents. Poor parsing â†’ poor chunks â†’ poor retrieval â†’ hallucinations. Garbage in, garbage out.
 - **Key point**: There is no universal document parser. Choose your parser based on document type (text PDF, scanned PDF, tables, multi-column layouts) and test on real samples from your data.
 
 ---
 
-## ★ Overview
+## â˜… Overview
 
 ### Definition
 
@@ -38,59 +39,59 @@ Covers: Parsing strategies for common document types, chunking approaches, table
 
 ### Prerequisites
 
-- [RAG](../techniques/rag.md) — retrieval pipeline this feeds into
-- [Embeddings](../foundations/embeddings.md) — how parsed text gets vectorized
+- [RAG](../techniques/rag.md) â€” retrieval pipeline this feeds into
+- [Embeddings](../foundations/embeddings.md) â€” how parsed text gets vectorized
 
 ---
 
-## ★ Deep Dive
+## â˜… Deep Dive
 
 ### The Document Parsing Pipeline
 
 ```
 RAW DOCUMENTS (PDF, DOCX, HTML, images)
-     │
-     ▼
-┌──────────────────────────────────────┐
-│  1. FORMAT DETECTION                  │
-│     What type of document is this?    │
-│     Text PDF? Scanned? Table-heavy?   │
-└───────────────┬──────────────────────┘
-                │
-                ▼
-┌──────────────────────────────────────┐
-│  2. TEXT EXTRACTION                   │
-│     Text PDF → PyMuPDF, pdfplumber   │
-│     Scanned  → OCR (Tesseract, etc.) │
-│     DOCX     → python-docx           │
-│     HTML     → BeautifulSoup         │
-└───────────────┬──────────────────────┘
-                │
-                ▼
-┌──────────────────────────────────────┐
-│  3. STRUCTURE PRESERVATION           │
-│     Keep headings, lists, tables     │
-│     Maintain section hierarchy       │
-│     Preserve metadata (page, source) │
-└───────────────┬──────────────────────┘
-                │
-                ▼
-┌──────────────────────────────────────┐
-│  4. CHUNKING                         │
-│     Split into retrieval-sized pieces│
-│     Respect section boundaries       │
-│     Add overlap for continuity       │
-└───────────────┬──────────────────────┘
-                │
-                ▼
-┌──────────────────────────────────────┐
-│  5. METADATA ENRICHMENT              │
-│     Source file, page number         │
-│     Section heading, document title  │
-│     Chunk index, overlap info        │
-└──────────────────────────────────────┘
-                │
-                ▼
+     â”‚
+     â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  1. FORMAT DETECTION                  â”‚
+â”‚     What type of document is this?    â”‚
+â”‚     Text PDF? Scanned? Table-heavy?   â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                â”‚
+                â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  2. TEXT EXTRACTION                   â”‚
+â”‚     Text PDF â†’ PyMuPDF, pdfplumber   â”‚
+â”‚     Scanned  â†’ OCR (Tesseract, etc.) â”‚
+â”‚     DOCX     â†’ python-docx           â”‚
+â”‚     HTML     â†’ BeautifulSoup         â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                â”‚
+                â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  3. STRUCTURE PRESERVATION           â”‚
+â”‚     Keep headings, lists, tables     â”‚
+â”‚     Maintain section hierarchy       â”‚
+â”‚     Preserve metadata (page, source) â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                â”‚
+                â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  4. CHUNKING                         â”‚
+â”‚     Split into retrieval-sized piecesâ”‚
+â”‚     Respect section boundaries       â”‚
+â”‚     Add overlap for continuity       â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                â”‚
+                â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  5. METADATA ENRICHMENT              â”‚
+â”‚     Source file, page number         â”‚
+â”‚     Section heading, document title  â”‚
+â”‚     Chunk index, overlap info        â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                â”‚
+                â–¼
            EMBED & INDEX
 ```
 
@@ -110,20 +111,20 @@ RAW DOCUMENTS (PDF, DOCX, HTML, images)
 | Strategy | How It Works | Best For | Chunk Size |
 |----------|-------------|----------|:----------:|
 | **Fixed-size** | Split every N tokens with overlap | Simple documents | 200-500 tokens |
-| **Recursive** | Split by paragraph → sentence → token | General purpose | 200-1000 tokens |
+| **Recursive** | Split by paragraph â†’ sentence â†’ token | General purpose | 200-1000 tokens |
 | **Semantic** | Split at topic boundaries using embeddings | Long documents | Variable |
 | **Document-aware** | Split at section headings | Structured docs | Section-sized |
 | **Sliding window** | Overlapping windows across text | Dense technical docs | 300-500 tokens |
 
 ---
 
-## ★ Code & Implementation
+## â˜… Code & Implementation
 
 ### Production Document Parsing Pipeline
 
 ```python
 # pip install pymupdf>=1.24 pdfplumber>=0.11 langchain-text-splitters>=0.3
-# ⚠️ Last tested: 2026-04 | Requires: pymupdf>=1.24
+# âš ï¸ Last tested: 2026-04 | Requires: pymupdf>=1.24
 
 import fitz  # PyMuPDF
 import pdfplumber
@@ -210,7 +211,7 @@ for chunk in chunks[:3]:
 
 ---
 
-## ◆ Production Failure Modes
+## â—† Production Failure Modes
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
@@ -221,14 +222,14 @@ for chunk in chunks[:3]:
 
 ---
 
-## ○ Interview Angles
+## â—‹ Interview Angles
 
 - **Q**: How would you build a document processing pipeline for a RAG system?
-- **A**: I'd build a 5-stage pipeline. (1) Format detection to route PDFs, DOCX, HTML to appropriate parsers. (2) Text extraction — PyMuPDF for digital PDFs, pdfplumber for table-heavy PDFs, Tesseract+layout detection for scans. (3) Structure preservation — keep headings, lists, and table structure using markdown formatting. (4) Document-aware chunking — split at section boundaries with 200-500 token chunks and 50-token overlap, keeping section headers as metadata. (5) Metadata enrichment — attach source file, page number, section heading to each chunk. I'd evaluate quality by sampling 50 chunks and manually checking if they preserve the meaning of the original content.
+- **A**: I'd build a 5-stage pipeline. (1) Format detection to route PDFs, DOCX, HTML to appropriate parsers. (2) Text extraction â€” PyMuPDF for digital PDFs, pdfplumber for table-heavy PDFs, Tesseract+layout detection for scans. (3) Structure preservation â€” keep headings, lists, and table structure using markdown formatting. (4) Document-aware chunking â€” split at section boundaries with 200-500 token chunks and 50-token overlap, keeping section headers as metadata. (5) Metadata enrichment â€” attach source file, page number, section heading to each chunk. I'd evaluate quality by sampling 50 chunks and manually checking if they preserve the meaning of the original content.
 
 ---
 
-## ◆ Hands-On Exercises
+## â—† Hands-On Exercises
 
 ### Exercise 1: Compare PDF Parsers
 
@@ -243,7 +244,7 @@ for chunk in chunks[:3]:
 
 ---
 
-## ★ Connections
+## â˜… Connections
 
 | Relationship | Topics |
 |---|---|
@@ -254,20 +255,20 @@ for chunk in chunks[:3]:
 
 ---
 
-## ★ Recommended Resources
+## â˜… Recommended Resources
 
 | Type | Resource | Why |
 |------|----------|-----|
-| 🔧 Hands-on | [Unstructured.io](https://unstructured.io/) | Best multi-format document parsing framework |
-| 🔧 Hands-on | [LlamaParse](https://cloud.llamaindex.ai/) | LLM-powered document parsing API |
-| 🔧 Hands-on | [pdfplumber](https://github.com/jsvine/pdfplumber) | Best open-source PDF table extraction |
-| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 3 | Document processing for RAG pipelines |
+| ðŸ”§ Hands-on | [Unstructured.io](https://unstructured.io/) | Best multi-format document parsing framework |
+| ðŸ”§ Hands-on | [LlamaParse](https://cloud.llamaindex.ai/) | LLM-powered document parsing API |
+| ðŸ”§ Hands-on | [pdfplumber](https://github.com/jsvine/pdfplumber) | Best open-source PDF table extraction |
+| ðŸ“˜ Book | "AI Engineering" by Chip Huyen (2025), Ch 3 | Document processing for RAG pipelines |
 
 ---
 
-## ★ Sources
+## â˜… Sources
 
-- PyMuPDF Documentation — https://pymupdf.readthedocs.io/
-- pdfplumber Documentation — https://github.com/jsvine/pdfplumber
-- Unstructured.io — https://unstructured.io/
+- PyMuPDF Documentation â€” https://pymupdf.readthedocs.io/
+- pdfplumber Documentation â€” https://github.com/jsvine/pdfplumber
+- Unstructured.io â€” https://unstructured.io/
 - [RAG](../techniques/rag.md)

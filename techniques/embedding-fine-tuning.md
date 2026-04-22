@@ -1,5 +1,6 @@
 ---
 title: "Embedding Fine-Tuning"
+aliases: ["Embedding Training", "Contrastive Learning"]
 tags: [embeddings, fine-tuning, retrieval, rag, contrastive-learning, production]
 type: procedure
 difficulty: advanced
@@ -7,26 +8,26 @@ status: published
 last_verified: 2026-04
 parent: "../foundations/embeddings.md"
 related: ["../techniques/rag.md", "../evaluation/retrieval-evaluation.md", "../tools-and-infra/vector-databases.md", "../techniques/fine-tuning.md"]
-source: "Multiple — see Sources"
+source: "Multiple â€” see Sources"
 created: 2026-04-14
 updated: 2026-04-14
 ---
 
 # Embedding Fine-Tuning
 
-> ✨ **Bit**: General-purpose embeddings work well for general-purpose tasks. But if your RAG system struggles with domain-specific queries (legal, medical, code), fine-tuning embeddings on your data can improve retrieval by 10-30% — often more impactful than changing the LLM.
+> âœ¨ **Bit**: General-purpose embeddings work well for general-purpose tasks. But if your RAG system struggles with domain-specific queries (legal, medical, code), fine-tuning embeddings on your data can improve retrieval by 10-30% â€” often more impactful than changing the LLM.
 
 ---
 
-## ★ TL;DR
+## â˜… TL;DR
 
 - **What**: Training or adapting embedding models on domain-specific data to improve retrieval quality for RAG and search systems
 - **Why**: Off-the-shelf embeddings (OpenAI, Cohere) are trained on general web data. Domain-specific terminology, jargon, and relationships aren't well captured.
-- **Key point**: Fine-tuning embeddings is often the highest-ROI improvement for RAG systems — 10-30% retrieval quality improvement with relatively small training sets (1K-10K examples).
+- **Key point**: Fine-tuning embeddings is often the highest-ROI improvement for RAG systems â€” 10-30% retrieval quality improvement with relatively small training sets (1K-10K examples).
 
 ---
 
-## ★ Overview
+## â˜… Overview
 
 ### Definition
 
@@ -38,13 +39,13 @@ Covers: When to fine-tune vs use off-the-shelf, training data generation, contra
 
 ### Prerequisites
 
-- [Embeddings](../foundations/embeddings.md) — vector representation fundamentals
-- [RAG](../techniques/rag.md) — retrieval architecture
-- [Fine-Tuning](../techniques/fine-tuning.md) — general fine-tuning concepts
+- [Embeddings](../foundations/embeddings.md) â€” vector representation fundamentals
+- [RAG](../techniques/rag.md) â€” retrieval architecture
+- [Fine-Tuning](../techniques/fine-tuning.md) â€” general fine-tuning concepts
 
 ---
 
-## ★ Deep Dive
+## â˜… Deep Dive
 
 ### When to Fine-Tune Embeddings
 
@@ -52,17 +53,17 @@ Covers: When to fine-tune vs use off-the-shelf, training data generation, contra
 DECISION TREE:
 
   Is your retrieval quality good enough (Recall@5 > 0.8)?
-  ├── YES → Don't fine-tune. Focus on LLM/prompt improvements.
-  └── NO  → Is the problem domain-specific vocabulary?
-             ├── YES → Fine-tune embeddings (highest ROI)
-             └── NO  → Check chunking, reranking, hybrid search first
-                        └── Still bad? → Fine-tune embeddings
+  â”œâ”€â”€ YES â†’ Don't fine-tune. Focus on LLM/prompt improvements.
+  â””â”€â”€ NO  â†’ Is the problem domain-specific vocabulary?
+             â”œâ”€â”€ YES â†’ Fine-tune embeddings (highest ROI)
+             â””â”€â”€ NO  â†’ Check chunking, reranking, hybrid search first
+                        â””â”€â”€ Still bad? â†’ Fine-tune embeddings
 
 SIGNS YOU NEED EMBEDDING FINE-TUNING:
-  ✗ Medical queries: "dyspnea" doesn't match "shortness of breath"
-  ✗ Legal queries: "force majeure" doesn't find relevant contract clauses
-  ✗ Code queries: "implement retry logic" doesn't find error handling code
-  ✗ Internal jargon: Company-specific terms have no good embedding
+  âœ— Medical queries: "dyspnea" doesn't match "shortness of breath"
+  âœ— Legal queries: "force majeure" doesn't find relevant contract clauses
+  âœ— Code queries: "implement retry logic" doesn't find error handling code
+  âœ— Internal jargon: Company-specific terms have no good embedding
 ```
 
 ### Training Data for Embedding Fine-Tuning
@@ -80,31 +81,31 @@ TRAINING OBJECTIVE: Pull matching pairs together, push non-matching apart
 
   Query: "What causes high blood pressure?"
 
-  Positive doc: "Hypertension is caused by..."     → PULL CLOSER
-  Negative doc: "Stock market trends in 2024..."    → PUSH APART
-  Hard negative: "Blood pressure measurement..."    → PUSH APART (harder!)
+  Positive doc: "Hypertension is caused by..."     â†’ PULL CLOSER
+  Negative doc: "Stock market trends in 2024..."    â†’ PUSH APART
+  Hard negative: "Blood pressure measurement..."    â†’ PUSH APART (harder!)
 
   Loss function: InfoNCE / Multiple Negatives Ranking Loss
 
-  L = -log( exp(sim(q, d+)/τ) / Σ exp(sim(q, di)/τ) )
+  L = -log( exp(sim(q, d+)/Ï„) / Î£ exp(sim(q, di)/Ï„) )
 
   Where:
     q = query embedding
     d+ = positive document embedding
     di = all documents in batch (positives + negatives)
-    τ = temperature (default 0.05)
+    Ï„ = temperature (default 0.05)
     sim = cosine similarity
 ```
 
 ---
 
-## ★ Code & Implementation
+## â˜… Code & Implementation
 
 ### Fine-Tune Embeddings with Sentence Transformers
 
 ```python
 # pip install sentence-transformers>=3.0 datasets>=2.0
-# ⚠️ Last tested: 2026-04 | Requires: sentence-transformers>=3.0
+# âš ï¸ Last tested: 2026-04 | Requires: sentence-transformers>=3.0
 
 from sentence_transformers import SentenceTransformer, InputExample, losses
 from sentence_transformers.evaluation import InformationRetrievalEvaluator
@@ -154,7 +155,7 @@ print(f"Similarity: {similarity:.3f}")
 
 ```python
 # pip install openai>=1.0
-# ⚠️ Last tested: 2026-04 | Requires: openai>=1.0
+# âš ï¸ Last tested: 2026-04 | Requires: openai>=1.0
 
 from openai import OpenAI
 import json
@@ -194,7 +195,7 @@ print(f"Generated {len(training_data)} training pairs")
 
 ---
 
-## ◆ Quick Reference
+## â—† Quick Reference
 
 ```
 EMBEDDING FINE-TUNING CHECKLIST:
@@ -215,24 +216,24 @@ EXPECTED IMPROVEMENTS:
 
 ---
 
-## ◆ Production Failure Modes
+## â—† Production Failure Modes
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
 | **Catastrophic forgetting** | Fine-tuned model worse on general queries | Overfitting to domain data, losing general knowledge | Use lower learning rate, fewer epochs, mix in general data |
 | **Low-quality training data** | No improvement after fine-tuning | Training pairs are noisy, irrelevant, or too easy | Clean data, add hard negatives, use LLM-generated queries |
-| **Embedding dimension mismatch** | Can't deploy — vector DB expects different dimensions | Changed model architecture during fine-tuning | Use same model family, or rebuild vector index |
+| **Embedding dimension mismatch** | Can't deploy â€” vector DB expects different dimensions | Changed model architecture during fine-tuning | Use same model family, or rebuild vector index |
 
 ---
 
-## ○ Interview Angles
+## â—‹ Interview Angles
 
 - **Q**: How would you improve retrieval quality in a RAG system?
-- **A**: I'd follow a priority ladder. First, measure baseline retrieval quality (Precision@5, Recall@5) to quantify the gap. Second, check chunking — are chunks the right size (200-500 tokens) with enough context? Third, try hybrid search (semantic + keyword with BM25). Fourth, add a cross-encoder reranker on top-20 results. If the domain is specialized (medical, legal), I'd fine-tune the embedding model on 5K-10K domain-specific (query, document) pairs using contrastive learning — this typically gives 10-30% improvement on domain queries. I'd evaluate each change independently to measure its contribution.
+- **A**: I'd follow a priority ladder. First, measure baseline retrieval quality (Precision@5, Recall@5) to quantify the gap. Second, check chunking â€” are chunks the right size (200-500 tokens) with enough context? Third, try hybrid search (semantic + keyword with BM25). Fourth, add a cross-encoder reranker on top-20 results. If the domain is specialized (medical, legal), I'd fine-tune the embedding model on 5K-10K domain-specific (query, document) pairs using contrastive learning â€” this typically gives 10-30% improvement on domain queries. I'd evaluate each change independently to measure its contribution.
 
 ---
 
-## ★ Connections
+## â˜… Connections
 
 | Relationship | Topics |
 |---|---|
@@ -243,19 +244,19 @@ EXPECTED IMPROVEMENTS:
 
 ---
 
-## ★ Recommended Resources
+## â˜… Recommended Resources
 
 | Type | Resource | Why |
 |------|----------|-----|
-| 🔧 Hands-on | [Sentence Transformers Fine-Tuning Guide](https://www.sbert.net/docs/training/overview.html) | Official guide for embedding fine-tuning |
-| 📄 Paper | [Xiao et al. "C-Pack: Packaged Resources for General Chinese Embeddings" (BGE, 2023)](https://arxiv.org/abs/2309.07597) | How BAAI/bge models are trained — informative for fine-tuning strategy |
-| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 3 | Embedding selection and optimization in RAG |
-| 🔧 Hands-on | [MTEB Leaderboard](https://huggingface.co/spaces/mteb/leaderboard) | Compare embedding model quality before choosing a base |
+| ðŸ”§ Hands-on | [Sentence Transformers Fine-Tuning Guide](https://www.sbert.net/docs/training/overview.html) | Official guide for embedding fine-tuning |
+| ðŸ“„ Paper | [Xiao et al. "C-Pack: Packaged Resources for General Chinese Embeddings" (BGE, 2023)](https://arxiv.org/abs/2309.07597) | How BAAI/bge models are trained â€” informative for fine-tuning strategy |
+| ðŸ“˜ Book | "AI Engineering" by Chip Huyen (2025), Ch 3 | Embedding selection and optimization in RAG |
+| ðŸ”§ Hands-on | [MTEB Leaderboard](https://huggingface.co/spaces/mteb/leaderboard) | Compare embedding model quality before choosing a base |
 
 
 ---
 
-## ◆ Hands-On Exercises
+## â—† Hands-On Exercises
 
 ### Exercise 1: Fine-Tune an Embedding Model on Your Domain
 
@@ -269,10 +270,10 @@ EXPECTED IMPROVEMENTS:
 **Expected Output**: MRR improvement table showing fine-tuned model outperforms base
 ---
 
-## ★ Sources
+## â˜… Sources
 
-- Sentence Transformers Documentation — https://www.sbert.net/
-- MTEB Embedding Benchmark — https://huggingface.co/spaces/mteb/leaderboard
+- Sentence Transformers Documentation â€” https://www.sbert.net/
+- MTEB Embedding Benchmark â€” https://huggingface.co/spaces/mteb/leaderboard
 - Reimers & Gurevych "Sentence-BERT" (2019)
 - [Embeddings](../foundations/embeddings.md)
 - [RAG](../techniques/rag.md)

@@ -153,14 +153,14 @@ flowchart LR
 ### System Design Interview: RAG Pipeline Scaffold
 
 ```python
-# âš ï¸ Last tested: 2026-04 | Requires: Python 3.10+ (stdlib only)
+# ⚠️ Last tested: 2026-04 | Requires: Python 3.10+ (stdlib only)
 # This is a code representation of an AI system design answer.
 # Use this structure to walk through a production RAG design in interviews.
 
 from dataclasses import dataclass, field
 from typing import Protocol
 
-# Ã¢”â‚¬Ã¢”â‚¬ Interface definitions (the design, not the implementation) Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬
+# ================= Interface definitions (the design, not the implementation) =================
 class VectorStore(Protocol):
     def upsert(self, docs: list[str], embeddings: list[list[float]]) -> None: ...
     def query(self, embedding: list[float], top_k: int) -> list[str]: ...
@@ -171,11 +171,11 @@ class EmbeddingModel(Protocol):
 class LLM(Protocol):
     def generate(self, messages: list[dict], max_tokens: int) -> str: ...
 
-# Ã¢”â‚¬Ã¢”â‚¬ Core RAG pipeline (design interview answer as code) Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬
+# ================= Core RAG pipeline (design interview answer as code) =================
 @dataclass
 class RAGSystem:
     """
-    Production RAG â€” key design decisions:
+    Production RAG — key design decisions:
     1. Chunking: 512 tokens, 20% overlap (balance context vs precision)
     2. Embedding: text-embedding-3-small (dims=1536, cost-efficient)
     3. Retrieval: top-5 chunks + BM25 hybrid (precision + recall)

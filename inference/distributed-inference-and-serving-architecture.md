@@ -329,10 +329,10 @@ print(f"Total:   {result['total_ms']}ms")
 
 | Type | Resource | Why |
 |------|----------|-----|
-| ðŸ”§ Hands-on | [vLLM Documentation](https://docs.vllm.ai/) | Best open-source LLM serving engine â€” PagedAttention, continuous batching |
-| ðŸ”§ Hands-on | [TGI Documentation](https://huggingface.co/docs/text-generation-inference/) | HuggingFace’s production serving engine |
-| ðŸ“„ Paper | [Kwon et al. "PagedAttention" (vLLM, 2023)](https://arxiv.org/abs/2309.06180) | The paper that revolutionized KV-cache management for LLM serving |
-| ðŸ“˜ Book | "AI Engineering" by Chip Huyen (2025), Ch 8 | Covers serving architecture, batching, and scaling patterns |
+| 🔧 Hands-on | [vLLM Documentation](https://docs.vllm.ai/) | Best open-source LLM serving engine — PagedAttention, continuous batching |
+| 🔧 Hands-on | [TGI Documentation](https://huggingface.co/docs/text-generation-inference/) | HuggingFace's production serving engine |
+| 📄 Paper | [Kwon et al. "PagedAttention" (vLLM, 2023)](https://arxiv.org/abs/2309.06180) | The paper that revolutionized KV-cache management for LLM serving |
+| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 8 | Covers serving architecture, batching, and scaling patterns |
 
 ---
 

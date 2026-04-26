@@ -205,7 +205,7 @@ RESEARCH GROUPS:
 
 ```python
 # pip install transformers>=4.40 torch>=2.3 captum>=0.7
-# âš ï¸ Last tested: 2026-04 | Requires: transformers>=4.40, captum>=0.7
+# ⚠️ Last tested: 2026-04 | Requires: transformers>=4.40, captum>=0.7
 import torch
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from captum.attr import IntegratedGradients
@@ -229,12 +229,12 @@ baseline = torch.zeros_like(ids)
 ig = IntegratedGradients(predict)
 attrs, delta = ig.attribute(ids, baseline, target=1, return_convergence_delta=True)
 
-# attrs: (1, seq_len) â€” positive = contributes to POSITIVE class
+# attrs: (1, seq_len) — positive = contributes to POSITIVE class
 importance = attrs[0].detach().numpy()
 print(f"Convergence delta: {delta.item():.4e}  (should be near 0)")
 print("\nToken Attribution Scores:")
 for token, score in sorted(zip(tokens, importance), key=lambda x: -abs(x[1])):
-    bar = "Ã¢—Ë†" * int(abs(score) * 30)
+    bar = "█" * int(abs(score) * 30)
     sign = "+" if score > 0 else "-"
     print(f"  {token:<15} {sign}{abs(score):.4f}  {bar}")
 ```

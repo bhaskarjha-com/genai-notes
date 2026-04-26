@@ -11,7 +11,7 @@ Utility scripts for maintaining and building the GenAI Notes repository.
 | `check_links.ps1` | Checks all internal markdown links for broken references | After renaming, moving, or deleting files |
 | `markdown_quality_check.ps1` | Lints markdown files for formatting, heading hierarchy, and style consistency | During content review |
 | `check_freshness.ps1` | Flags notes with stale content based on `updated` frontmatter date. Fast-moving topics (agents, models, tools) flagged after 6 months; stable topics after 12 months | Monthly maintenance |
-| `fix_mojibake.py` | Detects and fixes Unicode encoding issues (mojibake) in markdown files | One-time cleanup; run if encoding issues appear |
+| `fix_encoding_mojibake.py` | Detects and repairs UTF-8/cp1252/latin-1 mojibake in repo text files | Run whenever encoding corruption appears, or in CI as a check |
 
 ## Running Scripts
 
@@ -35,5 +35,5 @@ pwsh scripts/check_freshness.ps1
 ## Requirements
 
 - **PowerShell Core** (`pwsh`) — cross-platform, v7.0+
-- **Python 3.10+** — for `fix_mojibake.py` only
+- **Python 3.10+** — for `fix_encoding_mojibake.py`
 - **mkdocs** — installed via `requirements-docs.txt`

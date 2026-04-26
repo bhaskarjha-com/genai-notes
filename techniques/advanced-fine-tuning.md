@@ -15,11 +15,11 @@ updated: 2026-04-15
 
 # Advanced Fine-Tuning for LLM Adaptation
 
-> âœ¨ **Bit**: Basic SFT teaches a model what good answers look like. DPO teaches it which of two answers to prefer. GRPO teaches it to improve by comparing its own attempts. The progression is: imitation â†’ preference â†’ self-improvement.
+> ✨ **Bit**: Basic SFT teaches a model what good answers look like. DPO teaches it which of two answers to prefer. GRPO teaches it to improve by comparing its own attempts. The progression is: imitation → preference → self-improvement.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: Fine-tuning techniques beyond standard SFT â€” preference optimization (DPO, ORPO, KTO), RL-style training (GRPO, PPO), continued pretraining, and efficient training stacks (QLoRA, Unsloth)
 - **Why**: SFT alone cannot teach nuanced preferences, reasoning quality, or consistent tool use. You need preference signals and reward-based training.
@@ -27,7 +27,7 @@ updated: 2026-04-15
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Scope
 
@@ -48,14 +48,14 @@ This note focuses on advanced post-training methods: DPO, ORPO, KTO, GRPO, conti
 
 ```
 Do you have labeled preference pairs (chosen/rejected)?
-â”œâ”€â”€ YES â†’ Do you also have reward scores?
-â”‚          â”œâ”€â”€ YES â†’ GRPO or PPO (RL-style, strongest but hardest)
-â”‚          â””â”€â”€ NO  â†’ DPO (simplest preference method)
-â””â”€â”€ NO  â†’ Can you generate them?
-           â”œâ”€â”€ YES â†’ Use LLM-as-judge to create pairs â†’ DPO
-           â””â”€â”€ NO  â†’ Do you have positive examples only?
-                      â”œâ”€â”€ YES â†’ KTO (binary "good/bad" signal, no pairs needed)
-                      â””â”€â”€ NO  â†’ Start with SFT, collect feedback, return here
+â”œâ”€â”€ YES → Do you also have reward scores?
+â”‚          â”œâ”€â”€ YES → GRPO or PPO (RL-style, strongest but hardest)
+â”‚          â””â”€â”€ NO  → DPO (simplest preference method)
+â””â”€â”€ NO  → Can you generate them?
+           â”œâ”€â”€ YES → Use LLM-as-judge to create pairs → DPO
+           â””â”€â”€ NO  → Do you have positive examples only?
+                      â”œâ”€â”€ YES → KTO (binary "good/bad" signal, no pairs needed)
+                      â””â”€â”€ NO  → Start with SFT, collect feedback, return here
 ```
 
 ### Prerequisites
@@ -66,12 +66,12 @@ Do you have labeled preference pairs (chosen/rejected)?
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### The Post-Training Landscape
 
 ```
-              DIFFICULTY / INFRASTRUCTURE â†’
+              DIFFICULTY / INFRASTRUCTURE →
            â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
            â”‚                                                       â”‚
     Low    â”‚   SFT         KTO         DPO         ORPO           â”‚
@@ -84,7 +84,7 @@ Do you have labeled preference pairs (chosen/rejected)?
            â”‚                              (groups)    (full RL)    â”‚
            â”‚                                                       â”‚
            â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
-                     ALIGNMENT QUALITY â†’
+                     ALIGNMENT QUALITY →
 ```
 
 ### DPO: Direct Preference Optimization
@@ -193,7 +193,7 @@ Step 6: Deployment Candidate
 
 ---
 
-## â˜… Code & Implementation
+## ★ Code & Implementation
 
 ### Complete DPO Training with TRL
 
@@ -390,7 +390,7 @@ trainer.train()
 
 ---
 
-## â—† Formulas & Equations
+## ◆ Formulas & Equations
 
 | Name | Formula | Variables | Use |
 |------|---------|-----------|-----|
@@ -401,7 +401,7 @@ trainer.train()
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 
 ```
 TRAINING METHOD CHEAT SHEET:
@@ -435,7 +435,7 @@ DATA SIZE GUIDELINES:
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
@@ -448,7 +448,7 @@ DATA SIZE GUIDELINES:
 
 ---
 
-## â—‹ Gotchas & Common Mistakes
+## ○ Gotchas & Common Mistakes
 
 - âš ï¸ **A fancier algorithm cannot rescue bad data**: DPO with perfect preference pairs beats GRPO with noisy rewards. Always invest in data quality first.
 - âš ï¸ **DPO learning rate must be lower than SFT**: Using SFT learning rates (2e-4) with DPO causes rapid divergence. Start at 5e-6.
@@ -458,7 +458,7 @@ DATA SIZE GUIDELINES:
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: Why has DPO become more popular than PPO for alignment?
 - **A**: DPO reformulates the RLHF objective so that the optimal policy can be extracted directly from preference pairs, without needing a separate reward model or the unstable PPO training loop. This makes it dramatically simpler to implement â€” you just need ranked pairs of "chosen" and "rejected" responses, a reference model, and a standard classification-like loss. PPO requires training a reward model, running policy rollouts, computing advantages, and maintaining a value function â€” all of which introduce instability and hyperparameter sensitivity. In practice, DPO achieves comparable alignment quality to PPO with 3-5Ã— less infrastructure complexity. The tradeoff is that DPO is an offline method (it uses a fixed dataset), while PPO can potentially explore and self-improve through online generation. This is where GRPO bridges the gap â€” it gets PPO-like self-improvement with DPO-like simplicity.
@@ -471,7 +471,7 @@ DATA SIZE GUIDELINES:
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: DPO Training on Preference Data
 
@@ -498,7 +498,7 @@ DATA SIZE GUIDELINES:
 
 ---
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics |
 |---|---|
@@ -509,7 +509,7 @@ DATA SIZE GUIDELINES:
 
 ---
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type | Resource | Why |
 |------|----------|-----|
@@ -523,7 +523,7 @@ DATA SIZE GUIDELINES:
 
 ---
 
-## â˜… Sources
+## ★ Sources
 
 - Rafailov et al. "Direct Preference Optimization: Your Language Model is Secretly a Reward Model" (2023) â€” https://arxiv.org/abs/2305.18290
 - Shao et al. "DeepSeekMath: Pushing the Limits of Mathematical Reasoning" (2024) â€” https://arxiv.org/abs/2402.03300

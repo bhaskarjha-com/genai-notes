@@ -15,11 +15,11 @@ updated: 2026-04-11
 
 # Knowledge Distillation & Model Compression
 
-> âœ¨ **Bit**: GPT-4 knows a lot, but it's enormous and expensive. Distillation is like a PhD student learning from a professor â€” the student ends up much smaller but captures most of the professor's knowledge. That's how Phi-3 (3.8B) can compete with models 100x its size.
+> ✨ **Bit**: GPT-4 knows a lot, but it's enormous and expensive. Distillation is like a PhD student learning from a professor â€” the student ends up much smaller but captures most of the professor's knowledge. That's how Phi-3 (3.8B) can compete with models 100x its size.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: Techniques to create smaller, faster, cheaper models that retain the capabilities of larger ones
 - **Why**: You can't run GPT-4 on a phone. But you CAN distill its knowledge into a 7B model that runs anywhere.
@@ -27,7 +27,7 @@ updated: 2026-04-11
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -48,7 +48,7 @@ Covers distillation and pruning. For quantization (INT4/INT8/FP8), see [Inferenc
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### The Distillation Framework
 
@@ -82,8 +82,8 @@ Covers distillation and pruning. For quantization (INT4/INT8/FP8), see [Inferenc
 â”‚  LOSS = Î± Ã— KL(teacher_soft, student_soft)      â”‚
 â”‚       + (1-Î±) Ã— CrossEntropy(student, labels)   â”‚
 â”‚                                                 â”‚
-â”‚  Temperature T â†’ softens distributions          â”‚
-â”‚  Higher T â†’ more "dark knowledge" transfer      â”‚
+â”‚  Temperature T → softens distributions          â”‚
+â”‚  Higher T → more "dark knowledge" transfer      â”‚
 â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
@@ -94,9 +94,9 @@ Covers distillation and pruning. For quantization (INT4/INT8/FP8), see [Inferenc
 | **Response-based**    | Student mimics teacher's output distribution              | Classic: soft label matching   |
 | **Feature-based**     | Student mimics teacher's intermediate representations     | Match hidden layer activations |
 | **Relation-based**    | Student learns relationships between samples              | Contrastive distillation       |
-| **Rationale-based**   | Teacher generates step-by-step reasoning as training data | DeepSeek-R1 â†’ R1-Distill-Qwen  |
+| **Rationale-based**   | Teacher generates step-by-step reasoning as training data | DeepSeek-R1 → R1-Distill-Qwen  |
 | **Multi-teacher**     | Multiple teachers guide one student                       | Ensemble knowledge transfer    |
-| **Self-distillation** | Model teaches itself (larger layers â†’ smaller)            | Born-again networks            |
+| **Self-distillation** | Model teaches itself (larger layers → smaller)            | Born-again networks            |
 
 ### Rationale Distillation (Modern LLM Pattern)
 
@@ -113,9 +113,9 @@ The most common pattern in 2025-2026:
      Student (7B) trained on (input, reasoning + answer) pairs
 
   This is how:
-    DeepSeek-R1 â†’ R1-Distill-Qwen-14B, R1-Distill-Llama-70B
-    GPT-4 â†’ Alpaca/Vicuna (early 2023, simpler version)
-    GPT-4 â†’ Phi-3 (via synthetic data distillation)
+    DeepSeek-R1 → R1-Distill-Qwen-14B, R1-Distill-Llama-70B
+    GPT-4 → Alpaca/Vicuna (early 2023, simpler version)
+    GPT-4 → Phi-3 (via synthetic data distillation)
 ```
 
 ### Other Compression Techniques
@@ -137,7 +137,7 @@ PRUNING: Remove unimportant weights/neurons/layers
 
 QUANTIZATION: Reduce number precision
   (covered in detail in [Inference Optimization](../inference/inference-optimization.md))
-  FP32 â†’ FP16 â†’ INT8 â†’ INT4
+  FP32 → FP16 → INT8 → INT4
   Each step: ~2x smaller, slight quality trade-off
 
 
@@ -169,21 +169,21 @@ ARCHITECTURE CHANGES:
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 
 ```
 DISTILLATION DECISION TREE:
   Need to deploy on edge/mobile?
-    â†’ Quantize (INT4) + distill to small model
+    → Quantize (INT4) + distill to small model
 
   Need reasoning capability in small model?
-    â†’ Rationale distillation from o1/R1
+    → Rationale distillation from o1/R1
 
   Need domain-specific small model?
-    â†’ Fine-tune small model on teacher-generated domain data
+    → Fine-tune small model on teacher-generated domain data
 
   Need fastest possible inference?
-    â†’ Distill + quantize + prune (all three)
+    → Distill + quantize + prune (all three)
 
 KEY INSIGHT:
   Distillation â‰  just fine-tuning on outputs.
@@ -194,16 +194,16 @@ KEY INSIGHT:
 
 ---
 
-## â—‹ Gotchas & Common Mistakes
+## ○ Gotchas & Common Mistakes
 
 - âš ï¸ **Distilling from API outputs may violate ToS**: OpenAI/Anthropic prohibit using their outputs to train competing models. Check terms.
 - âš ï¸ **Not everything transfers**: Distillation works best for surface knowledge. Deep reasoning and world knowledge transfer is harder.
 - âš ï¸ **Model collapse risk**: Repeated distillation (distilling distilled models) degrades quality. Use the original teacher.
-- âš ï¸ **Temperature matters**: Too low T â†’ student only learns top predictions. Too high T â†’ noise. T=2-4 is typical.
+- âš ï¸ **Temperature matters**: Too low T → student only learns top predictions. Too high T → noise. T=2-4 is typical.
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: How does knowledge distillation work?
 - **A**: A large "teacher" model's soft probability outputs (including relationships between classes) are used as training targets for a smaller "student" model. The student learns to match the teacher's full output distribution using KL divergence loss, not just the correct answer. This transfers "dark knowledge" â€” the teacher's implicit understanding of which concepts are similar.
@@ -213,9 +213,9 @@ KEY INSIGHT:
 
 ---
 
-## â˜… Code & Implementation
+## ★ Code & Implementation
 
-### Knowledge Distillation: Teacher â†’ Student Loss
+### Knowledge Distillation: Teacher → Student Loss
 
 ```python
 # pip install torch>=2.3 transformers>=4.40
@@ -271,7 +271,7 @@ print(f"Distillation loss: {loss.item():.4f}")
 # print(output["choices"][0]["text"])
 ```
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics                                                                                                        |
 | ------------ | ------------------------------------------------------------------------------------------------------------- |
@@ -283,7 +283,7 @@ print(f"Distillation loss: {loss.item():.4f}")
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure                   | Symptoms                                                                   | Root Cause                                 | Mitigation                                                     |
 | ------------------------- | -------------------------------------------------------------------------- | ------------------------------------------ | -------------------------------------------------------------- |
@@ -294,7 +294,7 @@ print(f"Distillation loss: {loss.item():.4f}")
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Quantize and Benchmark at Multiple Precisions
 
@@ -309,7 +309,7 @@ print(f"Distillation loss: {loss.item():.4f}")
 ---
 
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type    | Resource                                                                                           | Why                                               |
 | ------- | -------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
@@ -317,7 +317,7 @@ print(f"Distillation loss: {loss.item():.4f}")
 | ðŸ“„ Paper | [Dettmers et al. "GPTQ" (2022)](https://arxiv.org/abs/2210.17323)                                  | Post-training quantization for large models       |
 | ðŸ“˜ Book  | "Efficient Deep Learning" by Menghani (2024)                                                       | Comprehensive treatment of compression techniques |
 
-## â˜… Sources
+## ★ Sources
 
 - Hinton et al., "Distilling the Knowledge in a Neural Network" (2015) â€” the original paper
 - DeepSeek, "DeepSeek-R1 Distilled Models" (2025)

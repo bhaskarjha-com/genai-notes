@@ -15,11 +15,11 @@ updated: 2026-04-11
 
 # Context Engineering & Long Context
 
-> âœ¨ **Bit**: In 2023, you could feed an LLM ~4,000 tokens (~3 pages). In 2025, Gemini accepts 1,000,000 tokens (~750,000 words â€” that's 10 novels). This changes EVERYTHING about how we build AI applications. RAG? Sometimes you just paste the entire database.
+> ✨ **Bit**: In 2023, you could feed an LLM ~4,000 tokens (~3 pages). In 2025, Gemini accepts 1,000,000 tokens (~750,000 words â€” that's 10 novels). This changes EVERYTHING about how we build AI applications. RAG? Sometimes you just paste the entire database.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: The art and science of deciding WHAT information goes into an LLM's context window, and using long context + caching to do it efficiently
 - **Why**: The context window IS the LLM's working memory. What you put in it determines everything about the output quality.
@@ -27,7 +27,7 @@ updated: 2026-04-11
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -41,7 +41,7 @@ Covers context strategy and optimization. For retrieval-specific techniques, see
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### Context Window Evolution
 
@@ -73,10 +73,10 @@ THE DEBATE (2025-2026):
   "Retrieve relevant chunks"    "Just stuff everything in"
 
   PROS:                         PROS:
-  âœ… Works with ANY context     âœ… No retrieval pipeline
-  âœ… Scales to billions of docs âœ… Model sees FULL context
-  âœ… Always up-to-date          âœ… Better cross-referencing
-  âœ… Cheaper per query          âœ… Simpler architecture
+  ✅ Works with ANY context     ✅ No retrieval pipeline
+  ✅ Scales to billions of docs ✅ Model sees FULL context
+  ✅ Always up-to-date          ✅ Better cross-referencing
+  ✅ Cheaper per query          ✅ Simpler architecture
 
   CONS:                         CONS:
   âŒ Retrieval failures         âŒ Expensive per query
@@ -110,16 +110,16 @@ THE COST PROBLEM:
 SOLUTION: Cache the repeated part.
 
   WITHOUT CACHING:
-    Call 1: [System + 50 pages + user question 1]  â†’ process ALL
-    Call 2: [System + 50 pages + user question 2]  â†’ process ALL
-    Call 3: [System + 50 pages + user question 3]  â†’ process ALL
+    Call 1: [System + 50 pages + user question 1]  → process ALL
+    Call 2: [System + 50 pages + user question 2]  → process ALL
+    Call 3: [System + 50 pages + user question 3]  → process ALL
     Cost: 100% Ã— 3 = 300% tokens
 
   WITH CACHING:
     Call 1: [System + 50 pages â† CACHE THIS] + [question 1]
-    Call 2: [CACHED] + [question 2]  â†’ only process new part
-    Call 3: [CACHED] + [question 3]  â†’ only process new part
-    Cost: 100% + 10% + 10% = 120% tokens â†’ 60% SAVINGS!
+    Call 2: [CACHED] + [question 2]  → only process new part
+    Call 3: [CACHED] + [question 3]  → only process new part
+    Cost: 100% + 10% + 10% = 120% tokens → 60% SAVINGS!
 
 PROVIDER SUPPORT (2026):
   Anthropic:  "Prompt caching" â€” explicit cache_control blocks
@@ -197,14 +197,14 @@ def build_context(user_query: str, conversation_history: list) -> list:
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 
 ```
 WHEN TO USE WHAT:
-  Small doc set (< 100 pages)  â†’ Long context (just paste it)
-  Large doc set (1000s of docs) â†’ RAG (retrieve relevant chunks)
-  Repeated context across calls â†’ Context caching (save $$$)
-  Mixed scenario               â†’ Cache + RAG + long context
+  Small doc set (< 100 pages)  → Long context (just paste it)
+  Large doc set (1000s of docs) → RAG (retrieve relevant chunks)
+  Repeated context across calls → Context caching (save $$$)
+  Mixed scenario               → Cache + RAG + long context
 
 TOKEN BUDGET PLANNING:
   Total budget = model's context window
@@ -224,7 +224,7 @@ COST COMPARISON (per 1M input tokens, approximate):
 
 ---
 
-## â—‹ Gotchas & Common Mistakes
+## ○ Gotchas & Common Mistakes
 
 - âš ï¸ **More context â‰  better answers**: Irrelevant context DILUTES quality. Be strategic about what goes in.
 - âš ï¸ **Lost in the middle**: Important info gets ignored if buried in the middle. Structure and position matter.
@@ -234,7 +234,7 @@ COST COMPARISON (per 1M input tokens, approximate):
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: When would you use RAG vs just a long context window?
 - **A**: Long context when: few documents, need cross-references, latency isn't critical, and you can afford the token cost. RAG when: many documents (more than context window), need real-time data, cost-sensitive, or need to scale to millions of docs. In practice, combine both: cache stable reference docs in context, use RAG for dynamic query-specific retrieval.
@@ -244,7 +244,7 @@ COST COMPARISON (per 1M input tokens, approximate):
 
 ---
 
-## â˜… Code & Implementation
+## ★ Code & Implementation
 
 ### Dynamic Context Window Manager
 
@@ -318,7 +318,7 @@ r  = cm.chat("What is RAG?", context_docs=["RAG combines retrieval with generati
 print(r)
 ```
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics                                                                                                         |
 | ------------ | -------------------------------------------------------------------------------------------------------------- |
@@ -330,7 +330,7 @@ print(r)
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure                          | Symptoms                                                        | Root Cause                                      | Mitigation                                                              |
 | -------------------------------- | --------------------------------------------------------------- | ----------------------------------------------- | ----------------------------------------------------------------------- |
@@ -341,7 +341,7 @@ print(r)
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Build a Token-Budget-Aware Prompt Builder
 
@@ -368,7 +368,7 @@ print(r)
 ---
 
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type       | Resource                                                                                                      | Why                                                      |
 | ---------- | ------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- |
@@ -376,7 +376,7 @@ print(r)
 | ðŸ“˜ Book     | "AI Engineering" by Chip Huyen (2025), Ch 5                                                                   | Covers prompt and context design patterns systematically |
 | ðŸŽ¥ Video    | [Simon Willison â€” "Context Engineering"](https://simonwillison.net/)                                          | Practical insights on managing LLM context               |
 
-## â˜… Sources
+## ★ Sources
 
 - Google, "Gemini 1.5: Unlocking Multimodal Understanding Across Millions of Tokens" (2024)
 - Anthropic, "Prompt Caching" documentation â€” https://docs.anthropic.com

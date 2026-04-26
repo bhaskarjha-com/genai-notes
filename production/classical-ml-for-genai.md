@@ -15,11 +15,11 @@ updated: 2026-04-14
 
 # Classical ML for GenAI Builders
 
-> âœ¨ **Bit**: Not every AI problem needs an LLM. Often the best GenAI system quietly depends on a $0.001/request XGBoost model doing the hard work around the edge, while the $0.03/request LLM gets all the credit.
+> ✨ **Bit**: Not every AI problem needs an LLM. Often the best GenAI system quietly depends on a $0.001/request XGBoost model doing the hard work around the edge, while the $0.03/request LLM gets all the credit.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: The role of traditional ML methods (logistic regression, gradient boosting, ranking models) as supporting components in GenAI systems
 - **Why**: LLMs are powerful but expensive ($0.01-$0.10/request), slow (1-3s latency), and unnecessary for many narrow decisions. Classical ML is 100-1000Ã— cheaper and faster.
@@ -27,7 +27,7 @@ updated: 2026-04-14
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -52,7 +52,7 @@ This note does NOT teach all of machine learning. It explains where simpler mode
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### Where Classical ML Fits in GenAI Systems
 
@@ -70,7 +70,7 @@ This note does NOT teach all of machine learning. It explains where simpler mode
 â”‚         â”‚                                                         â”‚
 â”‚         â–¼                                                         â”‚
 â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”     Classical ML                                 â”‚
-â”‚  â”‚   ROUTER    â”‚ â—„â”€â”€ Model selection (cheapâ†’expensive cascade)   â”‚
+â”‚  â”‚   ROUTER    â”‚ â—„â”€â”€ Model selection (cheap→expensive cascade)   â”‚
 â”‚  â”‚  (LogReg)   â”‚     Prompt template routing                      â”‚
 â”‚  â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”˜                                                  â”‚
 â”‚         â”‚                                                         â”‚
@@ -114,7 +114,7 @@ This note does NOT teach all of machine learning. It explains where simpler mode
 
 **Architecture**:
 ```
-User Request â†’ [Feature Extraction] â†’ [Router Classifier] â†’ Model A/B/C
+User Request → [Feature Extraction] → [Router Classifier] → Model A/B/C
                                             â”‚
                                       Trained on:
                                       - request length
@@ -144,7 +144,7 @@ User Request â†’ [Feature Extraction] â†’ [Router Classifier] â†’
 
 ---
 
-## â˜… Code & Implementation
+## ★ Code & Implementation
 
 ### Request Router with scikit-learn
 
@@ -318,7 +318,7 @@ print(test.evaluate())
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 
 ```
 WHEN TO USE CLASSICAL ML vs LLM:
@@ -348,19 +348,19 @@ COMMON MODELS BY TASK:
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
 | **Model staleness** | Router accuracy drops over weeks | User request patterns shift, model not retrained | Schedule weekly retraining, monitor drift metrics |
 | **Feature drift** | Reranker quality degrades without model change | Input data distribution shifts (new content types, new users) | Feature distribution monitoring, drift alerts |
 | **Label leakage** | Model looks great in training, fails in production | Training features contain information from the target | Strict temporal train/test splits, feature audit |
-| **Cascade amplification** | Router misroute â†’ wrong model â†’ bad output â†’ bad user rating | Error in early classifier propagates through pipeline | Add confidence thresholds, fallback to expensive model when uncertain |
+| **Cascade amplification** | Router misroute → wrong model → bad output → bad user rating | Error in early classifier propagates through pipeline | Add confidence thresholds, fallback to expensive model when uncertain |
 | **Cold start** | New topics/intents get consistently misrouted | No training data for new categories | Zero-shot LLM fallback for low-confidence classifications |
 
 ---
 
-## â—‹ Gotchas & Common Mistakes
+## ○ Gotchas & Common Mistakes
 
 - âš ï¸ **"We'll just use the LLM for everything"**: This is the most expensive mistake in GenAI. A $0.001 classifier beats a $0.03 LLM call for binary decisions.
 - âš ï¸ **Forgetting to retrain**: Classical models need fresh data. Set up automated retraining pipelines, not manual reruns.
@@ -369,7 +369,7 @@ COMMON MODELS BY TASK:
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: Where does classical ML fit in a GenAI system?
 - **A**: Classical ML handles the narrow, structured, cost-sensitive decisions around the LLM core. The most common patterns are: (1) request routing â€” classifying which model tier handles each request, saving 80%+ on API costs, (2) reranking â€” scoring and sorting retrieved documents faster than LLM-based reranking, (3) quality gates â€” fast pass/fail classifiers on LLM output before returning to users, (4) anomaly detection â€” flagging unusual requests or outputs for human review. The key insight is that production GenAI systems are hybrids: the LLM handles generation and reasoning, while classical models handle the structured decisions that need to be fast, cheap, and deterministic.
@@ -379,7 +379,7 @@ COMMON MODELS BY TASK:
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Build a Request Router
 
@@ -407,7 +407,7 @@ COMMON MODELS BY TASK:
 
 ---
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics |
 |---|---|
@@ -418,7 +418,7 @@ COMMON MODELS BY TASK:
 
 ---
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type | Resource | Why |
 |------|----------|-----|
@@ -432,7 +432,7 @@ COMMON MODELS BY TASK:
 
 ---
 
-## â˜… Sources
+## ★ Sources
 
 - scikit-learn documentation â€” https://scikit-learn.org/
 - XGBoost documentation â€” https://xgboost.readthedocs.io/

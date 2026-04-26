@@ -15,19 +15,19 @@ updated: 2026-04-14
 
 # Attention Mechanism Deep Dive
 
-> âœ¨ **Bit**: Attention is the beating heart of every transformer. Understanding its variants â€” MHA, GQA, MQA, and FlashAttention â€” is the difference between reading research papers and understanding them. This note goes beyond "QÂ·Káµ€/âˆšd" to the engineering reality of memory, speed, and scale.
+> ✨ **Bit**: Attention is the beating heart of every transformer. Understanding its variants â€” MHA, GQA, MQA, and FlashAttention â€” is the difference between reading research papers and understanding them. This note goes beyond "QÂ·Káµ€/âˆšd" to the engineering reality of memory, speed, and scale.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: A complete treatment of attention variants, their memory/compute tradeoffs, KV-cache mechanics, and hardware-efficient implementations (FlashAttention)
 - **Why**: Attention is the bottleneck for both training and inference cost. Understanding attention variants is essential for model selection, optimization, and architecture design.
-- **Key point**: The evolution from MHA â†’ GQA â†’ MQA reduced KV-cache memory by 8-96Ã—, enabling longer contexts and cheaper inference. FlashAttention reduced attention's memory footprint from O(nÂ²) to O(n).
+- **Key point**: The evolution from MHA → GQA → MQA reduced KV-cache memory by 8-96Ã—, enabling longer contexts and cheaper inference. FlashAttention reduced attention's memory footprint from O(nÂ²) to O(n).
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -41,7 +41,7 @@ updated: 2026-04-14
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### Attention Mathematics
 
@@ -57,11 +57,11 @@ SCALED DOT-PRODUCT ATTENTION:
     d_k                   Key dimension (typically d_model / n_heads)
 
   STEP BY STEP:
-    1. QÂ·Káµ€             â†’ (n Ã— n) attention scores     O(nÂ²Â·d_k)
-    2. / âˆšd_k            â†’ scale to prevent large logits
-    3. + mask             â†’ causal mask for autoregressive
-    4. softmax            â†’ normalize to probabilities    O(nÂ²)
-    5. Ã— V               â†’ weighted value aggregation     O(nÂ²Â·d_v)
+    1. QÂ·Káµ€             → (n Ã— n) attention scores     O(nÂ²Â·d_k)
+    2. / âˆšd_k            → scale to prevent large logits
+    3. + mask             → causal mask for autoregressive
+    4. softmax            → normalize to probabilities    O(nÂ²)
+    5. Ã— V               → weighted value aggregation     O(nÂ²Â·d_v)
 
   TOTAL COMPLEXITY: O(nÂ² Â· d)
   TOTAL MEMORY: O(nÂ²) for the attention weights matrix
@@ -104,14 +104,14 @@ KV-CACHE SIZE PER TOKEN:
   Per token total     = 4 KB Ã— 80 layers = 320 KB
   
   SEQUENCE COSTS:
-    1K tokens  â†’ 320 MB
-    8K tokens  â†’ 2.5 GB
-    32K tokens â†’ 10 GB
-    128K tokens â†’ 40 GB  â† exceeds many GPUs!
+    1K tokens  → 320 MB
+    8K tokens  → 2.5 GB
+    32K tokens → 10 GB
+    128K tokens → 40 GB  â† exceeds many GPUs!
 
   IF MHA (64 KV heads instead of 8):
     Per token = 2 Ã— 64 Ã— 128 Ã— 2 Ã— 80 = 2.5 MB per token
-    128K tokens â†’ 320 GB  â† impossible!
+    128K tokens → 320 GB  â† impossible!
 
   GQA SAVINGS: 8Ã— reduction in KV-cache = feasible long context
 ```
@@ -120,7 +120,7 @@ KV-CACHE SIZE PER TOKEN:
 
 ```
 STANDARD ATTENTION:
-  1. Compute full nÃ—n attention matrix in HBM  â†’ O(nÂ²) memory
+  1. Compute full nÃ—n attention matrix in HBM  → O(nÂ²) memory
   2. Apply softmax
   3. Multiply by V
   Problem: nÃ—n matrix doesn't fit in SRAM for long sequences
@@ -144,7 +144,7 @@ FLASH ATTENTION:
 
 ---
 
-## â˜… Code & Implementation
+## ★ Code & Implementation
 
 ### Attention Variants Comparison
 
@@ -201,7 +201,7 @@ for name, cfg in configs.items():
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
@@ -211,14 +211,14 @@ for name, cfg in configs.items():
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: What is Multi-Query Attention and why does it matter?
 - **A**: In standard Multi-Head Attention, each attention head has its own K and V projections â€” meaning the KV-cache scales linearly with the number of heads. Multi-Query Attention shares a single K, V pair across all query heads. This reduces KV-cache by the number of heads (e.g., 64Ã— for LLaMA with 64 heads), enabling much longer context windows and higher batch sizes during inference. Grouped-Query Attention (GQA) is the practical middle ground â€” using 8 KV groups instead of 64 or 1 â€” giving most of the memory savings with minimal quality loss. This is what LLaMA 3 uses.
 
 ---
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics |
 |---|---|
@@ -229,7 +229,7 @@ for name, cfg in configs.items():
 
 ---
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type | Resource | Why |
 |------|----------|-----|
@@ -241,7 +241,7 @@ for name, cfg in configs.items():
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Implement GQA and Compare KV-Cache Size
 
@@ -255,7 +255,7 @@ for name, cfg in configs.items():
 **Expected Output**: Memory comparison table showing 4x KV-cache reduction with GQA
 ---
 
-## â˜… Sources
+## ★ Sources
 
 - Vaswani et al. "Attention Is All You Need" (2017)
 - Dao et al. "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness" (2022)

@@ -15,11 +15,11 @@ updated: 2026-04-11
 
 # Reasoning Models & Test-Time Compute
 
-> âœ¨ **Bit**: Pre-2024: "Make the model bigger to make it smarter." Post-2024: "Make the model THINK LONGER to make it smarter." This shift â€” from scaling training compute to scaling inference compute â€” is the biggest paradigm change since the Transformer.
+> ✨ **Bit**: Pre-2024: "Make the model bigger to make it smarter." Post-2024: "Make the model THINK LONGER to make it smarter." This shift â€” from scaling training compute to scaling inference compute â€” is the biggest paradigm change since the Transformer.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: LLMs that generate internal "thinking" chains before answering, trading more inference compute for dramatically better reasoning
 - **Why**: Standard LLMs fail at complex math, logic, and multi-step problems. Reasoning models solve these by "thinking step by step" internally â€” not as a prompting trick, but as a trained capability
@@ -27,7 +27,7 @@ updated: 2026-04-11
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -54,7 +54,7 @@ Last verified for model-lineup and timeline references: 2026-04.
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### The Two Scaling Laws
 
@@ -64,8 +64,8 @@ ERA 1: PRE-TRAINING SCALING (2020-2024)
 
   Performance âˆ model_size Ã— data_size Ã— training_compute
 
-  GPT-3 (175B) â†’ GPT-4 (~1.8T) â†’ GPT-5 (~1T+)
-  Problem: Diminishing returns. 10x compute â†’ ~1.5x better.
+  GPT-3 (175B) → GPT-4 (~1.8T) → GPT-5 (~1T+)
+  Problem: Diminishing returns. 10x compute → ~1.5x better.
   Cost: $100M+ per training run.
 
 ERA 2: TEST-TIME COMPUTE SCALING (2024+)
@@ -73,11 +73,11 @@ ERA 2: TEST-TIME COMPUTE SCALING (2024+)
 
   Performance âˆ inference_compute (thinking tokens)
 
-  Small model + 100 thinking tokens â†’ beats large model on reasoning
+  Small model + 100 thinking tokens → beats large model on reasoning
   Cost: Pay per-problem (harder problems = more tokens = more cost)
 
   KEY INSIGHT: You can DYNAMICALLY allocate compute per problem.
-  Easy question â†’ fast answer. Hard math â†’ 10 minutes of thinking.
+  Easy question → fast answer. Hard math → 10 minutes of thinking.
 
   THE SCALING CEILING: Test-time compute scaling is bounded by the model's ability to verify its own logic (the verification-generation gap). If verifying a step is as hard as generating it, inference scaling flatlines. Furthermore, massive thinking chains lead to KV cache exhaustion on GPUs.
 ```
@@ -123,10 +123,10 @@ REASONING MODEL:
 â”‚  STEP 3: Reinforcement Learning (the key step)      â”‚
 â”‚          â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”   â”‚
 â”‚          â”‚ Model generates chain-of-thought     â”‚   â”‚
-â”‚          â”‚ â†’ Check if final answer is correct   â”‚   â”‚
-â”‚          â”‚ â†’ Reward correct reasoning paths     â”‚   â”‚
-â”‚          â”‚ â†’ Penalize wrong paths               â”‚   â”‚
-â”‚          â”‚ â†’ Model learns WHICH thinking        â”‚   â”‚
+â”‚          â”‚ → Check if final answer is correct   â”‚   â”‚
+â”‚          â”‚ → Reward correct reasoning paths     â”‚   â”‚
+â”‚          â”‚ → Penalize wrong paths               â”‚   â”‚
+â”‚          â”‚ → Model learns WHICH thinking        â”‚   â”‚
 â”‚          â”‚   strategies lead to right answers   â”‚   â”‚
 â”‚          â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜   â”‚
 â”‚          Methods: PPO, GRPO (DeepSeek)              â”‚
@@ -134,7 +134,7 @@ REASONING MODEL:
 â”‚  STEP 4: Process Reward Models (PRM)                â”‚
 â”‚          Don't just check the final answer â€”         â”‚
 â”‚          evaluate EACH STEP of reasoning.           â”‚
-â”‚          "Step 3 was wrong" â†’ more granular signal  â”‚
+â”‚          "Step 3 was wrong" → more granular signal  â”‚
 â”‚                                                     â”‚
 â”‚  Result: Model that knows WHEN and HOW to think     â”‚
 â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
@@ -156,15 +156,15 @@ REASONING MODEL:
 
 | Scenario                     | Use Standard LLM | Use Reasoning Model          |
 | ---------------------------- | ---------------- | ---------------------------- |
-| Simple Q&A, chat             | âœ… Fast, cheap    | âŒ Overkill                   |
-| Translation, summarization   | âœ…                | âŒ                            |
-| Complex math problems        | âŒ Often wrong    | âœ… Step-by-step verification  |
-| Multi-step logic/planning    | âŒ                | âœ…                            |
-| Code debugging (complex)     | âš ï¸ Sometimes      | âœ… Better at tracing issues   |
-| Creative writing             | âœ…                | âŒ Unnecessary reasoning      |
-| PhD-level science            | âŒ                | âœ… Designed for this          |
-| Real-time chat (low latency) | âœ…                | âŒ Thinking adds latency      |
-| Cost-sensitive applications  | âœ…                | âš ï¸ Thinking tokens cost money |
+| Simple Q&A, chat             | ✅ Fast, cheap    | âŒ Overkill                   |
+| Translation, summarization   | ✅                | âŒ                            |
+| Complex math problems        | âŒ Often wrong    | ✅ Step-by-step verification  |
+| Multi-step logic/planning    | âŒ                | ✅                            |
+| Code debugging (complex)     | âš ï¸ Sometimes      | ✅ Better at tracing issues   |
+| Creative writing             | ✅                | âŒ Unnecessary reasoning      |
+| PhD-level science            | âŒ                | ✅ Designed for this          |
+| Real-time chat (low latency) | ✅                | âŒ Thinking adds latency      |
+| Cost-sensitive applications  | ✅                | âš ï¸ Thinking tokens cost money |
 
 ### Test-Time Compute Techniques
 
@@ -195,13 +195,13 @@ TRAINING APPROACH (GRPO):
 
 DISTILLED VERSIONS:
   DeepSeek-R1-Distill-Qwen-32B, DeepSeek-R1-Distill-Llama-70B
-  â†’ Distill R1's reasoning into smaller models
-  â†’ Available via Ollama for local use
+  → Distill R1's reasoning into smaller models
+  → Available via Ollama for local use
 ```
 
 ---
 
-## â—† Code & Implementation
+## ◆ Code & Implementation
 
 ```python
 # âš ï¸ Last tested: 2026-04
@@ -224,7 +224,7 @@ response = client.chat.completions.create(
 # Thinking tokens are consumed but hidden by default
 print(response.choices[0].message.content)
 print(f"Total tokens: {response.usage.total_tokens}")
-# â†’ Much higher token count due to internal reasoning
+# → Much higher token count due to internal reasoning
 
 # â•â•â• Using DeepSeek-R1 locally via Ollama â•â•â•
 # ollama run deepseek-r1:8b
@@ -233,21 +233,21 @@ print(f"Total tokens: {response.usage.total_tokens}")
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 
 ```
 REASONING MODEL DECISION TREE:
   Is the task complex reasoning/math/logic?
-    YES â†’ Use reasoning model (o3, DeepSeek-R1)
-    NO  â†’ Use standard LLM (GPT-5.4, Claude Sonnet 4.6)
+    YES → Use reasoning model (o3, DeepSeek-R1)
+    NO  → Use standard LLM (GPT-5.4, Claude Sonnet 4.6)
 
   Is latency critical?
-    YES â†’ Use standard LLM or GPT-5.4 mini
-    NO  â†’ Reasoning model is fine
+    YES → Use standard LLM or GPT-5.4 mini
+    NO  → Reasoning model is fine
 
   Is cost critical?
-    YES â†’ GPT-5.4 mini or DeepSeek-R1 (open, self-host)
-    NO  â†’ o3 with high reasoning effort
+    YES → GPT-5.4 mini or DeepSeek-R1 (open, self-host)
+    NO  → o3 with high reasoning effort
 
 KEY NUMBERS:
   o1 on AIME 2024: 83% (vs GPT-4o: 13%)
@@ -260,7 +260,7 @@ KEY NUMBERS:
 
 ---
 
-## â—‹ Gotchas & Common Mistakes
+## ○ Gotchas & Common Mistakes
 
 - âš ï¸ **Don't prompt "think step by step"**: Reasoning models already do this internally. Adding CoT prompts can actually hurt performance.
 - âš ï¸ **KV Cache Explosion & Cost Surprise**: A single complex query can consume 50K+ tokens of thinking. Because reasoning models autoregressively output and attend to these hidden tokens, the KV cache grows massive during test-time compute. This forces dynamic PagedAttention management and huge API costs. Monitor token economics ruthlessly.
@@ -270,7 +270,7 @@ KEY NUMBERS:
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: What is test-time compute scaling and why does it matter?
 - **A**: Instead of scaling model size (pre-training compute), you scale compute at inference â€” let the model "think longer" on harder problems. This is more efficient because you allocate compute per-problem (easy = cheap, hard = expensive) rather than baking it all into a massive model. o1/o3 showed this can match or exceed much larger standard models.
@@ -283,7 +283,7 @@ KEY NUMBERS:
 
 ---
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics                                                                                                                                  |
 | ------------ | --------------------------------------------------------------------------------------------------------------------------------------- |
@@ -295,7 +295,7 @@ KEY NUMBERS:
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
@@ -306,7 +306,7 @@ KEY NUMBERS:
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Build a Complexity Router
 
@@ -321,7 +321,7 @@ KEY NUMBERS:
 ---
 
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type | Resource | Why |
 |------|----------|-----|
@@ -330,7 +330,7 @@ KEY NUMBERS:
 | ðŸ“˜ Book | "AI Engineering" by Chip Huyen (2025), Ch 5 | Covers reasoning techniques and their production implications |
 | ðŸŽ¥ Video | [Andrej Karpathy â€” "Deep Dive into o1"](https://www.youtube.com/watch?v=tEzs3VHyBDM) | Analysis of reasoning model architectures |
 
-## â˜… Sources
+## ★ Sources
 
 - OpenAI, "Learning to Reason with LLMs" (o1 blog post, Sep 2024)
 - DeepSeek, "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning" (Jan 2025)

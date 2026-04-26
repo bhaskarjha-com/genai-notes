@@ -15,11 +15,11 @@ updated: 2026-04-14
 
 # Code Generation & AI-Assisted Development
 
-> âœ¨ **Bit**: In 2024, AI wrote code suggestions. In 2026, AI writes entire features, debugs across codebases, runs tests, and deploys â€” while you review the PR. We went from autocomplete to autonomous coding agents in 2 years.
+> ✨ **Bit**: In 2024, AI wrote code suggestions. In 2026, AI writes entire features, debugs across codebases, runs tests, and deploys â€” while you review the PR. We went from autocomplete to autonomous coding agents in 2 years.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: AI tools that write, debug, refactor, test, and deploy code â€” from autocomplete to fully autonomous agents
 - **Why**: AI coding tools are the single largest productivity multiplier in software engineering. Every major company now mandates one.
@@ -27,7 +27,7 @@ updated: 2026-04-14
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -66,11 +66,11 @@ ERA 4: AGENT-FIRST IDES (2025-2026) â† WE ARE HERE
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### Major Tools & Platforms (March 2026)
 
-#### 1. Google Antigravity â­
+#### 1. Google Antigravity ⭐
 
 ```
 TYPE: AI-first IDE (VS Code fork)
@@ -103,7 +103,7 @@ BY: Google (open-source)
 MODELS: Gemini 3.1 Pro, Gemini 3 Flash
 
 KEY FEATURES:
-  - ReAct loop: reasons about code â†’ executes actions â†’ observes
+  - ReAct loop: reasons about code → executes actions → observes
   - File manipulation, command execution, debugging
   - Plan Mode (March 2026): creates structured plans before coding
   - Works in any terminal â€” no IDE needed
@@ -215,13 +215,13 @@ BEST FOR: Delegating complete tasks/tickets
 
 | Tool            | Type               | Multi-Agent    | MCP | Terminal  | Free?         | Best For                   |
 | --------------- | ------------------ | -------------- | --- | --------- | ------------- | -------------------------- |
-| **Antigravity** | IDE                | âœ… Manager View | âœ…   | Via agent | âœ… (preview)   | Agent-first development    |
-| **Gemini CLI**  | Terminal           | âŒ              | âœ…   | âœ… Native  | âœ… (free tier) | Terminal-native devs       |
-| **Claude Code** | Terminal/IDE       | âŒ              | âœ…   | âœ… Native  | âŒ (API costs) | Large codebase refactoring |
-| **Cursor**      | IDE                | âŒ              | âœ…   | Via agent | Freemium      | AI-enhanced VS Code        |
-| **Copilot**     | Extension/Platform | âœ…              | âœ…   | Via agent | Free student  | GitHub ecosystem           |
-| **Windsurf**    | IDE                | âŒ              | âœ…   | Via agent | Freemium      | Budget-conscious devs      |
-| **Devin**       | Autonomous agent   | âŒ              | âŒ   | âœ… Own env | âŒ             | Full task delegation       |
+| **Antigravity** | IDE                | ✅ Manager View | ✅   | Via agent | ✅ (preview)   | Agent-first development    |
+| **Gemini CLI**  | Terminal           | âŒ              | ✅   | ✅ Native  | ✅ (free tier) | Terminal-native devs       |
+| **Claude Code** | Terminal/IDE       | âŒ              | ✅   | ✅ Native  | âŒ (API costs) | Large codebase refactoring |
+| **Cursor**      | IDE                | âŒ              | ✅   | Via agent | Freemium      | AI-enhanced VS Code        |
+| **Copilot**     | Extension/Platform | ✅              | ✅   | Via agent | Free student  | GitHub ecosystem           |
+| **Windsurf**    | IDE                | âŒ              | ✅   | Via agent | Freemium      | Budget-conscious devs      |
+| **Devin**       | Autonomous agent   | âŒ              | âŒ   | ✅ Own env | âŒ             | Full task delegation       |
 
 ### Coding Model Benchmarks
 
@@ -270,8 +270,8 @@ POLYGLOT BENCH â€” Multi-language code generation:
 â”‚     Check for regressions                            â”‚
 â”‚                                                      â”‚
 â”‚  5. ITERATE                                          â”‚
-â”‚     If tests fail â†’ read errors â†’ fix â†’ re-run      â”‚
-â”‚     If lint fails â†’ fix â†’ re-run                     â”‚
+â”‚     If tests fail → read errors → fix → re-run      â”‚
+â”‚     If lint fails → fix → re-run                     â”‚
 â”‚     Loop until all checks pass                       â”‚
 â”‚                                                      â”‚
 â”‚  6. PRESENT                                          â”‚
@@ -283,7 +283,7 @@ POLYGLOT BENCH â€” Multi-language code generation:
 
 ---
 
-## â˜… Code & Implementation
+## ★ Code & Implementation
 
 ### Custom MCP Tool for a Coding Agent
 
@@ -362,7 +362,7 @@ if __name__ == "__main__":
 - Tests: minimum 1 test per public function, use fixtures
 
 ## Architecture Rules
-- Backend: domain-driven design (service â†’ repository â†’ model)
+- Backend: domain-driven design (service → repository → model)
 - Never import from one domain into another directly
 - All API responses use Pydantic models with examples
 - Database: async SQLAlchemy with Alembic migrations
@@ -376,7 +376,7 @@ if __name__ == "__main__":
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
@@ -389,16 +389,16 @@ if __name__ == "__main__":
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 
 ```
 WHICH TOOL TO USE:
-  Want agent-first IDE?          â†’ Antigravity
-  Prefer terminal?               â†’ Gemini CLI (Google) or Claude Code (Anthropic)
-  Want VS Code + AI?             â†’ Cursor
-  Already on GitHub?             â†’ Copilot
-  Want free?                     â†’ Windsurf or Gemini CLI
-  Delegate entire tickets?       â†’ Devin
+  Want agent-first IDE?          → Antigravity
+  Prefer terminal?               → Gemini CLI (Google) or Claude Code (Anthropic)
+  Want VS Code + AI?             → Cursor
+  Already on GitHub?             → Copilot
+  Want free?                     → Windsurf or Gemini CLI
+  Delegate entire tickets?       → Devin
 
 CODING MODELS:
   Best code-specific model:      GPT-5.3-Codex
@@ -413,7 +413,7 @@ KEY TREND (2026):
 
 ---
 
-## â—‹ Gotchas & Common Mistakes
+## ○ Gotchas & Common Mistakes
 
 - âš ï¸ **Blindly accepting AI code**: AI code can be subtly wrong. ALWAYS review diffs, run tests, and understand what changed.
 - âš ï¸ **Context is everything**: AI coding quality depends heavily on what context it has. Good system prompts, .cursorrules files, and MCP connections dramatically improve output.
@@ -424,7 +424,7 @@ KEY TREND (2026):
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: How do modern AI coding agents work?
 - **A**: They follow a plan-act-observe loop: (1) understand the task by reading the codebase context, (2) plan which files to change, (3) implement changes across multiple files, (4) run tests and linters to verify, (5) iterate on failures, (6) present a diff for human review. Tools like Antigravity and Cursor provide IDE integration, while Gemini CLI and Claude Code work from the terminal. The key differentiator in 2026 is MCP support â€” agents can connect to databases, APIs, and external tools.
@@ -434,7 +434,7 @@ KEY TREND (2026):
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Compare AI Coding Tools
 
@@ -460,7 +460,7 @@ KEY TREND (2026):
 
 ---
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics                                                                                      |
 | ------------ | ------------------------------------------------------------------------------------------- |
@@ -471,7 +471,7 @@ KEY TREND (2026):
 
 ---
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type | Resource | Why |
 |------|----------|-----|
@@ -484,7 +484,7 @@ KEY TREND (2026):
 
 ---
 
-## â˜… Sources
+## ★ Sources
 
 - Google Antigravity â€” https://antigravity-ide.com
 - Gemini CLI â€” https://github.com/google-gemini/gemini-cli

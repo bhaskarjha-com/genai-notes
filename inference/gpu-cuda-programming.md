@@ -19,14 +19,14 @@ updated: 2026-04-14
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 - **What**: The hardware and programming concepts behind GPU-accelerated AI workloads.
 - **Why**: Many training and inference bottlenecks make sense only if you understand memory hierarchy, parallel execution, and kernel behavior.
 - **Key point**: In AI systems, moving data efficiently is often harder than doing the math.
 
 ---
 
-## â˜… Overview
+## ★ Overview
 ### Definition
 
 A **GPU** is a massively parallel processor optimized for throughput-oriented numeric computation. **CUDA** is NVIDIA's programming model and toolchain for writing GPU-accelerated programs.
@@ -49,7 +49,7 @@ This note gives AI engineers a practical systems view: how GPU execution works, 
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 ### GPU Mental Model
 
 GPUs are built for many operations in parallel:
@@ -142,7 +142,7 @@ Ask:
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 | Question | Heuristic |
 |---|---|
 | Slow decode on large model | suspect memory bandwidth or KV-cache behavior |
@@ -153,7 +153,7 @@ Ask:
 
 ---
 
-## â—‹ Gotchas & Common Mistakes
+## ○ Gotchas & Common Mistakes
 - GPU utilization percentages are useful but incomplete.
 - Compute throughput and memory throughput are different bottlenecks.
 - Kernel-level optimization is usually wasted if the higher-level architecture is wrong.
@@ -161,7 +161,7 @@ Ask:
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 - **Q**: Why are LLM decode steps often memory-bound?
 - **A**: Each generated token requires repeatedly loading weights and KV-cache state, so memory movement can dominate arithmetic. That is why layout, caching, and serving-engine design matter so much.
 
@@ -170,7 +170,7 @@ Ask:
 
 ---
 
-## â˜… Connections
+## ★ Connections
 | Relationship | Topics |
 |---|---|
 | Builds on | [Transformers](../foundations/transformers.md), [Inference Optimization](./inference-optimization.md) |
@@ -180,7 +180,7 @@ Ask:
 
 ---
 
-## â˜… Code & Implementation
+## ★ Code & Implementation
 
 ### GPU Memory Profiling with PyTorch
 
@@ -228,7 +228,7 @@ gpu_memory_report()  # After
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
@@ -239,7 +239,7 @@ gpu_memory_report()  # After
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: GPU Memory Estimation
 
@@ -254,7 +254,7 @@ gpu_memory_report()  # After
 
 ---
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type | Resource | Why |
 |------|----------|-----|
@@ -266,7 +266,7 @@ gpu_memory_report()  # After
 
 ---
 
-## â˜… Sources
+## ★ Sources
 
 - NVIDIA CUDA Programming Guide â€” https://docs.nvidia.com/cuda/
 - NVIDIA Nsight Documentation â€” https://developer.nvidia.com/nsight-systems

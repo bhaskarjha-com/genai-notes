@@ -15,11 +15,11 @@ updated: 2026-04-11
 
 # Function Calling, Structured Output & Tool Use
 
-> âœ¨ **Bit**: An LLM that only generates text is like a brain with no hands. Function calling gives it hands â€” it can now search the web, query databases, send emails, and execute code. This is what makes LLMs actually useful in production.
+> ✨ **Bit**: An LLM that only generates text is like a brain with no hands. Function calling gives it hands â€” it can now search the web, query databases, send emails, and execute code. This is what makes LLMs actually useful in production.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: Mechanisms for LLMs to (1) call external functions/APIs and (2) return data in strict schemas (JSON, Pydantic)
 - **Why**: Every production LLM application uses these. You can't build real apps with free-text responses alone.
@@ -27,7 +27,7 @@ updated: 2026-04-11
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -48,7 +48,7 @@ Covers the patterns, APIs, and protocols. For building full agents with planning
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### Function Calling Flow
 
@@ -58,20 +58,20 @@ Covers the patterns, APIs, and protocols. For building full agents with planning
 â”‚                                                         â”‚
 â”‚  1. User: "What's the weather in Tokyo?"                â”‚
 â”‚                                                         â”‚
-â”‚  2. Your Code â†’ sends message + TOOL DEFINITIONS to LLMâ”‚
+â”‚  2. Your Code → sends message + TOOL DEFINITIONS to LLMâ”‚
 â”‚     tools = [{                                          â”‚
 â”‚       name: "get_weather",                              â”‚
 â”‚       parameters: { location: string, unit: string }    â”‚
 â”‚     }]                                                  â”‚
 â”‚                                                         â”‚
-â”‚  3. LLM â†’ decides to call a tool (NOT execute it!)      â”‚
+â”‚  3. LLM → decides to call a tool (NOT execute it!)      â”‚
 â”‚     Response: {                                         â”‚
 â”‚       tool_call: "get_weather",                         â”‚
 â”‚       arguments: { location: "Tokyo", unit: "celsius" } â”‚
 â”‚     }                                                   â”‚
 â”‚                                                         â”‚
 â”‚  4. YOUR CODE executes the actual function               â”‚
-â”‚     result = get_weather("Tokyo", "celsius")  â†’ "22Â°C"  â”‚
+â”‚     result = get_weather("Tokyo", "celsius")  → "22Â°C"  â”‚
 â”‚                                                         â”‚
 â”‚  5. Feed result back to LLM                             â”‚
 â”‚     messages.append(tool_result: "22Â°C")                â”‚
@@ -84,7 +84,7 @@ KEY: The LLM NEVER executes code. It only decides what to call.
      YOUR code runs the function. Safety is YOUR responsibility.
 ```
 
-## â˜… Code & Implementation
+## ★ Code & Implementation
 
 ### Function Calling API (OpenAI Pattern)
 
@@ -151,7 +151,7 @@ if message.tool_calls:
         model="gpt-4o", messages=messages
     )
     print(final.choices[0].message.content)
-    # â†’ "The current weather in Tokyo is 22Â°C and partly cloudy."
+    # → "The current weather in Tokyo is 22Â°C and partly cloudy."
 ```
 
 ### Structured Output
@@ -183,7 +183,7 @@ response = client.beta.chat.completions.parse(
     response_format=PlanetList  # Schema is STRICTLY enforced
 )
 
-planets = response.choices[0].message.parsed  # â†’ PlanetList object
+planets = response.choices[0].message.parsed  # → PlanetList object
 for p in planets.planets:
     print(f"{p.name}: {p.diameter_km}km, rings={p.has_rings}")
 
@@ -212,7 +212,7 @@ BEFORE MCP:
   N models Ã— M tools = NÃ—M integrations
 
 WITH MCP:
-  Tool implements MCP server â†’ works with ANY MCP client
+  Tool implements MCP server → works with ANY MCP client
   N models + M tools = N + M integrations
 
   â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”     MCP     â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
@@ -244,71 +244,71 @@ GROUNDING METHODS (from simple to complex):
      Simple but limited.
 
   2. RAG (Retrieval-Augmented Generation)
-     Retrieve relevant documents â†’ inject as context â†’ generate
+     Retrieve relevant documents → inject as context → generate
 See [Retrieval-Augmented Generation (RAG)](./rag.md) for full details.
 
   3. FUNCTION CALLING + LIVE DATA
-     LLM calls get_stock_price() â†’ gets real-time data
+     LLM calls get_stock_price() → gets real-time data
      Most accurate for dynamic information.
 
   4. KNOWLEDGE GRAPHS
-     Structured entity relationships (Company â†’ CEO â†’ Founded)
+     Structured entity relationships (Company → CEO → Founded)
      Graph databases (Neo4j) + LLM reasoning.
 
   5. MULTI-SOURCE VERIFICATION
-     Query multiple sources â†’ cross-validate â†’ generate
+     Query multiple sources → cross-validate → generate
      Highest accuracy, highest latency.
 ```
 
 ---
 
-## â—† Comparison
+## ◆ Comparison
 
 | Feature                  | JSON Mode                  | Structured Output          | Function Calling        |
 | ------------------------ | -------------------------- | -------------------------- | ----------------------- |
 | **What**                 | Valid JSON output          | Schema-enforced output     | Call external functions |
-| **Schema guaranteed?**   | âŒ (valid JSON, not schema) | âœ… (100% schema compliance) | âœ… (function signature)  |
+| **Schema guaranteed?**   | âŒ (valid JSON, not schema) | ✅ (100% schema compliance) | ✅ (function signature)  |
 | **Use case**             | Simple extraction          | Data pipelines, APIs       | Tool use, agents        |
 | **Hallucinated fields?** | Possible                   | No                         | No (args validated)     |
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 
 ```
 WHEN TO USE WHAT:
-  Need LLM to call APIs/tools    â†’ Function calling
-  Need structured data extraction â†’ Structured output (Pydantic)
-  Need basic JSON response        â†’ JSON mode
-  Need tool interop standard      â†’ MCP
-  Need factual grounding          â†’ RAG + citations
+  Need LLM to call APIs/tools    → Function calling
+  Need structured data extraction → Structured output (Pydantic)
+  Need basic JSON response        → JSON mode
+  Need tool interop standard      → MCP
+  Need factual grounding          → RAG + citations
 
 TOOL CHOICE OPTIONS:
-  "auto"      â†’ LLM decides whether to call a tool
-  "required"  â†’ LLM MUST call at least one tool
-  "none"      â†’ LLM cannot call any tools
-  {name: "x"} â†’ LLM must call specific tool
+  "auto"      → LLM decides whether to call a tool
+  "required"  → LLM MUST call at least one tool
+  "none"      → LLM cannot call any tools
+  {name: "x"} → LLM must call specific tool
 
 LIBRARIES:
-  instructor    â†’ Structured output with retries
-  marvin        â†’ AI functions with type hints
-  langchain     â†’ Tool/agent framework
-  pydantic      â†’ Schema definition
+  instructor    → Structured output with retries
+  marvin        → AI functions with type hints
+  langchain     → Tool/agent framework
+  pydantic      → Schema definition
 ```
 
 ---
 
-## â—‹ Gotchas & Common Mistakes
+## ○ Gotchas & Common Mistakes
 
 - âš ï¸ **LLM doesn't execute functions**: It only generates the call. YOUR code runs it. Never let the LLM run arbitrary code.
-- âš ï¸ **Tool descriptions matter enormously**: Vague descriptions â†’ wrong tool selection. Be specific and include examples.
+- âš ï¸ **Tool descriptions matter enormously**: Vague descriptions → wrong tool selection. Be specific and include examples.
 - âš ï¸ **Parallel tool calls**: Models can request multiple tool calls at once. Handle them all before responding.
 - âš ï¸ **JSON mode â‰  Structured Output**: JSON mode guarantees valid JSON but NOT schema compliance. Use structured output for reliable schemas.
-- âš ï¸ **Cost of tool calling**: Each round-trip (user â†’ tool call â†’ result â†’ final answer) doubles token usage.
+- âš ï¸ **Cost of tool calling**: Each round-trip (user → tool call → result → final answer) doubles token usage.
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: How does function calling work in LLMs?
 - **A**: You define tools with names, descriptions, and parameter schemas. The LLM receives the user message + tool definitions, decides if a tool should be called, and generates a JSON object with the function name and arguments. YOUR code executes the function and feeds the result back to the LLM for final response generation. The LLM never actually runs the function.
@@ -318,7 +318,7 @@ LIBRARIES:
 
 ---
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics                                                                                    |
 | ------------ | ----------------------------------------------------------------------------------------- |
@@ -330,7 +330,7 @@ LIBRARIES:
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
@@ -342,7 +342,7 @@ LIBRARIES:
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Build a Structured Data Extractor
 
@@ -369,7 +369,7 @@ esponse_format
 ---
 
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type | Resource | Why |
 |------|----------|-----|
@@ -378,7 +378,7 @@ esponse_format
 | ðŸ“˜ Book | "AI Engineering" by Chip Huyen (2025), Ch 6 (Agents) | Covers tool use and structured output in agent architectures |
 | ðŸ”§ Hands-on | [Anthropic Tool Use Guide](https://docs.anthropic.com/en/docs/build-with-claude/tool-use) | Claude's approach to function calling with examples |
 
-## â˜… Sources
+## ★ Sources
 
 - OpenAI Function Calling Guide â€” https://platform.openai.com/docs/guides/function-calling
 - OpenAI Structured Outputs â€” https://platform.openai.com/docs/guides/structured-outputs

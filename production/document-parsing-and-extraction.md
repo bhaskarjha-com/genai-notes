@@ -15,19 +15,19 @@ updated: 2026-04-14
 
 # Document Parsing & Extraction
 
-> âœ¨ **Bit**: RAG is only as good as its parsed documents. If your PDF parser turns a table into gibberish or loses headings, no embedding model or LLM can recover that information. Document parsing is the unglamorous foundation that makes or breaks retrieval quality.
+> ✨ **Bit**: RAG is only as good as its parsed documents. If your PDF parser turns a table into gibberish or loses headings, no embedding model or LLM can recover that information. Document parsing is the unglamorous foundation that makes or breaks retrieval quality.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: The pipeline for extracting structured text from unstructured documents (PDFs, Word, HTML, scans) for use in RAG and AI systems
-- **Why**: 90% of enterprise data lives in documents. Poor parsing â†’ poor chunks â†’ poor retrieval â†’ hallucinations. Garbage in, garbage out.
+- **Why**: 90% of enterprise data lives in documents. Poor parsing → poor chunks → poor retrieval → hallucinations. Garbage in, garbage out.
 - **Key point**: There is no universal document parser. Choose your parser based on document type (text PDF, scanned PDF, tables, multi-column layouts) and test on real samples from your data.
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -44,7 +44,7 @@ Covers: Parsing strategies for common document types, chunking approaches, table
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### The Document Parsing Pipeline
 
@@ -61,10 +61,10 @@ RAW DOCUMENTS (PDF, DOCX, HTML, images)
                 â–¼
 â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
 â”‚  2. TEXT EXTRACTION                   â”‚
-â”‚     Text PDF â†’ PyMuPDF, pdfplumber   â”‚
-â”‚     Scanned  â†’ OCR (Tesseract, etc.) â”‚
-â”‚     DOCX     â†’ python-docx           â”‚
-â”‚     HTML     â†’ BeautifulSoup         â”‚
+â”‚     Text PDF → PyMuPDF, pdfplumber   â”‚
+â”‚     Scanned  → OCR (Tesseract, etc.) â”‚
+â”‚     DOCX     → python-docx           â”‚
+â”‚     HTML     → BeautifulSoup         â”‚
 â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
                 â”‚
                 â–¼
@@ -111,14 +111,14 @@ RAW DOCUMENTS (PDF, DOCX, HTML, images)
 | Strategy | How It Works | Best For | Chunk Size |
 |----------|-------------|----------|:----------:|
 | **Fixed-size** | Split every N tokens with overlap | Simple documents | 200-500 tokens |
-| **Recursive** | Split by paragraph â†’ sentence â†’ token | General purpose | 200-1000 tokens |
+| **Recursive** | Split by paragraph → sentence → token | General purpose | 200-1000 tokens |
 | **Semantic** | Split at topic boundaries using embeddings | Long documents | Variable |
 | **Document-aware** | Split at section headings | Structured docs | Section-sized |
 | **Sliding window** | Overlapping windows across text | Dense technical docs | 300-500 tokens |
 
 ---
 
-## â˜… Code & Implementation
+## ★ Code & Implementation
 
 ### Production Document Parsing Pipeline
 
@@ -211,7 +211,7 @@ for chunk in chunks[:3]:
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
@@ -222,14 +222,14 @@ for chunk in chunks[:3]:
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: How would you build a document processing pipeline for a RAG system?
 - **A**: I'd build a 5-stage pipeline. (1) Format detection to route PDFs, DOCX, HTML to appropriate parsers. (2) Text extraction â€” PyMuPDF for digital PDFs, pdfplumber for table-heavy PDFs, Tesseract+layout detection for scans. (3) Structure preservation â€” keep headings, lists, and table structure using markdown formatting. (4) Document-aware chunking â€” split at section boundaries with 200-500 token chunks and 50-token overlap, keeping section headers as metadata. (5) Metadata enrichment â€” attach source file, page number, section heading to each chunk. I'd evaluate quality by sampling 50 chunks and manually checking if they preserve the meaning of the original content.
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Compare PDF Parsers
 
@@ -244,7 +244,7 @@ for chunk in chunks[:3]:
 
 ---
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics |
 |---|---|
@@ -255,7 +255,7 @@ for chunk in chunks[:3]:
 
 ---
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type | Resource | Why |
 |------|----------|-----|
@@ -266,7 +266,7 @@ for chunk in chunks[:3]:
 
 ---
 
-## â˜… Sources
+## ★ Sources
 
 - PyMuPDF Documentation â€” https://pymupdf.readthedocs.io/
 - pdfplumber Documentation â€” https://github.com/jsvine/pdfplumber

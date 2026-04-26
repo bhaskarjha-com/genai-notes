@@ -15,11 +15,11 @@ updated: 2026-04-14
 
 # LLM Routing & Model Selection
 
-> âœ¨ **Bit**: Using GPT-4 for everything is like taking an ambulance to the grocery store. Model routing sends simple requests to cheap/fast models and hard requests to powerful/expensive ones â€” cutting costs 60-80% with minimal quality loss.
+> ✨ **Bit**: Using GPT-4 for everything is like taking an ambulance to the grocery store. Model routing sends simple requests to cheap/fast models and hard requests to powerful/expensive ones â€” cutting costs 60-80% with minimal quality loss.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: Techniques for dynamically selecting which LLM handles each request based on task complexity, cost, latency, and quality requirements
 - **Why**: LLM costs vary 100Ã— between models (Gemini Flash: $0.075/M vs Claude Opus: $75/M input tokens). Routing simple tasks to cheap models saves enormous money.
@@ -27,7 +27,7 @@ updated: 2026-04-14
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -51,7 +51,7 @@ Covers: Routing strategies (rule-based, classifier-based, cascade), model select
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### The Cost-Quality Spectrum (April 2026)
 
@@ -91,25 +91,25 @@ MODEL TIERS (per 1M input tokens):
 â”‚  â”‚ if task_type == "summarize": use Sonnet       â”‚                 â”‚
 â”‚  â”‚ if task_type == "reason": use Opus            â”‚                 â”‚
 â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜                 â”‚
-â”‚  âœ… Simple, predictable, no overhead                              â”‚
+â”‚  ✅ Simple, predictable, no overhead                              â”‚
 â”‚  âŒ Can't handle ambiguous requests                               â”‚
 â”‚                                                                    â”‚
 â”‚  STRATEGY 2: CLASSIFIER-BASED                                     â”‚
 â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”                 â”‚
 â”‚  â”‚ Train a small classifier on labeled examples   â”‚                â”‚
-â”‚  â”‚ Input: user request â†’ Output: model tier       â”‚                â”‚
+â”‚  â”‚ Input: user request → Output: model tier       â”‚                â”‚
 â”‚  â”‚ Use: logistic regression, small BERT, or LLM   â”‚                â”‚
 â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜                 â”‚
-â”‚  âœ… Handles nuance, data-driven                                   â”‚
+â”‚  ✅ Handles nuance, data-driven                                   â”‚
 â”‚  âŒ Needs labeled data, can misroute                              â”‚
 â”‚                                                                    â”‚
 â”‚  STRATEGY 3: CASCADE (TRY CHEAP FIRST)                            â”‚
 â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”                 â”‚
 â”‚  â”‚ 1. Send to cheap model                         â”‚                â”‚
 â”‚  â”‚ 2. Check confidence / quality score            â”‚                â”‚
-â”‚  â”‚ 3. If below threshold â†’ escalate to expensive  â”‚                â”‚
+â”‚  â”‚ 3. If below threshold → escalate to expensive  â”‚                â”‚
 â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜                 â”‚
-â”‚  âœ… No misrouting (always has fallback)                           â”‚
+â”‚  ✅ No misrouting (always has fallback)                           â”‚
 â”‚  âŒ Adds latency for escalated requests                           â”‚
 â”‚                                                                    â”‚
 â”‚  STRATEGY 4: LLM-AS-ROUTER                                       â”‚
@@ -118,7 +118,7 @@ MODEL TIERS (per 1M input tokens):
 â”‚  â”‚ "Rate this query 1-3 for complexity"            â”‚                â”‚
 â”‚  â”‚ Route based on the rating                       â”‚                â”‚
 â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜                 â”‚
-â”‚  âœ… Flexible, understands context                                 â”‚
+â”‚  ✅ Flexible, understands context                                 â”‚
 â”‚  âŒ Adds cost and latency for the routing call                    â”‚
 â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
@@ -134,7 +134,7 @@ MODEL TIERS (per 1M input tokens):
 
 ---
 
-## â˜… Code & Implementation
+## ★ Code & Implementation
 
 ### LLM Router with Cascade Fallback
 
@@ -222,15 +222,15 @@ print(route_and_respond("Prove that P â‰  NP or explain the key obstacles to
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 
 ```
 ROUTING DECISION GUIDE:
 
-  Known task types (APIs)?          â†’ Rule-based routing
-  High traffic + labeled data?      â†’ Train a classifier
-  Quality-critical + can't misroute? â†’ Cascade (try cheap first)
-  Cold start / no labeled data?     â†’ LLM-as-router
+  Known task types (APIs)?          → Rule-based routing
+  High traffic + labeled data?      → Train a classifier
+  Quality-critical + can't misroute? → Cascade (try cheap first)
+  Cold start / no labeled data?     → LLM-as-router
 
 COST SAVINGS ESTIMATES:
   No routing (all GPT-4):           $100/day baseline
@@ -246,7 +246,7 @@ TRAFFIC DISTRIBUTION TARGET:
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
@@ -257,14 +257,14 @@ TRAFFIC DISTRIBUTION TARGET:
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: How would you reduce LLM costs by 80% without losing quality?
 - **A**: Model routing. I'd analyze our traffic and find that 70-80% of requests are simple (classification, extraction, formatting) and can be handled by a cheap model like GPT-4o-mini or Gemini Flash at 1/100th the cost of GPT-4. I'd implement a classifier-based router trained on labeled examples of easy/medium/hard queries. For the remaining 20-30% of complex requests, I'd use a mid-tier model, reserving expensive models (GPT-4, Opus) for only the hardest 2-5%. I'd monitor quality per route with automated evals and adjust thresholds weekly. Expected savings: 5-10Ã— reduction in average cost per request.
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Build a Cost-Optimizing Router
 
@@ -274,12 +274,12 @@ TRAFFIC DISTRIBUTION TARGET:
 1. Collect 50 example queries spanning easy/medium/hard
 2. Implement the LLM-as-router from the code section
 3. Process all 50 queries, measure cost per request for each model tier
-4. Compare: all-GPT-4 cost vs routed cost â†’ calculate savings
+4. Compare: all-GPT-4 cost vs routed cost → calculate savings
 **Expected Output**: Cost comparison table showing 5-10Ã— savings with routing
 
 ---
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics |
 |---|---|
@@ -290,7 +290,7 @@ TRAFFIC DISTRIBUTION TARGET:
 
 ---
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type | Resource | Why |
 |------|----------|-----|
@@ -301,7 +301,7 @@ TRAFFIC DISTRIBUTION TARGET:
 
 ---
 
-## â˜… Sources
+## ★ Sources
 
 - Ding et al. "RouteLLM: Learning to Route LLMs with Preference Data" (2024)
 - OpenAI, Anthropic, Google AI pricing pages (April 2026)

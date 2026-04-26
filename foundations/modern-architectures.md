@@ -15,11 +15,11 @@ updated: 2026-04-11
 
 # Modern LLM Architectures
 
-> âœ¨ **Bit**: The original Transformer (2017) is like a Model T Ford. Every modern LLM has upgraded every component â€” MoE for efficiency, GQA for memory, RoPE for position, Flash Attention for speed. Same soul, completely different car.
+> ✨ **Bit**: The original Transformer (2017) is like a Model T Ford. Every modern LLM has upgraded every component â€” MoE for efficiency, GQA for memory, RoPE for position, Flash Attention for speed. Same soul, completely different car.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: The architectural innovations that make modern LLMs (GPT-5, LLaMA 4, Gemini 3) work â€” beyond the basic Transformer
 - **Why**: Interviewers ask "what's MoE?" and "how does RoPE work?" These are the building blocks of every frontier model.
@@ -27,7 +27,7 @@ updated: 2026-04-11
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -45,7 +45,7 @@ Covers: MoE, GQA, RoPE, Flash Attention, normalization choices, and how they com
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### What Changed from the Original Transformer
 
@@ -63,7 +63,7 @@ Covers: MoE, GQA, RoPE, Flash Attention, normalization choices, and how they com
 ```
 DENSE MODEL (traditional):
   Every token goes through ALL parameters.
-  LLaMA 70B: 70B params active per token â†’ expensive!
+  LLaMA 70B: 70B params active per token → expensive!
 
 MoE MODEL:
   Each layer has N "expert" sub-networks.
@@ -136,12 +136,12 @@ SOLUTIONS (progressive):
   â”‚  Problem: Quality drops
   â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 
-  GQA (Grouped-Query Attention) â€” Sweet spot âœ…
+  GQA (Grouped-Query Attention) â€” Sweet spot ✅
   â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-  â”‚  Group 1: Q1 Q2 Q3 Q4 â†’ Kâ‚ Vâ‚       â”‚
-  â”‚  Group 2: Q5 Q6 Q7 Q8 â†’ Kâ‚‚ Vâ‚‚       â”‚
+  â”‚  Group 1: Q1 Q2 Q3 Q4 → Kâ‚ Vâ‚       â”‚
+  â”‚  Group 2: Q5 Q6 Q7 Q8 → Kâ‚‚ Vâ‚‚       â”‚
   â”‚  ...                                  â”‚
-  â”‚  Group 8: Q29..Q32    â†’ Kâ‚ˆ Vâ‚ˆ        â”‚
+  â”‚  Group 8: Q29..Q32    → Kâ‚ˆ Vâ‚ˆ        â”‚
   â”‚  KV cache: 8 Ã— 2 = 16 matrices       â”‚
   â”‚  4x less memory, near-MHA quality!    â”‚
   â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
@@ -172,9 +172,9 @@ RoPE: Rotary Position Embeddings
   Token at position 10: rotate Q by 10Î¸
   Dot product captures: they're 5 positions apart
 
-  âœ… Naturally handles relative positions
-  âœ… Can be extended to longer sequences (NTK-aware scaling, YaRN)
-  âœ… Computationally cheap (just rotation in pairs)
+  ✅ Naturally handles relative positions
+  ✅ Can be extended to longer sequences (NTK-aware scaling, YaRN)
+  ✅ Computationally cheap (just rotation in pairs)
 ```
 
 **Used in**: LLaMA 1/2/3/4, Mistral, Qwen, PaLM â€” standard in virtually all modern LLMs.
@@ -184,7 +184,7 @@ RoPE: Rotary Position Embeddings
 ```
 THE SPEED PROBLEM:
   Standard attention: O(NÂ²) in both time and memory.
-  4096 tokens â†’ 16 million attention scores â†’ slow + memory-heavy
+  4096 tokens → 16 million attention scores → slow + memory-heavy
 
 FLASH ATTENTION SOLUTION:
   Don't compute the full NxN attention matrix at once.
@@ -196,8 +196,8 @@ FLASH ATTENTION SOLUTION:
   â”‚  HBM (GPU RAM)         â”‚  40-80 GB    â”‚ â† SLOW (2 TB/s)
   â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 
-  Standard attention: load full matrices from HBM â†’ compute â†’ store
-  Flash attention:    compute in SRAM-sized tiles â†’ never materialize
+  Standard attention: load full matrices from HBM → compute → store
+  Flash attention:    compute in SRAM-sized tiles → never materialize
                       full attention matrix in HBM
 
   Result:
@@ -206,14 +206,14 @@ FLASH ATTENTION SOLUTION:
     Exact same output (not approximate!)
 ```
 
-**Versions**: FlashAttention-1 (2022) â†’ FlashAttention-2 (2023) â†’ FlashAttention-3 (2024, Hopper GPUs)
+**Versions**: FlashAttention-1 (2022) → FlashAttention-2 (2023) → FlashAttention-3 (2024, Hopper GPUs)
 
 ### 5. Normalization & Activation
 
 ```
 PRE-RMSNORM (replaces Post-LayerNorm):
-  Original Transformer: Attention â†’ Add â†’ LayerNorm â†’ FFN â†’ Add â†’ LayerNorm
-  Modern LLM:           RMSNorm â†’ Attention â†’ Add â†’ RMSNorm â†’ FFN â†’ Add
+  Original Transformer: Attention → Add → LayerNorm → FFN → Add → LayerNorm
+  Modern LLM:           RMSNorm → Attention → Add → RMSNorm → FFN → Add
 
   RMSNorm = Root Mean Square Normalization
   Simpler than LayerNorm (no mean subtraction), faster, works better.
@@ -227,14 +227,14 @@ SwiGLU ACTIVATION (replaces ReLU):
 
 ---
 
-## â—† How They Combine (LLaMA 3 Architecture)
+## ◆ How They Combine (LLaMA 3 Architecture)
 
 ```
 LLaMA 3 70B â€” A complete modern LLM:
 
-  Input â†’ Tokenizer (BPE, 128K vocab)
-       â†’ Embedding lookup
-       â†’ [80 Transformer layers, each:]
+  Input → Tokenizer (BPE, 128K vocab)
+       → Embedding lookup
+       → [80 Transformer layers, each:]
            â”œâ”€â”€ Pre-RMSNorm
            â”œâ”€â”€ GQA Self-Attention (8 KV heads, 64 query heads)
            â”‚   â””â”€â”€ RoPE positional encoding
@@ -243,24 +243,24 @@ LLaMA 3 70B â€” A complete modern LLM:
            â”œâ”€â”€ Pre-RMSNorm
            â”œâ”€â”€ SwiGLU Feed-Forward Network
            â””â”€â”€ Residual connection
-       â†’ Final RMSNorm
-       â†’ Output head â†’ Softmax â†’ Next token probability
+       → Final RMSNorm
+       → Output head → Softmax → Next token probability
 
   Total: 70B parameters, 8K-128K context
 ```
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 
 ```
 COMPONENT CHEAT SHEET:
-  MoE      â†’ More capacity, less compute (sparse activation)
-  GQA      â†’ Less KV cache memory (grouped key-value sharing)
-  RoPE     â†’ Better position encoding (rotation-based, extensible)
-  Flash    â†’ Faster attention (tiled SRAM computation)
-  RMSNorm  â†’ Simpler, faster normalization
-  SwiGLU   â†’ Better activation function
+  MoE      → More capacity, less compute (sparse activation)
+  GQA      → Less KV cache memory (grouped key-value sharing)
+  RoPE     → Better position encoding (rotation-based, extensible)
+  Flash    → Faster attention (tiled SRAM computation)
+  RMSNorm  → Simpler, faster normalization
+  SwiGLU   → Better activation function
 
 WHICH MODELS USE WHAT:
   LLaMA 3:    GQA + RoPE + Flash + RMSNorm + SwiGLU
@@ -273,7 +273,7 @@ WHICH MODELS USE WHAT:
 
 ---
 
-## â—‹ Gotchas & Common Mistakes
+## ○ Gotchas & Common Mistakes
 
 - âš ï¸ **MoE doesn't reduce model size**: Total params are HUGE. MoE reduces ACTIVE params per token. You still need to fit ALL experts in memory.
 - âš ï¸ **Flash Attention is exact**: It's not an approximation. Same result as standard attention, just computed more efficiently.
@@ -282,7 +282,7 @@ WHICH MODELS USE WHAT:
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: What is Mixture of Experts and why does LLaMA 4 use it?
 - **A**: MoE has multiple "expert" FFN sub-networks per layer with a learned router. For each token, only top-K experts (e.g., 2 of 16) are activated. This gives the model capacity of the total parameters but computational cost of only the active experts. LLaMA 4 uses it to achieve 400B total params with only 17B active â€” massive capacity at manageable cost.
@@ -292,7 +292,7 @@ WHICH MODELS USE WHAT:
 
 ---
 
-## â˜… Code & Implementation
+## ★ Code & Implementation
 
 ### Compare SSM vs Transformer Throughput
 
@@ -341,7 +341,7 @@ print(f"MiniTransformer (512 tokens): {lat:.1f}ms median")
 # Note: quadratic scaling â€” try seq=1024, 2048 to see latency grow
 ```
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics                                                                                                                                                 |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -353,7 +353,7 @@ print(f"MiniTransformer (512 tokens): {lat:.1f}ms median")
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure                              | Symptoms                                           | Root Cause                                                         | Mitigation                                                                       |
 | ------------------------------------ | -------------------------------------------------- | ------------------------------------------------------------------ | -------------------------------------------------------------------------------- |
@@ -363,7 +363,7 @@ print(f"MiniTransformer (512 tokens): {lat:.1f}ms median")
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Compare Architecture Families on a Task
 
@@ -378,7 +378,7 @@ print(f"MiniTransformer (512 tokens): {lat:.1f}ms median")
 ---
 
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type    | Resource                                                                                   | Why                                                 |
 | ------- | ------------------------------------------------------------------------------------------ | --------------------------------------------------- |
@@ -387,7 +387,7 @@ print(f"MiniTransformer (512 tokens): {lat:.1f}ms median")
 | ðŸŽ¥ Video | [Yannic Kilcher â€” Architecture Breakdowns](https://www.youtube.com/@YannicKilcher)         | Detailed paper walkthroughs of modern architectures |
 | ðŸ“˜ Book  | "Build a Large Language Model (From Scratch)" by Sebastian Raschka (2024)                  | End-to-end architecture implementation              |
 
-## â˜… Sources
+## ★ Sources
 
 - Shazeer et al., "Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer" (2017)
 - Ainslie et al., "GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints" (2023)

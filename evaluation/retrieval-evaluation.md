@@ -15,11 +15,11 @@ updated: 2026-04-14
 
 # Retrieval Evaluation
 
-> âœ¨ **Bit**: If your RAG system retrieves the wrong documents, no amount of prompt engineering will fix the answer. Retrieval evaluation measures whether the right information reaches the model â€” the most neglected and most impactful part of RAG quality.
+> ✨ **Bit**: If your RAG system retrieves the wrong documents, no amount of prompt engineering will fix the answer. Retrieval evaluation measures whether the right information reaches the model â€” the most neglected and most impactful part of RAG quality.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: Metrics and methods for measuring retrieval quality in RAG systems â€” precision, recall, MRR, nDCG, and end-to-end RAG evaluation
 - **Why**: Most RAG failures are retrieval failures. If irrelevant chunks reach the model, it hallucinates or refuses. Measuring retrieval quality separately from generation quality is essential.
@@ -27,7 +27,7 @@ updated: 2026-04-14
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -45,7 +45,7 @@ Covers: Core retrieval metrics (precision@k, recall@k, MRR, nDCG), RAG-specific 
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### The Two-Stage RAG Evaluation Framework
 
@@ -87,10 +87,10 @@ nDCG@K = DCG@K / IDCG@K
   Query: "What is attention in transformers?"
   Retrieved docs (relevance: 0=irrelevant, 1=somewhat, 2=highly):
 
-  Rank 1: "Attention mechanism explained" â†’ relevance 2
-  Rank 2: "CNN architectures"             â†’ relevance 0
-  Rank 3: "Self-attention in BERT"        â†’ relevance 2
-  Rank 4: "Transformer training tips"     â†’ relevance 1
+  Rank 1: "Attention mechanism explained" → relevance 2
+  Rank 2: "CNN architectures"             → relevance 0
+  Rank 3: "Self-attention in BERT"        → relevance 2
+  Rank 4: "Transformer training tips"     → relevance 1
 
   DCG@4  = 2/log2(2) + 0/log2(3) + 2/log2(4) + 1/log2(5)
          = 2.0 + 0.0 + 1.0 + 0.43 = 3.43
@@ -113,7 +113,7 @@ nDCG@K = DCG@K / IDCG@K
 
 ---
 
-## â˜… Code & Implementation
+## ★ Code & Implementation
 
 ### Retrieval Evaluation Suite
 
@@ -204,7 +204,7 @@ for metric, value in results.items():
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 
 ```
 RETRIEVAL QUALITY BENCHMARKS:
@@ -227,7 +227,7 @@ IF RETRIEVAL IS BAD, FIX THIS FIRST:
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
@@ -237,14 +237,14 @@ IF RETRIEVAL IS BAD, FIX THIS FIRST:
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: How would you evaluate a RAG system?
 - **A**: I'd evaluate in two stages. Stage 1: Retrieval quality â€” I'd create a labeled dataset of 100+ queries with known relevant documents, then measure Precision@5, Recall@5, MRR, and nDCG. If retrieval metrics are poor (< 0.5 precision), I'd fix retrieval before touching the LLM. Stage 2: End-to-end â€” using RAGAS metrics (context relevance, faithfulness, answer correctness) to evaluate the full pipeline. I'd run this on every prompt/model change as a regression check. For production, I'd add online metrics: user feedback (thumbs up/down), citation click-through rate, and "I don't know" rate.
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Build a Retrieval Eval Suite
 
@@ -260,7 +260,7 @@ IF RETRIEVAL IS BAD, FIX THIS FIRST:
 
 ---
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics |
 |---|---|
@@ -271,7 +271,7 @@ IF RETRIEVAL IS BAD, FIX THIS FIRST:
 
 ---
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type | Resource | Why |
 |------|----------|-----|
@@ -282,7 +282,7 @@ IF RETRIEVAL IS BAD, FIX THIS FIRST:
 
 ---
 
-## â˜… Sources
+## ★ Sources
 
 - Barnett et al. "Seven Failure Points When Engineering a RAG System" (2024)
 - RAGAS Documentation â€” https://docs.ragas.io/

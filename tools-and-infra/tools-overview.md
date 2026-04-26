@@ -15,11 +15,11 @@ updated: 2026-04-12
 
 # GenAI Tools & Infrastructure
 
-> âœ¨ **Bit**: The model is 10% of the work. The infrastructure around it is the other 90%. Welcome to production.
+> ✨ **Bit**: The model is 10% of the work. The infrastructure around it is the other 90%. Welcome to production.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: The ecosystem of frameworks, databases, serving engines, and platforms used to build GenAI applications
 - **Why**: Knowing models is theory. Knowing the tooling is what gets you hired and makes things work in production.
@@ -27,7 +27,7 @@ updated: 2026-04-12
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -56,7 +56,7 @@ This is the overview/index document. Deep dives on individual tools are in sub-d
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### The GenAI Application Stack
 
@@ -101,11 +101,11 @@ This is the overview/index document. Deep dives on individual tools are in sub-d
 
 **When to use what:**
 ```
-"I need a quick RAG prototype"       â†’ LlamaIndex
-"I need complex agent workflows"     â†’ LangGraph
-"I need maximum flexibility/control" â†’ LangChain
-"I'm in the Microsoft ecosystem"     â†’ Semantic Kernel
-"I want minimal abstraction"         â†’ Direct API calls + custom code
+"I need a quick RAG prototype"       → LlamaIndex
+"I need complex agent workflows"     → LangGraph
+"I need maximum flexibility/control" → LangChain
+"I'm in the Microsoft ecosystem"     → Semantic Kernel
+"I want minimal abstraction"         → Direct API calls + custom code
 ```
 
 #### 2. Model Serving & Inference
@@ -154,7 +154,7 @@ python -m vllm.entrypoints.openai.api_server \
 
 ---
 
-## â—† Types & Classifications
+## ◆ Types & Classifications
 
 ### By Deployment Pattern
 
@@ -187,7 +187,7 @@ How to Serve LLMs
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 
 ```
 STARTER STACK (prototype):
@@ -213,7 +213,7 @@ BUDGET STACK (learning / hobby):
 
 ---
 
-## â—‹ Gotchas & Common Mistakes
+## ○ Gotchas & Common Mistakes
 
 - âš ï¸ **Framework lock-in**: LangChain abstractions are convenient but can hide important details. Understand what's happening underneath.
 - âš ï¸ **"Just use the API" at scale**: At 1M+ tokens/day, API costs can be $1000+/month. Do the math before committing.
@@ -223,7 +223,7 @@ BUDGET STACK (learning / hobby):
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: How would you architect a production RAG system?
 - **A**: LLM via API (with fallback), vector DB (Qdrant/Pinecone) with hybrid search, LangChain/LlamaIndex for orchestration, LangSmith for tracing, RAGAS for eval. Add caching layer for repeated queries, rate limiting, and graceful degradation when LLM is unavailable.
@@ -233,7 +233,7 @@ BUDGET STACK (learning / hobby):
 
 ---
 
-## â˜… Code & Implementation
+## ★ Code & Implementation
 
 ### LangChain vs Direct API Comparison
 
@@ -277,7 +277,7 @@ print("LangChain:", langchain_call("What is RAG in one sentence?"))
 # LangChain = worth it when you need: memory, chains, agents, callbacks
 ```
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics                                                                 |
 | ------------ | ---------------------------------------------------------------------- |
@@ -289,7 +289,7 @@ print("LangChain:", langchain_call("What is RAG in one sentence?"))
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure                     | Symptoms                                                   | Root Cause                                   | Mitigation                                                      |
 | --------------------------- | ---------------------------------------------------------- | -------------------------------------------- | --------------------------------------------------------------- |
@@ -299,7 +299,7 @@ print("LangChain:", langchain_call("What is RAG in one sentence?"))
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Evaluate a GenAI Stack
 
@@ -314,7 +314,7 @@ print("LangChain:", langchain_call("What is RAG in one sentence?"))
 ---
 
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type       | Resource                                                 | Why                                         |
 | ---------- | -------------------------------------------------------- | ------------------------------------------- |
@@ -322,7 +322,7 @@ print("LangChain:", langchain_call("What is RAG in one sentence?"))
 | ðŸ”§ Hands-on | [HuggingFace Ecosystem](https://huggingface.co/)         | Central hub for models, datasets, and tools |
 | ðŸ”§ Hands-on | [LangChain Documentation](https://python.langchain.com/) | Comprehensive LLM application framework     |
 
-## â˜… Sources
+## ★ Sources
 
 - LangChain documentation â€” https://docs.langchain.com
 - LlamaIndex documentation â€” https://docs.llamaindex.ai

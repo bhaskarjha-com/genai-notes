@@ -15,11 +15,11 @@ updated: 2026-04-11
 
 # Diffusion Models
 
-> âœ¨ **Bit**: Diffusion models literally learn to un-destroy images â€” start with pure noise, progressively denoise until an image emerges. It's like teaching AI to reverse entropy.
+> ✨ **Bit**: Diffusion models literally learn to un-destroy images â€” start with pure noise, progressively denoise until an image emerges. It's like teaching AI to reverse entropy.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: Generative models that create images by learning to reverse a gradual noise-addition process
 - **Why**: Surpassed GANs in image quality and stability. Power Stable Diffusion, DALL-E, Midjourney
@@ -27,7 +27,7 @@ updated: 2026-04-11
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -51,21 +51,21 @@ Covers diffusion model theory, architecture, and key models. For practical image
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### The Core Idea
 
 ```
 FORWARD PROCESS (Training â€” add noise):
 
-  Clean Image â†’ Slightly Noisy â†’ More Noisy â†’ ... â†’ Pure Gaussian Noise
+  Clean Image → Slightly Noisy → More Noisy → ... → Pure Gaussian Noise
   xâ‚€           xâ‚               xâ‚‚              xâ‚œ
 
   Each step: xâ‚œ = âˆš(Î±â‚œ)Â·xâ‚œâ‚‹â‚ + âˆš(1-Î±â‚œ)Â·Îµ    (Îµ ~ Normal(0,1))
 
 REVERSE PROCESS (Generation â€” remove noise):
 
-  Pure Noise â†’ Slightly Less Noisy â†’ ... â†’ Clean Image!
+  Pure Noise → Slightly Less Noisy → ... → Clean Image!
   xâ‚œ          xâ‚œâ‚‹â‚                    xâ‚€
 
   The model learns: "Given noisy image xâ‚œ, predict the noise Îµ"
@@ -73,7 +73,7 @@ REVERSE PROCESS (Generation â€” remove noise):
 
                       â”Œâ”€â”€â”€â”€â”€â”€â”€â”€ FORWARD (destroy) â”€â”€â”€â”€â”€â”€â”€â”€â”
                       â”‚                                    â”‚
-  [Clean Image] â†’ [Noisy] â†’ [Noisier] â†’ ... â†’ [Pure Noise]
+  [Clean Image] → [Noisy] → [Noisier] → ... → [Pure Noise]
   [Clean Image] â† [Noisy] â† [Noisier] â† ... â† [Pure Noise]
                       â”‚                                    â”‚
                       â””â”€â”€â”€â”€â”€â”€â”€â”€ REVERSE (create) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
@@ -110,9 +110,9 @@ U-Net Structure:
     â–¼
 â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”    â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”    â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
 â”‚ Text       â”‚    â”‚ Diffusion     â”‚    â”‚ VAE      â”‚
-â”‚ Encoder    â”‚ â†’  â”‚ U-Net         â”‚ â†’  â”‚ Decoder  â”‚ â†’ Image!
+â”‚ Encoder    â”‚ →  â”‚ U-Net         â”‚ →  â”‚ Decoder  â”‚ → Image!
 â”‚ (CLIP)     â”‚    â”‚ (in latent    â”‚    â”‚ (latent  â”‚
-â”‚            â”‚    â”‚  space, not   â”‚    â”‚  â†’ pixel)â”‚
+â”‚            â”‚    â”‚  space, not   â”‚    â”‚  → pixel)â”‚
 â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜    â”‚  pixel space) â”‚    â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
                   â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
                   Runs ~20-50 denoising steps
@@ -144,7 +144,7 @@ U-Net Structure:
 
 ---
 
-## â—† Formulas & Equations
+## ◆ Formulas & Equations
 
 | Name                     | Formula                                                                                  | Variables                               | Use                      |
 | ------------------------ | ---------------------------------------------------------------------------------------- | --------------------------------------- | ------------------------ |
@@ -154,7 +154,7 @@ U-Net Structure:
 
 ---
 
-## â—† Comparison
+## ◆ Comparison
 
 | Aspect              | Diffusion Models        | GANs                      | VAEs          |
 | ------------------- | ----------------------- | ------------------------- | ------------- |
@@ -167,9 +167,9 @@ U-Net Structure:
 
 ---
 
-## â—† Strengths vs Limitations
+## ◆ Strengths vs Limitations
 
-| âœ… Strengths                                         | âŒ Limitations                                   |
+| ✅ Strengths                                         | âŒ Limitations                                   |
 | --------------------------------------------------- | ----------------------------------------------- |
 | Best image quality currently                        | Slow generation (20-50 steps)                   |
 | Stable training (no mode collapse)                  | High compute for training                       |
@@ -179,7 +179,7 @@ U-Net Structure:
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: How do diffusion models generate images?
 - **A**: During training, the model learns to predict noise added to images at various levels. During generation, start from pure noise and iteratively denoise over many steps, guided by a text prompt using classifier-free guidance.
@@ -192,7 +192,7 @@ U-Net Structure:
 
 ---
 
-## â˜… Code & Implementation
+## ★ Code & Implementation
 
 ### Image Generation with DALL-E 3 / Stable Diffusion
 
@@ -247,11 +247,11 @@ def cosine_beta_schedule(timesteps: int = 1000) -> torch.Tensor:
     return betas.clamp(0, 0.999)
 
 betas = cosine_beta_schedule(1000)
-print(f"Beta schedule: t=0 â†’ {betas[0]:.6f}, t=500 â†’ {betas[500]:.4f}, t=999 â†’ {betas[-1]:.4f}")
+print(f"Beta schedule: t=0 → {betas[0]:.6f}, t=500 → {betas[500]:.4f}, t=999 → {betas[-1]:.4f}")
 # Noise is added gradually â€” early steps add tiny noise, late steps add lots
 ```
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics                                                                                   |
 | ------------ | ---------------------------------------------------------------------------------------- |
@@ -263,7 +263,7 @@ print(f"Beta schedule: t=0 â†’ {betas[0]:.6f}, t=500 â†’ {betas[500]:.
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure                            | Symptoms                                     | Root Cause                                              | Mitigation                                                |
 | ---------------------------------- | -------------------------------------------- | ------------------------------------------------------- | --------------------------------------------------------- |
@@ -273,7 +273,7 @@ print(f"Beta schedule: t=0 â†’ {betas[0]:.6f}, t=500 â†’ {betas[500]:.
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Compare Diffusion Architectures
 
@@ -288,7 +288,7 @@ print(f"Beta schedule: t=0 â†’ {betas[0]:.6f}, t=500 â†’ {betas[500]:.
 ---
 
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type       | Resource                                                                                        | Why                                        |
 | ---------- | ----------------------------------------------------------------------------------------------- | ------------------------------------------ |
@@ -297,7 +297,7 @@ print(f"Beta schedule: t=0 â†’ {betas[0]:.6f}, t=500 â†’ {betas[500]:.
 | ðŸŽ¥ Video    | [Yannic Kilcher â€” "Diffusion Models"](https://www.youtube.com/@YannicKilcher)                   | Clear explanation of the diffusion process |
 | ðŸ”§ Hands-on | [HuggingFace Diffusers Library](https://huggingface.co/docs/diffusers/)                         | Production diffusion model library         |
 
-## â˜… Sources
+## ★ Sources
 
 - Ho et al., "Denoising Diffusion Probabilistic Models" (DDPM, 2020)
 - Rombach et al., "High-Resolution Image Synthesis with Latent Diffusion Models" (2022) â€” Stable Diffusion paper

@@ -15,11 +15,11 @@ updated: 2026-04-14
 
 # Agent Evaluation & Observability
 
-> âœ¨ **Bit**: A chatbot either knows the answer or hallucinates â€” you can catch that with one metric. An agent? It plans, selects tools, reads results, retries, backs off, re-plans, and then answers. If you only check the final answer, you're grading a cross-country road trip by looking at the parking job.
+> ✨ **Bit**: A chatbot either knows the answer or hallucinates â€” you can catch that with one metric. An agent? It plans, selects tools, reads results, retries, backs off, re-plans, and then answers. If you only check the final answer, you're grading a cross-country road trip by looking at the parking job.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: The metrics, traces, and evaluation workflows used to measure agent quality in offline and online settings
 - **Why**: Final-answer accuracy alone hides tool misuse, looping, latency blowups, and unsafe behavior
@@ -27,7 +27,7 @@ updated: 2026-04-14
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -46,7 +46,7 @@ This note covers trace design, offline and online evaluation, common metrics, co
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### What To Measure
 
@@ -156,7 +156,7 @@ Median cost per task:        $0.031
 
 ---
 
-## â—† Code & Implementation
+## ◆ Code & Implementation
 
 ### Traced Agent Evaluation with LangSmith
 
@@ -275,7 +275,7 @@ def judge_trajectory(task: str, trace: str) -> dict:
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 
 | If You See | Investigate |
 |---|---|
@@ -287,7 +287,7 @@ def judge_trajectory(task: str, trace: str) -> dict:
 
 ---
 
-## â—‹ Gotchas & Common Mistakes
+## ○ Gotchas & Common Mistakes
 
 - âš ï¸ Final-answer grading alone will miss most agent failures
 - âš ï¸ Online feedback without trace context is hard to act on
@@ -298,7 +298,7 @@ def judge_trajectory(task: str, trace: str) -> dict:
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: How would you evaluate an agent beyond task success?
 - **A**: I would score the trajectory: tool selection, tool arguments, retry behavior, safety, latency, cost, and whether the final answer actually used the evidence produced during execution. I'd build a composite score weighing task completion (40%), tool precision (30%), and cost efficiency (30%), and track regression across prompt/model changes.
@@ -314,7 +314,7 @@ def judge_trajectory(task: str, trace: str) -> dict:
 
 ---
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics |
 |---|---|
@@ -326,7 +326,7 @@ def judge_trajectory(task: str, trace: str) -> dict:
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Build an Agent Evaluation Harness
 
@@ -353,7 +353,7 @@ def judge_trajectory(task: str, trace: str) -> dict:
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
@@ -367,7 +367,7 @@ def judge_trajectory(task: str, trace: str) -> dict:
 ---
 
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type | Resource | Why |
 |------|----------|-----|
@@ -378,7 +378,7 @@ def judge_trajectory(task: str, trace: str) -> dict:
 | ðŸ”§ Hands-on | [Braintrust](https://www.braintrust.dev/docs) | Eval-focused observability for LLM applications |
 | ðŸ“˜ Book | "AI Engineering" by Chip Huyen (2025), Ch 7 | Agent evaluation patterns and metrics |
 
-## â˜… Sources
+## ★ Sources
 
 - LangSmith evaluation concepts documentation
 - Langfuse open-source observability documentation

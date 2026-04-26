@@ -15,11 +15,11 @@ updated: 2026-04-15
 
 # LLM Landscape & Model Selection (April 2026)
 
-> âœ¨ **Bit**: In 2023, GPT-4 was the only frontier model. In March 2026, there are 6+ frontier providers, each with 5+ model variants. Choosing the right model is now a genuine engineering decision â€” not just "use GPT."
+> ✨ **Bit**: In 2023, GPT-4 was the only frontier model. In March 2026, there are 6+ frontier providers, each with 5+ model variants. Choosing the right model is now a genuine engineering decision â€” not just "use GPT."
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: A comparison of current frontier LLMs and guidance for selecting the right model
 - **Why**: Interviewers ask "which model would you choose for X?" and "open vs closed?" â€” you need specifics, not generalities
@@ -27,7 +27,7 @@ updated: 2026-04-15
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -46,7 +46,7 @@ Last verified for the March 2026 market snapshot: 2026-04.
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### The Frontier Models (April 2026)
 
@@ -148,10 +148,10 @@ Gemma 4 represents a major architectural shift from Gemma 3. Key innovations:
 CLOSED SOURCE (API-only):           OPEN SOURCE / WEIGHTS:
   GPT-5.4, Claude 4.6, Gemini 3.1   LLaMA 4, DeepSeek, Qwen, Mistral
 
-  âœ… Highest capability              âœ… Full control over deployment
-  âœ… Managed, zero-ops               âœ… No vendor lock-in
-  âœ… Continuously updated            âœ… Fine-tunable (LoRA, full)
-  âœ… Safety/alignment built in       âœ… Data stays on your infra
+  ✅ Highest capability              ✅ Full control over deployment
+  ✅ Managed, zero-ops               ✅ No vendor lock-in
+  ✅ Continuously updated            ✅ Fine-tunable (LoRA, full)
+  ✅ Safety/alignment built in       ✅ Data stays on your infra
   âŒ Data leaves your infra          âŒ You manage inference infra
   âŒ Vendor lock-in                  âŒ 6-12 months behind frontier
   âŒ Costs scale linearly            âŒ Safety is YOUR responsibility
@@ -160,43 +160,43 @@ CLOSED SOURCE (API-only):           OPEN SOURCE / WEIGHTS:
 
 ---
 
-## â—† Model Selection Decision Tree
+## ◆ Model Selection Decision Tree
 
 ```
 START: What's your use case?
   â”‚
   â”œâ”€â”€ Simple classification, extraction, routing
-  â”‚   â†’ GPT-5.4 nano or mini (cheapest, fastest)
+  â”‚   → GPT-5.4 nano or mini (cheapest, fastest)
   â”‚
   â”œâ”€â”€ General chat / customer support
-  â”‚   â†’ Claude Sonnet 4.6 or GPT-5.4 (balanced)
+  â”‚   → Claude Sonnet 4.6 or GPT-5.4 (balanced)
   â”‚
   â”œâ”€â”€ Complex coding / large codebase
-  â”‚   â†’ Claude Opus 4.6 (best reasoning for code)
-  â”‚   â†’ GPT-5.3-Codex (if using Copilot)
+  â”‚   → Claude Opus 4.6 (best reasoning for code)
+  â”‚   → GPT-5.3-Codex (if using Copilot)
   â”‚
   â”œâ”€â”€ Math / science / reasoning
-  â”‚   â†’ GPT-5.4 Thinking or Gemini 3.1 Deep Think
+  â”‚   → GPT-5.4 Thinking or Gemini 3.1 Deep Think
   â”‚
   â”œâ”€â”€ Multimodal (images, video, audio input)
-  â”‚   â†’ Gemini 3.1 Pro (native multimodal, best)
+  â”‚   → Gemini 3.1 Pro (native multimodal, best)
   â”‚
   â”œâ”€â”€ Data must stay on-premise / regulated industry
-  â”‚   â†’ LLaMA 4 Scout/Maverick (self-host)
-  â”‚   â†’ Qwen 2.5 (if Asian market)
+  â”‚   → LLaMA 4 Scout/Maverick (self-host)
+  â”‚   → Qwen 2.5 (if Asian market)
   â”‚
   â”œâ”€â”€ High volume / cost-sensitive
-  â”‚   â†’ GPT-5.4 nano < mini < Gemini Flash-Lite
-  â”‚   â†’ Self-host LLaMA 4 Scout (1 GPU, 10M context!)
+  â”‚   → GPT-5.4 nano < mini < Gemini Flash-Lite
+  â”‚   → Self-host LLaMA 4 Scout (1 GPU, 10M context!)
   â”‚
   â””â”€â”€ Research / experimental
-      â†’ DeepSeek (cost-efficient frontier)
-      â†’ Multiple models (benchmark on YOUR data)
+      → DeepSeek (cost-efficient frontier)
+      → Multiple models (benchmark on YOUR data)
 ```
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: Which LLM would you choose for a production RAG system?
 - **A**: Depends on constraints. For highest quality: Claude Opus 4.6 (1M context, best at following complex instructions with citations). For cost efficiency: GPT-5.4 mini (near GPT-5.4 quality at fraction of cost). For data privacy: LLaMA 4 Scout self-hosted (10M context, fits on 1 H100). For multimodal RAG: Gemini 3.1 Pro (native vision for image documents). In practice, use a cheaper model for retrieval/routing and a powerful model for generation.
@@ -206,7 +206,7 @@ START: What's your use case?
 
 ---
 
-## â˜… Code & Implementation
+## ★ Code & Implementation
 
 ### Multi-Provider LLM API Comparison
 
@@ -253,7 +253,7 @@ print("Gemini:", res.text[:100])
 
 ---
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics |
 | ------------ | ------ |
@@ -265,7 +265,7 @@ print("Gemini:", res.text[:100])
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
@@ -275,7 +275,7 @@ print("Gemini:", res.text[:100])
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Build a Model Selection Matrix
 
@@ -290,7 +290,7 @@ print("Gemini:", res.text[:100])
 ---
 
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type | Resource | Why |
 |------|----------|-----|
@@ -298,7 +298,7 @@ print("Gemini:", res.text[:100])
 | ðŸ”§ Hands-on | [Artificial Analysis](https://artificialanalysis.ai/) | Speed, price, and quality comparisons across LLM providers |
 | ðŸ“˜ Book | "AI Engineering" by Chip Huyen (2025), Ch 2 | Model selection framework for practitioners |
 
-## â˜… Sources
+## ★ Sources
 
 - OpenAI model releases â€” https://openai.com/index
 - Google DeepMind Gemini â€” https://deepmind.google/technologies/gemini/

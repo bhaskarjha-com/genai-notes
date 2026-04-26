@@ -15,11 +15,11 @@ updated: 2026-04-15
 
 # Model Merging
 
-> âœ¨ **Bit**: Fine-tuning gives you specialists. Model merging gives you a generalist built from specialists â€” at zero extra training cost.
+> ✨ **Bit**: Fine-tuning gives you specialists. Model merging gives you a generalist built from specialists â€” at zero extra training cost.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: Techniques to combine the weights of multiple fine-tuned models into a single model without additional training
 - **Why**: Cheaper than training a multi-task model from scratch; lets you combine domain experts (code + medical + safety) into one deployable model
@@ -27,7 +27,7 @@ updated: 2026-04-15
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -52,7 +52,7 @@ Covers: TIES, DARE, SLERP, Model Soups, Frankenmerging, and the mergekit toolcha
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### Why Merging Works
 
@@ -121,9 +121,9 @@ SLERP:
   merged = sin((1-t)Î©)/sin(Î©) Ã— A + sin(tÎ©)/sin(Î©) Ã— B
   Advantage: Preserves weight vector norms
 
-  t = 0.0 â†’ pure model A
-  t = 0.5 â†’ balanced blend
-  t = 1.0 â†’ pure model B
+  t = 0.0 → pure model A
+  t = 0.5 → balanced blend
+  t = 1.0 → pure model B
 
 Limitation: Only works for EXACTLY 2 models.
 For 3+ models, use TIES or DARE.
@@ -143,12 +143,12 @@ TIES SOLUTION (3 steps):
 
   STEP 1 â€” TRIM: Drop low-magnitude delta parameters
     Delta = fine_tuned_weight - base_weight
-    If |delta| < threshold â†’ set to 0
+    If |delta| < threshold → set to 0
     Removes noise, keeps only significant changes
 
   STEP 2 â€” ELECT SIGN: Resolve sign conflicts by majority vote
     If 2 models say "increase" and 1 says "decrease"
-    â†’ Elect positive sign, zero out the negative delta
+    → Elect positive sign, zero out the negative delta
 
   STEP 3 â€” MERGE: Average the remaining (trimmed, sign-aligned) deltas
     merged = base_weight + avg(surviving_deltas)
@@ -171,7 +171,7 @@ WHY IT WORKS:
 
 TYPICAL COMBO:
   DARE (drop_rate=0.9) + TIES = DARE-TIES
-  â†’ Best of both: sparsification + sign conflict resolution
+  → Best of both: sparsification + sign conflict resolution
 ```
 
 ### Frankenmerging (Layer Stacking)
@@ -184,7 +184,7 @@ MODEL B (good at code):       [L0] [L1] [L2] [L3] [L4] [L5]
 
 FRANKENMERGE:
   [A:L0] [A:L1] [B:L2] [B:L3] [A:L4] [A:L5]
-  â†’ Take reasoning layers from A, coding layers from B
+  → Take reasoning layers from A, coding layers from B
 
 CAUTION:
   - Highly experimental, results are unpredictable
@@ -199,29 +199,29 @@ CAUTION:
 WHEN TO MERGE vs OTHER APPROACHES:
 
   Have multiple fine-tuned models from same base?
-    YES â†’ Model merging is free â€” try TIES-DARE first
-    NO  â†’ Can you fine-tune from a common base? If no â†’ Distillation
+    YES → Model merging is free â€” try TIES-DARE first
+    NO  → Can you fine-tune from a common base? If no → Distillation
 
   Need guaranteed quality for production?
-    YES â†’ Fine-tune from scratch on combined data (safer but expensive)
-    NO  â†’ Merge is fine for experimentation
+    YES → Fine-tune from scratch on combined data (safer but expensive)
+    NO  → Merge is fine for experimentation
 
   Models fine-tuned on DIFFERENT tasks?
-    YES â†’ TIES or DARE-TIES (handles interference)
-    NO  â†’ Model Soups or SLERP (models are close in weight space)
+    YES → TIES or DARE-TIES (handles interference)
+    NO  → Model Soups or SLERP (models are close in weight space)
 
   Only 2 models?
-    YES â†’ SLERP (best for 2-model blending)
-    NO  â†’ TIES or DARE-TIES (handles 3+ models)
+    YES → SLERP (best for 2-model blending)
+    NO  → TIES or DARE-TIES (handles 3+ models)
 
   Want to explore exotic architectures?
-    YES â†’ Frankenmerge (experimental, high variance)
-    NO  â†’ Stick with weight-average methods
+    YES → Frankenmerge (experimental, high variance)
+    NO  → Stick with weight-average methods
 ```
 
 ---
 
-## â˜… Code & Implementation
+## ★ Code & Implementation
 
 ### Merging with mergekit
 
@@ -315,16 +315,16 @@ print(f"Merged {len(merged_state)} tensors successfully")
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 
 ```
 TECHNIQUE CHEAT SHEET:
 
-  2 models, simple blend         â†’ SLERP (t=0.3-0.7)
-  3+ models, same task           â†’ Model Soups (uniform averaging)
-  3+ models, different tasks     â†’ TIES or DARE-TIES
-  Experimental layer mixing      â†’ Frankenmerge (âš ï¸ high variance)
-  LoRA adapters specifically     â†’ DARE-TIES via mergekit
+  2 models, simple blend         → SLERP (t=0.3-0.7)
+  3+ models, same task           → Model Soups (uniform averaging)
+  3+ models, different tasks     → TIES or DARE-TIES
+  Experimental layer mixing      → Frankenmerge (âš ï¸ high variance)
+  LoRA adapters specifically     → DARE-TIES via mergekit
 
 MERGEKIT COMMANDS:
   mergekit-yaml config.yaml ./output --cuda      # GPU merge
@@ -339,7 +339,7 @@ COMMON HYPERPARAMETERS:
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
@@ -351,7 +351,7 @@ COMMON HYPERPARAMETERS:
 
 ---
 
-## â—‹ Gotchas & Common Mistakes
+## ○ Gotchas & Common Mistakes
 
 - âš ï¸ **Only merge from the same base**: Merging LLaMA with Mistral produces garbage. Models MUST share the same architecture and initialization.
 - âš ï¸ **Evaluate per-task, not just aggregate**: A merge can improve average scores while catastrophically losing one parent's specialty.
@@ -361,7 +361,7 @@ COMMON HYPERPARAMETERS:
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: When would you use model merging instead of fine-tuning on combined data?
 - **A**: Merging when: (1) you already have multiple fine-tuned models and want to avoid retraining, (2) you don't have access to the original training data, (3) you want to quickly iterate on combinations (merging takes minutes, fine-tuning takes hours). Fine-tuning on combined data when: (1) you need guaranteed quality, (2) you have the data and compute budget, (3) the task combination is complex enough that weight averaging won't capture interactions.
@@ -371,7 +371,7 @@ COMMON HYPERPARAMETERS:
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Merge Two LoRA Adapters with mergekit
 
@@ -387,7 +387,7 @@ COMMON HYPERPARAMETERS:
 
 ---
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics |
 |---|---|
@@ -398,7 +398,7 @@ COMMON HYPERPARAMETERS:
 
 ---
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type | Resource | Why |
 |------|----------|-----|
@@ -410,7 +410,7 @@ COMMON HYPERPARAMETERS:
 
 ---
 
-## â˜… Sources
+## ★ Sources
 
 - Yadav et al., "Resolving Interference When Merging Models" (TIES, NeurIPS 2023)
 - Yu et al., "Language Models are Super Mario: Absorbing Abilities from Homologous Models as a Free Lunch" (DARE, 2023)

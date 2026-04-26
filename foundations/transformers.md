@@ -15,11 +15,11 @@ updated: 2026-04-11
 
 # Transformers
 
-> âœ¨ **Bit**: The paper was titled "Attention Is All You Need" â€” turns out, attention + ungodly amounts of compute + internet-scale data is what you actually need.
+> ✨ **Bit**: The paper was titled "Attention Is All You Need" â€” turns out, attention + ungodly amounts of compute + internet-scale data is what you actually need.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: A neural network architecture based on self-attention that processes entire sequences in parallel
 - **Why**: Replaced RNNs/LSTMs. Foundation of ALL modern LLMs and most GenAI models
@@ -27,7 +27,7 @@ updated: 2026-04-11
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -39,8 +39,8 @@ This document covers the Transformer architecture itself. For attention mechanis
 
 ### Significance
 
-- **Before Transformers**: RNNs/LSTMs processed sequences one step at a time â†’ slow, couldn't handle long sequences
-- **After Transformers**: Parallel processing + attention â†’ scalable to billions of parameters
+- **Before Transformers**: RNNs/LSTMs processed sequences one step at a time → slow, couldn't handle long sequences
+- **After Transformers**: Parallel processing + attention → scalable to billions of parameters
 - **Impact**: GPT, BERT, T5, LLaMA, Gemini, Claude â€” ALL are Transformer variants.
 
 ### Prerequisites
@@ -50,7 +50,7 @@ This document covers the Transformer architecture itself. For attention mechanis
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### The Original Architecture
 
@@ -62,7 +62,7 @@ This document covers the Transformer architecture itself. For attention mechanis
 â”‚  â”‚     ENCODER       â”‚          â”‚     DECODER       â”‚        â”‚
 â”‚  â”‚  (understands)    â”‚          â”‚   (generates)     â”‚        â”‚
 â”‚  â”‚                   â”‚          â”‚                   â”‚        â”‚
-â”‚  â”‚ â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”‚    â”Œâ”€â”€â†’ â”‚ â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”‚        â”‚
+â”‚  â”‚ â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”‚    â”Œâ”€â”€→ â”‚ â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”‚        â”‚
 â”‚  â”‚ â”‚ Multi-Head    â”‚ â”‚    â”‚    â”‚ â”‚ Masked        â”‚ â”‚        â”‚
 â”‚  â”‚ â”‚ Self-Attentionâ”‚ â”‚    â”‚    â”‚ â”‚ Self-Attentionâ”‚ â”‚        â”‚
 â”‚  â”‚ â””â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”˜ â”‚    â”‚    â”‚ â””â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”˜ â”‚        â”‚
@@ -156,7 +156,7 @@ This prevents vanishing gradients and enables training very deep networks (100+ 
 
 ---
 
-## â—† Terminology
+## ◆ Terminology
 
 | Term                | Meaning                                                                     |
 | ------------------- | --------------------------------------------------------------------------- |
@@ -171,7 +171,7 @@ This prevents vanishing gradients and enables training very deep networks (100+ 
 
 ---
 
-## â—† Formulas & Equations
+## ◆ Formulas & Equations
 
 | Name                | Formula                                                                           | Variables                                          | Use                                 |
 | ------------------- | --------------------------------------------------------------------------------- | -------------------------------------------------- | ----------------------------------- |
@@ -181,11 +181,11 @@ This prevents vanishing gradients and enables training very deep networks (100+ 
 
 ---
 
-## â—† Strengths vs Limitations
+## ◆ Strengths vs Limitations
 
-| âœ… Strengths                                    | âŒ Limitations                                         |
+| ✅ Strengths                                    | âŒ Limitations                                         |
 | ---------------------------------------------- | ----------------------------------------------------- |
-| Parallelizable (unlike RNNs) â†’ fast training   | Quadratic memory/compute with sequence length (O(nÂ²)) |
+| Parallelizable (unlike RNNs) → fast training   | Quadratic memory/compute with sequence length (O(nÂ²)) |
 | Captures long-range dependencies via attention | Fixed context window (though growing: 1M-10M tokens)  |
 | Scales predictably with more data/compute      | Massive compute requirements for training             |
 | Transfer learning works incredibly well        | Positional encoding schemes still imperfect           |
@@ -193,11 +193,11 @@ This prevents vanishing gradients and enables training very deep networks (100+ 
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 
 ```
 Transformer Block:
-  Input â†’ [Multi-Head Attention] â†’ Add & Norm â†’ [FFN] â†’ Add & Norm â†’ Output
+  Input → [Multi-Head Attention] → Add & Norm → [FFN] → Add & Norm → Output
 
 Key Dimensions (GPT-3 175B example):
   - Layers: 96
@@ -213,7 +213,7 @@ Modern Scaling (LLaMA 4 Behemoth):
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: Why do Transformers use scaled dot-product attention (divide by âˆšd_k)?
 - **A**: Without scaling, dot products grow large with high dimensions, pushing softmax into regions with tiny gradients. Dividing by âˆšd_k keeps gradients healthy.
@@ -226,7 +226,7 @@ Modern Scaling (LLaMA 4 Behemoth):
 
 ---
 
-## â˜… Code & Implementation
+## ★ Code & Implementation
 
 ### Load and Run a Transformer-Based LLM (HuggingFace)
 
@@ -298,14 +298,14 @@ class TransformerBlock(nn.Module):
 block = TransformerBlock(d_model=64, n_heads=4, d_ff=256)
 dummy = torch.randn(2, 10, 64)  # batch=2, seq_len=10, d_model=64
 out = block(dummy)
-print(f"Input shape: {dummy.shape} â†’ Output shape: {out.shape}")  # Should match
+print(f"Input shape: {dummy.shape} → Output shape: {out.shape}")  # Should match
 ```
 
 ---
 
 
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics                                                                        |
 | ------------ | ----------------------------------------------------------------------------- |
@@ -317,7 +317,7 @@ print(f"Input shape: {dummy.shape} â†’ Output shape: {out.shape}")  # Shoul
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
@@ -327,14 +327,14 @@ print(f"Input shape: {dummy.shape} â†’ Output shape: {out.shape}")  # Shoul
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Implement Scaled Dot-Product Attention from Scratch
 
 **Goal**: Build attention in pure PyTorch and verify against the built-in
 **Time**: 30 minutes
 **Steps**:
-1. Implement QÂ·K^T/âˆšd_k â†’ softmax â†’ Â·V in PyTorch
+1. Implement QÂ·K^T/âˆšd_k → softmax → Â·V in PyTorch
 2. Add causal mask
 3. Compare output against `torch.nn.functional.scaled_dot_product_attention`
 4. Verify outputs match to 1e-5 tolerance
@@ -342,7 +342,7 @@ print(f"Input shape: {dummy.shape} â†’ Output shape: {out.shape}")  # Shoul
 ---
 
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type | Resource | Why |
 |------|----------|-----|
@@ -351,7 +351,7 @@ print(f"Input shape: {dummy.shape} â†’ Output shape: {out.shape}")  # Shoul
 | ðŸŽ“ Course | [Stanford CS224n: NLP with Deep Learning](http://web.stanford.edu/class/cs224n/) | Gold standard NLP course covering transformers in depth |
 | ðŸ“˜ Book | "Build a Large Language Model (From Scratch)" by Sebastian Raschka (2024), Ch 3 | Step-by-step transformer implementation in PyTorch |
 
-## â˜… Sources
+## ★ Sources
 
 - Vaswani et al., "Attention Is All You Need" (2017) â€” https://arxiv.org/abs/1706.03762
 - "The Illustrated Transformer" by Jay Alammar â€” https://jalammar.github.io/illustrated-transformer/

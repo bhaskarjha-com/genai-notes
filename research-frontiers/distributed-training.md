@@ -15,11 +15,11 @@ updated: 2026-04-14
 
 # Distributed Training for Large Models
 
-> âœ¨ **Bit**: Once the model no longer fits on one GPU, training stops being a deep-learning problem and becomes a distributed systems problem. The math is easy; the networking, memory management, and failure recovery are hard.
+> ✨ **Bit**: Once the model no longer fits on one GPU, training stops being a deep-learning problem and becomes a distributed systems problem. The math is easy; the networking, memory management, and failure recovery are hard.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: Strategies to train or adapt models across multiple GPUs/machines â€” data parallelism, tensor parallelism, pipeline parallelism, and optimizer sharding (ZeRO/FSDP)
 - **Why**: Frontier models (100B+ params) require 100s-1000s of GPUs. Even fine-tuning 7B-70B models often needs multi-GPU setups.
@@ -27,7 +27,7 @@ updated: 2026-04-14
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -51,7 +51,7 @@ Covers: Parallelism strategies (data, tensor, pipeline, sequence), memory optimi
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### Why Single-GPU Training Breaks
 
@@ -104,7 +104,7 @@ WITH MIXED PRECISION (fp16/bf16):
 â”‚  â”Œâ”€â”€â”€â”€â”€â” â”Œâ”€â”€â”€â”€â”€â”            â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”                  â”‚
 â”‚  â”‚GPU 0â”‚ â”‚GPU 1â”‚            â”‚   Attention       â”‚                  â”‚
 â”‚  â”‚     â”‚ â”‚     â”‚            â”‚  â”Œâ”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”   â”‚                  â”‚
-â”‚  â”‚L1-L4â”‚â†’â”‚L5-L8â”‚            â”‚  â”‚Seq  â”‚Seq  â”‚   â”‚                  â”‚
+â”‚  â”‚L1-L4â”‚→â”‚L5-L8â”‚            â”‚  â”‚Seq  â”‚Seq  â”‚   â”‚                  â”‚
 â”‚  â”‚     â”‚ â”‚     â”‚            â”‚  â”‚1-512â”‚513+ â”‚   â”‚                  â”‚
 â”‚  â”‚     â”‚ â”‚     â”‚            â”‚  â”‚     â”‚     â”‚   â”‚                  â”‚
 â”‚  â””â”€â”€â”€â”€â”€â”˜ â””â”€â”€â”€â”€â”€â”˜            â”‚  â””â”€â”€â”€â”€â”€â”´â”€â”€â”€â”€â”€â”˜   â”‚                  â”‚
@@ -208,7 +208,7 @@ MEMORY ESTIMATION FORMULAS:
 
 ---
 
-## â˜… Code & Implementation
+## ★ Code & Implementation
 
 ### Multi-GPU Training with PyTorch FSDP
 
@@ -324,7 +324,7 @@ trainer.train()
 
 ---
 
-## â—† Formulas & Equations
+## ◆ Formulas & Equations
 
 | Name | Formula | Use |
 |------|---------|-----|
@@ -336,23 +336,23 @@ trainer.train()
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 
 ```
 DECISION GUIDE:
 
   Model fits on 1 GPU?
-  â”œâ”€â”€ YES â†’ Use DDP (data parallelism). Done.
-  â””â”€â”€ NO  â†’ Does it fit with mixed precision (bf16)?
-             â”œâ”€â”€ YES â†’ Use DDP + bf16 + gradient checkpointing
-             â””â”€â”€ NO  â†’ Use ZeRO/FSDP
+  â”œâ”€â”€ YES → Use DDP (data parallelism). Done.
+  â””â”€â”€ NO  → Does it fit with mixed precision (bf16)?
+             â”œâ”€â”€ YES → Use DDP + bf16 + gradient checkpointing
+             â””â”€â”€ NO  → Use ZeRO/FSDP
                         â”œâ”€â”€ ZeRO Stage 1: shard optimizer (easiest)
                         â”œâ”€â”€ ZeRO Stage 2: + shard gradients
                         â””â”€â”€ ZeRO Stage 3/FSDP: shard everything
                             â””â”€â”€ Still doesn't fit?
-                                â†’ Add tensor parallelism (intra-node)
-                                â†’ Add pipeline parallelism (inter-node)
-                                â†’ Welcome to 3D parallelism.
+                                → Add tensor parallelism (intra-node)
+                                → Add pipeline parallelism (inter-node)
+                                → Welcome to 3D parallelism.
 
 GPU COUNT ESTIMATES (bf16, fine-tuning with Adam):
   7B model:    1-2 Ã— A100 80GB  (FSDP Stage 2)
@@ -363,7 +363,7 @@ GPU COUNT ESTIMATES (bf16, fine-tuning with Adam):
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
@@ -376,7 +376,7 @@ GPU COUNT ESTIMATES (bf16, fine-tuning with Adam):
 
 ---
 
-## â—‹ Gotchas & Common Mistakes
+## ○ Gotchas & Common Mistakes
 
 - âš ï¸ **More GPUs â‰  faster training**: If communication dominates compute, adding GPUs makes it slower. Always profile before scaling.
 - âš ï¸ **ZeRO Stage 3 has overhead**: While it saves the most memory, Stage 3 requires all-gather before every forward pass. Stage 2 is often the better tradeoff.
@@ -386,7 +386,7 @@ GPU COUNT ESTIMATES (bf16, fine-tuning with Adam):
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: What's the difference between data parallelism and tensor parallelism?
 - **A**: Data parallelism replicates the entire model on each GPU and splits the batch â€” each GPU processes different data, then gradients are synchronized via all-reduce. This scales throughput linearly for models that fit on a single GPU. Tensor parallelism splits individual layer computations across GPUs â€” for example, a large matrix multiplication is split column-wise across 4 GPUs, each computing 1/4 of the result. This enables layers that are too large for one GPU but requires extremely fast inter-GPU communication (NVLink, not Ethernet) because activations must be synchronized at every layer boundary. In practice, tensor parallelism is used intra-node (within a server with NVLink) while data parallelism is used inter-node (across servers).
@@ -396,7 +396,7 @@ GPU COUNT ESTIMATES (bf16, fine-tuning with Adam):
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: GPU Memory Calculator
 
@@ -423,7 +423,7 @@ GPU COUNT ESTIMATES (bf16, fine-tuning with Adam):
 
 ---
 
-## â˜… Training Infrastructure
+## ★ Training Infrastructure
 
 > Absorbed from the former standalone `distributed-training.md` â€” the operational substrate behind large-scale training.
 
@@ -466,7 +466,7 @@ GPU COUNT ESTIMATES (bf16, fine-tuning with Adam):
 
 ---
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics |
 |---|---|
@@ -477,7 +477,7 @@ GPU COUNT ESTIMATES (bf16, fine-tuning with Adam):
 
 ---
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type | Resource | Why |
 |------|----------|-----|
@@ -491,7 +491,7 @@ GPU COUNT ESTIMATES (bf16, fine-tuning with Adam):
 
 ---
 
-## â˜… Sources
+## ★ Sources
 
 - Rajbhandari et al. "ZeRO: Memory Optimizations Toward Training Trillion Parameter Models" (2020)
 - Shoeybi et al. "Megatron-LM: Training Multi-Billion Parameter Language Models Using Model Parallelism" (2020)

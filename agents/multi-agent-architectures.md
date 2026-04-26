@@ -15,11 +15,11 @@ updated: 2026-04-14
 
 # Multi-Agent Architectures
 
-> âœ¨ **Bit**: A multi-agent system should exist because specialization creates value, not because multiple LLMs sound impressive on a slide. If one agent with good tools solves your problem, stop there.
+> ✨ **Bit**: A multi-agent system should exist because specialization creates value, not because multiple LLMs sound impressive on a slide. If one agent with good tools solves your problem, stop there.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: Systems where multiple specialized agents coordinate through explicit patterns (supervisor, debate, fan-out) to solve tasks too complex or broad for a single agent
 - **Why**: Enables specialization, parallel execution, and verification â€” but only when the coordination cost is justified
@@ -27,7 +27,7 @@ updated: 2026-04-14
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -39,7 +39,7 @@ Covers: Common multi-agent patterns with architecture diagrams and code, framewo
 
 ### When Multi-Agent Helps vs Hurts
 
-| âœ… Helps When | âŒ Hurts When |
+| ✅ Helps When | âŒ Hurts When |
 |--------------|--------------|
 | Task naturally decomposes into specialized sub-tasks | Task is simple enough for one agent with tools |
 | Different sub-tasks need different tools/models | Latency budget is tight (each agent adds 1-3s) |
@@ -55,11 +55,11 @@ Covers: Common multi-agent patterns with architecture diagrams and code, framewo
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### The 6 Multi-Agent Patterns
 
-#### Pattern 1: Supervisor (Manager â†’ Workers)
+#### Pattern 1: Supervisor (Manager → Workers)
 
 ```
                     â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
@@ -85,14 +85,14 @@ Risk: Supervisor becomes bottleneck; workers can't self-correct.
 #### Pattern 2: Sequential Pipeline
 
 ```
-  [Input] â†’ [Agent A: Research] â†’ [Agent B: Draft] â†’ [Agent C: Review] â†’ [Output]
+  [Input] → [Agent A: Research] → [Agent B: Draft] → [Agent C: Review] → [Output]
                                                           â”‚
                                                     (if rejected)
                                                           â”‚
                                                     â—„â”€â”€â”€â”€â”€â”˜ Back to Agent B
 
 How: Each agent processes the output of the previous one.
-Best for: Workflows with natural sequential stages (research â†’ write â†’ review).
+Best for: Workflows with natural sequential stages (research → write → review).
 Risk: Errors compound through the pipeline. Feedback loops can create cycles.
 ```
 
@@ -195,7 +195,7 @@ Framework: OpenAI Swarm (experimental).
 
 ---
 
-## â˜… Code & Implementation
+## ★ Code & Implementation
 
 ### Supervisor Pattern with LangGraph
 
@@ -388,27 +388,27 @@ print(result)
 | **Architecture** | Graph-based (nodes + edges) | Role-based teams | Hierarchical + graph |
 | **State management** | Explicit typed state | Implicit task context | Session-based |
 | **Flexibility** | Maximum â€” build any pattern | Medium â€” opinionated framework | High â€” Google ecosystem |
-| **Multi-agent** | âœ… Any pattern (supervisor, swarm, etc.) | âœ… Sequential or hierarchical | âœ… Sub-agents + delegation |
+| **Multi-agent** | ✅ Any pattern (supervisor, swarm, etc.) | ✅ Sequential or hierarchical | ✅ Sub-agents + delegation |
 | **Protocol support** | MCP via langchain-mcp | MCP via plugins | A2A native, MCP support |
 | **Learning curve** | High (graph concepts) | Low (intuitive roles/tasks) | Medium |
-| **Production use** | âœ… Widely adopted | âš ï¸ Growing | âœ… Google-backed |
+| **Production use** | ✅ Widely adopted | âš ï¸ Growing | ✅ Google-backed |
 | **Best for** | Custom, complex workflows | Quick prototyping, business automation | Google Cloud integration |
 
 ```
 DECISION GUIDE:
-  "I need maximum control and custom patterns"     â†’ LangGraph
-  "I want to prototype quickly with roles/tasks"   â†’ CrewAI
-  "I'm in the Google Cloud ecosystem"              â†’ Google ADK
-  "I need inter-company agent communication"       â†’ A2A protocol (any framework)
+  "I need maximum control and custom patterns"     → LangGraph
+  "I want to prototype quickly with roles/tasks"   → CrewAI
+  "I'm in the Google Cloud ecosystem"              → Google ADK
+  "I need inter-company agent communication"       → A2A protocol (any framework)
 ```
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 
 ```
 MULTI-AGENT DESIGN CHECKLIST:
-  â–¡ Can a single agent with tools solve this? (If yes â†’ don't use multi-agent)
+  â–¡ Can a single agent with tools solve this? (If yes → don't use multi-agent)
   â–¡ What specific bottleneck justifies adding agents?
   â–¡ What's the coordination pattern? (Supervisor / Pipeline / Debate / Fan-out)
   â–¡ How do agents share state? (Shared dict / Message passing / Workspace)
@@ -427,7 +427,7 @@ MULTI-AGENT COST MODEL:
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
@@ -440,17 +440,17 @@ MULTI-AGENT COST MODEL:
 
 ---
 
-## â—‹ Gotchas & Common Mistakes
+## ○ Gotchas & Common Mistakes
 
 - âš ï¸ **Multi-agent â‰  better**: The most common mistake is assuming more agents = more capability. Often one agent with good tools beats three agents with bad coordination.
 - âš ï¸ **Debugging is 5Ã— harder**: Each agent adds a layer of opacity. Invest in trajectory logging and per-agent tracing before scaling up.
 - âš ï¸ **Context sharing is the hardest part**: How agents share information (full messages vs summaries vs structured data) determines whether multi-agent works or fails.
 - âš ï¸ **Cost multiplier is real**: 4 agents Ã— 3 turns each = 12 LLM calls per request. At $0.03/call, that's $0.36/request vs $0.09 for single-agent.
-- âš ï¸ **Start with 2 agents, not 7**: The jump from 1â†’2 agents teaches you more about coordination than the jump from 5â†’7.
+- âš ï¸ **Start with 2 agents, not 7**: The jump from 1→2 agents teaches you more about coordination than the jump from 5→7.
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: When would you choose multi-agent over single-agent?
 - **A**: I'd choose multi-agent when three conditions are met: (1) the task has natural decomposition boundaries where different sub-tasks benefit from different tool access, system prompts, or contexts â€” for example, a research agent with web search and a coding agent with a sandbox; (2) the quality improvement from specialization is measurable and significant, not incremental; and (3) the latency and cost multiplier (3-7Ã— more expensive) is acceptable for the use case. I'd always benchmark a single-agent baseline first. If one agent with well-designed tools achieves 80%+ of the quality, the coordination overhead of multi-agent isn't justified. The exception is adversarial review: having a critic agent that challenges the primary agent's output catches errors that self-review misses.
@@ -460,7 +460,7 @@ MULTI-AGENT COST MODEL:
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Build a Research + Writing Team
 
@@ -468,7 +468,7 @@ MULTI-AGENT COST MODEL:
 **Time**: 60 minutes
 **Steps**:
 1. Create two agents in LangGraph: Researcher (with web search tool) and Writer
-2. Implement the supervisor pattern that routes: research â†’ write â†’ done
+2. Implement the supervisor pattern that routes: research → write → done
 3. Give them a topic: "Compare vLLM vs TGI for LLM serving in production"
 4. Measure: total cost, latency, and output quality vs single-agent baseline
 **Expected Output**: Structured document produced by the team, comparison metrics showing when multi-agent adds value
@@ -486,7 +486,7 @@ MULTI-AGENT COST MODEL:
 
 ---
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics |
 |---|---|
@@ -497,7 +497,7 @@ MULTI-AGENT COST MODEL:
 
 ---
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type | Resource | Why |
 |------|----------|-----|
@@ -511,7 +511,7 @@ MULTI-AGENT COST MODEL:
 
 ---
 
-## â˜… Sources
+## ★ Sources
 
 - Anthropic "Building Effective Agents" Guide (2025)
 - LangGraph Multi-Agent Documentation â€” https://langchain-ai.github.io/langgraph/

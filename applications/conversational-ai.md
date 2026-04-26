@@ -15,11 +15,11 @@ updated: 2026-04-14
 
 # Conversational AI & Dialogue Systems
 
-> âœ¨ **Bit**: A good chatbot answers questions. A great conversational system manages context, clarifies intent, recovers from confusion, escalates when needed, and knows when to shut up.
+> ✨ **Bit**: A good chatbot answers questions. A great conversational system manages context, clarifies intent, recovers from confusion, escalates when needed, and knows when to shut up.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: The design of systems that maintain coherent, multi-turn interaction with users through text or voice
 - **Why**: Conversation is not just generation â€” it is state management, turn-taking, recovery, and UX design. Getting this wrong means users abandon even if the model is brilliant.
@@ -27,7 +27,7 @@ updated: 2026-04-14
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -52,7 +52,7 @@ Covers: Dialogue state management, memory strategies, conversation design patter
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### What Makes Conversation Hard
 
@@ -63,7 +63,7 @@ Unlike one-shot generation, dialogue systems must manage:
 â”‚                  WHY CONVERSATION IS HARD                        â”‚
 â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
 â”‚                                                                  â”‚
-â”‚  1. INTENT TRACKING     "I want to reschedule" â†’ which meeting? â”‚
+â”‚  1. INTENT TRACKING     "I want to reschedule" → which meeting? â”‚
 â”‚     across turns         with whom? what constraints?            â”‚
 â”‚                                                                  â”‚
 â”‚  2. AMBIGUITY           "Can you make it earlier?"               â”‚
@@ -81,7 +81,7 @@ Unlike one-shot generation, dialogue systems must manage:
 â”‚  6. ESCALATION          When to hand off to human                â”‚
 â”‚     decisions            When to refuse, when to retry            â”‚
 â”‚                                                                  â”‚
-â”‚  7. LATENCY             Voice: 200ms VAD â†’ 500ms total response â”‚
+â”‚  7. LATENCY             Voice: 200ms VAD → 500ms total response â”‚
 â”‚     constraints          Text: TTFT < 500ms or users click away  â”‚
 â”‚                                                                  â”‚
 â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
@@ -135,7 +135,7 @@ Unlike one-shot generation, dialogue systems must manage:
 
 | Pattern | Architecture | Best For | Limitation |
 |---------|-------------|----------|------------|
-| **Stateless RAG chat** | Query â†’ retrieve â†’ generate. No turn memory. | FAQ, documentation search | No continuity across turns |
+| **Stateless RAG chat** | Query → retrieve → generate. No turn memory. | FAQ, documentation search | No continuity across turns |
 | **Context-window memory** | Append all messages to context | Short interactions (< 10 turns) | Expensive, fills context window |
 | **Summarized memory** | Periodically summarize old turns, keep recent ones | Longer sessions (10-50 turns) | Summary drift, information loss |
 | **State-machine + LLM** | Hard-coded flow graph with LLM for NLU/NLG in each node | Structured workflows (booking, support tickets) | Less flexible, brittle edges |
@@ -180,7 +180,7 @@ Unlike one-shot generation, dialogue systems must manage:
 | Dimension | Text | Voice |
 |-----------|------|-------|
 | **Latency tolerance** | 2-3 seconds acceptable | > 500ms feels laggy, > 1s is broken |
-| **Input errors** | Typos (minor) | ASR errors ("New York" â†’ "Newark") â€” critical |
+| **Input errors** | Typos (minor) | ASR errors ("New York" → "Newark") â€” critical |
 | **Turn-taking** | Explicit (user hits send) | Implicit (VAD detects end-of-speech) |
 | **Interruption** | User can edit before sending | User talks over the bot â€” must handle |
 | **Repair** | User re-types | "No, I said..." â€” bot must recover gracefully |
@@ -189,23 +189,23 @@ Unlike one-shot generation, dialogue systems must manage:
 
 **Critical voice latency thresholds** (as of 2026):
 - **VAD detection**: < 200ms (when user stops speaking)
-- **Total response time**: < 500ms (VAD â†’ first audio output)
+- **Total response time**: < 500ms (VAD → first audio output)
 - **Human-like pause**: 300-500ms delay feels natural; < 200ms feels robotic
 
 ### Framework Comparison (April 2026)
 
 | Framework | Type | Multi-turn | Tool Use | Best For |
 |-----------|------|:----------:|:--------:|----------|
-| **LangGraph** | Graph-based agent | âœ… State persistence | âœ… Function calling | Custom conversation flows with complex state |
-| **Rasa** | Open-source NLU + dialogue | âœ… Tracker store | âœ… Custom actions | Enterprise on-prem, privacy-sensitive |
-| **Voiceflow** | No-code conversation design | âœ… Visual builder | âœ… API integrations | Rapid prototyping, non-technical teams |
-| **Dialogflow CX** | Google Cloud managed | âœ… Session state | âœ… Webhooks/fulfillment | Google ecosystem, voice + text |
-| **Amazon Lex** | AWS managed | âœ… Session attributes | âœ… Lambda fulfillment | AWS ecosystem, Alexa integration |
-| **Chainlit/Streamlit** | Python UI frameworks | âš ï¸ Basic | âœ… Via LangChain | Demos, internal tools, prototyping |
+| **LangGraph** | Graph-based agent | ✅ State persistence | ✅ Function calling | Custom conversation flows with complex state |
+| **Rasa** | Open-source NLU + dialogue | ✅ Tracker store | ✅ Custom actions | Enterprise on-prem, privacy-sensitive |
+| **Voiceflow** | No-code conversation design | ✅ Visual builder | ✅ API integrations | Rapid prototyping, non-technical teams |
+| **Dialogflow CX** | Google Cloud managed | ✅ Session state | ✅ Webhooks/fulfillment | Google ecosystem, voice + text |
+| **Amazon Lex** | AWS managed | ✅ Session attributes | ✅ Lambda fulfillment | AWS ecosystem, Alexa integration |
+| **Chainlit/Streamlit** | Python UI frameworks | âš ï¸ Basic | ✅ Via LangChain | Demos, internal tools, prototyping |
 
 ---
 
-## â˜… Code & Implementation
+## ★ Code & Implementation
 
 ### Multi-Turn Conversation with LangGraph
 
@@ -357,21 +357,21 @@ print(f"Context messages: {len(context)}")
 
 ---
 
-## â—† Comparison
+## ◆ Comparison
 
 | Aspect | Stateless RAG Chat | LangGraph Conversation | Rasa | Voiceflow |
 |--------|-------------------|----------------------|------|-----------|
-| **Multi-turn state** | âŒ None | âœ… Full graph state | âœ… Tracker store | âœ… Visual state |
+| **Multi-turn state** | âŒ None | ✅ Full graph state | ✅ Tracker store | ✅ Visual state |
 | **Learning curve** | Low | Medium-High | High | Low |
 | **Customization** | High | Very High | High | Medium |
-| **Voice support** | âŒ | Via integration | âŒ (text-only) | âœ… Native |
-| **Production ready** | âš ï¸ | âœ… | âœ… | âœ… |
+| **Voice support** | âŒ | Via integration | âŒ (text-only) | ✅ Native |
+| **Production ready** | âš ï¸ | ✅ | ✅ | ✅ |
 | **Cost** | Per-API-call | OSS + LLM costs | OSS | SaaS pricing |
 | **Best for** | FAQ, search | Custom agents | Enterprise NLU | Rapid prototyping |
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 
 ```
 CONVERSATION DESIGN CHECKLIST:
@@ -398,7 +398,7 @@ MEMORY RULES OF THUMB:
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
@@ -411,7 +411,7 @@ MEMORY RULES OF THUMB:
 
 ---
 
-## â—‹ Gotchas & Common Mistakes
+## ○ Gotchas & Common Mistakes
 
 - âš ï¸ **More memory â‰  better conversations**: Keeping everything amplifies confusion. Curate what to remember.
 - âš ï¸ **Conversational polish can hide weak task completion**: A friendly bot that never books the meeting is still a failure.
@@ -421,7 +421,7 @@ MEMORY RULES OF THUMB:
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: How is conversational AI different from a basic chatbot?
 - **A**: A basic chatbot generates locally plausible replies â€” it answers the current message without tracking state. A conversational AI system manages dialogue state across turns (tracking intent, confirmed slots, pending questions), handles ambiguity through clarification, recovers from misunderstandings, uses tools to take real actions, and knows when to escalate to a human. The key difference is that a conversational system has explicit state management (what has been said, what's confirmed, what's pending) rather than relying purely on the LLM's context window to "remember" everything.
@@ -434,7 +434,7 @@ MEMORY RULES OF THUMB:
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Build a Multi-Turn Booking Assistant
 
@@ -460,7 +460,7 @@ MEMORY RULES OF THUMB:
 
 ---
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics |
 |---|---|
@@ -471,7 +471,7 @@ MEMORY RULES OF THUMB:
 
 ---
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type | Resource | Why |
 |------|----------|-----|
@@ -485,7 +485,7 @@ MEMORY RULES OF THUMB:
 
 ---
 
-## â˜… Sources
+## ★ Sources
 
 - Google Conversation Design Guidelines â€” https://designguidelines.withgoogle.com/conversation/
 - Microsoft Bot Framework Design Guidance â€” https://docs.microsoft.com/en-us/azure/bot-service/bot-service-design-principles

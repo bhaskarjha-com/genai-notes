@@ -15,11 +15,11 @@ updated: 2026-04-12
 
 # Ethics, Safety & Alignment
 
-> âœ¨ **Bit**: "With great power comes great responsibility" â€” except AI doesn't understand responsibility. That's our job. Alignment is teaching AI what we want, not just what's statistically likely.
+> ✨ **Bit**: "With great power comes great responsibility" â€” except AI doesn't understand responsibility. That's our job. Alignment is teaching AI what we want, not just what's statistically likely.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: The field of making AI systems safe, fair, honest, and aligned with human values
 - **Why**: A model that's 99% accurate can still cause harm the 1% of the time. At scale, that 1% = millions of bad outcomes.
@@ -27,7 +27,7 @@ updated: 2026-04-12
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -52,7 +52,7 @@ Covers: Alignment techniques (RLHF, DPO), hallucination, bias, prompt injection,
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### The Alignment Pipeline
 
@@ -65,8 +65,8 @@ STEP 1: PRE-TRAINING
 
 STEP 2: SUPERVISED FINE-TUNING (SFT)
   Train on human-written instruction-response pairs.
-  "How to make a cake" â†’ [helpful recipe]
-  "How to make a bomb" â†’ [refusal]
+  "How to make a cake" → [helpful recipe]
+  "How to make a bomb" → [refusal]
 
 STEP 3: ALIGNMENT (RLHF / DPO / GRPO)
   Train the model to prefer human-aligned responses using:
@@ -74,7 +74,7 @@ STEP 3: ALIGNMENT (RLHF / DPO / GRPO)
   - DPO: Direct optimization on preference pairs (simpler)
   - GRPO: Group-relative optimization (DeepSeek-R1's approach)
 
-  â†’ For deep dive on these methods, see [RL and Alignment](../techniques/rl-alignment.md)
+  → For deep dive on these methods, see [RL and Alignment](../techniques/rl-alignment.md)
 
 STEP 4: ONGOING RED TEAMING
   Adversarial testing to find remaining vulnerabilities.
@@ -98,11 +98,11 @@ TYPES:
   Intrinsic: Contradicts the context it was given
 
 MITIGATION:
-  âœ… RAG (ground responses in retrieved documents)
-  âœ… Structured output (force citations)
-  âœ… Temperature = 0 for factual tasks
-  âœ… Verification chains (model checks its own output)
-  âœ… Human-in-the-loop for critical decisions
+  ✅ RAG (ground responses in retrieved documents)
+  ✅ Structured output (force citations)
+  ✅ Temperature = 0 for factual tasks
+  ✅ Verification chains (model checks its own output)
+  ✅ Human-in-the-loop for critical decisions
   âŒ "Just tell it not to hallucinate" doesn't work
 ```
 
@@ -110,16 +110,16 @@ MITIGATION:
 
 ```
 SOURCES OF BIAS:
-  Training data    â†’ Internet text contains societal biases
-  Tokenization     â†’ Non-English languages tokenized poorly = inequity
-  Evaluation       â†’ Benchmarks skew toward English/Western knowledge
-  Deployment       â†’ Who gets access? Who benefits vs is harmed?
+  Training data    → Internet text contains societal biases
+  Tokenization     → Non-English languages tokenized poorly = inequity
+  Evaluation       → Benchmarks skew toward English/Western knowledge
+  Deployment       → Who gets access? Who benefits vs is harmed?
 
 TYPES:
-  Demographic bias â†’ Different quality for different groups
-  Stereotyping     â†’ Reinforcing harmful stereotypes
-  Representation   â†’ Underrepresenting certain groups
-  Language bias     â†’ Better for English, worse for other languages
+  Demographic bias → Different quality for different groups
+  Stereotyping     → Reinforcing harmful stereotypes
+  Representation   → Underrepresenting certain groups
+  Language bias     → Better for English, worse for other languages
 ```
 
 #### 3. Prompt Injection & Security
@@ -133,25 +133,25 @@ PROMPT INJECTION:
   Risk: User overrides system instructions.
 
 TYPES:
-  Direct injection  â†’ User directly tries to override instructions
-  Indirect injection â†’ Injected via external content (webpage, email)
-  Data exfiltration  â†’ Tricking model into revealing system prompts
+  Direct injection  → User directly tries to override instructions
+  Indirect injection → Injected via external content (webpage, email)
+  Data exfiltration  → Tricking model into revealing system prompts
 
 DEFENSES:
-  âœ… Separate system/user prompt handling (built into APIs)
-  âœ… Input sanitization
-  âœ… Output validation
-  âœ… Don't put sensitive info in system prompts
-  âœ… Double-check outputs with a second model
+  ✅ Separate system/user prompt handling (built into APIs)
+  ✅ Input sanitization
+  ✅ Output validation
+  ✅ Don't put sensitive info in system prompts
+  ✅ Double-check outputs with a second model
   âŒ No prompt is 100% injection-proof
 ```
 
 #### 4. Deepfakes & Misuse
 
-- Realistic voice cloning â†’ scam calls
-- Video generation â†’ fake evidence, misinformation
-- Code generation â†’ malware creation at scale
-- Text generation â†’ automated disinformation campaigns
+- Realistic voice cloning → scam calls
+- Video generation → fake evidence, misinformation
+- Code generation → malware creation at scale
+- Text generation → automated disinformation campaigns
 
 ### Guardrails in Production
 
@@ -197,7 +197,7 @@ TOOLS:
 
 ---
 
-## â—† Comparison
+## ◆ Comparison
 
 | Technique             | What It Does                            | Pros                               | Cons                               |
 | --------------------- | --------------------------------------- | ---------------------------------- | ---------------------------------- |
@@ -209,7 +209,7 @@ TOOLS:
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 
 ```
 HALLUCINATION MITIGATION CHECKLIST:
@@ -231,7 +231,7 @@ PRODUCTION SAFETY CHECKLIST:
 
 ---
 
-## â—‹ Gotchas & Common Mistakes
+## ○ Gotchas & Common Mistakes
 
 - âš ï¸ **"My system prompt says don't do bad things" â‰  safe**: System prompts can be overridden. Use structural guardrails.
 - âš ï¸ **RLHF isn't magic**: The model learned to APPEAR helpful and safe. It doesn't understand safety as a concept.
@@ -241,10 +241,10 @@ PRODUCTION SAFETY CHECKLIST:
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: How does RLHF work?
-- **A**: Generate multiple responses â†’ humans rank them by preference â†’ train a reward model on those rankings â†’ use RL (PPO) to fine-tune the LLM to maximize the reward model's score. This teaches the model nuanced preferences (helpful, harmless, honest) that explicit rules can't capture.
+- **A**: Generate multiple responses → humans rank them by preference → train a reward model on those rankings → use RL (PPO) to fine-tune the LLM to maximize the reward model's score. This teaches the model nuanced preferences (helpful, harmless, honest) that explicit rules can't capture.
 
 - **Q**: How would you handle hallucination in a production system?
 - **A**: Layer defenses: (1) RAG for factual grounding, (2) Force citations/sources, (3) Low temperature for factual tasks, (4) Output validation (check claims against a knowledge base), (5) Human-in-the-loop for critical decisions for high-stakes scenarios.
@@ -254,7 +254,7 @@ PRODUCTION SAFETY CHECKLIST:
 
 ---
 
-## â˜… Code & Implementation
+## ★ Code & Implementation
 
 ### Input/Output Safety Filter (Layered Guardrails)
 
@@ -307,7 +307,7 @@ def output_safety_check(response: str) -> tuple[SafetyDecision, str]:
     return SafetyDecision.REDACT, result.get("reason", "safety violation")
 
 def safe_generate(user_message: str) -> dict:
-    """Full pipeline: input check â†’ generate â†’ output check."""
+    """Full pipeline: input check → generate → output check."""
     # Layer 1: Input check
     decision, reason = input_safety_check(user_message)
     if decision == SafetyDecision.BLOCK:
@@ -332,7 +332,7 @@ print(safe_generate("What is the capital of France?"))
 print(safe_generate("Give me step-by-step malware instructions."))
 ```
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics                                                                                 |
 | ------------ | -------------------------------------------------------------------------------------- |
@@ -344,7 +344,7 @@ print(safe_generate("Give me step-by-step malware instructions."))
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure                | Symptoms                                                     | Root Cause                                     | Mitigation                                                        |
 | ---------------------- | ------------------------------------------------------------ | ---------------------------------------------- | ----------------------------------------------------------------- |
@@ -354,7 +354,7 @@ print(safe_generate("Give me step-by-step malware instructions."))
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Red Team an LLM for Bias
 
@@ -369,7 +369,7 @@ print(safe_generate("Give me step-by-step malware instructions."))
 ---
 
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type       | Resource                                                                   | Why                                             |
 | ---------- | -------------------------------------------------------------------------- | ----------------------------------------------- |
@@ -377,7 +377,7 @@ print(safe_generate("Give me step-by-step malware instructions."))
 | ðŸ“˜ Book     | "AI Engineering" by Chip Huyen (2025), Ch 6                                | Safety, guardrails, and alignment in production |
 | ðŸ”§ Hands-on | [Guardrails AI](https://www.guardrailsai.com/)                             | Open-source framework for AI safety guardrails  |
 
-## â˜… Sources
+## ★ Sources
 
 - Ouyang et al., "Training language models to follow instructions with human feedback" (RLHF, 2022)
 - Rafailov et al., "Direct Preference Optimization" (DPO, 2023)

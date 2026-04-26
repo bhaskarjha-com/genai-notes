@@ -15,19 +15,19 @@ updated: 2026-04-14
 
 # Data Flywheel Design
 
-> âœ¨ **Bit**: The best AI systems don't just answer questions â€” they learn from every interaction. A data flywheel turns user feedback, corrections, and behavioral signals into training data that makes the system better, which attracts more users, generating more data. This is the moat.
+> ✨ **Bit**: The best AI systems don't just answer questions â€” they learn from every interaction. A data flywheel turns user feedback, corrections, and behavioral signals into training data that makes the system better, which attracts more users, generating more data. This is the moat.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: A self-reinforcing loop where user interactions generate data that improves the AI system, which improves user experience, generating more data
 - **Why**: Static AI systems degrade over time as user needs evolve. Flywheels create compounding improvement â€” the competitive advantage that separates products from prototypes.
-- **Key point**: The flywheel has 4 stages: collect signals â†’ curate data â†’ improve model/retrieval â†’ measure impact â†’ repeat.
+- **Key point**: The flywheel has 4 stages: collect signals → curate data → improve model/retrieval → measure impact → repeat.
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -45,7 +45,7 @@ Covers: Flywheel architecture, signal collection (implicit/explicit), data curat
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### The Flywheel Loop
 
@@ -116,7 +116,7 @@ IMPROVEMENT TARGETS (ordered by ease and impact):
 
 ---
 
-## â˜… Code & Implementation
+## ★ Code & Implementation
 
 ### Feedback Collection Pipeline
 
@@ -182,7 +182,7 @@ async def get_training_candidates(min_quality: str = "high"):
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
@@ -193,14 +193,14 @@ async def get_training_candidates(min_quality: str = "high"):
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: How would you build a system that improves from user feedback?
 - **A**: I'd design a 4-stage data flywheel. Stage 1: Collect both explicit signals (thumbs up/down, user edits) and implicit signals (regeneration, session abandonment) from every interaction. Stage 2: Curate â€” user corrections become the highest-quality training data; thumbs-up responses become positive examples; thumbs-down + regeneration patterns reveal failure modes. Stage 3: Improve iteratively â€” start with prompt refinements (days), then retrieval improvements (weeks), then embedding fine-tuning (weeks), then model fine-tuning quarterly. Stage 4: Measure impact with A/B tests â€” compare flywheel-improved version vs control. I'd target 2-5% quality improvement per month, compounding over time.
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Design a Flywheel for a Support Chatbot
 
@@ -208,14 +208,14 @@ async def get_training_candidates(min_quality: str = "high"):
 **Time**: 30 minutes
 **Steps**:
 1. List all signals you'd collect (at least 5 explicit + 5 implicit)
-2. Design the data curation pipeline (which signals â†’ which training data)
+2. Design the data curation pipeline (which signals → which training data)
 3. Prioritize 3 improvement actions for month 1, 3, and 6
 4. Define success metrics for each stage
 **Expected Output**: Flywheel architecture diagram with metrics plan
 
 ---
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics |
 |---|---|
@@ -226,7 +226,7 @@ async def get_training_candidates(min_quality: str = "high"):
 
 ---
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type | Resource | Why |
 |------|----------|-----|
@@ -236,7 +236,7 @@ async def get_training_candidates(min_quality: str = "high"):
 
 ---
 
-## â˜… Sources
+## ★ Sources
 
 - Huyen, C. "AI Engineering" (2025)
 - Huyen, C. "Designing Machine Learning Systems" (2022)

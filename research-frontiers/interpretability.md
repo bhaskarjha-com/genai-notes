@@ -15,11 +15,11 @@ updated: 2026-04-11
 
 # Mechanistic Interpretability
 
-> âœ¨ **Bit**: We built AGI-approaching systems and we have NO IDEA what's happening inside them. Mechanistic interpretability is reverse-engineering neural networks â€” finding the "circuits" that implement specific capabilities. It's neuroscience, but for artificial brains.
+> ✨ **Bit**: We built AGI-approaching systems and we have NO IDEA what's happening inside them. Mechanistic interpretability is reverse-engineering neural networks â€” finding the "circuits" that implement specific capabilities. It's neuroscience, but for artificial brains.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: Understanding WHAT individual neurons, attention heads, and circuits in neural networks actually do â€” reverse-engineering the model's internal algorithms
 - **Why**: We can't trust what we can't understand. AI safety REQUIRES understanding model internals. Also: Anthropic's biggest research bet.
@@ -27,7 +27,7 @@ updated: 2026-04-11
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -46,7 +46,7 @@ Frontier research. This is not needed for building apps but shows deep technical
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### Key Concepts
 
@@ -89,7 +89,7 @@ CIRCUITS:
   Connected patterns of features that implement specific behaviors.
 
   Example: "Indirect Object Identification" circuit
-  "Mary gave the book to ___" â†’ [John]
+  "Mary gave the book to ___" → [John]
 
   Attention head A finds "Mary" (subject)
   Attention head B finds "John" (recipient)
@@ -111,7 +111,7 @@ HOW TO EXTRACT FEATURES FROM SUPERPOSITION:
   â”‚         â”‚                                  â”‚
   â”‚         â–¼                                  â”‚
   â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”                          â”‚
-  â”‚  â”‚ ENCODER       â”‚  768 â†’ 65,536 dimensionsâ”‚
+  â”‚  â”‚ ENCODER       â”‚  768 → 65,536 dimensionsâ”‚
   â”‚  â”‚ (expand)      â”‚  (overcomplete)         â”‚
   â”‚  â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”˜                          â”‚
   â”‚         â”‚  + sparsity constraint            â”‚
@@ -124,7 +124,7 @@ HOW TO EXTRACT FEATURES FROM SUPERPOSITION:
   â”‚  â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”˜                          â”‚
   â”‚         â–¼                                  â”‚
   â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”                          â”‚
-  â”‚  â”‚ DECODER       â”‚  65,536 â†’ 768           â”‚
+  â”‚  â”‚ DECODER       â”‚  65,536 → 768           â”‚
   â”‚  â”‚ (reconstruct) â”‚  Reconstruct original   â”‚
   â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜                          â”‚
   â”‚                                            â”‚
@@ -153,7 +153,7 @@ HOW TO EXTRACT FEATURES FROM SUPERPOSITION:
 
 | Discovery              | Who                | What                                                                     |
 | ---------------------- | ------------------ | ------------------------------------------------------------------------ |
-| **Induction heads**    | Anthropic (2022)   | Attention heads that implement in-context learning ("A B ... A â†’ B")     |
+| **Induction heads**    | Anthropic (2022)   | Attention heads that implement in-context learning ("A B ... A → B")     |
 | **Golden Gate Claude** | Anthropic (2024)   | Amplifying the "Golden Gate Bridge" feature made Claude obsessed with it |
 | **10M features**       | Anthropic (2024)   | Extracted 10M interpretable features from Claude 3 Sonnet via SAEs       |
 | **ROME**               | Meng et al. (2022) | Located and edited specific facts in GPT models                          |
@@ -161,7 +161,7 @@ HOW TO EXTRACT FEATURES FROM SUPERPOSITION:
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 
 ```
 WHY IT MATTERS FOR SAFETY:
@@ -189,7 +189,7 @@ RESEARCH GROUPS:
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: What is superposition in neural networks?
 - **A**: Neural networks represent more concepts (features) than they have neurons. Features are encoded as DIRECTIONS in activation space, not individual neurons. Multiple features share the same neurons through superposition â€” similar to how compressed audio encodes many frequencies in fewer data points. Sparse autoencoders can decompose these back into individual features.
@@ -199,7 +199,7 @@ RESEARCH GROUPS:
 
 ---
 
-## â˜… Code & Implementation
+## ★ Code & Implementation
 
 ### Integrated Gradients (Feature Importance for LLMs)
 
@@ -234,12 +234,12 @@ importance = attrs[0].detach().numpy()
 print(f"Convergence delta: {delta.item():.4e}  (should be near 0)")
 print("\nToken Attribution Scores:")
 for token, score in sorted(zip(tokens, importance), key=lambda x: -abs(x[1])):
-    bar = "Ã¢â€“Ë†" * int(abs(score) * 30)
+    bar = "Ã¢—Ë†" * int(abs(score) * 30)
     sign = "+" if score > 0 else "-"
     print(f"  {token:<15} {sign}{abs(score):.4f}  {bar}")
 ```
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics                                                                                                                                                                     |
 | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -251,7 +251,7 @@ for token, score in sorted(zip(tokens, importance), key=lambda x: -abs(x[1])):
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure                       | Symptoms                                                  | Root Cause                                      | Mitigation                                                        |
 | ----------------------------- | --------------------------------------------------------- | ----------------------------------------------- | ----------------------------------------------------------------- |
@@ -261,7 +261,7 @@ for token, score in sorted(zip(tokens, importance), key=lambda x: -abs(x[1])):
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Probe a Model's Internal Representations
 
@@ -276,7 +276,7 @@ for token, score in sorted(zip(tokens, importance), key=lambda x: -abs(x[1])):
 ---
 
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type    | Resource                                                                                                     | Why                                                            |
 | ------- | ------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------- |
@@ -284,7 +284,7 @@ for token, score in sorted(zip(tokens, importance), key=lambda x: -abs(x[1])):
 | ðŸ“„ Paper | [Anthropic â€” "Scaling Monosemanticity" (2023)](https://transformer-circuits.pub/2023/monosemantic-features/) | Extracting interpretable features from language models         |
 | ðŸŽ¥ Video | [3Blue1Brown â€” "Neural Networks"](https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi)  | Visual intuition for neural network internals                  |
 
-## â˜… Sources
+## ★ Sources
 
 - Anthropic, "Scaling Monosemanticity" (2024) â€” https://transformer-circuits.pub/2024/scaling-monosemanticity/
 - Anthropic, "A Mathematical Framework for Transformer Circuits" (2021)

@@ -15,19 +15,19 @@ updated: 2026-04-12
 
 # Voice AI & Speech
 
-> âœ¨ **Bit**: In 2024, talking to AI felt like talking to Siri â€” robotic and frustrating. By 2026, voice AI agents do customer support calls, conduct job interviews, and have natural conversations with sub-300ms latency. The interface is disappearing â€” you just talk.
+> ✨ **Bit**: In 2024, talking to AI felt like talking to Siri â€” robotic and frustrating. By 2026, voice AI agents do customer support calls, conduct job interviews, and have natural conversations with sub-300ms latency. The interface is disappearing â€” you just talk.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: AI systems that understand speech (STT), generate speech (TTS), and enable real-time voice conversations
 - **Why**: Voice is the most natural human interface. Voice AI agents are the fastest-growing GenAI application vertical. deeplearning.ai has a dedicated course on it.
-- **Key point**: Modern voice AI isn't just STTâ†’LLMâ†’TTS glued together. End-to-end models process speech directly, achieving human-like latency and expressiveness.
+- **Key point**: Modern voice AI isn't just STT→LLM→TTS glued together. End-to-end models process speech directly, achieving human-like latency and expressiveness.
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -43,7 +43,7 @@ Last verified for provider and product examples in this note: 2026-04.
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### Voice AI Architecture
 
@@ -54,7 +54,7 @@ TRADITIONAL PIPELINE (cascaded):
   â”‚(Whisperâ”‚    â”‚(GPT-5.4)â”‚    â”‚(ElevenLabs)
   â”‚ V4)   â”‚    â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜    â””â”€â”€â”€â”€â”€â”€â”€â”€â”˜
   â””â”€â”€â”€â”€â”€â”€â”€â”€â”˜    â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜    â””â”€â”€â”€â”€â”€â”€â”€â”€â”˜
-  Audio â†’ Text â†’ Text â†’ Audio
+  Audio → Text → Text → Audio
 
   Latency: STT(300ms) + LLM(500ms) + TTS(200ms) = ~1000ms
   âŒ Loses tone, emotion, context from audio
@@ -71,8 +71,8 @@ MODERN END-TO-END (speech-to-speech):
   â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 
   Latency: ~250-400ms (one model, no pipeline)
-  âœ… Preserves audio context
-  âœ… Natural turn-taking and interruptions
+  ✅ Preserves audio context
+  ✅ Natural turn-taking and interruptions
 ```
 
 ### STT (Speech-to-Text) Models
@@ -128,8 +128,8 @@ OPENAI REALTIME API (GPT-5.4):
   - Tools: search, compute, external APIs
 
   Architecture:
-    User speaks â†’ WebSocket â†’ GPT-5.4 processes audio â†’
-    Generates audio response â†’ Streams back â†’ User hears
+    User speaks → WebSocket → GPT-5.4 processes audio →
+    Generates audio response → Streams back → User hears
 
 GOOGLE GEMINI 3.1 LIVE:
   - Multimodal real-time: voice + video + screen
@@ -169,17 +169,17 @@ VOICE AGENT ARCHITECTURE:
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 
 ```
 VOICE AI DECISION TREE:
-  Need batch transcription?        â†’ Whisper (free, open)
-  Need real-time transcription?    â†’ Deepgram Nova-3
-  Need best voice quality?         â†’ ElevenLabs
-  Need lowest latency TTS?         â†’ Cartesia Sonic
-  Need full voice conversation?    â†’ OpenAI Realtime API
-  Need voice agent framework?      â†’ ADK + Gemini Live
-  Need open-source voice?          â†’ Whisper + XTTS/Fish
+  Need batch transcription?        → Whisper (free, open)
+  Need real-time transcription?    → Deepgram Nova-3
+  Need best voice quality?         → ElevenLabs
+  Need lowest latency TTS?         → Cartesia Sonic
+  Need full voice conversation?    → OpenAI Realtime API
+  Need voice agent framework?      → ADK + Gemini Live
+  Need open-source voice?          → Whisper + XTTS/Fish
 
 KEY METRICS:
   STT WER:           < 5% is excellent
@@ -190,7 +190,7 @@ KEY METRICS:
 
 ---
 
-## â—‹ Gotchas & Common Mistakes
+## ○ Gotchas & Common Mistakes
 
 - âš ï¸ **Cascaded latency**: STT + LLM + TTS adds up. Use end-to-end models (Realtime API) for conversational applications.
 - âš ï¸ **Turn-taking is HARD**: Detecting when the user is done speaking vs pausing to think is a major UX challenge. VAD alone isn't enough.
@@ -200,14 +200,14 @@ KEY METRICS:
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: How would you build a real-time voice AI agent?
-- **A**: Option 1 (simplest): OpenAI Realtime API â€” WebSocket-based, speech-to-speech, handles turn-taking and interruptions natively. Option 2 (customizable): Pipeline of Deepgram STT â†’ LLM (with function calling for tools) â†’ ElevenLabs TTS, with a VAD layer for turn management. Option 3 (Google ecosystem): ADK + Gemini Live for multi-agent voice systems. Key challenges: latency optimization, interruption handling, and graceful error recovery.
+- **A**: Option 1 (simplest): OpenAI Realtime API â€” WebSocket-based, speech-to-speech, handles turn-taking and interruptions natively. Option 2 (customizable): Pipeline of Deepgram STT → LLM (with function calling for tools) → ElevenLabs TTS, with a VAD layer for turn management. Option 3 (Google ecosystem): ADK + Gemini Live for multi-agent voice systems. Key challenges: latency optimization, interruption handling, and graceful error recovery.
 
 ---
 
-## â˜… Code & Implementation
+## ★ Code & Implementation
 
 ### Speech-to-Text with Whisper + GPT Response
 
@@ -220,8 +220,8 @@ from pathlib import Path
 client = OpenAI()
 
 def voice_pipeline(audio_file: str, system_prompt: str = "You are a helpful voice assistant.") -> dict:
-    """Full voice pipeline: STT â†’ LLM â†’ TTS."""
-    # Step 1: Speech â†’ Text (Whisper)
+    """Full voice pipeline: STT → LLM → TTS."""
+    # Step 1: Speech → Text (Whisper)
     with open(audio_file, "rb") as f:
         transcript = client.audio.transcriptions.create(
             model="whisper-1",
@@ -231,7 +231,7 @@ def voice_pipeline(audio_file: str, system_prompt: str = "You are a helpful voic
     user_text = transcript.text
     print(f"Transcribed: {user_text}")
 
-    # Step 2: Text â†’ LLM Response
+    # Step 2: Text → LLM Response
     response = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=[
@@ -243,7 +243,7 @@ def voice_pipeline(audio_file: str, system_prompt: str = "You are a helpful voic
     answer_text = response.choices[0].message.content
     print(f"LLM Answer: {answer_text}")
 
-    # Step 3: Text â†’ Speech (TTS)
+    # Step 3: Text → Speech (TTS)
     speech = client.audio.speech.create(
         model="tts-1",          # tts-1-hd for higher quality
         voice="nova",           # alloy|echo|fable|onyx|nova|shimmer
@@ -264,7 +264,7 @@ def streaming_tts(text: str, output_path: str = "stream_output.mp3") -> None:
     print(f"Saved streaming TTS to {output_path}")
 ```
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics                                                                               |
 | ------------ | ------------------------------------------------------------------------------------ |
@@ -276,7 +276,7 @@ def streaming_tts(text: str, output_path: str = "stream_output.mp3") -> None:
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure                     | Symptoms                                                 | Root Cause                                      | Mitigation                                                 |
 | --------------------------- | -------------------------------------------------------- | ----------------------------------------------- | ---------------------------------------------------------- |
@@ -286,7 +286,7 @@ def streaming_tts(text: str, output_path: str = "stream_output.mp3") -> None:
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Build a Voice-to-Voice Pipeline
 
@@ -301,7 +301,7 @@ def streaming_tts(text: str, output_path: str = "stream_output.mp3") -> None:
 ---
 
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type       | Resource                                                            | Why                                                   |
 | ---------- | ------------------------------------------------------------------- | ----------------------------------------------------- |
@@ -309,7 +309,7 @@ def streaming_tts(text: str, output_path: str = "stream_output.mp3") -> None:
 | ðŸ”§ Hands-on | [ElevenLabs Documentation](https://elevenlabs.io/docs)              | State-of-the-art voice synthesis                      |
 | ðŸ“„ Paper    | [Radford et al. "Whisper" (2022)](https://arxiv.org/abs/2212.04356) | Robust speech recognition via large-scale supervision |
 
-## â˜… Sources
+## ★ Sources
 
 - OpenAI Realtime API â€” https://platform.openai.com/docs/guides/realtime
 - Whisper â€” https://github.com/openai/whisper

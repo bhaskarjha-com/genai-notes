@@ -15,11 +15,11 @@ updated: 2026-04-12
 
 # LLM Evaluation & Benchmarks
 
-> âœ¨ **Bit**: "You can't improve what you can't measure." In GenAI, the problem is the opposite â€” you CAN measure, but the benchmarks keep getting saturated. It's an arms race between models and tests.
+> ✨ **Bit**: "You can't improve what you can't measure." In GenAI, the problem is the opposite â€” you CAN measure, but the benchmarks keep getting saturated. It's an arms race between models and tests.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: Methods, metrics, and benchmark datasets to measure LLM quality, safety, and reliability
 - **Why**: Without evaluation, you're guessing. Models that score 90% on benchmarks can still hallucinate, be biased, or fail in production.
@@ -27,7 +27,7 @@ updated: 2026-04-12
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -42,7 +42,7 @@ Covers: Major benchmarks, RAG-specific evaluation, evaluation tools, and emergin
 - Models that ace benchmarks can still fail catastrophically in production
 - Companies are increasingly demanding evaluation before deploying GenAI
 - Understanding eval = you can pick the right model, avoid hype, and build reliable systems
-- Most teams skip evaluation â†’ most teams ship broken GenAI
+- Most teams skip evaluation → most teams ship broken GenAI
 
 ### Prerequisites
 
@@ -51,7 +51,7 @@ Covers: Major benchmarks, RAG-specific evaluation, evaluation tools, and emergin
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### The 7 Dimensions of LLM Evaluation
 
@@ -59,13 +59,13 @@ Covers: Major benchmarks, RAG-specific evaluation, evaluation tools, and emergin
 â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
 â”‚            WHAT TO MEASURE                               â”‚
 â”‚                                                         â”‚
-â”‚  1. ACCURACY & KNOWLEDGE    â†’ Does it know things?      â”‚
-â”‚  2. REASONING               â†’ Can it think logically?   â”‚
-â”‚  3. CODING                  â†’ Can it write code?        â”‚
-â”‚  4. SAFETY & HARM           â†’ Is it safe to deploy?     â”‚
-â”‚  5. FAIRNESS & BIAS         â†’ Is it equitable?          â”‚
-â”‚  6. ROBUSTNESS              â†’ Does it handle edge cases?â”‚
-â”‚  7. EFFICIENCY              â†’ Is it fast & cheap enough?â”‚
+â”‚  1. ACCURACY & KNOWLEDGE    → Does it know things?      â”‚
+â”‚  2. REASONING               → Can it think logically?   â”‚
+â”‚  3. CODING                  → Can it write code?        â”‚
+â”‚  4. SAFETY & HARM           → Is it safe to deploy?     â”‚
+â”‚  5. FAIRNESS & BIAS         → Is it equitable?          â”‚
+â”‚  6. ROBUSTNESS              → Does it handle edge cases?â”‚
+â”‚  7. EFFICIENCY              → Is it fast & cheap enough?â”‚
 â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
@@ -75,7 +75,7 @@ Covers: Major benchmarks, RAG-specific evaluation, evaluation tools, and emergin
 
 | Benchmark        | What It Tests                                        | Saturated?          | Top Score (Mar 2026)   |
 | ---------------- | ---------------------------------------------------- | ------------------- | ---------------------- |
-| **MMLU**         | 57 subject knowledge (high school â†’ professional)    | âš ï¸ YES (>90%)        | GPT-5.3: 93%           |
+| **MMLU**         | 57 subject knowledge (high school → professional)    | âš ï¸ YES (>90%)        | GPT-5.3: 93%           |
 | **MMLU-Pro**     | Harder MMLU: 12K grad-level, 10 options per question | Approaching         | Gemini 3 Pro: 89.8%    |
 | **GPQA-Diamond** | PhD-level science (physics, chemistry, biology)      | No (60-90% range)   | ~87% (frontier models) |
 | **ARC-AGI-2**    | Abstract reasoning (pattern completion)              | No (LLMs score ~0%) | Below human average    |
@@ -207,7 +207,7 @@ Contamination = benchmark data leaked into training data, inflating scores.
 
 ---
 
-## â—† Code & Implementation
+## ◆ Code & Implementation
 
 ```python
 # âš ï¸ Last tested: 2026-04
@@ -242,17 +242,17 @@ assert_test(test_case, [metric])  # Passes if hallucination score < 0.5
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 
 ```
 WHICH BENCHMARK FOR WHAT:
-  General knowledge â†’ MMLU-Pro (MMLU is too easy now)
-  Coding            â†’ SWE-bench (HumanEval is too easy now)
-  Reasoning         â†’ GPQA-Diamond, ARC-AGI-2
-  Math              â†’ MATH-500, AIME
-  Real-world        â†’ LiveBench (dynamic, uncontaminated)
-  RAG quality       â†’ RAGAS metrics
-  Safety            â†’ Red teaming + automated harm benchmarks
+  General knowledge → MMLU-Pro (MMLU is too easy now)
+  Coding            → SWE-bench (HumanEval is too easy now)
+  Reasoning         → GPQA-Diamond, ARC-AGI-2
+  Math              → MATH-500, AIME
+  Real-world        → LiveBench (dynamic, uncontaminated)
+  RAG quality       → RAGAS metrics
+  Safety            → Red teaming + automated harm benchmarks
 
 MINIMUM EVAL STACK:
   1. RAGAS (if building RAG)
@@ -267,7 +267,7 @@ BENCHMARK SATURATION WARNING:
 
 ---
 
-## â—‹ Gotchas & Common Mistakes
+## ○ Gotchas & Common Mistakes
 
 - âš ï¸ **Benchmark contamination**: Models may have trained on benchmark data. High scores â‰  real-world ability.
 - âš ï¸ **LLM-as-Judge bias**: GPT-5.4 prefers GPT-5.4 outputs. Claude prefers Claude outputs. Use multiple judges or human verification.
@@ -277,7 +277,7 @@ BENCHMARK SATURATION WARNING:
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: How would you evaluate a RAG system?
 - **A**: Component-level: Retrieval quality (context precision + recall) â€” are the right chunks found? Generation quality (faithfulness + answer relevancy) â€” is the answer grounded and on-topic? Use RAGAS for automated metrics, plus a golden test set of 50+ question-answer pairs with human-verified ground truth.
@@ -287,7 +287,7 @@ BENCHMARK SATURATION WARNING:
 
 ---
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics                                                            |
 | ------------ | ----------------------------------------------------------------- |
@@ -299,7 +299,7 @@ BENCHMARK SATURATION WARNING:
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
@@ -309,7 +309,7 @@ BENCHMARK SATURATION WARNING:
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Build a Custom Evaluation Suite
 
@@ -324,7 +324,7 @@ BENCHMARK SATURATION WARNING:
 ---
 
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type | Resource | Why |
 |------|----------|-----|
@@ -332,7 +332,7 @@ BENCHMARK SATURATION WARNING:
 | ðŸ”§ Hands-on | [Eleuther AI LM Eval Harness](https://github.com/EleutherAI/lm-evaluation-harness) | Standard LLM benchmark suite |
 | ðŸ”§ Hands-on | [LMSYS Chatbot Arena](https://chat.lmsys.org/) | Human evaluation via head-to-head comparisons |
 
-## â˜… Sources
+## ★ Sources
 
 - MMLU: Hendrycks et al. (2020) â€” https://arxiv.org/abs/2009.03300
 - RAGAS documentation â€” https://docs.ragas.io

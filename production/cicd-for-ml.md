@@ -19,14 +19,14 @@ updated: 2026-04-14
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 - **What**: The automation pipeline for testing, packaging, validating, and releasing ML and LLM systems.
 - **Why**: AI changes can silently degrade quality, safety, or cost while all unit tests still pass.
 - **Key point**: CI/CD for AI must validate behavior, not just syntax and infrastructure.
 
 ---
 
-## â˜… Overview
+## ★ Overview
 ### Definition
 
 **CI/CD for AI systems** extends normal software delivery with model, prompt, dataset, and evaluation checks.
@@ -49,7 +49,7 @@ This note covers the delivery path for GenAI services and ML-backed applications
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 ### What Changes in AI Systems
 
 The delivery pipeline may need to track changes in:
@@ -136,7 +136,7 @@ jobs:
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 | Change Type           | Minimum Checks                                        |
 | --------------------- | ----------------------------------------------------- |
 | Prompt change         | offline evals, cost diff, formatting checks           |
@@ -147,7 +147,7 @@ jobs:
 
 ---
 
-## â—‹ Gotchas & Common Mistakes
+## ○ Gotchas & Common Mistakes
 - Unit tests alone can create false confidence.
 - A better benchmark score can still be a worse product outcome.
 - Teams often forget to version datasets and prompts.
@@ -155,7 +155,7 @@ jobs:
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 - **Q**: What makes CI/CD for LLM systems different from regular CI/CD?
 - **A**: The output behavior is probabilistic and influenced by prompts, models, and datasets, so the pipeline needs evaluation gates, cost checks, and rollout safety beyond normal software tests.
 
@@ -164,7 +164,7 @@ jobs:
 
 ---
 
-## â˜… Code & Implementation
+## ★ Code & Implementation
 
 ### LLM Eval CI Gate (pytest)
 
@@ -204,7 +204,7 @@ class TestLLMQualityGate:
         assert expected.lower() in resp.lower(), f"Expected {expected!r} in: {resp}"
 ```
 
-## â˜… Connections
+## ★ Connections
 | Relationship | Topics                                                                                                                                                                                                                       |
 | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Builds on    | [LLM Evaluation Deep Dive](../evaluation/llm-evaluation-deep-dive.md), [Monitoring & Observability for GenAI Systems](./monitoring-observability.md), [Docker & Kubernetes for GenAI Deployment](./docker-and-kubernetes.md) |
@@ -214,7 +214,7 @@ class TestLLMQualityGate:
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure                       | Symptoms                                    | Root Cause                                        | Mitigation                                                                |
 | ----------------------------- | ------------------------------------------- | ------------------------------------------------- | ------------------------------------------------------------------------- |
@@ -225,7 +225,7 @@ class TestLLMQualityGate:
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Build an AI CI Pipeline
 
@@ -240,7 +240,7 @@ class TestLLMQualityGate:
 
 ---
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type       | Resource                                                                       | Why                                                             |
 | ---------- | ------------------------------------------------------------------------------ | --------------------------------------------------------------- |
@@ -251,7 +251,7 @@ class TestLLMQualityGate:
 
 ---
 
-## â˜… Sources
+## ★ Sources
 
 - GitHub Actions documentation â€” https://docs.github.com/en/actions
 - Argo CD documentation â€” https://argo-cd.readthedocs.io/

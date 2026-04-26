@@ -15,11 +15,11 @@ updated: 2026-04-15
 
 # Agent Memory Systems
 
-> âœ¨ **Bit**: An LLM without memory is a brilliant person with amnesia â€” they can reason perfectly but can't remember what happened 5 minutes ago. Agent memory is how you give AI systems persistence, learning, and context across interactions.
+> ✨ **Bit**: An LLM without memory is a brilliant person with amnesia â€” they can reason perfectly but can't remember what happened 5 minutes ago. Agent memory is how you give AI systems persistence, learning, and context across interactions.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: Architectural patterns for giving AI agents persistent memory â€” conversation history, semantic recall, structured knowledge, and episodic learning
 - **Why**: Without memory, every interaction starts from zero. Memory enables personalization, multi-session reasoning, and agents that learn from experience.
@@ -27,7 +27,7 @@ updated: 2026-04-15
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -53,7 +53,7 @@ Covers: Memory taxonomy, implementation patterns (context stuffing, RAG-based re
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### The Memory Taxonomy
 
@@ -82,7 +82,7 @@ PROCEDURAL MEMORY                     TOOLS + LEARNED BEHAVIORS
   Duration: permanent                   Duration: permanent
 
 GRAPH-BASED MEMORY                    KNOWLEDGE GRAPH STORE
-  "Relationships between things"         Entities + typed edges ("User â†’ works at â†’ Acme")
+  "Relationships between things"         Entities + typed edges ("User → works at → Acme")
   Capacity: structured, scalable         Neo4j, Kuzu, in-memory graph
   Duration: permanent                    Best for: complex domain reasoning, entity traversal
 ```
@@ -248,7 +248,7 @@ KEY INSIGHT: The agent is its own memory manager.
 
 ---
 
-## â˜… Code & Implementation
+## ★ Code & Implementation
 
 ### LangGraph Agent with Conversation Memory
 
@@ -388,17 +388,17 @@ for r in results:
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 
 ```
 MEMORY PATTERN DECISION GUIDE:
 
-  Short conversation (< 20 turns)?     â†’ Sliding window buffer
-  Long conversation (20-200 turns)?     â†’ Summarization memory
-  Cross-session personalization?        â†’ Semantic memory (vector store)
-  Complex domain relationships?         â†’ Knowledge graph memory
-  Agent-managed long-term memory?       â†’ Letta / MemGPT (virtual context)
-  Production multi-user system?         â†’ Vector store + structured user profiles
+  Short conversation (< 20 turns)?     → Sliding window buffer
+  Long conversation (20-200 turns)?     → Summarization memory
+  Cross-session personalization?        → Semantic memory (vector store)
+  Complex domain relationships?         → Knowledge graph memory
+  Agent-managed long-term memory?       → Letta / MemGPT (virtual context)
+  Production multi-user system?         → Vector store + structured user profiles
   
 MEMORY STORAGE OPTIONS:
   Prototype:     In-memory (list/dict)
@@ -414,7 +414,7 @@ MEMORY SIZING:
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
@@ -426,7 +426,7 @@ MEMORY SIZING:
 
 ---
 
-## â—‹ Gotchas & Common Mistakes
+## ○ Gotchas & Common Mistakes
 
 - âš ï¸ **More memory â‰  better responses**: Stuffing too many memories into context confuses the model. Retrieve 3-5 most relevant, not 50.
 - âš ï¸ **Summarization is lossy**: When you summarize old conversations, specific details (dates, numbers, names) are often lost. Store facts separately.
@@ -435,7 +435,7 @@ MEMORY SIZING:
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: How would you implement long-term memory for a customer support agent?
 - **A**: I'd use a three-layer memory architecture. Layer 1: sliding window of the last 10 messages for immediate context. Layer 2: a structured user profile (name, plan, past issues) stored in PostgreSQL, updated after each conversation. Layer 3: semantic memory in a vector database for retrieving relevant past tickets and resolutions. On each new message, I'd retrieve the user profile + top 3 relevant past interactions and inject them into the system prompt. I'd budget 30% of context for memory, 20% for system prompt, and 50% for the current conversation. Memory writes happen asynchronously after each turn to avoid adding latency.
@@ -445,7 +445,7 @@ MEMORY SIZING:
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Build a Memory-Enabled Chatbot
 
@@ -460,7 +460,7 @@ MEMORY SIZING:
 
 ---
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics |
 |---|---|
@@ -471,7 +471,7 @@ MEMORY SIZING:
 
 ---
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type | Resource | Why |
 |------|----------|-----|
@@ -484,7 +484,7 @@ MEMORY SIZING:
 
 ---
 
-## â˜… Sources
+## ★ Sources
 
 - LangGraph Documentation â€” https://langchain-ai.github.io/langgraph/
 - Mem0 Documentation â€” https://docs.mem0.ai/

@@ -15,11 +15,11 @@ updated: 2026-04-14
 
 # ML Experiment & Data Management
 
-> âœ¨ **Bit**: If you can't answer "which config and data produced this result?" you're not experimenting â€” you're guessing. Experiment tracking and data versioning are two halves of the reproducibility story. Code versioning without data versioning is only half the picture.
+> ✨ **Bit**: If you can't answer "which config and data produced this result?" you're not experimenting â€” you're guessing. Experiment tracking and data versioning are two halves of the reproducibility story. Code versioning without data versioning is only half the picture.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: The practices and tools for recording ML runs (parameters, metrics, artifacts) and tracking dataset changes (versions, lineage, snapshots)
 - **Why**: ML behavior changes when either code OR data changes. Without tracking both, reproducing results, debugging regressions, and governing models is impossible.
@@ -27,7 +27,7 @@ updated: 2026-04-14
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -40,7 +40,7 @@ Covers: Experiment tracking discipline, data versioning strategies, tool selecti
 ### Significance
 
 - Strong tracking accelerates iteration and debugging
-- ML governance and audit require lineage from data â†’ model â†’ deployment
+- ML governance and audit require lineage from data → model → deployment
 - Data drift and silent dataset changes are common causes of production regressions
 - Essential for promotion from notebook work to team-level ML engineering
 
@@ -52,7 +52,7 @@ Covers: Experiment tracking discipline, data versioning strategies, tool selecti
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### What to Track
 
@@ -88,12 +88,12 @@ GenAI teams must track more artifacts than classical ML:
 
 | Tool | Experiment Tracking | Data Versioning | Best For |
 |------|:-------------------:|:---------------:|---------|
-| **MLflow** | âœ… | Partial (model registry) | Open-source, self-hosted |
-| **Weights & Biases** | âœ… | Partial (artifacts) | Team collaboration, visualization |
-| **DVC** | Partial | âœ… | Git-based data versioning |
-| **LakeFS** | âŒ | âœ… | Data lake versioning at scale |
-| **Neptune.ai** | âœ… | Partial | Metadata-rich experiment tracking |
-| **Vertex AI / SageMaker** | âœ… | âœ… | Integrated cloud ML platform |
+| **MLflow** | ✅ | Partial (model registry) | Open-source, self-hosted |
+| **Weights & Biases** | ✅ | Partial (artifacts) | Team collaboration, visualization |
+| **DVC** | Partial | ✅ | Git-based data versioning |
+| **LakeFS** | âŒ | ✅ | Data lake versioning at scale |
+| **Neptune.ai** | ✅ | Partial | Metadata-rich experiment tracking |
+| **Vertex AI / SageMaker** | ✅ | ✅ | Integrated cloud ML platform |
 
 ### Data Versioning Strategies
 
@@ -106,7 +106,7 @@ GenAI teams must track more artifacts than classical ML:
 
 ---
 
-## â˜… Code & Implementation
+## ★ Code & Implementation
 
 ### MLflow Experiment Tracking
 
@@ -181,7 +181,7 @@ dvc pull               # pull the exact data version used in that commit
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 
 ```
 EXPERIMENT TRACKING CHECKLIST:
@@ -205,7 +205,7 @@ DATA VERSIONING CHECKLIST:
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
@@ -216,7 +216,7 @@ DATA VERSIONING CHECKLIST:
 
 ---
 
-## â—‹ Gotchas
+## ○ Gotchas
 
 - Tracking only the best run hides important learning
 - Manual metadata entry decays quickly â€” automate everything
@@ -226,7 +226,7 @@ DATA VERSIONING CHECKLIST:
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: What is the minimum metadata you would track for an ML run?
 - **A**: Parameters, metrics, code version, data version, artifacts, and environment details. Without that set, comparing or reproducing results is unreliable. For GenAI specifically, I'd also track prompt versions, eval set versions, and token costs.
@@ -236,7 +236,7 @@ DATA VERSIONING CHECKLIST:
 
 ---
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics |
 |---|---|
@@ -247,7 +247,7 @@ DATA VERSIONING CHECKLIST:
 
 ---
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type | Resource | Why |
 |------|----------|-----|
@@ -260,7 +260,7 @@ DATA VERSIONING CHECKLIST:
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Set Up End-to-End Experiment Tracking
 
@@ -274,7 +274,7 @@ DATA VERSIONING CHECKLIST:
 **Expected Output**: MLflow dashboard showing 3 comparable runs with artifact links
 ---
 
-## â˜… Sources
+## ★ Sources
 
 - MLflow Documentation â€” https://mlflow.org/docs/
 - Weights & Biases Documentation â€” https://docs.wandb.ai/

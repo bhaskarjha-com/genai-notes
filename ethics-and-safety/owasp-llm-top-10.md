@@ -15,11 +15,11 @@ updated: 2026-04-15
 
 # OWASP Top 10 for LLM Applications
 
-> âœ¨ **Bit**: The OWASP list earns its place not because it's comprehensive â€” it isn't â€” but because it turns vague AI security anxiety into a concrete checklist reviewable in a sprint planning meeting.
+> ✨ **Bit**: The OWASP list earns its place not because it's comprehensive â€” it isn't â€” but because it turns vague AI security anxiety into a concrete checklist reviewable in a sprint planning meeting.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: A community-driven security framework cataloging the 10 most critical risks in LLM and GenAI applications â€” updated to the **2025 edition**.
 - **Why**: It gives engineering teams a shared threat vocabulary for design reviews, red-teaming, and release gates.
@@ -27,7 +27,7 @@ updated: 2026-04-15
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -52,7 +52,7 @@ This note covers the 2025 risk categories, their practical meaning for builders,
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### The 2025 Categories â€” Full Reference
 
@@ -64,14 +64,14 @@ This note covers the 2025 risk categories, their practical meaning for builders,
 | **LLM04** | Data and Model Poisoning | Corrupted training or ingested data harms model behavior |
 | **LLM05** | Improper Output Handling | Generated text is rendered unsafely (XSS, command injection) |
 | **LLM06** | Excessive Agency | Model takes irreversible actions with insufficient human oversight |
-| **LLM07** | **System Prompt Leakage** â­ | Hidden instructions, credentials, or logic exposed to users |
-| **LLM08** | **Vector and Embedding Weaknesses** â­ | RAG pipeline attack surface â€” corpus poisoning and embedding manipulation |
+| **LLM07** | **System Prompt Leakage** ⭐ | Hidden instructions, credentials, or logic exposed to users |
+| **LLM08** | **Vector and Embedding Weaknesses** ⭐ | RAG pipeline attack surface â€” corpus poisoning and embedding manipulation |
 | **LLM09** | Misinformation | Model produces convincing but false outputs; humans over-trust |
 | **LLM10** | Unbounded Consumption | Cost attacks, resource exhaustion, model extraction |
 
-> â­ = New in 2025 edition
+> ⭐ = New in 2025 edition
 
-### What Changed from 2023 â†’ 2025
+### What Changed from 2023 → 2025
 
 | 2023 (Outdated) | 2025 (Current) | Change |
 |----------------|----------------|--------|
@@ -81,8 +81,8 @@ This note covers the 2025 risk categories, their practical meaning for builders,
 | LLM07: Insecure Plugin Design | Removed / folded into LLM03 + LLM06 | |
 | LLM09: Overreliance | LLM09: Misinformation | Renamed; broader scope |
 | LLM10: Model Theft | LLM10: Unbounded Consumption | Merged with DoS |
-| *(absent)* | LLM07: System Prompt Leakage | â­ New |
-| *(absent)* | LLM08: Vector and Embedding Weaknesses | â­ New |
+| *(absent)* | LLM07: System Prompt Leakage | ⭐ New |
+| *(absent)* | LLM08: Vector and Embedding Weaknesses | ⭐ New |
 
 ### LLM07: System Prompt Leakage â€” Deep Dive
 
@@ -133,16 +133,16 @@ The OWASP framing converts vague fear into reviewable questions:
 
 ```
 For any LLM feature, ask:
-  LLM01 â†’ Can user input change what the model does or says?
-  LLM02 â†’ Can the model reveal data it shouldn't know?
-  LLM03 â†’ Are your model weights, plugins, and dependencies provenance-verified?
-  LLM04 â†’ Is your training/RAG data validated at ingestion?
-  LLM05 â†’ Where does model output get rendered? Could it execute?
-  LLM06 â†’ What's the most destructive action the model could take? Is it gated?
-  LLM07 â†’ Does your system prompt contain anything an attacker could exploit?
-  LLM08 â†’ Is your vector store protected against document injection?
-  LLM09 â†’ Where are humans relying on model output without verification?
-  LLM10 â†’ Can an attacker trigger unbounded LLM calls or extract your model?
+  LLM01 → Can user input change what the model does or says?
+  LLM02 → Can the model reveal data it shouldn't know?
+  LLM03 → Are your model weights, plugins, and dependencies provenance-verified?
+  LLM04 → Is your training/RAG data validated at ingestion?
+  LLM05 → Where does model output get rendered? Could it execute?
+  LLM06 → What's the most destructive action the model could take? Is it gated?
+  LLM07 → Does your system prompt contain anything an attacker could exploit?
+  LLM08 → Is your vector store protected against document injection?
+  LLM09 → Where are humans relying on model output without verification?
+  LLM10 → Can an attacker trigger unbounded LLM calls or extract your model?
 ```
 
 ### Practical Mapping for Builders (2025)
@@ -158,7 +158,7 @@ For any LLM feature, ask:
 
 ---
 
-## â˜… Code & Implementation
+## ★ Code & Implementation
 
 ### Guarded Request Path (2025 OWASP Categories)
 
@@ -276,7 +276,7 @@ def ingest_document_with_provenance(
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 
 | Risk | One-Line Defense |
 |------|-----------------|
@@ -293,7 +293,7 @@ def ingest_document_with_provenance(
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
@@ -306,7 +306,7 @@ def ingest_document_with_provenance(
 
 ---
 
-## â—‹ Gotchas & Common Mistakes
+## ○ Gotchas & Common Mistakes
 
 - âš ï¸ The 2023 categories are now outdated â€” especially "Insecure Plugin Design," "Overreliance," and "Model Theft." Using old category names in security reviews is a credibility hazard.
 - âš ï¸ LLM08 (Vector and Embedding Weaknesses) is frequently overlooked â€” teams secure the API but not the RAG pipeline that feeds it.
@@ -316,7 +316,7 @@ def ingest_document_with_provenance(
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: What changed in the OWASP LLM Top 10 from 2023 to 2025, and why does it matter?
 - **A**: The 2025 edition introduced two new categories â€” LLM07 (System Prompt Leakage) and LLM08 (Vector and Embedding Weaknesses) â€” while removing "Insecure Plugin Design" and "Model Theft" as standalone categories (both were absorbed into adjacent risks). The additions reflect real production patterns: most GenAI systems now use system prompts to define behavior (making prompt leakage a genuine attack surface) and RAG pipelines (making vector store poisoning a primary threat). The 2023 list was designed for isolated API-based LLM calls; the 2025 list assumes a more complex agentic architecture.
@@ -329,7 +329,7 @@ def ingest_document_with_provenance(
 
 ---
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics |
 |---|---|
@@ -340,7 +340,7 @@ def ingest_document_with_provenance(
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: OWASP 2025 Security Assessment
 
@@ -369,7 +369,7 @@ def ingest_document_with_provenance(
 
 ---
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type | Resource | Why |
 |------|----------|-----|
@@ -381,7 +381,7 @@ def ingest_document_with_provenance(
 
 ---
 
-## â˜… Sources
+## ★ Sources
 
 - OWASP Top 10 for Large Language Model Applications 2025 â€” https://owasp.org/www-project-top-10-for-large-language-model-applications/
 - OWASP GenAI Security Project â€” https://genai.owasp.org/

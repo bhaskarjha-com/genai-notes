@@ -15,19 +15,19 @@ updated: 2026-04-11
 
 # Reinforcement Learning for LLM Alignment
 
-> âœ¨ **Bit**: Pre-training gives the model knowledge. SFT gives it manners. RL alignment gives it values. Without this step, GPT would be a Wikipedia-quoting sociopath â€” brilliant but unsafe. RLHF, DPO, and GRPO are HOW we teach models to be helpful, harmless, and honest.
+> ✨ **Bit**: Pre-training gives the model knowledge. SFT gives it manners. RL alignment gives it values. Without this step, GPT would be a Wikipedia-quoting sociopath â€” brilliant but unsafe. RLHF, DPO, and GRPO are HOW we teach models to be helpful, harmless, and honest.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: Techniques that align LLM behavior with human preferences using reinforcement learning or preference optimization
 - **Why**: Pre-trained LLMs know a lot but don't know WHAT to say. Alignment makes them helpful, honest, and harmless.
-- **Key point**: The field has rapidly evolved: RLHF (complex, expensive) â†’ DPO (simpler, no reward model) â†’ GRPO (no critic, efficient, powers DeepSeek-R1). Each generation trades complexity for efficiency.
+- **Key point**: The field has rapidly evolved: RLHF (complex, expensive) → DPO (simpler, no reward model) → GRPO (no critic, efficient, powers DeepSeek-R1). Each generation trades complexity for efficiency.
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -46,7 +46,7 @@ Covers the full alignment technique landscape: RLHF, DPO, PPO, GRPO, ORPO, KTO. 
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### The LLM Training Pipeline
 
@@ -55,7 +55,7 @@ Covers the full alignment technique landscape: RLHF, DPO, PPO, GRPO, ORPO, KTO. 
 â”‚         COMPLETE LLM TRAINING PIPELINE               â”‚
 â”‚                                                     â”‚
 â”‚  STAGE 1: PRE-TRAINING                              â”‚
-â”‚  Train on internet text â†’ predict next token        â”‚
+â”‚  Train on internet text → predict next token        â”‚
 â”‚  Result: knows a lot, but no conversational skills  â”‚
 â”‚  Cost: $10M-$100M+                                  â”‚
 â”‚                â”‚                                    â”‚
@@ -90,7 +90,7 @@ THE CLASSIC 3-STAGE PIPELINE:
     Human annotator: A > B  âœ“
 
   STEP 2: Train Reward Model
-    Input: (prompt, response) â†’ Output: scalar score
+    Input: (prompt, response) → Output: scalar score
     The reward model LEARNS what humans prefer
     Trained on 100K+ comparison pairs
 
@@ -134,8 +134,8 @@ HOW:
     L = min(ratio Ã— advantage,
             clip(ratio, 1-Îµ, 1+Îµ) Ã— advantage)
 
-  If ratio > 1+Îµ â†’ clip it (prevent too-large updates)
-  If ratio < 1-Îµ â†’ clip it (prevent too-large updates)
+  If ratio > 1+Îµ → clip it (prevent too-large updates)
+  If ratio < 1-Îµ → clip it (prevent too-large updates)
   Îµ typically = 0.2
 
 REQUIRES:
@@ -158,7 +158,7 @@ KEY INSIGHT (Rafailov et al., 2023):
   The RLHF objective can be MATHEMATICALLY REARRANGED
   into a simple classification loss!
 
-  Instead of: train reward model â†’ run PPO
+  Instead of: train reward model → run PPO
   Do:         directly optimize on preference pairs
 
   Loss = -log Ïƒ(Î² Ã— (log Ï€(y_w|x) - log Ï€(y_l|x)
@@ -177,10 +177,10 @@ IN PLAIN ENGLISH:
    but don't stray too far from the starting model."
 
   â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-  â”‚  RLHF:  SFT â†’ Reward Model â†’ PPO training  â”‚
+  â”‚  RLHF:  SFT → Reward Model → PPO training  â”‚
   â”‚         3 stages, 4 models, complex          â”‚
   â”‚                                             â”‚
-  â”‚  DPO:   SFT â†’ Direct optimization           â”‚
+  â”‚  DPO:   SFT → Direct optimization           â”‚
   â”‚         1 stage, 2 models (policy + ref),    â”‚
   â”‚         simple as fine-tuning!               â”‚
   â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
@@ -191,7 +191,7 @@ CONS: Quality depends heavily on preference data quality,
       may underperform PPO on hardest tasks
 ```
 
-### 4. GRPO (Group Relative Policy Optimization) â­
+### 4. GRPO (Group Relative Policy Optimization) ⭐
 
 ```
 GRPO = "PPO WITHOUT the critic/value model"
@@ -241,7 +241,7 @@ WHY IT MATTERS:
   Stability: Group baseline has lower variance
   Reasoning: Particularly effective for math/code
 
-  DeepSeek-R1-Zero: Pure GRPO (no SFT!) â†’
+  DeepSeek-R1-Zero: Pure GRPO (no SFT!) →
     Model SPONTANEOUSLY developed chain-of-thought,
     self-correction, and "aha moment" behaviors.
     Reasoning emerged from RL alone!
@@ -265,15 +265,15 @@ REWARD TYPES:
 
 ---
 
-## â—† The Complete Comparison
+## ◆ The Complete Comparison
 
 | Feature                | RLHF+PPO                       | DPO                             | GRPO                                    |
 | ---------------------- | ------------------------------ | ------------------------------- | --------------------------------------- |
-| **Reward model**       | âœ… Required                     | âŒ Not needed                    | âš ï¸ Optional (can use verifiable rewards) |
-| **Value/Critic model** | âœ… Required                     | âŒ Not needed                    | âŒ Not needed                            |
+| **Reward model**       | ✅ Required                     | âŒ Not needed                    | âš ï¸ Optional (can use verifiable rewards) |
+| **Value/Critic model** | ✅ Required                     | âŒ Not needed                    | âŒ Not needed                            |
 | **Models in memory**   | 4 (policy, ref, reward, value) | 2 (policy, ref)                 | 2-3 (policy, ref, +optional reward)     |
 | **Complexity**         | Very high                      | Low                             | Medium                                  |
-| **Stability**          | âš ï¸ Can be unstable              | âœ… Stable                        | âœ… Stable                                |
+| **Stability**          | âš ï¸ Can be unstable              | ✅ Stable                        | ✅ Stable                                |
 | **Data needed**        | Preference pairs + RL rollouts | Preference pairs only           | Prompts + reward signal                 |
 | **Memory usage**       | Highest                        | Lowest                          | ~50% of PPO                             |
 | **Best for**           | Complex alignment              | Simple alignment, open-source   | Reasoning, math, code                   |
@@ -282,22 +282,22 @@ REWARD TYPES:
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 
 ```
 DECISION TREE:
   Building a chat model with general alignment?
-    Budget high â†’ RLHF+PPO (most proven)
-    Budget low  â†’ DPO (simplest, cheapest)
+    Budget high → RLHF+PPO (most proven)
+    Budget low  → DPO (simplest, cheapest)
 
   Building a reasoning model (math, code)?
-    â†’ GRPO + verifiable rewards (RLVR)
+    → GRPO + verifiable rewards (RLVR)
 
   Have only binary feedback (ðŸ‘/ðŸ‘Ž)?
-    â†’ KTO (works without paired comparisons)
+    → KTO (works without paired comparisons)
 
   Want SFT + alignment in one step?
-    â†’ ORPO (saves training time)
+    → ORPO (saves training time)
 
 KEY FORMULAS:
   PPO:  L = min(rÂ·A, clip(r, 1Â±Îµ)Â·A
@@ -307,7 +307,7 @@ KEY FORMULAS:
 
 ---
 
-## â—‹ Gotchas & Common Mistakes
+## ○ Gotchas & Common Mistakes
 
 - âš ï¸ **Reward hacking**: In RLHF, models learn to exploit the reward model's weaknesses rather than genuinely improving. KL penalty helps but doesn't eliminate this.
 - âš ï¸ **DPO data quality**: DPO is only as good as its preference pairs. Noisy or biased data = poorly aligned model.
@@ -317,7 +317,7 @@ KEY FORMULAS:
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: What is GRPO and how is it different from PPO?
 - **A**: GRPO eliminates the value/critic network that PPO requires. Instead of estimating expected rewards, GRPO generates multiple responses per prompt and uses the group mean reward as a baseline. This cuts memory by ~50% and provides lower-variance advantage estimates. DeepSeek-R1 used GRPO to achieve state-of-the-art reasoning by rewarding correct final answers (RLVR) rather than training a separate reward model.
@@ -330,7 +330,7 @@ KEY FORMULAS:
 
 ---
 
-## â˜… Code & Implementation
+## ★ Code & Implementation
 
 ### DPO Training Data Format + Trainer Setup
 
@@ -385,19 +385,19 @@ print("DPO trainer initialized. Dataset:", dataset)
 print("Beta (KL coeff):", config.beta)
 ```
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics                                                                                                                                                 |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Builds on    | [Fine Tuning](./fine-tuning.md) (SFT stage), [Deep Learning Fundamentals](../prerequisites/deep-learning-fundamentals.md) (optimization)               |
-| Leads to     | [Reasoning Models](../llms/reasoning-models.md) (GRPO â†’ R1), [Ethics Safety Alignment](../ethics-and-safety/ethics-safety-alignment.md) (safety layer) |
+| Leads to     | [Reasoning Models](../llms/reasoning-models.md) (GRPO → R1), [Ethics Safety Alignment](../ethics-and-safety/ethics-safety-alignment.md) (safety layer) |
 | Compare with | Constitutional AI (Anthropic's approach), Self-play                                                                                                    |
 | Cross-domain | Game theory, Behavioural economics (KTO), Curriculum learning                                                                                          |
 
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure                           | Symptoms                                              | Root Cause                                           | Mitigation                                                         |
 | --------------------------------- | ----------------------------------------------------- | ---------------------------------------------------- | ------------------------------------------------------------------ |
@@ -409,7 +409,7 @@ print("Beta (KL coeff):", config.beta)
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Compare DPO vs PPO on a Toy Task
 
@@ -435,16 +435,16 @@ print("Beta (KL coeff):", config.beta)
 ---
 
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type    | Resource                                                               | Why                                                   |
 | ------- | ---------------------------------------------------------------------- | ----------------------------------------------------- |
-| ðŸ“„ Paper | [Ouyang et al. "InstructGPT" (2022)](https://arxiv.org/abs/2203.02155) | Definitive RLHF paper â€” SFT â†’ RM â†’ PPO pipeline       |
+| ðŸ“„ Paper | [Ouyang et al. "InstructGPT" (2022)](https://arxiv.org/abs/2203.02155) | Definitive RLHF paper â€” SFT → RM → PPO pipeline       |
 | ðŸ“„ Paper | [Rafailov et al. "DPO" (2023)](https://arxiv.org/abs/2305.18290)       | DPO as simpler alternative to PPO                     |
 | ðŸ“˜ Book  | "AI Engineering" by Chip Huyen (2025), Ch 5                            | Covers RLHF, DPO, and alignment in production context |
 | ðŸŽ¥ Video | [Hugging Face â€” "RLHF Explained"](https://huggingface.co/blog/rlhf)    | Clear visual walkthrough of the RLHF pipeline         |
 
-## â˜… Sources
+## ★ Sources
 
 - Ouyang et al., "Training Language Models to Follow Instructions with Human Feedback" (InstructGPT/RLHF, 2022)
 - Rafailov et al., "Direct Preference Optimization" (DPO, 2023)

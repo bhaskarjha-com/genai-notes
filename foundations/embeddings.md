@@ -15,19 +15,19 @@ updated: 2026-04-11
 
 # Embeddings
 
-> âœ¨ **Bit**: Embeddings are how machines "understand" meaning â€” by turning everything (words, images, code) into lists of numbers where similar things are close together. "King - Man + Woman = Queen" is the most famous proof it works.
+> ✨ **Bit**: Embeddings are how machines "understand" meaning â€” by turning everything (words, images, code) into lists of numbers where similar things are close together. "King - Man + Woman = Queen" is the most famous proof it works.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: Dense vector representations that encode the meaning/semantics of data (text, images, audio) into fixed-size arrays of numbers
 - **Why**: THE bridge between human-readable content and machine computation. Without embeddings, there's no RAG, no semantic search, no modern AI
-- **Key point**: Similar meanings â†’ nearby vectors. "Dog" and "puppy" are close. "Dog" and "cryptocurrency" are far apart.
+- **Key point**: Similar meanings → nearby vectors. "Dog" and "puppy" are close. "Dog" and "cryptocurrency" are far apart.
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -51,20 +51,20 @@ Covers: What embeddings are, how they work, types, models, and practical usage. 
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### The Core Idea
 
 ```
 TRADITIONAL REPRESENTATION (sparse, no meaning):
-  "cat"  â†’ [0, 0, 0, 1, 0, 0, 0, ..., 0]  (one-hot, 50K+ dimensions)
-  "dog"  â†’ [0, 0, 1, 0, 0, 0, 0, ..., 0]
+  "cat"  → [0, 0, 0, 1, 0, 0, 0, ..., 0]  (one-hot, 50K+ dimensions)
+  "dog"  → [0, 0, 1, 0, 0, 0, 0, ..., 0]
   Problem: "cat" and "dog" are equidistant from each other AND from "quantum"
 
 EMBEDDING REPRESENTATION (dense, captures meaning):
-  "cat"  â†’ [0.21, -0.55, 0.89, 0.12, ..., 0.45]  (768-3072 dimensions)
-  "dog"  â†’ [0.23, -0.51, 0.85, 0.15, ..., 0.43]  â† CLOSE to cat!
-  "quantum" â†’ [-0.67, 0.33, -0.12, 0.91, ..., -0.28]  â† FAR from both
+  "cat"  → [0.21, -0.55, 0.89, 0.12, ..., 0.45]  (768-3072 dimensions)
+  "dog"  → [0.23, -0.51, 0.85, 0.15, ..., 0.43]  â† CLOSE to cat!
+  "quantum" → [-0.67, 0.33, -0.12, 0.91, ..., -0.28]  â† FAR from both
 ```
 
 ### How Embeddings Are Created
@@ -81,8 +81,8 @@ EMBEDDING REPRESENTATION (dense, captures meaning):
 â”‚  â”‚  (trained on massive text pairs) â”‚                    â”‚
 â”‚  â”‚                                  â”‚                    â”‚
 â”‚  â”‚  "This sentence" â†” "That sentence"                   â”‚
-â”‚  â”‚  Similar? â†’ Vectors close                             â”‚
-â”‚  â”‚  Different? â†’ Vectors far                             â”‚
+â”‚  â”‚  Similar? → Vectors close                             â”‚
+â”‚  â”‚  Different? → Vectors far                             â”‚
 â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜                    â”‚
 â”‚                     â–¼                                    â”‚
 â”‚  Vector: [0.12, -0.45, 0.89, ..., 0.33]                â”‚
@@ -140,8 +140,8 @@ embed_cat = [0.21, -0.55, 0.89]
 embed_dog = [0.23, -0.51, 0.85]
 embed_car = [-0.67, 0.33, -0.12]
 
-cosine_similarity(embed_cat, embed_dog)  # â†’ 0.99 (very similar!)
-cosine_similarity(embed_cat, embed_car)  # â†’ 0.12 (very different)
+cosine_similarity(embed_cat, embed_dog)  # → 0.99 (very similar!)
+cosine_similarity(embed_cat, embed_car)  # → 0.12 (very different)
 ```
 
 | Metric                 | When to Use                              | Range   |
@@ -152,7 +152,7 @@ cosine_similarity(embed_cat, embed_car)  # â†’ 0.12 (very different)
 
 ---
 
-## â—† Code & Implementation
+## ◆ Code & Implementation
 
 ```python
 # âš ï¸ Last tested: 2026-04
@@ -188,9 +188,9 @@ vector = response["embedding"]  # 768 dimensions
 
 ---
 
-## â—† Strengths vs Limitations
+## ◆ Strengths vs Limitations
 
-| âœ… Strengths                                   | âŒ Limitations                                                     |
+| ✅ Strengths                                   | âŒ Limitations                                                     |
 | --------------------------------------------- | ----------------------------------------------------------------- |
 | Capture semantic meaning (synonyms, concepts) | Fixed-size: long documents squeezed into same dimensions as short |
 | Enable similarity search at scale             | Black box: hard to interpret what each dimension means            |
@@ -200,7 +200,7 @@ vector = response["embedding"]  # 768 dimensions
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 
 ```
 CHOOSING AN EMBEDDING MODEL:
@@ -224,7 +224,7 @@ SIMILARITY THRESHOLDS (cosine, rough guide):
 
 ---
 
-## â—‹ Gotchas & Common Mistakes
+## ○ Gotchas & Common Mistakes
 
 - âš ï¸ **Embedding model for index â‰  query model = disaster**: ALWAYS use the same model for embedding documents and queries.
 - âš ï¸ **Long text â‰  good embedding**: Most models have a max input (~8K tokens). Longer text gets truncated, losing info. Chunk first.
@@ -234,7 +234,7 @@ SIMILARITY THRESHOLDS (cosine, rough guide):
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: What are embeddings and why do they matter for GenAI?
 - **A**: Embeddings map data to dense vectors where semantic similarity becomes geometric distance. They're the foundation of RAG (find relevant documents), semantic search (find by meaning), and even the first layer of every LLM. Without embeddings, modern AI can't represent or compare meaning.
@@ -244,7 +244,7 @@ SIMILARITY THRESHOLDS (cosine, rough guide):
 
 ---
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics                                                                                |
 | ------------ | ------------------------------------------------------------------------------------- |
@@ -256,7 +256,7 @@ SIMILARITY THRESHOLDS (cosine, rough guide):
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
@@ -267,7 +267,7 @@ SIMILARITY THRESHOLDS (cosine, rough guide):
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Compare Embedding Models on Your Domain
 
@@ -282,7 +282,7 @@ SIMILARITY THRESHOLDS (cosine, rough guide):
 ---
 
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type | Resource | Why |
 |------|----------|-----|
@@ -291,7 +291,7 @@ SIMILARITY THRESHOLDS (cosine, rough guide):
 | ðŸ”§ Hands-on | [OpenAI Embeddings Guide](https://platform.openai.com/docs/guides/embeddings) | Practical guide to using production embeddings |
 | ðŸ“˜ Book | "Speech and Language Processing" by Jurafsky & Martin, Ch 6 | Authoritative textbook treatment of vector semantics |
 
-## â˜… Sources
+## ★ Sources
 
 - Mikolov et al., "Efficient Estimation of Word Representations" (Word2Vec, 2013)
 - Reimers & Gurevych, "Sentence-BERT" (2019)

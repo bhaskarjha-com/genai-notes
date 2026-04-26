@@ -15,11 +15,11 @@ updated: 2026-04-11
 
 # Synthetic Data & Data Engineering for LLMs
 
-> âœ¨ **Bit**: We've read the entire internet. Literally â€” we ran out of public text data around 2024. So what do we do? We use AI to generate MORE training data for AI. Sounds circular, but it works â€” if you're careful.
+> ✨ **Bit**: We've read the entire internet. Literally â€” we ran out of public text data around 2024. So what do we do? We use AI to generate MORE training data for AI. Sounds circular, but it works â€” if you're careful.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: Generating artificial training data using LLMs and curating/filtering real data for training
 - **Why**: Training data is the MOAT. The quality, format, and diversity of data determine model quality more than architecture or compute.
@@ -27,7 +27,7 @@ updated: 2026-04-11
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -47,7 +47,7 @@ Covers data generation methods, quality filtering, and format standards. For fin
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### The Data-Centric AI Shift
 
@@ -60,8 +60,8 @@ DATA-CENTRIC (now):
 
 EVIDENCE:
   Phi-3 (3.8B) â‰ˆ GPT-3.5 quality  â† HOW?
-  â†’ Trained on ~3.3T tokens of heavily filtered + synthetic data
-  â†’ Data quality > model size
+  → Trained on ~3.3T tokens of heavily filtered + synthetic data
+  → Data quality > model size
 ```
 
 ### Synthetic Data Generation Methods
@@ -72,7 +72,7 @@ EVIDENCE:
 | **Evol-Instruct**      | Iteratively make instructions more complex        | WizardLM           |
 | **Distillation**       | Larger model generates high-quality outputs       | Phi-3, Orca-2      |
 | **Persona-based**      | Assign personas for diverse responses             | Persona Hub        |
-| **Back-translation**   | Generate code â†’ describe it, or vice versa        | Code training      |
+| **Back-translation**   | Generate code → describe it, or vice versa        | Code training      |
 | **Rejection sampling** | Generate many, keep only the best                 | DeepSeek-Math      |
 | **Constitutional AI**  | Model critiques and revises its own outputs       | Anthropic's Claude |
 
@@ -83,17 +83,17 @@ SELF-INSTRUCT PIPELINE:
 
   2. Feed to LLM:
      "Generate a new instruction similar to these examples:"
-     â†’ LLM generates: "Write a function to reverse a linked list"
+     → LLM generates: "Write a function to reverse a linked list"
 
   3. Feed instruction back to LLM:
      "Complete this instruction:"
-     â†’ LLM generates response
+     → LLM generates response
 
   4. Filter bad/duplicate examples
 
   5. Add good ones to the dataset
 
-  6. Repeat â†’ 52K instructions from 175 seeds!
+  6. Repeat → 52K instructions from 175 seeds!
 
 
 EVOL-INSTRUCT (making instructions harder):
@@ -116,14 +116,14 @@ RAW DATA (internet, books, code)
 â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
 â”‚  1. DEDUPLICATION                       â”‚
 â”‚     Remove near-duplicates (MinHash)    â”‚
-â”‚     â†’ Removes 30-50% of web data       â”‚
+â”‚     → Removes 30-50% of web data       â”‚
 â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
 â”‚  2. QUALITY FILTERING                   â”‚
 â”‚     - Perplexity filter (remove gibberish)
 â”‚     - Language detection                â”‚
 â”‚     - Document length filters           â”‚
 â”‚     - Classifier-based quality scoring  â”‚
-â”‚     â†’ Another 30-40% removed           â”‚
+â”‚     → Another 30-40% removed           â”‚
 â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
 â”‚  3. CONTENT FILTERING                   â”‚
 â”‚     - PII removal                       â”‚
@@ -198,8 +198,8 @@ MODEL COLLAPSE:
   When AI-generated data is used to train more AI,
   which generates data for more AI... quality degrades.
 
-  Real data â†’ Model A â†’ Synthetic data â†’ Model B â†’
-  Synthetic data â†’ Model C â†’ ... â†’ garbage
+  Real data → Model A → Synthetic data → Model B →
+  Synthetic data → Model C → ... → garbage
 
   Like photocopying a photocopy of a photocopy.
 
@@ -213,7 +213,7 @@ PREVENTION:
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 
 ```
 DATA SOURCES FOR FINE-TUNING:
@@ -228,10 +228,10 @@ DATASET SIZE GUIDELINES:
   Pre-training:             1T-15T tokens (massive!)
 
 FORMAT CHOICE:
-  Simple tasks (Q&A)        â†’ Alpaca
-  Conversations (chat)      â†’ ShareGPT
-  Tool-using models         â†’ Function calling format
-  Reasoning models          â†’ Include chain-of-thought
+  Simple tasks (Q&A)        → Alpaca
+  Conversations (chat)      → ShareGPT
+  Tool-using models         → Function calling format
+  Reasoning models          → Include chain-of-thought
 
 QUALITY > QUANTITY:
   1,000 high-quality examples > 100,000 noisy ones
@@ -240,7 +240,7 @@ QUALITY > QUANTITY:
 
 ---
 
-## â—‹ Gotchas & Common Mistakes
+## ○ Gotchas & Common Mistakes
 
 - âš ï¸ **ToS violations**: Using GPT-4/Claude outputs to train competitor models may violate terms. Use open models for open training.
 - âš ï¸ **Benchmark contamination**: If training data leaks test data, benchmarks become meaningless. Always check for leakage.
@@ -249,7 +249,7 @@ QUALITY > QUANTITY:
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: How would you train a domain-specific LLM?
 - **A**: (1) Collect domain documents, (2) Generate synthetic instruction-response pairs using a teacher model, (3) Quality-filter using domain experts + LLM-as-judge, (4) Format in ShareGPT/ChatML, (5) Fine-tune with LoRA/QLoRA, (6) Evaluate against domain-specific benchmarks.
@@ -259,7 +259,7 @@ QUALITY > QUANTITY:
 
 ---
 
-## â˜… Code & Implementation
+## ★ Code & Implementation
 
 ### Synthetic Instruction Data Generator
 
@@ -309,7 +309,7 @@ examples = generate_instruction_dataset(
 )
 for ex in examples[:3]:
     print(f"[{ex.get('task_type', 'N/A')}] {ex['instruction'][:60]}...")
-    print(f"  â†’ {ex['response'][:80]}...\n")
+    print(f"  → {ex['response'][:80]}...\n")
 
 # Save for fine-tuning
 with open("synthetic_sft_data.jsonl", "w") as f:
@@ -318,7 +318,7 @@ with open("synthetic_sft_data.jsonl", "w") as f:
 print(f"Saved {len(examples)} examples to synthetic_sft_data.jsonl")
 ```
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics                                                                           |
 | ------------ | -------------------------------------------------------------------------------- |
@@ -330,7 +330,7 @@ print(f"Saved {len(examples)} examples to synthetic_sft_data.jsonl")
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure                   | Symptoms                                                 | Root Cause                                           | Mitigation                                                        |
 | ------------------------- | -------------------------------------------------------- | ---------------------------------------------------- | ----------------------------------------------------------------- |
@@ -341,7 +341,7 @@ print(f"Saved {len(examples)} examples to synthetic_sft_data.jsonl")
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Generate and Validate a Synthetic Dataset
 
@@ -356,7 +356,7 @@ print(f"Saved {len(examples)} examples to synthetic_sft_data.jsonl")
 ---
 
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type       | Resource                                                                               | Why                                                    |
 | ---------- | -------------------------------------------------------------------------------------- | ------------------------------------------------------ |
@@ -364,7 +364,7 @@ print(f"Saved {len(examples)} examples to synthetic_sft_data.jsonl")
 | ðŸ“˜ Book     | "AI Engineering" by Chip Huyen (2025), Ch 4                                            | Covers synthetic data for evaluation and training      |
 | ðŸ”§ Hands-on | [Argilla Documentation](https://docs.argilla.io/)                                      | Platform for data labeling and synthetic data curation |
 
-## â˜… Sources
+## ★ Sources
 
 - Wang et al., "Self-Instruct" (2023)
 - Xu et al., "WizardLM: Empowering Large Language Models to Follow Complex Instructions" (2023)

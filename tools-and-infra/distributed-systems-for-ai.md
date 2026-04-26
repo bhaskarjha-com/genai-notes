@@ -19,14 +19,14 @@ updated: 2026-04-12
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 - **What**: The distributed-systems ideas most relevant to AI and GenAI platforms.
 - **Why**: Production AI systems are built from many networked components, and their failures are often distributed-systems failures.
 - **Key point**: Reliability comes from flow control, state management, and graceful degradation as much as from model quality.
 
 ---
 
-## â˜… Overview
+## ★ Overview
 ### Definition
 
 **Distributed systems** are systems whose components communicate over a network while coordinating work, state, and failure handling.
@@ -49,7 +49,7 @@ This note is practical and AI-oriented. It focuses on service boundaries, queues
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 ### Why AI Systems Become Distributed
 
 A production GenAI request might touch:
@@ -126,7 +126,7 @@ async def call_with_budget(primary_model, fallback_model, payload):
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 | Symptom                                  | Likely Distributed-Systems Issue       |
 | ---------------------------------------- | -------------------------------------- |
 | sudden latency spikes                    | queue buildup or downstream contention |
@@ -137,7 +137,7 @@ async def call_with_budget(primary_model, fallback_model, payload):
 
 ---
 
-## â—‹ Gotchas & Common Mistakes
+## ○ Gotchas & Common Mistakes
 - A "microservice" split can hurt more than it helps if the system is small.
 - Retries without idempotency create expensive duplicates.
 - Teams often treat queues as free buffers instead of operational surfaces.
@@ -145,7 +145,7 @@ async def call_with_budget(primary_model, fallback_model, payload):
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 - **Q**: Why do AI systems need distributed-systems knowledge?
 - **A**: Because production AI is composed of many interacting services with partial failure, variable latency, and expensive state transitions. Reliability depends on queueing, retry policy, caching, and graceful degradation.
 
@@ -154,7 +154,7 @@ async def call_with_budget(primary_model, fallback_model, payload):
 
 ---
 
-## â˜… Code & Implementation
+## ★ Code & Implementation
 
 ### Tensor Parallel Training with PyTorch FSDP
 
@@ -198,7 +198,7 @@ print(f"Estimated FSDP across 4 GPUs: {param_count * 2 / 1e9 / 4:.2f} GB per GPU
 # FSDP shards params across GPUs â€” linear memory reduction
 ```
 
-## â˜… Connections
+## ★ Connections
 | Relationship | Topics                                                                                                                                             |
 | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Builds on    | [AI System Design for GenAI Applications](../production/ai-system-design.md), [Model Serving for LLM Applications](../production/model-serving.md) |
@@ -209,7 +209,7 @@ print(f"Estimated FSDP across 4 GPUs: {param_count * 2 / 1e9 / 4:.2f} GB per GPU
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure                    | Symptoms                                            | Root Cause                              | Mitigation                                                    |
 | -------------------------- | --------------------------------------------------- | --------------------------------------- | ------------------------------------------------------------- |
@@ -219,14 +219,14 @@ print(f"Estimated FSDP across 4 GPUs: {param_count * 2 / 1e9 / 4:.2f} GB per GPU
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Simulate Distributed Failures
 
 **Goal**: Build fault tolerance into a multi-service AI pipeline
 **Time**: 30 minutes
 **Steps**:
-1. Build a 3-service pipeline (embed â†’ retrieve â†’ generate) with FastAPI
+1. Build a 3-service pipeline (embed → retrieve → generate) with FastAPI
 2. Add circuit breakers (tenacity or pybreaker) to each service call
 3. Simulate failures by killing each service in turn
 4. Verify graceful degradation instead of cascading failures
@@ -234,7 +234,7 @@ print(f"Estimated FSDP across 4 GPUs: {param_count * 2 / 1e9 / 4:.2f} GB per GPU
 ---
 
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type     | Resource                                                            | Why                                           |
 | -------- | ------------------------------------------------------------------- | --------------------------------------------- |
@@ -242,7 +242,7 @@ print(f"Estimated FSDP across 4 GPUs: {param_count * 2 / 1e9 / 4:.2f} GB per GPU
 | ðŸŽ“ Course | [MIT 6.824: Distributed Systems](https://pdos.csail.mit.edu/6.824/) | Best academic distributed systems course      |
 | ðŸ“˜ Book   | "AI Engineering" by Chip Huyen (2025), Ch 8                         | Distributed patterns specific to AI workloads |
 
-## â˜… Sources
+## ★ Sources
 - Martin Kleppmann, *Designing Data-Intensive Applications*
 - cloud architecture guidance for resilient systems
 - [AI System Design for GenAI Applications](../production/ai-system-design.md)

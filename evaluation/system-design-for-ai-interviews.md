@@ -19,14 +19,14 @@ updated: 2026-04-14
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 - **What**: A framework for answering AI and GenAI system-design interview questions clearly.
 - **Why**: These interviews often feel broad and ambiguous unless you structure the problem aggressively.
 - **Key point**: Clarify the task, define success metrics, choose the right interaction pattern, then walk through reliability, cost, safety, and evaluation.
 
 ---
 
-## â˜… Overview
+## ★ Overview
 ### Definition
 
 This note is a practical interview-prep guide for designing AI assistants, RAG systems, agent workflows, recommendation services, and ML platforms in interviews.
@@ -49,7 +49,7 @@ It focuses on answer structure and trade-off language rather than implementation
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 ### A Reliable Answer Structure
 
 1. Clarify the user, task, and scale.
@@ -122,7 +122,7 @@ flowchart LR
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 | If Asked To Design...  | Mention Early                                   |
 | ---------------------- | ----------------------------------------------- |
 | RAG assistant          | data freshness, retrieval quality, groundedness |
@@ -132,14 +132,14 @@ flowchart LR
 
 ---
 
-## â—‹ Gotchas & Common Mistakes
+## ○ Gotchas & Common Mistakes
 - Fancy architecture without requirement clarity usually scores worse.
 - Interviewers care about trade-off reasoning more than product-brand trivia.
 - A clean baseline architecture is often better than an overbuilt "future-proof" one.
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 - **Q**: What is the most common mistake in AI system-design interviews?
 - **A**: Skipping clarification and jumping straight into tools. Good answers start with requirements, success metrics, and failure tolerance before architecture.
 
@@ -148,7 +148,7 @@ flowchart LR
 
 ---
 
-## â˜… Code & Implementation
+## ★ Code & Implementation
 
 ### System Design Interview: RAG Pipeline Scaffold
 
@@ -160,7 +160,7 @@ flowchart LR
 from dataclasses import dataclass, field
 from typing import Protocol
 
-# Ã¢â€â‚¬Ã¢â€â‚¬ Interface definitions (the design, not the implementation) Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
+# Ã¢”â‚¬Ã¢”â‚¬ Interface definitions (the design, not the implementation) Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬
 class VectorStore(Protocol):
     def upsert(self, docs: list[str], embeddings: list[list[float]]) -> None: ...
     def query(self, embedding: list[float], top_k: int) -> list[str]: ...
@@ -171,7 +171,7 @@ class EmbeddingModel(Protocol):
 class LLM(Protocol):
     def generate(self, messages: list[dict], max_tokens: int) -> str: ...
 
-# Ã¢â€â‚¬Ã¢â€â‚¬ Core RAG pipeline (design interview answer as code) Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
+# Ã¢”â‚¬Ã¢”â‚¬ Core RAG pipeline (design interview answer as code) Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬Ã¢”â‚¬
 @dataclass
 class RAGSystem:
     """
@@ -224,14 +224,14 @@ DESIGN_DECISIONS = {
     "scaling":     "Horizontal scaling of inference; async ingestion pipeline",
     "caching":     "Semantic cache on query embeddings (exact match L1, cosine L2)",
     "monitoring":  "Track: retrieval recall@5, groundedness score, P95 latency, CSAT",
-    "failure_modes": "Empty retrieval â†’ abstain; low groundedness â†’ human escalation",
+    "failure_modes": "Empty retrieval → abstain; low groundedness → human escalation",
     "cost":        "Batch embed during ingestion; cache hit rate target >60%",
 }
 for k, v in DESIGN_DECISIONS.items():
     print(f"{k.upper():<18}: {v}")
 ```
 
-## â˜… Connections
+## ★ Connections
 | Relationship | Topics                                                                                                                                                                                                                                        |
 | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Builds on    | [AI System Design for GenAI Applications](../production/ai-system-design.md), [Model Serving for LLM Applications](../production/model-serving.md), [Monitoring & Observability for GenAI Systems](../production/monitoring-observability.md) |
@@ -241,7 +241,7 @@ for k, v in DESIGN_DECISIONS.items():
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure                        | Symptoms                                                           | Root Cause                                              | Mitigation                                                                 |
 | ------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------- | -------------------------------------------------------------------------- |
@@ -252,7 +252,7 @@ for k, v in DESIGN_DECISIONS.items():
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Practice System Design
 
@@ -268,7 +268,7 @@ for k, v in DESIGN_DECISIONS.items():
 
 ---
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type       | Resource                                                                                                                                                   | Why                                                                |
 | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
@@ -280,7 +280,7 @@ for k, v in DESIGN_DECISIONS.items():
 
 ---
 
-## â˜… Sources
+## ★ Sources
 
 - [AI System Design for GenAI Applications](../production/ai-system-design.md)
 - [Monitoring & Observability for GenAI Systems](../production/monitoring-observability.md)

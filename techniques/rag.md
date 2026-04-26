@@ -15,11 +15,11 @@ updated: 2026-04-15
 
 # Retrieval-Augmented Generation (RAG)
 
-> âœ¨ **Bit**: RAG is like giving the LLM an open-book exam instead of asking it to recall everything from memory. Turns out, even AI does better with notes.
+> ✨ **Bit**: RAG is like giving the LLM an open-book exam instead of asking it to recall everything from memory. Turns out, even AI does better with notes.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: A pattern that retrieves relevant external documents and feeds them to an LLM as context before generation
 - **Why**: Fixes hallucination, enables up-to-date answers, works with private data â€” WITHOUT retraining the model
@@ -27,7 +27,7 @@ updated: 2026-04-15
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -51,7 +51,7 @@ This document covers RAG architecture, pipeline components, and advanced pattern
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### The Basic RAG Pipeline
 
@@ -61,13 +61,13 @@ This document covers RAG architecture, pipeline components, and advanced pattern
 â”‚                                                              â”‚
 â”‚  INDEXING (one-time / periodic)                              â”‚
 â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”   â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”   â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”   â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”‚
-â”‚  â”‚ Documentsâ”‚ â†’ â”‚ Chunking â”‚ â†’ â”‚ Embeddingâ”‚ â†’ â”‚ Vector  â”‚  â”‚
+â”‚  â”‚ Documentsâ”‚ → â”‚ Chunking â”‚ → â”‚ Embeddingâ”‚ → â”‚ Vector  â”‚  â”‚
 â”‚  â”‚ (raw)    â”‚   â”‚ (split)  â”‚   â”‚ (encode) â”‚   â”‚ DB      â”‚  â”‚
 â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜   â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜   â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜   â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â”‚
 â”‚                                                              â”‚
 â”‚  RETRIEVAL + GENERATION (per query)                          â”‚
 â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”   â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”   â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”   â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”‚
-â”‚  â”‚ User     â”‚ â†’ â”‚ Embed    â”‚ â†’ â”‚ Search   â”‚ â†’ â”‚ Top-K   â”‚  â”‚
+â”‚  â”‚ User     â”‚ → â”‚ Embed    â”‚ → â”‚ Search   â”‚ → â”‚ Top-K   â”‚  â”‚
 â”‚  â”‚ Query    â”‚   â”‚ Query    â”‚   â”‚ Vector DBâ”‚   â”‚ Chunks  â”‚  â”‚
 â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜   â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜   â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜   â””â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”˜  â”‚
 â”‚                                                      â”‚       â”‚
@@ -152,15 +152,15 @@ Convert text chunks and queries into high-dimensional vectors for similarity sea
 
 ```
 Basic RAG
-  â””â†’ Advanced RAG
+  â””→ Advanced RAG
        â”œâ”€â”€ Hybrid Search (semantic + BM25)
        â”œâ”€â”€ Re-ranking (Cohere Rerank, cross-encoders)
        â”œâ”€â”€ Query Transformation (HyDE, multi-query, step-back)
        â”œâ”€â”€ Self-RAG (model decides when to retrieve)
        â”œâ”€â”€ Late Chunking (embed full doc, pool after)           â† 2025-2026 standard
-       â”œâ”€â”€ Contextual Retrieval (LLM-enrich each chunk)        â† Anthropic 2024â†’standard
+       â”œâ”€â”€ Contextual Retrieval (LLM-enrich each chunk)        â† Anthropic 2024→standard
        â”œâ”€â”€ Corrective RAG / CRAG (grade + re-retrieve/search)  â† 2026 agentic pattern
-       â””â†’ Agentic RAG
+       â””→ Agentic RAG
             â”œâ”€â”€ Tool-calling RAG (agent decides what to search)
             â”œâ”€â”€ Multi-source RAG (different DBs, APIs, web)
             â””â”€â”€ Multi-step RAG (iterative retrieval-reasoning loops)
@@ -173,8 +173,8 @@ Basic RAG
 **Late Chunking** reverses the order:
 
 ```
-Traditional:  Document â†’ Chunk â†’ Embed each chunk â†’ Store
-Late:         Document â†’ Embed FULL document (token-level) â†’ Pool tokens per logical chunk â†’ Store
+Traditional:  Document → Chunk → Embed each chunk → Store
+Late:         Document → Embed FULL document (token-level) → Pool tokens per logical chunk → Store
 
 Result: Each chunk's embedding retains context from the surrounding document.
 ```
@@ -215,7 +215,7 @@ def late_chunking_embed(document: str, chunk_boundaries: list[tuple[int,int]], m
 
 **When to use**: Long documents (reports, legal docs, books) where a chunk's meaning depends on earlier context. Outperforms standard chunking by 10-20% on multi-hop retrieval benchmarks.
 
-### Contextual Retrieval (Anthropic, 2024 â†’ 2026 Production Standard)
+### Contextual Retrieval (Anthropic, 2024 → 2026 Production Standard)
 
 **Problem**: BM25 and semantic search fail when chunks use pronouns or references ("the approach," "this method") without repeating the noun.
 
@@ -258,19 +258,19 @@ def add_chunk_context(full_document: str, chunk: str) -> str:
 enriched_chunk = add_chunk_context(full_document="...", chunk="This approach...")
 ```
 
-### Corrective RAG / CRAG â€” Grade â†’ Decide â†’ Act
+### Corrective RAG / CRAG â€” Grade → Decide → Act
 
 When retrieved chunks are irrelevant, CRAG falls back to web search or query reformulation:
 
 ```
 Query
   â†“
-[Retrieve] â†’ chunks
+[Retrieve] → chunks
   â†“
 [Grade each chunk: RELEVANT / IRRELEVANT / AMBIGUOUS]
   â†“
-If ALL irrelevant â†’ [Web Search] or [Reformulate Query] â†’ [Re-retrieve]
-If SOME relevant â†’ [Filter to relevant chunks only]
+If ALL irrelevant → [Web Search] or [Reformulate Query] → [Re-retrieve]
+If SOME relevant → [Filter to relevant chunks only]
   â†“
 [Generate answer from filtered/searched context]
 ```
@@ -356,7 +356,7 @@ bm25_results     = ["doc_1", "doc_3", "doc_8", "doc_5", "doc_4"]  # ordered by B
 fused = reciprocal_rank_fusion([semantic_results, bm25_results])
 top_5 = [doc_id for doc_id, _ in fused[:5]]
 print(f"Fused top-5: {top_5}")
-# â†’ doc_1 and doc_3 both appear in both lists at high ranks â†’ RRF promotes them
+# → doc_1 and doc_3 both appear in both lists at high ranks → RRF promotes them
 ```
 
 ### RAG vs Fine-tuning vs Long Context
@@ -373,7 +373,7 @@ print(f"Fused top-5: {top_5}")
 
 ---
 
-## â—† Code & Implementation
+## ◆ Code & Implementation
 
 ### Minimal RAG with LangChain (Python)
 
@@ -427,9 +427,9 @@ print(result["answer"])
 
 ---
 
-## â—† Strengths vs Limitations
+## ◆ Strengths vs Limitations
 
-| âœ… Strengths                                | âŒ Limitations                                         |
+| ✅ Strengths                                | âŒ Limitations                                         |
 | ------------------------------------------ | ----------------------------------------------------- |
 | No model retraining needed                 | Retrieval quality bottleneck                          |
 | Always up-to-date (update docs, not model) | Chunking is hard to get right                         |
@@ -439,12 +439,12 @@ print(result["answer"])
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 
 ```
 RAG Pipeline:
-  Documents â†’ Chunk â†’ Embed â†’ Store in Vector DB
-  Query â†’ Embed â†’ Search â†’ Top-K Chunks â†’ LLM â†’ Answer
+  Documents → Chunk → Embed → Store in Vector DB
+  Query → Embed → Search → Top-K Chunks → LLM → Answer
 
 Key Params to Tune:
   - Chunk size: 500-1000 chars (start here)
@@ -454,9 +454,9 @@ Key Params to Tune:
   - Search type: Hybrid (semantic + BM25) when possible
 
 Quick Debug:
-  Bad answers? â†’ Check retrieved chunks first
-  Irrelevant chunks? â†’ Fix chunking or embedding model
-  Good chunks, bad answer? â†’ Fix prompt or try better LLM
+  Bad answers? → Check retrieved chunks first
+  Irrelevant chunks? → Fix chunking or embedding model
+  Good chunks, bad answer? → Fix prompt or try better LLM
 ```
 
 ---
@@ -469,17 +469,17 @@ THE RAG TRIAD â€” 3 metrics that cover everything:
   1. CONTEXT RELEVANCE (retrieval quality)
      "Are the retrieved chunks actually relevant to the question?"
      Metric: What % of retrieved context is useful
-     Low score â†’ Fix: chunking strategy, embedding model, or retrieval method
+     Low score → Fix: chunking strategy, embedding model, or retrieval method
 
   2. FAITHFULNESS / GROUNDEDNESS (hallucination check)
      "Is the answer supported by the retrieved context?"
      Metric: What % of claims in the answer can be traced to context
-     Low score â†’ Fix: LLM prompt (cite sources), temperature, or model choice
+     Low score → Fix: LLM prompt (cite sources), temperature, or model choice
 
   3. ANSWER RELEVANCE (response quality)
      "Does the answer actually address the question?"
      Metric: How well does the answer match the user's intent
-     Low score â†’ Fix: prompt template, LLM model, or retrieval strategy
+     Low score → Fix: prompt template, LLM model, or retrieval strategy
 
   â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”      â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”      â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
   â”‚   Question  â”‚â”€â”€1â”€â”€â–¶â”‚  Context   â”‚â”€â”€2â”€â”€â–¶â”‚   Answer    â”‚
@@ -500,7 +500,7 @@ EVALUATION TOOLS:
 
 ---
 
-## â—‹ Gotchas & Common Mistakes
+## ○ Gotchas & Common Mistakes
 
 - âš ï¸ **"Garbage in, garbage out"**: If your chunking splits a table across chunks, the answer will be wrong. Always inspect chunks.
 - âš ï¸ **Embedding model mismatch**: embedding model for indexing MUST match the one used for querying
@@ -510,7 +510,7 @@ EVALUATION TOOLS:
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: How would you improve a RAG pipeline that's giving wrong answers?
 - **A**: Debug in order: (1) Check if correct chunks are retrieved (retrieval eval), (2) If not, fix chunking strategy or embedding model, (3) If chunks are good but answer is wrong, fix the prompt or use a better LLM. Also consider adding re-ranking.
@@ -523,7 +523,7 @@ EVALUATION TOOLS:
 
 ---
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics                                                                         |
 | ------------ | ------------------------------------------------------------------------------ |
@@ -535,7 +535,7 @@ EVALUATION TOOLS:
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
@@ -549,7 +549,7 @@ EVALUATION TOOLS:
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Build and Break a RAG Pipeline
 
@@ -576,7 +576,7 @@ EVALUATION TOOLS:
 ---
 
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type | Resource | Why |
 |------|----------|-----|
@@ -585,7 +585,7 @@ EVALUATION TOOLS:
 | ðŸŽ“ Course | [deeplearning.ai â€” "Building and Evaluating RAG"](https://www.deeplearning.ai/) | Hands-on RAG implementation course |
 | ðŸ”§ Hands-on | [LlamaIndex RAG Tutorial](https://docs.llamaindex.ai/) | Production RAG framework with excellent documentation |
 
-## â˜… Sources
+## ★ Sources
 
 - Lewis et al., "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks" (2020)
 - LangChain documentation â€” https://docs.langchain.com

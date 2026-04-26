@@ -15,11 +15,11 @@ updated: 2026-04-11
 
 # Scaling Laws & Pre-training
 
-> âœ¨ **Bit**: GPT-5.4 cost hundreds of millions of dollars to train. Not because the algorithm is complex â€” it's literally next-token prediction â€” but because you need ~25,000 GPUs running for months on trillions of tokens. The secret of LLMs is embarrassingly simple: scale.
+> ✨ **Bit**: GPT-5.4 cost hundreds of millions of dollars to train. Not because the algorithm is complex â€” it's literally next-token prediction â€” but because you need ~25,000 GPUs running for months on trillions of tokens. The secret of LLMs is embarrassingly simple: scale.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: The process of training an LLM from scratch on internet-scale data, and the mathematical laws predicting how performance improves with more compute, data, and parameters
 - **Why**: Understanding pre-training explains WHY bigger models are better, HOW training costs scale, and WHEN to stop training â€” critical for anyone building or evaluating LLMs
@@ -27,7 +27,7 @@ updated: 2026-04-11
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -44,7 +44,7 @@ This note focuses on the economics, mechanics, and trade-offs of pre-training at
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### The Pre-training Pipeline
 
@@ -80,7 +80,7 @@ This note focuses on the economics, mechanics, and trade-offs of pre-training at
 â”‚     â”‚ Conversation:  ~3-5%              â”‚            â”‚
 â”‚     â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜            â”‚
 â”‚     These ratios MASSIVELY affect capabilities       â”‚
-â”‚     More code â†’ better reasoning (!)                 â”‚
+â”‚     More code → better reasoning (!)                 â”‚
 â”‚                                                      â”‚
 â”‚  5. TRAINING                                         â”‚
 â”‚     Objective: Predict the next token                â”‚
@@ -113,7 +113,7 @@ THE CORE INSIGHT (Kaplan et al., 2020):
   L(D) âˆ D^(-0.095) (loss decreases with data)
 
   WHAT THIS MEANS:
-  - 10x more compute â†’ predictable improvement
+  - 10x more compute → predictable improvement
   - Returns diminish but NEVER stop (no plateau found yet)
   - You can PREDICT a model's quality before training it
 ```
@@ -125,7 +125,7 @@ THE GAME-CHANGER:
 
   OpenAI's approach (2020-2022): "Make models BIGGER"
     GPT-3: 175B params, trained on 300B tokens
-    Bigger model, less data â†’ expensive inference
+    Bigger model, less data → expensive inference
 
   DeepMind's Chinchilla finding:
     "For a given compute budget, you should train a
@@ -143,7 +143,7 @@ THE GAME-CHANGER:
   IMPACT:
     GPT-3 was 10x undertrained by this rule!
     LLaMA (Meta, 2023): 65B model trained on 1.4T tokens
-      â†’ Matched GPT-3 175B with 3x fewer parameters!
+      → Matched GPT-3 175B with 3x fewer parameters!
 
   POST-CHINCHILLA (2024-2026):
     Industry shifted to "over-training" small models:
@@ -159,7 +159,7 @@ THE GAME-CHANGER:
 ```
 HARDWARE (2025-2026 training runs):
 
-  GPU: NVIDIA H100 (80GB) â†’ H200 (141GB) â†’ B200/GB300
+  GPU: NVIDIA H100 (80GB) → H200 (141GB) → B200/GB300
 
   Typical cluster:
     GPT-5.x training:    ~25,000+ H100s
@@ -208,7 +208,7 @@ COMMON FAILURES:
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 
 ```
 SCALING RULES OF THUMB:
@@ -229,7 +229,7 @@ PRE-TRAINING OBJECTIVE:
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: Explain the Chinchilla scaling laws.
 - **A**: For a fixed compute budget, there's an optimal ratio of model size to training data. Chinchilla showed the optimal is ~20 tokens per parameter. GPT-3 (175B params, 300B tokens) was massively undertrained â€” a 70B model on 1.4T tokens would match it. This led to LLaMA's approach: smaller models, much more data. In 2025-2026, industry "over-trains" beyond Chinchilla-optimal because inference cost (running the model) matters more than training cost (one-time).
@@ -239,7 +239,7 @@ PRE-TRAINING OBJECTIVE:
 
 ---
 
-## â˜… Code & Implementation
+## ★ Code & Implementation
 
 ### Chinchilla Optimal Token Calculator
 
@@ -281,7 +281,7 @@ for model_name, params in [
 # inference efficiency â€” Chinchilla is the floor, not the ceiling.
 ```
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics                                                                                                          |
 | ------------ | --------------------------------------------------------------------------------------------------------------- |
@@ -293,7 +293,7 @@ for model_name, params in [
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure                           | Symptoms                                                        | Root Cause                                                    | Mitigation                                                        |
 | --------------------------------- | --------------------------------------------------------------- | ------------------------------------------------------------- | ----------------------------------------------------------------- |
@@ -303,7 +303,7 @@ for model_name, params in [
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Plot Your Own Scaling Law
 
@@ -318,7 +318,7 @@ for model_name, params in [
 ---
 
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type    | Resource                                                                                           | Why                                                                     |
 | ------- | -------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
@@ -327,7 +327,7 @@ for model_name, params in [
 | ðŸŽ¥ Video | [Andrej Karpathy â€” "Let's Build GPT"](https://www.youtube.com/watch?v=kCc8FmEb1nY)                 | Build a language model from scratch â€” pretraining intuition             |
 | ðŸ“˜ Book  | "AI Engineering" by Chip Huyen (2025), Ch 2                                                        | Practical understanding of model selection and scaling tradeoffs        |
 
-## â˜… Sources
+## ★ Sources
 
 - Kaplan et al., "Scaling Laws for Neural Language Models" (2020)
 - Hoffmann et al., "Training Compute-Optimal Large Language Models" (Chinchilla, 2022)

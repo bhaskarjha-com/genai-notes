@@ -15,11 +15,11 @@ updated: 2026-04-11
 
 # Tokenization
 
-> âœ¨ **Bit**: LLMs don't see words. They see token IDs. "Hello" = `[15496]`. This is why they can't count the letters in "strawberry" â€” they see something like `[" straw", "berry"]`, not individual characters.
+> ✨ **Bit**: LLMs don't see words. They see token IDs. "Hello" = `[15496]`. This is why they can't count the letters in "strawberry" â€” they see something like `[" straw", "berry"]`, not individual characters.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: The process of breaking text into sub-word units (tokens) that LLMs actually process
 - **Why**: Models can't process raw text. Tokenization determines what the model "sees" â€” and affects cost, multilingual performance, and model behavior
@@ -27,7 +27,7 @@ updated: 2026-04-11
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -50,7 +50,7 @@ Covers tokenization algorithms (BPE, WordPiece, SentencePiece), practical implic
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### Why Not Just Use Words or Characters?
 
@@ -65,8 +65,8 @@ CHARACTER-LEVEL:
 
 SUB-WORD (what we actually use):
   Vocabulary: 32K - 128K tokens
-  "unhappiness" â†’ ["un", "happiness"]  â† Common words stay whole
-  "transformer" â†’ ["transform", "er"]   â† Rare words split intelligently
+  "unhappiness" → ["un", "happiness"]  â† Common words stay whole
+  "transformer" → ["transform", "er"]   â† Rare words split intelligently
   Balance: Compact vocabulary + handles any text
 ```
 
@@ -76,24 +76,24 @@ SUB-WORD (what we actually use):
 
 ```
 START: Split everything into characters
-  "lower" â†’ ['l', 'o', 'w', 'e', 'r']
-  "lowest" â†’ ['l', 'o', 'w', 'e', 's', 't']
+  "lower" → ['l', 'o', 'w', 'e', 'r']
+  "lowest" → ['l', 'o', 'w', 'e', 's', 't']
 
-STEP 1: Find most frequent pair â†’ ('l', 'o') appears most
+STEP 1: Find most frequent pair → ('l', 'o') appears most
   Merge: "lo" becomes a token
-  "lower" â†’ ['lo', 'w', 'e', 'r']
+  "lower" → ['lo', 'w', 'e', 'r']
 
-STEP 2: Find most frequent pair â†’ ('lo', 'w')
+STEP 2: Find most frequent pair → ('lo', 'w')
   Merge: "low" becomes a token
-  "lower" â†’ ['low', 'e', 'r']
+  "lower" → ['low', 'e', 'r']
 
 STEP 3: ('e', 'r') is frequent
   Merge: "er" becomes a token
-  "lower" â†’ ['low', 'er']
+  "lower" → ['low', 'er']
 
 STEP 4: ('low', 'er') is frequent
   Merge: "lower" becomes a token
-  "lower" â†’ ['lower']
+  "lower" → ['lower']
 
 ... Continue until vocabulary reaches target size (32K-128K)
 ```
@@ -150,11 +150,11 @@ print(len(tokens))         # 20+ tokens for same meaning!
 ```
 Common special tokens across models:
 
-<|begin_of_text|>   â†’ Start of sequence
-<|end_of_text|>     â†’ End of sequence / stop generating
-<|im_start|>        â†’ Start of a message (ChatML format)
-<|im_end|>          â†’ End of a message
-<|system|>          â†’ System prompt marker
+<|begin_of_text|>   → Start of sequence
+<|end_of_text|>     → End of sequence / stop generating
+<|im_start|>        → Start of a message (ChatML format)
+<|im_end|>          → End of a message
+<|system|>          → System prompt marker
 
 These are NOT part of the text â€” they're control signals the model was trained on.
 Different models use different special tokens (not compatible).
@@ -162,9 +162,9 @@ Different models use different special tokens (not compatible).
 
 ---
 
-## â—† Strengths vs Limitations
+## ◆ Strengths vs Limitations
 
-| âœ… Strengths                                      | âŒ Limitations                                             |
+| ✅ Strengths                                      | âŒ Limitations                                             |
 | ------------------------------------------------ | --------------------------------------------------------- |
 | Sub-word = handles any text (even made-up words) | Non-English languages get more tokens per word = inequity |
 | Fixed vocabulary = predictable model size        | Arithmetic is hard (numbers split unpredictably)          |
@@ -173,7 +173,7 @@ Different models use different special tokens (not compatible).
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 
 ```
 TOKEN ESTIMATION:
@@ -194,7 +194,7 @@ TOOLS:
 
 ---
 
-## â—‹ Gotchas & Common Mistakes
+## ○ Gotchas & Common Mistakes
 
 - âš ï¸ **"Why can't GPT count letters in strawberry?"** â€” Because it sees `["straw", "berry"]`, not individual characters. It literally can't see the letters.
 - âš ï¸ **Token â‰  word**: Never estimate costs by word count. Always use the tokenizer library.
@@ -204,17 +204,17 @@ TOOLS:
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: Why do LLMs use sub-word tokenization instead of word-level?
-- **A**: Word-level requires an impossibly large vocabulary (every word in every language) and can't handle misspellings, new words, or code. Sub-word splits rare words into common pieces ("unhappiness" â†’ ["un", "happiness"]) while keeping frequent words whole. Fixed vocab size (~32K-128K), handles any input.
+- **A**: Word-level requires an impossibly large vocabulary (every word in every language) and can't handle misspellings, new words, or code. Sub-word splits rare words into common pieces ("unhappiness" → ["un", "happiness"]) while keeping frequent words whole. Fixed vocab size (~32K-128K), handles any input.
 
 - **Q**: Why is tokenization a source of bias?
 - **A**: Languages with less representation in training data get worse tokenization â€” more tokens per word. This means non-English users spend more money, get slower responses, and use more of their context window for the same content. Larger vocabularies (LLaMA 3's 128K vs LLaMA 2's 32K) help mitigate this.
 
 ---
 
-## â˜… Code & Implementation
+## ★ Code & Implementation
 
 ### Token Cost Calculator (tiktoken)
 
@@ -257,33 +257,33 @@ text = "The transformer architecture revolutionized natural language processing 
 for model in ["gpt-4o", "gpt-3.5-turbo"]:
     enc = tiktoken.encoding_for_model(model)
     tokens = enc.encode(text)
-    print(f"OpenAI {model}: {len(tokens)} tokens â†’ {tokens}")
+    print(f"OpenAI {model}: {len(tokens)} tokens → {tokens}")
 
 # HuggingFace tokenizers
 for hf_model in ["meta-llama/Llama-3.2-1B", "google/gemma-2-2b"]:
     tok = AutoTokenizer.from_pretrained(hf_model)
     tokens = tok.encode(text)
     print(f"HF {hf_model.split('/')[-1]}: {len(tokens)} tokens")
-# Different tokenizers â†’ different counts for same text
+# Different tokenizers → different counts for same text
 # This is why you MUST use the correct tokenizer for each model
 ```
 
 ---
 
-## â˜… Connections
+## ★ Connections
 
 
 | Relationship | Topics                                                                    |
 | ------------ | ------------------------------------------------------------------------- |
 | Builds on    | String processing, Compression algorithms (BPE originated in compression) |
-| Leads to     | [Embeddings](./embeddings.md) (tokens â†’ vectors), [Large Language Models (LLMs)](../llms/llms-overview.md)           |
+| Leads to     | [Embeddings](./embeddings.md) (tokens → vectors), [Large Language Models (LLMs)](../llms/llms-overview.md)           |
 | Compare with | Character encoding (ASCII/UTF-8), Word-level parsing                      |
 | Cross-domain | Linguistic morphology, Data compression                                   |
 
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
@@ -293,7 +293,7 @@ for hf_model in ["meta-llama/Llama-3.2-1B", "google/gemma-2-2b"]:
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Token Economics Calculator
 
@@ -307,7 +307,7 @@ for hf_model in ["meta-llama/Llama-3.2-1B", "google/gemma-2-2b"]:
 ---
 
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type | Resource | Why |
 |------|----------|-----|
@@ -316,7 +316,7 @@ for hf_model in ["meta-llama/Llama-3.2-1B", "google/gemma-2-2b"]:
 | ðŸ”§ Hands-on | [HuggingFace Tokenizers Library](https://huggingface.co/docs/tokenizers/) | Fast, production-grade tokenizer implementations |
 | ðŸ“˜ Book | "Build a Large Language Model (From Scratch)" by Sebastian Raschka (2024), Ch 2 | Tokenizer implementation with BPE and SentencePiece |
 
-## â˜… Sources
+## ★ Sources
 
 - Sennrich et al., "Neural Machine Translation of Rare Words with Subword Units" (BPE, 2016)
 - Kudo & Richardson, "SentencePiece: A simple and language independent subword tokenizer" (2018)

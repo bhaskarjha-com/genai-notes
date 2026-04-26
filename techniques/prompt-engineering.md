@@ -15,11 +15,11 @@ updated: 2026-04-11
 
 # Prompt Engineering
 
-> âœ¨ **Bit**: Prompt engineering is the art of asking the right question. Turns out, how you ask an LLM matters as much as what you ask â€” just like talking to humans.
+> ✨ **Bit**: Prompt engineering is the art of asking the right question. Turns out, how you ask an LLM matters as much as what you ask â€” just like talking to humans.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: Crafting inputs (prompts) to get desired outputs from LLMs without changing the model
 - **Why**: The cheapest, fastest way to improve LLM output. Zero training, zero infra â€” just better instructions.
@@ -27,7 +27,7 @@ updated: 2026-04-11
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -49,17 +49,17 @@ Covers prompting techniques from basic to advanced. For when prompting isn't eno
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
-### The Prompting Hierarchy (Simplest â†’ Most Complex)
+### The Prompting Hierarchy (Simplest → Most Complex)
 
 ```
-Level 1: Zero-Shot       â†’ "Translate this to French: Hello"
-Level 2: System Prompt   â†’ "You are a French translator. Translate: Hello"
-Level 3: Few-Shot        â†’ "Here are 3 examples. Now do this one..."
-Level 4: Chain-of-Thought â†’ "Think step by step..."
-Level 5: Self-Consistency â†’ Generate multiple answers, pick the majority
-Level 6: ReAct / Tool Use â†’ Think, Act, Observe loops (enters Agent territory)
+Level 1: Zero-Shot       → "Translate this to French: Hello"
+Level 2: System Prompt   → "You are a French translator. Translate: Hello"
+Level 3: Few-Shot        → "Here are 3 examples. Now do this one..."
+Level 4: Chain-of-Thought → "Think step by step..."
+Level 5: Self-Consistency → Generate multiple answers, pick the majority
+Level 6: ReAct / Tool Use → Think, Act, Observe loops (enters Agent territory)
 ```
 
 ### Key Techniques
@@ -80,11 +80,11 @@ STRONG: "You are an expert technical editor. Summarize the following
 ```
 Classify the sentiment:
 
-"This product is amazing!" â†’ Positive
-"Worst purchase ever." â†’ Negative
-"It's okay, nothing special." â†’ Neutral
+"This product is amazing!" → Positive
+"Worst purchase ever." → Negative
+"It's okay, nothing special." → Neutral
 
-"The quality exceeded my expectations!" â†’
+"The quality exceeded my expectations!" →
 ```
 
 **Rule of thumb**: 3-5 examples is the sweet spot. More examples = more consistent, but uses context window.
@@ -134,11 +134,11 @@ Model output with CoT:
 | **Tree of Thought**     | Explore multiple reasoning branches            | Complex problem-solving          |
 | **Least-to-Most**       | Break complex problem into sub-problems        | Problems requiring decomposition |
 | **Generated Knowledge** | "First, tell me facts about X. Then, answer Y" | Knowledge-intensive questions    |
-| **Prompt Chaining**     | Output of prompt A â†’ Input of prompt B         | Multi-stage pipelines            |
+| **Prompt Chaining**     | Output of prompt A → Input of prompt B         | Multi-stage pipelines            |
 
 ### The Prompting Mistake Matrix
 
-| âŒ Common Mistake        | âœ… Better Approach                                                                                     |
+| âŒ Common Mistake        | ✅ Better Approach                                                                                     |
 | ----------------------- | ----------------------------------------------------------------------------------------------------- |
 | "Write good code"       | "Write Python 3.12 code that handles edge cases. Include type hints, docstrings, and error handling." |
 | "Summarize this"        | "Summarize in 3 bullet points for a technical audience. Each bullet max 20 words."                    |
@@ -148,40 +148,40 @@ Model output with CoT:
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 
 ```
 PROMPTING CHECKLIST:
-â–¡ Define ROLE      â†’ "You are a [specific expert]"
-â–¡ Set CONTEXT      â†’ Background info the model needs
-â–¡ State TASK       â†’ Exactly what to do
-â–¡ Specify FORMAT   â†’ How to structure the output
-â–¡ Give EXAMPLES    â†’ 2-3 examples of desired output
-â–¡ Add CONSTRAINTS  â†’ What NOT to do, length limits, etc.
-â–¡ Request REASONING â†’ "Think step by step" / "Explain your reasoning"
+â–¡ Define ROLE      → "You are a [specific expert]"
+â–¡ Set CONTEXT      → Background info the model needs
+â–¡ State TASK       → Exactly what to do
+â–¡ Specify FORMAT   → How to structure the output
+â–¡ Give EXAMPLES    → 2-3 examples of desired output
+â–¡ Add CONSTRAINTS  → What NOT to do, length limits, etc.
+â–¡ Request REASONING → "Think step by step" / "Explain your reasoning"
 
 TEMPERATURE GUIDE:
-  0.0 â†’ Factual, deterministic (data extraction, classification)
-  0.3 â†’ Balanced (summarization, coding)
-  0.7 â†’ Creative (writing, brainstorming)
-  1.0 â†’ Very creative (poetry, fiction)
+  0.0 → Factual, deterministic (data extraction, classification)
+  0.3 → Balanced (summarization, coding)
+  0.7 → Creative (writing, brainstorming)
+  1.0 → Very creative (poetry, fiction)
 ```
 
 ---
 
-## â—† Strengths vs Limitations
+## ◆ Strengths vs Limitations
 
-| âœ… Strengths                   | âŒ Limitations                                            |
+| ✅ Strengths                   | âŒ Limitations                                            |
 | ----------------------------- | -------------------------------------------------------- |
 | Zero cost (no training/infra) | Can't add new knowledge                                  |
 | Instant iteration             | Fragile â€” small changes = different results              |
 | Works with any model          | Context window limits complexity                         |
 | Easy to A/B test              | Can't change model behavior permanently                  |
-| Good starting point always    | Diminishing returns at some point â†’ need RAG/fine-tuning |
+| Good starting point always    | Diminishing returns at some point → need RAG/fine-tuning |
 
 ---
 
-## â—‹ Gotchas & Common Mistakes
+## ○ Gotchas & Common Mistakes
 
 - âš ï¸ **Prompt â‰  Programming**: Prompts are probabilistic, not deterministic. Same prompt can give different results.
 - âš ï¸ **"Be concise" doesn't work well**: Instead say "Respond in exactly 3 sentences" â€” be specific about constraints.
@@ -191,17 +191,17 @@ TEMPERATURE GUIDE:
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: What's the difference between zero-shot, few-shot, and chain-of-thought prompting?
-- **A**: Zero-shot: just instructions, no examples. Few-shot: include examples of desired inputâ†’output pairs. CoT: ask model to show reasoning steps. Each adds more guidance and typically improves quality.
+- **A**: Zero-shot: just instructions, no examples. Few-shot: include examples of desired input→output pairs. CoT: ask model to show reasoning steps. Each adds more guidance and typically improves quality.
 
 - **Q**: How would you handle prompt injection in a production system?
 - **A**: Input sanitization, separate system/user prompts, output validation, don't include raw user input in system prompts. Use the model's built-in system prompt separation. For critical apps, add a second LLM call to verify the first output makes sense.
 
 ---
 
-## â˜… Code & Implementation
+## ★ Code & Implementation
 
 ### Structured Prompt Builder
 
@@ -264,7 +264,7 @@ response = client.chat.completions.create(
     max_tokens=100,
 )
 print(response.choices[0].message.content)
-# â†’ {"sentiment": "negative", "confidence": 0.82, "reason": "mixed review, negative feature mentioned"}
+# → {"sentiment": "negative", "confidence": 0.82, "reason": "mixed review, negative feature mentioned"}
 ```
 
 ### Chain-of-Thought vs Direct: Side-by-Side Test
@@ -293,12 +293,12 @@ def compare_cot(question: str, model: str = "gpt-4o-mini") -> None:
 
 compare_cot("If a train travels 120km at 60km/h and then 90km at 45km/h, what is the total travel time?")
 # Direct: often gives wrong answer quickly
-# CoT: breaks into phases â†’ gets 2h + 2h = 4h (correct)
+# CoT: breaks into phases → gets 2h + 2h = 4h (correct)
 ```
 
 ---
 
-## â˜… Connections
+## ★ Connections
 
 
 | Relationship | Topics                                                                |
@@ -311,7 +311,7 @@ compare_cot("If a train travels 120km at 60km/h and then 90km at 45km/h, what is
 ---
 
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type | Resource | Why |
 |------|----------|-----|
@@ -320,7 +320,7 @@ compare_cot("If a train travels 120km at 60km/h and then 90km at 45km/h, what is
 | ðŸ”§ Hands-on | [OpenAI Prompt Engineering Guide](https://platform.openai.com/docs/guides/prompt-engineering) | Practical tips with examples for GPT models |
 | ðŸŽ“ Course | [deeplearning.ai â€” "ChatGPT Prompt Engineering"](https://www.deeplearning.ai/) | Short, practical course on effective prompting |
 
-## â˜… Sources
+## ★ Sources
 
 - OpenAI Prompt Engineering Guide â€” https://platform.openai.com/docs/guides/prompt-engineering
 - Anthropic Prompt Engineering Guide â€” https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering

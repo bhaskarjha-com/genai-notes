@@ -19,14 +19,14 @@ updated: 2026-04-14
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 - **What**: The design patterns for building application-facing APIs around AI systems.
 - **Why**: Poor API design leaks model quirks, makes clients brittle, and turns AI product iteration into integration pain.
 - **Key point**: Design APIs around product tasks and operational constraints, not around raw model endpoints alone.
 
 ---
 
-## â˜… Overview
+## ★ Overview
 ### Definition
 
 An **AI application API** is the contract between clients and an AI-backed service. It defines request shape, response shape, streaming behavior, error semantics, and operational guarantees.
@@ -49,7 +49,7 @@ This note focuses on product-facing APIs, not provider SDK specifics. It covers 
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 ### Core Design Questions
 
 Ask:
@@ -141,7 +141,7 @@ Do not force clients to track every prompt revision.
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 | Need | Better Design Choice |
 |---|---|
 | interactive chat | streaming endpoint |
@@ -152,7 +152,7 @@ Do not force clients to track every prompt revision.
 
 ---
 
-## â—‹ Gotchas & Common Mistakes
+## ○ Gotchas & Common Mistakes
 - Raw provider payload passthrough creates long-term client pain.
 - Streaming is not always better if the task is short and structured.
 - Hidden prompt changes can look like API regressions to downstream teams.
@@ -160,7 +160,7 @@ Do not force clients to track every prompt revision.
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 - **Q**: What should an AI API return besides the answer?
 - **A**: Usually a request id, status or finish reason, and optionally citations or usage metadata depending on the product. Those fields make debugging, billing, and trust much easier.
 
@@ -169,7 +169,7 @@ Do not force clients to track every prompt revision.
 
 ---
 
-## â˜… Connections
+## ★ Connections
 | Relationship | Topics |
 |---|---|
 | Builds on | [AI System Design for GenAI Applications](../production/ai-system-design.md), [Model Serving for LLM Applications](../production/model-serving.md) |
@@ -179,7 +179,7 @@ Do not force clients to track every prompt revision.
 
 ---
 
-## â˜… Code & Implementation
+## ★ Code & Implementation
 
 ### FastAPI AI Endpoint with Streaming
 
@@ -237,7 +237,7 @@ async def chat_stream(request: dict):
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
@@ -248,7 +248,7 @@ async def chat_stream(request: dict):
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Design an AI API Contract
 
@@ -264,7 +264,7 @@ async def chat_stream(request: dict):
 
 ---
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type | Resource | Why |
 |------|----------|-----|
@@ -275,7 +275,7 @@ async def chat_stream(request: dict):
 
 ---
 
-## â˜… Sources
+## ★ Sources
 
 - OpenAPI Specification â€” https://spec.openapis.org/
 - Google API Design Guide â€” https://cloud.google.com/apis/design

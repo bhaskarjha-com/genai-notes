@@ -15,19 +15,19 @@ updated: 2026-04-14
 
 # Long-Context Engineering
 
-> âœ¨ **Bit**: Models now accept 1M+ tokens â€” but "accepts" â‰  "uses well." Long-context engineering is the art of deciding what to put in that window, how to structure it, and when RAG still beats stuffing everything in.
+> ✨ **Bit**: Models now accept 1M+ tokens â€” but "accepts" â‰  "uses well." Long-context engineering is the art of deciding what to put in that window, how to structure it, and when RAG still beats stuffing everything in.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: Techniques for effectively using large context windows (128K-2M tokens) â€” structuring input, managing retrieval vs context stuffing, and handling the "lost in the middle" problem
-- **Why**: Context windows grew 1000Ã— in 3 years (4K â†’ 2M tokens). Knowing how to use them well is now a core GenAI engineering skill.
+- **Why**: Context windows grew 1000Ã— in 3 years (4K → 2M tokens). Knowing how to use them well is now a core GenAI engineering skill.
 - **Key point**: Longer context â‰  better results. Models degrade on information in the middle of long contexts. Strategic placement, chunking, and hybrid RAG+context approaches outperform naive stuffing.
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -51,7 +51,7 @@ Covers: Context window capabilities across models, the "lost in the middle" phen
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### Context Window Landscape (April 2026)
 
@@ -143,7 +143,7 @@ OPTIMAL CONTEXT LAYOUT:
 
 ---
 
-## â˜… Code & Implementation
+## ★ Code & Implementation
 
 ### Structured Long-Context Prompt Builder
 
@@ -237,7 +237,7 @@ print(response.choices[0].message.content)
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 
 ```
 CONTEXT WINDOW RULES OF THUMB:
@@ -258,7 +258,7 @@ TOKEN ESTIMATION:
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
@@ -269,14 +269,14 @@ TOKEN ESTIMATION:
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: When would you use RAG vs long context?
 - **A**: It depends on corpus size, cost tolerance, and update frequency. If the source material is < 50K tokens and relatively static (e.g., a product manual), I'd stuff it directly into context â€” simpler architecture, no retrieval failures. For 50K-500K tokens, I'd use a hybrid: retrieve the top 5-10 most relevant chunks via RAG, then include them in a long-context prompt with supporting background. For > 500K tokens (entire codebases, large doc collections), RAG is necessary â€” no model reliably processes that much context. I'd also consider cost: a 200K-token context costs $0.50-$15 per request at API prices, vs $0.01-$0.10 for RAG with small chunks.
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Needle-in-a-Haystack Test
 
@@ -291,7 +291,7 @@ TOKEN ESTIMATION:
 
 ---
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics |
 |---|---|
@@ -302,7 +302,7 @@ TOKEN ESTIMATION:
 
 ---
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type | Resource | Why |
 |------|----------|-----|
@@ -313,7 +313,7 @@ TOKEN ESTIMATION:
 
 ---
 
-## â˜… Sources
+## ★ Sources
 
 - Liu et al. "Lost in the Middle: How Language Models Use Long Contexts" (2023)
 - Google "Leave No Context Behind: Efficient Infinite Context Transformers" (2024)

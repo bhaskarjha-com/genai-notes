@@ -19,14 +19,14 @@ updated: 2026-04-12
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 - **What**: The systems and patterns used to expose models as production endpoints.
 - **Why**: A strong model with weak serving still feels slow, flaky, and expensive.
 - **Key point**: Serving is a scheduling and systems problem, not just a "wrap it in FastAPI" problem.
 
 ---
 
-## â˜… Overview
+## ★ Overview
 ### Definition
 
 **Model serving** is the runtime layer that accepts requests, prepares inputs, executes inference, and returns outputs under production constraints.
@@ -49,7 +49,7 @@ This note covers serving architectures, runtime choices, and operational trade-o
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 ### Serving Request Path
 
 ```text
@@ -143,7 +143,7 @@ python -m vllm.entrypoints.openai.api_server \
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 | Problem             | First Serving Move                                         |
 | ------------------- | ---------------------------------------------------------- |
 | High API cost       | Evaluate self-hosting or smaller-model routing             |
@@ -154,7 +154,7 @@ python -m vllm.entrypoints.openai.api_server \
 
 ---
 
-## â—‹ Gotchas & Common Mistakes
+## ○ Gotchas & Common Mistakes
 - Teams often blame the model when the real bottleneck is gateway design or retrieval latency.
 - A single serving stack for every workload usually performs badly.
 - OpenAI-compatible APIs simplify clients but do not remove serving complexity.
@@ -162,7 +162,7 @@ python -m vllm.entrypoints.openai.api_server \
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 - **Q**: What is the difference between inference optimization and model serving?
 - **A**: Inference optimization focuses on making the core generation path more efficient, for example quantization or KV-cache improvements. Model serving covers the full production runtime around that path, including APIs, routing, scheduling, scaling, and failure handling.
 
@@ -171,7 +171,7 @@ python -m vllm.entrypoints.openai.api_server \
 
 ---
 
-## â˜… Code & Implementation
+## ★ Code & Implementation
 
 ### vLLM Server Setup (OpenAI-Compatible)
 
@@ -209,7 +209,7 @@ elapsed = time.monotonic() - start
 print(f"{len(prompts)} requests in {elapsed:.1f}s = {len(prompts)/elapsed:.1f} req/s")
 ```
 
-## â˜… Connections
+## ★ Connections
 | Relationship | Topics                                                                                                                                                                                                     |
 | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Builds on    | [Inference Optimization](../inference/inference-optimization.md), [Docker & Kubernetes for GenAI Deployment](./docker-and-kubernetes.md), [AI System Design for GenAI Applications](./ai-system-design.md) |
@@ -286,7 +286,7 @@ async def load_test(base_url: str, num_requests: int = 20, concurrency: int = 5)
 ```
 
 ---
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure                            | Symptoms                                      | Root Cause                                      | Mitigation                                      |
 | ---------------------------------- | --------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
@@ -297,7 +297,7 @@ async def load_test(base_url: str, num_requests: int = 20, concurrency: int = 5)
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Deploy and Benchmark a Model Server
 
@@ -312,7 +312,7 @@ async def load_test(base_url: str, num_requests: int = 20, concurrency: int = 5)
 ---
 
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type       | Resource                                                                    | Why                                       |
 | ---------- | --------------------------------------------------------------------------- | ----------------------------------------- |
@@ -321,7 +321,7 @@ async def load_test(base_url: str, num_requests: int = 20, concurrency: int = 5)
 | ðŸ“„ Paper    | [Kwon et al. "PagedAttention" (2023)](https://arxiv.org/abs/2309.06180)     | KV-cache management that powers vLLM      |
 | ðŸ“˜ Book     | "AI Engineering" by Chip Huyen (2025), Ch 8                                 | Model serving patterns for production     |
 
-## â˜… Sources
+## ★ Sources
 - vLLM documentation - https://docs.vllm.ai
 - Hugging Face Text Generation Inference documentation
 - NVIDIA Triton Inference Server documentation

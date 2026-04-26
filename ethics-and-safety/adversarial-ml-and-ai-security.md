@@ -19,14 +19,14 @@ updated: 2026-04-14
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 - **What**: The study of attacks against AI systems and the controls used to defend them.
 - **Why**: LLM apps can leak data, misuse tools, follow malicious instructions, or become gateways into other systems.
 - **Key point**: Treat the full AI application as the security boundary, not just the model.
 
 ---
 
-## â˜… Overview
+## ★ Overview
 ### Definition
 
 **Adversarial ML** covers attacks that manipulate model inputs, training data, behavior, or surrounding infrastructure. In GenAI, this includes prompt injection, data poisoning, insecure tool use, and misuse of autonomous workflows.
@@ -49,7 +49,7 @@ This note is application-focused. It covers practical threat categories and defe
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 ### Common Threat Families
 
 | Threat | Example |
@@ -118,7 +118,7 @@ tools:
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 | Risk | First Defense |
 |---|---|
 | prompt injection | context isolation and strict tool policy |
@@ -129,7 +129,7 @@ tools:
 
 ---
 
-## â—‹ Gotchas & Common Mistakes
+## ○ Gotchas & Common Mistakes
 - A strong system prompt is not a security boundary.
 - Output validation matters even when the model is "usually right."
 - Security issues often appear at system integration points, not in the model alone.
@@ -137,7 +137,7 @@ tools:
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 - **Q**: Why is prompt injection a security problem and not only a quality problem?
 - **A**: Because malicious instructions can manipulate system behavior, trigger data leakage, or cause unauthorized actions through tools and downstream systems. That makes it part of the application's security surface.
 
@@ -146,7 +146,7 @@ tools:
 
 ---
 
-## â˜… Connections
+## ★ Connections
 | Relationship | Topics |
 |---|---|
 | Builds on | [Ethics, Safety & Alignment](./ethics-safety-alignment.md), [AI Regulation for Builders](./ai-regulation.md) |
@@ -156,7 +156,7 @@ tools:
 
 ---
 
-## â˜… Code & Implementation
+## ★ Code & Implementation
 
 ### Basic Prompt Injection Detection
 
@@ -212,7 +212,7 @@ print(detect_injection("What's the weather in Paris?"))
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
@@ -223,7 +223,7 @@ print(detect_injection("What's the weather in Paris?"))
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Red Team Your Own App
 
@@ -239,7 +239,7 @@ print(detect_injection("What's the weather in Paris?"))
 
 ---
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type | Resource | Why |
 |------|----------|-----|
@@ -250,7 +250,7 @@ print(detect_injection("What's the weather in Paris?"))
 
 ---
 
-## â˜… Sources
+## ★ Sources
 
 - OWASP GenAI Security Project â€” https://owasp.org/www-project-top-10-for-large-language-model-applications/
 - NIST AI Risk Management Framework â€” https://www.nist.gov/artificial-intelligence/ai-risk-management-framework

@@ -15,11 +15,11 @@ updated: 2026-04-12
 
 # LLMOps & Production Deployment
 
-> âœ¨ **Bit**: Anyone can call an API in a notebook. Getting that same API to serve 10,000 users reliably, cheaply, safely, and without hallucinating financial advice? That's LLMOps. It's the difference between a demo and a product.
+> ✨ **Bit**: Anyone can call an API in a notebook. Getting that same API to serve 10,000 users reliably, cheaply, safely, and without hallucinating financial advice? That's LLMOps. It's the difference between a demo and a product.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: The practices, tools, and pipelines for deploying, monitoring, and maintaining LLM applications in production
 - **Why**: 90% of GenAI projects fail to reach production. LLMOps is what separates "cool prototype" from "reliable product"
@@ -27,7 +27,7 @@ updated: 2026-04-12
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -45,7 +45,7 @@ Covers the production lifecycle. For deployment packaging, see [Docker & Kuberne
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### The LLMOps Stack
 
@@ -129,13 +129,13 @@ response = openai.chat.completions.create(
     messages=[{"role": "user", "content": "Explain RAG"}],
     metadata={"user_id": "user_123", "session": "abc"}
 )
-# â†’ Langfuse dashboard shows: latency, tokens, cost, trace
+# → Langfuse dashboard shows: latency, tokens, cost, trace
 
 # â•â•â• Semantic Caching (reduce costs 30-60%) â•â•â•
 # If a similar question was asked before, return cached answer
 from gptcache import cache
 cache.init()  # Initialize semantic cache
-# Similar questions â†’ cache hit â†’ save tokens + latency
+# Similar questions → cache hit → save tokens + latency
 ```
 
 ### Deployment Patterns
@@ -165,12 +165,12 @@ DEPLOYMENT CHECKLIST:
 
 ```
 TRADITIONAL CI/CD:
-  Code change â†’ Run tests â†’ Deploy if tests pass
+  Code change → Run tests → Deploy if tests pass
 
 LLM CI/CD (additional steps):
-  Prompt change â†’ Run eval suite â†’ Compare with baseline
-                â†’ If better â†’ Deploy (canary)
-                â†’ If worse â†’ Block deployment
+  Prompt change → Run eval suite → Compare with baseline
+                → If better → Deploy (canary)
+                → If worse → Block deployment
 
   â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
   â”‚  PROMPT/CODE CHANGE                               â”‚
@@ -195,7 +195,7 @@ LLM CI/CD (additional steps):
   â”‚  â”‚              â”‚   expensive? Within budget?       â”‚
   â”‚  â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”˜                                  â”‚
   â”‚         â–¼                                         â”‚
-  â”‚  DEPLOY (canary â†’ 5% â†’ 50% â†’ 100%)               â”‚
+  â”‚  DEPLOY (canary → 5% → 50% → 100%)               â”‚
   â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
@@ -213,7 +213,7 @@ LLM CI/CD (additional steps):
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 
 ```
 COST REDUCTION STRATEGIES:
@@ -224,10 +224,10 @@ COST REDUCTION STRATEGIES:
   5. Self-host for high-volume (break-even ~$5K/month)
 
 INCIDENT RESPONSE:
-  Model returns gibberish  â†’ Check API status, switch to fallback
-  Costs spike unexpectedly â†’ Check for prompt injection, rate limit
-  Quality drops suddenly   â†’ API model updated? Check eval scores
-  Guardrail trigger surge  â†’ Possible attack, review logs
+  Model returns gibberish  → Check API status, switch to fallback
+  Costs spike unexpectedly → Check for prompt injection, rate limit
+  Quality drops suddenly   → API model updated? Check eval scores
+  Guardrail trigger surge  → Possible attack, review logs
 
 KEY METRICS:
   TTFT (time to first token) < 500ms for interactive
@@ -239,7 +239,7 @@ KEY METRICS:
 
 ---
 
-## â—‹ Gotchas & Common Mistakes
+## ○ Gotchas & Common Mistakes
 
 - âš ï¸ **No eval suite = deploying blind**: You MUST have a set of golden test cases to catch regressions.
 - âš ï¸ **LLM APIs change without warning**: OpenAI/Anthropic update models silently. Your app can break overnight. Monitor quality continuously.
@@ -249,7 +249,7 @@ KEY METRICS:
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: How would you take an LLM prototype to production?
 - **A**: (1) Create an eval suite (50+ golden examples), (2) Add input/output guardrails, (3) Implement observability (Langfuse/LangSmith), (4) Set up cost alerting, (5) Abstract the LLM provider behind a gateway for fallbacks, (6) CI/CD pipeline that runs eval suite on every prompt/code change, (7) Canary deployment with quality monitoring.
@@ -259,7 +259,7 @@ KEY METRICS:
 
 ---
 
-## â˜… Code & Implementation
+## ★ Code & Implementation
 
 ### LLM Call Tracker (Latency + Token Logging)
 
@@ -322,7 +322,7 @@ ab_eval(
 )
 ```
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics                                                                                                                                                                                         |
 | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -334,7 +334,7 @@ ab_eval(
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure                        | Symptoms                                   | Root Cause                           | Mitigation                                                    |
 | ------------------------------ | ------------------------------------------ | ------------------------------------ | ------------------------------------------------------------- |
@@ -345,7 +345,7 @@ ab_eval(
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Build a Prompt Versioning System
 
@@ -360,7 +360,7 @@ ab_eval(
 ---
 
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type       | Resource                                                                          | Why                                                  |
 | ---------- | --------------------------------------------------------------------------------- | ---------------------------------------------------- |
@@ -369,7 +369,7 @@ ab_eval(
 | ðŸ”§ Hands-on | [LangSmith Documentation](https://docs.smith.langchain.com/)                      | Production LLM observability and evaluation platform |
 | ðŸŽ¥ Video    | [Chip Huyen â€” "Building LLM Applications for Production"](https://huyenchip.com/) | Practical LLMOps talk covering common pitfalls       |
 
-## â˜… Sources
+## ★ Sources
 
 - LangSmith documentation â€” https://docs.smith.langchain.com
 - Langfuse documentation â€” https://langfuse.com/docs

@@ -19,7 +19,7 @@ updated: 2026-04-15
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: A practical overview of the main regulatory and governance frameworks that affect AI builders.
 - **Why**: Compliance, safety, documentation, and deployment choices are becoming product requirements, not optional extras.
@@ -27,7 +27,7 @@ updated: 2026-04-15
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -54,7 +54,7 @@ Last verified for timeline-oriented statements: 2026-04.
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### The Builder's Mental Model
 
@@ -165,7 +165,7 @@ compliance_deadline: 2026-08-02        # or 2027-08-02 if pre-existing system
 
 ---
 
-## â˜… Code & Implementation
+## ★ Code & Implementation
 
 ### Governance Record Validation (EU AI Act Compliance Checklist)
 
@@ -229,7 +229,7 @@ def run_compliance_checklist(record: AISystemGovernanceRecord) -> list[str]:
 
     return gaps
 
-# Example: Creditworthiness AI (Annex III â†’ high-risk)
+# Example: Creditworthiness AI (Annex III → high-risk)
 record = AISystemGovernanceRecord(
     system_name="loan-risk-assistant",
     owner="platform-team",
@@ -249,7 +249,7 @@ if gaps:
     for gap in gaps:
         print(f"   [{gap}]")
 else:
-    print("âœ… No compliance gaps detected")
+    print("✅ No compliance gaps detected")
 
 # Expected output:
 # âš ï¸  1 compliance gap(s) found:
@@ -258,7 +258,7 @@ else:
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 
 | If You Are Building... | First Governance Move |
 |---|---|
@@ -270,7 +270,7 @@ else:
 
 ---
 
-## â—‹ Gotchas & Common Mistakes
+## ○ Gotchas & Common Mistakes
 
 - âš ï¸ Regulation applies to use context, not only model type. A chatbot doing credit decisions = high risk, even if built on a general API.
 - âš ï¸ "We use an API provider" does not remove all downstream responsibility. Deployers bear obligations too.
@@ -280,20 +280,20 @@ else:
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: What should an AI engineer do when working on a potentially regulated use case?
 - **A**: Classify the use case early against EU AI Act Annex III categories, document system purpose and limitations, build evaluation and monitoring into the workflow, and pull in legal or compliance partners before launch. An engineer who flags a high-risk classification before code is written saves far more time than one who raises it post-launch.
 
 - **Q**: Why does the NIST AI RMF matter if it is voluntary?
-- **A**: It provides an operational structure for governance and risk management that maps directly to engineering workflows (Govern â†’ Map â†’ Measure â†’ Manage). Many enterprises use it to organize trustworthy-AI programs, and US federal procurement increasingly references it. It's also a good baseline before your jurisdiction mandates something more specific.
+- **A**: It provides an operational structure for governance and risk management that maps directly to engineering workflows (Govern → Map → Measure → Manage). Many enterprises use it to organize trustworthy-AI programs, and US federal procurement increasingly references it. It's also a good baseline before your jurisdiction mandates something more specific.
 
 - **Q**: What is the significance of August 2, 2026 for engineering teams?
 - **A**: It's the date the EU AI Act becomes fully applicable for Annex III high-risk AI systems. After this date, deploying a non-compliant high-risk AI system in the EU exposes the deployer to fines up to â‚¬35M or 7% of global annual turnover. Engineering teams should treat this as a hard product deadline: conformity assessments, human oversight mechanisms, logging (Art.12), and testing records (Art.9) must all be in place.
 
 ---
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics |
 |---|---|
@@ -304,7 +304,7 @@ else:
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
@@ -315,7 +315,7 @@ else:
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: EU AI Act Risk Classification
 
@@ -344,7 +344,7 @@ else:
 
 ---
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type | Resource | Why |
 |------|----------|-----|
@@ -354,7 +354,7 @@ else:
 | ðŸ”§ Reference | [NIST AI RMF](https://www.nist.gov/artificial-intelligence/ai-risk-management-framework) | Primary framework page |
 | ðŸ“˜ Book | "The AI Dilemma" by Tegmark (2024) | Accessible treatment of AI governance challenges |
 
-## â˜… Sources
+## ★ Sources
 
 - European Commission, AI Act full text (Regulation 2024/1689) â€” https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689
 - European Commission, AI Act policy page â€” https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai

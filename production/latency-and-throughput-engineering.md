@@ -15,11 +15,11 @@ updated: 2026-04-14
 
 # Latency & Throughput Engineering for AI Systems
 
-> âœ¨ **Bit**: Little's Law (L = Î»W) is the universal truth of performance engineering â€” "the average number of items in a system equals the arrival rate multiplied by the average time each item spends in the system." If you remember one formula from this note, make it this one.
+> ✨ **Bit**: Little's Law (L = Î»W) is the universal truth of performance engineering â€” "the average number of items in a system equals the arrival rate multiplied by the average time each item spends in the system." If you remember one formula from this note, make it this one.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: The engineering discipline of measuring, budgeting, and optimizing response time (latency) and work capacity (throughput) in AI systems
 - **Why**: A model that's 10% smarter but 3Ã— slower loses in production every time. Users abandon after 2-3 seconds.
@@ -27,7 +27,7 @@ updated: 2026-04-14
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -51,7 +51,7 @@ Covers: End-to-end AI performance engineering including latency budgets, queuing
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### The Two-Phase Nature of LLM Latency
 
@@ -105,11 +105,11 @@ Question: What is the maximum throughput?
 
   Î» = L / W = 8 / 2 = 4 requests/second
 
-If arrival rate exceeds 4 req/s â†’ queue grows â†’ latency increases â†’ system degrades.
+If arrival rate exceeds 4 req/s → queue grows → latency increases → system degrades.
 
 To serve 10 req/s with the same latency:
   L = Î» Ã— W = 10 Ã— 2 = 20 concurrent slots needed
-  â†’ Need 20/8 = 2.5 â†’ 3 GPUs minimum
+  → Need 20/8 = 2.5 → 3 GPUs minimum
 ```
 
 #### Amdahl's Law for AI Pipelines
@@ -151,10 +151,10 @@ For a single-server queue with Poisson arrivals:
 
 Key insight: As utilization (Ï) approaches 1.0, queue length explodes:
 
-  Ï = 0.5  â†’  Lq = 0.5     (manageable)
-  Ï = 0.8  â†’  Lq = 3.2     (getting crowded)
-  Ï = 0.9  â†’  Lq = 8.1     (dangerous)
-  Ï = 0.95 â†’  Lq = 18.1    (system failing)
+  Ï = 0.5  →  Lq = 0.5     (manageable)
+  Ï = 0.8  →  Lq = 3.2     (getting crowded)
+  Ï = 0.9  →  Lq = 8.1     (dangerous)
+  Ï = 0.95 →  Lq = 18.1    (system failing)
 
   â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
   â”‚ Queue Length                                â”‚
@@ -211,7 +211,7 @@ Distribution of request latencies (typical LLM serving):
    150  â”‚ â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ
    100  â”‚ â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ
     50  â”‚ â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ
-        â”‚ â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ         long tail â†’â†’â†’
+        â”‚ â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ         long tail →→→
      0  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ â€¢ â€¢ â€¢ â€¢ â€¢
         200  500  1000  1500  2000  3000  5000  8000ms
 
@@ -220,7 +220,7 @@ Distribution of request latencies (typical LLM serving):
   P99 = 5000ms  â† 1 in 100 requests
 
 Why tail matters:
-  - A page showing 10 AI components â†’ P(all fast) = 0.95^10 = 60%
+  - A page showing 10 AI components → P(all fast) = 0.95^10 = 60%
   - 40% of page loads hit at least one slow component
   - User experience is defined by the slowest component
 ```
@@ -230,7 +230,7 @@ Why tail matters:
 | Category | Lever | Latency Impact | Throughput Impact | Trade-off |
 |----------|-------|:-------------:|:-----------------:|-----------|
 | **Model** | Smaller model / model routing | â¬‡ï¸â¬‡ï¸â¬‡ï¸ | â¬†ï¸â¬†ï¸â¬†ï¸ | Quality loss |
-| **Model** | Quantization (FP16â†’INT8â†’INT4) | â¬‡ï¸â¬‡ï¸ | â¬†ï¸â¬†ï¸ | Slight quality loss |
+| **Model** | Quantization (FP16→INT8→INT4) | â¬‡ï¸â¬‡ï¸ | â¬†ï¸â¬†ï¸ | Slight quality loss |
 | **Model** | Speculative decoding | â¬‡ï¸â¬‡ï¸ | â¬†ï¸ | Complexity, draft model needed |
 | **Serving** | Continuous batching (vLLM) | â¬†ï¸ (slightly) | â¬†ï¸â¬†ï¸â¬†ï¸ | More complex serving |
 | **Serving** | KV cache optimization | â¬‡ï¸ | â¬†ï¸â¬†ï¸ | Memory management |
@@ -238,13 +238,13 @@ Why tail matters:
 | **Caching** | KV cache reuse (prompt prefix) | â¬‡ï¸â¬‡ï¸ | â¬†ï¸ | Memory usage |
 | **Request** | Context window trimming | â¬‡ï¸â¬‡ï¸ | â¬†ï¸â¬†ï¸ | Information loss |
 | **Request** | Streaming | Perceived â¬‡ï¸â¬‡ï¸â¬‡ï¸ | Neutral | No actual compute savings |
-| **Infra** | GPU upgrade (A100â†’H100) | â¬‡ï¸â¬‡ï¸ | â¬†ï¸â¬†ï¸â¬†ï¸ | Cost |
+| **Infra** | GPU upgrade (A100→H100) | â¬‡ï¸â¬‡ï¸ | â¬†ï¸â¬†ï¸â¬†ï¸ | Cost |
 | **Infra** | Autoscaling | â¬‡ï¸ (at tail) | â¬†ï¸â¬†ï¸ | Cold start latency |
 | **Architecture** | Async/offline split | â¬‡ï¸â¬‡ï¸â¬‡ï¸ (user path) | Neutral | Delayed results |
 
 ---
 
-## â˜… Code & Implementation
+## ★ Code & Implementation
 
 ### Latency Instrumentation with OpenTelemetry
 
@@ -415,7 +415,7 @@ print(result)
 
 ---
 
-## â—† Formulas & Equations
+## ◆ Formulas & Equations
 
 | Name | Formula | Variables | Use |
 |------|---------|-----------|-----|
@@ -429,7 +429,7 @@ print(result)
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 
 ```
 LATENCY TARGETS (production AI chatbot, 2026):
@@ -455,7 +455,7 @@ OPTIMIZATION PRIORITY ORDER:
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
@@ -468,7 +468,7 @@ OPTIMIZATION PRIORITY ORDER:
 
 ---
 
-## â—‹ Gotchas & Common Mistakes
+## ○ Gotchas & Common Mistakes
 
 - âš ï¸ **Optimizing averages, not tails**: A P50 of 500ms means nothing if P99 is 8000ms. Always measure and optimize tail latency.
 - âš ï¸ **Faster model â‰  faster system**: Amdahl's Law applies â€” if the model is 70% of latency, making it 2Ã— faster only gives 1.5Ã— total speedup.
@@ -479,7 +479,7 @@ OPTIMIZATION PRIORITY ORDER:
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: What is the difference between latency and throughput, and when do they conflict?
 - **A**: Latency is the time a single request takes from submission to completion. Throughput is the total work the system handles per unit time (req/s or tokens/s). They conflict because optimizing throughput often means larger batch sizes and higher GPU utilization, which increases queuing time and thus individual request latency. In production, you typically set a latency SLA first (e.g., P95 < 2s), then maximize throughput within that constraint. The mathematical relationship is captured by Little's Law: L = Î»W â€” at a given concurrency level (L), you can trade latency (W) for throughput (Î») and vice versa.
@@ -492,14 +492,14 @@ OPTIMIZATION PRIORITY ORDER:
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Latency Budget Analysis
 
 **Goal**: Break down an AI pipeline into stages and identify the bottleneck
 **Time**: 30 minutes
 **Steps**:
-1. Instrument a simple RAG pipeline (embedding â†’ search â†’ LLM) with `time.perf_counter()` timing
+1. Instrument a simple RAG pipeline (embedding → search → LLM) with `time.perf_counter()` timing
 2. Run 50 requests and record per-stage latency
 3. Create a latency budget table (like the one in Deep Dive)
 4. Apply Amdahl's Law: What's the maximum total speedup if you make the LLM 5Ã— faster?
@@ -518,7 +518,7 @@ OPTIMIZATION PRIORITY ORDER:
 
 ---
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics |
 |---|---|
@@ -529,7 +529,7 @@ OPTIMIZATION PRIORITY ORDER:
 
 ---
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type | Resource | Why |
 |------|----------|-----|
@@ -543,7 +543,7 @@ OPTIMIZATION PRIORITY ORDER:
 
 ---
 
-## â˜… Sources
+## ★ Sources
 
 - Dean, J., & Barroso, L. A. "The Tail at Scale." Communications of the ACM, 2013.
 - Little, J. D. C. "A Proof for the Queuing Formula: L = Î»W." Operations Research, 1961.

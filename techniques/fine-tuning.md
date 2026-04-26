@@ -15,11 +15,11 @@ updated: 2026-04-12
 
 # Fine-Tuning LLMs
 
-> âœ¨ **Bit**: Full fine-tuning a 70B model needs ~280GB of GPU memory (14Ã— A100 40GBs). LoRA does it on 1 GPU. That's not an optimization â€” that's a paradigm shift.
+> ✨ **Bit**: Full fine-tuning a 70B model needs ~280GB of GPU memory (14Ã— A100 40GBs). LoRA does it on 1 GPU. That's not an optimization â€” that's a paradigm shift.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: Adapting a pre-trained LLM's weights on your specific data to change its behavior, style, or domain expertise
 - **Why**: When prompting isn't enough â€” you need the model to consistently behave a certain way
@@ -27,7 +27,7 @@ updated: 2026-04-12
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -51,7 +51,7 @@ Covers: Full fine-tuning, LoRA, QLoRA, PEFT methods, when to use vs RAG. For RAG
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### Types of Fine-Tuning
 
@@ -156,7 +156,7 @@ Performance: Within 1-2% of full fine-tuning
 
 ---
 
-## â˜… Code & Implementation
+## ★ Code & Implementation
 
 ### Fine-tuning with QLoRA (Step-by-Step)
 
@@ -223,7 +223,7 @@ model.save_pretrained("./my-fine-tuned-model")
 
 ---
 
-## â—† Comparison
+## ◆ Comparison
 
 | Aspect             | Full Fine-Tuning  | LoRA              | QLoRA             | RAG (alternative)       |
 | ------------------ | ----------------- | ----------------- | ----------------- | ----------------------- |
@@ -236,9 +236,9 @@ model.save_pretrained("./my-fine-tuned-model")
 
 ---
 
-## â—† Strengths vs Limitations
+## ◆ Strengths vs Limitations
 
-| âœ… Strengths                                | âŒ Limitations                          |
+| ✅ Strengths                                | âŒ Limitations                          |
 | ------------------------------------------ | -------------------------------------- |
 | Permanently changes model behavior         | Requires training data curation        |
 | Consistent output style/format             | Risk of catastrophic forgetting        |
@@ -248,7 +248,7 @@ model.save_pretrained("./my-fine-tuned-model")
 
 ---
 
-## â—‹ Gotchas & Common Mistakes
+## ○ Gotchas & Common Mistakes
 
 - âš ï¸ **"Just fine-tune it" is usually wrong**: Try prompting and RAG first. Fine-tuning is for behavior, not knowledge.
 - âš ï¸ **Data quality > data quantity**: 100 perfect examples beat 10,000 noisy ones
@@ -258,7 +258,7 @@ model.save_pretrained("./my-fine-tuned-model")
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: When would you fine-tune vs use RAG?
 - **A**: Fine-tune for: output format changes, domain-specific reasoning/style, consistent behavior. RAG for: up-to-date knowledge, source attribution, private data access. Best practice in 2026: **combine both** â€” LoRA for behavior, RAG for facts.
@@ -268,7 +268,7 @@ model.save_pretrained("./my-fine-tuned-model")
 
 ---
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics                                                          |
 | ------------ | --------------------------------------------------------------- |
@@ -279,7 +279,7 @@ model.save_pretrained("./my-fine-tuned-model")
 
 ---
 
-## â˜… Fine-Tuning Tooling (2026)
+## ★ Fine-Tuning Tooling (2026)
 
 | Tool                | Key Feature                                | When to Use                                                                      |
 | ------------------- | ------------------------------------------ | -------------------------------------------------------------------------------- |
@@ -310,7 +310,7 @@ model = FastLanguageModel.get_peft_model(
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
@@ -322,7 +322,7 @@ model = FastLanguageModel.get_peft_model(
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Fine-Tune and Measure Forgetting
 
@@ -348,7 +348,7 @@ model = FastLanguageModel.get_peft_model(
 ---
 
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type | Resource | Why |
 |------|----------|-----|
@@ -357,7 +357,7 @@ model = FastLanguageModel.get_peft_model(
 | ðŸ“˜ Book | "LLM Engineer's Handbook" by Iusztin & Labonne (2024), Ch 5-6 | Practical fine-tuning pipeline guide |
 | ðŸŽ¥ Video | [Sebastian Raschka â€” "LoRA and Fine-Tuning LLMs"](https://www.youtube.com/watch?v=MEhQH0Xa1hw) | Clear explanation of LoRA mechanics and practical tips |
 
-## â˜… Sources
+## ★ Sources
 
 - Hu et al., "LoRA: Low-Rank Adaptation of Large Language Models" (2021)
 - Dettmers et al., "QLoRA: Efficient Finetuning of Quantized LLMs" (2023)

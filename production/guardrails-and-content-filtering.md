@@ -15,11 +15,11 @@ updated: 2026-04-14
 
 # Guardrails & Content Filtering
 
-> âœ¨ **Bit**: LLMs are powerful but unpredictable. Guardrails are the safety barriers that keep your AI from generating toxic content, leaking data, executing unauthorized actions, or hallucinating medical advice. They're not optional in production.
+> ✨ **Bit**: LLMs are powerful but unpredictable. Guardrails are the safety barriers that keep your AI from generating toxic content, leaking data, executing unauthorized actions, or hallucinating medical advice. They're not optional in production.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: Input validation, output filtering, and behavioral constraints applied to LLM systems to ensure safety, compliance, and quality
 - **Why**: Without guardrails, LLMs can generate harmful content, leak PII, follow injection attacks, or produce outputs that violate regulations.
@@ -27,7 +27,7 @@ updated: 2026-04-14
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -51,7 +51,7 @@ Covers: Input validation, output filtering, PII detection, topic boundaries, hal
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### Three-Layer Guardrail Architecture
 
@@ -68,8 +68,8 @@ USER INPUT
 â”‚  â€¢ Input length / cost limits            â”‚
 â”‚  â€¢ Rate limiting                         â”‚
 â”‚                                          â”‚
-â”‚  â†“ BLOCKED â†’ return rejection message    â”‚
-â”‚  â†“ PASSED â†’ continue to model           â”‚
+â”‚  â†“ BLOCKED → return rejection message    â”‚
+â”‚  â†“ PASSED → continue to model           â”‚
 â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
      â”‚
      â–¼
@@ -94,8 +94,8 @@ USER INPUT
 â”‚  â€¢ Competitor mention filter             â”‚
 â”‚  â€¢ Citation verification                 â”‚
 â”‚                                          â”‚
-â”‚  â†“ FAILED â†’ fallback response or retry   â”‚
-â”‚  â†“ PASSED â†’ return to user              â”‚
+â”‚  â†“ FAILED → fallback response or retry   â”‚
+â”‚  â†“ PASSED → return to user              â”‚
 â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
      â”‚
      â–¼
@@ -117,7 +117,7 @@ USER RESPONSE
 
 ---
 
-## â˜… Code & Implementation
+## ★ Code & Implementation
 
 ### Production Guardrails Pipeline
 
@@ -246,7 +246,7 @@ print(result.model_dump_json(indent=2))
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 
 ```
 GUARDRAIL PRIORITY (implement in this order):
@@ -267,7 +267,7 @@ LATENCY BUDGET:
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
@@ -278,14 +278,14 @@ LATENCY BUDGET:
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: Design a guardrail system for a healthcare chatbot.
 - **A**: Three-layer approach. Input: PII detection (redact SSN, DOB before model sees them), injection detection, and topic filter (reject non-health queries). Model: system prompt with strict medical disclaimer rules, temperature=0 for consistency, structured output for treatment recommendations. Output: medical claim classifier (flag unverified treatment claims), PII leakage check, mandatory disclaimer injection. I'd add a HIPAA compliance layer that logs all interactions without PII for audit. Latency budget: < 200ms total guardrail overhead. For high-risk responses (medication, diagnosis), add a human-review queue.
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Build a Guardrailed Chatbot
 
@@ -301,7 +301,7 @@ LATENCY BUDGET:
 
 ---
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics |
 |---|---|
@@ -312,7 +312,7 @@ LATENCY BUDGET:
 
 ---
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type | Resource | Why |
 |------|----------|-----|
@@ -323,7 +323,7 @@ LATENCY BUDGET:
 
 ---
 
-## â˜… Sources
+## ★ Sources
 
 - Guardrails AI â€” https://www.guardrailsai.com/
 - NVIDIA NeMo Guardrails â€” https://github.com/NVIDIA/NeMo-Guardrails

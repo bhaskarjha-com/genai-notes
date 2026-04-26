@@ -15,11 +15,11 @@ updated: 2026-04-14
 
 # Embedding Fine-Tuning
 
-> âœ¨ **Bit**: General-purpose embeddings work well for general-purpose tasks. But if your RAG system struggles with domain-specific queries (legal, medical, code), fine-tuning embeddings on your data can improve retrieval by 10-30% â€” often more impactful than changing the LLM.
+> ✨ **Bit**: General-purpose embeddings work well for general-purpose tasks. But if your RAG system struggles with domain-specific queries (legal, medical, code), fine-tuning embeddings on your data can improve retrieval by 10-30% â€” often more impactful than changing the LLM.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: Training or adapting embedding models on domain-specific data to improve retrieval quality for RAG and search systems
 - **Why**: Off-the-shelf embeddings (OpenAI, Cohere) are trained on general web data. Domain-specific terminology, jargon, and relationships aren't well captured.
@@ -27,7 +27,7 @@ updated: 2026-04-14
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -45,7 +45,7 @@ Covers: When to fine-tune vs use off-the-shelf, training data generation, contra
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### When to Fine-Tune Embeddings
 
@@ -53,11 +53,11 @@ Covers: When to fine-tune vs use off-the-shelf, training data generation, contra
 DECISION TREE:
 
   Is your retrieval quality good enough (Recall@5 > 0.8)?
-  â”œâ”€â”€ YES â†’ Don't fine-tune. Focus on LLM/prompt improvements.
-  â””â”€â”€ NO  â†’ Is the problem domain-specific vocabulary?
-             â”œâ”€â”€ YES â†’ Fine-tune embeddings (highest ROI)
-             â””â”€â”€ NO  â†’ Check chunking, reranking, hybrid search first
-                        â””â”€â”€ Still bad? â†’ Fine-tune embeddings
+  â”œâ”€â”€ YES → Don't fine-tune. Focus on LLM/prompt improvements.
+  â””â”€â”€ NO  → Is the problem domain-specific vocabulary?
+             â”œâ”€â”€ YES → Fine-tune embeddings (highest ROI)
+             â””â”€â”€ NO  → Check chunking, reranking, hybrid search first
+                        â””â”€â”€ Still bad? → Fine-tune embeddings
 
 SIGNS YOU NEED EMBEDDING FINE-TUNING:
   âœ— Medical queries: "dyspnea" doesn't match "shortness of breath"
@@ -81,9 +81,9 @@ TRAINING OBJECTIVE: Pull matching pairs together, push non-matching apart
 
   Query: "What causes high blood pressure?"
 
-  Positive doc: "Hypertension is caused by..."     â†’ PULL CLOSER
-  Negative doc: "Stock market trends in 2024..."    â†’ PUSH APART
-  Hard negative: "Blood pressure measurement..."    â†’ PUSH APART (harder!)
+  Positive doc: "Hypertension is caused by..."     → PULL CLOSER
+  Negative doc: "Stock market trends in 2024..."    → PUSH APART
+  Hard negative: "Blood pressure measurement..."    → PUSH APART (harder!)
 
   Loss function: InfoNCE / Multiple Negatives Ranking Loss
 
@@ -99,7 +99,7 @@ TRAINING OBJECTIVE: Pull matching pairs together, push non-matching apart
 
 ---
 
-## â˜… Code & Implementation
+## ★ Code & Implementation
 
 ### Fine-Tune Embeddings with Sentence Transformers
 
@@ -195,7 +195,7 @@ print(f"Generated {len(training_data)} training pairs")
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 
 ```
 EMBEDDING FINE-TUNING CHECKLIST:
@@ -216,7 +216,7 @@ EXPECTED IMPROVEMENTS:
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
@@ -226,14 +226,14 @@ EXPECTED IMPROVEMENTS:
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: How would you improve retrieval quality in a RAG system?
 - **A**: I'd follow a priority ladder. First, measure baseline retrieval quality (Precision@5, Recall@5) to quantify the gap. Second, check chunking â€” are chunks the right size (200-500 tokens) with enough context? Third, try hybrid search (semantic + keyword with BM25). Fourth, add a cross-encoder reranker on top-20 results. If the domain is specialized (medical, legal), I'd fine-tune the embedding model on 5K-10K domain-specific (query, document) pairs using contrastive learning â€” this typically gives 10-30% improvement on domain queries. I'd evaluate each change independently to measure its contribution.
 
 ---
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics |
 |---|---|
@@ -244,7 +244,7 @@ EXPECTED IMPROVEMENTS:
 
 ---
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type | Resource | Why |
 |------|----------|-----|
@@ -256,7 +256,7 @@ EXPECTED IMPROVEMENTS:
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Fine-Tune an Embedding Model on Your Domain
 
@@ -270,7 +270,7 @@ EXPECTED IMPROVEMENTS:
 **Expected Output**: MRR improvement table showing fine-tuned model outperforms base
 ---
 
-## â˜… Sources
+## ★ Sources
 
 - Sentence Transformers Documentation â€” https://www.sbert.net/
 - MTEB Embedding Benchmark â€” https://huggingface.co/spaces/mteb/leaderboard

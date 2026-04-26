@@ -15,11 +15,11 @@ updated: 2026-04-14
 
 # Computer Vision Fundamentals for AI Builders
 
-> âœ¨ **Bit**: You don't need to be a vision PhD to build multimodal AI â€” but you do need to understand why a ViT-L/14 processes images as 16Ã—16 patch sequences, why CLIP can search images with text, and why resolution quadruples compute cost. This note gives you that working knowledge.
+> ✨ **Bit**: You don't need to be a vision PhD to build multimodal AI â€” but you do need to understand why a ViT-L/14 processes images as 16Ã—16 patch sequences, why CLIP can search images with text, and why resolution quadruples compute cost. This note gives you that working knowledge.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: The core concepts behind image understanding â€” CNNs, Vision Transformers, CLIP, detection, segmentation â€” that every GenAI builder needs
 - **Why**: Modern AI is multimodal. GPT-4o, Gemini, and Claude all process images. Understanding how pixels become representations is now a core GenAI skill.
@@ -27,7 +27,7 @@ updated: 2026-04-14
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -51,7 +51,7 @@ Covers: Core CV tasks, how images become representations, CNN vs ViT architectur
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### Core Vision Tasks
 
@@ -64,22 +64,22 @@ INPUT: Image (H Ã— W Ã— C pixel array)
 â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
 â”‚                                                           â”‚
 â”‚  CLASSIFICATION        "This is a cat"                    â”‚
-â”‚  Image â†’ single label                                    â”‚
+â”‚  Image → single label                                    â”‚
 â”‚                                                           â”‚
 â”‚  DETECTION            "Cat at (x1,y1,x2,y2)"            â”‚
-â”‚  Image â†’ bounding boxes + labels                         â”‚
+â”‚  Image → bounding boxes + labels                         â”‚
 â”‚                                                           â”‚
 â”‚  SEGMENTATION         "These pixels are cat"             â”‚
-â”‚  Image â†’ per-pixel labels                                â”‚
+â”‚  Image → per-pixel labels                                â”‚
 â”‚                                                           â”‚
 â”‚  OCR / DOCUMENT AI    "Invoice #1234, Total: $500"       â”‚
-â”‚  Image â†’ structured text extraction                      â”‚
+â”‚  Image → structured text extraction                      â”‚
 â”‚                                                           â”‚
 â”‚  IMAGE-TEXT MATCHING   "How similar is this image         â”‚
 â”‚  (CLIP, SigLIP)        to 'a sunset over mountains'?"   â”‚
 â”‚                                                           â”‚
 â”‚  VISUAL QA            "How many people are in             â”‚
-â”‚  (VLMs)                this photo?" â†’ "Three"             â”‚
+â”‚  (VLMs)                this photo?" → "Three"             â”‚
 â”‚                                                           â”‚
 â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
@@ -99,10 +99,10 @@ INPUT: Image (H Ã— W Ã— C pixel array)
 RAW IMAGE                    FEATURE EXTRACTION              SEMANTIC EMBEDDING
                            
 â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”          â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”            â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚ â–‘â–‘â–“â–“â–ˆâ–ˆâ–‘â–‘â–“â–“â–ˆâ–ˆ  â”‚          â”‚  Edges â†’ Shapes  â”‚            â”‚ [0.23, -0.1, â”‚
-â”‚ â–‘â–‘â–“â–“â–ˆâ–ˆâ–‘â–‘â–“â–“â–ˆâ–ˆ  â”‚  â”€CNNâ”€â–º  â”‚  Shapes â†’ Parts  â”‚  â”€Poolâ”€â–º   â”‚  0.87, 0.45, â”‚
-â”‚ â–ˆâ–ˆâ–‘â–‘â–“â–“â–ˆâ–ˆâ–‘â–‘â–“â–“  â”‚  or ViT  â”‚  Parts â†’ Objects â”‚            â”‚  ..., -0.33] â”‚
-â”‚ â–ˆâ–ˆâ–‘â–‘â–“â–“â–ˆâ–ˆâ–‘â–‘â–“â–“  â”‚          â”‚  Objects â†’ Scene â”‚            â”‚              â”‚
+â”‚ â–‘â–‘â–“â–“â–ˆâ–ˆâ–‘â–‘â–“â–“â–ˆâ–ˆ  â”‚          â”‚  Edges → Shapes  â”‚            â”‚ [0.23, -0.1, â”‚
+â”‚ â–‘â–‘â–“â–“â–ˆâ–ˆâ–‘â–‘â–“â–“â–ˆâ–ˆ  â”‚  â”€CNNâ”€â–º  â”‚  Shapes → Parts  â”‚  â”€Poolâ”€â–º   â”‚  0.87, 0.45, â”‚
+â”‚ â–ˆâ–ˆâ–‘â–‘â–“â–“â–ˆâ–ˆâ–‘â–‘â–“â–“  â”‚  or ViT  â”‚  Parts → Objects â”‚            â”‚  ..., -0.33] â”‚
+â”‚ â–ˆâ–ˆâ–‘â–‘â–“â–“â–ˆâ–ˆâ–‘â–‘â–“â–“  â”‚          â”‚  Objects → Scene â”‚            â”‚              â”‚
 â”‚                â”‚          â”‚                  â”‚            â”‚  768-dim vec  â”‚
 â”‚ HÃ—WÃ—3 tensor   â”‚          â”‚  Feature maps    â”‚            â”‚              â”‚
 â”‚ (e.g. 224Ã—224Ã—3)â”‚         â”‚                  â”‚            â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
@@ -118,7 +118,7 @@ RAW IMAGE                    FEATURE EXTRACTION              SEMANTIC EMBEDDING
 
 | Aspect | CNN (ConvNet) | Vision Transformer (ViT) |
 |--------|:-------------|:------------------------|
-| **How it works** | Slides learned filters across image, building local â†’ global features | Splits image into patches, treats each as a "token", processes with transformer |
+| **How it works** | Slides learned filters across image, building local → global features | Splits image into patches, treats each as a "token", processes with transformer |
 | **Key operation** | Convolution (local receptive field) | Self-attention (global receptive field) |
 | **Inductive bias** | Translation invariance, locality | Minimal â€” learns spatial relationships from data |
 | **Data efficiency** | Better with small datasets (built-in priors) | Needs large datasets or pretraining |
@@ -138,7 +138,7 @@ Split into patches: 14Ã—14 grid of 16Ã—16 pixel patches = 196 patches
 Flatten each patch: 16Ã—16Ã—3 = 768 values per patch
       â”‚
       â–¼
-Linear projection: 768 â†’ D (embedding dimension)
+Linear projection: 768 → D (embedding dimension)
       â”‚
       â–¼
 Add position embeddings: Tell the model where each patch is
@@ -230,7 +230,7 @@ More tokens = better detail but higher cost and latency
 
 ---
 
-## â˜… Code & Implementation
+## ★ Code & Implementation
 
 ### Image Classification with a Pretrained ViT
 
@@ -242,7 +242,7 @@ from transformers import ViTForImageClassification, ViTImageProcessor
 from PIL import Image
 import torch
 
-# Load pretrained ViT (ImageNet-21k â†’ ImageNet-1k fine-tuned)
+# Load pretrained ViT (ImageNet-21k → ImageNet-1k fine-tuned)
 model_name = "google/vit-base-patch16-224"
 processor = ViTImageProcessor.from_pretrained(model_name)
 model = ViTForImageClassification.from_pretrained(model_name)
@@ -358,16 +358,16 @@ print(f"Best match: {image_paths[best_match_idx]} (similarity: {similarities[bes
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 
 ```
 CV TASK DECISION GUIDE:
-  "What is in this image?"              â†’ Classification (ViT, EfficientNet)
-  "Where are the objects?"              â†’ Detection (YOLO, RT-DETR)
-  "Which pixels belong to what?"        â†’ Segmentation (SAM 2, Mask2Former)
-  "What does this document say?"        â†’ OCR (PaddleOCR, DocTR)
-  "Find images similar to this text"    â†’ CLIP / SigLIP embedding search
-  "Answer questions about this image"   â†’ VLM (GPT-4o, Gemini, LLaVA)
+  "What is in this image?"              → Classification (ViT, EfficientNet)
+  "Where are the objects?"              → Detection (YOLO, RT-DETR)
+  "Which pixels belong to what?"        → Segmentation (SAM 2, Mask2Former)
+  "What does this document say?"        → OCR (PaddleOCR, DocTR)
+  "Find images similar to this text"    → CLIP / SigLIP embedding search
+  "Answer questions about this image"   → VLM (GPT-4o, Gemini, LLaVA)
 
 RESOLUTION vs COMPUTE TRADE-OFF:
   224Ã—224:   Baseline (1Ã—) â€” standard classification
@@ -384,7 +384,7 @@ MODEL SIZE REFERENCE (ViT family):
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
@@ -396,17 +396,17 @@ MODEL SIZE REFERENCE (ViT family):
 
 ---
 
-## â—‹ Gotchas & Common Mistakes
+## ○ Gotchas & Common Mistakes
 
 - âš ï¸ **High ImageNet accuracy â‰  production robustness**: A model with 90% on ImageNet may fail spectacularly on your specific photos (different lighting, angles, backgrounds).
-- âš ï¸ **Resolution is the hidden cost multiplier**: Going from 224â†’512 resolution increases compute ~5Ã— and memory ~5Ã—. Budget this explicitly.
+- âš ï¸ **Resolution is the hidden cost multiplier**: Going from 224→512 resolution increases compute ~5Ã— and memory ~5Ã—. Budget this explicitly.
 - âš ï¸ **CLIP is powerful but not precise**: CLIP excels at broad semantic matching but struggles with fine-grained distinctions ("two cats" vs "three cats"). Don't use it for counting or spatial reasoning.
 - âš ï¸ **OCR â‰  document understanding**: Extracting text (OCR) is different from understanding layout and relationships (Document AI). Don't confuse them.
 - âš ï¸ **Vision tokens are expensive in VLMs**: A single image in GPT-4o costs 85-1105 tokens. Processing 10 images per request can cost more than the text portion.
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: Why are Vision Transformers important for multimodal AI?
 - **A**: ViTs convert images into sequences of patch embeddings using the same transformer architecture as language models. This architectural alignment is what makes multimodal models possible â€” you can project visual patch tokens into the same embedding space as text tokens, concatenate them, and let a single transformer process both modalities together. This is exactly how models like LLaVA and GPT-4o work: a ViT encodes the image into visual tokens, a projection layer maps them into the LLM's space, and the LLM attends to both visual and text tokens. Before ViTs, integrating CNNs with transformers required more complex adapter architectures.
@@ -419,7 +419,7 @@ MODEL SIZE REFERENCE (ViT family):
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Zero-Shot Image Classification
 
@@ -440,14 +440,14 @@ MODEL SIZE REFERENCE (ViT family):
 **Steps**:
 1. Collect 50 images (or use CIFAR-10 sample)
 2. Encode all images with CLIP into a numpy matrix
-3. Implement text-query search: encode query â†’ cosine similarity â†’ top-5 results
+3. Implement text-query search: encode query → cosine similarity → top-5 results
 4. Test with 5 queries: one precise ("red car"), one abstract ("peaceful"), one misleading
 5. Evaluate retrieval quality â€” how does query specificity affect results?
 **Expected Output**: Working search system, quality analysis by query type
 
 ---
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics |
 |---|---|
@@ -458,7 +458,7 @@ MODEL SIZE REFERENCE (ViT family):
 
 ---
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type | Resource | Why |
 |------|----------|-----|
@@ -472,7 +472,7 @@ MODEL SIZE REFERENCE (ViT family):
 
 ---
 
-## â˜… Sources
+## ★ Sources
 
 - Dosovitskiy et al. "An Image is Worth 16Ã—16 Words: Transformers for Image Recognition at Scale" (2020)
 - Radford et al. "Learning Transferable Visual Models From Natural Language Supervision" (CLIP, 2021)

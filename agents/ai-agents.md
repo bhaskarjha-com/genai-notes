@@ -15,11 +15,11 @@ updated: 2026-04-12
 
 # AI Agents
 
-> âœ¨ **Bit**: 2024 was "year of the chatbot." 2025-2026 is "year of the agent." The difference? Chatbots answer. Agents do.
+> ✨ **Bit**: 2024 was "year of the chatbot." 2025-2026 is "year of the agent." The difference? Chatbots answer. Agents do.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: AI systems that autonomously plan, reason, use tools, and take multi-step actions to achieve goals
 - **Why**: The biggest paradigm shift in GenAI since ChatGPT. Moves AI from "answer questions" to "complete tasks"
@@ -27,7 +27,7 @@ updated: 2026-04-12
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -52,7 +52,7 @@ Covers: Agent architecture, tool use, planning patterns, multi-agent systems, an
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### Agent Architecture
 
@@ -80,7 +80,7 @@ Covers: Agent architecture, tool use, planning patterns, multi-agent systems, an
 â”‚                                                     â”‚
 â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”      â”‚
 â”‚  â”‚         OBSERVATION & FEEDBACK LOOP       â”‚      â”‚
-â”‚  â”‚  Tool result â†’ Reason â†’ Next action â†’ ... â”‚      â”‚
+â”‚  â”‚  Tool result → Reason → Next action → ... â”‚      â”‚
 â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜      â”‚
 â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
@@ -147,7 +147,7 @@ ACT:   respond_to_user(summary + table)
 
 | Strategy             | How                                  | When                          |
 | -------------------- | ------------------------------------ | ----------------------------- |
-| **ReAct**            | Think â†’ Act â†’ Observe loop           | General-purpose agent tasks   |
+| **ReAct**            | Think → Act → Observe loop           | General-purpose agent tasks   |
 | **Plan-and-Execute** | Create full plan first, then execute | Complex multi-step tasks      |
 | **Tree of Thoughts** | Explore multiple reasoning paths     | Hard reasoning problems       |
 | **Reflexion**        | Self-reflect on failures, retry      | Tasks needing self-correction |
@@ -183,7 +183,7 @@ ACT:   respond_to_user(summary + table)
 
 ---
 
-## â—† Code & Implementation
+## ◆ Code & Implementation
 
 ### Simple Agent with LangGraph
 
@@ -238,9 +238,9 @@ result = app.invoke({"messages": [("user", "What is 25 * 47?")]})
 
 ---
 
-## â—† Strengths vs Limitations
+## ◆ Strengths vs Limitations
 
-| âœ… Strengths                           | âŒ Limitations                             |
+| ✅ Strengths                           | âŒ Limitations                             |
 | ------------------------------------- | ----------------------------------------- |
 | Can complete complex multi-step tasks | Unreliable â€” can get stuck in loops       |
 | Adapts approach based on observations | Expensive (many LLM calls per task)       |
@@ -250,7 +250,7 @@ result = app.invoke({"messages": [("user", "What is 25 * 47?")]})
 
 ---
 
-## â—† Agent Memory
+## ◆ Agent Memory
 
 ```
 MEMORY TYPES:
@@ -278,30 +278,30 @@ MEMORY TYPES:
   â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 
 IMPLEMENTATION:
-  Short-term  â†’ Sliding window on conversation history
-  Long-term   â†’ Vector DB (Chroma, Pinecone) + retrieval
-  Episodic    â†’ Summarize and store past task outcomes
-  Procedural  â†’ Fine-tuned behaviors or prompt templates
+  Short-term  → Sliding window on conversation history
+  Long-term   → Vector DB (Chroma, Pinecone) + retrieval
+  Episodic    → Summarize and store past task outcomes
+  Procedural  → Fine-tuned behaviors or prompt templates
 ```
 
 ---
 
-## â—† Framework Comparison (March 2026)
+## ◆ Framework Comparison (March 2026)
 
 | Framework           | By        | Orchestration        | Multi-Agent | Best For                        |
 | ------------------- | --------- | -------------------- | ----------- | ------------------------------- |
-| **LangGraph**       | LangChain | Graph-based stateful | âœ…           | Complex workflows with state    |
-| **CrewAI**          | Community | Role-based teams     | âœ…           | Business process automation     |
-| **AutoGen**         | Microsoft | Chat-based           | âœ…           | Research, conversational agents |
-| **ADK**             | Google    | Hierarchical + graph | âœ…           | Google ecosystem, production    |
+| **LangGraph**       | LangChain | Graph-based stateful | ✅           | Complex workflows with state    |
+| **CrewAI**          | Community | Role-based teams     | ✅           | Business process automation     |
+| **AutoGen**         | Microsoft | Chat-based           | ✅           | Research, conversational agents |
+| **ADK**             | Google    | Hierarchical + graph | ✅           | Google ecosystem, production    |
 | **Semantic Kernel** | Microsoft | Plugin-based         | âš ï¸ Basic     | Enterprise .NET/Python          |
-| **Mastra**          | Community | TypeScript-first     | âœ…           | JS/TS developers                |
+| **Mastra**          | Community | TypeScript-first     | ✅           | JS/TS developers                |
 
 For protocols connecting agents (MCP, A2A), see [Agentic Protocols](./agentic-protocols.md).
 
 ---
 
-## â—‹ Gotchas & Common Mistakes
+## ○ Gotchas & Common Mistakes
 
 - âš ï¸ **Agent â‰  Chatbot with tools**: A chatbot uses tools reactively. An agent plans proactively. Don't call everything an "agent."
 - âš ï¸ **Infinite loops**: Agents can get stuck retrying failed actions. Always set max iterations.
@@ -312,7 +312,7 @@ For protocols connecting agents (MCP, A2A), see [Agentic Protocols](./agentic-pr
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: What makes an AI agent different from a chatbot?
 - **A**: A chatbot responds to messages. An agent sets goals, plans multi-step approaches, uses tools, observes results, and iterates. Agents are autonomous; chatbots are reactive.
@@ -328,7 +328,7 @@ For protocols connecting agents (MCP, A2A), see [Agentic Protocols](./agentic-pr
 
 ---
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics                                                                                                 |
 | ------------ | ------------------------------------------------------------------------------------------------------ |
@@ -340,7 +340,7 @@ For protocols connecting agents (MCP, A2A), see [Agentic Protocols](./agentic-pr
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
@@ -352,7 +352,7 @@ For protocols connecting agents (MCP, A2A), see [Agentic Protocols](./agentic-pr
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Build an Agent with Guardrails
 
@@ -379,7 +379,7 @@ For protocols connecting agents (MCP, A2A), see [Agentic Protocols](./agentic-pr
 ---
 
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type | Resource | Why |
 |------|----------|-----|
@@ -388,7 +388,7 @@ For protocols connecting agents (MCP, A2A), see [Agentic Protocols](./agentic-pr
 | ðŸ”§ Hands-on | [LangGraph Documentation](https://langchain-ai.github.io/langgraph/) | Build production agent workflows with state management |
 | ðŸŽ¥ Video | [Harrison Chase â€” "What Are AI Agents?"](https://www.youtube.com/watch?v=DWUdGhRrv2c) | LangChain creator explaining agent architectures |
 
-## â˜… Sources
+## ★ Sources
 
 - LangGraph documentation â€” https://langchain-ai.github.io/langgraph/
 - Anthropic "Building Effective Agents" guide (2025)

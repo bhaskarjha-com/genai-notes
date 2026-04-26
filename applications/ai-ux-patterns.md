@@ -15,11 +15,11 @@ updated: 2026-04-15
 
 # AI UX Patterns
 
-> âœ¨ **Bit**: The best AI model in the world is useless if users don't trust it, can't understand it, or give up waiting 8 seconds for a response. AI UX design is about making intelligence feel reliable, fast, and controllable.
+> ✨ **Bit**: The best AI model in the world is useless if users don't trust it, can't understand it, or give up waiting 8 seconds for a response. AI UX design is about making intelligence feel reliable, fast, and controllable.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: Design patterns for building user interfaces around AI systems â€” handling latency, uncertainty, trust, and error
 - **Why**: AI behaves differently from traditional software (non-deterministic, sometimes wrong, variable latency). Generic UX patterns don't work.
@@ -27,7 +27,7 @@ updated: 2026-04-15
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -40,7 +40,7 @@ updated: 2026-04-15
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### The Three Pillars of AI UX
 
@@ -113,7 +113,7 @@ PROGRESSIVE DISCLOSURE HIERARCHY:
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure                   | Symptoms                           | Root Cause                                   | Mitigation                                                    |
 | ------------------------- | ---------------------------------- | -------------------------------------------- | ------------------------------------------------------------- |
@@ -125,7 +125,7 @@ PROGRESSIVE DISCLOSURE HIERARCHY:
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: How would you design the UX for an AI research assistant?
 - **A**: Three core principles. Speed: stream responses token-by-token with a skeleton loading state. Trust: every claim gets an inline citation with a link to the source document â€” clicking opens the relevant passage highlighted. Control: users can regenerate, edit the response, or thumbs-down with a reason. I'd add progressive disclosure â€” a TL;DR summary with expandable details underneath. For uncertainty, I'd use a confidence indicator and have the AI explicitly say "I'm not sure about this" rather than hallucinating confidently.
@@ -138,7 +138,7 @@ PROGRESSIVE DISCLOSURE HIERARCHY:
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Audit an AI Product's UX
 
@@ -164,7 +164,7 @@ PROGRESSIVE DISCLOSURE HIERARCHY:
 
 ---
 
-## â˜… Code & Implementation
+## ★ Code & Implementation
 
 ### Streaming Response with Progressive Disclosure
 
@@ -231,7 +231,7 @@ def answer_with_confidence(question: str) -> dict:
     )
     return json.loads(resp.choices[0].message.content)
 
-# UI mapping: confidence â†’ indicator color
+# UI mapping: confidence → indicator color
 def confidence_color(conf: float) -> str:
     if conf >= 0.85: return "green"    # show normally
     if conf >= 0.6:  return "yellow"   # show with "Verify this" note
@@ -239,7 +239,7 @@ def confidence_color(conf: float) -> str:
 
 result = answer_with_confidence("What is the population of Mars?")
 print(f"Answer: {result['answer']}")
-print(f"Confidence: {result['confidence']:.0%} â†’ {confidence_color(result['confidence'])}")
+print(f"Confidence: {result['confidence']:.0%} → {confidence_color(result['confidence'])}")
 print(f"Caveat: {result.get('uncertainty_note')}")
 ```
 
@@ -299,7 +299,7 @@ export function StreamingChat() {
 }
 ```
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics                                                                                                    |
 | ------------ | --------------------------------------------------------------------------------------------------------- |
@@ -310,7 +310,7 @@ export function StreamingChat() {
 
 ---
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type       | Resource                                                                                                                              | Why                                               |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
@@ -320,7 +320,7 @@ export function StreamingChat() {
 
 ---
 
-## â˜… Sources
+## ★ Sources
 
 - Google PAIR â€” https://pair.withgoogle.com/
 - Apple HIG: Machine Learning â€” https://developer.apple.com/design/human-interface-guidelines/machine-learning

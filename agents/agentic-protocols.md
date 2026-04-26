@@ -15,11 +15,11 @@ updated: 2026-04-11
 
 # Agentic Protocols & Frameworks
 
-> âœ¨ **Bit**: MCP is like USB â€” it connects your AI to tools. A2A is like TCP/IP â€” it lets AIs talk to each other. ADK is like a factory â€” it builds the AIs. Together they're the plumbing of the agentic revolution.
+> ✨ **Bit**: MCP is like USB â€” it connects your AI to tools. A2A is like TCP/IP â€” it lets AIs talk to each other. ADK is like a factory â€” it builds the AIs. Together they're the plumbing of the agentic revolution.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: The standard protocols and frameworks for building, connecting, and orchestrating AI agents
 - **Why**: Building one agent is easy. Building 5 agents that use 20 tools and talk to each other? You need standards. MCP, A2A, and ADK are those standards.
@@ -27,7 +27,7 @@ updated: 2026-04-11
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -48,7 +48,7 @@ Covers protocols and frameworks. For agent architecture/planning patterns, see [
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### How They Fit Together
 
@@ -131,12 +131,12 @@ SECURITY (2026 spec):
   - Rate limiting, scope consent, observability/audit trails
 
 MCP SERVER EXAMPLES:
-  GitHub       â†’ repos, issues, PRs as tools
-  PostgreSQL   â†’ query, schema as tools + resources
-  Slack        â†’ send/read messages
-  Filesystem   â†’ read/write files
-  Web Search   â†’ search the internet
-  Custom       â†’ YOUR API as an MCP server
+  GitHub       → repos, issues, PRs as tools
+  PostgreSQL   → query, schema as tools + resources
+  Slack        → send/read messages
+  Filesystem   → read/write files
+  Web Search   → search the internet
+  Custom       → YOUR API as an MCP server
 ```
 
 ### A2A (Agent-to-Agent Protocol) â€” Agent â†” Agent
@@ -178,17 +178,17 @@ HOW IT WORKS:
      - Request more info
 
   3. COMMUNICATION MODES
-     Synchronous:  Request â†’ Response (simple tasks)
-     Async:        Request â†’ Webhook updates â†’ Final result
-     Streaming:    Request â†’ SSE stream â†’ Progressive results
+     Synchronous:  Request → Response (simple tasks)
+     Async:        Request → Webhook updates → Final result
+     Streaming:    Request → SSE stream → Progressive results
 
 A2A vs MCP:
   â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
   â”‚  MCP:  "Hey database, give me user data"     â”‚
-  â”‚         Agent â†’ Tool (structured function)    â”‚
+  â”‚         Agent → Tool (structured function)    â”‚
   â”‚                                              â”‚
   â”‚  A2A:  "Hey booking agent, find me a flight" â”‚
-  â”‚         Agent â†’ Agent (autonomous delegation) â”‚
+  â”‚         Agent → Agent (autonomous delegation) â”‚
   â”‚                                              â”‚
   â”‚  They're COMPLEMENTARY, not competing.       â”‚
   â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
@@ -230,16 +230,16 @@ AGENT HIERARCHY IN ADK:
 
 | Framework           | By        | Best For                         | Multi-Agent    | MCP | A2A | Graph Workflow |
 | ------------------- | --------- | -------------------------------- | -------------- | --- | --- | -------------- |
-| **ADK**             | Google    | Google ecosystem, full lifecycle | âœ… Hierarchical | âœ…   | âœ…   | âœ… (2.0)        |
-| **LangGraph**       | LangChain | Complex stateful agents          | âœ… Graph-based  | âœ…   | âŒ   | âœ…              |
-| **CrewAI**          | Community | Role-based agent teams           | âœ… Role-based   | âœ…   | âŒ   | âš ï¸ Limited      |
-| **AutoGen**         | Microsoft | Research, conversational         | âœ… Chat-based   | âœ…   | âŒ   | âŒ              |
-| **Semantic Kernel** | Microsoft | Enterprise .NET/Python           | âš ï¸ Basic        | âœ…   | âŒ   | âŒ              |
-| **Mastra**          | Community | TypeScript-first                 | âœ…              | âœ…   | âŒ   | âœ…              |
+| **ADK**             | Google    | Google ecosystem, full lifecycle | ✅ Hierarchical | ✅   | ✅   | ✅ (2.0)        |
+| **LangGraph**       | LangChain | Complex stateful agents          | ✅ Graph-based  | ✅   | âŒ   | ✅              |
+| **CrewAI**          | Community | Role-based agent teams           | ✅ Role-based   | ✅   | âŒ   | âš ï¸ Limited      |
+| **AutoGen**         | Microsoft | Research, conversational         | ✅ Chat-based   | ✅   | âŒ   | âŒ              |
+| **Semantic Kernel** | Microsoft | Enterprise .NET/Python           | âš ï¸ Basic        | ✅   | âŒ   | âŒ              |
+| **Mastra**          | Community | TypeScript-first                 | ✅              | ✅   | âŒ   | ✅              |
 
 ---
 
-## â—† Code Example: MCP Server
+## ◆ Code Example: MCP Server
 
 ```python
 # âš ï¸ Last tested: 2026-04
@@ -278,18 +278,18 @@ async def call_tool(name: str, arguments: dict):
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 
 ```
 PROTOCOL CHEAT SHEET:
-  Need agent to use tools (DB, API, files)?  â†’ MCP
-  Need agents to talk to each other?          â†’ A2A
-  Need to build the agents?                    â†’ ADK / LangGraph / CrewAI
+  Need agent to use tools (DB, API, files)?  → MCP
+  Need agents to talk to each other?          → A2A
+  Need to build the agents?                    → ADK / LangGraph / CrewAI
 
 MATURITY (March 2026):
-  MCP:     Production-ready âœ… (Linux Foundation standard, adopted by OpenAI, Google, Anthropic)
+  MCP:     Production-ready ✅ (Linux Foundation standard, adopted by OpenAI, Google, Anthropic)
   A2A:     Early adoption âš ï¸ (spec stable, ecosystem growing)
-  ADK:     GA âœ… (deployed on Vertex AI, active development)
+  ADK:     GA ✅ (deployed on Vertex AI, active development)
 
 MCP PRIMITIVES:
   Tools     = functions to call (model-controlled)
@@ -299,7 +299,7 @@ MCP PRIMITIVES:
 
 ---
 
-## â—‹ Gotchas & Common Mistakes
+## ○ Gotchas & Common Mistakes
 
 - âš ï¸ **MCP â‰  function calling**: Function calling is the LLM API feature. MCP is the PROTOCOL for discovering and connecting to tools. MCP uses function calling under the hood.
 - âš ï¸ **A2A is not for tool use**: Don't use A2A when MCP suffices. A2A is for agent-to-agent delegation, not simple tool calls.
@@ -308,7 +308,7 @@ MCP PRIMITIVES:
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: What's the difference between MCP and A2A?
 - **A**: MCP connects an agent to TOOLS (databases, APIs, filesystems) â€” it's agent-to-tool communication. A2A connects an agent to OTHER AGENTS â€” it's agent-to-agent collaboration. MCP is like a USB port (connect devices), A2A is like a network protocol (connect computers). They're complementary: an agent uses MCP to access its own tools and A2A to delegate tasks to other agents.
@@ -318,7 +318,7 @@ MCP PRIMITIVES:
 
 ---
 
-## â˜… Code & Implementation
+## ★ Code & Implementation
 
 ### MCP-Compatible Tool Server (FastMCP)
 
@@ -405,7 +405,7 @@ def react_agent(user_query: str, max_steps: int = 5) -> str:
 print(react_agent("What is 2 to the power of 10, times pi?"))
 ```
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics                                                                                                                         |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------ |
@@ -417,7 +417,7 @@ print(react_agent("What is 2 to the power of 10, times pi?"))
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure                       | Symptoms                                                  | Root Cause                                   | Mitigation                                                    |
 | ----------------------------- | --------------------------------------------------------- | -------------------------------------------- | ------------------------------------------------------------- |
@@ -428,7 +428,7 @@ print(react_agent("What is 2 to the power of 10, times pi?"))
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Connect to an MCP Server
 
@@ -443,7 +443,7 @@ print(react_agent("What is 2 to the power of 10, times pi?"))
 ---
 
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type       | Resource                                                       | Why                                                    |
 | ---------- | -------------------------------------------------------------- | ------------------------------------------------------ |
@@ -452,7 +452,7 @@ print(react_agent("What is 2 to the power of 10, times pi?"))
 | ðŸ”§ Hands-on | [Google ADK Documentation](https://google.github.io/adk-docs/) | Google's Agent Development Kit                         |
 | ðŸ“˜ Book     | "AI Engineering" by Chip Huyen (2025), Ch 7                    | Agent protocols and inter-agent communication patterns |
 
-## â˜… Sources
+## ★ Sources
 
 - MCP Specification â€” https://modelcontextprotocol.io
 - A2A Protocol â€” https://a2aprotocol.org

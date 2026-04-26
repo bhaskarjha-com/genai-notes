@@ -15,11 +15,11 @@ updated: 2026-04-15
 
 # Structured Outputs & Constrained Generation
 
-> âœ¨ **Bit**: JSON Mode tells the model "give me valid JSON." Structured Outputs tells the model "give me this exact schema, or nothing." The difference is the difference between hoping and enforcing.
+> ✨ **Bit**: JSON Mode tells the model "give me valid JSON." Structured Outputs tells the model "give me this exact schema, or nothing." The difference is the difference between hoping and enforcing.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: Techniques that force LLMs to produce output conforming to a specific schema â€” guaranteed structurally valid
 - **Why**: Production data pipelines, tool calling, and API integrations require deterministic structure, not free-form text
@@ -27,7 +27,7 @@ updated: 2026-04-15
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -50,7 +50,7 @@ This note covers the spectrum from basic JSON Mode through strict schema enforce
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### The Hierarchy of Output Control
 
@@ -142,7 +142,7 @@ For local/open-weights models:
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 
 | Problem | Solution |
 |---------|----------|
@@ -154,7 +154,7 @@ For local/open-weights models:
 
 ---
 
-## â—‹ Gotchas & Common Mistakes
+## ○ Gotchas & Common Mistakes
 
 - JSON Mode is NOT Structured Outputs â€” JSON Mode only guarantees valid JSON syntax, not your schema
 - Model refusals bypass schema enforcement â€” always check for refusal metadata in the response
@@ -164,7 +164,7 @@ For local/open-weights models:
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: What's the difference between JSON Mode and Structured Outputs?
 - **A**: JSON Mode only guarantees the output is syntactically valid JSON â€” it could be any shape. Structured Outputs enforce a specific JSON Schema using constrained decoding, guaranteeing the output has exactly the right fields, types, and structure. In production, always use Structured Outputs because you need to parse the result programmatically.
@@ -177,7 +177,7 @@ For local/open-weights models:
 
 ---
 
-## â˜… Code & Implementation
+## ★ Code & Implementation
 
 ### OpenAI Structured Output with Pydantic Validation
 
@@ -319,7 +319,7 @@ print(result)
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
@@ -331,7 +331,7 @@ print(result)
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Cross-Provider Extraction Comparison
 
@@ -361,7 +361,7 @@ print(result)
 
 ---
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics |
 |---|---|
@@ -372,7 +372,7 @@ print(result)
 
 ---
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type | Resource | Why |
 |------|----------|-----|
@@ -383,7 +383,7 @@ print(result)
 
 ---
 
-## â˜… Sources
+## ★ Sources
 
 - OpenAI Structured Outputs documentation â€” https://platform.openai.com/docs/guides/structured-outputs
 - Anthropic Tool Use documentation â€” https://docs.anthropic.com/en/docs/build-with-claude/tool-use

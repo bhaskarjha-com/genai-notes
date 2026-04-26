@@ -15,11 +15,11 @@ updated: 2026-04-11
 
 # Vector Databases
 
-> âœ¨ **Bit**: A vector database is just a database where you search by "vibes" instead of exact values. "Find me something similar to this" is literally the query.
+> ✨ **Bit**: A vector database is just a database where you search by "vibes" instead of exact values. "Find me something similar to this" is literally the query.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: Databases optimized for storing and searching high-dimensional vectors (embeddings) using similarity metrics
 - **Why**: The backbone of RAG, semantic search, recommendation systems â€” any time you need "find similar things"
@@ -27,7 +27,7 @@ updated: 2026-04-11
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -45,12 +45,12 @@ Covers vector DB concepts, comparison of major options, and when to use what. Fo
 
 ### Prerequisites
 
-- Understanding of embeddings (text â†’ dense vector)
+- Understanding of embeddings (text → dense vector)
 - Basic [Rag](../techniques/rag.md) concepts
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### How It Works
 
@@ -59,15 +59,15 @@ TRADITIONAL DATABASE:                    VECTOR DATABASE:
   SELECT * FROM docs                       "Find documents similar to
   WHERE title = 'attention'                 this query about attention"
 
-  â†’ Exact match                            â†’ Semantic similarity
-  â†’ Returns: only docs titled              â†’ Returns: docs ABOUT attention
+  → Exact match                            → Semantic similarity
+  → Returns: only docs titled              → Returns: docs ABOUT attention
     "attention"                              even if word isn't in title
 
 HOW:
-  1. Text â†’ [Embedding Model] â†’ Vector [0.12, -0.45, 0.89, ..., 0.33]
+  1. Text → [Embedding Model] → Vector [0.12, -0.45, 0.89, ..., 0.33]
                                          (768-3072 dimensions)
   2. Store vector + metadata in Vector DB
-  3. Query â†’ Embed â†’ Find nearest vectors â†’ Return results
+  3. Query → Embed → Find nearest vectors → Return results
 ```
 
 ### Similarity Metrics
@@ -124,10 +124,10 @@ Search: Start at top layer, navigate to approximate area,
 
 ```
 Do you need a vector DB at all?
-â”œâ”€â”€ < 10K documents â†’ Just use FAISS/numpy in memory
-â”œâ”€â”€ < 100K documents â†’ pgvector (if you have Postgres) or Chroma
-â”œâ”€â”€ 100K - 10M documents â†’ Qdrant, Weaviate, or Pinecone
-â””â”€â”€ > 10M documents â†’ Milvus or Qdrant (clustered)
+â”œâ”€â”€ < 10K documents → Just use FAISS/numpy in memory
+â”œâ”€â”€ < 100K documents → pgvector (if you have Postgres) or Chroma
+â”œâ”€â”€ 100K - 10M documents → Qdrant, Weaviate, or Pinecone
+â””â”€â”€ > 10M documents → Milvus or Qdrant (clustered)
 
 Do you want managed or self-hosted?
 â”œâ”€â”€ Managed (no ops): Pinecone, Qdrant Cloud, Weaviate Cloud
@@ -136,7 +136,7 @@ Do you want managed or self-hosted?
 
 ---
 
-## â—† Code & Implementation
+## ◆ Code & Implementation
 
 ### Quick Start Examples
 
@@ -160,7 +160,7 @@ collection.add(
 
 # Query
 results = collection.query(query_texts=["How do language models work?"], n_results=2)
-print(results["documents"])  # â†’ Most similar docs
+print(results["documents"])  # → Most similar docs
 ```
 
 ```python
@@ -204,9 +204,9 @@ docker run -p 8080:8080 semitechnologies/weaviate
 
 ---
 
-## â—† Strengths vs Limitations
+## ◆ Strengths vs Limitations
 
-| âœ… Strengths                                          | âŒ Limitations                               |
+| ✅ Strengths                                          | âŒ Limitations                               |
 | ---------------------------------------------------- | ------------------------------------------- |
 | Semantic search ("find similar" not "find exact")    | Approximate â€” may miss some results         |
 | Sub-millisecond search at million-scale              | Embedding quality determines search quality |
@@ -216,16 +216,16 @@ docker run -p 8080:8080 semitechnologies/weaviate
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 
 ```
 CHOOSING A VECTOR DB:
-  Prototyping â†’ Chroma (embedded, zero setup)
-  Production (managed) â†’ Pinecone or Qdrant Cloud
-  Production (self-host) â†’ Qdrant or Weaviate
-  Already have Postgres â†’ pgvector
-  Massive scale (billions) â†’ Milvus
-  Just need a library â†’ FAISS
+  Prototyping → Chroma (embedded, zero setup)
+  Production (managed) → Pinecone or Qdrant Cloud
+  Production (self-host) → Qdrant or Weaviate
+  Already have Postgres → pgvector
+  Massive scale (billions) → Milvus
+  Just need a library → FAISS
 
 KEY PARAMETERS:
   - Distance metric: Cosine (text), L2 (images)
@@ -242,7 +242,7 @@ EMBEDDING DIMENSIONS:
 
 ---
 
-## â—‹ Gotchas & Common Mistakes
+## ○ Gotchas & Common Mistakes
 
 - âš ï¸ **Embedding model matters more than the DB**: A bad embedding model with Pinecone will perform worse than a good one with Chroma.
 - âš ï¸ **Don't forget metadata filtering**: Most queries need both vector similarity AND metadata filters (e.g., "similar to X AND category = 'tutorials'").
@@ -252,7 +252,7 @@ EMBEDDING DIMENSIONS:
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: How does approximate nearest neighbor search work?
 - **A**: ANN algorithms like HNSW build a graph structure where similar vectors are connected. Search starts from random entry points and greedily navigates toward the query vector through the graph. It's O(log n) vs O(n) for brute force, with ~95-99% recall.
@@ -262,7 +262,7 @@ EMBEDDING DIMENSIONS:
 
 ---
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics                                                                        |
 | ------------ | ----------------------------------------------------------------------------- |
@@ -274,7 +274,7 @@ EMBEDDING DIMENSIONS:
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
@@ -285,7 +285,7 @@ EMBEDDING DIMENSIONS:
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Benchmark Vector DB Performance
 
@@ -300,7 +300,7 @@ EMBEDDING DIMENSIONS:
 ---
 
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type | Resource | Why |
 |------|----------|-----|
@@ -309,7 +309,7 @@ EMBEDDING DIMENSIONS:
 | ðŸ“„ Paper | [Johnson et al. "FAISS" (2017)](https://arxiv.org/abs/1702.08734) | Foundational nearest-neighbor search algorithms |
 | ðŸ“˜ Book | "AI Engineering" by Chip Huyen (2025), Ch 3 | Vector search in the context of RAG systems |
 
-## â˜… Sources
+## ★ Sources
 
 - Pinecone Learning Center â€” https://www.pinecone.io/learn/
 - Qdrant documentation â€” https://qdrant.tech/documentation/

@@ -19,14 +19,14 @@ updated: 2026-04-12
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 - **What**: A deeper framework for designing offline and online evaluation loops for LLM apps, RAG systems, and agents.
 - **Why**: Generic benchmark literacy is not enough for shipping a domain-specific system.
 - **Key point**: Build task-specific evaluation sets, measure failure modes directly, and combine automation with targeted human review.
 
 ---
 
-## â˜… Overview
+## ★ Overview
 ### Definition
 
 This note focuses on **application-level evaluation**: whether a real GenAI system is correct, grounded, safe, and useful for the task it was built to solve.
@@ -49,7 +49,7 @@ The note goes beyond benchmark names and covers evaluation design, judge usage, 
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 ### Start With The Task, Not The Tool
 
 The evaluation design should begin with:
@@ -158,7 +158,7 @@ For agents, score more than the final text:
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 | Question                             | Better Eval Choice                                      |
 | ------------------------------------ | ------------------------------------------------------- |
 | Is JSON shape valid?                 | rule-based check                                        |
@@ -169,7 +169,7 @@ For agents, score more than the final text:
 
 ---
 
-## â—‹ Gotchas & Common Mistakes
+## ○ Gotchas & Common Mistakes
 - Teams often optimize what is easy to score rather than what matters.
 - Judge prompts drift just like application prompts do.
 - Over-clean eval datasets create fake confidence.
@@ -177,7 +177,7 @@ For agents, score more than the final text:
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 - **Q**: Why are benchmarks not enough for production LLM evaluation?
 - **A**: Benchmarks measure generic capability, but production systems depend on domain data, UX constraints, retrieval quality, safety needs, and business outcomes. You need task-specific evaluation tied to real failure modes.
 
@@ -186,7 +186,7 @@ For agents, score more than the final text:
 
 ---
 
-## â˜… Code & Implementation
+## ★ Code & Implementation
 
 ### LLM-as-Judge Evaluation Framework
 
@@ -240,7 +240,7 @@ print(f"Score: {result['overall']}/5")
 print(f"Reasoning: {result['reasoning']}")
 ```
 
-## â˜… Connections
+## ★ Connections
 | Relationship | Topics                                                                                                                                                                                                       |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Builds on    | [LLM Evaluation & Benchmarks](./evaluation-and-benchmarks.md), [Hallucination Detection & Mitigation](../llms/hallucination-detection.md), [Agent Evaluation & Observability](../agents/agent-evaluation.md) |
@@ -251,7 +251,7 @@ print(f"Reasoning: {result['reasoning']}")
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Build an LLM-as-Judge Pipeline
 
@@ -266,7 +266,7 @@ print(f"Reasoning: {result['reasoning']}")
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure                 | Symptoms                                                | Root Cause                                     | Mitigation                                                      |
 | ----------------------- | ------------------------------------------------------- | ---------------------------------------------- | --------------------------------------------------------------- |
@@ -276,7 +276,7 @@ print(f"Reasoning: {result['reasoning']}")
 ---
 
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type       | Resource                                                                         | Why                                        |
 | ---------- | -------------------------------------------------------------------------------- | ------------------------------------------ |
@@ -285,7 +285,7 @@ print(f"Reasoning: {result['reasoning']}")
 | ðŸ“„ Paper    | [Zheng et al. "Judging LLM-as-a-Judge" (2023)](https://arxiv.org/abs/2306.05685) | When and how to use LLMs to evaluate LLMs  |
 | ðŸ”§ Hands-on | [DeepEval Documentation](https://docs.confident-ai.com/)                         | Production LLM evaluation framework        |
 
-## â˜… Sources
+## ★ Sources
 - RAGAS documentation
 - DeepEval documentation
 - LangSmith evaluation documentation

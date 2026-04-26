@@ -19,14 +19,14 @@ updated: 2026-04-12
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 - **What**: The product-thinking layer for identifying, shaping, and delivering useful AI features.
 - **Why**: Many AI projects fail because the product problem is vague even when the model is impressive.
 - **Key point**: The product manager's job is to turn model possibility into reliable user value.
 
 ---
 
-## â˜… Overview
+## ★ Overview
 ### Definition
 
 **AI product management** combines normal product work with AI-specific concerns such as probabilistic behavior, evaluation, trust, data access, and human oversight.
@@ -49,7 +49,7 @@ This note is for technical learners who want product fluency. It covers use-case
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 ### Start With The User Problem
 
 Good AI product questions:
@@ -143,7 +143,7 @@ launch_plan:
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 | If You Are Unsure About... | Ask This                                               |
 | -------------------------- | ------------------------------------------------------ |
 | use case quality           | what user pain disappears if this works?               |
@@ -154,7 +154,7 @@ launch_plan:
 
 ---
 
-## â—‹ Gotchas & Common Mistakes
+## ○ Gotchas & Common Mistakes
 - Strong demos can hide weak repeat usage.
 - Product-market fit and model capability are different questions.
 - Users often prefer slower but more trustworthy AI.
@@ -162,7 +162,7 @@ launch_plan:
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 - **Q**: How do you decide whether an AI feature is worth building?
 - **A**: I start with the user workflow and measurable outcome, then test whether AI materially improves that workflow at an acceptable quality, trust, and cost level. If it does not, I narrow the scope or avoid the feature.
 
@@ -171,7 +171,7 @@ launch_plan:
 
 ---
 
-## â˜… Code & Implementation
+## ★ Code & Implementation
 
 ### AI Feature Feasibility Scorecard
 
@@ -188,8 +188,8 @@ class AIFeatureFeasibility:
     data_availability:    int   # Is training/evaluation data available?
     accuracy_requirement: int   # How much does accuracy matter? (5=critical)
     latency_tolerance:    int   # How tolerant is the UX to latency? (5=very tolerant)
-    failure_impact:       int   # What is the impact of AI errors? (5=catastrophic â†’ hard)
-    alternatives_exist:   int   # Do rule-based alternatives exist? (5=many â†’ lower AI need)
+    failure_impact:       int   # What is the impact of AI errors? (5=catastrophic → hard)
+    alternatives_exist:   int   # Do rule-based alternatives exist? (5=many → lower AI need)
     user_ai_trust:        int   # How much do users trust AI in this context? (5=high trust)
 
     def score(self) -> dict:
@@ -225,7 +225,7 @@ for f in features:
     print(f"{r['name']}: {r['score']:.0f}/100 ({r['confidence']}) â€” {r['guidance']}")
 ```
 
-## â˜… Connections
+## ★ Connections
 | Relationship | Topics                                                                                                                                              |
 | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Builds on    | [AI System Design for GenAI Applications](../production/ai-system-design.md), [LLM Evaluation Deep Dive](../evaluation/llm-evaluation-deep-dive.md) |
@@ -236,7 +236,7 @@ for f in features:
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure                         | Symptoms                                        | Root Cause                               | Mitigation                                                      |
 | ------------------------------- | ----------------------------------------------- | ---------------------------------------- | --------------------------------------------------------------- |
@@ -246,7 +246,7 @@ for f in features:
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Write an AI Product Brief
 
@@ -261,7 +261,7 @@ for f in features:
 ---
 
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type    | Resource                                                                           | Why                                  |
 | ------- | ---------------------------------------------------------------------------------- | ------------------------------------ |
@@ -269,7 +269,7 @@ for f in features:
 | ðŸ“˜ Book  | "The AI Product Manager's Handbook" by Buest (2023)                                | PM-specific AI guide                 |
 | ðŸŽ¥ Video | [Lenny's Podcast â€” AI Product Management Episodes](https://www.lennyspodcast.com/) | PM perspectives on building with AI  |
 
-## â˜… Sources
+## ★ Sources
 - Reforge and product strategy material on AI products
 - [AI System Design for GenAI Applications](../production/ai-system-design.md)
 - [LLM Evaluation Deep Dive](../evaluation/llm-evaluation-deep-dive.md)

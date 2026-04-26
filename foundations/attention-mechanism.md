@@ -15,11 +15,11 @@ updated: 2026-04-11
 
 # Attention Mechanism
 
-> âœ¨ **Bit**: Attention in AI is like attention in humans â€” you don't read every word equally; you focus on what matters for understanding the current thing.
+> ✨ **Bit**: Attention in AI is like attention in humans â€” you don't read every word equally; you focus on what matters for understanding the current thing.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: A mechanism that lets each element in a sequence dynamically focus on relevant parts of the entire input
 - **Why**: Solves the bottleneck of fixed-size representations in sequence models. THE key innovation behind Transformers
@@ -27,7 +27,7 @@ updated: 2026-04-11
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -39,8 +39,8 @@ Covers: Self-attention, cross-attention, multi-head attention, and modern varian
 
 ### Significance
 
-- Before attention: Encoder compressed entire sequence into ONE fixed vector â†’ information bottleneck
-- After attention: Every output position can directly access any input position â†’ no bottleneck
+- Before attention: Encoder compressed entire sequence into ONE fixed vector → information bottleneck
+- After attention: Every output position can directly access any input position → no bottleneck
 
 ### Prerequisites
 
@@ -49,21 +49,21 @@ Covers: Self-attention, cross-attention, multi-head attention, and modern varian
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### The QKV Intuition
 
 Think of attention as a **search engine**:
 
 ```
-You have a QUERY    â†’ "What information do I need?"
-Matched against KEYS  â†’ "What does each position contain?"
-Retrieves VALUES      â†’ "Here's the actual content"
+You have a QUERY    → "What information do I need?"
+Matched against KEYS  → "What does each position contain?"
+Retrieves VALUES      → "Here's the actual content"
 
 Example: Parsing "The cat sat because it was tired"
 When processing "it":
-  Query("it") Â· Key("cat") = HIGH score â†’ "it" refers to "cat"
-  Query("it") Â· Key("sat") = LOW score  â†’ "it" doesn't refer to "sat"
+  Query("it") Â· Key("cat") = HIGH score → "it" refers to "cat"
+  Query("it") Â· Key("sat") = LOW score  → "it" doesn't refer to "sat"
 
 Result: "it" attends strongly to "cat" and gets its information
 ```
@@ -156,7 +156,7 @@ Applied BEFORE softmax: e^(-âˆž) = 0, so masked positions get zero weight
 
 ---
 
-## â—† Formulas & Equations
+## ◆ Formulas & Equations
 
 | Name               | Formula                                                                           | Variables                            | Use                |
 | ------------------ | --------------------------------------------------------------------------------- | ------------------------------------ | ------------------ |
@@ -166,9 +166,9 @@ Applied BEFORE softmax: e^(-âˆž) = 0, so masked positions get zero weight
 
 ---
 
-## â—† Strengths vs Limitations
+## ◆ Strengths vs Limitations
 
-| âœ… Strengths                                                  | âŒ Limitations                                        |
+| ✅ Strengths                                                  | âŒ Limitations                                        |
 | ------------------------------------------------------------ | ---------------------------------------------------- |
 | Captures long-range dependencies                             | O(nÂ²) â€” quadratic with sequence length               |
 | Fully parallelizable                                         | Large memory footprint for long sequences            |
@@ -177,7 +177,7 @@ Applied BEFORE softmax: e^(-âˆž) = 0, so masked positions get zero weight
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 
 ```
 Attention(Q,K,V) = softmax(QKáµ€/âˆšd_k) Â· V
@@ -197,10 +197,10 @@ Modern defaults:
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: Why divide by âˆšd_k in attention?
-- **A**: Without it, for large d_k, dot products become huge â†’ softmax saturates â†’ near-zero gradients. Scaling keeps variance at ~1.
+- **A**: Without it, for large d_k, dot products become huge → softmax saturates → near-zero gradients. Scaling keeps variance at ~1.
 
 - **Q**: What's the difference between MHA, MQA, and GQA?
 - **A**: MHA: separate K,V per head (most expressive, slowest). MQA: one shared K,V (fastest, some quality loss). GQA: groups of heads share K,V (good balance). LLaMA 2+ uses GQA.
@@ -210,7 +210,7 @@ Modern defaults:
 
 ---
 
-## â˜… Code & Implementation
+## ★ Code & Implementation
 
 ### Scaled Dot-Product Attention from Scratch
 
@@ -289,7 +289,7 @@ print("Saved attention_head0.png")
 
 ---
 
-## â˜… Connections
+## ★ Connections
 
 
 | Relationship | Topics                                                                           |
@@ -302,7 +302,7 @@ print("Saved attention_head0.png")
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
@@ -312,7 +312,7 @@ print("Saved attention_head0.png")
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Visualize Attention Patterns
 
@@ -327,7 +327,7 @@ print("Saved attention_head0.png")
 ---
 
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type | Resource | Why |
 |------|----------|-----|
@@ -336,7 +336,7 @@ print("Saved attention_head0.png")
 | ðŸ“„ Paper | [Dao et al. "FlashAttention" (2022)](https://arxiv.org/abs/2205.14135) | IO-aware attention kernels â€” essential for understanding modern efficiency |
 | ðŸ“˜ Book | "Build a Large Language Model (From Scratch)" by Sebastian Raschka (2024), Ch 3 | Implement attention from scratch in PyTorch |
 
-## â˜… Sources
+## ★ Sources
 
 - Vaswani et al., "Attention Is All You Need" (2017) â€” https://arxiv.org/abs/1706.03762
 - Bahdanau et al., "Neural Machine Translation by Jointly Learning to Align and Translate" (2014) â€” Original attention paper

@@ -15,11 +15,11 @@ updated: 2026-04-15
 
 # AI Coding Agents
 
-> âœ¨ **Bit**: The most productive engineers in 2026 don't type faster â€” they supervise agents that edit, test, and commit code while they think about architecture.
+> ✨ **Bit**: The most productive engineers in 2026 don't type faster â€” they supervise agents that edit, test, and commit code while they think about architecture.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: AI systems that autonomously write, edit, test, and refactor code in real codebases â€” going far beyond autocomplete
 - **Why**: The fastest-growing application category in GenAI â€” used by millions of developers daily, reshaping how software is built
@@ -27,7 +27,7 @@ updated: 2026-04-15
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -51,7 +51,7 @@ This note covers the architecture, evaluation, and practical use of coding agent
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### The Think-Act-Observe Loop
 
@@ -62,16 +62,16 @@ Every modern coding agent runs a deterministic control loop wrapping a non-deter
 â”‚                 AGENT LOOP                  â”‚
 â”‚                                             â”‚
 â”‚  1. THINK: LLM receives state + history     â”‚
-â”‚     â†’ decides next action                   â”‚
+â”‚     → decides next action                   â”‚
 â”‚                                             â”‚
 â”‚  2. ACT: Harness executes tool call         â”‚
-â”‚     â†’ file_read, file_edit, bash_run, etc.  â”‚
+â”‚     → file_read, file_edit, bash_run, etc.  â”‚
 â”‚                                             â”‚
 â”‚  3. OBSERVE: Tool output added to context   â”‚
-â”‚     â†’ loop back to THINK                    â”‚
+â”‚     → loop back to THINK                    â”‚
 â”‚                                             â”‚
 â”‚  4. DONE: LLM signals task complete         â”‚
-â”‚     â†’ return result to user                 â”‚
+â”‚     → return result to user                 â”‚
 â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
@@ -131,20 +131,20 @@ Best practice: Include `ARCHITECTURE.md` or `DESIGN.md` in your repository root.
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
 | **Context window exhaustion** | Agent forgets earlier edits, repeats work | Large codebase, no compaction strategy | Context compaction, selective file loading, history summarization |
 | **Hallucinated file paths** | `FileNotFoundError` in edits | Agent invents paths from training data | AST-based file discovery, path validation before writes |
-| **Infinite edit loops** | Agent repeatedly edits the same file, never converges | Errorâ†’editâ†’error cycle without progress detection | Max iteration limit, state diffing, loop detection |
+| **Infinite edit loops** | Agent repeatedly edits the same file, never converges | Error→edit→error cycle without progress detection | Max iteration limit, state diffing, loop detection |
 | **Architecture drift** | Working code but inconsistent patterns across files | No architecture context, no style enforcement | Design docs in context, linter integration, style guides |
 | **Security: untrusted execution** | Agent runs destructive or exfiltrating commands | No command sanitization or sandboxing | Command allowlist, sandbox execution, network restrictions |
 | **Test regression** | Existing tests break after agent edits | Agent only tests new code, ignores existing suite | Mandatory full test suite run as gate before completion |
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: How do modern coding agents handle large codebases that don't fit in context?
 - **A**: Three techniques. (1) Repository indexing â€” parse ASTs and dependency graphs to understand code structure without reading every file. (2) Progressive context loading â€” only pull in files relevant to the current step, not the entire repo. (3) Context compaction â€” periodically summarize the conversation history to free up tokens. The best agents combine all three: index the repo upfront, retrieve relevant files via codebase RAG, and compact history when approaching the context limit.
@@ -157,7 +157,7 @@ Best practice: Include `ARCHITECTURE.md` or `DESIGN.md` in your repository root.
 
 ---
 
-## â˜… Code & Implementation
+## ★ Code & Implementation
 
 ### Minimal Coding Agent with Tool Use
 
@@ -210,7 +210,7 @@ def execute_tool(name: str, args: dict) -> str:
     return "ERROR: Unknown tool"
 
 def coding_agent(task: str, max_steps: int = 10) -> str:
-    """Run a coding agent loop: think â†’ act â†’ observe â†’ repeat."""
+    """Run a coding agent loop: think → act → observe → repeat."""
     messages = [
         {"role": "system", "content": "You are a coding agent. Use tools to read files, "
          "write code, and run tests. Stop when the task is complete."},
@@ -227,7 +227,7 @@ def coding_agent(task: str, max_steps: int = 10) -> str:
         for tc in msg.tool_calls:
             args = json.loads(tc.function.arguments)
             result = execute_tool(tc.function.name, args)
-            print(f"  Step {step+1}: {tc.function.name}({list(args.keys())}) â†’ {result[:80]}...")
+            print(f"  Step {step+1}: {tc.function.name}({list(args.keys())}) → {result[:80]}...")
             messages.append({"role": "tool", "tool_call_id": tc.id, "content": result})
     return "Agent reached max steps without completing."
 
@@ -273,7 +273,7 @@ def eval_coding_agent(agent_fn, test_cases: list[dict]) -> dict:
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Audit a Coding Agent
 
@@ -303,7 +303,7 @@ def eval_coding_agent(agent_fn, test_cases: list[dict]) -> dict:
 
 ---
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics |
 |---|---|
@@ -314,7 +314,7 @@ def eval_coding_agent(agent_fn, test_cases: list[dict]) -> dict:
 
 ---
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type | Resource | Why |
 |------|----------|-----|
@@ -325,7 +325,7 @@ def eval_coding_agent(agent_fn, test_cases: list[dict]) -> dict:
 
 ---
 
-## â˜… Sources
+## ★ Sources
 
 - Anthropic â€” Building Effective Agents â€” https://www.anthropic.com/engineering/building-effective-agents
 - SWE-bench â€” https://swebench.com/

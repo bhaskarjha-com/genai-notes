@@ -21,11 +21,11 @@ updated: 2026-04-15
 
 # Inference Optimization
 
-> âœ¨ **Bit**: Training a frontier LLM costs $100M+. Running it costs... well, also a LOT. Inference optimization is the difference between "cool demo" and "sustainable business." This is the deep tech that companies actually pay for.
+> ✨ **Bit**: Training a frontier LLM costs $100M+. Running it costs... well, also a LOT. Inference optimization is the difference between "cool demo" and "sustainable business." This is the deep tech that companies actually pay for.
 
 ---
 
-## â˜… TL;DR
+## ★ TL;DR
 
 - **What**: Techniques to make LLM inference faster, cheaper, and more memory-efficient without (significantly) hurting quality
 - **Why**: Inference is where the money is spent (90%+ of LLM compute cost in production). This is THE skill for deep tech roles.
@@ -33,7 +33,7 @@ updated: 2026-04-15
 
 ---
 
-## â˜… Overview
+## ★ Overview
 
 ### Definition
 
@@ -58,13 +58,13 @@ Covers: Quantization, KV cache, speculative decoding, batching, and architectura
 
 ---
 
-## â˜… Deep Dive
+## ★ Deep Dive
 
 ### Why Inference Is Slow
 
 ```
 AUTOREGRESSIVE GENERATION IS SEQUENTIAL:
-  "The" â†’ "capital" â†’ "of" â†’ "France" â†’ "is" â†’ "Paris" â†’ "."
+  "The" → "capital" → "of" → "France" → "is" → "Paris" → "."
 
   Each token requires a FULL forward pass through the model.
   GPT-5.4 (frontier scale): Each forward pass = massive computation.
@@ -113,10 +113,10 @@ MEMORY IMPACT (LLaMA 70B):
 
 ```
 QUICK DECISION:
-  Running locally (consumer GPU)?     â†’ GGUF Q4 via Ollama/llama.cpp
-  Production serving on GPU?          â†’ AWQ or GPTQ via vLLM
-  Fine-tuning on limited GPU?         â†’ QLoRA (4-bit base + 16-bit LoRA)
-  Newest enterprise GPU (Blackwell)?  â†’ Native FP8
+  Running locally (consumer GPU)?     → GGUF Q4 via Ollama/llama.cpp
+  Production serving on GPU?          → AWQ or GPTQ via vLLM
+  Fine-tuning on limited GPU?         → QLoRA (4-bit base + 16-bit LoRA)
+  Newest enterprise GPU (Blackwell)?  → Native FP8
 ```
 
 #### 2. KV Cache (Don't Recompute Past Tokens)
@@ -128,8 +128,8 @@ WITHOUT KV CACHE:
                      â†‘ Recomputed everything again! Wasteful.
 
 WITH KV CACHE:
-  Generate "Paris":  Compute K,V for all tokens â†’ STORE in cache
-  Generate ".":      Reuse cached K,V â†’ Only compute for new token "Paris"
+  Generate "Paris":  Compute K,V for all tokens → STORE in cache
+  Generate ".":      Reuse cached K,V → Only compute for new token "Paris"
                      â†‘ 100x faster for long sequences!
 
 PROBLEM: KV cache grows with sequence length Ã— batch size:
@@ -149,7 +149,7 @@ PROBLEM: KV cache grows with sequence length Ã— batch size:
 
 ```
 NORMAL DECODING (slow):
-  Big Model generates: T1 â†’ T2 â†’ T3 â†’ T4 â†’ T5
+  Big Model generates: T1 → T2 → T3 → T4 → T5
   Time: 5 sequential forward passes through the BIG model
 
 SPECULATIVE DECODING (fast):
@@ -177,7 +177,7 @@ SPECULATIVE DECODING (fast):
 |-----------|--------|:-----------------:|:---------------:|:-------------------:|
 | **EAGLE-3** | Draft head (2-5% of target model params), feature fusion, tree-based candidate verification | Yes (lightweight head training) | 2-3x | Production (vLLM, SGLang) |
 | **Medusa** | Multiple prediction heads on target model, each predicts k tokens ahead | Yes (head fine-tuning) | 1.5-2.5x | Production |
-| **SPECTRA** | Training-free, uses n-gram + small model ensemble for drafting | No | 1.5-2x | Research â†’ Production |
+| **SPECTRA** | Training-free, uses n-gram + small model ensemble for drafting | No | 1.5-2x | Research → Production |
 | **Self-Speculative** | Model drafts from its own early layers (early exit) | No | 1.3-1.8x | Experimental |
 
 ```
@@ -226,7 +226,7 @@ EDGE MODEL SELECTION (April 2026):
 
   APPLE SILICON UMA ADVANTAGE:
     CPU and GPU share the same memory pool (Unified Memory Architecture)
-    No PCIe transfer bottleneck â†’ faster KV cache access
+    No PCIe transfer bottleneck → faster KV cache access
     M4 Max (128GB) can run 70B models at Q4 comfortably
 ```
 
@@ -272,7 +272,7 @@ vLLM PagedAttention:
 SGLang RadixAttention:
 â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
 â”‚  KV cache stored as a RADIX TREE (prefix trie)       â”‚
-â”‚  Common prefix â†’ shared nodes across requests        â”‚
+â”‚  Common prefix → shared nodes across requests        â”‚
 â”‚  Automatic prefix matching at every request          â”‚
 â”‚                                                      â”‚
 â”‚  Request A: "System: You are a coder. User: Fix X"  â”‚
@@ -287,10 +287,10 @@ SGLang RadixAttention:
 
 | Workload | vLLM | SGLang | Reason |
 |---|---|---|---|
-| Simple batch Q&A (diverse prompts) | âœ… | Good | Both work; vLLM has wider ecosystem |
-| RAG pipeline (shared system prompt) | âš ï¸ Manual | âœ… | RadixAttention auto-shares prefix context |
-| Multi-turn chat (shared history) | âš ï¸ | âœ… | Radix tree naturally stores conversation cache |
-| Agentic loops (shared tool schemas) | âš ï¸ | âœ… | High-repetition prefix = massive cache hits |
+| Simple batch Q&A (diverse prompts) | ✅ | Good | Both work; vLLM has wider ecosystem |
+| RAG pipeline (shared system prompt) | âš ï¸ Manual | ✅ | RadixAttention auto-shares prefix context |
+| Multi-turn chat (shared history) | âš ï¸ | ✅ | Radix tree naturally stores conversation cache |
+| Agentic loops (shared tool schemas) | âš ï¸ | ✅ | High-repetition prefix = massive cache hits |
 
 ### Prefill/Decode (P/D) Disaggregation
 
@@ -331,7 +331,7 @@ Result: 2-4Ã— higher cluster throughput at same cost.
 ---
 
 
-## â—† Formulas & Equations
+## ◆ Formulas & Equations
 
 | Name                   | Formula/Concept                                                                        | Use                                          |
 | ---------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------- |
@@ -341,7 +341,7 @@ Result: 2-4Ã— higher cluster throughput at same cost.
 
 ---
 
-## â—† Quick Reference
+## ◆ Quick Reference
 
 ```
 OPTIMIZATION PRIORITY ORDER (start here):
@@ -365,7 +365,7 @@ LATENCY TARGETS (typical):
 
 ---
 
-## â—‹ Gotchas & Common Mistakes
+## ○ Gotchas & Common Mistakes
 
 - âš ï¸ **Quantization isn't free**: INT4 CAN degrade quality for complex reasoning. Always benchmark YOUR use case.
 - âš ï¸ **KV cache OOM**: Long contexts + large batches = KV cache eats all GPU memory. Monitor and limit.
@@ -377,7 +377,7 @@ LATENCY TARGETS (typical):
 
 ---
 
-## â˜… Code & Implementation
+## ★ Code & Implementation
 
 ### Start vLLM Server (OpenAI-Compatible)
 
@@ -410,7 +410,7 @@ python -m sglang.launch_server \
   --port 30000 \
   --mem-fraction-static 0.85
 # RadixAttention prefix caching is automatic â€” no extra config needed
-# High prefix cache hit rate (RAG, agents) â†’ SGLang outperforms vLLM
+# High prefix cache hit rate (RAG, agents) → SGLang outperforms vLLM
 ```
 
 ### Load Model with 4-bit Quantization
@@ -447,7 +447,7 @@ print(tokenizer.decode(output[0], skip_special_tokens=True))
 
 ---
 
-## â—‹ Interview Angles
+## ○ Interview Angles
 
 - **Q**: How does quantization make LLMs run on consumer hardware?
 - **A**: By representing model weights in fewer bits (INT4 = 4 bits vs FP16 = 16 bits), memory drops 4x. LLaMA 70B goes from 140GB (needs 2Ã— A100) to 35GB (fits on 1Ã— RTX 4090). Modern quantization methods (AWQ, GPTQ) preserve quality by protecting important weights and using calibration data.
@@ -460,7 +460,7 @@ print(tokenizer.decode(output[0], skip_special_tokens=True))
 
 ---
 
-## â˜… Connections
+## ★ Connections
 
 | Relationship | Topics                                                                       |
 | ------------ | ---------------------------------------------------------------------------- |
@@ -472,7 +472,7 @@ print(tokenizer.decode(output[0], skip_special_tokens=True))
 
 ---
 
-## â—† Production Failure Modes
+## ◆ Production Failure Modes
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
@@ -485,7 +485,7 @@ print(tokenizer.decode(output[0], skip_special_tokens=True))
 
 ---
 
-## â—† Hands-On Exercises
+## ◆ Hands-On Exercises
 
 ### Exercise 1: Benchmark Quantization Levels
 
@@ -500,7 +500,7 @@ print(tokenizer.decode(output[0], skip_special_tokens=True))
 ---
 
 
-## â˜… Recommended Resources
+## ★ Recommended Resources
 
 | Type | Resource | Why |
 |------|----------|-----|
@@ -512,7 +512,7 @@ print(tokenizer.decode(output[0], skip_special_tokens=True))
 | ðŸ”§ Hands-on | [SGLang Documentation](https://sgl-project.github.io/) | RadixAttention and efficient serving |
 | ðŸ“˜ Book | "Efficient Deep Learning" by Menghani (2024) | Comprehensive treatment of inference optimization techniques |
 
-## â˜… Sources
+## ★ Sources
 
 - Dettmers et al., "LLM.int8(): 8-bit Matrix Multiplication for Transformers at Scale" (2022)
 - Lin et al., "AWQ: Activation-aware Weight Quantization" (2023)

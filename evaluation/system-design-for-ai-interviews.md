@@ -247,7 +247,7 @@ for k, v in DESIGN_DECISIONS.items():
 | ------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------- | -------------------------------------------------------------------------- |
 | **Over-engineering in design** | 30-minute answer covers infrastructure but misses requirements     | Jumped to tools before clarifying the problem           | Always start with 5 min of requirements, metrics, constraints              |
 | **Missing evaluation story**   | Interviewer asks "how do you know it works?" and candidate freezes | Forgot to plan evaluation as part of the design         | Include eval from the start: offline metrics, online A/B, human review     |
-| **No cost analysis**           | "Just use GPT-4 for everything"                                    | Didn't calculate cost at scale                          | Always estimate: requests/day Ã— cost/request = monthly cost                |
+| **No cost analysis**           | "Just use GPT-4 for everything"                                    | Didn't calculate cost at scale                          | Always estimate: requests/day × cost/request = monthly cost                |
 | **Ignoring failure modes**     | Design only covers happy path                                      | No mention of latency spikes, model failures, or safety | Explicitly discuss: what breaks? how do you detect it? how do you recover? |
 
 ---
@@ -272,11 +272,11 @@ for k, v in DESIGN_DECISIONS.items():
 
 | Type       | Resource                                                                                                                                                   | Why                                                                |
 | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
-| ðŸ“˜ Book     | "AI Engineering" by Chip Huyen (2025)                                                                                                                      | Covers AI system design end-to-end â€” the single best prep resource |
-| ðŸ“˜ Book     | "Designing Machine Learning Systems" by Chip Huyen (2022)                                                                                                  | System design fundamentals â€” data, features, serving, monitoring   |
-| ðŸŽ¥ Video    | [Alex Xu â€” "System Design Interview" Series](https://www.youtube.com/@ByteByteGo)                                                                          | Best visual explanations of system design interview techniques     |
-| ðŸ”§ Hands-on | [AI System Design Practice Problems](https://www.educative.io/)                                                                                            | Structured practice with AI-specific system design prompts         |
-| ðŸ“„ Paper    | [Google "MLOps: Continuous delivery for ML"](https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning) | Production ML patterns frequently tested in interviews             |
+| 📘 Book     | "AI Engineering" by Chip Huyen (2025)                                                                                                                      | Covers AI system design end-to-end — the single best prep resource |
+| 📘 Book     | "Designing Machine Learning Systems" by Chip Huyen (2022)                                                                                                  | System design fundamentals — data, features, serving, monitoring   |
+| 🎥 Video    | [Alex Xu — "System Design Interview" Series](https://www.youtube.com/@ByteByteGo)                                                                          | Best visual explanations of system design interview techniques     |
+| 🔧 Hands-on | [AI System Design Practice Problems](https://www.educative.io/)                                                                                            | Structured practice with AI-specific system design prompts         |
+| 📄 Paper    | [Google "MLOps: Continuous delivery for ML"](https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning) | Production ML patterns frequently tested in interviews             |
 
 ---
 

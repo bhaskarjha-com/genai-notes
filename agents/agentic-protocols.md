@@ -8,14 +8,14 @@ status: published
 last_verified: 2026-04
 parent: "../genai.md"
 related: ["ai-agents.md", "../techniques/function-calling-and-structured-output.md", "../tools-and-infra/tools-overview.md"]
-source: "Multiple â€” see Sources"
+source: "Multiple — see Sources"
 created: 2026-03-22
 updated: 2026-04-11
 ---
 
 # Agentic Protocols & Frameworks
 
-> ✨ **Bit**: MCP is like USB â€” it connects your AI to tools. A2A is like TCP/IP â€” it lets AIs talk to each other. ADK is like a factory â€” it builds the AIs. Together they're the plumbing of the agentic revolution.
+> ✨ **Bit**: MCP is like USB — it connects your AI to tools. A2A is like TCP/IP — it lets AIs talk to each other. ADK is like a factory — it builds the AIs. Together they're the plumbing of the agentic revolution.
 
 ---
 
@@ -23,7 +23,7 @@ updated: 2026-04-11
 
 - **What**: The standard protocols and frameworks for building, connecting, and orchestrating AI agents
 - **Why**: Building one agent is easy. Building 5 agents that use 20 tools and talk to each other? You need standards. MCP, A2A, and ADK are those standards.
-- **Key point**: MCP (agentâ†”tool), A2A (agentâ†”agent), and ADK (build agents) are complementary â€” not competitors. Think HTTP + WebSocket + a web framework.
+- **Key point**: MCP (agent↔tool), A2A (agent↔agent), and ADK (build agents) are complementary — not competitors. Think HTTP + WebSocket + a web framework.
 
 ---
 
@@ -43,7 +43,7 @@ Covers protocols and frameworks. For agent architecture/planning patterns, see [
 
 - deeplearning.ai has 3+ courses on MCP/A2A/ADK (2025-2026)
 - Google Cloud NEXT 2025 featured ADK + A2A as headline announcements
-- MCP adopted by OpenAI, Google, Anthropic â€” industry standard
+- MCP adopted by OpenAI, Google, Anthropic — industry standard
 - These are the "infrastructure layer" that GenAI engineers build on
 
 ---
@@ -53,75 +53,75 @@ Covers protocols and frameworks. For agent architecture/planning patterns, see [
 ### How They Fit Together
 
 ```
-â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚                 THE AGENTIC STACK                        â”‚
-â”‚                                                         â”‚
-â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”        â”‚
-â”‚  â”‚           YOUR APPLICATION                    â”‚        â”‚
-â”‚  â”‚  (Chat app, workflow automation, etc.)        â”‚        â”‚
-â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜        â”‚
-â”‚                       â”‚                                  â”‚
-â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”        â”‚
-â”‚  â”‚           AGENT FRAMEWORK (ADK)              â”‚        â”‚
-â”‚  â”‚  Build agents, orchestrate, deploy            â”‚        â”‚
-â”‚  â”‚  Also: LangGraph, CrewAI, AutoGen            â”‚        â”‚
-â”‚  â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜        â”‚
-â”‚         â”‚                      â”‚                         â”‚
-â”‚  â”Œâ”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”       â”Œâ”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”                  â”‚
-â”‚  â”‚ MCP Protocolâ”‚       â”‚ A2A Protocolâ”‚                  â”‚
-â”‚  â”‚ Agent â†” Toolâ”‚       â”‚ Agent â†” Agentâ”‚                 â”‚
-â”‚  â”‚             â”‚       â”‚              â”‚                  â”‚
-â”‚  â”‚ "Use this   â”‚       â”‚ "Hey Agent B,â”‚                 â”‚
-â”‚  â”‚  database"  â”‚       â”‚  do this taskâ”‚                 â”‚
-â”‚  â”‚  "Search    â”‚       â”‚  for me"     â”‚                  â”‚
-â”‚  â”‚   the web"  â”‚       â”‚              â”‚                  â”‚
-â”‚  â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”˜       â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”˜                  â”‚
-â”‚         â”‚                      â”‚                         â”‚
-â”‚  â”Œâ”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”       â”Œâ”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”                  â”‚
-â”‚  â”‚ MCP Servers â”‚       â”‚ Other Agents â”‚                  â”‚
-â”‚  â”‚ (GitHub,    â”‚       â”‚ (May be builtâ”‚                  â”‚
-â”‚  â”‚  Postgres,  â”‚       â”‚  by differentâ”‚                  â”‚
-â”‚  â”‚  Slack...)  â”‚       â”‚  companies)  â”‚                  â”‚
-â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜       â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜                  â”‚
-â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+┌─────────────────────────────────────────────────────────┐
+│                 THE AGENTIC STACK                        │
+│                                                         │
+│  ┌─────────────────────────────────────────────┐        │
+│  │           YOUR APPLICATION                    │        │
+│  │  (Chat app, workflow automation, etc.)        │        │
+│  └────────────────────┬────────────────────────┘        │
+│                       │                                  │
+│  ┌────────────────────▼────────────────────────┐        │
+│  │           AGENT FRAMEWORK (ADK)              │        │
+│  │  Build agents, orchestrate, deploy            │        │
+│  │  Also: LangGraph, CrewAI, AutoGen            │        │
+│  └──────┬──────────────────────┬───────────────┘        │
+│         │                      │                         │
+│  ┌──────▼──────┐       ┌──────▼──────┐                  │
+│  │ MCP Protocol│       │ A2A Protocol│                  │
+│  │ Agent ↔ Tool│       │ Agent ↔ Agent│                 │
+│  │             │       │              │                  │
+│  │ "Use this   │       │ "Hey Agent B,│                 │
+│  │  database"  │       │  do this task│                 │
+│  │  "Search    │       │  for me"     │                  │
+│  │   the web"  │       │              │                  │
+│  └──────┬──────┘       └──────┬──────┘                  │
+│         │                      │                         │
+│  ┌──────▼──────┐       ┌──────▼──────┐                  │
+│  │ MCP Servers │       │ Other Agents │                  │
+│  │ (GitHub,    │       │ (May be built│                  │
+│  │  Postgres,  │       │  by different│                  │
+│  │  Slack...)  │       │  companies)  │                  │
+│  └─────────────┘       └─────────────┘                  │
+└─────────────────────────────────────────────────────────┘
 ```
 
-### MCP (Model Context Protocol) â€” Agent â†” Tool
+### MCP (Model Context Protocol) — Agent ↔ Tool
 
 ```
 ARCHITECTURE: Client-Host-Server
 
-  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”    â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”    â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-  â”‚  MCP HOST   â”‚    â”‚  MCP HOST   â”‚    â”‚            â”‚
-  â”‚  (Claude,   â”‚    â”‚  (Your App) â”‚    â”‚ MCP SERVER â”‚
-  â”‚   Cursor)   â”‚    â”‚             â”‚    â”‚ (Postgres) â”‚
-  â”‚             â”‚    â”‚             â”‚    â”‚            â”‚
-  â”‚ â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”  â”‚    â”‚ â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”  â”‚    â”‚ Exposes:   â”‚
-  â”‚ â”‚MCP     â”‚â”€â”€â”¼â”€â”€â”€â”€â”¼â”€â”‚MCP     â”‚  â”‚    â”‚ - Tools    â”‚
-  â”‚ â”‚CLIENT  â”‚  â”‚    â”‚ â”‚CLIENT  â”‚â”€â”€â”¼â”€â”€â”€â–¶â”‚ - Resourcesâ”‚
-  â”‚ â””â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â”‚    â”‚ â””â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â”‚    â”‚ - Prompts  â”‚
-  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜    â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜    â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+  ┌────────────┐    ┌────────────┐    ┌────────────┐
+  │  MCP HOST   │    │  MCP HOST   │    │            │
+  │  (Claude,   │    │  (Your App) │    │ MCP SERVER │
+  │   Cursor)   │    │             │    │ (Postgres) │
+  │             │    │             │    │            │
+  │ ┌────────┐  │    │ ┌────────┐  │    │ Exposes:   │
+  │ │MCP     │──┼────┼─│MCP     │  │    │ - Tools    │
+  │ │CLIENT  │  │    │ │CLIENT  │──┼───▶│ - Resources│
+  │ └────────┘  │    │ └────────┘  │    │ - Prompts  │
+  └────────────┘    └────────────┘    └────────────┘
 
   Transport: JSON-RPC 2.0 over:
     - STDIO (local process, same machine)
     - HTTP + SSE (remote, network)
 
 THREE PRIMITIVES:
-  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-  â”‚  TOOLS = Functions the LLM can call           â”‚
-  â”‚    get_weather(), query_database(), commit()  â”‚
-  â”‚    Model-controlled, needs human approval     â”‚
-  â”‚                                              â”‚
-  â”‚  RESOURCES = Data the LLM can read            â”‚
-  â”‚    file:///users/data.csv                     â”‚
-  â”‚    db://users/schema                          â”‚
-  â”‚    Application-controlled (UI exposes them)   â”‚
-  â”‚                                              â”‚
-  â”‚  PROMPTS = Pre-built templates                â”‚
-  â”‚    "Summarize this document"                  â”‚
-  â”‚    "Generate a SQL query for..."              â”‚
-  â”‚    User-controlled (user selects them)        â”‚
-  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+  ┌──────────────────────────────────────────────┐
+  │  TOOLS = Functions the LLM can call           │
+  │    get_weather(), query_database(), commit()  │
+  │    Model-controlled, needs human approval     │
+  │                                              │
+  │  RESOURCES = Data the LLM can read            │
+  │    file:///users/data.csv                     │
+  │    db://users/schema                          │
+  │    Application-controlled (UI exposes them)   │
+  │                                              │
+  │  PROMPTS = Pre-built templates                │
+  │    "Summarize this document"                  │
+  │    "Generate a SQL query for..."              │
+  │    User-controlled (user selects them)        │
+  └──────────────────────────────────────────────┘
 
 SECURITY (2026 spec):
   - MCP servers = OAuth 2.0 Resource Servers
@@ -139,7 +139,7 @@ MCP SERVER EXAMPLES:
   Custom       → YOUR API as an MCP server
 ```
 
-### A2A (Agent-to-Agent Protocol) â€” Agent â†” Agent
+### A2A (Agent-to-Agent Protocol) — Agent ↔ Agent
 
 ```
 WHAT: Standard for AI agents made by DIFFERENT providers
@@ -183,18 +183,18 @@ HOW IT WORKS:
      Streaming:    Request → SSE stream → Progressive results
 
 A2A vs MCP:
-  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-  â”‚  MCP:  "Hey database, give me user data"     â”‚
-  â”‚         Agent → Tool (structured function)    â”‚
-  â”‚                                              â”‚
-  â”‚  A2A:  "Hey booking agent, find me a flight" â”‚
-  â”‚         Agent → Agent (autonomous delegation) â”‚
-  â”‚                                              â”‚
-  â”‚  They're COMPLEMENTARY, not competing.       â”‚
-  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+  ┌──────────────────────────────────────────────┐
+  │  MCP:  "Hey database, give me user data"     │
+  │         Agent → Tool (structured function)    │
+  │                                              │
+  │  A2A:  "Hey booking agent, find me a flight" │
+  │         Agent → Agent (autonomous delegation) │
+  │                                              │
+  │  They're COMPLEMENTARY, not competing.       │
+  └──────────────────────────────────────────────┘
 ```
 
-### ADK (Agent Development Kit) â€” Build Agents
+### ADK (Agent Development Kit) — Build Agents
 
 ```
 WHAT: Google's open-source framework for building AI agents.
@@ -209,21 +209,21 @@ KEY FEATURES:
   - Deploy to Vertex AI, Cloud Run, or Docker
 
 AGENT HIERARCHY IN ADK:
-  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-  â”‚  ROOT AGENT (orchestrator)              â”‚
-  â”‚    â”‚                                    â”‚
-  â”‚    â”œâ”€â”€ Sub-Agent: Research              â”‚
-  â”‚    â”‚   â””â”€â”€ Tools: web_search, read_doc  â”‚
-  â”‚    â”‚                                    â”‚
-  â”‚    â”œâ”€â”€ Sub-Agent: Analysis              â”‚
-  â”‚    â”‚   â””â”€â”€ Tools: python_exec, db_query â”‚
-  â”‚    â”‚                                    â”‚
-  â”‚    â””â”€â”€ Sub-Agent: Report Writer         â”‚
-  â”‚        â””â”€â”€ Tools: file_write, format    â”‚
-  â”‚                                         â”‚
-  â”‚  Root delegates tasks to sub-agents     â”‚
-  â”‚  Sub-agents can delegate further        â”‚
-  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+  ┌─────────────────────────────────────────┐
+  │  ROOT AGENT (orchestrator)              │
+  │    │                                    │
+  │    ├── Sub-Agent: Research              │
+  │    │   └── Tools: web_search, read_doc  │
+  │    │                                    │
+  │    ├── Sub-Agent: Analysis              │
+  │    │   └── Tools: python_exec, db_query │
+  │    │                                    │
+  │    └── Sub-Agent: Report Writer         │
+  │        └── Tools: file_write, format    │
+  │                                         │
+  │  Root delegates tasks to sub-agents     │
+  │  Sub-agents can delegate further        │
+  └─────────────────────────────────────────┘
 ```
 
 ### Framework Comparison (March 2026)
@@ -231,19 +231,19 @@ AGENT HIERARCHY IN ADK:
 | Framework           | By        | Best For                         | Multi-Agent    | MCP | A2A | Graph Workflow |
 | ------------------- | --------- | -------------------------------- | -------------- | --- | --- | -------------- |
 | **ADK**             | Google    | Google ecosystem, full lifecycle | ✅ Hierarchical | ✅   | ✅   | ✅ (2.0)        |
-| **LangGraph**       | LangChain | Complex stateful agents          | ✅ Graph-based  | ✅   | âŒ   | ✅              |
-| **CrewAI**          | Community | Role-based agent teams           | ✅ Role-based   | ✅   | âŒ   | âš ï¸ Limited      |
-| **AutoGen**         | Microsoft | Research, conversational         | ✅ Chat-based   | ✅   | âŒ   | âŒ              |
-| **Semantic Kernel** | Microsoft | Enterprise .NET/Python           | âš ï¸ Basic        | ✅   | âŒ   | âŒ              |
-| **Mastra**          | Community | TypeScript-first                 | ✅              | ✅   | âŒ   | ✅              |
+| **LangGraph**       | LangChain | Complex stateful agents          | ✅ Graph-based  | ✅   | ❌   | ✅              |
+| **CrewAI**          | Community | Role-based agent teams           | ✅ Role-based   | ✅   | ❌   | ⚠️ Limited      |
+| **AutoGen**         | Microsoft | Research, conversational         | ✅ Chat-based   | ✅   | ❌   | ❌              |
+| **Semantic Kernel** | Microsoft | Enterprise .NET/Python           | ⚠️ Basic        | ✅   | ❌   | ❌              |
+| **Mastra**          | Community | TypeScript-first                 | ✅              | ✅   | ❌   | ✅              |
 
 ---
 
 ## ◆ Code Example: MCP Server
 
 ```python
-# âš ï¸ Last tested: 2026-04
-# â•â•â• Building a simple MCP server â•â•â•
+# ⚠️ Last tested: 2026-04
+# ═══ Building a simple MCP server ═══
 from mcp.server import Server
 from mcp.types import Tool, TextContent
 
@@ -270,7 +270,7 @@ async def call_tool(name: str, arguments: dict):
     if name == "get_weather":
         city = arguments["city"]
         # Your actual weather API call here
-        return [TextContent(type="text", text=f"Weather in {city}: 22Â°C, sunny")]
+        return [TextContent(type="text", text=f"Weather in {city}: 22°C, sunny")]
 
 # Run with: python server.py
 # Connect from Claude Desktop, Cursor, or any MCP client
@@ -288,7 +288,7 @@ PROTOCOL CHEAT SHEET:
 
 MATURITY (March 2026):
   MCP:     Production-ready ✅ (Linux Foundation standard, adopted by OpenAI, Google, Anthropic)
-  A2A:     Early adoption âš ï¸ (spec stable, ecosystem growing)
+  A2A:     Early adoption ⚠️ (spec stable, ecosystem growing)
   ADK:     GA ✅ (deployed on Vertex AI, active development)
 
 MCP PRIMITIVES:
@@ -301,20 +301,20 @@ MCP PRIMITIVES:
 
 ## ○ Gotchas & Common Mistakes
 
-- âš ï¸ **MCP â‰  function calling**: Function calling is the LLM API feature. MCP is the PROTOCOL for discovering and connecting to tools. MCP uses function calling under the hood.
-- âš ï¸ **A2A is not for tool use**: Don't use A2A when MCP suffices. A2A is for agent-to-agent delegation, not simple tool calls.
-- âš ï¸ **ADK is Google-optimized**: While model-agnostic, ADK works best with Gemini + Vertex AI. Consider LangGraph for fully provider-neutral needs.
-- âš ï¸ **Security is YOUR problem**: MCP servers can expose sensitive data. Always implement auth, rate limiting, and access controls.
+- ⚠️ **MCP ≠ function calling**: Function calling is the LLM API feature. MCP is the PROTOCOL for discovering and connecting to tools. MCP uses function calling under the hood.
+- ⚠️ **A2A is not for tool use**: Don't use A2A when MCP suffices. A2A is for agent-to-agent delegation, not simple tool calls.
+- ⚠️ **ADK is Google-optimized**: While model-agnostic, ADK works best with Gemini + Vertex AI. Consider LangGraph for fully provider-neutral needs.
+- ⚠️ **Security is YOUR problem**: MCP servers can expose sensitive data. Always implement auth, rate limiting, and access controls.
 
 ---
 
 ## ○ Interview Angles
 
 - **Q**: What's the difference between MCP and A2A?
-- **A**: MCP connects an agent to TOOLS (databases, APIs, filesystems) â€” it's agent-to-tool communication. A2A connects an agent to OTHER AGENTS â€” it's agent-to-agent collaboration. MCP is like a USB port (connect devices), A2A is like a network protocol (connect computers). They're complementary: an agent uses MCP to access its own tools and A2A to delegate tasks to other agents.
+- **A**: MCP connects an agent to TOOLS (databases, APIs, filesystems) — it's agent-to-tool communication. A2A connects an agent to OTHER AGENTS — it's agent-to-agent collaboration. MCP is like a USB port (connect devices), A2A is like a network protocol (connect computers). They're complementary: an agent uses MCP to access its own tools and A2A to delegate tasks to other agents.
 
 - **Q**: Why do we need MCP if we already have function calling?
-- **A**: Function calling is model-specific (OpenAI's API, Anthropic's API). MCP is a universal standard â€” build one MCP server and it works with Claude, GPT, Gemini, Cursor, and any MCP client. It also adds discovery (list available tools), resources (data access), and security (OAuth). It's the difference between every device having a custom charger vs. everyone using USB-C.
+- **A**: Function calling is model-specific (OpenAI's API, Anthropic's API). MCP is a universal standard — build one MCP server and it works with Claude, GPT, Gemini, Cursor, and any MCP client. It also adds discovery (list available tools), resources (data access), and security (OAuth). It's the difference between every device having a custom charger vs. everyone using USB-C.
 
 ---
 
@@ -324,8 +324,8 @@ MCP PRIMITIVES:
 
 ```python
 # pip install fastmcp>=0.1 httpx>=0.27
-# âš ï¸ Last tested: 2026-04 | Requires: fastmcp>=0.1
-# Model Context Protocol server â€” compatible with Claude Desktop, Cursor, custom agents
+# ⚠️ Last tested: 2026-04 | Requires: fastmcp>=0.1
+# Model Context Protocol server — compatible with Claude Desktop, Cursor, custom agents
 
 from fastmcp import FastMCP
 import httpx
@@ -336,12 +336,12 @@ mcp = FastMCP("demo-server")
 def get_weather(city: str) -> str:
     """Get current weather for a city. Returns temperature and condition."""
     # In production: call real weather API
-    return f"{city}: 22Â°C, partly cloudy (simulated)"
+    return f"{city}: 22°C, partly cloudy (simulated)"
 
 @mcp.tool()
 def calculate(expression: str) -> str:
     """Safely evaluate a math expression. Supports +, -, *, /, **, sqrt."""
-    # âš ï¸ SECURITY: eval() with restricted builtins used for demo. In production,
+    # ⚠️ SECURITY: eval() with restricted builtins used for demo. In production,
     # use a safe expression parser like `simpleeval` or `numexpr`.
     import math
     try:
@@ -364,7 +364,7 @@ if __name__ == "__main__":
 ### ReAct Agent Loop
 
 ```python
-# âš ï¸ Last tested: 2026-04 | Requires: openai>=1.60, OPENAI_API_KEY
+# ⚠️ Last tested: 2026-04 | Requires: openai>=1.60, OPENAI_API_KEY
 from openai import OpenAI
 import json
 
@@ -382,7 +382,7 @@ TOOLS = [{
 }]
 
 def calculate(expression: str) -> str:
-    # âš ï¸ SECURITY: eval() used for demo. In production, use `simpleeval` or `numexpr`.
+    # ⚠️ SECURITY: eval() used for demo. In production, use `simpleeval` or `numexpr`.
     import math
     return str(eval(expression, {}, {"sqrt": math.sqrt}))
 
@@ -447,16 +447,16 @@ print(react_agent("What is 2 to the power of 10, times pi?"))
 
 | Type       | Resource                                                       | Why                                                    |
 | ---------- | -------------------------------------------------------------- | ------------------------------------------------------ |
-| ðŸ”§ Hands-on | [MCP Specification](https://modelcontextprotocol.io/)          | The standard protocol for agent-tool communication     |
-| ðŸ”§ Hands-on | [Google A2A Protocol](https://google.github.io/A2A/)           | Agent-to-agent communication protocol                  |
-| ðŸ”§ Hands-on | [Google ADK Documentation](https://google.github.io/adk-docs/) | Google's Agent Development Kit                         |
-| ðŸ“˜ Book     | "AI Engineering" by Chip Huyen (2025), Ch 7                    | Agent protocols and inter-agent communication patterns |
+| 🔧 Hands-on | [MCP Specification](https://modelcontextprotocol.io/)          | The standard protocol for agent-tool communication     |
+| 🔧 Hands-on | [Google A2A Protocol](https://google.github.io/A2A/)           | Agent-to-agent communication protocol                  |
+| 🔧 Hands-on | [Google ADK Documentation](https://google.github.io/adk-docs/) | Google's Agent Development Kit                         |
+| 📘 Book     | "AI Engineering" by Chip Huyen (2025), Ch 7                    | Agent protocols and inter-agent communication patterns |
 
 ## ★ Sources
 
-- MCP Specification â€” https://modelcontextprotocol.io
-- A2A Protocol â€” https://a2aprotocol.org
-- Google ADK â€” https://google.github.io/adk-docs/
+- MCP Specification — https://modelcontextprotocol.io
+- A2A Protocol — https://a2aprotocol.org
+- Google ADK — https://google.github.io/adk-docs/
 - deeplearning.ai, "MCP: Build Rich-Context AI Apps with Anthropic" (2025)
 - deeplearning.ai, "Build AI Apps with MCP Servers: Working with Box Files" (2025)
 - deeplearning.ai, "Building Live Voice Agents with Google's ADK" (2025)

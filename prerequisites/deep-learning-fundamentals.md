@@ -293,7 +293,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-# â•â•â• Manual 2-layer MLP forward + backward â•â•â•
+# ═══ Manual 2-layer MLP forward + backward ═══
 torch.manual_seed(42)
 X = torch.randn(32, 10)      # 32 samples, 10 features
 y = torch.randint(0, 3, (32,))  # 3-class labels
@@ -323,7 +323,7 @@ for epoch in range(5):
 
     print(f"Epoch {epoch+1}: loss={loss.item():.4f}")
 
-# â•â•â• Same with nn.Module â•â•â• (idiomatic PyTorch)
+# ═══ Same with nn.Module ═══ (idiomatic PyTorch)
 class MLP(nn.Module):
     def __init__(self):
         super().__init__()

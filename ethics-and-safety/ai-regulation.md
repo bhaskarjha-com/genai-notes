@@ -76,7 +76,7 @@ The EU AI Act is a risk-based framework. For engineering teams, the practical ta
 | August 1, 2024 | Act entered into force |
 | February 2, 2025 | Prohibited practices ban + AI literacy obligations applied |
 | August 2, 2025 | GPAI model transparency obligations applied |
-| **August 2, 2026** | **Act fully applicable** âš ï¸ PRIMARY COMPLIANCE DEADLINE for Annex III high-risk AI |
+| **August 2, 2026** | **Act fully applicable** ⚠️ PRIMARY COMPLIANCE DEADLINE for Annex III high-risk AI |
 | August 2, 2027 | Transition period ends for pre-existing systems deployed before the Act |
 
 **In force RIGHT NOW (April 2026)**:
@@ -170,7 +170,7 @@ compliance_deadline: 2026-08-02        # or 2027-08-02 if pre-existing system
 ### Governance Record Validation (EU AI Act Compliance Checklist)
 
 ```python
-# âš ï¸ Last tested: 2026-04 | Requires: Python 3.10+ (stdlib only)
+# ⚠️ Last tested: 2026-04 | Requires: Python 3.10+ (stdlib only)
 # Programmatic compliance gap checker for EU AI Act Annex III high-risk systems
 
 from datetime import date
@@ -224,7 +224,7 @@ def run_compliance_checklist(record: AISystemGovernanceRecord) -> list[str]:
     months_since = (today.year - review_year) * 12 + (today.month - review_month)
     if months_since > 6:
         gaps.append(
-            f"STALE: Risk review is {months_since} months old â€” recommend every 6 months"
+            f"STALE: Risk review is {months_since} months old — recommend every 6 months"
         )
 
     return gaps
@@ -237,7 +237,7 @@ record = AISystemGovernanceRecord(
     eu_ai_act_risk_tier="high",          # Annex III: creditworthiness assessment
     human_oversight_implemented=True,
     evaluation_set_version="loan_eval_v3",
-    last_risk_review="2026-01",          # 3 months ago â€” will pass
+    last_risk_review="2026-01",          # 3 months ago — will pass
     incident_response_runbook=True,
     logging_implemented=False,           # missing Art.12 logging!
     compliance_deadline=date(2026, 8, 2),
@@ -245,14 +245,14 @@ record = AISystemGovernanceRecord(
 
 gaps = run_compliance_checklist(record)
 if gaps:
-    print(f"âš ï¸  {len(gaps)} compliance gap(s) found:")
+    print(f"⚠️  {len(gaps)} compliance gap(s) found:")
     for gap in gaps:
         print(f"   [{gap}]")
 else:
     print("✅ No compliance gaps detected")
 
 # Expected output:
-# âš ï¸  1 compliance gap(s) found:
+# ⚠️  1 compliance gap(s) found:
 #    [HIGH-RISK [Art.12]: Automatic logging of system operation required]
 ```
 
@@ -272,11 +272,11 @@ else:
 
 ## ○ Gotchas & Common Mistakes
 
-- âš ï¸ Regulation applies to use context, not only model type. A chatbot doing credit decisions = high risk, even if built on a general API.
-- âš ï¸ "We use an API provider" does not remove all downstream responsibility. Deployers bear obligations too.
-- âš ï¸ Governance evidence is hard to reconstruct after launch if you never logged it. Build it in from day one.
-- âš ï¸ Teams often confuse voluntary frameworks (NIST AI RMF) with binding law (EU AI Act). Both matter, but differently.
-- âš ï¸ The Digital Omnibus does NOT simplify high-risk AI obligations â€” only some administrative procedures for small providers.
+- ⚠️ Regulation applies to use context, not only model type. A chatbot doing credit decisions = high risk, even if built on a general API.
+- ⚠️ "We use an API provider" does not remove all downstream responsibility. Deployers bear obligations too.
+- ⚠️ Governance evidence is hard to reconstruct after launch if you never logged it. Build it in from day one.
+- ⚠️ Teams often confuse voluntary frameworks (NIST AI RMF) with binding law (EU AI Act). Both matter, but differently.
+- ⚠️ The Digital Omnibus does NOT simplify high-risk AI obligations — only some administrative procedures for small providers.
 
 ---
 
@@ -289,7 +289,7 @@ else:
 - **A**: It provides an operational structure for governance and risk management that maps directly to engineering workflows (Govern → Map → Measure → Manage). Many enterprises use it to organize trustworthy-AI programs, and US federal procurement increasingly references it. It's also a good baseline before your jurisdiction mandates something more specific.
 
 - **Q**: What is the significance of August 2, 2026 for engineering teams?
-- **A**: It's the date the EU AI Act becomes fully applicable for Annex III high-risk AI systems. After this date, deploying a non-compliant high-risk AI system in the EU exposes the deployer to fines up to â‚¬35M or 7% of global annual turnover. Engineering teams should treat this as a hard product deadline: conformity assessments, human oversight mechanisms, logging (Art.12), and testing records (Art.9) must all be in place.
+- **A**: It's the date the EU AI Act becomes fully applicable for Annex III high-risk AI systems. After this date, deploying a non-compliant high-risk AI system in the EU exposes the deployer to fines up to €35M or 7% of global annual turnover. Engineering teams should treat this as a hard product deadline: conformity assessments, human oversight mechanisms, logging (Art.12), and testing records (Art.9) must all be in place.
 
 ---
 
@@ -348,15 +348,15 @@ else:
 
 | Type | Resource | Why |
 |------|----------|-----|
-| ðŸ”§ Reference | [EU AI Act Full Text](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689) | Authoritative source â€” Annex III for high-risk categories |
-| ðŸ”§ Reference | [EU AI Act Summary (artificialintelligenceact.eu)](https://artificialintelligenceact.eu/) | Accessible article-by-article guide |
-| ðŸ”§ Reference | [NIST AI RMF Playbook](https://airc.nist.gov/AI_RMF_Playbook) | Risk management actions aligned to the four functions |
-| ðŸ”§ Reference | [NIST AI RMF](https://www.nist.gov/artificial-intelligence/ai-risk-management-framework) | Primary framework page |
-| ðŸ“˜ Book | "The AI Dilemma" by Tegmark (2024) | Accessible treatment of AI governance challenges |
+| 🔧 Reference | [EU AI Act Full Text](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689) | Authoritative source — Annex III for high-risk categories |
+| 🔧 Reference | [EU AI Act Summary (artificialintelligenceact.eu)](https://artificialintelligenceact.eu/) | Accessible article-by-article guide |
+| 🔧 Reference | [NIST AI RMF Playbook](https://airc.nist.gov/AI_RMF_Playbook) | Risk management actions aligned to the four functions |
+| 🔧 Reference | [NIST AI RMF](https://www.nist.gov/artificial-intelligence/ai-risk-management-framework) | Primary framework page |
+| 📘 Book | "The AI Dilemma" by Tegmark (2024) | Accessible treatment of AI governance challenges |
 
 ## ★ Sources
 
-- European Commission, AI Act full text (Regulation 2024/1689) â€” https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689
-- European Commission, AI Act policy page â€” https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai
-- European Commission, "European Artificial Intelligence Act comes into force" â€” https://digital-strategy.ec.europa.eu/en/news/european-artificial-intelligence-act-comes-force
-- NIST AI RMF Playbook â€” https://www.nist.gov/itl/ai-risk-management-framework/nist-ai-rmf-playbook
+- European Commission, AI Act full text (Regulation 2024/1689) — https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689
+- European Commission, AI Act policy page — https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai
+- European Commission, "European Artificial Intelligence Act comes into force" — https://digital-strategy.ec.europa.eu/en/news/european-artificial-intelligence-act-comes-force
+- NIST AI RMF Playbook — https://www.nist.gov/itl/ai-risk-management-framework/nist-ai-rmf-playbook

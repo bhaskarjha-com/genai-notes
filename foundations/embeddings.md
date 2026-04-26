@@ -15,7 +15,7 @@ updated: 2026-04-11
 
 # Embeddings
 
-> ✨ **Bit**: Embeddings are how machines "understand" meaning â€” by turning everything (words, images, code) into lists of numbers where similar things are close together. "King - Man + Woman = Queen" is the most famous proof it works.
+> ✨ **Bit**: Embeddings are how machines "understand" meaning — by turning everything (words, images, code) into lists of numbers where similar things are close together. "King - Man + Woman = Queen" is the most famous proof it works.
 
 ---
 
@@ -46,7 +46,7 @@ Covers: What embeddings are, how they work, types, models, and practical usage. 
 
 ### Prerequisites
 
-- Basic [Linear Algebra For Ai](../prerequisites/linear-algebra-for-ai.md) â€” vectors, dot products
+- Basic [Linear Algebra For Ai](../prerequisites/linear-algebra-for-ai.md) — vectors, dot products
 - Understanding of what [Large Language Models (LLMs)](../llms/llms-overview.md) do
 
 ---
@@ -63,31 +63,31 @@ TRADITIONAL REPRESENTATION (sparse, no meaning):
 
 EMBEDDING REPRESENTATION (dense, captures meaning):
   "cat"  → [0.21, -0.55, 0.89, 0.12, ..., 0.45]  (768-3072 dimensions)
-  "dog"  → [0.23, -0.51, 0.85, 0.15, ..., 0.43]  â† CLOSE to cat!
-  "quantum" → [-0.67, 0.33, -0.12, 0.91, ..., -0.28]  â† FAR from both
+  "dog"  → [0.23, -0.51, 0.85, 0.15, ..., 0.43]  ← CLOSE to cat!
+  "quantum" → [-0.67, 0.33, -0.12, 0.91, ..., -0.28]  ← FAR from both
 ```
 
 ### How Embeddings Are Created
 
 ```
-â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚                  EMBEDDING PIPELINE                       â”‚
-â”‚                                                          â”‚
-â”‚  Text: "Transformers revolutionized NLP"                 â”‚
-â”‚                    â”‚                                     â”‚
-â”‚                    â–¼                                     â”‚
-â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”                    â”‚
-â”‚  â”‚     EMBEDDING MODEL              â”‚                    â”‚
-â”‚  â”‚  (trained on massive text pairs) â”‚                    â”‚
-â”‚  â”‚                                  â”‚                    â”‚
-â”‚  â”‚  "This sentence" â†” "That sentence"                   â”‚
-â”‚  â”‚  Similar? → Vectors close                             â”‚
-â”‚  â”‚  Different? → Vectors far                             â”‚
-â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜                    â”‚
-â”‚                     â–¼                                    â”‚
-â”‚  Vector: [0.12, -0.45, 0.89, ..., 0.33]                â”‚
-â”‚           â””â”€â”€â”€â”€â”€â”€â”€â”€ 768-3072 numbers â”€â”€â”€â”€â”€â”˜              â”‚
-â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+┌──────────────────────────────────────────────────────────┐
+│                  EMBEDDING PIPELINE                       │
+│                                                          │
+│  Text: "Transformers revolutionized NLP"                 │
+│                    │                                     │
+│                    ▼                                     │
+│  ┌──────────────────────────────────┐                    │
+│  │     EMBEDDING MODEL              │                    │
+│  │  (trained on massive text pairs) │                    │
+│  │                                  │                    │
+│  │  "This sentence" ↔ "That sentence"                   │
+│  │  Similar? → Vectors close                             │
+│  │  Different? → Vectors far                             │
+│  └──────────────────┬───────────────┘                    │
+│                     ▼                                    │
+│  Vector: [0.12, -0.45, 0.89, ..., 0.33]                │
+│           └──────── 768-3072 numbers ─────┘              │
+└──────────────────────────────────────────────────────────┘
 ```
 
 ### Types of Embeddings
@@ -128,7 +128,7 @@ EMBEDDING REPRESENTATION (dense, captures meaning):
 ### Similarity Measurement
 
 ```python
-# âš ï¸ Last tested: 2026-04
+# ⚠️ Last tested: 2026-04
 import numpy as np
 
 def cosine_similarity(a, b):
@@ -147,16 +147,16 @@ cosine_similarity(embed_cat, embed_car)  # → 0.12 (very different)
 | Metric                 | When to Use                              | Range   |
 | ---------------------- | ---------------------------------------- | ------- |
 | **Cosine Similarity**  | Normalized text embeddings (most common) | -1 to 1 |
-| **Euclidean Distance** | When magnitude matters                   | 0 to âˆž  |
-| **Dot Product**        | Already-normalized vectors, fast         | -âˆž to âˆž |
+| **Euclidean Distance** | When magnitude matters                   | 0 to ∞  |
+| **Dot Product**        | Already-normalized vectors, fast         | -∞ to ∞ |
 
 ---
 
 ## ◆ Code & Implementation
 
 ```python
-# âš ï¸ Last tested: 2026-04
-# â•â•â• OPENAI EMBEDDINGS â•â•â•
+# ⚠️ Last tested: 2026-04
+# ═══ OPENAI EMBEDDINGS ═══
 from openai import OpenAI
 client = OpenAI()
 
@@ -167,7 +167,7 @@ response = client.embeddings.create(
 vector = response.data[0].embedding  # List of 1536 floats
 print(f"Dimensions: {len(vector)}")  # 1536
 
-# â•â•â• OPEN-SOURCE (Sentence Transformers) â•â•â•
+# ═══ OPEN-SOURCE (Sentence Transformers) ═══
 from sentence_transformers import SentenceTransformer
 
 model = SentenceTransformer("BAAI/bge-m3")
@@ -180,7 +180,7 @@ sims = cosine_similarity(embeddings)
 # texts[0] vs texts[1]: ~0.92 (semantically similar!)
 # texts[0] vs texts[2]: ~0.15 (unrelated)
 
-# â•â•â• LOCAL WITH OLLAMA â•â•â•
+# ═══ LOCAL WITH OLLAMA ═══
 import ollama
 response = ollama.embeddings(model="nomic-embed-text", prompt="Hello, world!")
 vector = response["embedding"]  # 768 dimensions
@@ -190,7 +190,7 @@ vector = response["embedding"]  # 768 dimensions
 
 ## ◆ Strengths vs Limitations
 
-| ✅ Strengths                                   | âŒ Limitations                                                     |
+| ✅ Strengths                                   | ❌ Limitations                                                     |
 | --------------------------------------------- | ----------------------------------------------------------------- |
 | Capture semantic meaning (synonyms, concepts) | Fixed-size: long documents squeezed into same dimensions as short |
 | Enable similarity search at scale             | Black box: hard to interpret what each dimension means            |
@@ -212,8 +212,8 @@ CHOOSING AN EMBEDDING MODEL:
 
 KEY NUMBERS:
   Dimensions: 768-3072 (typical)
-  Storage: ~6KB per embedding (1536 dims Ã— 4 bytes)
-  1M documents Ã— 1536 dims = ~6 GB storage
+  Storage: ~6KB per embedding (1536 dims × 4 bytes)
+  1M documents × 1536 dims = ~6 GB storage
 
 SIMILARITY THRESHOLDS (cosine, rough guide):
   > 0.9  = Very similar / near-duplicate
@@ -226,11 +226,11 @@ SIMILARITY THRESHOLDS (cosine, rough guide):
 
 ## ○ Gotchas & Common Mistakes
 
-- âš ï¸ **Embedding model for index â‰  query model = disaster**: ALWAYS use the same model for embedding documents and queries.
-- âš ï¸ **Long text â‰  good embedding**: Most models have a max input (~8K tokens). Longer text gets truncated, losing info. Chunk first.
-- âš ï¸ **Dimensions aren't free**: 3072-dim vectors cost 2x storage/compute vs 1536-dim. Use the smallest that gives acceptable quality.
-- âš ï¸ **Cosine similarity isn't everything**: Two documents about different aspects of the same topic might have high similarity but not answer the same question. Task-specific fine-tuning helps.
-- âš ï¸ **Don't ignore the MTEB leaderboard**: The Massive Text Embedding Benchmark ranks models. Check it before choosing.
+- ⚠️ **Embedding model for index ≠ query model = disaster**: ALWAYS use the same model for embedding documents and queries.
+- ⚠️ **Long text ≠ good embedding**: Most models have a max input (~8K tokens). Longer text gets truncated, losing info. Chunk first.
+- ⚠️ **Dimensions aren't free**: 3072-dim vectors cost 2x storage/compute vs 1536-dim. Use the smallest that gives acceptable quality.
+- ⚠️ **Cosine similarity isn't everything**: Two documents about different aspects of the same topic might have high similarity but not answer the same question. Task-specific fine-tuning helps.
+- ⚠️ **Don't ignore the MTEB leaderboard**: The Massive Text Embedding Benchmark ranks models. Check it before choosing.
 
 ---
 
@@ -240,7 +240,7 @@ SIMILARITY THRESHOLDS (cosine, rough guide):
 - **A**: Embeddings map data to dense vectors where semantic similarity becomes geometric distance. They're the foundation of RAG (find relevant documents), semantic search (find by meaning), and even the first layer of every LLM. Without embeddings, modern AI can't represent or compare meaning.
 
 - **Q**: What's the difference between word embeddings and sentence embeddings?
-- **A**: Word embeddings (Word2Vec, GloVe) encode individual words â€” "bank" always gets the same vector. Sentence embeddings (SBERT, text-embedding-3) encode entire sentences with context â€” "river bank" and "bank robbery" get very different vectors. Modern systems use sentence/paragraph embeddings.
+- **A**: Word embeddings (Word2Vec, GloVe) encode individual words — "bank" always gets the same vector. Sentence embeddings (SBERT, text-embedding-3) encode entire sentences with context — "river bank" and "bank robbery" get very different vectors. Modern systems use sentence/paragraph embeddings.
 
 ---
 
@@ -286,14 +286,14 @@ SIMILARITY THRESHOLDS (cosine, rough guide):
 
 | Type | Resource | Why |
 |------|----------|-----|
-| ðŸ“„ Paper | [Mikolov et al. "Word2Vec" (2013)](https://arxiv.org/abs/1301.3781) | Where it all started â€” skip-gram and CBOW |
-| ðŸŽ¥ Video | [Jay Alammar â€” "The Illustrated Word2vec"](https://jalammar.github.io/illustrated-word2vec/) | Best visual explanation of word embeddings |
-| ðŸ”§ Hands-on | [OpenAI Embeddings Guide](https://platform.openai.com/docs/guides/embeddings) | Practical guide to using production embeddings |
-| ðŸ“˜ Book | "Speech and Language Processing" by Jurafsky & Martin, Ch 6 | Authoritative textbook treatment of vector semantics |
+| 📄 Paper | [Mikolov et al. "Word2Vec" (2013)](https://arxiv.org/abs/1301.3781) | Where it all started — skip-gram and CBOW |
+| 🎥 Video | [Jay Alammar — "The Illustrated Word2vec"](https://jalammar.github.io/illustrated-word2vec/) | Best visual explanation of word embeddings |
+| 🔧 Hands-on | [OpenAI Embeddings Guide](https://platform.openai.com/docs/guides/embeddings) | Practical guide to using production embeddings |
+| 📘 Book | "Speech and Language Processing" by Jurafsky & Martin, Ch 6 | Authoritative textbook treatment of vector semantics |
 
 ## ★ Sources
 
 - Mikolov et al., "Efficient Estimation of Word Representations" (Word2Vec, 2013)
 - Reimers & Gurevych, "Sentence-BERT" (2019)
-- OpenAI Embeddings documentation â€” https://platform.openai.com/docs/guides/embeddings
-- MTEB Leaderboard â€” https://huggingface.co/spaces/mteb/leaderboard
+- OpenAI Embeddings documentation — https://platform.openai.com/docs/guides/embeddings
+- MTEB Leaderboard — https://huggingface.co/spaces/mteb/leaderboard

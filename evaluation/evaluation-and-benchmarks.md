@@ -15,7 +15,7 @@ updated: 2026-04-12
 
 # LLM Evaluation & Benchmarks
 
-> ✨ **Bit**: "You can't improve what you can't measure." In GenAI, the problem is the opposite â€” you CAN measure, but the benchmarks keep getting saturated. It's an arms race between models and tests.
+> ✨ **Bit**: "You can't improve what you can't measure." In GenAI, the problem is the opposite — you CAN measure, but the benchmarks keep getting saturated. It's an arms race between models and tests.
 
 ---
 
@@ -46,8 +46,8 @@ Covers: Major benchmarks, RAG-specific evaluation, evaluation tools, and emergin
 
 ### Prerequisites
 
-- [Llms Overview](../llms/llms-overview.md) â€” what you're evaluating
-- [Rag](../techniques/rag.md) â€” for RAG-specific metrics
+- [Llms Overview](../llms/llms-overview.md) — what you're evaluating
+- [Rag](../techniques/rag.md) — for RAG-specific metrics
 
 ---
 
@@ -56,17 +56,17 @@ Covers: Major benchmarks, RAG-specific evaluation, evaluation tools, and emergin
 ### The 7 Dimensions of LLM Evaluation
 
 ```
-â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚            WHAT TO MEASURE                               â”‚
-â”‚                                                         â”‚
-â”‚  1. ACCURACY & KNOWLEDGE    → Does it know things?      â”‚
-â”‚  2. REASONING               → Can it think logically?   â”‚
-â”‚  3. CODING                  → Can it write code?        â”‚
-â”‚  4. SAFETY & HARM           → Is it safe to deploy?     â”‚
-â”‚  5. FAIRNESS & BIAS         → Is it equitable?          â”‚
-â”‚  6. ROBUSTNESS              → Does it handle edge cases?â”‚
-â”‚  7. EFFICIENCY              → Is it fast & cheap enough?â”‚
-â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+┌─────────────────────────────────────────────────────────┐
+│            WHAT TO MEASURE                               │
+│                                                         │
+│  1. ACCURACY & KNOWLEDGE    → Does it know things?      │
+│  2. REASONING               → Can it think logically?   │
+│  3. CODING                  → Can it write code?        │
+│  4. SAFETY & HARM           → Is it safe to deploy?     │
+│  5. FAIRNESS & BIAS         → Is it equitable?          │
+│  6. ROBUSTNESS              → Does it handle edge cases?│
+│  7. EFFICIENCY              → Is it fast & cheap enough?│
+└─────────────────────────────────────────────────────────┘
 ```
 
 ### Major Benchmarks (March 2026 Status)
@@ -75,7 +75,7 @@ Covers: Major benchmarks, RAG-specific evaluation, evaluation tools, and emergin
 
 | Benchmark        | What It Tests                                        | Saturated?          | Top Score (Mar 2026)   |
 | ---------------- | ---------------------------------------------------- | ------------------- | ---------------------- |
-| **MMLU**         | 57 subject knowledge (high school → professional)    | âš ï¸ YES (>90%)        | GPT-5.3: 93%           |
+| **MMLU**         | 57 subject knowledge (high school → professional)    | ⚠️ YES (>90%)        | GPT-5.3: 93%           |
 | **MMLU-Pro**     | Harder MMLU: 12K grad-level, 10 options per question | Approaching         | Gemini 3 Pro: 89.8%    |
 | **GPQA-Diamond** | PhD-level science (physics, chemistry, biology)      | No (60-90% range)   | ~87% (frontier models) |
 | **ARC-AGI-2**    | Abstract reasoning (pattern completion)              | No (LLMs score ~0%) | Below human average    |
@@ -85,7 +85,7 @@ Covers: Major benchmarks, RAG-specific evaluation, evaluation tools, and emergin
 
 | Benchmark              | What It Tests                        | Saturated?     | Top Score                |
 | ---------------------- | ------------------------------------ | -------------- | ------------------------ |
-| **HumanEval**          | 164 Python problems (pass@1)         | âš ï¸ YES (>95%)   | Claude Sonnet 4.5: 97.6% |
+| **HumanEval**          | 164 Python problems (pass@1)         | ⚠️ YES (>95%)   | Claude Sonnet 4.5: 97.6% |
 | **SWE-bench Verified** | Real GitHub issues in real codebases | No (very hard) | ~50% (frontier)          |
 | **BigCodeBench**       | Complex coding with library usage    | No             | Moderate                 |
 
@@ -93,7 +93,7 @@ Covers: Major benchmarks, RAG-specific evaluation, evaluation tools, and emergin
 
 | Benchmark          | What It Tests                      | Saturated?   | Top Score                |
 | ------------------ | ---------------------------------- | ------------ | ------------------------ |
-| **GSM8K**          | Grade school math word problems    | âš ï¸ YES (>95%) | Near-perfect             |
+| **GSM8K**          | Grade school math word problems    | ⚠️ YES (>95%) | Near-perfect             |
 | **MATH-500**       | Competition-level math             | Approaching  | ~90%+ (reasoning models) |
 | **AIME 2025/2026** | American math competition problems | No           | Varies                   |
 
@@ -109,25 +109,25 @@ Covers: Major benchmarks, RAG-specific evaluation, evaluation tools, and emergin
 ```
 RAG Evaluation = Separate what went wrong WHERE
 
-â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚                                                       â”‚
-â”‚   User Question                                       â”‚
-â”‚        â”‚                                              â”‚
-â”‚        â–¼                                              â”‚
-â”‚   â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”     Context         Context             â”‚
-â”‚   â”‚RETRIEVERâ”œâ”€â”€â”€â–º Precision  â”€â”€â”€â–º "Did I retrieve     â”‚
-â”‚   â””â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”˜     Context          only what matters?"â”‚
-â”‚        â”‚          Recall     â”€â”€â”€â–º "Did I get ALL       â”‚
-â”‚        â”‚                          relevant info?"      â”‚
-â”‚        â–¼                                              â”‚
-â”‚   â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”     Faithfulness â”€â–º "Is the answer      â”‚
-â”‚   â”‚GENERATORâ”œâ”€â”€â”€â”€â–º                 grounded in the     â”‚
-â”‚   â””â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”˜                      retrieved context?" â”‚
-â”‚        â”‚          Answer     â”€â”€â”€â–º "Does it actually    â”‚
-â”‚        â”‚          Relevancy       answer the question?"â”‚
-â”‚        â–¼                                              â”‚
-â”‚   Final Answer                                        â”‚
-â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+┌───────────────────────────────────────────────────────┐
+│                                                       │
+│   User Question                                       │
+│        │                                              │
+│        ▼                                              │
+│   ┌─────────┐     Context         Context             │
+│   │RETRIEVER├───► Precision  ───► "Did I retrieve     │
+│   └────┬────┘     Context          only what matters?"│
+│        │          Recall     ───► "Did I get ALL       │
+│        │                          relevant info?"      │
+│        ▼                                              │
+│   ┌─────────┐     Faithfulness ─► "Is the answer      │
+│   │GENERATOR├────►                 grounded in the     │
+│   └────┬────┘                      retrieved context?" │
+│        │          Answer     ───► "Does it actually    │
+│        │          Relevancy       answer the question?"│
+│        ▼                                              │
+│   Final Answer                                        │
+└───────────────────────────────────────────────────────┘
 ```
 
 | RAGAS Metric           | What It Measures                             | Why It Matters              |
@@ -164,13 +164,13 @@ HOW CHATBOT ARENA WORKS:
   5. After enough votes, model identity revealed
 
 WHY IT'S THE GOLD STANDARD:
-  âœ“ Contamination-resistant (prompts are user-generated, dynamic)
-  âœ“ Real-world signal (actual users, not curated test sets)
-  âœ“ Covers open-ended quality (creativity, helpfulness, nuance)
-  âœ— Slow to converge (needs 1000s of votes for stable rankings)
-  âœ— Only tests conversational ability (not coding, math, safety)
+  ✓ Contamination-resistant (prompts are user-generated, dynamic)
+  ✓ Real-world signal (actual users, not curated test sets)
+  ✓ Covers open-ended quality (creativity, helpfulness, nuance)
+  ✗ Slow to converge (needs 1000s of votes for stable rankings)
+  ✗ Only tests conversational ability (not coding, math, safety)
 
-ELO RANKINGS (April 2026 â€” illustrative):
+ELO RANKINGS (April 2026 — illustrative):
   GPT-5.4:           ~1350
   Claude Opus 4.6:   ~1345
   Gemini 3.1 Pro:    ~1330
@@ -184,11 +184,11 @@ Contamination = benchmark data leaked into training data, inflating scores.
 
 | Detection Method | How It Works | Effectiveness |
 |-----------------|--------------|---------------|
-| **Canary questions** | Insert unique, never-published questions into eval set | High â€” if model "knows" the answer, it's contaminated |
-| **Temporal splits** | Use questions created AFTER model's training cutoff | High â€” model can't have seen them |
-| **N-gram overlap** | Check training data for exact benchmark question matches | Medium â€” misses paraphrases |
-| **Rephrasing attacks** | Rephrase benchmark questions; check if model scores drop | High â€” contaminated models overfit to exact wording |
-| **Membership inference** | Statistical test: does model "remember" specific examples? | Medium â€” requires calibration |
+| **Canary questions** | Insert unique, never-published questions into eval set | High — if model "knows" the answer, it's contaminated |
+| **Temporal splits** | Use questions created AFTER model's training cutoff | High — model can't have seen them |
+| **N-gram overlap** | Check training data for exact benchmark question matches | Medium — misses paraphrases |
+| **Rephrasing attacks** | Rephrase benchmark questions; check if model scores drop | High — contaminated models overfit to exact wording |
+| **Membership inference** | Statistical test: does model "remember" specific examples? | Medium — requires calibration |
 
 **Best practice**: Always supplement static benchmarks with dynamic evaluation (LiveBench, Chatbot Arena, or your own held-out eval set refreshed monthly).
 
@@ -210,8 +210,8 @@ Contamination = benchmark data leaked into training data, inflating scores.
 ## ◆ Code & Implementation
 
 ```python
-# âš ï¸ Last tested: 2026-04
-# â•â•â• RAGAS: Evaluate a RAG Pipeline â•â•â•
+# ⚠️ Last tested: 2026-04
+# ═══ RAGAS: Evaluate a RAG Pipeline ═══
 from ragas import evaluate
 from ragas.metrics import faithfulness, answer_relevancy, context_precision
 
@@ -225,7 +225,7 @@ try:
 except Exception as e:
     print(f"Evaluation failed: {e}")  # Production: retry or fall back to subset
 
-# â•â•â• DEEPEVAL: Unit Tests for LLMs â•â•â•
+# ═══ DEEPEVAL: Unit Tests for LLMs ═══
 from deepeval import assert_test
 from deepeval.test_case import LLMTestCase
 from deepeval.metrics import HallucinationMetric
@@ -269,18 +269,18 @@ BENCHMARK SATURATION WARNING:
 
 ## ○ Gotchas & Common Mistakes
 
-- âš ï¸ **Benchmark contamination**: Models may have trained on benchmark data. High scores â‰  real-world ability.
-- âš ï¸ **LLM-as-Judge bias**: GPT-5.4 prefers GPT-5.4 outputs. Claude prefers Claude outputs. Use multiple judges or human verification.
-- âš ï¸ **No eval = shipping blind**: Most teams skip evaluation entirely. Build at least a minimal test set (20-50 golden examples).
-- âš ï¸ **Accuracy isn't enough**: A model can be accurate AND unsafe, biased, or hallucinating. Evaluate multiple dimensions.
-- âš ï¸ **Leaderboard chasing**: Models optimized for benchmarks may sacrifice real-world usability. Always test on YOUR use case.
+- ⚠️ **Benchmark contamination**: Models may have trained on benchmark data. High scores ≠ real-world ability.
+- ⚠️ **LLM-as-Judge bias**: GPT-5.4 prefers GPT-5.4 outputs. Claude prefers Claude outputs. Use multiple judges or human verification.
+- ⚠️ **No eval = shipping blind**: Most teams skip evaluation entirely. Build at least a minimal test set (20-50 golden examples).
+- ⚠️ **Accuracy isn't enough**: A model can be accurate AND unsafe, biased, or hallucinating. Evaluate multiple dimensions.
+- ⚠️ **Leaderboard chasing**: Models optimized for benchmarks may sacrifice real-world usability. Always test on YOUR use case.
 
 ---
 
 ## ○ Interview Angles
 
 - **Q**: How would you evaluate a RAG system?
-- **A**: Component-level: Retrieval quality (context precision + recall) â€” are the right chunks found? Generation quality (faithfulness + answer relevancy) â€” is the answer grounded and on-topic? Use RAGAS for automated metrics, plus a golden test set of 50+ question-answer pairs with human-verified ground truth.
+- **A**: Component-level: Retrieval quality (context precision + recall) — are the right chunks found? Generation quality (faithfulness + answer relevancy) — is the answer grounded and on-topic? Use RAGAS for automated metrics, plus a golden test set of 50+ question-answer pairs with human-verified ground truth.
 
 - **Q**: Why are traditional benchmarks becoming less useful?
 - **A**: Saturation (top models all score >90%), contamination (benchmark data in training sets), and gap between benchmark performance and real-world utility. The field is moving to dynamic benchmarks (LiveBench), harder tests (SWE-bench, ARC-AGI-2), and domain-specific evaluation.
@@ -328,17 +328,17 @@ BENCHMARK SATURATION WARNING:
 
 | Type | Resource | Why |
 |------|----------|-----|
-| ðŸ“˜ Book | "AI Engineering" by Chip Huyen (2025), Ch 4 | Best treatment of AI evaluation strategy |
-| ðŸ”§ Hands-on | [Eleuther AI LM Eval Harness](https://github.com/EleutherAI/lm-evaluation-harness) | Standard LLM benchmark suite |
-| ðŸ”§ Hands-on | [LMSYS Chatbot Arena](https://chat.lmsys.org/) | Human evaluation via head-to-head comparisons |
+| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 4 | Best treatment of AI evaluation strategy |
+| 🔧 Hands-on | [Eleuther AI LM Eval Harness](https://github.com/EleutherAI/lm-evaluation-harness) | Standard LLM benchmark suite |
+| 🔧 Hands-on | [LMSYS Chatbot Arena](https://chat.lmsys.org/) | Human evaluation via head-to-head comparisons |
 
 ## ★ Sources
 
-- MMLU: Hendrycks et al. (2020) â€” https://arxiv.org/abs/2009.03300
-- RAGAS documentation â€” https://docs.ragas.io
-- DeepEval documentation â€” https://docs.confident-ai.com
-- LiveBench â€” https://livebench.ai
-- EleutherAI lm-evaluation-harness â€” https://github.com/EleutherAI/lm-evaluation-harness
-- Chiang et al., "Chatbot Arena: An Open Platform for Evaluating LLMs by Human Preference" (2024) â€” https://arxiv.org/abs/2403.04132
-- LMSYS Chatbot Arena â€” https://chat.lmsys.org/
+- MMLU: Hendrycks et al. (2020) — https://arxiv.org/abs/2009.03300
+- RAGAS documentation — https://docs.ragas.io
+- DeepEval documentation — https://docs.confident-ai.com
+- LiveBench — https://livebench.ai
+- EleutherAI lm-evaluation-harness — https://github.com/EleutherAI/lm-evaluation-harness
+- Chiang et al., "Chatbot Arena: An Open Platform for Evaluating LLMs by Human Preference" (2024) — https://arxiv.org/abs/2403.04132
+- LMSYS Chatbot Arena — https://chat.lmsys.org/
 

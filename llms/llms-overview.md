@@ -31,7 +31,7 @@ updated: 2026-04-12
 
 ### Definition
 
-**Large Language Models (LLMs)** are autoregressive Transformer models (decoder-only) with billions to trillions of parameters, trained on internet-scale text data to predict the next token. Through scale, they develop emergent capabilities: reasoning, coding, translation, analysis â€” tasks they were never explicitly taught.
+**Large Language Models (LLMs)** are autoregressive Transformer models (decoder-only) with billions to trillions of parameters, trained on internet-scale text data to predict the next token. Through scale, they develop emergent capabilities: reasoning, coding, translation, analysis — tasks they were never explicitly taught.
 
 ### Scope
 
@@ -47,8 +47,8 @@ Last verified for market and provider-snapshot statements: 2026-04.
 
 ### Prerequisites
 
-- [Transformers](../foundations/transformers.md) â€” architecture
-- [Attention Mechanism](../foundations/attention-mechanism.md) â€” how attention works
+- [Transformers](../foundations/transformers.md) — architecture
+- [Attention Mechanism](../foundations/attention-mechanism.md) — how attention works
 
 ---
 
@@ -58,35 +58,35 @@ Last verified for market and provider-snapshot statements: 2026-04.
 
 ```
 Phase 1: PRE-TRAINING (the expensive part)
-  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-  â”‚ Internet text (trillions of tokens)              â”‚
-  â”‚            â†“                                     â”‚
-  â”‚ Train: Predict next token                        â”‚
-  â”‚   "The cat sat on the ___" → "mat"              â”‚
-  â”‚            â†“                                     â”‚
-  â”‚ Result: Base model (knows language, world facts) â”‚
-  â”‚          Cost: $10M - $100M+                     â”‚
-  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+  ┌─────────────────────────────────────────────────┐
+  │ Internet text (trillions of tokens)              │
+  │            ↓                                     │
+  │ Train: Predict next token                        │
+  │   "The cat sat on the ___" → "mat"              │
+  │            ↓                                     │
+  │ Result: Base model (knows language, world facts) │
+  │          Cost: $10M - $100M+                     │
+  └─────────────────────────────────────────────────┘
 
 Phase 2: ALIGNMENT (making it helpful & safe)
-  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-  â”‚ SFT: Supervised Fine-Tuning on instruction data â”‚
-  â”‚   Input: "Explain quantum computing"            â”‚
-  â”‚   Output: [high-quality human-written answer]    â”‚
-  â”‚            â†“                                     â”‚
-  â”‚ RLHF/DPO: Learn from human preferences          â”‚
-  â”‚   "Which response is better: A or B?"           â”‚
-  â”‚            â†“                                     â”‚
-  â”‚ Result: Chat model (helpful, harmless, honest)   â”‚
-  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+  ┌─────────────────────────────────────────────────┐
+  │ SFT: Supervised Fine-Tuning on instruction data │
+  │   Input: "Explain quantum computing"            │
+  │   Output: [high-quality human-written answer]    │
+  │            ↓                                     │
+  │ RLHF/DPO: Learn from human preferences          │
+  │   "Which response is better: A or B?"           │
+  │            ↓                                     │
+  │ Result: Chat model (helpful, harmless, honest)   │
+  └─────────────────────────────────────────────────┘
 
 Phase 3: DEPLOYMENT
-  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-  â”‚ API / Chat interface                             â”‚
-  â”‚ + RAG for up-to-date knowledge                  â”‚
-  â”‚ + Tool use for actions (search, code execution) â”‚
-  â”‚ + Guardrails for safety                          â”‚
-  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+  ┌─────────────────────────────────────────────────┐
+  │ API / Chat interface                             │
+  │ + RAG for up-to-date knowledge                  │
+  │ + Tool use for actions (search, code execution) │
+  │ + Guardrails for safety                          │
+  └─────────────────────────────────────────────────┘
 ```
 
 ### The Major Model Families (March 2026)
@@ -114,9 +114,9 @@ Phase 3: DEPLOYMENT
 The relationship between model size, data, and performance:
 
 ```
-Performance âˆ (Compute)^Î±
+Performance ∝ (Compute)^α
 
-Where Compute = f(Parameters Ã— Training Tokens)
+Where Compute = f(Parameters × Training Tokens)
 
 Chinchilla optimal: Train for ~20 tokens per parameter
   - 7B model → 140B tokens
@@ -132,11 +132,11 @@ for better inference efficiency
 Text → numbers. Models don't see words; they see token IDs.
 
 ```python
-# âš ï¸ Last tested: 2026-04
+# ⚠️ Last tested: 2026-04
 "Hello world" → [15496, 995]        # GPT-style BPE
 "Hello world" → [8774, 296, 1650]    # Different tokenizer
 
-# ~4 characters â‰ˆ 1 token (English average)
+# ~4 characters ≈ 1 token (English average)
 # Non-English: often 2-3x more tokens per word
 ```
 
@@ -200,11 +200,11 @@ Top-k: Only sample from the k most likely tokens
 
 ## ○ Gotchas & Common Mistakes
 
-- âš ï¸ **Hallucination â‰  lying**: The model generates plausible continuations, not facts. It has no concept of truth.
-- âš ï¸ **Context window â‰  memory**: LLMs don't remember across conversations unless you build memory systems
-- âš ï¸ **Bigger â‰  always better**: A well-fine-tuned 7B model can beat a generic 70B model on specific tasks
-- âš ï¸ **Tokens â‰  words**: Pricing and limits are in tokens (~4 chars each). Non-English = more tokens
-- âš ï¸ **Benchmarks lie**: Models are increasingly trained on benchmark data. Real-world eval matters more
+- ⚠️ **Hallucination ≠ lying**: The model generates plausible continuations, not facts. It has no concept of truth.
+- ⚠️ **Context window ≠ memory**: LLMs don't remember across conversations unless you build memory systems
+- ⚠️ **Bigger ≠ always better**: A well-fine-tuned 7B model can beat a generic 70B model on specific tasks
+- ⚠️ **Tokens ≠ words**: Pricing and limits are in tokens (~4 chars each). Non-English = more tokens
+- ⚠️ **Benchmarks lie**: Models are increasingly trained on benchmark data. Real-world eval matters more
 
 ---
 
@@ -227,7 +227,7 @@ Top-k: Only sample from the k most likely tokens
 
 ```python
 # pip install openai>=1.60
-# âš ï¸ Last tested: 2026-04 | Requires: openai>=1.60, OPENAI_API_KEY env var
+# ⚠️ Last tested: 2026-04 | Requires: openai>=1.60, OPENAI_API_KEY env var
 from openai import OpenAI
 
 client = OpenAI()
@@ -260,7 +260,7 @@ print()  # newline after streaming
 
 ```python
 # pip install transformers>=4.40 torch>=2.3
-# âš ï¸ Last tested: 2026-04 | Requires: transformers>=4.40, torch>=2.3
+# ⚠️ Last tested: 2026-04 | Requires: transformers>=4.40, torch>=2.3
 # Note: CPU-only is slow. GPU (CUDA or MPS) strongly recommended.
 from transformers import pipeline
 
@@ -322,10 +322,10 @@ print(response[0]["generated_text"][-1]["content"])
 
 | Type | Resource | Why |
 |------|----------|-----|
-| ðŸ“˜ Book | "AI Engineering" by Chip Huyen (2025), Ch 1-2 | Best introduction to LLMs for practitioners |
-| ðŸŽ¥ Video | [Andrej Karpathy â€” "Intro to Large Language Models"](https://www.youtube.com/watch?v=zjkBMFhNj_g) | Best 1-hour overview of how LLMs work |
-| ðŸ“˜ Book | "Build a Large Language Model (From Scratch)" by Sebastian Raschka (2024) | Implement an LLM from scratch in PyTorch |
-| ðŸ”§ Hands-on | [HuggingFace Transformers](https://huggingface.co/docs/transformers/) | Production library for working with LLMs |
+| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 1-2 | Best introduction to LLMs for practitioners |
+| 🎥 Video | [Andrej Karpathy — "Intro to Large Language Models"](https://www.youtube.com/watch?v=zjkBMFhNj_g) | Best 1-hour overview of how LLMs work |
+| 📘 Book | "Build a Large Language Model (From Scratch)" by Sebastian Raschka (2024) | Implement an LLM from scratch in PyTorch |
+| 🔧 Hands-on | [HuggingFace Transformers](https://huggingface.co/docs/transformers/) | Production library for working with LLMs |
 
 ## ★ Sources
 

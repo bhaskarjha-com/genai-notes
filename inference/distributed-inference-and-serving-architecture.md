@@ -161,7 +161,7 @@ That introduces trade-offs in cache reuse, model synchronization, and observabil
 
 ```python
 # pip install vllm>=0.8
-# âš ï¸ Last tested: 2026-04 | Requires: vllm>=0.8
+# ⚠️ Last tested: 2026-04 | Requires: vllm>=0.8
 
 # Launch vLLM with tensor parallelism across 4 GPUs
 # Command line:
@@ -191,7 +191,7 @@ print(response.choices[0].message.content)
 ### Multi-GPU Health Monitor
 
 ```python
-# âš ï¸ Last tested: 2026-04 | Requires: nvidia-ml-py3 (pynvml), Python 3.10+
+# ⚠️ Last tested: 2026-04 | Requires: nvidia-ml-py3 (pynvml), Python 3.10+
 import pynvml
 from dataclasses import dataclass
 
@@ -238,7 +238,7 @@ def check_gpu_health(max_temp: int = 85, min_free_gb: float = 2.0) -> list[GPUHe
 ### Prefill/Decode Disaggregation Router
 
 ```python
-# âš ï¸ Last tested: 2026-04 | Requires: Python 3.10+ (architecture pattern)
+# ⚠️ Last tested: 2026-04 | Requires: Python 3.10+ (architecture pattern)
 # P/D disaggregation: separate GPU pools for prefill (compute-bound) vs decode (memory-bound)
 # Reference: DistServe (2024), Splitwise (2024)
 from dataclasses import dataclass, field
@@ -292,7 +292,7 @@ print(f"Total:   {result['total_ms']}ms")
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
 | **KV-cache OOM** | Server rejects new requests, GPU memory exhausted | Too many concurrent long-context requests | Set max_model_len, implement request queuing, monitor cache utilization |
-| **Tail latency spike** | P99 latency 10Ã— worse than P50 | One long request blocks batch, straggler GPU | Length-aware scheduling, separate long/short request queues |
+| **Tail latency spike** | P99 latency 10× worse than P50 | One long request blocks batch, straggler GPU | Length-aware scheduling, separate long/short request queues |
 | **GPU fragmentation** | Low utilization despite high demand | Requests don't fill GPU batches efficiently | Dynamic batching (vLLM continuous batching), right-size GPU allocation |
 | **Cascade failure** | All replicas go down simultaneously | Shared dependency failure, no circuit breakers | Health checks, circuit breakers, graceful degradation |
 | **NCCL timeout** | Training/serving hangs silently for minutes | Network partition between GPUs, slow interconnect | NCCL timeout tuning, heartbeat monitoring, automatic restart |
@@ -338,7 +338,7 @@ print(f"Total:   {result['total_ms']}ms")
 
 ## ★ Sources
 
-- vLLM documentation â€” https://docs.vllm.ai/
-- TGI documentation â€” https://huggingface.co/docs/text-generation-inference/
+- vLLM documentation — https://docs.vllm.ai/
+- TGI documentation — https://huggingface.co/docs/text-generation-inference/
 - [Inference Optimization](./inference-optimization.md)
 - [Distributed Systems Fundamentals for AI](../tools-and-infra/distributed-systems-for-ai.md)

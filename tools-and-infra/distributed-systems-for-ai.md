@@ -111,7 +111,7 @@ That means network, state, and partial failure are built into the architecture.
 ### Example: Timeout, Concurrency, And Fallback
 
 ```python
-# âš ï¸ Last tested: 2026-04
+# ⚠️ Last tested: 2026-04
 import asyncio
 
 semaphore = asyncio.Semaphore(32)
@@ -160,7 +160,7 @@ async def call_with_budget(primary_model, fallback_model, payload):
 
 ```python
 # pip install torch>=2.3
-# âš ï¸ Last tested: 2026-04 | Requires: torch>=2.3, multiple GPUs for true parallelism
+# ⚠️ Last tested: 2026-04 | Requires: torch>=2.3, multiple GPUs for true parallelism
 # Single-GPU simulation: FSDP wraps work on 1 GPU with CPU offload
 
 import torch
@@ -195,7 +195,7 @@ param_count = sum(p.numel() for p in model.parameters())
 print(f"Model parameters: {param_count:,} ({param_count/1e6:.1f}M)")
 print(f"Estimated BF16 memory: {param_count * 2 / 1e9:.2f} GB")
 print(f"Estimated FSDP across 4 GPUs: {param_count * 2 / 1e9 / 4:.2f} GB per GPU")
-# FSDP shards params across GPUs â€” linear memory reduction
+# FSDP shards params across GPUs — linear memory reduction
 ```
 
 ## ★ Connections
@@ -238,9 +238,9 @@ print(f"Estimated FSDP across 4 GPUs: {param_count * 2 / 1e9 / 4:.2f} GB per GPU
 
 | Type     | Resource                                                            | Why                                           |
 | -------- | ------------------------------------------------------------------- | --------------------------------------------- |
-| ðŸ“˜ Book   | "Designing Data-Intensive Applications" by Kleppmann (2017)         | The distributed systems bible                 |
-| ðŸŽ“ Course | [MIT 6.824: Distributed Systems](https://pdos.csail.mit.edu/6.824/) | Best academic distributed systems course      |
-| ðŸ“˜ Book   | "AI Engineering" by Chip Huyen (2025), Ch 8                         | Distributed patterns specific to AI workloads |
+| 📘 Book   | "Designing Data-Intensive Applications" by Kleppmann (2017)         | The distributed systems bible                 |
+| 🎓 Course | [MIT 6.824: Distributed Systems](https://pdos.csail.mit.edu/6.824/) | Best academic distributed systems course      |
+| 📘 Book   | "AI Engineering" by Chip Huyen (2025), Ch 8                         | Distributed patterns specific to AI workloads |
 
 ## ★ Sources
 - Martin Kleppmann, *Designing Data-Intensive Applications*

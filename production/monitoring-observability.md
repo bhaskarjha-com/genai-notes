@@ -205,7 +205,7 @@ PLATFORM DECISION GUIDE:
 
 ```python
 # pip install openai>=1.60 prometheus_client>=0.20
-# âš ï¸ Last tested: 2026-04 | Requires: openai>=1.60, prometheus_client>=0.20
+# ⚠️ Last tested: 2026-04 | Requires: openai>=1.60, prometheus_client>=0.20
 import time
 from openai import OpenAI
 from prometheus_client import Counter, Histogram, start_http_server
@@ -240,7 +240,7 @@ print(monitored_call([{"role": "user", "content": "What is observability?"}]))
 
 ```python
 # pip install langfuse>=2.0 openai>=1.60
-# âš ï¸ Last tested: 2026-04 | Requires: langfuse>=2.0, openai>=1.60
+# ⚠️ Last tested: 2026-04 | Requires: langfuse>=2.0, openai>=1.60
 # Set env: LANGFUSE_PUBLIC_KEY, LANGFUSE_SECRET_KEY, LANGFUSE_HOST (if self-hosted)
 
 from langfuse.decorators import observe, langfuse_context
@@ -250,7 +250,7 @@ client = OpenAI()
 
 @observe()  # Automatically creates a trace with latency, token usage, and cost
 def answer_question(user_question: str, model: str = "gpt-4o-mini") -> str:
-    """Traced LLM call â€” appears in Langfuse dashboard with full metadata."""
+    """Traced LLM call — appears in Langfuse dashboard with full metadata."""
     # Tag the trace for filtering in the dashboard
     langfuse_context.update_current_observation(
         metadata={"prompt_version": "support-v7", "route": "qa-pipeline"},
@@ -262,7 +262,7 @@ def answer_question(user_question: str, model: str = "gpt-4o-mini") -> str:
     )
     return response.choices[0].message.content
 
-# Usage â€” each call creates a trace visible in Langfuse UI
+# Usage — each call creates a trace visible in Langfuse UI
 result = answer_question("What are the key metrics for LLM observability?")
 print(result)
 # Dashboard shows: latency, token usage, cost, model, prompt version per trace
@@ -310,10 +310,10 @@ print(result)
 
 | Type       | Resource                                                                       | Why                                          |
 | ---------- | ------------------------------------------------------------------------------ | -------------------------------------------- |
-| ðŸ”§ Hands-on | [LangSmith Documentation](https://docs.smith.langchain.com/)                   | Production LLM observability platform        |
-| ðŸ”§ Hands-on | [Arize Phoenix](https://docs.arize.com/phoenix/)                               | Open-source LLM observability and evaluation |
-| ðŸ“˜ Book     | "AI Engineering" by Chip Huyen (2025), Ch 9                                    | Monitoring patterns specific to AI systems   |
-| ðŸŽ¥ Video    | [Shreya Shankar â€” "Rethinking ML Monitoring"](https://www.shreya-shankar.com/) | Data quality monitoring for ML systems       |
+| 🔧 Hands-on | [LangSmith Documentation](https://docs.smith.langchain.com/)                   | Production LLM observability platform        |
+| 🔧 Hands-on | [Arize Phoenix](https://docs.arize.com/phoenix/)                               | Open-source LLM observability and evaluation |
+| 📘 Book     | "AI Engineering" by Chip Huyen (2025), Ch 9                                    | Monitoring patterns specific to AI systems   |
+| 🎥 Video    | [Shreya Shankar — "Rethinking ML Monitoring"](https://www.shreya-shankar.com/) | Data quality monitoring for ML systems       |
 
 ## ★ Sources
 - Langfuse documentation

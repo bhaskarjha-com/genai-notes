@@ -185,7 +185,7 @@ Do not force clients to track every prompt revision.
 
 ```python
 # pip install fastapi>=0.110 uvicorn>=0.27 openai>=1.0
-# âš ï¸ Last tested: 2026-04 | Requires: fastapi>=0.110
+# ⚠️ Last tested: 2026-04 | Requires: fastapi>=0.110
 
 from fastapi import FastAPI
 from fastapi.responses import StreamingResponse
@@ -242,7 +242,7 @@ async def chat_stream(request: dict):
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
 | **Provider passthrough leak** | Client breaks when model changes | Raw provider response exposed to clients | Wrap in stable response schema, version the contract |
-| **Retry storm** | 10Ã— traffic spike after transient failure | Client retries without backoff, server returns 500 for rate limits | Use 429 with Retry-After header, implement client-side exponential backoff |
+| **Retry storm** | 10× traffic spike after transient failure | Client retries without backoff, server returns 500 for rate limits | Use 429 with Retry-After header, implement client-side exponential backoff |
 | **Streaming disconnect** | User sees partial response, no error | Long SSE stream interrupted by proxy/LB timeout | Heartbeat pings, configurable timeouts, client reconnection logic |
 | **Schema drift** | Downstream automation breaks silently | Prompt change alters output structure | Use structured output / JSON schema enforcement, version schemas |
 
@@ -268,16 +268,16 @@ async def chat_stream(request: dict):
 
 | Type | Resource | Why |
 |------|----------|-----|
-| ðŸ“˜ Book | "AI Engineering" by Chip Huyen (2025), Ch 8 | API design patterns for AI-backed services |
-| ðŸ”§ Hands-on | [OpenAI API Reference](https://platform.openai.com/docs/api-reference) | Gold standard for AI API design â€” study their schema, streaming, and error patterns |
-| ðŸ”§ Hands-on | [FastAPI Documentation](https://fastapi.tiangolo.com/) | Best Python framework for building AI APIs with auto-documentation |
-| ðŸ“„ Paper | [Google API Design Guide](https://cloud.google.com/apis/design) | Industry-standard API design principles applicable to AI services |
+| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 8 | API design patterns for AI-backed services |
+| 🔧 Hands-on | [OpenAI API Reference](https://platform.openai.com/docs/api-reference) | Gold standard for AI API design — study their schema, streaming, and error patterns |
+| 🔧 Hands-on | [FastAPI Documentation](https://fastapi.tiangolo.com/) | Best Python framework for building AI APIs with auto-documentation |
+| 📄 Paper | [Google API Design Guide](https://cloud.google.com/apis/design) | Industry-standard API design principles applicable to AI services |
 
 ---
 
 ## ★ Sources
 
-- OpenAPI Specification â€” https://spec.openapis.org/
-- Google API Design Guide â€” https://cloud.google.com/apis/design
-- OpenAI API Reference â€” https://platform.openai.com/docs/api-reference
+- OpenAPI Specification — https://spec.openapis.org/
+- Google API Design Guide — https://cloud.google.com/apis/design
+- OpenAI API Reference — https://platform.openai.com/docs/api-reference
 - [AI System Design](../production/ai-system-design.md)

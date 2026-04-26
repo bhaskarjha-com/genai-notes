@@ -8,22 +8,22 @@ status: published
 last_verified: 2026-04
 parent: "ethics-safety-alignment.md"
 related: ["adversarial-ml-and-ai-security.md", "ai-regulation.md", "../production/llmops.md", "../techniques/rag.md"]
-source: "OWASP Top 10 for LLM Applications 2025 â€” owasp.org"
+source: "OWASP Top 10 for LLM Applications 2025 — owasp.org"
 created: 2026-04-12
 updated: 2026-04-15
 ---
 
 # OWASP Top 10 for LLM Applications
 
-> ✨ **Bit**: The OWASP list earns its place not because it's comprehensive â€” it isn't â€” but because it turns vague AI security anxiety into a concrete checklist reviewable in a sprint planning meeting.
+> ✨ **Bit**: The OWASP list earns its place not because it's comprehensive — it isn't — but because it turns vague AI security anxiety into a concrete checklist reviewable in a sprint planning meeting.
 
 ---
 
 ## ★ TL;DR
 
-- **What**: A community-driven security framework cataloging the 10 most critical risks in LLM and GenAI applications â€” updated to the **2025 edition**.
+- **What**: A community-driven security framework cataloging the 10 most critical risks in LLM and GenAI applications — updated to the **2025 edition**.
 - **Why**: It gives engineering teams a shared threat vocabulary for design reviews, red-teaming, and release gates.
-- **Key point**: The 2025 edition added two new categories â€” **LLM07: System Prompt Leakage** and **LLM08: Vector and Embedding Weaknesses** â€” reflecting the rise of agentic and RAG-based systems.
+- **Key point**: The 2025 edition added two new categories — **LLM07: System Prompt Leakage** and **LLM08: Vector and Embedding Weaknesses** — reflecting the rise of agentic and RAG-based systems.
 
 ---
 
@@ -35,7 +35,7 @@ The **OWASP Top 10 for LLM Applications** is part of the broader **OWASP GenAI S
 
 ### Scope
 
-This note covers the 2025 risk categories, their practical meaning for builders, and how to map them to system architecture reviews. It is not a full security playbook â€” it is a threat-modeling starting point.
+This note covers the 2025 risk categories, their practical meaning for builders, and how to map them to system architecture reviews. It is not a full security playbook — it is a threat-modeling starting point.
 
 ### Significance
 
@@ -54,7 +54,7 @@ This note covers the 2025 risk categories, their practical meaning for builders,
 
 ## ★ Deep Dive
 
-### The 2025 Categories â€” Full Reference
+### The 2025 Categories — Full Reference
 
 | ID | Risk | Core Threat |
 |----|------|-------------|
@@ -65,7 +65,7 @@ This note covers the 2025 risk categories, their practical meaning for builders,
 | **LLM05** | Improper Output Handling | Generated text is rendered unsafely (XSS, command injection) |
 | **LLM06** | Excessive Agency | Model takes irreversible actions with insufficient human oversight |
 | **LLM07** | **System Prompt Leakage** ⭐ | Hidden instructions, credentials, or logic exposed to users |
-| **LLM08** | **Vector and Embedding Weaknesses** ⭐ | RAG pipeline attack surface â€” corpus poisoning and embedding manipulation |
+| **LLM08** | **Vector and Embedding Weaknesses** ⭐ | RAG pipeline attack surface — corpus poisoning and embedding manipulation |
 | **LLM09** | Misinformation | Model produces convincing but false outputs; humans over-trust |
 | **LLM10** | Unbounded Consumption | Cost attacks, resource exhaustion, model extraction |
 
@@ -84,9 +84,9 @@ This note covers the 2025 risk categories, their practical meaning for builders,
 | *(absent)* | LLM07: System Prompt Leakage | ⭐ New |
 | *(absent)* | LLM08: Vector and Embedding Weaknesses | ⭐ New |
 
-### LLM07: System Prompt Leakage â€” Deep Dive
+### LLM07: System Prompt Leakage — Deep Dive
 
-**What it is**: Attackers extract or reconstruct the system prompt â€” the hidden instructions that define the model's behavior, persona, constraints, and tool access.
+**What it is**: Attackers extract or reconstruct the system prompt — the hidden instructions that define the model's behavior, persona, constraints, and tool access.
 
 **Why it matters**: System prompts commonly contain:
 - Business logic and product rules
@@ -105,9 +105,9 @@ This note covers the 2025 risk categories, their practical meaning for builders,
 - Segment system context from user context in the context window
 - Assume system prompts WILL be extracted by sufficiently motivated attackers
 
-### LLM08: Vector and Embedding Weaknesses â€” Deep Dive
+### LLM08: Vector and Embedding Weaknesses — Deep Dive
 
-**What it is**: Security vulnerabilities specific to **RAG pipelines and vector stores** â€” the new primary attack surface for GenAI systems.
+**What it is**: Security vulnerabilities specific to **RAG pipelines and vector stores** — the new primary attack surface for GenAI systems.
 
 **Attack vectors**:
 
@@ -164,14 +164,14 @@ For any LLM feature, ask:
 
 ```python
 # pip install openai>=1.60
-# âš ï¸ Last tested: 2026-04 | Requires: openai>=1.60
+# ⚠️ Last tested: 2026-04 | Requires: openai>=1.60
 
 import re
 from openai import OpenAI
 
 client = OpenAI()
 
-# â”€â”€ Simple input/output guardrail pattern â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# ── Simple input/output guardrail pattern ────────────────────────────────────
 
 SYSTEM_PROMPT = "You are a helpful customer support assistant for ACME Corp."
 # LLM07: Never put secrets, API keys, or internal logic in system prompts
@@ -241,8 +241,8 @@ def handle_llm_request(user_input: str, retrieved_chunks: list[str]) -> str:
 ### LLM08: Corpus Poisoning Detection (RAG)
 
 ```python
-# âš ï¸ Last tested: 2026-04 | Requires: numpy>=1.26
-# PSEUDOCODE â€” illustrative ingestion-time integrity check
+# ⚠️ Last tested: 2026-04 | Requires: numpy>=1.26
+# PSEUDOCODE — illustrative ingestion-time integrity check
 
 import hashlib
 import json
@@ -308,21 +308,21 @@ def ingest_document_with_provenance(
 
 ## ○ Gotchas & Common Mistakes
 
-- âš ï¸ The 2023 categories are now outdated â€” especially "Insecure Plugin Design," "Overreliance," and "Model Theft." Using old category names in security reviews is a credibility hazard.
-- âš ï¸ LLM08 (Vector and Embedding Weaknesses) is frequently overlooked â€” teams secure the API but not the RAG pipeline that feeds it.
-- âš ï¸ LLM07 (System Prompt Leakage) is underestimated: assume your system prompt WILL be extracted; don't put anything in it you'd be embarrassed to have public.
-- âš ï¸ "Overreliance" was the 2023 framing â€” 2025 calls it "Misinformation" to better capture the systemic, societal dimension of the risk.
-- âš ï¸ The OWASP list is a security STARTING POINT, not a complete risk assessment. It won't catch domain-specific risks (e.g., healthcare liability, financial fraud).
+- ⚠️ The 2023 categories are now outdated — especially "Insecure Plugin Design," "Overreliance," and "Model Theft." Using old category names in security reviews is a credibility hazard.
+- ⚠️ LLM08 (Vector and Embedding Weaknesses) is frequently overlooked — teams secure the API but not the RAG pipeline that feeds it.
+- ⚠️ LLM07 (System Prompt Leakage) is underestimated: assume your system prompt WILL be extracted; don't put anything in it you'd be embarrassed to have public.
+- ⚠️ "Overreliance" was the 2023 framing — 2025 calls it "Misinformation" to better capture the systemic, societal dimension of the risk.
+- ⚠️ The OWASP list is a security STARTING POINT, not a complete risk assessment. It won't catch domain-specific risks (e.g., healthcare liability, financial fraud).
 
 ---
 
 ## ○ Interview Angles
 
 - **Q**: What changed in the OWASP LLM Top 10 from 2023 to 2025, and why does it matter?
-- **A**: The 2025 edition introduced two new categories â€” LLM07 (System Prompt Leakage) and LLM08 (Vector and Embedding Weaknesses) â€” while removing "Insecure Plugin Design" and "Model Theft" as standalone categories (both were absorbed into adjacent risks). The additions reflect real production patterns: most GenAI systems now use system prompts to define behavior (making prompt leakage a genuine attack surface) and RAG pipelines (making vector store poisoning a primary threat). The 2023 list was designed for isolated API-based LLM calls; the 2025 list assumes a more complex agentic architecture.
+- **A**: The 2025 edition introduced two new categories — LLM07 (System Prompt Leakage) and LLM08 (Vector and Embedding Weaknesses) — while removing "Insecure Plugin Design" and "Model Theft" as standalone categories (both were absorbed into adjacent risks). The additions reflect real production patterns: most GenAI systems now use system prompts to define behavior (making prompt leakage a genuine attack surface) and RAG pipelines (making vector store poisoning a primary threat). The 2023 list was designed for isolated API-based LLM calls; the 2025 list assumes a more complex agentic architecture.
 
 - **Q**: Which OWASP 2025 categories matter most for an agentic RAG system?
-- **A**: Four categories are critical. LLM01 (Prompt Injection) â€” because agents execute tool calls based on model outputs, a single injected instruction can trigger real-world actions. LLM06 (Excessive Agency) â€” agents need tight permission scoping and irreversible-action gates. LLM07 (System Prompt Leakage) â€” agent system prompts typically contain tool schemas, personas, and routing logic that could be exploited. LLM08 (Vector and Embedding Weaknesses) â€” the RAG corpus is the most exploitable ingestion surface for an agentic system that retrieves before acting.
+- **A**: Four categories are critical. LLM01 (Prompt Injection) — because agents execute tool calls based on model outputs, a single injected instruction can trigger real-world actions. LLM06 (Excessive Agency) — agents need tight permission scoping and irreversible-action gates. LLM07 (System Prompt Leakage) — agent system prompts typically contain tool schemas, personas, and routing logic that could be exploited. LLM08 (Vector and Embedding Weaknesses) — the RAG corpus is the most exploitable ingestion surface for an agentic system that retrieves before acting.
 
 - **Q**: How do you use the OWASP list in a real security review?
 - **A**: Use it as a structured checklist per system component, not per-category. For each component (LLM API, RAG pipeline, agent loop, output surface, data ingestion), identify which categories apply, then ask the specific design question for each: "Can user input reach the system prompt?" (LLM01/LLM07), "Does this component retrieve from an unvalidated source?" (LLM08), "Can model output execute or render unsafely?" (LLM05). Combine with threat modeling for domain-specific risks not covered by OWASP.
@@ -373,16 +373,16 @@ def ingest_document_with_provenance(
 
 | Type | Resource | Why |
 |------|----------|-----|
-| ðŸ”§ Reference | [OWASP LLM Top 10 (2025)](https://owasp.org/www-project-top-10-for-large-language-model-applications/) | The primary source â€” always use this, not summaries |
-| ðŸ”§ Reference | [OWASP GenAI Security Project](https://genai.owasp.org/) | Broader GenAI security guidance beyond the Top 10 |
-| ðŸ“„ Paper | [Greshake et al. "Not What You've Signed Up For" (2023)](https://arxiv.org/abs/2302.12173) | Systematic study of indirect prompt injection attacks |
-| ðŸ”§ Hands-on | [NIST AI RMF Playbook](https://airc.nist.gov/AI_RMF_Playbook) | Risk management actions for AI systems |
-| ðŸ“„ Paper | [Zou et al. "Universal and Transferable Adversarial Attacks" (2023)](https://arxiv.org/abs/2307.15043) | Adversarial suffix attacks that transfer across models |
+| 🔧 Reference | [OWASP LLM Top 10 (2025)](https://owasp.org/www-project-top-10-for-large-language-model-applications/) | The primary source — always use this, not summaries |
+| 🔧 Reference | [OWASP GenAI Security Project](https://genai.owasp.org/) | Broader GenAI security guidance beyond the Top 10 |
+| 📄 Paper | [Greshake et al. "Not What You've Signed Up For" (2023)](https://arxiv.org/abs/2302.12173) | Systematic study of indirect prompt injection attacks |
+| 🔧 Hands-on | [NIST AI RMF Playbook](https://airc.nist.gov/AI_RMF_Playbook) | Risk management actions for AI systems |
+| 📄 Paper | [Zou et al. "Universal and Transferable Adversarial Attacks" (2023)](https://arxiv.org/abs/2307.15043) | Adversarial suffix attacks that transfer across models |
 
 ---
 
 ## ★ Sources
 
-- OWASP Top 10 for Large Language Model Applications 2025 â€” https://owasp.org/www-project-top-10-for-large-language-model-applications/
-- OWASP GenAI Security Project â€” https://genai.owasp.org/
-- OWASP Top 10 for LLM Applications 2025 resource page â€” https://genai.owasp.org/resource/owasp-top-10-for-llm-applications-2025/
+- OWASP Top 10 for Large Language Model Applications 2025 — https://owasp.org/www-project-top-10-for-large-language-model-applications/
+- OWASP GenAI Security Project — https://genai.owasp.org/
+- OWASP Top 10 for LLM Applications 2025 resource page — https://genai.owasp.org/resource/owasp-top-10-for-llm-applications-2025/

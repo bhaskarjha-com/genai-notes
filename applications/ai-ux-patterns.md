@@ -8,7 +8,7 @@ status: published
 last_verified: 2026-04
 parent: "../production/ai-system-design.md"
 related: ["api-design-for-ai.md", "conversational-ai.md", "voice-ai.md", "ai-product-management-fundamentals.md"]
-source: "Multiple â€” see Sources"
+source: "Multiple — see Sources"
 created: 2026-04-14
 updated: 2026-04-15
 ---
@@ -21,7 +21,7 @@ updated: 2026-04-15
 
 ## ★ TL;DR
 
-- **What**: Design patterns for building user interfaces around AI systems â€” handling latency, uncertainty, trust, and error
+- **What**: Design patterns for building user interfaces around AI systems — handling latency, uncertainty, trust, and error
 - **Why**: AI behaves differently from traditional software (non-deterministic, sometimes wrong, variable latency). Generic UX patterns don't work.
 - **Key point**: The three pillars of AI UX: make it fast (streaming), make it trustable (citations, confidence), make it controllable (edit, regenerate, undo).
 
@@ -46,13 +46,13 @@ updated: 2026-04-15
 
 ```
 PILLAR 1: SPEED                    PILLAR 2: TRUST                  PILLAR 3: CONTROL
-â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€                  â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€                   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-â€¢ Stream tokens                    â€¢ Show citations                  â€¢ Regenerate button
-â€¢ Skeleton loading                 â€¢ Confidence indicators           â€¢ Edit AI output
-â€¢ Progressive rendering            â€¢ Source attribution              â€¢ Undo / revert
-â€¢ Optimistic updates               â€¢ "I don't know" admission        â€¢ Feedback (ðŸ‘/ðŸ‘Ž)
-â€¢ Background prefetch              â€¢ Transparent limitations          â€¢ Temperature control
-                                   â€¢ Consistent persona               â€¢ Mode switching
+─────────────────                  ───────────────                   ──────────────────
+• Stream tokens                    • Show citations                  • Regenerate button
+• Skeleton loading                 • Confidence indicators           • Edit AI output
+• Progressive rendering            • Source attribution              • Undo / revert
+• Optimistic updates               • "I don't know" admission        • Feedback (👍/👎)
+• Background prefetch              • Transparent limitations          • Temperature control
+                                   • Consistent persona               • Mode switching
 ```
 
 ### Core AI UX Patterns
@@ -128,13 +128,13 @@ PROGRESSIVE DISCLOSURE HIERARCHY:
 ## ○ Interview Angles
 
 - **Q**: How would you design the UX for an AI research assistant?
-- **A**: Three core principles. Speed: stream responses token-by-token with a skeleton loading state. Trust: every claim gets an inline citation with a link to the source document â€” clicking opens the relevant passage highlighted. Control: users can regenerate, edit the response, or thumbs-down with a reason. I'd add progressive disclosure â€” a TL;DR summary with expandable details underneath. For uncertainty, I'd use a confidence indicator and have the AI explicitly say "I'm not sure about this" rather than hallucinating confidently.
+- **A**: Three core principles. Speed: stream responses token-by-token with a skeleton loading state. Trust: every claim gets an inline citation with a link to the source document — clicking opens the relevant passage highlighted. Control: users can regenerate, edit the response, or thumbs-down with a reason. I'd add progressive disclosure — a TL;DR summary with expandable details underneath. For uncertainty, I'd use a confidence indicator and have the AI explicitly say "I'm not sure about this" rather than hallucinating confidently.
 
 - **Q**: How do you handle the trust problem with AI-generated content?
-- **A**: Trust is built through transparency and verifiability. Three patterns: (1) Citation cards â€” every factual claim links to its source; users can verify. (2) Explicit uncertainty â€” "I'm not confident about this" is better than false confidence. (3) Graceful correction â€” make it trivially easy to edit, regenerate, or flag wrong answers. The key insight: users don't need AI to be perfect, they need to know *when* to trust it and when to double-check.
+- **A**: Trust is built through transparency and verifiability. Three patterns: (1) Citation cards — every factual claim links to its source; users can verify. (2) Explicit uncertainty — "I'm not confident about this" is better than false confidence. (3) Graceful correction — make it trivially easy to edit, regenerate, or flag wrong answers. The key insight: users don't need AI to be perfect, they need to know *when* to trust it and when to double-check.
 
-- **Q**: Streaming responses seem simple â€” what are the hard engineering tradeoffs?
-- **A**: Three non-obvious challenges. (1) Partial markdown â€” streaming mid-table or mid-code-block means your frontend must handle incomplete syntax gracefully without layout breaking. (2) Cancellation â€” users abort early; you need to cleanly close SSE connections and stop generation to avoid wasted cost. (3) Error recovery â€” if the stream breaks after 50 tokens, resume or restart gracefully, not leave a half-rendered response. At scale: buffer DOM updates to batches of ~50ms to avoid 100+ React re-renders/second, and cache common prompt prefixes server-side.
+- **Q**: Streaming responses seem simple — what are the hard engineering tradeoffs?
+- **A**: Three non-obvious challenges. (1) Partial markdown — streaming mid-table or mid-code-block means your frontend must handle incomplete syntax gracefully without layout breaking. (2) Cancellation — users abort early; you need to cleanly close SSE connections and stop generation to avoid wasted cost. (3) Error recovery — if the stream breaks after 50 tokens, resume or restart gracefully, not leave a half-rendered response. At scale: buffer DOM updates to batches of ~50ms to avoid 100+ React re-renders/second, and cache common prompt prefixes server-side.
 
 ---
 
@@ -170,7 +170,7 @@ PROGRESSIVE DISCLOSURE HIERARCHY:
 
 ```python
 # pip install openai>=1.60 fastapi>=0.110 uvicorn>=0.29
-# âš ï¸ Last tested: 2026-04 | Requires: openai>=1.60, OPENAI_API_KEY
+# ⚠️ Last tested: 2026-04 | Requires: openai>=1.60, OPENAI_API_KEY
 from fastapi import FastAPI
 from fastapi.responses import StreamingResponse
 from openai import OpenAI
@@ -180,7 +180,7 @@ client = OpenAI()
 
 @app.get("/stream")
 async def stream_response(question: str) -> StreamingResponse:
-    """Stream LLM tokens to the client as they arrive â€” core AI UX pattern."""
+    """Stream LLM tokens to the client as they arrive — core AI UX pattern."""
     def token_generator():
         stream = client.chat.completions.create(
             model="gpt-4o-mini",
@@ -208,7 +208,7 @@ async def stream_response(question: str) -> StreamingResponse:
 ### Confidence Signaling Pattern
 
 ```python
-# âš ï¸ Last tested: 2026-04 | Requires: openai>=1.60, OPENAI_API_KEY
+# ⚠️ Last tested: 2026-04 | Requires: openai>=1.60, OPENAI_API_KEY
 import json
 from openai import OpenAI
 
@@ -243,11 +243,11 @@ print(f"Confidence: {result['confidence']:.0%} → {confidence_color(result['con
 print(f"Caveat: {result.get('uncertainty_note')}")
 ```
 
-### React Streaming UI (TypeScript â€” DOM Ref Pattern)
+### React Streaming UI (TypeScript — DOM Ref Pattern)
 
 ```typescript
 // npm install openai  (React 18+ assumed)
-// âš ï¸ Last tested: 2026-04 | Requires: React 18+, EventSource API
+// ⚠️ Last tested: 2026-04 | Requires: React 18+, EventSource API
 // Key insight: use ref + direct DOM mutation for streaming, NOT useState per token.
 // useState per token = 100+ re-renders/sec = jank. Ref mutation = smooth.
 
@@ -314,14 +314,14 @@ export function StreamingChat() {
 
 | Type       | Resource                                                                                                                              | Why                                               |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
-| ðŸ“˜ Book     | "AI Engineering" by Chip Huyen (2025), Ch 1                                                                                           | AI product design from an engineering perspective |
-| ðŸ”§ Hands-on | [Google PAIR Guidelines](https://pair.withgoogle.com/)                                                                                | Google's AI UX design principles                  |
-| ðŸ”§ Hands-on | [Apple Human Interface Guidelines â€” Machine Learning](https://developer.apple.com/design/human-interface-guidelines/machine-learning) | Apple's AI UX design principles                   |
+| 📘 Book     | "AI Engineering" by Chip Huyen (2025), Ch 1                                                                                           | AI product design from an engineering perspective |
+| 🔧 Hands-on | [Google PAIR Guidelines](https://pair.withgoogle.com/)                                                                                | Google's AI UX design principles                  |
+| 🔧 Hands-on | [Apple Human Interface Guidelines — Machine Learning](https://developer.apple.com/design/human-interface-guidelines/machine-learning) | Apple's AI UX design principles                   |
 
 ---
 
 ## ★ Sources
 
-- Google PAIR â€” https://pair.withgoogle.com/
-- Apple HIG: Machine Learning â€” https://developer.apple.com/design/human-interface-guidelines/machine-learning
-- Nielsen Norman Group â€” AI UX Research â€” https://www.nngroup.com/
+- Google PAIR — https://pair.withgoogle.com/
+- Apple HIG: Machine Learning — https://developer.apple.com/design/human-interface-guidelines/machine-learning
+- Nielsen Norman Group — AI UX Research — https://www.nngroup.com/

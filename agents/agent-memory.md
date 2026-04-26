@@ -8,22 +8,22 @@ status: published
 last_verified: 2026-04
 parent: "ai-agents.md"
 related: ["ai-agents.md", "multi-agent-architectures.md", "../techniques/rag.md", "../techniques/context-engineering.md"]
-source: "Multiple â€” see Sources"
+source: "Multiple — see Sources"
 created: 2026-04-14
 updated: 2026-04-15
 ---
 
 # Agent Memory Systems
 
-> ✨ **Bit**: An LLM without memory is a brilliant person with amnesia â€” they can reason perfectly but can't remember what happened 5 minutes ago. Agent memory is how you give AI systems persistence, learning, and context across interactions.
+> ✨ **Bit**: An LLM without memory is a brilliant person with amnesia — they can reason perfectly but can't remember what happened 5 minutes ago. Agent memory is how you give AI systems persistence, learning, and context across interactions.
 
 ---
 
 ## ★ TL;DR
 
-- **What**: Architectural patterns for giving AI agents persistent memory â€” conversation history, semantic recall, structured knowledge, and episodic learning
+- **What**: Architectural patterns for giving AI agents persistent memory — conversation history, semantic recall, structured knowledge, and episodic learning
 - **Why**: Without memory, every interaction starts from zero. Memory enables personalization, multi-session reasoning, and agents that learn from experience.
-- **Key point**: Memory is not one thing â€” it's a taxonomy (working, episodic, semantic, procedural) that maps to different implementation patterns (context window, vector store, knowledge graph, tool results cache).
+- **Key point**: Memory is not one thing — it's a taxonomy (working, episodic, semantic, procedural) that maps to different implementation patterns (context window, vector store, knowledge graph, tool results cache).
 
 ---
 
@@ -41,15 +41,15 @@ Covers: Memory taxonomy, implementation patterns (context stuffing, RAG-based re
 
 - **Personalization**: Users expect AI to remember preferences and context
 - **Multi-session continuity**: Agents that forget between sessions feel broken
-- **Learning agents**: The frontier â€” agents that improve from their own experience
+- **Learning agents**: The frontier — agents that improve from their own experience
 - **Interview topic**: "How would you give an agent long-term memory?" is a common system design question
 
 ### Prerequisites
 
-- [AI Agents](./ai-agents.md) â€” agent architecture fundamentals
-- [RAG](../techniques/rag.md) â€” retrieval as a memory mechanism
-- [Context Engineering](../techniques/context-engineering.md) â€” managing context windows
-- [Embeddings](../foundations/embeddings.md) â€” vector representations for semantic memory
+- [AI Agents](./ai-agents.md) — agent architecture fundamentals
+- [RAG](../techniques/rag.md) — retrieval as a memory mechanism
+- [Context Engineering](../techniques/context-engineering.md) — managing context windows
+- [Embeddings](../foundations/embeddings.md) — vector representations for semantic memory
 
 ---
 
@@ -59,7 +59,7 @@ Covers: Memory taxonomy, implementation patterns (context stuffing, RAG-based re
 
 ```
 HUMAN MEMORY                          AGENT MEMORY EQUIVALENT
-â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€                         â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+─────────────                         ──────────────────────
 
 WORKING MEMORY                        CONTEXT WINDOW
   "What I'm thinking about now"         Current prompt + recent messages
@@ -94,54 +94,54 @@ GRAPH-BASED MEMORY                    KNOWLEDGE GRAPH STORE
 ### Memory Architecture Patterns
 
 ```
-â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚                    AGENT MEMORY ARCHITECTURE                     â”‚
-â”‚                                                                   â”‚
-â”‚  USER MESSAGE                                                     â”‚
-â”‚       â”‚                                                           â”‚
-â”‚       â–¼                                                           â”‚
-â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”    â”‚
-â”‚  â”‚              MEMORY RETRIEVAL LAYER                       â”‚    â”‚
-â”‚  â”‚                                                           â”‚    â”‚
-â”‚  â”‚  1. Recent messages (sliding window / buffer)             â”‚    â”‚
-â”‚  â”‚  2. Relevant past conversations (semantic search)         â”‚    â”‚
-â”‚  â”‚  3. User profile & preferences (structured store)         â”‚    â”‚
-â”‚  â”‚  4. Relevant knowledge (RAG)                              â”‚    â”‚
-â”‚  â”‚  5. Task history & outcomes (episodic store)              â”‚    â”‚
-â”‚  â”‚                                                           â”‚    â”‚
-â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜    â”‚
-â”‚                        â”‚                                          â”‚
-â”‚                        â–¼                                          â”‚
-â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”    â”‚
-â”‚  â”‚              CONTEXT ASSEMBLY                             â”‚    â”‚
-â”‚  â”‚                                                           â”‚    â”‚
-â”‚  â”‚  System prompt                                            â”‚    â”‚
-â”‚  â”‚  + Retrieved memories (ranked by relevance)               â”‚    â”‚
-â”‚  â”‚  + Recent conversation (last N turns)                     â”‚    â”‚
-â”‚  â”‚  + Current user message                                   â”‚    â”‚
-â”‚  â”‚  = FINAL PROMPT (fits within context window)              â”‚    â”‚
-â”‚  â”‚                                                           â”‚    â”‚
-â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜    â”‚
-â”‚                        â”‚                                          â”‚
-â”‚                        â–¼                                          â”‚
-â”‚                    LLM GENERATES RESPONSE                         â”‚
-â”‚                        â”‚                                          â”‚
-â”‚                        â–¼                                          â”‚
-â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”    â”‚
-â”‚  â”‚              MEMORY WRITE-BACK                            â”‚    â”‚
-â”‚  â”‚                                                           â”‚    â”‚
-â”‚  â”‚  1. Store conversation turn                               â”‚    â”‚
-â”‚  â”‚  2. Extract & update user preferences                     â”‚    â”‚
-â”‚  â”‚  3. Update task outcomes / success metrics                â”‚    â”‚
-â”‚  â”‚  4. Summarize if buffer exceeds threshold                 â”‚    â”‚
-â”‚  â”‚                                                           â”‚    â”‚
-â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜    â”‚
-â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+┌─────────────────────────────────────────────────────────────────┐
+│                    AGENT MEMORY ARCHITECTURE                     │
+│                                                                   │
+│  USER MESSAGE                                                     │
+│       │                                                           │
+│       ▼                                                           │
+│  ┌──────────────────────────────────────────────────────────┐    │
+│  │              MEMORY RETRIEVAL LAYER                       │    │
+│  │                                                           │    │
+│  │  1. Recent messages (sliding window / buffer)             │    │
+│  │  2. Relevant past conversations (semantic search)         │    │
+│  │  3. User profile & preferences (structured store)         │    │
+│  │  4. Relevant knowledge (RAG)                              │    │
+│  │  5. Task history & outcomes (episodic store)              │    │
+│  │                                                           │    │
+│  └─────────────────────┬────────────────────────────────────┘    │
+│                        │                                          │
+│                        ▼                                          │
+│  ┌──────────────────────────────────────────────────────────┐    │
+│  │              CONTEXT ASSEMBLY                             │    │
+│  │                                                           │    │
+│  │  System prompt                                            │    │
+│  │  + Retrieved memories (ranked by relevance)               │    │
+│  │  + Recent conversation (last N turns)                     │    │
+│  │  + Current user message                                   │    │
+│  │  = FINAL PROMPT (fits within context window)              │    │
+│  │                                                           │    │
+│  └─────────────────────┬────────────────────────────────────┘    │
+│                        │                                          │
+│                        ▼                                          │
+│                    LLM GENERATES RESPONSE                         │
+│                        │                                          │
+│                        ▼                                          │
+│  ┌──────────────────────────────────────────────────────────┐    │
+│  │              MEMORY WRITE-BACK                            │    │
+│  │                                                           │    │
+│  │  1. Store conversation turn                               │    │
+│  │  2. Extract & update user preferences                     │    │
+│  │  3. Update task outcomes / success metrics                │    │
+│  │  4. Summarize if buffer exceeds threshold                 │    │
+│  │                                                           │    │
+│  └──────────────────────────────────────────────────────────┘    │
+└─────────────────────────────────────────────────────────────────┘
 ```
 
 ### Pattern 1: Sliding Window (Buffer Memory)
 
-The simplest â€” keep the last N messages in context.
+The simplest — keep the last N messages in context.
 
 | Aspect | Detail |
 |--------|--------|
@@ -170,7 +170,7 @@ Store and retrieve memories by relevance using embeddings.
 | Aspect | Detail |
 |--------|--------|
 | **How** | Embed each memory, store in vector DB, retrieve by similarity to current query |
-| **Capacity** | Unlimited â€” retrieve only what's relevant |
+| **Capacity** | Unlimited — retrieve only what's relevant |
 | **Pros** | Scales to millions of memories, relevance-based recall |
 | **Cons** | May miss important context that isn't semantically similar to current query |
 | **Best for** | Long-term user memory, cross-session recall, knowledge-heavy agents |
@@ -189,12 +189,12 @@ Store structured relationships between entities.
 
 ### Pattern 5: Virtual Context Memory (Letta / MemGPT)
 
-An OS-inspired approach where the agent manages its own memory via tool calls â€” reading, writing, and searching memory tiers autonomously.
+An OS-inspired approach where the agent manages its own memory via tool calls — reading, writing, and searching memory tiers autonomously.
 
 | Aspect | Detail |
 |--------|--------|
 | **How** | Three-tier memory hierarchy managed by the agent itself via memory tools |
-| **Capacity** | Unlimited â€” agent pages data in/out of context as needed |
+| **Capacity** | Unlimited — agent pages data in/out of context as needed |
 | **Pros** | Self-organizing, handles arbitrarily long histories, agent decides what to remember |
 | **Cons** | Extra LLM calls for memory management, complexity, requires reliable tool use |
 | **Best for** | Long-running agents, personalized assistants, agents that must learn over weeks/months |
@@ -202,32 +202,32 @@ An OS-inspired approach where the agent manages its own memory via tool calls â
 ```
 LETTA / MEMGPT ARCHITECTURE:
 
-  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-  â”‚                   AGENT CONTEXT WINDOW                   â”‚
-  â”‚                                                         â”‚
-  â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”   â”‚
-  â”‚  â”‚  CORE MEMORY (always in context)                 â”‚   â”‚
-  â”‚  â”‚  - System persona + user profile blocks          â”‚   â”‚
-  â”‚  â”‚  - Agent can self-edit: core_memory_replace()    â”‚   â”‚
-  â”‚  â”‚  Capacity: ~2K tokens (curated, high-value)      â”‚   â”‚
-  â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜   â”‚
-  â”‚                         â”‚                               â”‚
-  â”‚                    pages in/out                          â”‚
-  â”‚                         â”‚                               â”‚
-  â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”   â”‚
-  â”‚  â”‚  RECALL MEMORY (conversation search)             â”‚   â”‚
-  â”‚  â”‚  - Full conversation log, searchable             â”‚   â”‚
-  â”‚  â”‚  - Agent calls: conversation_search(query)       â”‚   â”‚
-  â”‚  â”‚  Capacity: unlimited (retrieval-based)           â”‚   â”‚
-  â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜   â”‚
-  â”‚                         â”‚                               â”‚
-  â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”   â”‚
-  â”‚  â”‚  ARCHIVAL MEMORY (persistent knowledge store)    â”‚   â”‚
-  â”‚  â”‚  - Long-term facts, documents, learned knowledge â”‚   â”‚
-  â”‚  â”‚  - Agent calls: archival_memory_insert/search()  â”‚   â”‚
-  â”‚  â”‚  Capacity: unlimited (vector DB backed)          â”‚   â”‚
-  â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜   â”‚
-  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+  ┌─────────────────────────────────────────────────────────┐
+  │                   AGENT CONTEXT WINDOW                   │
+  │                                                         │
+  │  ┌─────────────────────────────────────────────────┐   │
+  │  │  CORE MEMORY (always in context)                 │   │
+  │  │  - System persona + user profile blocks          │   │
+  │  │  - Agent can self-edit: core_memory_replace()    │   │
+  │  │  Capacity: ~2K tokens (curated, high-value)      │   │
+  │  └─────────────────────────────────────────────────┘   │
+  │                         │                               │
+  │                    pages in/out                          │
+  │                         │                               │
+  │  ┌─────────────────────────────────────────────────┐   │
+  │  │  RECALL MEMORY (conversation search)             │   │
+  │  │  - Full conversation log, searchable             │   │
+  │  │  - Agent calls: conversation_search(query)       │   │
+  │  │  Capacity: unlimited (retrieval-based)           │   │
+  │  └─────────────────────────────────────────────────┘   │
+  │                         │                               │
+  │  ┌─────────────────────────────────────────────────┐   │
+  │  │  ARCHIVAL MEMORY (persistent knowledge store)    │   │
+  │  │  - Long-term facts, documents, learned knowledge │   │
+  │  │  - Agent calls: archival_memory_insert/search()  │   │
+  │  │  Capacity: unlimited (vector DB backed)          │   │
+  │  └─────────────────────────────────────────────────┘   │
+  └─────────────────────────────────────────────────────────┘
 
 KEY INSIGHT: The agent is its own memory manager.
   - It decides what to remember (archival_memory_insert)
@@ -254,7 +254,7 @@ KEY INSIGHT: The agent is its own memory manager.
 
 ```python
 # pip install langgraph>=0.3 langchain-openai>=0.3 langchain-community>=0.3
-# âš ï¸ Last tested: 2026-04 | Requires: langgraph>=0.3
+# ⚠️ Last tested: 2026-04 | Requires: langgraph>=0.3
 
 from langgraph.graph import StateGraph, MessagesState, START, END
 from langgraph.checkpoint.memory import MemorySaver
@@ -287,7 +287,7 @@ response = app.invoke(
 )
 print(response["messages"][-1].content)
 
-# Turn 2 â€” agent remembers Turn 1!
+# Turn 2 — agent remembers Turn 1!
 response = app.invoke(
     {"messages": [("user", "What am I working on?")]},
     config=config,
@@ -295,21 +295,21 @@ response = app.invoke(
 print(response["messages"][-1].content)
 # Expected: "You mentioned you're building a RAG system, Alex!"
 
-# Turn 3 â€” different session (no memory)
+# Turn 3 — different session (no memory)
 config_new = {"configurable": {"thread_id": "user_123_session_2"}}
 response = app.invoke(
     {"messages": [("user", "What's my name?")]},
     config=config_new,
 )
 print(response["messages"][-1].content)
-# Expected: "I don't know your name â€” this is our first interaction."
+# Expected: "I don't know your name — this is our first interaction."
 ```
 
 ### Semantic Memory with Vector Store
 
 ```python
 # pip install openai>=1.0 numpy>=1.24
-# âš ï¸ Last tested: 2026-04 | Requires: openai>=1.0
+# ⚠️ Last tested: 2026-04 | Requires: openai>=1.0
 
 from openai import OpenAI
 import numpy as np
@@ -407,9 +407,9 @@ MEMORY STORAGE OPTIONS:
   Enterprise:    Redis (hot) + PostgreSQL (cold) + vector DB (semantic)
   
 MEMORY SIZING:
-  1 conversation turn â‰ˆ 100-500 tokens
-  Context window budget for memory â‰ˆ 30-50% of total context
-  Semantic memory retrieval â‰ˆ top 3-5 most relevant memories
+  1 conversation turn ≈ 100-500 tokens
+  Context window budget for memory ≈ 30-50% of total context
+  Semantic memory retrieval ≈ top 3-5 most relevant memories
 ```
 
 ---
@@ -428,10 +428,10 @@ MEMORY SIZING:
 
 ## ○ Gotchas & Common Mistakes
 
-- âš ï¸ **More memory â‰  better responses**: Stuffing too many memories into context confuses the model. Retrieve 3-5 most relevant, not 50.
-- âš ï¸ **Summarization is lossy**: When you summarize old conversations, specific details (dates, numbers, names) are often lost. Store facts separately.
-- âš ï¸ **Embedding similarity â‰  importance**: A memory can be highly similar to the current query but unimportant, or vice versa. Combine relevance with recency and importance scoring.
-- âš ï¸ **Memory writes have latency and cost**: Each embedding call adds ~100ms and ~$0.0001. At scale (1000s of conversations/day), this adds up.
+- ⚠️ **More memory ≠ better responses**: Stuffing too many memories into context confuses the model. Retrieve 3-5 most relevant, not 50.
+- ⚠️ **Summarization is lossy**: When you summarize old conversations, specific details (dates, numbers, names) are often lost. Store facts separately.
+- ⚠️ **Embedding similarity ≠ importance**: A memory can be highly similar to the current query but unimportant, or vice versa. Combine relevance with recency and importance scoring.
+- ⚠️ **Memory writes have latency and cost**: Each embedding call adds ~100ms and ~$0.0001. At scale (1000s of conversations/day), this adds up.
 
 ---
 
@@ -441,7 +441,7 @@ MEMORY SIZING:
 - **A**: I'd use a three-layer memory architecture. Layer 1: sliding window of the last 10 messages for immediate context. Layer 2: a structured user profile (name, plan, past issues) stored in PostgreSQL, updated after each conversation. Layer 3: semantic memory in a vector database for retrieving relevant past tickets and resolutions. On each new message, I'd retrieve the user profile + top 3 relevant past interactions and inject them into the system prompt. I'd budget 30% of context for memory, 20% for system prompt, and 50% for the current conversation. Memory writes happen asynchronously after each turn to avoid adding latency.
 
 - **Q**: What are the risks of giving an agent memory?
-- **A**: Four main risks. (1) Privacy: memories must be strictly isolated per user/tenant â€” a vector DB namespace leak would expose personal data. (2) Poisoning: users can intentionally inject false memories ("remember that I'm an admin") â€” validate and sanitize memory writes. (3) Staleness: preferences change but old memories persist â€” add TTLs and explicit update mechanisms. (4) Hallucinated memories: the LLM may "remember" things that never happened â€” always check retrieved memories against actual stored data, never rely on the model's internal "memory."
+- **A**: Four main risks. (1) Privacy: memories must be strictly isolated per user/tenant — a vector DB namespace leak would expose personal data. (2) Poisoning: users can intentionally inject false memories ("remember that I'm an admin") — validate and sanitize memory writes. (3) Staleness: preferences change but old memories persist — add TTLs and explicit update mechanisms. (4) Hallucinated memories: the LLM may "remember" things that never happened — always check retrieved memories against actual stored data, never rely on the model's internal "memory."
 
 ---
 
@@ -454,7 +454,7 @@ MEMORY SIZING:
 **Steps**:
 1. Build a basic chatbot using the LangGraph code above
 2. Add semantic memory using the vector store implementation
-3. Test: have 3 conversations, then start a 4th â€” does it recall relevant context?
+3. Test: have 3 conversations, then start a 4th — does it recall relevant context?
 4. Test memory isolation: create 2 users, verify they can't see each other's memories
 **Expected Output**: Working chatbot with cross-session memory, isolation verification
 
@@ -475,21 +475,21 @@ MEMORY SIZING:
 
 | Type | Resource | Why |
 |------|----------|-----|
-| ðŸ“˜ Book | "AI Engineering" by Chip Huyen (2025), Ch 7 | Covers agent memory patterns in production context |
-| ðŸ”§ Hands-on | [LangGraph Memory Tutorial](https://langchain-ai.github.io/langgraph/concepts/memory/) | Official guide to checkpointing and memory in LangGraph |
-| ðŸ”§ Hands-on | [Mem0 Library](https://github.com/mem0ai/mem0) | Open-source long-term memory layer for AI agents |
-| ðŸ”§ Hands-on | [Letta (MemGPT)](https://github.com/letta-ai/letta) | Virtual context memory runtime â€” agent self-manages memory tiers |
-| ðŸ“„ Paper | [Packer et al. "MemGPT" (2023)](https://arxiv.org/abs/2310.08560) | OS-inspired virtual context management for LLM agents |
-| ðŸ“„ Paper | [Park et al. "Generative Agents" (2023)](https://arxiv.org/abs/2304.03442) | Stanford's simulation of memory-enabled AI agents in a virtual world |
+| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 7 | Covers agent memory patterns in production context |
+| 🔧 Hands-on | [LangGraph Memory Tutorial](https://langchain-ai.github.io/langgraph/concepts/memory/) | Official guide to checkpointing and memory in LangGraph |
+| 🔧 Hands-on | [Mem0 Library](https://github.com/mem0ai/mem0) | Open-source long-term memory layer for AI agents |
+| 🔧 Hands-on | [Letta (MemGPT)](https://github.com/letta-ai/letta) | Virtual context memory runtime — agent self-manages memory tiers |
+| 📄 Paper | [Packer et al. "MemGPT" (2023)](https://arxiv.org/abs/2310.08560) | OS-inspired virtual context management for LLM agents |
+| 📄 Paper | [Park et al. "Generative Agents" (2023)](https://arxiv.org/abs/2304.03442) | Stanford's simulation of memory-enabled AI agents in a virtual world |
 
 ---
 
 ## ★ Sources
 
-- LangGraph Documentation â€” https://langchain-ai.github.io/langgraph/
-- Mem0 Documentation â€” https://docs.mem0.ai/
-- Letta (MemGPT) Documentation â€” https://docs.letta.com/
-- Packer et al. "MemGPT: Towards LLMs as Operating Systems" (2023) â€” https://arxiv.org/abs/2310.08560
+- LangGraph Documentation — https://langchain-ai.github.io/langgraph/
+- Mem0 Documentation — https://docs.mem0.ai/
+- Letta (MemGPT) Documentation — https://docs.letta.com/
+- Packer et al. "MemGPT: Towards LLMs as Operating Systems" (2023) — https://arxiv.org/abs/2310.08560
 - Park et al. "Generative Agents: Interactive Simulacra of Human Behavior" (2023)
 - [AI Agents](./ai-agents.md)
 - [RAG](../techniques/rag.md)

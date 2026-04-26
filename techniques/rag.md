@@ -22,7 +22,7 @@ updated: 2026-04-15
 ## ★ TL;DR
 
 - **What**: A pattern that retrieves relevant external documents and feeds them to an LLM as context before generation
-- **Why**: Fixes hallucination, enables up-to-date answers, works with private data â€” WITHOUT retraining the model
+- **Why**: Fixes hallucination, enables up-to-date answers, works with private data — WITHOUT retraining the model
 - **Key point**: The dominant technique for enterprise GenAI. If you're building GenAI products, you ARE building RAG pipelines.
 
 ---
@@ -46,7 +46,7 @@ This document covers RAG architecture, pipeline components, and advanced pattern
 
 ### Prerequisites
 
-- [Llms Overview](../llms/llms-overview.md) â€” what LLMs are and how they work
+- [Llms Overview](../llms/llms-overview.md) — what LLMs are and how they work
 - Basic understanding of embeddings (vector representations of text)
 
 ---
@@ -56,36 +56,36 @@ This document covers RAG architecture, pipeline components, and advanced pattern
 ### The Basic RAG Pipeline
 
 ```
-â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚                      RAG PIPELINE                            â”‚
-â”‚                                                              â”‚
-â”‚  INDEXING (one-time / periodic)                              â”‚
-â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”   â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”   â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”   â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”‚
-â”‚  â”‚ Documentsâ”‚ → â”‚ Chunking â”‚ → â”‚ Embeddingâ”‚ → â”‚ Vector  â”‚  â”‚
-â”‚  â”‚ (raw)    â”‚   â”‚ (split)  â”‚   â”‚ (encode) â”‚   â”‚ DB      â”‚  â”‚
-â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜   â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜   â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜   â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â”‚
-â”‚                                                              â”‚
-â”‚  RETRIEVAL + GENERATION (per query)                          â”‚
-â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”   â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”   â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”   â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”‚
-â”‚  â”‚ User     â”‚ → â”‚ Embed    â”‚ → â”‚ Search   â”‚ → â”‚ Top-K   â”‚  â”‚
-â”‚  â”‚ Query    â”‚   â”‚ Query    â”‚   â”‚ Vector DBâ”‚   â”‚ Chunks  â”‚  â”‚
-â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜   â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜   â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜   â””â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”˜  â”‚
-â”‚                                                      â”‚       â”‚
-â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”â”‚       â”‚
-â”‚  â”‚ PROMPT = System Instructions + Retrieved Chunks + Query  â”‚â”‚
-â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜â”‚       â”‚
-â”‚                                         â†“            â”‚       â”‚
-â”‚                                    â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”               â”‚
-â”‚                                    â”‚  LLM    â”‚               â”‚
-â”‚                                    â”‚ Generateâ”‚               â”‚
-â”‚                                    â””â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”˜               â”‚
-â”‚                                         â†“                    â”‚
-â”‚                                    â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”               â”‚
-â”‚                                    â”‚ Answer  â”‚               â”‚
-â”‚                                    â”‚ + Cited â”‚               â”‚
-â”‚                                    â”‚ Sources â”‚               â”‚
-â”‚                                    â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜               â”‚
-â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+┌──────────────────────────────────────────────────────────────┐
+│                      RAG PIPELINE                            │
+│                                                              │
+│  INDEXING (one-time / periodic)                              │
+│  ┌──────────┐   ┌──────────┐   ┌──────────┐   ┌─────────┐  │
+│  │ Documents│ → │ Chunking │ → │ Embedding│ → │ Vector  │  │
+│  │ (raw)    │   │ (split)  │   │ (encode) │   │ DB      │  │
+│  └──────────┘   └──────────┘   └──────────┘   └─────────┘  │
+│                                                              │
+│  RETRIEVAL + GENERATION (per query)                          │
+│  ┌──────────┐   ┌──────────┐   ┌──────────┐   ┌─────────┐  │
+│  │ User     │ → │ Embed    │ → │ Search   │ → │ Top-K   │  │
+│  │ Query    │   │ Query    │   │ Vector DB│   │ Chunks  │  │
+│  └──────────┘   └──────────┘   └──────────┘   └────┬────┘  │
+│                                                      │       │
+│  ┌──────────────────────────────────────────────────┐│       │
+│  │ PROMPT = System Instructions + Retrieved Chunks + Query  ││
+│  └──────────────────────────────────────┬───────────┘│       │
+│                                         ↓            │       │
+│                                    ┌─────────┐               │
+│                                    │  LLM    │               │
+│                                    │ Generate│               │
+│                                    └────┬────┘               │
+│                                         ↓                    │
+│                                    ┌─────────┐               │
+│                                    │ Answer  │               │
+│                                    │ + Cited │               │
+│                                    │ Sources │               │
+│                                    └─────────┘               │
+└──────────────────────────────────────────────────────────────┘
 ```
 
 ### Pipeline Components Deep Dive
@@ -98,18 +98,18 @@ This document covers RAG architecture, pipeline components, and advanced pattern
 # Tools: LangChain loaders, Unstructured.io, LlamaIndex readers
 ```
 
-#### 2. Chunking (CRITICAL â€” where most pipelines fail)
+#### 2. Chunking (CRITICAL — where most pipelines fail)
 
 ```
 Strategy           | Chunk Size | Overlap | When to Use
-â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+────────────────────────────────────────────────────────
 Fixed size          | 500-1000   | 100-200 | Quick start, general docs
 Recursive splitting | 500-1000   | 100-200 | Text with natural hierarchy
 Semantic            | Variable   | N/A     | When meaning boundaries matter
 Document-based      | Full doc   | N/A     | Short docs (emails, tickets)
 Sentence-level      | 1-3 sents  | N/A     | Q&A, precise retrieval
 
-âš ï¸ GOTCHA: Bad chunking = bad retrieval = bad answers.
+⚠️ GOTCHA: Bad chunking = bad retrieval = bad answers.
    If your RAG sucks, fix chunking FIRST.
 ```
 
@@ -122,7 +122,7 @@ Convert text chunks and queries into high-dimensional vectors for similarity sea
 | OpenAI `text-embedding-3-large` | 3072       | Best quality, API, Matryoshka dims   |
 | **Gemini text-embedding-004**          | Flexible   | Multimodal! (text+image+video+audio) |
 | Cohere `embed-v4`               | 1024       | Best multilingual (100+ languages)   |
-| Voyage AI `voyage-3-large`      | â€”          | Best for code & technical docs       |
+| Voyage AI `voyage-3-large`      | —          | Best for code & technical docs       |
 | `bge-m3` (BAAI)                 | 1024       | Best open-source, hybrid retrieval   |
 | `nomic-embed-v2`                | 768        | Best for local/edge deployment       |
 
@@ -152,18 +152,18 @@ Convert text chunks and queries into high-dimensional vectors for similarity sea
 
 ```
 Basic RAG
-  â””→ Advanced RAG
-       â”œâ”€â”€ Hybrid Search (semantic + BM25)
-       â”œâ”€â”€ Re-ranking (Cohere Rerank, cross-encoders)
-       â”œâ”€â”€ Query Transformation (HyDE, multi-query, step-back)
-       â”œâ”€â”€ Self-RAG (model decides when to retrieve)
-       â”œâ”€â”€ Late Chunking (embed full doc, pool after)           â† 2025-2026 standard
-       â”œâ”€â”€ Contextual Retrieval (LLM-enrich each chunk)        â† Anthropic 2024→standard
-       â”œâ”€â”€ Corrective RAG / CRAG (grade + re-retrieve/search)  â† 2026 agentic pattern
-       â””→ Agentic RAG
-            â”œâ”€â”€ Tool-calling RAG (agent decides what to search)
-            â”œâ”€â”€ Multi-source RAG (different DBs, APIs, web)
-            â””â”€â”€ Multi-step RAG (iterative retrieval-reasoning loops)
+  └→ Advanced RAG
+       ├── Hybrid Search (semantic + BM25)
+       ├── Re-ranking (Cohere Rerank, cross-encoders)
+       ├── Query Transformation (HyDE, multi-query, step-back)
+       ├── Self-RAG (model decides when to retrieve)
+       ├── Late Chunking (embed full doc, pool after)           ← 2025-2026 standard
+       ├── Contextual Retrieval (LLM-enrich each chunk)        ← Anthropic 2024→standard
+       ├── Corrective RAG / CRAG (grade + re-retrieve/search)  ← 2026 agentic pattern
+       └→ Agentic RAG
+            ├── Tool-calling RAG (agent decides what to search)
+            ├── Multi-source RAG (different DBs, APIs, web)
+            └── Multi-step RAG (iterative retrieval-reasoning loops)
 ```
 
 ### Late Chunking (2025-2026 Standard for Long-Doc Retrieval)
@@ -181,8 +181,8 @@ Result: Each chunk's embedding retains context from the surrounding document.
 
 ```python
 # pip install transformers>=4.45 torch>=2.3
-# âš ï¸ Last tested: 2026-04 | Requires: jina-embeddings-v3 or nomic-embed-text-v2
-# PSEUDOCODE â€” illustrative of the late chunking concept
+# ⚠️ Last tested: 2026-04 | Requires: jina-embeddings-v3 or nomic-embed-text-v2
+# PSEUDOCODE — illustrative of the late chunking concept
 
 from transformers import AutoTokenizer, AutoModel
 import torch
@@ -223,8 +223,8 @@ def late_chunking_embed(document: str, chunk_boundaries: list[tuple[int,int]], m
 
 ```python
 # pip install anthropic>=0.34
-# âš ï¸ Last tested: 2026-04 | Requires: anthropic>=0.34, ANTHROPIC_API_KEY
-# Cost note: use prompt caching â€” cache the full document, vary only per chunk
+# ⚠️ Last tested: 2026-04 | Requires: anthropic>=0.34, ANTHROPIC_API_KEY
+# Cost note: use prompt caching — cache the full document, vary only per chunk
 
 import anthropic
 
@@ -258,26 +258,26 @@ def add_chunk_context(full_document: str, chunk: str) -> str:
 enriched_chunk = add_chunk_context(full_document="...", chunk="This approach...")
 ```
 
-### Corrective RAG / CRAG â€” Grade → Decide → Act
+### Corrective RAG / CRAG — Grade → Decide → Act
 
 When retrieved chunks are irrelevant, CRAG falls back to web search or query reformulation:
 
 ```
 Query
-  â†“
+  ↓
 [Retrieve] → chunks
-  â†“
+  ↓
 [Grade each chunk: RELEVANT / IRRELEVANT / AMBIGUOUS]
-  â†“
+  ↓
 If ALL irrelevant → [Web Search] or [Reformulate Query] → [Re-retrieve]
 If SOME relevant → [Filter to relevant chunks only]
-  â†“
+  ↓
 [Generate answer from filtered/searched context]
 ```
 
 ```python
-# âš ï¸ Last tested: 2026-04 | Requires: openai>=1.60
-# PSEUDOCODE â€” the grading + fallback pattern
+# ⚠️ Last tested: 2026-04 | Requires: openai>=1.60
+# PSEUDOCODE — the grading + fallback pattern
 
 from openai import OpenAI
 import json
@@ -324,17 +324,17 @@ def corrective_rag(question: str, retrieved_chunks: list[str], web_search_fn=Non
     return resp.choices[0].message.content
 ```
 
-### Reciprocal Rank Fusion (RRF) â€” Combining Multiple Retrieval Lists
+### Reciprocal Rank Fusion (RRF) — Combining Multiple Retrieval Lists
 
 RRF merges ranked lists from multiple retrieval methods (semantic + BM25 + metadata) without needing score normalization:
 
 ```
-RRF(document d) = Î£_i  1 / (k + rank_i(d))
+RRF(document d) = Σ_i  1 / (k + rank_i(d))
   where: k = 60 (constant, empirically validated), rank_i = rank in list i
 ```
 
 ```python
-# âš ï¸ Last tested: 2026-04 | Requires: Python 3.10+ (stdlib only)
+# ⚠️ Last tested: 2026-04 | Requires: Python 3.10+ (stdlib only)
 from collections import defaultdict
 
 def reciprocal_rank_fusion(ranked_lists: list[list[str]], k: int = 60) -> list[tuple[str, float]]:
@@ -379,7 +379,7 @@ print(f"Fused top-5: {top_5}")
 
 ```python
 # pip install langchain>=0.3 langchain-openai>=0.3 langchain-community>=0.3 chromadb>=0.5
-# âš ï¸ Last tested: 2026-04 | Requires: langchain>=0.3
+# ⚠️ Last tested: 2026-04 | Requires: langchain>=0.3
 
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
@@ -429,7 +429,7 @@ print(result["answer"])
 
 ## ◆ Strengths vs Limitations
 
-| ✅ Strengths                                | âŒ Limitations                                         |
+| ✅ Strengths                                | ❌ Limitations                                         |
 | ------------------------------------------ | ----------------------------------------------------- |
 | No model retraining needed                 | Retrieval quality bottleneck                          |
 | Always up-to-date (update docs, not model) | Chunking is hard to get right                         |
@@ -464,7 +464,7 @@ Quick Debug:
 ### RAG Evaluation Metrics (RAG Triad)
 
 ```
-THE RAG TRIAD â€” 3 metrics that cover everything:
+THE RAG TRIAD — 3 metrics that cover everything:
 
   1. CONTEXT RELEVANCE (retrieval quality)
      "Are the retrieved chunks actually relevant to the question?"
@@ -481,32 +481,32 @@ THE RAG TRIAD â€” 3 metrics that cover everything:
      Metric: How well does the answer match the user's intent
      Low score → Fix: prompt template, LLM model, or retrieval strategy
 
-  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”      â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”      â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-  â”‚   Question  â”‚â”€â”€1â”€â”€â–¶â”‚  Context   â”‚â”€â”€2â”€â”€â–¶â”‚   Answer    â”‚
-  â”‚             â”‚      â”‚ (retrieved)â”‚      â”‚ (generated) â”‚
-  â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”˜      â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜      â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”˜
-         â”‚                                        â”‚
-         â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€3â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+  ┌─────────────┐      ┌────────────┐      ┌─────────────┐
+  │   Question  │──1──▶│  Context   │──2──▶│   Answer    │
+  │             │      │ (retrieved)│      │ (generated) │
+  └──────┬──────┘      └────────────┘      └──────┬──────┘
+         │                                        │
+         └──────────────3──────────────────────────┘
 
   1 = Context Relevance   2 = Faithfulness   3 = Answer Relevance
 
 EVALUATION TOOLS:
-  RAGAS          â€” most popular, uses LLM-as-judge, supports all 3 metrics
-  DeepEval       â€” unit-test style, CI/CD friendly
-  TruLens        â€” real-time monitoring, tracing
-  LangSmith      â€” LangChain's eval + tracing platform
-  Arize Phoenix  â€” open-source LLM observability
+  RAGAS          — most popular, uses LLM-as-judge, supports all 3 metrics
+  DeepEval       — unit-test style, CI/CD friendly
+  TruLens        — real-time monitoring, tracing
+  LangSmith      — LangChain's eval + tracing platform
+  Arize Phoenix  — open-source LLM observability
 ```
 
 ---
 
 ## ○ Gotchas & Common Mistakes
 
-- âš ï¸ **"Garbage in, garbage out"**: If your chunking splits a table across chunks, the answer will be wrong. Always inspect chunks.
-- âš ï¸ **Embedding model mismatch**: embedding model for indexing MUST match the one used for querying
-- âš ï¸ **Over-retrieving**: More chunks â‰  better. Too many chunks adds noise and can confuse the LLM.
-- âš ï¸ **Ignoring hybrid search**: Pure semantic search misses exact keywords, names, IDs. Always consider BM25 + semantic.
-- âš ï¸ **Not evaluating**: Most teams deploy RAG without measuring retrieval quality. Use RAGAS, DeepEval, or at minimum test manually.
+- ⚠️ **"Garbage in, garbage out"**: If your chunking splits a table across chunks, the answer will be wrong. Always inspect chunks.
+- ⚠️ **Embedding model mismatch**: embedding model for indexing MUST match the one used for querying
+- ⚠️ **Over-retrieving**: More chunks ≠ better. Too many chunks adds noise and can confuse the LLM.
+- ⚠️ **Ignoring hybrid search**: Pure semantic search misses exact keywords, names, IDs. Always consider BM25 + semantic.
+- ⚠️ **Not evaluating**: Most teams deploy RAG without measuring retrieval quality. Use RAGAS, DeepEval, or at minimum test manually.
 
 ---
 
@@ -519,7 +519,7 @@ EVALUATION TOOLS:
 - **A**: RAG when: need up-to-date info, knowledge changes frequently, need source attribution. Fine-tuning when: need different output style/format, domain-specific reasoning, or model behavior changes. Best: combine both (Hybrid RAG).
 
 - **Q**: Explain the difference between semantic and keyword search in RAG.
-- **A**: Semantic (vector) search finds conceptually similar content even with different words ("car" matches "automobile"). Keyword (BM25) search finds exact term matches. Hybrid combines both â€” best overall because semantic misses exact terms and BM25 misses synonyms.
+- **A**: Semantic (vector) search finds conceptually similar content even with different words ("car" matches "automobile"). Keyword (BM25) search finds exact term matches. Hybrid combines both — best overall because semantic misses exact terms and BM25 misses synonyms.
 
 ---
 
@@ -559,8 +559,8 @@ EVALUATION TOOLS:
 1. Load a 10-page PDF with PyPDFLoader
 2. Chunk with RecursiveCharacterTextSplitter (1000 chars, 200 overlap)
 3. Embed with text-embedding-3-small, store in Chroma
-4. Query with 5 normal questions â€” log retrieval scores
-5. Query with 5 adversarial queries (ambiguous, multi-hop, out-of-scope) â€” document failures
+4. Query with 5 normal questions — log retrieval scores
+5. Query with 5 adversarial queries (ambiguous, multi-hop, out-of-scope) — document failures
 **Expected Output**: Table comparing retrieval precision for normal vs adversarial queries
 
 ### Exercise 2: Add a Reranking Layer
@@ -580,14 +580,14 @@ EVALUATION TOOLS:
 
 | Type | Resource | Why |
 |------|----------|-----|
-| ðŸ“„ Paper | [Lewis et al. "Retrieval-Augmented Generation" (2020)](https://arxiv.org/abs/2005.11401) | The original RAG paper |
-| ðŸ“˜ Book | "AI Engineering" by Chip Huyen (2025), Ch 3-4 | Best practical treatment of RAG architecture and evaluation |
-| ðŸŽ“ Course | [deeplearning.ai â€” "Building and Evaluating RAG"](https://www.deeplearning.ai/) | Hands-on RAG implementation course |
-| ðŸ”§ Hands-on | [LlamaIndex RAG Tutorial](https://docs.llamaindex.ai/) | Production RAG framework with excellent documentation |
+| 📄 Paper | [Lewis et al. "Retrieval-Augmented Generation" (2020)](https://arxiv.org/abs/2005.11401) | The original RAG paper |
+| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 3-4 | Best practical treatment of RAG architecture and evaluation |
+| 🎓 Course | [deeplearning.ai — "Building and Evaluating RAG"](https://www.deeplearning.ai/) | Hands-on RAG implementation course |
+| 🔧 Hands-on | [LlamaIndex RAG Tutorial](https://docs.llamaindex.ai/) | Production RAG framework with excellent documentation |
 
 ## ★ Sources
 
 - Lewis et al., "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks" (2020)
-- LangChain documentation â€” https://docs.langchain.com
-- LlamaIndex documentation â€” https://docs.llamaindex.ai
-- RAGAS evaluation framework â€” https://docs.ragas.io
+- LangChain documentation — https://docs.langchain.com
+- LlamaIndex documentation — https://docs.llamaindex.ai
+- RAGAS evaluation framework — https://docs.ragas.io

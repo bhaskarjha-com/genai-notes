@@ -201,7 +201,7 @@ When asked to design a GenAI system, structure the answer like this:
 
 ```python
 # pip install openai>=1.60 chromadb>=0.5
-# âš ï¸ Last tested: 2026-04 | Requires: openai>=1.60, chromadb>=0.5, OPENAI_API_KEY env var
+# ⚠️ Last tested: 2026-04 | Requires: openai>=1.60, chromadb>=0.5, OPENAI_API_KEY env var
 from openai import OpenAI
 import chromadb
 
@@ -283,10 +283,10 @@ print(rag_query("How does RAG work?"))
 
 | Type       | Resource                                                                                                                           | Why                                    |
 | ---------- | ---------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
-| ðŸ“˜ Book     | "AI Engineering" by Chip Huyen (2025)                                                                                              | End-to-end AI system design reference  |
-| ðŸ“˜ Book     | "Designing Machine Learning Systems" by Chip Huyen (2022)                                                                          | Foundational ML system design patterns |
-| ðŸŽ¥ Video    | [Alex Xu â€” System Design Interview Series](https://www.youtube.com/@ByteByteGo)                                                    | Visual system design explanations      |
-| ðŸ”§ Hands-on | [Google MLOps Guide](https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning) | Production ML architecture patterns    |
+| 📘 Book     | "AI Engineering" by Chip Huyen (2025)                                                                                              | End-to-end AI system design reference  |
+| 📘 Book     | "Designing Machine Learning Systems" by Chip Huyen (2022)                                                                          | Foundational ML system design patterns |
+| 🎥 Video    | [Alex Xu — System Design Interview Series](https://www.youtube.com/@ByteByteGo)                                                    | Visual system design explanations      |
+| 🔧 Hands-on | [Google MLOps Guide](https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning) | Production ML architecture patterns    |
 
 ## ★ Sources
 - Chip Huyen, *Designing Machine Learning Systems*

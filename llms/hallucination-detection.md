@@ -120,7 +120,7 @@ User request
 ### Simple Groundedness Pattern
 
 ```python
-# âš ï¸ Last tested: 2026-04
+# ⚠️ Last tested: 2026-04
 def answer_with_check(query, context_chunks, llm, verifier):
     draft = llm.generate(query=query, context=context_chunks)
     verdict = verifier.score(answer=draft, evidence=context_chunks)
@@ -174,7 +174,7 @@ def answer_with_check(query, context_chunks, llm, verifier):
 
 ```python
 # pip install openai>=1.60
-# âš ï¸ Last tested: 2026-04 | Requires: openai>=1.60, OPENAI_API_KEY env var
+# ⚠️ Last tested: 2026-04 | Requires: openai>=1.60, OPENAI_API_KEY env var
 from openai import OpenAI
 import json
 
@@ -209,7 +209,7 @@ print(f"Unsupported: {check.get('unsupported_claims', [])}")
 ### Self-Consistency Check (Reference-Free)
 
 ```python
-# âš ï¸ Last tested: 2026-04 | Requires: openai>=1.60, OPENAI_API_KEY
+# ⚠️ Last tested: 2026-04 | Requires: openai>=1.60, OPENAI_API_KEY
 from collections import Counter
 
 def self_consistency_check(question: str, n: int = 5) -> dict:
@@ -232,7 +232,7 @@ print(f"{r['answer']} ({r['consistency']:.0%} agreement, confident={r['confident
 
 ```python
 # pip install ragas>=0.2 openai>=1.60
-# âš ï¸ Last tested: 2026-04 | Requires: ragas>=0.2, OPENAI_API_KEY
+# ⚠️ Last tested: 2026-04 | Requires: ragas>=0.2, OPENAI_API_KEY
 
 from ragas import evaluate
 from ragas.metrics import faithfulness, answer_relevancy
@@ -294,7 +294,7 @@ print(result)
 | Failure                      | Symptoms                                             | Root Cause                             | Mitigation                                                          |
 | ---------------------------- | ---------------------------------------------------- | -------------------------------------- | ------------------------------------------------------------------- |
 | **False positive refusals**  | System flags accurate responses as hallucinations    | Detection threshold too aggressive     | Calibrate thresholds on domain data, multi-method consensus         |
-| **Confident hallucinations** | Model hallucinates with high confidence scores       | Confidence â‰  correctness for LLMs      | Retrieval grounding, self-consistency checks, citation verification |
+| **Confident hallucinations** | Model hallucinates with high confidence scores       | Confidence ≠ correctness for LLMs      | Retrieval grounding, self-consistency checks, citation verification |
 | **Detection latency**        | Real-time hallucination check adds 2-5s per response | Detection method too compute-intensive | Lightweight pre-filter, async verification, batch checking          |
 | **Judge model hallucination** | LLM-as-judge marks correct answers as hallucinated  | Judge model itself is not grounded     | Provide evidence to the judge; ensemble multiple judges             |
 | **Domain drift**             | Detection accuracy degrades on new document types    | Detector calibrated on different corpus | Domain-specific threshold calibration, periodic re-evaluation      |
@@ -307,9 +307,9 @@ print(result)
 
 | Type       | Resource                                                                      | Why                                                    |
 | ---------- | ----------------------------------------------------------------------------- | ------------------------------------------------------ |
-| ðŸ“„ Paper    | [Min et al. "FActScore" (2023)](https://arxiv.org/abs/2305.14251)             | Fine-grained factuality scoring for LLM outputs        |
-| ðŸ“˜ Book     | "AI Engineering" by Chip Huyen (2025), Ch 4                                   | Hallucination detection as part of evaluation strategy |
-| ðŸ”§ Hands-on | [Vectara HHEM](https://huggingface.co/vectara/hallucination_evaluation_model) | Open-source hallucination evaluation model             |
+| 📄 Paper    | [Min et al. "FActScore" (2023)](https://arxiv.org/abs/2305.14251)             | Fine-grained factuality scoring for LLM outputs        |
+| 📘 Book     | "AI Engineering" by Chip Huyen (2025), Ch 4                                   | Hallucination detection as part of evaluation strategy |
+| 🔧 Hands-on | [Vectara HHEM](https://huggingface.co/vectara/hallucination_evaluation_model) | Open-source hallucination evaluation model             |
 
 ## ★ Sources
 - SelfCheckGPT paper

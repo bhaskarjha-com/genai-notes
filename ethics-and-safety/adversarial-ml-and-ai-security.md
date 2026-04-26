@@ -162,7 +162,7 @@ tools:
 
 ```python
 # pip install openai>=1.0
-# âš ï¸ Last tested: 2026-04 | Requires: openai>=1.0
+# ⚠️ Last tested: 2026-04 | Requires: openai>=1.0
 
 import re
 from openai import OpenAI
@@ -243,16 +243,16 @@ print(detect_injection("What's the weather in Paris?"))
 
 | Type | Resource | Why |
 |------|----------|-----|
-| ðŸ”§ Hands-on | [OWASP Top 10 for LLMs](https://owasp.org/www-project-top-10-for-large-language-model-applications/) | The definitive security checklist for LLM applications |
-| ðŸ“„ Paper | [Greshake et al. "Prompt Injection Attacks" (2023)](https://arxiv.org/abs/2302.12173) | First systematic study of indirect prompt injection |
-| ðŸ“˜ Book | "AI Engineering" by Chip Huyen (2025), Ch 6 (Defense) | Practical guardrails and safety patterns for production AI |
-| ðŸŽ¥ Video | [Simon Willison â€” Prompt Injection Talks](https://simonwillison.net/) | Best practical coverage of prompt injection risks and defenses |
+| 🔧 Hands-on | [OWASP Top 10 for LLMs](https://owasp.org/www-project-top-10-for-large-language-model-applications/) | The definitive security checklist for LLM applications |
+| 📄 Paper | [Greshake et al. "Prompt Injection Attacks" (2023)](https://arxiv.org/abs/2302.12173) | First systematic study of indirect prompt injection |
+| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 6 (Defense) | Practical guardrails and safety patterns for production AI |
+| 🎥 Video | [Simon Willison — Prompt Injection Talks](https://simonwillison.net/) | Best practical coverage of prompt injection risks and defenses |
 
 ---
 
 ## ★ Sources
 
-- OWASP GenAI Security Project â€” https://owasp.org/www-project-top-10-for-large-language-model-applications/
-- NIST AI Risk Management Framework â€” https://www.nist.gov/artificial-intelligence/ai-risk-management-framework
+- OWASP GenAI Security Project — https://owasp.org/www-project-top-10-for-large-language-model-applications/
+- NIST AI Risk Management Framework — https://www.nist.gov/artificial-intelligence/ai-risk-management-framework
 - Greshake et al. "Not what you've signed up for" (2023)
 - [AI Regulation for Builders](./ai-regulation.md)

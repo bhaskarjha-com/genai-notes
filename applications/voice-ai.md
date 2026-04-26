@@ -8,14 +8,14 @@ status: published
 last_verified: 2026-04
 parent: "../genai.md"
 related: ["../multimodal/multimodal-ai.md", "../agents/ai-agents.md", "../agents/agentic-protocols.md", "conversational-ai.md"]
-source: "Multiple â€” see Sources"
+source: "Multiple — see Sources"
 created: 2026-03-22
 updated: 2026-04-12
 ---
 
 # Voice AI & Speech
 
-> ✨ **Bit**: In 2024, talking to AI felt like talking to Siri â€” robotic and frustrating. By 2026, voice AI agents do customer support calls, conduct job interviews, and have natural conversations with sub-300ms latency. The interface is disappearing â€” you just talk.
+> ✨ **Bit**: In 2024, talking to AI felt like talking to Siri — robotic and frustrating. By 2026, voice AI agents do customer support calls, conduct job interviews, and have natural conversations with sub-300ms latency. The interface is disappearing — you just talk.
 
 ---
 
@@ -31,7 +31,7 @@ updated: 2026-04-12
 
 ### Definition
 
-- **STT (Speech-to-Text)**: Converting spoken audio to text (also called ASR â€” Automatic Speech Recognition)
+- **STT (Speech-to-Text)**: Converting spoken audio to text (also called ASR — Automatic Speech Recognition)
 - **TTS (Text-to-Speech)**: Converting text to natural-sounding audio
 - **Voice Agent**: An AI agent that converses in real-time via voice, handling turn-taking, interruptions, and context
 
@@ -49,26 +49,26 @@ Last verified for provider and product examples in this note: 2026-04.
 
 ```
 TRADITIONAL PIPELINE (cascaded):
-  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”    â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”    â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”
-  â”‚  STT   â”‚â”€â”€â”€â–¶â”‚   LLM   â”‚â”€â”€â”€â–¶â”‚  TTS   â”‚
-  â”‚(Whisperâ”‚    â”‚(GPT-5.4)â”‚    â”‚(ElevenLabs)
-  â”‚ V4)   â”‚    â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜    â””â”€â”€â”€â”€â”€â”€â”€â”€â”˜
-  â””â”€â”€â”€â”€â”€â”€â”€â”€â”˜    â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜    â””â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+  ┌────────┐    ┌─────────┐    ┌────────┐
+  │  STT   │───▶│   LLM   │───▶│  TTS   │
+  │(Whisper│    │(GPT-5.4)│    │(ElevenLabs)
+  │ V4)   │    └─────────┘    └────────┘
+  └────────┘    └─────────┘    └────────┘
   Audio → Text → Text → Audio
 
   Latency: STT(300ms) + LLM(500ms) + TTS(200ms) = ~1000ms
-  âŒ Loses tone, emotion, context from audio
-  âŒ Error compounds across stages
+  ❌ Loses tone, emotion, context from audio
+  ❌ Error compounds across stages
 
 MODERN END-TO-END (speech-to-speech):
-  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-  â”‚  MULTIMODAL MODEL                â”‚
-  â”‚  (GPT-5.4, Gemini 3.1 Live)      â”‚
-  â”‚                                  â”‚
-  â”‚  Audio IN â”€â”€â”€â”€â”€â”€â–¶ Audio OUT     â”‚
-  â”‚  (understands tone, emotion,    â”‚
-  â”‚   generates expressive speech)  â”‚
-  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+  ┌──────────────────────────────────┐
+  │  MULTIMODAL MODEL                │
+  │  (GPT-5.4, Gemini 3.1 Live)      │
+  │                                  │
+  │  Audio IN ──────▶ Audio OUT     │
+  │  (understands tone, emotion,    │
+  │   generates expressive speech)  │
+  └──────────────────────────────────┘
 
   Latency: ~250-400ms (one model, no pipeline)
   ✅ Preserves audio context
@@ -88,11 +88,11 @@ MODERN END-TO-END (speech-to-speech):
 
 ```
 STT KEY CONCEPTS:
-  WER (Word Error Rate) â€” lower is better, top models < 5%
-  Diarization â€” who said what ("Speaker 1: ... Speaker 2: ...")
-  VAD (Voice Activity Detection) â€” detect when someone is speaking
-  Streaming vs Batch â€” real-time transcription vs file processing
-  Code-switching â€” handling mid-sentence language switches
+  WER (Word Error Rate) — lower is better, top models < 5%
+  Diarization — who said what ("Speaker 1: ... Speaker 2: ...")
+  VAD (Voice Activity Detection) — detect when someone is speaking
+  Streaming vs Batch — real-time transcription vs file processing
+  Code-switching — handling mid-sentence language switches
 ```
 
 ### TTS (Text-to-Speech) Models
@@ -108,12 +108,12 @@ STT KEY CONCEPTS:
 
 ```
 TTS KEY CONCEPTS:
-  Voice cloning â€” reproduce a specific voice from seconds of audio
-  Emotional tags â€” <happy>, <serious>, <whisper> control
-  SSML â€” Speech Synthesis Markup Language (pauses, emphasis)
-  Prosody â€” rhythm, stress, intonation patterns
-  Streaming â€” start playing audio before the full response is ready
-  Zero-shot â€” generate believable voice from minutes of sample
+  Voice cloning — reproduce a specific voice from seconds of audio
+  Emotional tags — <happy>, <serious>, <whisper> control
+  SSML — Speech Synthesis Markup Language (pauses, emphasis)
+  Prosody — rhythm, stress, intonation patterns
+  Streaming — start playing audio before the full response is ready
+  Zero-shot — generate believable voice from minutes of sample
 ```
 
 ### Real-Time Voice APIs
@@ -137,22 +137,22 @@ GOOGLE GEMINI 3.1 LIVE:
   - 3-tier thinking for adaptive complexity
 
 VOICE AGENT ARCHITECTURE:
-  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-  â”‚  VAD: Is there speech? Start listening.        â”‚
-  â”‚       â”‚                                       â”‚
-  â”‚       â–¼                                       â”‚
-  â”‚  STT/End-to-end: Transcribe or process audio  â”‚
-  â”‚       â”‚                                       â”‚
-  â”‚       â–¼                                       â”‚
-  â”‚  LLM: Understand intent, generate response    â”‚
-  â”‚       â”‚ â† Tools: calendar, CRM, database      â”‚
-  â”‚       â–¼                                       â”‚
-  â”‚  TTS: Generate natural speech response         â”‚
-  â”‚       â”‚                                       â”‚
-  â”‚       â–¼                                       â”‚
-  â”‚  Turn management: Handle interruptions,        â”‚
-  â”‚  silence, back-channeling ("uh-huh")          â”‚
-  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+  ┌───────────────────────────────────────────────┐
+  │  VAD: Is there speech? Start listening.        │
+  │       │                                       │
+  │       ▼                                       │
+  │  STT/End-to-end: Transcribe or process audio  │
+  │       │                                       │
+  │       ▼                                       │
+  │  LLM: Understand intent, generate response    │
+  │       │ ← Tools: calendar, CRM, database      │
+  │       ▼                                       │
+  │  TTS: Generate natural speech response         │
+  │       │                                       │
+  │       ▼                                       │
+  │  Turn management: Handle interruptions,        │
+  │  silence, back-channeling ("uh-huh")          │
+  └───────────────────────────────────────────────┘
 ```
 
 ### Applications (2026)
@@ -192,18 +192,18 @@ KEY METRICS:
 
 ## ○ Gotchas & Common Mistakes
 
-- âš ï¸ **Cascaded latency**: STT + LLM + TTS adds up. Use end-to-end models (Realtime API) for conversational applications.
-- âš ï¸ **Turn-taking is HARD**: Detecting when the user is done speaking vs pausing to think is a major UX challenge. VAD alone isn't enough.
-- âš ï¸ **Voice cloning ethics**: Cloning someone's voice without consent is illegal in many jurisdictions. Always get permission.
-- âš ï¸ **Accents and noise**: STT accuracy drops significantly with heavy accents, background noise, or domain jargon. Test with real users.
-- âš ï¸ **Cost**: Voice tokens are more expensive than text tokens. Budget carefully for voice applications.
+- ⚠️ **Cascaded latency**: STT + LLM + TTS adds up. Use end-to-end models (Realtime API) for conversational applications.
+- ⚠️ **Turn-taking is HARD**: Detecting when the user is done speaking vs pausing to think is a major UX challenge. VAD alone isn't enough.
+- ⚠️ **Voice cloning ethics**: Cloning someone's voice without consent is illegal in many jurisdictions. Always get permission.
+- ⚠️ **Accents and noise**: STT accuracy drops significantly with heavy accents, background noise, or domain jargon. Test with real users.
+- ⚠️ **Cost**: Voice tokens are more expensive than text tokens. Budget carefully for voice applications.
 
 ---
 
 ## ○ Interview Angles
 
 - **Q**: How would you build a real-time voice AI agent?
-- **A**: Option 1 (simplest): OpenAI Realtime API â€” WebSocket-based, speech-to-speech, handles turn-taking and interruptions natively. Option 2 (customizable): Pipeline of Deepgram STT → LLM (with function calling for tools) → ElevenLabs TTS, with a VAD layer for turn management. Option 3 (Google ecosystem): ADK + Gemini Live for multi-agent voice systems. Key challenges: latency optimization, interruption handling, and graceful error recovery.
+- **A**: Option 1 (simplest): OpenAI Realtime API — WebSocket-based, speech-to-speech, handles turn-taking and interruptions natively. Option 2 (customizable): Pipeline of Deepgram STT → LLM (with function calling for tools) → ElevenLabs TTS, with a VAD layer for turn management. Option 3 (Google ecosystem): ADK + Gemini Live for multi-agent voice systems. Key challenges: latency optimization, interruption handling, and graceful error recovery.
 
 ---
 
@@ -213,7 +213,7 @@ KEY METRICS:
 
 ```python
 # pip install openai>=1.60
-# âš ï¸ Last tested: 2026-04 | Requires: openai>=1.60, OPENAI_API_KEY, a .wav/.mp3 file
+# ⚠️ Last tested: 2026-04 | Requires: openai>=1.60, OPENAI_API_KEY, a .wav/.mp3 file
 from openai import OpenAI
 from pathlib import Path
 
@@ -256,7 +256,7 @@ def voice_pipeline(audio_file: str, system_prompt: str = "You are a helpful voic
 
 # Streaming TTS (lower latency for real-time)
 def streaming_tts(text: str, output_path: str = "stream_output.mp3") -> None:
-    """Stream TTS bytes as they arrive â€” good for low-latency voice assistants."""
+    """Stream TTS bytes as they arrive — good for low-latency voice assistants."""
     with client.audio.speech.with_streaming_response.create(
         model="tts-1", voice="nova", input=text
     ) as resp:
@@ -305,14 +305,14 @@ def streaming_tts(text: str, output_path: str = "stream_output.mp3") -> None:
 
 | Type       | Resource                                                            | Why                                                   |
 | ---------- | ------------------------------------------------------------------- | ----------------------------------------------------- |
-| ðŸ”§ Hands-on | [OpenAI Audio API](https://platform.openai.com/docs/guides/audio)   | Production speech-to-text and text-to-speech          |
-| ðŸ”§ Hands-on | [ElevenLabs Documentation](https://elevenlabs.io/docs)              | State-of-the-art voice synthesis                      |
-| ðŸ“„ Paper    | [Radford et al. "Whisper" (2022)](https://arxiv.org/abs/2212.04356) | Robust speech recognition via large-scale supervision |
+| 🔧 Hands-on | [OpenAI Audio API](https://platform.openai.com/docs/guides/audio)   | Production speech-to-text and text-to-speech          |
+| 🔧 Hands-on | [ElevenLabs Documentation](https://elevenlabs.io/docs)              | State-of-the-art voice synthesis                      |
+| 📄 Paper    | [Radford et al. "Whisper" (2022)](https://arxiv.org/abs/2212.04356) | Robust speech recognition via large-scale supervision |
 
 ## ★ Sources
 
-- OpenAI Realtime API â€” https://platform.openai.com/docs/guides/realtime
-- Whisper â€” https://github.com/openai/whisper
-- ElevenLabs â€” https://elevenlabs.io/docs
-- Deepgram â€” https://deepgram.com/docs
+- OpenAI Realtime API — https://platform.openai.com/docs/guides/realtime
+- Whisper — https://github.com/openai/whisper
+- ElevenLabs — https://elevenlabs.io/docs
+- Deepgram — https://deepgram.com/docs
 - deeplearning.ai, "Building Live Voice Agents with Google's ADK" (2025)

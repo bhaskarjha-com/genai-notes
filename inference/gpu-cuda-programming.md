@@ -186,7 +186,7 @@ Ask:
 
 ```python
 # pip install torch>=2.0
-# âš ï¸ Last tested: 2026-04 | Requires: torch>=2.0
+# ⚠️ Last tested: 2026-04 | Requires: torch>=2.0
 
 import torch
 
@@ -219,7 +219,7 @@ gpu_memory_report()  # After
 
 # Expected output:
 # GPU: NVIDIA A100 80GB
-# Allocated: 15.20 GB  (8B params Ã— 2 bytes)
+# Allocated: 15.20 GB  (8B params × 2 bytes)
 # Reserved:  16.00 GB
 # Peak:      15.20 GB
 # Total:     80.00 GB
@@ -248,7 +248,7 @@ gpu_memory_report()  # After
 **Steps**:
 1. Calculate memory for a 7B model in fp32, fp16, int8, and int4
 2. With the model loaded in bf16, estimate remaining memory for KV-cache
-3. Calculate max batch size Ã— sequence length that fits in remaining memory
+3. Calculate max batch size × sequence length that fits in remaining memory
 4. Compare your estimates with actual usage using the profiling code above
 **Expected Output**: Memory estimation table matching real GPU measurements within 10%
 
@@ -258,17 +258,17 @@ gpu_memory_report()  # After
 
 | Type | Resource | Why |
 |------|----------|-----|
-| ðŸŽ“ Course | [NVIDIA CUDA Programming Guide](https://docs.nvidia.com/cuda/cuda-c-programming-guide/) | Official reference for CUDA concepts and programming model |
-| ðŸŽ“ Course | [Stanford CS149: Parallel Computing](http://cs149.stanford.edu/) | Deep dive into GPU parallelism, memory hierarchy, and scheduling |
-| ðŸ“„ Paper | [Dao et al. "FlashAttention" (2022)](https://arxiv.org/abs/2205.14135) | Shows how IO-aware kernel design transforms attention performance |
-| ðŸ”§ Hands-on | [NVIDIA Nsight Systems / Compute](https://developer.nvidia.com/nsight-systems) | Essential GPU profiling tools for identifying bottlenecks |
-| ðŸŽ¥ Video | [Jeremy Howard â€” "CUDA Programming" (fast.ai)](https://course.fast.ai/) | Practical introduction to CUDA for ML engineers |
+| 🎓 Course | [NVIDIA CUDA Programming Guide](https://docs.nvidia.com/cuda/cuda-c-programming-guide/) | Official reference for CUDA concepts and programming model |
+| 🎓 Course | [Stanford CS149: Parallel Computing](http://cs149.stanford.edu/) | Deep dive into GPU parallelism, memory hierarchy, and scheduling |
+| 📄 Paper | [Dao et al. "FlashAttention" (2022)](https://arxiv.org/abs/2205.14135) | Shows how IO-aware kernel design transforms attention performance |
+| 🔧 Hands-on | [NVIDIA Nsight Systems / Compute](https://developer.nvidia.com/nsight-systems) | Essential GPU profiling tools for identifying bottlenecks |
+| 🎥 Video | [Jeremy Howard — "CUDA Programming" (fast.ai)](https://course.fast.ai/) | Practical introduction to CUDA for ML engineers |
 
 ---
 
 ## ★ Sources
 
-- NVIDIA CUDA Programming Guide â€” https://docs.nvidia.com/cuda/
-- NVIDIA Nsight Documentation â€” https://developer.nvidia.com/nsight-systems
+- NVIDIA CUDA Programming Guide — https://docs.nvidia.com/cuda/
+- NVIDIA Nsight Documentation — https://developer.nvidia.com/nsight-systems
 - Dao et al. "FlashAttention: Fast and Memory-Efficient Exact Attention" (2022)
 - [Inference Optimization](./inference-optimization.md)

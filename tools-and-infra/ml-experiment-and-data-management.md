@@ -8,14 +8,14 @@ status: published
 last_verified: 2026-04
 parent: "tools-overview.md"
 related: ["cloud-ml-services.md", "../production/cicd-for-ml.md", "../production/llmops.md", "../production/monitoring-observability.md"]
-source: "Multiple â€” see Sources"
+source: "Multiple — see Sources"
 created: 2026-04-14
 updated: 2026-04-14
 ---
 
 # ML Experiment & Data Management
 
-> ✨ **Bit**: If you can't answer "which config and data produced this result?" you're not experimenting â€” you're guessing. Experiment tracking and data versioning are two halves of the reproducibility story. Code versioning without data versioning is only half the picture.
+> ✨ **Bit**: If you can't answer "which config and data produced this result?" you're not experimenting — you're guessing. Experiment tracking and data versioning are two halves of the reproducibility story. Code versioning without data versioning is only half the picture.
 
 ---
 
@@ -23,7 +23,7 @@ updated: 2026-04-14
 
 - **What**: The practices and tools for recording ML runs (parameters, metrics, artifacts) and tracking dataset changes (versions, lineage, snapshots)
 - **Why**: ML behavior changes when either code OR data changes. Without tracking both, reproducing results, debugging regressions, and governing models is impossible.
-- **Key point**: Track not just the best run, but enough context to explain why it was better â€” including the exact data version behind it.
+- **Key point**: Track not just the best run, but enough context to explain why it was better — including the exact data version behind it.
 
 ---
 
@@ -91,7 +91,7 @@ GenAI teams must track more artifacts than classical ML:
 | **MLflow** | ✅ | Partial (model registry) | Open-source, self-hosted |
 | **Weights & Biases** | ✅ | Partial (artifacts) | Team collaboration, visualization |
 | **DVC** | Partial | ✅ | Git-based data versioning |
-| **LakeFS** | âŒ | ✅ | Data lake versioning at scale |
+| **LakeFS** | ❌ | ✅ | Data lake versioning at scale |
 | **Neptune.ai** | ✅ | Partial | Metadata-rich experiment tracking |
 | **Vertex AI / SageMaker** | ✅ | ✅ | Integrated cloud ML platform |
 
@@ -112,7 +112,7 @@ GenAI teams must track more artifacts than classical ML:
 
 ```python
 # pip install mlflow>=2.10
-# âš ï¸ Last tested: 2026-04 | Requires: mlflow>=2.10
+# ⚠️ Last tested: 2026-04 | Requires: mlflow>=2.10
 
 import mlflow
 
@@ -160,7 +160,7 @@ else:
 
 ```bash
 # Install: pip install dvc[s3]
-# âš ï¸ Last tested: 2026-04
+# ⚠️ Last tested: 2026-04
 
 # Initialize DVC in your git repo
 dvc init
@@ -187,20 +187,20 @@ dvc pull               # pull the exact data version used in that commit
 EXPERIMENT TRACKING CHECKLIST:
 
   Every run MUST record:
-  âœ“ Parameters (config, hyperparams, prompt version)
-  âœ“ Metrics (quality, cost, latency)
-  âœ“ Data version (dataset ID, split, snapshot hash)
-  âœ“ Code version (git SHA)
-  âœ“ Environment (dependencies, hardware)
-  âœ“ Artifacts (model, outputs, plots)
+  ✓ Parameters (config, hyperparams, prompt version)
+  ✓ Metrics (quality, cost, latency)
+  ✓ Data version (dataset ID, split, snapshot hash)
+  ✓ Code version (git SHA)
+  ✓ Environment (dependencies, hardware)
+  ✓ Artifacts (model, outputs, plots)
 
 DATA VERSIONING CHECKLIST:
 
-  âœ“ Assign stable dataset identifiers
-  âœ“ Version evaluation sets just like code
-  âœ“ Record exact snapshot used by every important run
-  âœ“ Keep schema and provenance metadata with the data
-  âœ“ Make rollback and replay possible
+  ✓ Assign stable dataset identifiers
+  ✓ Version evaluation sets just like code
+  ✓ Record exact snapshot used by every important run
+  ✓ Keep schema and provenance metadata with the data
+  ✓ Make rollback and replay possible
 ```
 
 ---
@@ -219,7 +219,7 @@ DATA VERSIONING CHECKLIST:
 ## ○ Gotchas
 
 - Tracking only the best run hides important learning
-- Manual metadata entry decays quickly â€” automate everything
+- Manual metadata entry decays quickly — automate everything
 - A dashboard without artifact or data lineage is incomplete
 - Naming folders `final_v2_real` is not data versioning
 - Eval datasets are often forgotten even though they're critical
@@ -251,11 +251,11 @@ DATA VERSIONING CHECKLIST:
 
 | Type | Resource | Why |
 |------|----------|-----|
-| ðŸ”§ Hands-on | [Weights & Biases Documentation](https://docs.wandb.ai/) | Industry-standard experiment tracking platform |
-| ðŸ”§ Hands-on | [MLflow Documentation](https://mlflow.org/docs/) | Open-source experiment tracking and model registry |
-| ðŸ”§ Hands-on | [DVC Documentation](https://dvc.org/doc) | Git-based data and model versioning |
-| ðŸ”§ Hands-on | [LakeFS Documentation](https://docs.lakefs.io/) | Git-like versioning for data lakes |
-| ðŸ“˜ Book | "Designing Machine Learning Systems" by Chip Huyen (2022), Ch 4, 6 | Data management and experiment tracking in ML workflows |
+| 🔧 Hands-on | [Weights & Biases Documentation](https://docs.wandb.ai/) | Industry-standard experiment tracking platform |
+| 🔧 Hands-on | [MLflow Documentation](https://mlflow.org/docs/) | Open-source experiment tracking and model registry |
+| 🔧 Hands-on | [DVC Documentation](https://dvc.org/doc) | Git-based data and model versioning |
+| 🔧 Hands-on | [LakeFS Documentation](https://docs.lakefs.io/) | Git-like versioning for data lakes |
+| 📘 Book | "Designing Machine Learning Systems" by Chip Huyen (2022), Ch 4, 6 | Data management and experiment tracking in ML workflows |
 
 
 ---
@@ -276,8 +276,8 @@ DATA VERSIONING CHECKLIST:
 
 ## ★ Sources
 
-- MLflow Documentation â€” https://mlflow.org/docs/
-- Weights & Biases Documentation â€” https://docs.wandb.ai/
-- DVC Documentation â€” https://dvc.org/doc
-- LakeFS Documentation â€” https://docs.lakefs.io/
+- MLflow Documentation — https://mlflow.org/docs/
+- Weights & Biases Documentation — https://docs.wandb.ai/
+- DVC Documentation — https://dvc.org/doc
+- LakeFS Documentation — https://docs.lakefs.io/
 - [CI/CD for ML](../production/cicd-for-ml.md)

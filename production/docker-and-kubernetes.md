@@ -210,8 +210,8 @@ Do not adopt Kubernetes only because it feels "more production."
 ### Containerize a FastAPI LLM Service
 
 ```dockerfile
-# Dockerfile â€” production LLM API service
-# âš ï¸ Last tested: 2026-04 | Requires: Docker 24+
+# Dockerfile — production LLM API service
+# ⚠️ Last tested: 2026-04 | Requires: Docker 24+
 FROM python:3.12-slim
 
 WORKDIR /app
@@ -231,9 +231,9 @@ CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080", "--workers", 
 ```
 
 ```python
-# main.py â€” FastAPI LLM endpoint
+# main.py — FastAPI LLM endpoint
 # pip install fastapi>=0.110 uvicorn>=0.29 openai>=1.60 pydantic>=2
-# âš ï¸ Last tested: 2026-04
+# ⚠️ Last tested: 2026-04
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from openai import OpenAI, APIError
@@ -330,10 +330,10 @@ services:
 
 | Type       | Resource                                                                           | Why                                        |
 | ---------- | ---------------------------------------------------------------------------------- | ------------------------------------------ |
-| ðŸ”§ Hands-on | [Docker Official Documentation](https://docs.docker.com/)                          | Container fundamentals for ML deployment   |
-| ðŸ”§ Hands-on | [Kubernetes for ML (Kubeflow)](https://www.kubeflow.org/docs/)                     | ML-specific Kubernetes orchestration       |
-| ðŸ“˜ Book     | "Kubernetes in Action" by Luksa (2020)                                             | Comprehensive K8s reference                |
-| ðŸŽ¥ Video    | [TechWorld with Nana â€” "Docker + K8s"](https://www.youtube.com/@TechWorldwithNana) | Best beginner-friendly container tutorials |
+| 🔧 Hands-on | [Docker Official Documentation](https://docs.docker.com/)                          | Container fundamentals for ML deployment   |
+| 🔧 Hands-on | [Kubernetes for ML (Kubeflow)](https://www.kubeflow.org/docs/)                     | ML-specific Kubernetes orchestration       |
+| 📘 Book     | "Kubernetes in Action" by Luksa (2020)                                             | Comprehensive K8s reference                |
+| 🎥 Video    | [TechWorld with Nana — "Docker + K8s"](https://www.youtube.com/@TechWorldwithNana) | Best beginner-friendly container tutorials |
 
 ## ★ Sources
 - Docker documentation - https://docs.docker.com

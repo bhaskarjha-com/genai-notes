@@ -164,7 +164,7 @@ notes_to_capture:
 
 ```python
 # pip install openai>=1.60 PyPDF2>=3
-# âš ï¸ Last tested: 2026-04 | Requires: openai>=1.60, OPENAI_API_KEY, PyPDF2>=3
+# ⚠️ Last tested: 2026-04 | Requires: openai>=1.60, OPENAI_API_KEY, PyPDF2>=3
 from openai import OpenAI
 import PyPDF2, json
 
@@ -251,9 +251,9 @@ print(json.dumps(result, indent=2))
 
 | Type       | Resource                                                                      | Why                                             |
 | ---------- | ----------------------------------------------------------------------------- | ----------------------------------------------- |
-| ðŸŽ¥ Video    | [Yannic Kilcher's Paper Explanations](https://www.youtube.com/@YannicKilcher) | Best ML paper walkthroughs on YouTube           |
-| ðŸ”§ Hands-on | [Semantic Scholar](https://www.semanticscholar.org/)                          | AI-powered paper search and citation graph      |
-| ðŸ”§ Hands-on | [Papers With Code](https://paperswithcode.com/)                               | Papers linked to implementations and benchmarks |
+| 🎥 Video    | [Yannic Kilcher's Paper Explanations](https://www.youtube.com/@YannicKilcher) | Best ML paper walkthroughs on YouTube           |
+| 🔧 Hands-on | [Semantic Scholar](https://www.semanticscholar.org/)                          | AI-powered paper search and citation graph      |
+| 🔧 Hands-on | [Papers With Code](https://paperswithcode.com/)                               | Papers linked to implementations and benchmarks |
 
 ## ★ Sources
 - S. Keshav, "How to Read a Paper"

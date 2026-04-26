@@ -192,7 +192,7 @@ For agents, score more than the final text:
 
 ```python
 # pip install openai>=1.60
-# âš ï¸ Last tested: 2026-04 | Requires: openai>=1.60, OPENAI_API_KEY env var
+# ⚠️ Last tested: 2026-04 | Requires: openai>=1.60, OPENAI_API_KEY env var
 from openai import OpenAI
 import json
 
@@ -280,10 +280,10 @@ print(f"Reasoning: {result['reasoning']}")
 
 | Type       | Resource                                                                         | Why                                        |
 | ---------- | -------------------------------------------------------------------------------- | ------------------------------------------ |
-| ðŸ“˜ Book     | "AI Engineering" by Chip Huyen (2025), Ch 4 (Evaluation)                         | Best practical treatment of LLM evaluation |
-| ðŸ”§ Hands-on | [RAGAS Documentation](https://docs.ragas.io/)                                    | Framework for RAG evaluation metrics       |
-| ðŸ“„ Paper    | [Zheng et al. "Judging LLM-as-a-Judge" (2023)](https://arxiv.org/abs/2306.05685) | When and how to use LLMs to evaluate LLMs  |
-| ðŸ”§ Hands-on | [DeepEval Documentation](https://docs.confident-ai.com/)                         | Production LLM evaluation framework        |
+| 📘 Book     | "AI Engineering" by Chip Huyen (2025), Ch 4 (Evaluation)                         | Best practical treatment of LLM evaluation |
+| 🔧 Hands-on | [RAGAS Documentation](https://docs.ragas.io/)                                    | Framework for RAG evaluation metrics       |
+| 📄 Paper    | [Zheng et al. "Judging LLM-as-a-Judge" (2023)](https://arxiv.org/abs/2306.05685) | When and how to use LLMs to evaluate LLMs  |
+| 🔧 Hands-on | [DeepEval Documentation](https://docs.confident-ai.com/)                         | Production LLM evaluation framework        |
 
 ## ★ Sources
 - RAGAS documentation

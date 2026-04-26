@@ -8,14 +8,14 @@ status: published
 last_verified: 2026-04
 parent: "../genai.md"
 related: ["rag.md", "../agents/ai-agents.md", "context-engineering.md", "../tools-and-infra/vector-databases.md"]
-source: "Multiple â€” see Sources"
+source: "Multiple — see Sources"
 created: 2026-03-22
 updated: 2026-04-11
 ---
 
 # Graph RAG & Advanced Retrieval
 
-> ✨ **Bit**: Standard RAG is like searching a library by keyword â€” you find relevant pages but miss the connections. Graph RAG is like having a librarian who understands that "Einstein worked at Princeton, Princeton is in New Jersey, New Jersey passed X law" â€” it reasons across RELATIONSHIPS, not just similarity.
+> ✨ **Bit**: Standard RAG is like searching a library by keyword — you find relevant pages but miss the connections. Graph RAG is like having a librarian who understands that "Einstein worked at Princeton, Princeton is in New Jersey, New Jersey passed X law" — it reasons across RELATIONSHIPS, not just similarity.
 
 ---
 
@@ -57,8 +57,8 @@ VECTOR RAG:
   2. Get chunks about "attrition" and "hiring"
   3. Chunks are from DIFFERENT docs, no connection
   4. LLM tries to combine → often wrong or hallucinated
-  âŒ Can't aggregate across entities
-  âŒ Can't traverse relationships
+  ❌ Can't aggregate across entities
+  ❌ Can't traverse relationships
 
 GRAPH RAG:
   1. Knowledge graph has: Employee → Department → HireDate → Status
@@ -75,57 +75,57 @@ VECTOR RAG                           GRAPH RAG
 (similarity search)                  (relationship traversal)
 
   Docs → Chunks → Embeddings         Docs → Entities → Relationships
-     â†“                                   â†“
+     ↓                                   ↓
   Query → Similar chunks              Query → Graph traversal
-     â†“                                   â†“
+     ↓                                   ↓
   "Find texts about X"               "Find entities connected to X
                                        via relationship Y"
 
   ✅ Simple to set up                ✅ Multi-hop reasoning
   ✅ Works for direct Q&A            ✅ Aggregation queries
   ✅ Fast retrieval                  ✅ Structured/verified answers
-  âŒ No relationship awareness       âŒ Expensive graph construction
-  âŒ Fails at aggregation            âŒ More complex pipeline
-  âŒ Multi-hop failures              âŒ Needs entity extraction
+  ❌ No relationship awareness       ❌ Expensive graph construction
+  ❌ Fails at aggregation            ❌ More complex pipeline
+  ❌ Multi-hop failures              ❌ Needs entity extraction
 ```
 
 ### How Graph RAG Works (Microsoft GraphRAG)
 
 ```
 INDEXING PHASE:
-  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-  â”‚  1. ENTITY EXTRACTION                        â”‚
-  â”‚     LLM reads documents, extracts:            â”‚
-  â”‚     - Entities: "Albert Einstein", "Princeton"â”‚
-  â”‚     - Relationships: "worked at", "located in"â”‚
-  â”‚                                              â”‚
-  â”‚  2. BUILD KNOWLEDGE GRAPH                     â”‚
-  â”‚     Entities = nodes, Relationships = edges   â”‚
-  â”‚     [Einstein]â”€â”€works_atâ”€â”€â–¶[Princeton]        â”‚
-  â”‚     [Princeton]â”€â”€located_inâ”€â”€â–¶[New Jersey]    â”‚
-  â”‚                                              â”‚
-  â”‚  3. COMMUNITY DETECTION                       â”‚
-  â”‚     Cluster related entities into communities â”‚
-  â”‚     Community: "Princeton Academic Network"   â”‚
-  â”‚                                              â”‚
-  â”‚  4. COMMUNITY SUMMARIES                       â”‚
-  â”‚     LLM summarizes each community             â”‚
-  â”‚     "Princeton University, founded in 1746,   â”‚
-  â”‚      notable faculty include Einstein..."     â”‚
-  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+  ┌──────────────────────────────────────────────┐
+  │  1. ENTITY EXTRACTION                        │
+  │     LLM reads documents, extracts:            │
+  │     - Entities: "Albert Einstein", "Princeton"│
+  │     - Relationships: "worked at", "located in"│
+  │                                              │
+  │  2. BUILD KNOWLEDGE GRAPH                     │
+  │     Entities = nodes, Relationships = edges   │
+  │     [Einstein]──works_at──▶[Princeton]        │
+  │     [Princeton]──located_in──▶[New Jersey]    │
+  │                                              │
+  │  3. COMMUNITY DETECTION                       │
+  │     Cluster related entities into communities │
+  │     Community: "Princeton Academic Network"   │
+  │                                              │
+  │  4. COMMUNITY SUMMARIES                       │
+  │     LLM summarizes each community             │
+  │     "Princeton University, founded in 1746,   │
+  │      notable faculty include Einstein..."     │
+  └──────────────────────────────────────────────┘
 
 QUERY PHASE:
-  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-  â”‚  LOCAL SEARCH (specific questions):           â”‚
-  â”‚    Entity lookup → traverse related entities  â”‚
-  â”‚    → gather context → LLM generates answer   â”‚
-  â”‚                                              â”‚
-  â”‚  GLOBAL SEARCH (thematic questions):          â”‚
-  â”‚    Search all community summaries             â”‚
-  â”‚    → map: each community answers partially    â”‚
-  â”‚    → reduce: combine into final answer        â”‚
-  â”‚    "What are the main themes in this dataset?"â”‚
-  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+  ┌──────────────────────────────────────────────┐
+  │  LOCAL SEARCH (specific questions):           │
+  │    Entity lookup → traverse related entities  │
+  │    → gather context → LLM generates answer   │
+  │                                              │
+  │  GLOBAL SEARCH (thematic questions):          │
+  │    Search all community summaries             │
+  │    → map: each community answers partially    │
+  │    → reduce: combine into final answer        │
+  │    "What are the main themes in this dataset?"│
+  └──────────────────────────────────────────────┘
 ```
 
 ### Agentic RAG (2025-2026 Standard)
@@ -139,12 +139,12 @@ AGENTIC RAG = RAG + Agent autonomy
   Agentic RAG:
     Query → Agent DECIDES:
       "What do I need to answer this?"
-      â”œâ”€â”€ Vector search? (semantic similarity)
-      â”œâ”€â”€ Graph query? (relationship traversal)
-      â”œâ”€â”€ SQL query? (structured data)
-      â”œâ”€â”€ Web search? (real-time data)
-      â”œâ”€â”€ Rewrite query? (ambiguous question)
-      â””â”€â”€ Ask for clarification? (insufficient info)
+      ├── Vector search? (semantic similarity)
+      ├── Graph query? (relationship traversal)
+      ├── SQL query? (structured data)
+      ├── Web search? (real-time data)
+      ├── Rewrite query? (ambiguous question)
+      └── Ask for clarification? (insufficient info)
 
     Agent can:
       - Self-correct: "These results aren't relevant, let me refine"
@@ -152,34 +152,34 @@ AGENTIC RAG = RAG + Agent autonomy
       - Verify: "Let me cross-check this claim"
       - Route: Different retrieval strategies for different sub-questions
 
-  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-  â”‚  AGENTIC RAG ARCHITECTURE                      â”‚
-  â”‚                                                â”‚
-  â”‚  User Query                                    â”‚
-  â”‚      â”‚                                         â”‚
-  â”‚      â–¼                                         â”‚
-  â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”                                â”‚
-  â”‚  â”‚   ROUTER    â”‚ â† "What type of question?"    â”‚
-  â”‚  â”‚   AGENT     â”‚                                â”‚
-  â”‚  â””â”€â”€â”¬â”€â”€â”€â”¬â”€â”€â”€â”¬â”€â”€â”˜                               â”‚
-  â”‚     â”‚   â”‚   â”‚                                  â”‚
-  â”‚  â”Œâ”€â”€â–¼â” â”Œâ–¼â”€â”€â” â”Œâ–¼â”€â”€â”€â”€â”€â”€â”                        â”‚
-  â”‚  â”‚Vecâ”‚ â”‚KG â”‚ â”‚SQL/APIâ”‚                         â”‚
-  â”‚  â”‚DB â”‚ â”‚   â”‚ â”‚       â”‚                         â”‚
-  â”‚  â””â”€â”€â”¬â”˜ â””â”¬â”€â”€â”˜ â””â”¬â”€â”€â”€â”€â”€â”€â”˜                        â”‚
-  â”‚     â”‚   â”‚     â”‚                                â”‚
-  â”‚     â–¼   â–¼     â–¼                                â”‚
-  â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”                            â”‚
-  â”‚  â”‚  SYNTHESIZER   â”‚ â† Combine, verify, reason  â”‚
-  â”‚  â”‚  AGENT         â”‚                            â”‚
-  â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”˜                            â”‚
-  â”‚          â–¼                                     â”‚
-  â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”                            â”‚
-  â”‚  â”‚  SELF-CHECK    â”‚ â† "Is my answer grounded?" â”‚
-  â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”˜                            â”‚
-  â”‚          â–¼                                     â”‚
-  â”‚     Final Answer                               â”‚
-  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+  ┌────────────────────────────────────────────────┐
+  │  AGENTIC RAG ARCHITECTURE                      │
+  │                                                │
+  │  User Query                                    │
+  │      │                                         │
+  │      ▼                                         │
+  │  ┌────────────┐                                │
+  │  │   ROUTER    │ ← "What type of question?"    │
+  │  │   AGENT     │                                │
+  │  └──┬───┬───┬──┘                               │
+  │     │   │   │                                  │
+  │  ┌──▼┐ ┌▼──┐ ┌▼──────┐                        │
+  │  │Vec│ │KG │ │SQL/API│                         │
+  │  │DB │ │   │ │       │                         │
+  │  └──┬┘ └┬──┘ └┬──────┘                        │
+  │     │   │     │                                │
+  │     ▼   ▼     ▼                                │
+  │  ┌────────────────┐                            │
+  │  │  SYNTHESIZER   │ ← Combine, verify, reason  │
+  │  │  AGENT         │                            │
+  │  └───────┬────────┘                            │
+  │          ▼                                     │
+  │  ┌────────────────┐                            │
+  │  │  SELF-CHECK    │ ← "Is my answer grounded?" │
+  │  └───────┬────────┘                            │
+  │          ▼                                     │
+  │     Final Answer                               │
+  └────────────────────────────────────────────────┘
 ```
 
 ### When to Use What
@@ -206,11 +206,11 @@ GRAPH RAG DECISION:
   Both structured + unstructured data? → Graph + Agentic RAG
 
 KNOWLEDGE GRAPH TOOLS:
-  Neo4j          â€” industry standard graph DB
-  Amazon Neptune â€” managed graph DB (AWS)
-  Microsoft GraphRAG â€” open-source Graph RAG framework
-  LlamaIndex KG  â€” knowledge graph integration
-  Graphiti (Zep) â€” temporally-aware knowledge graphs
+  Neo4j          — industry standard graph DB
+  Amazon Neptune — managed graph DB (AWS)
+  Microsoft GraphRAG — open-source Graph RAG framework
+  LlamaIndex KG  — knowledge graph integration
+  Graphiti (Zep) — temporally-aware knowledge graphs
 ```
 
 ---
@@ -218,7 +218,7 @@ KNOWLEDGE GRAPH TOOLS:
 ## ○ Interview Angles
 
 - **Q**: What is Graph RAG and when would you use it over standard RAG?
-- **A**: Graph RAG combines knowledge graphs with RAG. Standard RAG retrieves text chunks by similarity â€” great for "what does X mean?" but fails at "how are X and Y connected?" or "summarize all instances of Z." Graph RAG extracts entities and relationships into a knowledge graph, enabling multi-hop reasoning and aggregation. Use it when: data is entity-heavy (people, organizations, events), questions require relationship traversal, or you need thematic summary across large document sets.
+- **A**: Graph RAG combines knowledge graphs with RAG. Standard RAG retrieves text chunks by similarity — great for "what does X mean?" but fails at "how are X and Y connected?" or "summarize all instances of Z." Graph RAG extracts entities and relationships into a knowledge graph, enabling multi-hop reasoning and aggregation. Use it when: data is entity-heavy (people, organizations, events), questions require relationship traversal, or you need thematic summary across large document sets.
 
 - **Q**: What is Agentic RAG?
 - **A**: Agentic RAG gives retrieval an autonomous agent that can dynamically choose retrieval strategies (vector search, graph query, SQL, web search), self-correct when results are poor, decompose complex questions into sub-queries, and verify answers before returning. It transforms RAG from a fixed pipeline into an adaptive reasoning loop. This is the emerging standard for enterprise AI in 2026.
@@ -231,7 +231,7 @@ KNOWLEDGE GRAPH TOOLS:
 
 ```python
 # pip install openai>=1.60 networkx>=3.2
-# âš ï¸ Last tested: 2026-04 | Requires: openai>=1.60, networkx>=3.2, OPENAI_API_KEY
+# ⚠️ Last tested: 2026-04 | Requires: openai>=1.60, networkx>=3.2, OPENAI_API_KEY
 from openai import OpenAI
 import networkx as nx
 import json
@@ -317,13 +317,13 @@ print(graph_rag_query("What components does RAG rely on?", entity="RAG"))
 
 | Type       | Resource                                                                      | Why                                                    |
 | ---------- | ----------------------------------------------------------------------------- | ------------------------------------------------------ |
-| ðŸ“„ Paper    | [Edge et al. "Graph RAG" (Microsoft, 2024)](https://arxiv.org/abs/2404.16130) | The paper that introduced graph-based RAG architecture |
-| ðŸ”§ Hands-on | [Microsoft GraphRAG](https://github.com/microsoft/graphrag)                   | Open-source Graph RAG implementation                   |
-| ðŸ”§ Hands-on | [Neo4j GenAI Documentation](https://neo4j.com/docs/genai/)                    | Graph database + LLM integration patterns              |
+| 📄 Paper    | [Edge et al. "Graph RAG" (Microsoft, 2024)](https://arxiv.org/abs/2404.16130) | The paper that introduced graph-based RAG architecture |
+| 🔧 Hands-on | [Microsoft GraphRAG](https://github.com/microsoft/graphrag)                   | Open-source Graph RAG implementation                   |
+| 🔧 Hands-on | [Neo4j GenAI Documentation](https://neo4j.com/docs/genai/)                    | Graph database + LLM integration patterns              |
 
 ## ★ Sources
 
 - Microsoft, "From Local to Global: A Graph RAG Approach" (2024)
-- Microsoft GraphRAG â€” https://github.com/microsoft/graphrag
+- Microsoft GraphRAG — https://github.com/microsoft/graphrag
 - LlamaIndex Knowledge Graph documentation
 - Neo4j + LLM integrations documentation

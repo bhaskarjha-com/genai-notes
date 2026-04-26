@@ -8,22 +8,22 @@ status: published
 last_verified: 2026-04
 parent: "../genai.md"
 related: ["llms-overview.md", "../foundations/transformers.md", "../techniques/prompt-engineering.md"]
-source: "Multiple â€” see Sources"
+source: "Multiple — see Sources"
 created: 2026-03-22
 updated: 2026-04-11
 ---
 
 # Reasoning Models & Test-Time Compute
 
-> ✨ **Bit**: Pre-2024: "Make the model bigger to make it smarter." Post-2024: "Make the model THINK LONGER to make it smarter." This shift â€” from scaling training compute to scaling inference compute â€” is the biggest paradigm change since the Transformer.
+> ✨ **Bit**: Pre-2024: "Make the model bigger to make it smarter." Post-2024: "Make the model THINK LONGER to make it smarter." This shift — from scaling training compute to scaling inference compute — is the biggest paradigm change since the Transformer.
 
 ---
 
 ## ★ TL;DR
 
 - **What**: LLMs that generate internal "thinking" chains before answering, trading more inference compute for dramatically better reasoning
-- **Why**: Standard LLMs fail at complex math, logic, and multi-step problems. Reasoning models solve these by "thinking step by step" internally â€” not as a prompting trick, but as a trained capability
-- **Key point**: o1/o3/DeepSeek-R1 represent a new scaling law â€” **test-time compute scaling** â€” where spending more compute at inference yields better answers, sometimes surpassing even larger standard models
+- **Why**: Standard LLMs fail at complex math, logic, and multi-step problems. Reasoning models solve these by "thinking step by step" internally — not as a prompting trick, but as a trained capability
+- **Key point**: o1/o3/DeepSeek-R1 represent a new scaling law — **test-time compute scaling** — where spending more compute at inference yields better answers, sometimes surpassing even larger standard models
 
 ---
 
@@ -48,9 +48,9 @@ Last verified for model-lineup and timeline references: 2026-04.
 
 ### Prerequisites
 
-- [Llms Overview](./llms-overview.md) â€” how standard LLMs work
-- [Prompt Engineering](../techniques/prompt-engineering.md) â€” chain-of-thought prompting
-- [Probability And Statistics](../prerequisites/probability-and-statistics.md) â€” reinforcement learning basics
+- [Llms Overview](./llms-overview.md) — how standard LLMs work
+- [Prompt Engineering](../techniques/prompt-engineering.md) — chain-of-thought prompting
+- [Probability And Statistics](../prerequisites/probability-and-statistics.md) — reinforcement learning basics
 
 ---
 
@@ -62,7 +62,7 @@ Last verified for model-lineup and timeline references: 2026-04.
 ERA 1: PRE-TRAINING SCALING (2020-2024)
   "Make the model bigger, train on more data"
 
-  Performance âˆ model_size Ã— data_size Ã— training_compute
+  Performance ∝ model_size × data_size × training_compute
 
   GPT-3 (175B) → GPT-4 (~1.8T) → GPT-5 (~1T+)
   Problem: Diminishing returns. 10x compute → ~1.5x better.
@@ -71,7 +71,7 @@ ERA 1: PRE-TRAINING SCALING (2020-2024)
 ERA 2: TEST-TIME COMPUTE SCALING (2024+)
   "Let the model think longer on hard problems"
 
-  Performance âˆ inference_compute (thinking tokens)
+  Performance ∝ inference_compute (thinking tokens)
 
   Small model + 100 thinking tokens → beats large model on reasoning
   Cost: Pay per-problem (harder problems = more tokens = more cost)
@@ -86,58 +86,58 @@ ERA 2: TEST-TIME COMPUTE SCALING (2024+)
 
 ```
 STANDARD LLM:
-  User: "What is 27 Ã— 34?"
-  Model: "918" â† Direct answer (often wrong for harder math)
+  User: "What is 27 × 34?"
+  Model: "918" ← Direct answer (often wrong for harder math)
   Tokens: ~5
 
 REASONING MODEL:
-  User: "What is 27 Ã— 34?"
+  User: "What is 27 × 34?"
 
-  [THINKING â€” hidden from user]
-  "I need to multiply 27 Ã— 34.
+  [THINKING — hidden from user]
+  "I need to multiply 27 × 34.
    Let me break this down:
-   27 Ã— 34 = 27 Ã— 30 + 27 Ã— 4
-   27 Ã— 30 = 810
-   27 Ã— 4 = 108
+   27 × 34 = 27 × 30 + 27 × 4
+   27 × 30 = 810
+   27 × 4 = 108
    810 + 108 = 918
-   Let me verify: 918 / 27 = 34 âœ“"
+   Let me verify: 918 / 27 = 34 ✓"
   [/THINKING]
 
-  Model: "918" â† Same answer, but verified
+  Model: "918" ← Same answer, but verified
   Tokens: ~80 (thinking) + 5 (answer)
 ```
 
 ### The Training Pipeline
 
 ```
-â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚         HOW REASONING MODELS ARE TRAINED             â”‚
-â”‚                                                     â”‚
-â”‚  STEP 1: Start with a pre-trained LLM              â”‚
-â”‚          (e.g., GPT-4 base, DeepSeek-V3 base)      â”‚
-â”‚                                                     â”‚
-â”‚  STEP 2: Supervised Fine-Tuning on reasoning traces â”‚
-â”‚          Human-written step-by-step solutions        â”‚
-â”‚          "Here's HOW to solve this problem"          â”‚
-â”‚                                                     â”‚
-â”‚  STEP 3: Reinforcement Learning (the key step)      â”‚
-â”‚          â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”   â”‚
-â”‚          â”‚ Model generates chain-of-thought     â”‚   â”‚
-â”‚          â”‚ → Check if final answer is correct   â”‚   â”‚
-â”‚          â”‚ → Reward correct reasoning paths     â”‚   â”‚
-â”‚          â”‚ → Penalize wrong paths               â”‚   â”‚
-â”‚          â”‚ → Model learns WHICH thinking        â”‚   â”‚
-â”‚          â”‚   strategies lead to right answers   â”‚   â”‚
-â”‚          â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜   â”‚
-â”‚          Methods: PPO, GRPO (DeepSeek)              â”‚
-â”‚                                                     â”‚
-â”‚  STEP 4: Process Reward Models (PRM)                â”‚
-â”‚          Don't just check the final answer â€”         â”‚
-â”‚          evaluate EACH STEP of reasoning.           â”‚
-â”‚          "Step 3 was wrong" → more granular signal  â”‚
-â”‚                                                     â”‚
-â”‚  Result: Model that knows WHEN and HOW to think     â”‚
-â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+┌─────────────────────────────────────────────────────┐
+│         HOW REASONING MODELS ARE TRAINED             │
+│                                                     │
+│  STEP 1: Start with a pre-trained LLM              │
+│          (e.g., GPT-4 base, DeepSeek-V3 base)      │
+│                                                     │
+│  STEP 2: Supervised Fine-Tuning on reasoning traces │
+│          Human-written step-by-step solutions        │
+│          "Here's HOW to solve this problem"          │
+│                                                     │
+│  STEP 3: Reinforcement Learning (the key step)      │
+│          ┌──────────────────────────────────────┐   │
+│          │ Model generates chain-of-thought     │   │
+│          │ → Check if final answer is correct   │   │
+│          │ → Reward correct reasoning paths     │   │
+│          │ → Penalize wrong paths               │   │
+│          │ → Model learns WHICH thinking        │   │
+│          │   strategies lead to right answers   │   │
+│          └──────────────────────────────────────┘   │
+│          Methods: PPO, GRPO (DeepSeek)              │
+│                                                     │
+│  STEP 4: Process Reward Models (PRM)                │
+│          Don't just check the final answer —         │
+│          evaluate EACH STEP of reasoning.           │
+│          "Step 3 was wrong" → more granular signal  │
+│                                                     │
+│  Result: Model that knows WHEN and HOW to think     │
+└─────────────────────────────────────────────────────┘
 ```
 
 ### Major Reasoning Models (April 2026)
@@ -156,15 +156,15 @@ REASONING MODEL:
 
 | Scenario                     | Use Standard LLM | Use Reasoning Model          |
 | ---------------------------- | ---------------- | ---------------------------- |
-| Simple Q&A, chat             | ✅ Fast, cheap    | âŒ Overkill                   |
-| Translation, summarization   | ✅                | âŒ                            |
-| Complex math problems        | âŒ Often wrong    | ✅ Step-by-step verification  |
-| Multi-step logic/planning    | âŒ                | ✅                            |
-| Code debugging (complex)     | âš ï¸ Sometimes      | ✅ Better at tracing issues   |
-| Creative writing             | ✅                | âŒ Unnecessary reasoning      |
-| PhD-level science            | âŒ                | ✅ Designed for this          |
-| Real-time chat (low latency) | ✅                | âŒ Thinking adds latency      |
-| Cost-sensitive applications  | ✅                | âš ï¸ Thinking tokens cost money |
+| Simple Q&A, chat             | ✅ Fast, cheap    | ❌ Overkill                   |
+| Translation, summarization   | ✅                | ❌                            |
+| Complex math problems        | ❌ Often wrong    | ✅ Step-by-step verification  |
+| Multi-step logic/planning    | ❌                | ✅                            |
+| Code debugging (complex)     | ⚠️ Sometimes      | ✅ Better at tracing issues   |
+| Creative writing             | ✅                | ❌ Unnecessary reasoning      |
+| PhD-level science            | ❌                | ✅ Designed for this          |
+| Real-time chat (low latency) | ✅                | ❌ Thinking adds latency      |
+| Cost-sensitive applications  | ✅                | ⚠️ Thinking tokens cost money |
 
 ### Test-Time Compute Techniques
 
@@ -184,7 +184,7 @@ WHY IT MATTERS:
   - Open-weight reasoning model competitive with o1
   - Showed reasoning can emerge from pure RL (no supervised data!)
   - "Aha moment": During training, the model spontaneously started
-    re-evaluating and self-correcting â€” emergent reasoning behavior
+    re-evaluating and self-correcting — emergent reasoning behavior
 
 TRAINING APPROACH (GRPO):
   Group Relative Policy Optimization
@@ -204,8 +204,8 @@ DISTILLED VERSIONS:
 ## ◆ Code & Implementation
 
 ```python
-# âš ï¸ Last tested: 2026-04
-# â•â•â• Using OpenAI o3 â•â•â•
+# ⚠️ Last tested: 2026-04
+# ═══ Using OpenAI o3 ═══
 from openai import OpenAI
 client = OpenAI()
 
@@ -213,11 +213,11 @@ response = client.chat.completions.create(
     model="o3",
     messages=[{
         "role": "user",
-        "content": "Prove that âˆš2 is irrational."
+        "content": "Prove that √2 is irrational."
     }],
     # Reasoning models handle CoT internally
     # No need for "think step by step" prompts
-    # reasoning_effort="high"  # low/medium/high â€” controls thinking depth
+    # reasoning_effort="high"  # low/medium/high — controls thinking depth
 )
 
 # The response includes the final answer
@@ -226,7 +226,7 @@ print(response.choices[0].message.content)
 print(f"Total tokens: {response.usage.total_tokens}")
 # → Much higher token count due to internal reasoning
 
-# â•â•â• Using DeepSeek-R1 locally via Ollama â•â•â•
+# ═══ Using DeepSeek-R1 locally via Ollama ═══
 # ollama run deepseek-r1:8b
 # The model outputs <think>...</think> blocks visibly
 ```
@@ -262,18 +262,18 @@ KEY NUMBERS:
 
 ## ○ Gotchas & Common Mistakes
 
-- âš ï¸ **Don't prompt "think step by step"**: Reasoning models already do this internally. Adding CoT prompts can actually hurt performance.
-- âš ï¸ **KV Cache Explosion & Cost Surprise**: A single complex query can consume 50K+ tokens of thinking. Because reasoning models autoregressively output and attend to these hidden tokens, the KV cache grows massive during test-time compute. This forces dynamic PagedAttention management and huge API costs. Monitor token economics ruthlessly.
-- âš ï¸ **Latency**: Thinking takes time. A hard math problem might take 30-60 seconds. Not suitable for real-time chat.
-- âš ï¸ **Not always better**: For simple tasks, reasoning models waste compute and can overthink. Use standard models for simple tasks.
-- âš ï¸ **Hidden thinking â‰  explainable**: You see the answer but not always the reasoning (o1/o3 hide thinking by default).
+- ⚠️ **Don't prompt "think step by step"**: Reasoning models already do this internally. Adding CoT prompts can actually hurt performance.
+- ⚠️ **KV Cache Explosion & Cost Surprise**: A single complex query can consume 50K+ tokens of thinking. Because reasoning models autoregressively output and attend to these hidden tokens, the KV cache grows massive during test-time compute. This forces dynamic PagedAttention management and huge API costs. Monitor token economics ruthlessly.
+- ⚠️ **Latency**: Thinking takes time. A hard math problem might take 30-60 seconds. Not suitable for real-time chat.
+- ⚠️ **Not always better**: For simple tasks, reasoning models waste compute and can overthink. Use standard models for simple tasks.
+- ⚠️ **Hidden thinking ≠ explainable**: You see the answer but not always the reasoning (o1/o3 hide thinking by default).
 
 ---
 
 ## ○ Interview Angles
 
 - **Q**: What is test-time compute scaling and why does it matter?
-- **A**: Instead of scaling model size (pre-training compute), you scale compute at inference â€” let the model "think longer" on harder problems. This is more efficient because you allocate compute per-problem (easy = cheap, hard = expensive) rather than baking it all into a massive model. o1/o3 showed this can match or exceed much larger standard models.
+- **A**: Instead of scaling model size (pre-training compute), you scale compute at inference — let the model "think longer" on harder problems. This is more efficient because you allocate compute per-problem (easy = cheap, hard = expensive) rather than baking it all into a massive model. o1/o3 showed this can match or exceed much larger standard models.
 
 - **Q**: How is DeepSeek-R1 trained?
 - **A**: Uses GRPO (Group Relative Policy Optimization). Generate multiple reasoning chains for a problem, rank them group-relatively, and reinforce better paths. Remarkably, reasoning behavior (self-correction, re-evaluation) emerged purely from RL without supervised reasoning data.
@@ -325,10 +325,10 @@ KEY NUMBERS:
 
 | Type | Resource | Why |
 |------|----------|-----|
-| ðŸ“„ Paper | [Wei et al. "Chain-of-Thought Prompting" (2022)](https://arxiv.org/abs/2201.11903) | Foundational paper on reasoning in LLMs |
-| ðŸ“„ Paper | [DeepSeek-R1 Technical Report (2025)](https://arxiv.org/abs/2501.12948) | How GRPO enables reasoning model training |
-| ðŸ“˜ Book | "AI Engineering" by Chip Huyen (2025), Ch 5 | Covers reasoning techniques and their production implications |
-| ðŸŽ¥ Video | [Andrej Karpathy â€” "Deep Dive into o1"](https://www.youtube.com/watch?v=tEzs3VHyBDM) | Analysis of reasoning model architectures |
+| 📄 Paper | [Wei et al. "Chain-of-Thought Prompting" (2022)](https://arxiv.org/abs/2201.11903) | Foundational paper on reasoning in LLMs |
+| 📄 Paper | [DeepSeek-R1 Technical Report (2025)](https://arxiv.org/abs/2501.12948) | How GRPO enables reasoning model training |
+| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 5 | Covers reasoning techniques and their production implications |
+| 🎥 Video | [Andrej Karpathy — "Deep Dive into o1"](https://www.youtube.com/watch?v=tEzs3VHyBDM) | Analysis of reasoning model architectures |
 
 ## ★ Sources
 

@@ -176,7 +176,7 @@ launch_plan:
 ### AI Feature Feasibility Scorecard
 
 ```python
-# âš ï¸ Last tested: 2026-04 | Requires: Python 3.10+ (stdlib only)
+# ⚠️ Last tested: 2026-04 | Requires: Python 3.10+ (stdlib only)
 from dataclasses import dataclass
 from typing import Literal
 
@@ -222,7 +222,7 @@ features = [
 ]
 for f in features:
     r = f.score()
-    print(f"{r['name']}: {r['score']:.0f}/100 ({r['confidence']}) â€” {r['guidance']}")
+    print(f"{r['name']}: {r['score']:.0f}/100 ({r['confidence']}) — {r['guidance']}")
 ```
 
 ## ★ Connections
@@ -265,9 +265,9 @@ for f in features:
 
 | Type    | Resource                                                                           | Why                                  |
 | ------- | ---------------------------------------------------------------------------------- | ------------------------------------ |
-| ðŸ“˜ Book  | "AI Engineering" by Chip Huyen (2025), Ch 1, 9                                     | Product thinking for AI applications |
-| ðŸ“˜ Book  | "The AI Product Manager's Handbook" by Buest (2023)                                | PM-specific AI guide                 |
-| ðŸŽ¥ Video | [Lenny's Podcast â€” AI Product Management Episodes](https://www.lennyspodcast.com/) | PM perspectives on building with AI  |
+| 📘 Book  | "AI Engineering" by Chip Huyen (2025), Ch 1, 9                                     | Product thinking for AI applications |
+| 📘 Book  | "The AI Product Manager's Handbook" by Buest (2023)                                | PM-specific AI guide                 |
+| 🎥 Video | [Lenny's Podcast — AI Product Management Episodes](https://www.lennyspodcast.com/) | PM perspectives on building with AI  |
 
 ## ★ Sources
 - Reforge and product strategy material on AI products

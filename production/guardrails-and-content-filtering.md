@@ -8,7 +8,7 @@ status: published
 last_verified: 2026-04
 parent: "llmops.md"
 related: ["../ethics-and-safety/adversarial-ml-and-ai-security.md", "../ethics-and-safety/owasp-llm-top-10.md", "monitoring-observability.md", "../agents/ai-agents.md"]
-source: "Multiple â€” see Sources"
+source: "Multiple — see Sources"
 created: 2026-04-14
 updated: 2026-04-14
 ---
@@ -23,7 +23,7 @@ updated: 2026-04-14
 
 - **What**: Input validation, output filtering, and behavioral constraints applied to LLM systems to ensure safety, compliance, and quality
 - **Why**: Without guardrails, LLMs can generate harmful content, leak PII, follow injection attacks, or produce outputs that violate regulations.
-- **Key point**: Guardrails operate at 3 layers â€” input (block bad requests), model (constrain behavior), and output (validate before delivery) â€” and must be fast enough to not destroy latency.
+- **Key point**: Guardrails operate at 3 layers — input (block bad requests), model (constrain behavior), and output (validate before delivery) — and must be fast enough to not destroy latency.
 
 ---
 
@@ -41,7 +41,7 @@ Covers: Input validation, output filtering, PII detection, topic boundaries, hal
 
 - **Regulatory requirement**: EU AI Act, HIPAA, SOC2 all require content controls
 - **Brand safety**: One toxic response can go viral and damage trust
-- **Production necessity**: Every production LLM system needs guardrails â€” the question is which ones
+- **Production necessity**: Every production LLM system needs guardrails — the question is which ones
 
 ### Prerequisites
 
@@ -57,48 +57,48 @@ Covers: Input validation, output filtering, PII detection, topic boundaries, hal
 
 ```
 USER INPUT
-     â”‚
-     â–¼
-â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚         LAYER 1: INPUT GUARDS            â”‚
-â”‚                                          â”‚
-â”‚  â€¢ Prompt injection detection            â”‚
-â”‚  â€¢ PII detection & redaction             â”‚
-â”‚  â€¢ Topic boundary check                  â”‚
-â”‚  â€¢ Input length / cost limits            â”‚
-â”‚  â€¢ Rate limiting                         â”‚
-â”‚                                          â”‚
-â”‚  â†“ BLOCKED → return rejection message    â”‚
-â”‚  â†“ PASSED → continue to model           â”‚
-â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
-     â”‚
-     â–¼
-â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚         LAYER 2: MODEL CONSTRAINTS       â”‚
-â”‚                                          â”‚
-â”‚  â€¢ System prompt with behavioral rules   â”‚
-â”‚  â€¢ Temperature / token limits            â”‚
-â”‚  â€¢ Structured output enforcement         â”‚
-â”‚  â€¢ Tool call validation                  â”‚
-â”‚                                          â”‚
-â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
-     â”‚
-     â–¼
-â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚         LAYER 3: OUTPUT GUARDS           â”‚
-â”‚                                          â”‚
-â”‚  â€¢ Toxicity / hate speech classifier     â”‚
-â”‚  â€¢ PII leakage detection                 â”‚
-â”‚  â€¢ Hallucination check (if applicable)   â”‚
-â”‚  â€¢ Schema validation                     â”‚
-â”‚  â€¢ Competitor mention filter             â”‚
-â”‚  â€¢ Citation verification                 â”‚
-â”‚                                          â”‚
-â”‚  â†“ FAILED → fallback response or retry   â”‚
-â”‚  â†“ PASSED → return to user              â”‚
-â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
-     â”‚
-     â–¼
+     │
+     ▼
+┌──────────────────────────────────────────┐
+│         LAYER 1: INPUT GUARDS            │
+│                                          │
+│  • Prompt injection detection            │
+│  • PII detection & redaction             │
+│  • Topic boundary check                  │
+│  • Input length / cost limits            │
+│  • Rate limiting                         │
+│                                          │
+│  ↓ BLOCKED → return rejection message    │
+│  ↓ PASSED → continue to model           │
+└──────────────────────────────────────────┘
+     │
+     ▼
+┌──────────────────────────────────────────┐
+│         LAYER 2: MODEL CONSTRAINTS       │
+│                                          │
+│  • System prompt with behavioral rules   │
+│  • Temperature / token limits            │
+│  • Structured output enforcement         │
+│  • Tool call validation                  │
+│                                          │
+└──────────────────────────────────────────┘
+     │
+     ▼
+┌──────────────────────────────────────────┐
+│         LAYER 3: OUTPUT GUARDS           │
+│                                          │
+│  • Toxicity / hate speech classifier     │
+│  • PII leakage detection                 │
+│  • Hallucination check (if applicable)   │
+│  • Schema validation                     │
+│  • Competitor mention filter             │
+│  • Citation verification                 │
+│                                          │
+│  ↓ FAILED → fallback response or retry   │
+│  ↓ PASSED → return to user              │
+└──────────────────────────────────────────┘
+     │
+     ▼
 USER RESPONSE
 ```
 
@@ -123,7 +123,7 @@ USER RESPONSE
 
 ```python
 # pip install openai>=1.0 pydantic>=2.0
-# âš ï¸ Last tested: 2026-04 | Requires: openai>=1.0
+# ⚠️ Last tested: 2026-04 | Requires: openai>=1.0
 
 import re
 from openai import OpenAI
@@ -157,7 +157,7 @@ def redact_pii(text: str) -> str:
         text = re.sub(pattern, f"[REDACTED_{pii_type.upper()}]", text)
     return text
 
-# Injection detection (simplified â€” see adversarial-ml note for full version)
+# Injection detection (simplified — see adversarial-ml note for full version)
 INJECTION_PATTERNS = [
     r"ignore (all |previous )?instructions",
     r"you are now",
@@ -251,13 +251,13 @@ print(result.model_dump_json(indent=2))
 ```
 GUARDRAIL PRIORITY (implement in this order):
 
-  1. Prompt injection detection    â€” prevents control hijacking
-  2. PII detection & redaction     â€” prevents data leakage
-  3. Output toxicity filtering     â€” prevents brand damage
-  4. Schema validation             â€” prevents downstream errors
-  5. Topic boundaries              â€” keeps agent on-task
-  6. Hallucination checking        â€” prevents misinformation
-  7. Cost guards                   â€” prevents budget blowout
+  1. Prompt injection detection    — prevents control hijacking
+  2. PII detection & redaction     — prevents data leakage
+  3. Output toxicity filtering     — prevents brand damage
+  4. Schema validation             — prevents downstream errors
+  5. Topic boundaries              — keeps agent on-task
+  6. Hallucination checking        — prevents misinformation
+  7. Cost guards                   — prevents budget blowout
 
 LATENCY BUDGET:
   Input guards:   < 50ms (regex + classifier)
@@ -296,7 +296,7 @@ LATENCY BUDGET:
 2. Add PII detection (regex-based) on input and output
 3. Add prompt injection detection (regex + LLM classifier)
 4. Add toxicity checking (OpenAI Moderation API)
-5. Test with 10 adversarial inputs â€” how many get caught?
+5. Test with 10 adversarial inputs — how many get caught?
 **Expected Output**: Guardrailed chatbot with attack resistance log
 
 ---
@@ -316,17 +316,17 @@ LATENCY BUDGET:
 
 | Type | Resource | Why |
 |------|----------|-----|
-| ðŸ”§ Hands-on | [Guardrails AI](https://www.guardrailsai.com/) | Open-source guardrails framework with validators |
-| ðŸ”§ Hands-on | [NeMo Guardrails (NVIDIA)](https://github.com/NVIDIA/NeMo-Guardrails) | Programmable guardrails for LLM applications |
-| ðŸ”§ Hands-on | [Microsoft Presidio](https://microsoft.github.io/presidio/) | PII detection and de-identification |
-| ðŸ“˜ Book | "AI Engineering" by Chip Huyen (2025), Ch 6 | Safety and guardrail patterns in production |
+| 🔧 Hands-on | [Guardrails AI](https://www.guardrailsai.com/) | Open-source guardrails framework with validators |
+| 🔧 Hands-on | [NeMo Guardrails (NVIDIA)](https://github.com/NVIDIA/NeMo-Guardrails) | Programmable guardrails for LLM applications |
+| 🔧 Hands-on | [Microsoft Presidio](https://microsoft.github.io/presidio/) | PII detection and de-identification |
+| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 6 | Safety and guardrail patterns in production |
 
 ---
 
 ## ★ Sources
 
-- Guardrails AI â€” https://www.guardrailsai.com/
-- NVIDIA NeMo Guardrails â€” https://github.com/NVIDIA/NeMo-Guardrails
-- Microsoft Presidio â€” https://microsoft.github.io/presidio/
-- OpenAI Moderation API â€” https://platform.openai.com/docs/guides/moderation
+- Guardrails AI — https://www.guardrailsai.com/
+- NVIDIA NeMo Guardrails — https://github.com/NVIDIA/NeMo-Guardrails
+- Microsoft Presidio — https://microsoft.github.io/presidio/
+- OpenAI Moderation API — https://platform.openai.com/docs/guides/moderation
 - [Adversarial ML & AI Security](../ethics-and-safety/adversarial-ml-and-ai-security.md)

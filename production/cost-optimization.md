@@ -175,7 +175,7 @@ Self-hosting is not automatically cheaper. It becomes attractive only when workl
 
 ```python
 # No external dependencies required
-# âš ï¸ Last tested: 2026-04
+# ⚠️ Last tested: 2026-04
 
 # Pricing as of April 2026 (per 1M tokens)
 PRICING = {
@@ -223,7 +223,7 @@ for model in PRICING:
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
-| **Silent cost explosion** | Monthly bill 5Ã— higher than expected | Context window bloat, no token monitoring | Per-request cost tracking, budget alerts at 80% |
+| **Silent cost explosion** | Monthly bill 5× higher than expected | Context window bloat, no token monitoring | Per-request cost tracking, budget alerts at 80% |
 | **Cache poisoning** | Users get wrong cached answers | Semantic cache too aggressive, poor invalidation | Tighter similarity threshold, cache TTL, user-specific cache keys |
 | **Routing misclassification** | Cheap model fails on complex queries, retries hit expensive model | Router not trained on edge cases | Confidence threshold on router, fallback cost tracking |
 | **Stale cost assumptions** | Optimization based on old pricing, provider changed rates | API pricing changes quarterly | Automate pricing checks, use provider cost APIs |
@@ -249,10 +249,10 @@ for model in PRICING:
 
 | Type | Resource | Why |
 |------|----------|-----|
-| ðŸ“˜ Book | "AI Engineering" by Chip Huyen (2025), Ch 9 (AI Engineering Architecture) | Covers cost-aware system design and model routing patterns |
-| ðŸ”§ Hands-on | [OpenAI Usage Dashboard](https://platform.openai.com/usage) | Real-time cost tracking for API users |
-| ðŸŽ¥ Video | [FinOps for AI/ML](https://www.finops.org/wg/ai-ml/) | FinOps Foundation's framework for managing AI infrastructure costs |
-| ðŸ“„ Paper | [Ding et al. "RouteLLM" (2024)](https://arxiv.org/abs/2406.18665) | Academic approach to cost-aware model routing |
+| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 9 (AI Engineering Architecture) | Covers cost-aware system design and model routing patterns |
+| 🔧 Hands-on | [OpenAI Usage Dashboard](https://platform.openai.com/usage) | Real-time cost tracking for API users |
+| 🎥 Video | [FinOps for AI/ML](https://www.finops.org/wg/ai-ml/) | FinOps Foundation's framework for managing AI infrastructure costs |
+| 📄 Paper | [Ding et al. "RouteLLM" (2024)](https://arxiv.org/abs/2406.18665) | Academic approach to cost-aware model routing |
 
 ---
 

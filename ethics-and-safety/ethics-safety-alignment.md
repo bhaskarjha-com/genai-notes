@@ -15,7 +15,7 @@ updated: 2026-04-12
 
 # Ethics, Safety & Alignment
 
-> ✨ **Bit**: "With great power comes great responsibility" â€” except AI doesn't understand responsibility. That's our job. Alignment is teaching AI what we want, not just what's statistically likely.
+> ✨ **Bit**: "With great power comes great responsibility" — except AI doesn't understand responsibility. That's our job. Alignment is teaching AI what we want, not just what's statistically likely.
 
 ---
 
@@ -31,7 +31,7 @@ updated: 2026-04-12
 
 ### Definition
 
-**AI Safety & Alignment** encompasses the techniques, policies, and practices to ensure AI systems are: (1) Helpful â€” do what users want, (2) Harmless â€” don't cause harm, (3) Honest â€” don't hallucinate or deceive. **AI Ethics** covers broader societal impacts: bias, fairness, privacy, transparency, and accountability.
+**AI Safety & Alignment** encompasses the techniques, policies, and practices to ensure AI systems are: (1) Helpful — do what users want, (2) Harmless — don't cause harm, (3) Honest — don't hallucinate or deceive. **AI Ethics** covers broader societal impacts: bias, fairness, privacy, transparency, and accountability.
 
 ### Scope
 
@@ -47,8 +47,8 @@ Covers: Alignment techniques (RLHF, DPO), hallucination, bias, prompt injection,
 
 ### Prerequisites
 
-- [Llms Overview](../llms/llms-overview.md) â€” how models generate
-- [Fine Tuning](../techniques/fine-tuning.md) â€” how alignment training works
+- [Llms Overview](../llms/llms-overview.md) — how models generate
+- [Fine Tuning](../techniques/fine-tuning.md) — how alignment training works
 
 ---
 
@@ -103,7 +103,7 @@ MITIGATION:
   ✅ Temperature = 0 for factual tasks
   ✅ Verification chains (model checks its own output)
   ✅ Human-in-the-loop for critical decisions
-  âŒ "Just tell it not to hallucinate" doesn't work
+  ❌ "Just tell it not to hallucinate" doesn't work
 ```
 
 #### 2. Bias & Fairness
@@ -143,7 +143,7 @@ DEFENSES:
   ✅ Output validation
   ✅ Don't put sensitive info in system prompts
   ✅ Double-check outputs with a second model
-  âŒ No prompt is 100% injection-proof
+  ❌ No prompt is 100% injection-proof
 ```
 
 #### 4. Deepfakes & Misuse
@@ -156,28 +156,28 @@ DEFENSES:
 ### Guardrails in Production
 
 ```
-â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚              GUARDRAILS ARCHITECTURE             â”‚
-â”‚                                                  â”‚
-â”‚  User Input                                      â”‚
-â”‚      â”‚                                           â”‚
-â”‚      â–¼                                           â”‚
-â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”                                  â”‚
-â”‚  â”‚ INPUT       â”‚ â† Block harmful requests        â”‚
-â”‚  â”‚ GUARDRAIL   â”‚ â† Detect prompt injection       â”‚
-â”‚  â””â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”˜ â† Sanitize input                 â”‚
-â”‚        â–¼                                         â”‚
-â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”                                  â”‚
-â”‚  â”‚    LLM     â”‚                                  â”‚
-â”‚  â””â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”˜                                  â”‚
-â”‚        â–¼                                         â”‚
-â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”                                  â”‚
-â”‚  â”‚ OUTPUT      â”‚ â† Check for PII leakage         â”‚
-â”‚  â”‚ GUARDRAIL   â”‚ â† Verify factual claims         â”‚
-â”‚  â””â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”˜ â† Block harmful content          â”‚
-â”‚        â–¼                                         â”‚
-â”‚  Safe Response                                   â”‚
-â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+┌─────────────────────────────────────────────────┐
+│              GUARDRAILS ARCHITECTURE             │
+│                                                  │
+│  User Input                                      │
+│      │                                           │
+│      ▼                                           │
+│  ┌────────────┐                                  │
+│  │ INPUT       │ ← Block harmful requests        │
+│  │ GUARDRAIL   │ ← Detect prompt injection       │
+│  └─────┬──────┘ ← Sanitize input                 │
+│        ▼                                         │
+│  ┌────────────┐                                  │
+│  │    LLM     │                                  │
+│  └─────┬──────┘                                  │
+│        ▼                                         │
+│  ┌────────────┐                                  │
+│  │ OUTPUT      │ ← Check for PII leakage         │
+│  │ GUARDRAIL   │ ← Verify factual claims         │
+│  └─────┬──────┘ ← Block harmful content          │
+│        ▼                                         │
+│  Safe Response                                   │
+└─────────────────────────────────────────────────┘
 
 TOOLS:
   - NVIDIA NeMo Guardrails (programmable rails)
@@ -213,31 +213,31 @@ TOOLS:
 
 ```
 HALLUCINATION MITIGATION CHECKLIST:
-  â–¡ Use RAG for factual tasks
-  â–¡ Set temperature to 0 for factual extraction
-  â–¡ Force citations / source attribution
-  â–¡ Implement verification (second model / human review)
-  â–¡ Clearly state when the model is unsure
+  □ Use RAG for factual tasks
+  □ Set temperature to 0 for factual extraction
+  □ Force citations / source attribution
+  □ Implement verification (second model / human review)
+  □ Clearly state when the model is unsure
 
 PRODUCTION SAFETY CHECKLIST:
-  â–¡ Input guardrails (prompt injection, harmful requests)
-  â–¡ Output guardrails (PII, harmful content, sensitive topics)
-  â–¡ Rate limiting
-  â–¡ Logging & audit trail
-  â–¡ Human escalation path
-  â–¡ Content moderation (for user-facing apps)
-  â–¡ Regular red teaming
+  □ Input guardrails (prompt injection, harmful requests)
+  □ Output guardrails (PII, harmful content, sensitive topics)
+  □ Rate limiting
+  □ Logging & audit trail
+  □ Human escalation path
+  □ Content moderation (for user-facing apps)
+  □ Regular red teaming
 ```
 
 ---
 
 ## ○ Gotchas & Common Mistakes
 
-- âš ï¸ **"My system prompt says don't do bad things" â‰  safe**: System prompts can be overridden. Use structural guardrails.
-- âš ï¸ **RLHF isn't magic**: The model learned to APPEAR helpful and safe. It doesn't understand safety as a concept.
-- âš ï¸ **Over-alignment (refusal problem)**: Overly cautious models refuse benign requests. Balance safety with utility.
-- âš ï¸ **Bias is systematic, not a bug to fix once**: Continual monitoring and evaluation is required.
-- âš ï¸ **Hallucination cannot be eliminated**: It can be reduced (RAG, verification) but is inherent to how generative models work.
+- ⚠️ **"My system prompt says don't do bad things" ≠ safe**: System prompts can be overridden. Use structural guardrails.
+- ⚠️ **RLHF isn't magic**: The model learned to APPEAR helpful and safe. It doesn't understand safety as a concept.
+- ⚠️ **Over-alignment (refusal problem)**: Overly cautious models refuse benign requests. Balance safety with utility.
+- ⚠️ **Bias is systematic, not a bug to fix once**: Continual monitoring and evaluation is required.
+- ⚠️ **Hallucination cannot be eliminated**: It can be reduced (RAG, verification) but is inherent to how generative models work.
 
 ---
 
@@ -250,7 +250,7 @@ PRODUCTION SAFETY CHECKLIST:
 - **A**: Layer defenses: (1) RAG for factual grounding, (2) Force citations/sources, (3) Low temperature for factual tasks, (4) Output validation (check claims against a knowledge base), (5) Human-in-the-loop for critical decisions for high-stakes scenarios.
 
 - **Q**: What's the difference between RLHF and DPO?
-- **A**: Both learn from human preference pairs (A is better than B). RLHF first trains a separate reward model, then uses RL to optimize. DPO skips the reward model and directly optimizes the LLM on preference pairs â€” simpler, cheaper, similar quality.
+- **A**: Both learn from human preference pairs (A is better than B). RLHF first trains a separate reward model, then uses RL to optimize. DPO skips the reward model and directly optimizes the LLM on preference pairs — simpler, cheaper, similar quality.
 
 ---
 
@@ -260,7 +260,7 @@ PRODUCTION SAFETY CHECKLIST:
 
 ```python
 # pip install openai>=1.60
-# âš ï¸ Last tested: 2026-04 | Requires: openai>=1.60, OPENAI_API_KEY env var
+# ⚠️ Last tested: 2026-04 | Requires: openai>=1.60, OPENAI_API_KEY env var
 
 from openai import OpenAI
 from enum import Enum
@@ -373,14 +373,14 @@ print(safe_generate("Give me step-by-step malware instructions."))
 
 | Type       | Resource                                                                   | Why                                             |
 | ---------- | -------------------------------------------------------------------------- | ----------------------------------------------- |
-| ðŸ“„ Paper    | [Anthropic â€” "Constitutional AI" (2022)](https://arxiv.org/abs/2212.08073) | Self-supervised alignment via principles        |
-| ðŸ“˜ Book     | "AI Engineering" by Chip Huyen (2025), Ch 6                                | Safety, guardrails, and alignment in production |
-| ðŸ”§ Hands-on | [Guardrails AI](https://www.guardrailsai.com/)                             | Open-source framework for AI safety guardrails  |
+| 📄 Paper    | [Anthropic — "Constitutional AI" (2022)](https://arxiv.org/abs/2212.08073) | Self-supervised alignment via principles        |
+| 📘 Book     | "AI Engineering" by Chip Huyen (2025), Ch 6                                | Safety, guardrails, and alignment in production |
+| 🔧 Hands-on | [Guardrails AI](https://www.guardrailsai.com/)                             | Open-source framework for AI safety guardrails  |
 
 ## ★ Sources
 
 - Ouyang et al., "Training language models to follow instructions with human feedback" (RLHF, 2022)
 - Rafailov et al., "Direct Preference Optimization" (DPO, 2023)
 - Anthropic, "Constitutional AI" (2022)
-- NVIDIA NeMo Guardrails â€” https://github.com/NVIDIA/NeMo-Guardrails
+- NVIDIA NeMo Guardrails — https://github.com/NVIDIA/NeMo-Guardrails
 - EU AI Act official documentation (2024-2025)

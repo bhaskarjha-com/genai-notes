@@ -152,7 +152,7 @@ az ml online-endpoint list
 
 ```python
 # pip install openai>=1.60 anthropic>=0.40 google-generativeai>=0.8
-# âš ï¸ Last tested: 2026-04 | Requires: OPENAI_API_KEY, ANTHROPIC_API_KEY, GOOGLE_API_KEY env vars
+# ⚠️ Last tested: 2026-04 | Requires: OPENAI_API_KEY, ANTHROPIC_API_KEY, GOOGLE_API_KEY env vars
 import os, time
 from openai    import OpenAI
 import anthropic
@@ -228,9 +228,9 @@ print(f"Gemini ({time.monotonic()-start:.2f}s): {gem_r.text[:100]}")
 
 | Type       | Resource                                                                  | Why                                 |
 | ---------- | ------------------------------------------------------------------------- | ----------------------------------- |
-| ðŸ”§ Hands-on | [AWS Bedrock Documentation](https://docs.aws.amazon.com/bedrock/)         | Multi-model API access on AWS       |
-| ðŸ”§ Hands-on | [Google Vertex AI Documentation](https://cloud.google.com/vertex-ai/docs) | Google's unified ML platform        |
-| ðŸ”§ Hands-on | [Azure AI Studio](https://learn.microsoft.com/en-us/azure/ai-studio/)     | Microsoft's AI development platform |
+| 🔧 Hands-on | [AWS Bedrock Documentation](https://docs.aws.amazon.com/bedrock/)         | Multi-model API access on AWS       |
+| 🔧 Hands-on | [Google Vertex AI Documentation](https://cloud.google.com/vertex-ai/docs) | Google's unified ML platform        |
+| 🔧 Hands-on | [Azure AI Studio](https://learn.microsoft.com/en-us/azure/ai-studio/)     | Microsoft's AI development platform |
 
 ## ★ Sources
 - AWS SageMaker AI documentation and overview pages

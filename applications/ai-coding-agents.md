@@ -8,22 +8,22 @@ status: published
 last_verified: 2026-04
 parent: "../agents/ai-agents.md"
 related: ["../agents/agentic-protocols.md", "../agents/multi-agent-architectures.md", "code-generation.md", "../techniques/context-engineering.md"]
-source: "Multiple â€” see Sources"
+source: "Multiple — see Sources"
 created: 2026-04-15
 updated: 2026-04-15
 ---
 
 # AI Coding Agents
 
-> ✨ **Bit**: The most productive engineers in 2026 don't type faster â€” they supervise agents that edit, test, and commit code while they think about architecture.
+> ✨ **Bit**: The most productive engineers in 2026 don't type faster — they supervise agents that edit, test, and commit code while they think about architecture.
 
 ---
 
 ## ★ TL;DR
 
-- **What**: AI systems that autonomously write, edit, test, and refactor code in real codebases â€” going far beyond autocomplete
-- **Why**: The fastest-growing application category in GenAI â€” used by millions of developers daily, reshaping how software is built
-- **Key point**: The competitive advantage is not the model â€” it's the context engineering, tool orchestration, and codebase awareness layer that wraps it
+- **What**: AI systems that autonomously write, edit, test, and refactor code in real codebases — going far beyond autocomplete
+- **Why**: The fastest-growing application category in GenAI — used by millions of developers daily, reshaping how software is built
+- **Key point**: The competitive advantage is not the model — it's the context engineering, tool orchestration, and codebase awareness layer that wraps it
 
 ---
 
@@ -31,7 +31,7 @@ updated: 2026-04-15
 
 ### Definition
 
-**AI coding agents** are agentic systems that interact with codebases through tool use â€” reading files, writing edits, running commands, and iterating on test results â€” to accomplish software engineering tasks with minimal human intervention.
+**AI coding agents** are agentic systems that interact with codebases through tool use — reading files, writing edits, running commands, and iterating on test results — to accomplish software engineering tasks with minimal human intervention.
 
 ### Scope
 
@@ -58,21 +58,21 @@ This note covers the architecture, evaluation, and practical use of coding agent
 Every modern coding agent runs a deterministic control loop wrapping a non-deterministic LLM:
 
 ```
-â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚                 AGENT LOOP                  â”‚
-â”‚                                             â”‚
-â”‚  1. THINK: LLM receives state + history     â”‚
-â”‚     → decides next action                   â”‚
-â”‚                                             â”‚
-â”‚  2. ACT: Harness executes tool call         â”‚
-â”‚     → file_read, file_edit, bash_run, etc.  â”‚
-â”‚                                             â”‚
-â”‚  3. OBSERVE: Tool output added to context   â”‚
-â”‚     → loop back to THINK                    â”‚
-â”‚                                             â”‚
-â”‚  4. DONE: LLM signals task complete         â”‚
-â”‚     → return result to user                 â”‚
-â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+┌─────────────────────────────────────────────┐
+│                 AGENT LOOP                  │
+│                                             │
+│  1. THINK: LLM receives state + history     │
+│     → decides next action                   │
+│                                             │
+│  2. ACT: Harness executes tool call         │
+│     → file_read, file_edit, bash_run, etc.  │
+│                                             │
+│  3. OBSERVE: Tool output added to context   │
+│     → loop back to THINK                    │
+│                                             │
+│  4. DONE: LLM signals task complete         │
+│     → return result to user                 │
+└─────────────────────────────────────────────┘
 ```
 
 The LLM never touches the filesystem directly. It outputs structured tool calls that a "harness" program executes safely, with results fed back into context.
@@ -112,10 +112,10 @@ Complex coding tasks benefit from agent teams:
 
 ```
 ORCHESTRATOR
-â”œâ”€â”€ PLANNER: Breaks task into subtasks, defines file scope
-â”œâ”€â”€ CODER: Implements each subtask, writes code
-â”œâ”€â”€ TESTER: Runs tests, reports failures back to Coder
-â””â”€â”€ REVIEWER: Checks style, architecture, security
+├── PLANNER: Breaks task into subtasks, defines file scope
+├── CODER: Implements each subtask, writes code
+├── TESTER: Runs tests, reports failures back to Coder
+└── REVIEWER: Checks style, architecture, security
 ```
 
 This pattern is used internally by agents like Devin and is emerging in open-source frameworks.
@@ -147,13 +147,13 @@ Best practice: Include `ARCHITECTURE.md` or `DESIGN.md` in your repository root.
 ## ○ Interview Angles
 
 - **Q**: How do modern coding agents handle large codebases that don't fit in context?
-- **A**: Three techniques. (1) Repository indexing â€” parse ASTs and dependency graphs to understand code structure without reading every file. (2) Progressive context loading â€” only pull in files relevant to the current step, not the entire repo. (3) Context compaction â€” periodically summarize the conversation history to free up tokens. The best agents combine all three: index the repo upfront, retrieve relevant files via codebase RAG, and compact history when approaching the context limit.
+- **A**: Three techniques. (1) Repository indexing — parse ASTs and dependency graphs to understand code structure without reading every file. (2) Progressive context loading — only pull in files relevant to the current step, not the entire repo. (3) Context compaction — periodically summarize the conversation history to free up tokens. The best agents combine all three: index the repo upfront, retrieve relevant files via codebase RAG, and compact history when approaching the context limit.
 
 - **Q**: What's the most common failure mode of coding agents and how do you mitigate it?
-- **A**: Infinite edit loops â€” the agent encounters an error, makes a change that doesn't fix it, sees the same error, and repeats. Mitigation: (1) Track state diffs between iterations â€” if the agent's edit doesn't change the test output, intervene. (2) Set hard max iteration limits (typically 10-20 steps). (3) Have the agent explicitly explain its hypothesis before each edit so you can catch circular reasoning.
+- **A**: Infinite edit loops — the agent encounters an error, makes a change that doesn't fix it, sees the same error, and repeats. Mitigation: (1) Track state diffs between iterations — if the agent's edit doesn't change the test output, intervene. (2) Set hard max iteration limits (typically 10-20 steps). (3) Have the agent explicitly explain its hypothesis before each edit so you can catch circular reasoning.
 
 - **Q**: When would you choose a cloud sandbox agent vs an IDE-integrated agent?
-- **A**: Cloud sandbox (like Devin) for tasks that are well-defined, can run unattended, and benefit from isolation â€” ticket-based bug fixes, migrations, boilerplate generation. IDE-integrated (like Cursor) for tasks requiring rapid human feedback â€” feature development, debugging, and any work where you need to steer the agent in real-time. The tradeoff is autonomy vs control.
+- **A**: Cloud sandbox (like Devin) for tasks that are well-defined, can run unattended, and benefit from isolation — ticket-based bug fixes, migrations, boilerplate generation. IDE-integrated (like Cursor) for tasks requiring rapid human feedback — feature development, debugging, and any work where you need to steer the agent in real-time. The tradeoff is autonomy vs control.
 
 ---
 
@@ -163,7 +163,7 @@ Best practice: Include `ARCHITECTURE.md` or `DESIGN.md` in your repository root.
 
 ```python
 # pip install openai>=1.60
-# âš ï¸ Last tested: 2026-04 | Requires: openai>=1.60, OPENAI_API_KEY
+# ⚠️ Last tested: 2026-04 | Requires: openai>=1.60, OPENAI_API_KEY
 import json, os, subprocess
 from openai import OpenAI
 
@@ -240,7 +240,7 @@ def coding_agent(task: str, max_steps: int = 10) -> str:
 ### Coding Agent Eval Harness
 
 ```python
-# âš ï¸ Last tested: 2026-04 | Requires: openai>=1.60
+# ⚠️ Last tested: 2026-04 | Requires: openai>=1.60
 import time
 
 def eval_coding_agent(agent_fn, test_cases: list[dict]) -> dict:
@@ -318,16 +318,16 @@ def eval_coding_agent(agent_fn, test_cases: list[dict]) -> dict:
 
 | Type | Resource | Why |
 |------|----------|-----|
-| ðŸ“˜ Book | "AI Engineering" by Chip Huyen (2025), Ch 5 | Agent architecture patterns applicable to coding agents |
-| ðŸ”§ Hands-on | [Cursor Documentation](https://docs.cursor.com/) | The most popular AI coding IDE's official docs |
-| ðŸ“„ Paper | [SWE-bench](https://swebench.com/) | The standard benchmark for evaluating coding agents |
-| ðŸŽ¥ Video | [Anthropic â€” Building Effective Agents](https://www.anthropic.com/engineering/building-effective-agents) | Architectural patterns that coding agents use |
+| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 5 | Agent architecture patterns applicable to coding agents |
+| 🔧 Hands-on | [Cursor Documentation](https://docs.cursor.com/) | The most popular AI coding IDE's official docs |
+| 📄 Paper | [SWE-bench](https://swebench.com/) | The standard benchmark for evaluating coding agents |
+| 🎥 Video | [Anthropic — Building Effective Agents](https://www.anthropic.com/engineering/building-effective-agents) | Architectural patterns that coding agents use |
 
 ---
 
 ## ★ Sources
 
-- Anthropic â€” Building Effective Agents â€” https://www.anthropic.com/engineering/building-effective-agents
-- SWE-bench â€” https://swebench.com/
-- OpenAI Codex CLI â€” https://github.com/openai/codex
-- Cursor Documentation â€” https://docs.cursor.com/
+- Anthropic — Building Effective Agents — https://www.anthropic.com/engineering/building-effective-agents
+- SWE-bench — https://swebench.com/
+- OpenAI Codex CLI — https://github.com/openai/codex
+- Cursor Documentation — https://docs.cursor.com/

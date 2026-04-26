@@ -15,15 +15,15 @@ updated: 2026-04-11
 
 # Tokenization
 
-> ✨ **Bit**: LLMs don't see words. They see token IDs. "Hello" = `[15496]`. This is why they can't count the letters in "strawberry" â€” they see something like `[" straw", "berry"]`, not individual characters.
+> ✨ **Bit**: LLMs don't see words. They see token IDs. "Hello" = `[15496]`. This is why they can't count the letters in "strawberry" — they see something like `[" straw", "berry"]`, not individual characters.
 
 ---
 
 ## ★ TL;DR
 
 - **What**: The process of breaking text into sub-word units (tokens) that LLMs actually process
-- **Why**: Models can't process raw text. Tokenization determines what the model "sees" â€” and affects cost, multilingual performance, and model behavior
-- **Key point**: ~4 English characters â‰ˆ 1 token. Non-English text is often 2-3x more tokens per word (= more expensive, slower).
+- **Why**: Models can't process raw text. Tokenization determines what the model "sees" — and affects cost, multilingual performance, and model behavior
+- **Key point**: ~4 English characters ≈ 1 token. Non-English text is often 2-3x more tokens per word (= more expensive, slower).
 
 ---
 
@@ -42,7 +42,7 @@ Covers tokenization algorithms (BPE, WordPiece, SentencePiece), practical implic
 - Directly affects API cost (pricing is per-token)
 - Determines multilingual capability (poor tokenizers = expensive for non-English)
 - Explains many LLM "failures" (can't count letters, bad at math = tokenization artifacts)
-- Different models use different tokenizers â€” tokens aren't transferable
+- Different models use different tokenizers — tokens aren't transferable
 
 ### Prerequisites
 
@@ -65,14 +65,14 @@ CHARACTER-LEVEL:
 
 SUB-WORD (what we actually use):
   Vocabulary: 32K - 128K tokens
-  "unhappiness" → ["un", "happiness"]  â† Common words stay whole
-  "transformer" → ["transform", "er"]   â† Rare words split intelligently
+  "unhappiness" → ["un", "happiness"]  ← Common words stay whole
+  "transformer" → ["transform", "er"]   ← Rare words split intelligently
   Balance: Compact vocabulary + handles any text
 ```
 
 ### How BPE Works (Most Common Algorithm)
 
-**Byte Pair Encoding** (BPE) â€” used by GPT, LLaMA, Mistral:
+**Byte Pair Encoding** (BPE) — used by GPT, LLaMA, Mistral:
 
 ```
 START: Split everything into characters
@@ -110,7 +110,7 @@ STEP 4: ('low', 'er') is frequent
 ### Practical Impact
 
 ```python
-# âš ï¸ Last tested: 2026-04
+# ⚠️ Last tested: 2026-04
 # Using OpenAI's tiktoken
 import tiktoken
 enc = tiktoken.encoding_for_model("gpt-4o")
@@ -125,7 +125,7 @@ tokens = enc.encode("def calculate_fibonacci(n):")
 print(len(tokens))         # 7 tokens
 
 # Non-English is expensive:
-tokens = enc.encode("à¤¨à¤®à¤¸à¥à¤¤à¥‡, à¤†à¤ª à¤•à¥ˆà¤¸à¥‡ à¤¹à¥ˆà¤‚?")  # Hindi
+tokens = enc.encode("नमस्ते, आप कैसे हैं?")  # Hindi
 print(len(tokens))         # 20+ tokens for same meaning!
 
 # This means Hindi/Arabic/CJK users pay 2-4x more per API call
@@ -156,7 +156,7 @@ Common special tokens across models:
 <|im_end|>          → End of a message
 <|system|>          → System prompt marker
 
-These are NOT part of the text â€” they're control signals the model was trained on.
+These are NOT part of the text — they're control signals the model was trained on.
 Different models use different special tokens (not compatible).
 ```
 
@@ -164,7 +164,7 @@ Different models use different special tokens (not compatible).
 
 ## ◆ Strengths vs Limitations
 
-| ✅ Strengths                                      | âŒ Limitations                                             |
+| ✅ Strengths                                      | ❌ Limitations                                             |
 | ------------------------------------------------ | --------------------------------------------------------- |
 | Sub-word = handles any text (even made-up words) | Non-English languages get more tokens per word = inequity |
 | Fixed vocabulary = predictable model size        | Arithmetic is hard (numbers split unpredictably)          |
@@ -177,14 +177,14 @@ Different models use different special tokens (not compatible).
 
 ```
 TOKEN ESTIMATION:
-  1 token â‰ˆ 4 characters (English)
-  1 token â‰ˆ Â¾ of a word (English)
-  100 tokens â‰ˆ 75 words
-  1 page â‰ˆ 300 tokens
+  1 token ≈ 4 characters (English)
+  1 token ≈ ¾ of a word (English)
+  100 tokens ≈ 75 words
+  1 page ≈ 300 tokens
 
 COST IMPACT (example at $3/1M tokens):
-  1,000 word document â‰ˆ 1,300 tokens â‰ˆ $0.004
-  Full book (80K words) â‰ˆ 100K tokens â‰ˆ $0.30
+  1,000 word document ≈ 1,300 tokens ≈ $0.004
+  Full book (80K words) ≈ 100K tokens ≈ $0.30
 
 TOOLS:
   tiktoken (OpenAI): pip install tiktoken
@@ -196,11 +196,11 @@ TOOLS:
 
 ## ○ Gotchas & Common Mistakes
 
-- âš ï¸ **"Why can't GPT count letters in strawberry?"** â€” Because it sees `["straw", "berry"]`, not individual characters. It literally can't see the letters.
-- âš ï¸ **Token â‰  word**: Never estimate costs by word count. Always use the tokenizer library.
-- âš ï¸ **Multilingual cost surprise**: Hindi/Arabic/Japanese text can be 2-4x more tokens than equivalent English.
-- âš ï¸ **Context window is in tokens**: "128K context" means 128K tokens, not characters or words. In English, that's roughly 96K words.
-- âš ï¸ **Leading whitespace matters**: `" hello"` (with space) and `"hello"` are often different tokens.
+- ⚠️ **"Why can't GPT count letters in strawberry?"** — Because it sees `["straw", "berry"]`, not individual characters. It literally can't see the letters.
+- ⚠️ **Token ≠ word**: Never estimate costs by word count. Always use the tokenizer library.
+- ⚠️ **Multilingual cost surprise**: Hindi/Arabic/Japanese text can be 2-4x more tokens than equivalent English.
+- ⚠️ **Context window is in tokens**: "128K context" means 128K tokens, not characters or words. In English, that's roughly 96K words.
+- ⚠️ **Leading whitespace matters**: `" hello"` (with space) and `"hello"` are often different tokens.
 
 ---
 
@@ -210,7 +210,7 @@ TOOLS:
 - **A**: Word-level requires an impossibly large vocabulary (every word in every language) and can't handle misspellings, new words, or code. Sub-word splits rare words into common pieces ("unhappiness" → ["un", "happiness"]) while keeping frequent words whole. Fixed vocab size (~32K-128K), handles any input.
 
 - **Q**: Why is tokenization a source of bias?
-- **A**: Languages with less representation in training data get worse tokenization â€” more tokens per word. This means non-English users spend more money, get slower responses, and use more of their context window for the same content. Larger vocabularies (LLaMA 3's 128K vs LLaMA 2's 32K) help mitigate this.
+- **A**: Languages with less representation in training data get worse tokenization — more tokens per word. This means non-English users spend more money, get slower responses, and use more of their context window for the same content. Larger vocabularies (LLaMA 3's 128K vs LLaMA 2's 32K) help mitigate this.
 
 ---
 
@@ -220,7 +220,7 @@ TOOLS:
 
 ```python
 # pip install tiktoken>=0.6
-# âš ï¸ Last tested: 2026-04 | Requires: tiktoken>=0.6
+# ⚠️ Last tested: 2026-04 | Requires: tiktoken>=0.6
 import tiktoken
 
 enc = tiktoken.encoding_for_model("gpt-4o")
@@ -237,17 +237,17 @@ def token_cost_report(texts: dict[str, str], price_per_1m: float = 2.50) -> None
 samples = {
     "English (100 words)":  "The quick brown fox jumps over the lazy dog. " * 5,
     "Code (Python func)":   "def fibonacci(n):\n    if n <= 1:\n        return n\n    return fibonacci(n-1) + fibonacci(n-2)\n" * 3,
-    "Hindi (same meaning)":  "à¤¨à¤®à¤¸à¥à¤¤à¥‡, à¤†à¤ª à¤•à¥ˆà¤¸à¥‡ à¤¹à¥ˆà¤‚? à¤®à¥ˆà¤‚ à¤ à¥€à¤• à¤¹à¥‚à¤à¥¤ " * 10,   # 2-4x more tokens
+    "Hindi (same meaning)":  "नमस्ते, आप कैसे हैं? मैं ठीक हूँ। " * 10,   # 2-4x more tokens
     "JSON (structured)":    '{"name": "Alice", "age": 30, "city": "Tokyo"}\n' * 10,
 }
 token_cost_report(samples)
-# English: ~75 tokens  â€” Hindi: ~200+ tokens for equivalent content
+# English: ~75 tokens  — Hindi: ~200+ tokens for equivalent content
 ```
 
 ### Cross-Model Token Comparison
 
 ```python
-# âš ï¸ Last tested: 2026-04 | Requires: tiktoken>=0.6, transformers>=4.40
+# ⚠️ Last tested: 2026-04 | Requires: tiktoken>=0.6, transformers>=4.40
 import tiktoken
 from transformers import AutoTokenizer
 
@@ -311,14 +311,14 @@ for hf_model in ["meta-llama/Llama-3.2-1B", "google/gemma-2-2b"]:
 
 | Type | Resource | Why |
 |------|----------|-----|
-| ðŸ“„ Paper | [Sennrich et al. "BPE for Neural Machine Translation" (2016)](https://arxiv.org/abs/1508.07909) | The paper that introduced BPE to NLP |
-| ðŸŽ¥ Video | [Andrej Karpathy â€” "Let's Build GPT Tokenizer"](https://www.youtube.com/watch?v=zduSFxRajkE) | Build BPE from scratch â€” best practical walkthrough |
-| ðŸ”§ Hands-on | [HuggingFace Tokenizers Library](https://huggingface.co/docs/tokenizers/) | Fast, production-grade tokenizer implementations |
-| ðŸ“˜ Book | "Build a Large Language Model (From Scratch)" by Sebastian Raschka (2024), Ch 2 | Tokenizer implementation with BPE and SentencePiece |
+| 📄 Paper | [Sennrich et al. "BPE for Neural Machine Translation" (2016)](https://arxiv.org/abs/1508.07909) | The paper that introduced BPE to NLP |
+| 🎥 Video | [Andrej Karpathy — "Let's Build GPT Tokenizer"](https://www.youtube.com/watch?v=zduSFxRajkE) | Build BPE from scratch — best practical walkthrough |
+| 🔧 Hands-on | [HuggingFace Tokenizers Library](https://huggingface.co/docs/tokenizers/) | Fast, production-grade tokenizer implementations |
+| 📘 Book | "Build a Large Language Model (From Scratch)" by Sebastian Raschka (2024), Ch 2 | Tokenizer implementation with BPE and SentencePiece |
 
 ## ★ Sources
 
 - Sennrich et al., "Neural Machine Translation of Rare Words with Subword Units" (BPE, 2016)
 - Kudo & Richardson, "SentencePiece: A simple and language independent subword tokenizer" (2018)
-- OpenAI tiktoken â€” https://github.com/openai/tiktoken
-- Hugging Face Tokenizers â€” https://huggingface.co/docs/tokenizers
+- OpenAI tiktoken — https://github.com/openai/tiktoken
+- Hugging Face Tokenizers — https://huggingface.co/docs/tokenizers

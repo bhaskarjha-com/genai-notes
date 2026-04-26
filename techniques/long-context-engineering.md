@@ -8,22 +8,22 @@ status: published
 last_verified: 2026-04
 parent: "../foundations/transformers.md"
 related: ["../techniques/rag.md", "../techniques/context-engineering.md", "../inference/inference-optimization.md", "../foundations/attention-mechanism.md"]
-source: "Multiple â€” see Sources"
+source: "Multiple — see Sources"
 created: 2026-04-14
 updated: 2026-04-14
 ---
 
 # Long-Context Engineering
 
-> ✨ **Bit**: Models now accept 1M+ tokens â€” but "accepts" â‰  "uses well." Long-context engineering is the art of deciding what to put in that window, how to structure it, and when RAG still beats stuffing everything in.
+> ✨ **Bit**: Models now accept 1M+ tokens — but "accepts" ≠ "uses well." Long-context engineering is the art of deciding what to put in that window, how to structure it, and when RAG still beats stuffing everything in.
 
 ---
 
 ## ★ TL;DR
 
-- **What**: Techniques for effectively using large context windows (128K-2M tokens) â€” structuring input, managing retrieval vs context stuffing, and handling the "lost in the middle" problem
-- **Why**: Context windows grew 1000Ã— in 3 years (4K → 2M tokens). Knowing how to use them well is now a core GenAI engineering skill.
-- **Key point**: Longer context â‰  better results. Models degrade on information in the middle of long contexts. Strategic placement, chunking, and hybrid RAG+context approaches outperform naive stuffing.
+- **What**: Techniques for effectively using large context windows (128K-2M tokens) — structuring input, managing retrieval vs context stuffing, and handling the "lost in the middle" problem
+- **Why**: Context windows grew 1000× in 3 years (4K → 2M tokens). Knowing how to use them well is now a core GenAI engineering skill.
+- **Key point**: Longer context ≠ better results. Models degrade on information in the middle of long contexts. Strategic placement, chunking, and hybrid RAG+context approaches outperform naive stuffing.
 
 ---
 
@@ -31,7 +31,7 @@ updated: 2026-04-14
 
 ### Definition
 
-**Long-context engineering** is the practice of designing AI systems that effectively utilize large context windows â€” deciding what information to include, how to structure it, and when to use retrieval vs direct context inclusion.
+**Long-context engineering** is the practice of designing AI systems that effectively utilize large context windows — deciding what information to include, how to structure it, and when to use retrieval vs direct context inclusion.
 
 ### Scope
 
@@ -68,15 +68,15 @@ Covers: Context window capabilities across models, the "lost in the middle" phen
 ```
 INFORMATION RECALL BY POSITION IN CONTEXT:
 
-  Beginning â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ 95% recall   â† STRONG
-  Position 25%  â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ  80% recall
-  Middle    â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ           55% recall   â† WEAK (lost!)
-  Position 75%  â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ  78% recall
-  End       â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ 92% recall   â† STRONG
+  Beginning ████████████████████ 95% recall   ← STRONG
+  Position 25%  ███████████████  80% recall
+  Middle    ██████████           55% recall   ← WEAK (lost!)
+  Position 75%  ███████████████  78% recall
+  End       ████████████████████ 92% recall   ← STRONG
 
   KEY INSIGHT: Models attend strongest to the beginning and
   end of context. Information buried in the middle gets
-  "lost" â€” lower recall accuracy on retrieval tasks.
+  "lost" — lower recall accuracy on retrieval tasks.
 
   PRACTICAL IMPACT:
   - Put the most important information at the START or END
@@ -89,26 +89,26 @@ INFORMATION RECALL BY POSITION IN CONTEXT:
 ```
 DECISION FRAMEWORK:
 
-  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-  â”‚ How much source material do you have?                â”‚
-  â”‚                                                       â”‚
-  â”‚  < 50K tokens?                                       â”‚
-  â”‚  â””â”€ STUFF IT ALL IN CONTEXT                          â”‚
-  â”‚     Simpler, no retrieval infrastructure needed       â”‚
-  â”‚                                                       â”‚
-  â”‚  50K - 500K tokens?                                  â”‚
-  â”‚  â””â”€ HYBRID: Retrieve top chunks + long context       â”‚
-  â”‚     Best of both worlds                               â”‚
-  â”‚                                                       â”‚
-  â”‚  > 500K tokens? (e.g., entire codebase, doc corpus)  â”‚
-  â”‚  â””â”€ RAG with retrieval pipeline                      â”‚
-  â”‚     Can't fit it all, need smart selection            â”‚
-  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+  ┌─────────────────────────────────────────────────────┐
+  │ How much source material do you have?                │
+  │                                                       │
+  │  < 50K tokens?                                       │
+  │  └─ STUFF IT ALL IN CONTEXT                          │
+  │     Simpler, no retrieval infrastructure needed       │
+  │                                                       │
+  │  50K - 500K tokens?                                  │
+  │  └─ HYBRID: Retrieve top chunks + long context       │
+  │     Best of both worlds                               │
+  │                                                       │
+  │  > 500K tokens? (e.g., entire codebase, doc corpus)  │
+  │  └─ RAG with retrieval pipeline                      │
+  │     Can't fit it all, need smart selection            │
+  └─────────────────────────────────────────────────────┘
 
   COST COMPARISON (processing 200K tokens of source material):
 
   Approach          | Per Request Cost | Latency | Quality
-  â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€|â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€|â”€â”€â”€â”€â”€â”€â”€â”€â”€|â”€â”€â”€â”€â”€â”€â”€â”€
+  ──────────────────|─────────────────|─────────|────────
   Full context      | $0.50 - $15.00  | 3-15s   | Good (if structured)
   RAG (top 5 chunks)| $0.01 - $0.10  | 1-3s    | Good (if retrieval works)
   Hybrid            | $0.10 - $1.00  | 2-5s    | Best
@@ -119,19 +119,19 @@ DECISION FRAMEWORK:
 ```
 OPTIMAL CONTEXT LAYOUT:
 
-  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-  â”‚  SYSTEM PROMPT (instructions, persona)   â”‚  â† Beginning: highest attention
-  â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
-  â”‚  MOST RELEVANT CONTEXT                   â”‚  â† Place critical info early
-  â”‚  (top RAG chunks, key documents)         â”‚
-  â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
-  â”‚  SUPPORTING CONTEXT                      â”‚  â† Middle: lower attention
-  â”‚  (additional chunks, examples)           â”‚
-  â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
-  â”‚  CONVERSATION HISTORY                    â”‚  â† Recent context
-  â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
-  â”‚  USER'S CURRENT MESSAGE                  â”‚  â† End: high attention
-  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+  ┌──────────────────────────────────────────┐
+  │  SYSTEM PROMPT (instructions, persona)   │  ← Beginning: highest attention
+  ├──────────────────────────────────────────┤
+  │  MOST RELEVANT CONTEXT                   │  ← Place critical info early
+  │  (top RAG chunks, key documents)         │
+  ├──────────────────────────────────────────┤
+  │  SUPPORTING CONTEXT                      │  ← Middle: lower attention
+  │  (additional chunks, examples)           │
+  ├──────────────────────────────────────────┤
+  │  CONVERSATION HISTORY                    │  ← Recent context
+  ├──────────────────────────────────────────┤
+  │  USER'S CURRENT MESSAGE                  │  ← End: high attention
+  └──────────────────────────────────────────┘
 
   RULES:
   1. Put instructions at START (system prompt)
@@ -149,7 +149,7 @@ OPTIMAL CONTEXT LAYOUT:
 
 ```python
 # pip install openai>=1.0 tiktoken>=0.7
-# âš ï¸ Last tested: 2026-04 | Requires: openai>=1.0
+# ⚠️ Last tested: 2026-04 | Requires: openai>=1.0
 
 import tiktoken
 from openai import OpenAI
@@ -243,17 +243,17 @@ print(response.choices[0].message.content)
 CONTEXT WINDOW RULES OF THUMB:
 
   < 10K tokens:    Any model works, no special engineering needed
-  10K-50K tokens:  Structure matters â€” use XML tags, headers, clear sections
-  50K-200K tokens: "Lost in the middle" is real â€” put key info at start/end
-  200K-1M tokens:  Cost dominates â€” consider hybrid RAG + context approach
-  > 1M tokens:     Must use RAG â€” no model handles this reliably yet
+  10K-50K tokens:  Structure matters — use XML tags, headers, clear sections
+  50K-200K tokens: "Lost in the middle" is real — put key info at start/end
+  200K-1M tokens:  Cost dominates — consider hybrid RAG + context approach
+  > 1M tokens:     Must use RAG — no model handles this reliably yet
 
 TOKEN ESTIMATION:
-  1 page of text  â‰ˆ 400-500 tokens
-  1 code file     â‰ˆ 200-2000 tokens
-  10-page PDF     â‰ˆ 4,000-5,000 tokens
-  100-page report â‰ˆ 40,000-50,000 tokens
-  Entire codebase â‰ˆ 200,000-2,000,000 tokens
+  1 page of text  ≈ 400-500 tokens
+  1 code file     ≈ 200-2000 tokens
+  10-page PDF     ≈ 4,000-5,000 tokens
+  100-page report ≈ 40,000-50,000 tokens
+  Entire codebase ≈ 200,000-2,000,000 tokens
 ```
 
 ---
@@ -272,7 +272,7 @@ TOKEN ESTIMATION:
 ## ○ Interview Angles
 
 - **Q**: When would you use RAG vs long context?
-- **A**: It depends on corpus size, cost tolerance, and update frequency. If the source material is < 50K tokens and relatively static (e.g., a product manual), I'd stuff it directly into context â€” simpler architecture, no retrieval failures. For 50K-500K tokens, I'd use a hybrid: retrieve the top 5-10 most relevant chunks via RAG, then include them in a long-context prompt with supporting background. For > 500K tokens (entire codebases, large doc collections), RAG is necessary â€” no model reliably processes that much context. I'd also consider cost: a 200K-token context costs $0.50-$15 per request at API prices, vs $0.01-$0.10 for RAG with small chunks.
+- **A**: It depends on corpus size, cost tolerance, and update frequency. If the source material is < 50K tokens and relatively static (e.g., a product manual), I'd stuff it directly into context — simpler architecture, no retrieval failures. For 50K-500K tokens, I'd use a hybrid: retrieve the top 5-10 most relevant chunks via RAG, then include them in a long-context prompt with supporting background. For > 500K tokens (entire codebases, large doc collections), RAG is necessary — no model reliably processes that much context. I'd also consider cost: a 200K-token context costs $0.50-$15 per request at API prices, vs $0.01-$0.10 for RAG with small chunks.
 
 ---
 
@@ -306,10 +306,10 @@ TOKEN ESTIMATION:
 
 | Type | Resource | Why |
 |------|----------|-----|
-| ðŸ“„ Paper | [Liu et al. "Lost in the Middle" (2023)](https://arxiv.org/abs/2307.03172) | Definitive study of positional attention degradation |
-| ðŸ“„ Paper | [Google "Leave No Context Behind" (2024)](https://arxiv.org/abs/2404.07143) | Infini-attention for unbounded context |
-| ðŸ“˜ Book | "AI Engineering" by Chip Huyen (2025), Ch 3 | RAG vs long context tradeoffs in production |
-| ðŸ”§ Hands-on | [Google AI Studio](https://aistudio.google.com/) | Test Gemini's 1M-token context window for free |
+| 📄 Paper | [Liu et al. "Lost in the Middle" (2023)](https://arxiv.org/abs/2307.03172) | Definitive study of positional attention degradation |
+| 📄 Paper | [Google "Leave No Context Behind" (2024)](https://arxiv.org/abs/2404.07143) | Infini-attention for unbounded context |
+| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 3 | RAG vs long context tradeoffs in production |
+| 🔧 Hands-on | [Google AI Studio](https://aistudio.google.com/) | Test Gemini's 1M-token context window for free |
 
 ---
 
@@ -317,6 +317,6 @@ TOKEN ESTIMATION:
 
 - Liu et al. "Lost in the Middle: How Language Models Use Long Contexts" (2023)
 - Google "Leave No Context Behind: Efficient Infinite Context Transformers" (2024)
-- Anthropic Context Window Documentation â€” https://docs.anthropic.com/
+- Anthropic Context Window Documentation — https://docs.anthropic.com/
 - [RAG](../techniques/rag.md)
 - [Context Engineering](../techniques/context-engineering.md)

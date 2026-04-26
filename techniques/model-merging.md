@@ -8,14 +8,14 @@ status: published
 last_verified: 2026-04
 parent: "../genai.md"
 related: ["fine-tuning.md", "advanced-fine-tuning.md", "distillation-and-compression.md", "../inference/inference-optimization.md"]
-source: "Multiple â€” see Sources"
+source: "Multiple — see Sources"
 created: 2026-04-15
 updated: 2026-04-15
 ---
 
 # Model Merging
 
-> ✨ **Bit**: Fine-tuning gives you specialists. Model merging gives you a generalist built from specialists â€” at zero extra training cost.
+> ✨ **Bit**: Fine-tuning gives you specialists. Model merging gives you a generalist built from specialists — at zero extra training cost.
 
 ---
 
@@ -23,7 +23,7 @@ updated: 2026-04-15
 
 - **What**: Techniques to combine the weights of multiple fine-tuned models into a single model without additional training
 - **Why**: Cheaper than training a multi-task model from scratch; lets you combine domain experts (code + medical + safety) into one deployable model
-- **Key point**: Merging is NOT ensembling â€” you get ONE model at inference time, with no extra latency or memory cost
+- **Key point**: Merging is NOT ensembling — you get ONE model at inference time, with no extra latency or memory cost
 
 ---
 
@@ -31,7 +31,7 @@ updated: 2026-04-15
 
 ### Definition
 
-**Model merging** encompasses weight-space techniques that combine parameters from two or more models â€” typically fine-tuned from the same base model â€” into a single unified model. Unlike ensembles (which run multiple models at inference), merged models have identical cost and latency to a single model.
+**Model merging** encompasses weight-space techniques that combine parameters from two or more models — typically fine-tuned from the same base model — into a single unified model. Unlike ensembles (which run multiple models at inference), merged models have identical cost and latency to a single model.
 
 ### Scope
 
@@ -40,15 +40,15 @@ Covers: TIES, DARE, SLERP, Model Soups, Frankenmerging, and the mergekit toolcha
 ### Significance
 
 - **Standard open-weight technique** in 2025-2026: top HuggingFace Open LLM Leaderboard models are typically merges
-- **Cost**: Zero GPU-hours for training â€” merging is a pure weight arithmetic operation
+- **Cost**: Zero GPU-hours for training — merging is a pure weight arithmetic operation
 - **Production use cases**: Multi-task deployment, domain adaptation stacking, safety alignment injection
 - **Interview topic**: "When would you merge models instead of fine-tuning or distilling?" is a common system design question
 
 ### Prerequisites
 
-- [Fine-Tuning](./fine-tuning.md) â€” understanding what fine-tuned weight deltas represent
-- [Distillation and Compression](./distillation-and-compression.md) â€” alternative model optimization path
-- [Inference Optimization](../inference/inference-optimization.md) â€” serving context for merged models
+- [Fine-Tuning](./fine-tuning.md) — understanding what fine-tuned weight deltas represent
+- [Distillation and Compression](./distillation-and-compression.md) — alternative model optimization path
+- [Inference Optimization](../inference/inference-optimization.md) — serving context for merged models
 
 ---
 
@@ -58,23 +58,23 @@ Covers: TIES, DARE, SLERP, Model Soups, Frankenmerging, and the mergekit toolcha
 
 When you fine-tune a base model for different tasks, each resulting model occupies a point in weight space near the base model. Research shows that:
 
-1. **The loss landscape between fine-tuned models is often convex** â€” averaging weights tends to land in a good region
-2. **Most weight changes are small** â€” fine-tuning modifies <5% of weights significantly
-3. **Different tasks modify different weights** â€” interference is lower than expected
+1. **The loss landscape between fine-tuned models is often convex** — averaging weights tends to land in a good region
+2. **Most weight changes are small** — fine-tuning modifies <5% of weights significantly
+3. **Different tasks modify different weights** — interference is lower than expected
 
 ```
 WEIGHT SPACE VISUALIZATION:
 
-         Code Expert â—
-                    â•²
-                     â•²  â† Merged model lands
-                      â—    somewhere in this region
-                     â•±
-                    â•±
-     Medical Expert â—
-                    â”‚
-                    â”‚
-              Base Model â—
+         Code Expert ●
+                    ╲
+                     ╲  ← Merged model lands
+                      ●    somewhere in this region
+                     ╱
+                    ╱
+     Medical Expert ●
+                    │
+                    │
+              Base Model ●
 
 Key insight: The path between fine-tuned models
 often passes through regions of LOW loss for BOTH tasks.
@@ -86,13 +86,13 @@ often passes through regions of LOW loss for BOTH tasks.
 |-----------|--------|-------------|---------|:----------:|
 | **Model Soups** | Simple weight averaging | Same base, same task, different hyperparams | Good | Low |
 | **SLERP** | Spherical interpolation between 2 models | Blending 2 models with different strengths | Good | Low |
-| **TIES** | Trim + Elect Sign + Merge | â‰¥2 models with potential sign conflicts | Very Good | Medium |
+| **TIES** | Trim + Elect Sign + Merge | ≥2 models with potential sign conflicts | Very Good | Medium |
 | **DARE** | Drop + Rescale delta params | Sparsifying merges, combines with TIES | Very Good | Medium |
 | **Frankenmerging** | Layer/block stacking from different models | Experimental, architecture exploration | Variable | High |
 
 ### Model Soups (Weight Averaging)
 
-The simplest technique â€” average the weights of models fine-tuned from the same base.
+The simplest technique — average the weights of models fine-tuned from the same base.
 
 ```
 UNIFORM SOUP:
@@ -117,8 +117,8 @@ LINEAR INTERPOLATION (naive):
   Problem: Can shrink weight magnitudes at t = 0.5
 
 SLERP:
-  Î© = arccos(A Â· B / (|A| Ã— |B|))
-  merged = sin((1-t)Î©)/sin(Î©) Ã— A + sin(tÎ©)/sin(Î©) Ã— B
+  Ω = arccos(A · B / (|A| × |B|))
+  merged = sin((1-t)Ω)/sin(Ω) × A + sin(tΩ)/sin(Ω) × B
   Advantage: Preserves weight vector norms
 
   t = 0.0 → pure model A
@@ -141,16 +141,16 @@ THE INTERFERENCE PROBLEM:
 
 TIES SOLUTION (3 steps):
 
-  STEP 1 â€” TRIM: Drop low-magnitude delta parameters
+  STEP 1 — TRIM: Drop low-magnitude delta parameters
     Delta = fine_tuned_weight - base_weight
     If |delta| < threshold → set to 0
     Removes noise, keeps only significant changes
 
-  STEP 2 â€” ELECT SIGN: Resolve sign conflicts by majority vote
+  STEP 2 — ELECT SIGN: Resolve sign conflicts by majority vote
     If 2 models say "increase" and 1 says "decrease"
     → Elect positive sign, zero out the negative delta
 
-  STEP 3 â€” MERGE: Average the remaining (trimmed, sign-aligned) deltas
+  STEP 3 — MERGE: Average the remaining (trimmed, sign-aligned) deltas
     merged = base_weight + avg(surviving_deltas)
 ```
 
@@ -160,9 +160,9 @@ A sparsification technique that randomly drops most delta parameters and rescale
 
 ```
 DARE MECHANISM:
-  1. Compute delta: Î” = fine_tuned - base
+  1. Compute delta: Δ = fine_tuned - base
   2. Randomly drop p% of delta parameters (typically p = 90-99%)
-  3. Rescale remaining: Î”_surviving = Î”_surviving / (1 - p)
+  3. Rescale remaining: Δ_surviving = Δ_surviving / (1 - p)
      (Rescaling preserves the expected sum of deltas)
 
 WHY IT WORKS:
@@ -199,7 +199,7 @@ CAUTION:
 WHEN TO MERGE vs OTHER APPROACHES:
 
   Have multiple fine-tuned models from same base?
-    YES → Model merging is free â€” try TIES-DARE first
+    YES → Model merging is free — try TIES-DARE first
     NO  → Can you fine-tune from a common base? If no → Distillation
 
   Need guaranteed quality for production?
@@ -227,7 +227,7 @@ WHEN TO MERGE vs OTHER APPROACHES:
 
 ```yaml
 # pip install mergekit
-# âš ï¸ Last tested: 2026-04 | Requires: mergekit>=0.0.5, torch>=2.0, GPU recommended
+# ⚠️ Last tested: 2026-04 | Requires: mergekit>=0.0.5, torch>=2.0, GPU recommended
 
 # === mergekit YAML config: TIES-DARE merge of 2 LoRA experts ===
 # Save as: merge_config.yaml
@@ -262,7 +262,7 @@ tokenizer_source: base  # use base model tokenizer
 
 ```python
 # pip install torch>=2.0 safetensors>=0.4
-# âš ï¸ Last tested: 2026-04 | Requires: torch>=2.0
+# ⚠️ Last tested: 2026-04 | Requires: torch>=2.0
 
 import torch
 from safetensors.torch import load_file, save_file
@@ -323,7 +323,7 @@ TECHNIQUE CHEAT SHEET:
   2 models, simple blend         → SLERP (t=0.3-0.7)
   3+ models, same task           → Model Soups (uniform averaging)
   3+ models, different tasks     → TIES or DARE-TIES
-  Experimental layer mixing      → Frankenmerge (âš ï¸ high variance)
+  Experimental layer mixing      → Frankenmerge (⚠️ high variance)
   LoRA adapters specifically     → DARE-TIES via mergekit
 
 MERGEKIT COMMANDS:
@@ -343,8 +343,8 @@ COMMON HYPERPARAMETERS:
 
 | Failure | Symptoms | Root Cause | Mitigation |
 |---------|----------|------------|------------|
-| **Capability collapse** | Merged model loses a skill one parent had | Weight interference â€” competing deltas cancel out | Use TIES/DARE instead of naive averaging; test each capability post-merge |
-| **Safety regression** | Merged model bypasses safety training | Safety alignment weights diluted by task-specific merges | Always include safety-tuned model with high weight (â‰¥0.3); red-team test post-merge |
+| **Capability collapse** | Merged model loses a skill one parent had | Weight interference — competing deltas cancel out | Use TIES/DARE instead of naive averaging; test each capability post-merge |
+| **Safety regression** | Merged model bypasses safety training | Safety alignment weights diluted by task-specific merges | Always include safety-tuned model with high weight (≥0.3); red-team test post-merge |
 | **Evaluation blindspots** | Merge scores well on average benchmarks but fails on specific tasks | Averaging hides per-task regressions | Evaluate on EACH parent's original eval set, not just aggregate benchmarks |
 | **Architecture mismatch** | Merge crashes or produces garbage | Models have different architectures, vocab sizes, or tokenizers | Only merge models from the same base architecture and tokenizer |
 | **LoRA rank mismatch** | mergekit fails or produces degraded output | Different LoRA rank/alpha across adapters | Standardize rank/alpha across all LoRA experiments you plan to merge |
@@ -353,11 +353,11 @@ COMMON HYPERPARAMETERS:
 
 ## ○ Gotchas & Common Mistakes
 
-- âš ï¸ **Only merge from the same base**: Merging LLaMA with Mistral produces garbage. Models MUST share the same architecture and initialization.
-- âš ï¸ **Evaluate per-task, not just aggregate**: A merge can improve average scores while catastrophically losing one parent's specialty.
-- âš ï¸ **Tokenizer matters**: Use the base model's tokenizer. If any fine-tuned model added special tokens, the merge will have mismatched embeddings.
-- âš ï¸ **SLERP is for 2 models only**: For 3+ models, use TIES or DARE. SLERP doesn't extend to multi-model merges.
-- âš ï¸ **Merging â‰  knowledge addition**: Merging combines what models already know. It cannot teach a merged model NEW knowledge that no parent had.
+- ⚠️ **Only merge from the same base**: Merging LLaMA with Mistral produces garbage. Models MUST share the same architecture and initialization.
+- ⚠️ **Evaluate per-task, not just aggregate**: A merge can improve average scores while catastrophically losing one parent's specialty.
+- ⚠️ **Tokenizer matters**: Use the base model's tokenizer. If any fine-tuned model added special tokens, the merge will have mismatched embeddings.
+- ⚠️ **SLERP is for 2 models only**: For 3+ models, use TIES or DARE. SLERP doesn't extend to multi-model merges.
+- ⚠️ **Merging ≠ knowledge addition**: Merging combines what models already know. It cannot teach a merged model NEW knowledge that no parent had.
 
 ---
 
@@ -367,7 +367,7 @@ COMMON HYPERPARAMETERS:
 - **A**: Merging when: (1) you already have multiple fine-tuned models and want to avoid retraining, (2) you don't have access to the original training data, (3) you want to quickly iterate on combinations (merging takes minutes, fine-tuning takes hours). Fine-tuning on combined data when: (1) you need guaranteed quality, (2) you have the data and compute budget, (3) the task combination is complex enough that weight averaging won't capture interactions.
 
 - **Q**: How do you evaluate whether a merge was successful?
-- **A**: Three levels. First, run each parent model's original eval suite against the merge â€” the merge should retain â‰¥90% of each parent's task-specific performance. Second, run general benchmarks (MMLU-Pro, HumanEval) to ensure no broad capability loss. Third, red-team for safety regressions, especially if one parent was a safety-tuned model. If any parent's capability drops below acceptable threshold, adjust merge weights or switch to TIES/DARE to reduce interference.
+- **A**: Three levels. First, run each parent model's original eval suite against the merge — the merge should retain ≥90% of each parent's task-specific performance. Second, run general benchmarks (MMLU-Pro, HumanEval) to ensure no broad capability loss. Third, red-team for safety regressions, especially if one parent was a safety-tuned model. If any parent's capability drops below acceptable threshold, adjust merge weights or switch to TIES/DARE to reduce interference.
 
 ---
 
@@ -378,12 +378,12 @@ COMMON HYPERPARAMETERS:
 **Goal**: Create a multi-task model from two LoRA experts
 **Time**: 30 minutes
 **Steps**:
-1. Fine-tune two LoRA adapters from the same base (e.g., one for code, one for summarization) â€” or download two from HuggingFace
+1. Fine-tune two LoRA adapters from the same base (e.g., one for code, one for summarization) — or download two from HuggingFace
 2. Write a mergekit YAML config using `dare_ties` method
 3. Run `mergekit-yaml config.yaml ./merged --cuda`
 4. Evaluate the merged model on both tasks
 5. Compare: merged model vs each parent on their respective task
-**Expected Output**: A single model that handles both tasks with â‰¤10% quality degradation per task
+**Expected Output**: A single model that handles both tasks with ≤10% quality degradation per task
 
 ---
 
@@ -402,11 +402,11 @@ COMMON HYPERPARAMETERS:
 
 | Type | Resource | Why |
 |------|----------|-----|
-| ðŸ”§ Hands-on | [mergekit](https://github.com/arcee-ai/mergekit) | Industry-standard toolkit for all merge methods |
-| ðŸ“„ Paper | [Yadav et al., "Resolving Interference When Merging Models" (2023)](https://arxiv.org/abs/2306.01708) | The TIES paper â€” foundational reading |
-| ðŸ“„ Paper | [Yu et al., "Language Models are Super Mario" (2023)](https://arxiv.org/abs/2311.03099) | The DARE paper â€” drop and rescale technique |
-| ðŸ“„ Paper | [Wortsman et al., "Model Soups" (2022)](https://arxiv.org/abs/2203.05482) | Original work on weight averaging of fine-tuned models |
-| ðŸ”§ Hands-on | [HuggingFace Open LLM Leaderboard](https://huggingface.co/spaces/open-llm-leaderboard/open_llm_leaderboard) | See which top models are merges |
+| 🔧 Hands-on | [mergekit](https://github.com/arcee-ai/mergekit) | Industry-standard toolkit for all merge methods |
+| 📄 Paper | [Yadav et al., "Resolving Interference When Merging Models" (2023)](https://arxiv.org/abs/2306.01708) | The TIES paper — foundational reading |
+| 📄 Paper | [Yu et al., "Language Models are Super Mario" (2023)](https://arxiv.org/abs/2311.03099) | The DARE paper — drop and rescale technique |
+| 📄 Paper | [Wortsman et al., "Model Soups" (2022)](https://arxiv.org/abs/2203.05482) | Original work on weight averaging of fine-tuned models |
+| 🔧 Hands-on | [HuggingFace Open LLM Leaderboard](https://huggingface.co/spaces/open-llm-leaderboard/open_llm_leaderboard) | See which top models are merges |
 
 ---
 
@@ -415,6 +415,6 @@ COMMON HYPERPARAMETERS:
 - Yadav et al., "Resolving Interference When Merging Models" (TIES, NeurIPS 2023)
 - Yu et al., "Language Models are Super Mario: Absorbing Abilities from Homologous Models as a Free Lunch" (DARE, 2023)
 - Wortsman et al., "Model Soups: Averaging Weights of Multiple Fine-tuned Models Improves Accuracy" (ICML 2022)
-- mergekit documentation â€” https://github.com/arcee-ai/mergekit
+- mergekit documentation — https://github.com/arcee-ai/mergekit
 - [Fine-Tuning](./fine-tuning.md)
 - [Advanced Fine-Tuning](./advanced-fine-tuning.md)

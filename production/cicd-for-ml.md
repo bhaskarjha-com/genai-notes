@@ -170,7 +170,7 @@ jobs:
 
 ```python
 # pip install openai>=1.60 pytest>=8
-# âš ï¸ Last tested: 2026-04 | Requires: openai>=1.60, OPENAI_API_KEY
+# ⚠️ Last tested: 2026-04 | Requires: openai>=1.60, OPENAI_API_KEY
 # Save as tests/test_llm_quality.py and run: pytest tests/ -v
 
 import re, pytest
@@ -244,16 +244,16 @@ class TestLLMQualityGate:
 
 | Type       | Resource                                                                       | Why                                                             |
 | ---------- | ------------------------------------------------------------------------------ | --------------------------------------------------------------- |
-| ðŸ“˜ Book     | "Designing Machine Learning Systems" by Chip Huyen (2022), Ch 9 (Deployment)   | Best treatment of ML deployment patterns and release strategies |
-| ðŸ”§ Hands-on | [GitHub Actions for ML](https://docs.github.com/en/actions)                    | CI/CD platform most accessible for ML teams                     |
-| ðŸ”§ Hands-on | [MLflow Model Registry](https://mlflow.org/docs/latest/model-registry.html)    | Model versioning and stage transitions                          |
-| ðŸŽ¥ Video    | [Shreya Shankar â€” "Rethinking ML Monitoring"](https://www.shreya-shankar.com/) | How to detect quality regressions in production ML              |
+| 📘 Book     | "Designing Machine Learning Systems" by Chip Huyen (2022), Ch 9 (Deployment)   | Best treatment of ML deployment patterns and release strategies |
+| 🔧 Hands-on | [GitHub Actions for ML](https://docs.github.com/en/actions)                    | CI/CD platform most accessible for ML teams                     |
+| 🔧 Hands-on | [MLflow Model Registry](https://mlflow.org/docs/latest/model-registry.html)    | Model versioning and stage transitions                          |
+| 🎥 Video    | [Shreya Shankar — "Rethinking ML Monitoring"](https://www.shreya-shankar.com/) | How to detect quality regressions in production ML              |
 
 ---
 
 ## ★ Sources
 
-- GitHub Actions documentation â€” https://docs.github.com/en/actions
-- Argo CD documentation â€” https://argo-cd.readthedocs.io/
-- MLflow documentation â€” https://mlflow.org/docs/
+- GitHub Actions documentation — https://docs.github.com/en/actions
+- Argo CD documentation — https://argo-cd.readthedocs.io/
+- MLflow documentation — https://mlflow.org/docs/
 - [LLMOps & Production Deployment](./llmops.md)

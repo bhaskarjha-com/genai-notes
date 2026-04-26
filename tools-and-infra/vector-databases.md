@@ -22,7 +22,7 @@ updated: 2026-04-11
 ## ★ TL;DR
 
 - **What**: Databases optimized for storing and searching high-dimensional vectors (embeddings) using similarity metrics
-- **Why**: The backbone of RAG, semantic search, recommendation systems â€” any time you need "find similar things"
+- **Why**: The backbone of RAG, semantic search, recommendation systems — any time you need "find similar things"
 - **Key point**: Traditional DBs search by exact match. Vector DBs search by meaning/similarity using distance metrics.
 
 ---
@@ -80,7 +80,7 @@ HOW:
 
 ```
 Cosine Similarity:
-  sim(A, B) = (A Â· B) / (||A|| Ã— ||B||)
+  sim(A, B) = (A · B) / (||A|| × ||B||)
 
   Range: -1 (opposite) to 1 (identical)
   Typical threshold: > 0.7 = "similar"
@@ -97,7 +97,7 @@ Brute-force search (compare query against ALL vectors) is O(n). At millions of v
 | **ScaNN** | Quantize + search                        | Google                     | Very fast, slight accuracy loss |
 | **Annoy** | Random projection trees                  | Spotify                    | Fast build, OK accuracy         |
 
-**HNSW** (Hierarchical Navigable Small World) is the most popular â€” think of it as:
+**HNSW** (Hierarchical Navigable Small World) is the most popular — think of it as:
 
 ```
 Layer 3: [  A  --------  B  ]           (few nodes, long-range links)
@@ -124,14 +124,14 @@ Search: Start at top layer, navigate to approximate area,
 
 ```
 Do you need a vector DB at all?
-â”œâ”€â”€ < 10K documents → Just use FAISS/numpy in memory
-â”œâ”€â”€ < 100K documents → pgvector (if you have Postgres) or Chroma
-â”œâ”€â”€ 100K - 10M documents → Qdrant, Weaviate, or Pinecone
-â””â”€â”€ > 10M documents → Milvus or Qdrant (clustered)
+├── < 10K documents → Just use FAISS/numpy in memory
+├── < 100K documents → pgvector (if you have Postgres) or Chroma
+├── 100K - 10M documents → Qdrant, Weaviate, or Pinecone
+└── > 10M documents → Milvus or Qdrant (clustered)
 
 Do you want managed or self-hosted?
-â”œâ”€â”€ Managed (no ops): Pinecone, Qdrant Cloud, Weaviate Cloud
-â””â”€â”€ Self-hosted (control): Qdrant, Weaviate, Milvus (Docker)
+├── Managed (no ops): Pinecone, Qdrant Cloud, Weaviate Cloud
+└── Self-hosted (control): Qdrant, Weaviate, Milvus (Docker)
 ```
 
 ---
@@ -141,8 +141,8 @@ Do you want managed or self-hosted?
 ### Quick Start Examples
 
 ```python
-# âš ï¸ Last tested: 2026-04
-# â•â•â• CHROMA (simplest - great for learning) â•â•â•
+# ⚠️ Last tested: 2026-04
+# ═══ CHROMA (simplest - great for learning) ═══
 import chromadb
 from chromadb.utils import embedding_functions
 
@@ -164,8 +164,8 @@ print(results["documents"])  # → Most similar docs
 ```
 
 ```python
-# âš ï¸ Last tested: 2026-04
-# â•â•â• QDRANT (production-ready) â•â•â•
+# ⚠️ Last tested: 2026-04
+# ═══ QDRANT (production-ready) ═══
 from qdrant_client import QdrantClient
 from qdrant_client.models import VectorParams, Distance, PointStruct
 
@@ -195,10 +195,10 @@ results = client.query_points(
 ```
 
 ```bash
-# â•â•â• DOCKER: Run Qdrant locally â•â•â•
+# ═══ DOCKER: Run Qdrant locally ═══
 docker run -p 6333:6333 qdrant/qdrant
 
-# â•â•â• DOCKER: Run Weaviate locally â•â•â•
+# ═══ DOCKER: Run Weaviate locally ═══
 docker run -p 8080:8080 semitechnologies/weaviate
 ```
 
@@ -206,9 +206,9 @@ docker run -p 8080:8080 semitechnologies/weaviate
 
 ## ◆ Strengths vs Limitations
 
-| ✅ Strengths                                          | âŒ Limitations                               |
+| ✅ Strengths                                          | ❌ Limitations                               |
 | ---------------------------------------------------- | ------------------------------------------- |
-| Semantic search ("find similar" not "find exact")    | Approximate â€” may miss some results         |
+| Semantic search ("find similar" not "find exact")    | Approximate — may miss some results         |
 | Sub-millisecond search at million-scale              | Embedding quality determines search quality |
 | Rich metadata filtering + vector search              | Additional infra to manage                  |
 | Growing ecosystem and tooling                        | Each DB has different APIs (no standard)    |
@@ -244,11 +244,11 @@ EMBEDDING DIMENSIONS:
 
 ## ○ Gotchas & Common Mistakes
 
-- âš ï¸ **Embedding model matters more than the DB**: A bad embedding model with Pinecone will perform worse than a good one with Chroma.
-- âš ï¸ **Don't forget metadata filtering**: Most queries need both vector similarity AND metadata filters (e.g., "similar to X AND category = 'tutorials'").
-- âš ï¸ **pgvector is good enough for most**: Don't adopt a specialized vector DB if pgvector in your existing Postgres handles your scale.
-- âš ï¸ **Index before you search**: Without building an index (HNSW/IVF), searches fall back to brute-force and become slow.
-- âš ï¸ **Embedding mismatch**: The model that embeds documents MUST be the same model that embeds queries. Mixing models = garbage results.
+- ⚠️ **Embedding model matters more than the DB**: A bad embedding model with Pinecone will perform worse than a good one with Chroma.
+- ⚠️ **Don't forget metadata filtering**: Most queries need both vector similarity AND metadata filters (e.g., "similar to X AND category = 'tutorials'").
+- ⚠️ **pgvector is good enough for most**: Don't adopt a specialized vector DB if pgvector in your existing Postgres handles your scale.
+- ⚠️ **Index before you search**: Without building an index (HNSW/IVF), searches fall back to brute-force and become slow.
+- ⚠️ **Embedding mismatch**: The model that embeds documents MUST be the same model that embeds queries. Mixing models = garbage results.
 
 ---
 
@@ -304,15 +304,15 @@ EMBEDDING DIMENSIONS:
 
 | Type | Resource | Why |
 |------|----------|-----|
-| ðŸ”§ Hands-on | [Qdrant Documentation](https://qdrant.tech/documentation/) | Excellent open-source vector DB with filtering support |
-| ðŸ”§ Hands-on | [Pinecone Documentation](https://docs.pinecone.io/) | Managed vector DB â€” easiest to start with |
-| ðŸ“„ Paper | [Johnson et al. "FAISS" (2017)](https://arxiv.org/abs/1702.08734) | Foundational nearest-neighbor search algorithms |
-| ðŸ“˜ Book | "AI Engineering" by Chip Huyen (2025), Ch 3 | Vector search in the context of RAG systems |
+| 🔧 Hands-on | [Qdrant Documentation](https://qdrant.tech/documentation/) | Excellent open-source vector DB with filtering support |
+| 🔧 Hands-on | [Pinecone Documentation](https://docs.pinecone.io/) | Managed vector DB — easiest to start with |
+| 📄 Paper | [Johnson et al. "FAISS" (2017)](https://arxiv.org/abs/1702.08734) | Foundational nearest-neighbor search algorithms |
+| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 3 | Vector search in the context of RAG systems |
 
 ## ★ Sources
 
-- Pinecone Learning Center â€” https://www.pinecone.io/learn/
-- Qdrant documentation â€” https://qdrant.tech/documentation/
-- Weaviate documentation â€” https://weaviate.io/developers/weaviate
-- Chroma documentation â€” https://docs.trychroma.com
-- "HNSW algorithm explained" â€” https://www.pinecone.io/learn/series/faiss/hnsw/
+- Pinecone Learning Center — https://www.pinecone.io/learn/
+- Qdrant documentation — https://qdrant.tech/documentation/
+- Weaviate documentation — https://weaviate.io/developers/weaviate
+- Chroma documentation — https://docs.trychroma.com
+- "HNSW algorithm explained" — https://www.pinecone.io/learn/series/faiss/hnsw/

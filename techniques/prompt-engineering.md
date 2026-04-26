@@ -15,14 +15,14 @@ updated: 2026-04-11
 
 # Prompt Engineering
 
-> ✨ **Bit**: Prompt engineering is the art of asking the right question. Turns out, how you ask an LLM matters as much as what you ask â€” just like talking to humans.
+> ✨ **Bit**: Prompt engineering is the art of asking the right question. Turns out, how you ask an LLM matters as much as what you ask — just like talking to humans.
 
 ---
 
 ## ★ TL;DR
 
 - **What**: Crafting inputs (prompts) to get desired outputs from LLMs without changing the model
-- **Why**: The cheapest, fastest way to improve LLM output. Zero training, zero infra â€” just better instructions.
+- **Why**: The cheapest, fastest way to improve LLM output. Zero training, zero infra — just better instructions.
 - **Key point**: Good prompting follows patterns: be specific, give examples, assign a role, think step-by-step.
 
 ---
@@ -73,7 +73,7 @@ STRONG: "You are an expert technical editor. Summarize the following
          for software engineers. Use precise technical language."
 ```
 
-**Why it works**: Activates the model's "persona" â€” trained on text BY experts, so "being" an expert improves output.
+**Why it works**: Activates the model's "persona" — trained on text BY experts, so "being" an expert improves output.
 
 #### 2. Few-Shot Prompting
 
@@ -92,12 +92,12 @@ Classify the sentiment:
 #### 3. Chain of Thought (CoT)
 
 ```
-WEAK:  "What is 17 Ã— 24?"
-STRONG: "What is 17 Ã— 24? Think step by step."
+WEAK:  "What is 17 × 24?"
+STRONG: "What is 17 × 24? Think step by step."
 
 Model output with CoT:
-  "17 Ã— 24
-   = 17 Ã— 20 + 17 Ã— 4
+  "17 × 24
+   = 17 × 20 + 17 × 4
    = 340 + 68
    = 408"
 ```
@@ -138,7 +138,7 @@ Model output with CoT:
 
 ### The Prompting Mistake Matrix
 
-| âŒ Common Mistake        | ✅ Better Approach                                                                                     |
+| ❌ Common Mistake        | ✅ Better Approach                                                                                     |
 | ----------------------- | ----------------------------------------------------------------------------------------------------- |
 | "Write good code"       | "Write Python 3.12 code that handles edge cases. Include type hints, docstrings, and error handling." |
 | "Summarize this"        | "Summarize in 3 bullet points for a technical audience. Each bullet max 20 words."                    |
@@ -152,13 +152,13 @@ Model output with CoT:
 
 ```
 PROMPTING CHECKLIST:
-â–¡ Define ROLE      → "You are a [specific expert]"
-â–¡ Set CONTEXT      → Background info the model needs
-â–¡ State TASK       → Exactly what to do
-â–¡ Specify FORMAT   → How to structure the output
-â–¡ Give EXAMPLES    → 2-3 examples of desired output
-â–¡ Add CONSTRAINTS  → What NOT to do, length limits, etc.
-â–¡ Request REASONING → "Think step by step" / "Explain your reasoning"
+□ Define ROLE      → "You are a [specific expert]"
+□ Set CONTEXT      → Background info the model needs
+□ State TASK       → Exactly what to do
+□ Specify FORMAT   → How to structure the output
+□ Give EXAMPLES    → 2-3 examples of desired output
+□ Add CONSTRAINTS  → What NOT to do, length limits, etc.
+□ Request REASONING → "Think step by step" / "Explain your reasoning"
 
 TEMPERATURE GUIDE:
   0.0 → Factual, deterministic (data extraction, classification)
@@ -171,10 +171,10 @@ TEMPERATURE GUIDE:
 
 ## ◆ Strengths vs Limitations
 
-| ✅ Strengths                   | âŒ Limitations                                            |
+| ✅ Strengths                   | ❌ Limitations                                            |
 | ----------------------------- | -------------------------------------------------------- |
 | Zero cost (no training/infra) | Can't add new knowledge                                  |
-| Instant iteration             | Fragile â€” small changes = different results              |
+| Instant iteration             | Fragile — small changes = different results              |
 | Works with any model          | Context window limits complexity                         |
 | Easy to A/B test              | Can't change model behavior permanently                  |
 | Good starting point always    | Diminishing returns at some point → need RAG/fine-tuning |
@@ -183,11 +183,11 @@ TEMPERATURE GUIDE:
 
 ## ○ Gotchas & Common Mistakes
 
-- âš ï¸ **Prompt â‰  Programming**: Prompts are probabilistic, not deterministic. Same prompt can give different results.
-- âš ï¸ **"Be concise" doesn't work well**: Instead say "Respond in exactly 3 sentences" â€” be specific about constraints.
-- âš ï¸ **Prompt injection**: Users can override your system prompt. Never trust user input in prompts for production apps.
-- âš ï¸ **Position matters**: Important instructions at the beginning AND end of prompts are most likely followed (primacy/recency effect).
-- âš ï¸ **"Just prompt engineer it" is a ceiling**: For domain expertise, consistent behavior, or new knowledge â€” prompting alone won't cut it.
+- ⚠️ **Prompt ≠ Programming**: Prompts are probabilistic, not deterministic. Same prompt can give different results.
+- ⚠️ **"Be concise" doesn't work well**: Instead say "Respond in exactly 3 sentences" — be specific about constraints.
+- ⚠️ **Prompt injection**: Users can override your system prompt. Never trust user input in prompts for production apps.
+- ⚠️ **Position matters**: Important instructions at the beginning AND end of prompts are most likely followed (primacy/recency effect).
+- ⚠️ **"Just prompt engineer it" is a ceiling**: For domain expertise, consistent behavior, or new knowledge — prompting alone won't cut it.
 
 ---
 
@@ -207,7 +207,7 @@ TEMPERATURE GUIDE:
 
 ```python
 # pip install openai>=1.60
-# âš ï¸ Last tested: 2026-04 | Requires: openai>=1.60, OPENAI_API_KEY env var
+# ⚠️ Last tested: 2026-04 | Requires: openai>=1.60, OPENAI_API_KEY env var
 from openai import OpenAI
 from dataclasses import dataclass
 
@@ -270,7 +270,7 @@ print(response.choices[0].message.content)
 ### Chain-of-Thought vs Direct: Side-by-Side Test
 
 ```python
-# âš ï¸ Last tested: 2026-04 | Requires: openai>=1.60, OPENAI_API_KEY
+# ⚠️ Last tested: 2026-04 | Requires: openai>=1.60, OPENAI_API_KEY
 
 def compare_cot(question: str, model: str = "gpt-4o-mini") -> None:
     """Compare direct vs chain-of-thought prompting on a reasoning question."""
@@ -315,14 +315,14 @@ compare_cot("If a train travels 120km at 60km/h and then 90km at 45km/h, what is
 
 | Type | Resource | Why |
 |------|----------|-----|
-| ðŸ”§ Hands-on | [Anthropic Prompt Engineering Guide](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering) | Industry-best prompt engineering documentation |
-| ðŸ“˜ Book | "AI Engineering" by Chip Huyen (2025), Ch 5 (Prompt Engineering) | Systematic treatment of prompting techniques with evaluation |
-| ðŸ”§ Hands-on | [OpenAI Prompt Engineering Guide](https://platform.openai.com/docs/guides/prompt-engineering) | Practical tips with examples for GPT models |
-| ðŸŽ“ Course | [deeplearning.ai â€” "ChatGPT Prompt Engineering"](https://www.deeplearning.ai/) | Short, practical course on effective prompting |
+| 🔧 Hands-on | [Anthropic Prompt Engineering Guide](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering) | Industry-best prompt engineering documentation |
+| 📘 Book | "AI Engineering" by Chip Huyen (2025), Ch 5 (Prompt Engineering) | Systematic treatment of prompting techniques with evaluation |
+| 🔧 Hands-on | [OpenAI Prompt Engineering Guide](https://platform.openai.com/docs/guides/prompt-engineering) | Practical tips with examples for GPT models |
+| 🎓 Course | [deeplearning.ai — "ChatGPT Prompt Engineering"](https://www.deeplearning.ai/) | Short, practical course on effective prompting |
 
 ## ★ Sources
 
-- OpenAI Prompt Engineering Guide â€” https://platform.openai.com/docs/guides/prompt-engineering
-- Anthropic Prompt Engineering Guide â€” https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering
+- OpenAI Prompt Engineering Guide — https://platform.openai.com/docs/guides/prompt-engineering
+- Anthropic Prompt Engineering Guide — https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering
 - Wei et al., "Chain-of-Thought Prompting" (2022)
 - Yao et al., "Tree of Thoughts" (2023)

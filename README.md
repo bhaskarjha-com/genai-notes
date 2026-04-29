@@ -1,6 +1,6 @@
 # 🧠 GenAI Study Notes
 
-> Comprehensive, structured study notes for Generative AI — from prerequisites to frontier research. **83 curriculum-ordered notes.** Career-mapped to 31 AI/ML roles. AI-generated, human-reviewed.
+> Comprehensive, structured study notes for Generative AI — from prerequisites to frontier research. **83 curriculum-ordered notes.** Career-mapped to 31 AI/ML roles. Research based Human & AI created, reviewed and updated.
 
 [![Repo Quality](https://github.com/bhaskarjha-com/genai-notes/actions/workflows/lint.yml/badge.svg?branch=master)](https://github.com/bhaskarjha-com/genai-notes/actions/workflows/lint.yml)
 [![Docs Site|154](https://github.com/bhaskarjha-com/genai-notes/actions/workflows/deploy.yml/badge.svg?branch=master)](https://github.com/bhaskarjha-com/genai-notes/actions/workflows/deploy.yml)
@@ -14,15 +14,21 @@
 
 ## 📑 Table of Contents
 
-- [What This Is](#what-this-is)
-- [Quick Start](#quick-start)
-- [How to Use](#how-to-use)
-- [What's Covered](#whats-covered)
-- [Study Tools](#study-tools)
-- [Note Format](#note-format)
-- [Quality Notice](#quality-notice)
-- [Contributing](#contributing)
-- [License](#license)
+- [🧠 GenAI Study Notes](#-genai-study-notes)
+  - [📑 Table of Contents](#-table-of-contents)
+  - [What This Is](#what-this-is)
+  - [⚡ Quick Start](#-quick-start)
+  - [🗺️ How to Use](#️-how-to-use)
+    - [Path 1: Linear Study](#path-1-linear-study)
+    - [Path 2: Role-Based Study](#path-2-role-based-study)
+    - [Path 3: Topic Reference](#path-3-topic-reference)
+    - [Path 4: Obsidian Vault](#path-4-obsidian-vault)
+  - [📚 What's Covered](#-whats-covered)
+  - [🛠️ Study Tools](#️-study-tools)
+  - [📝 Note Format](#-note-format)
+  - [Quality Notice](#quality-notice)
+  - [🤝 Contributing](#-contributing)
+  - [⚖️ License](#️-license)
 
 ---
 
@@ -155,7 +161,7 @@ The template uses section markers:
 
 ## Quality Notice
 
-These notes are AI-generated and human-reviewed. We aim for accuracy, but advanced topics can still benefit from expert review. If you spot an issue, please open an issue or pull request.
+These notes are created, reviewed and updated by human & AI. We aim for accuracy, but advanced topics can still benefit from expert review. If you spot an issue, please open an issue or pull request.
 
 ---
 

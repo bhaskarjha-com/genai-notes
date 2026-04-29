@@ -13,7 +13,7 @@
 
 | Deck | Cards | Source Notes | Description |
 |---|---:|---:|---|
-| [Master Deck](./master-deck.tsv) | 180 | 83 | All interview-angle cards from all published topic notes. |
+| [Master Deck](./master-deck.tsv) | 181 | 83 | All interview-angle cards from all published topic notes. |
 | [Universal Foundation](./universal-foundation.tsv) | 47 | 20 | Interview-angle cards from the Part 1 universal foundation. |
 | [Track A - Application and Integration Builder](./track-a-application-and-integration-builder.tsv) | 75 | 33 | Universal foundation plus the role-cluster notes from Track A - Application and Integration Builder. |
 | [Track B - AI Systems and Orchestration Engineer](./track-b-ai-systems-and-orchestration-engineer.tsv) | 95 | 45 | Universal foundation plus the role-cluster notes from Track B - AI Systems and Orchestration Engineer. |

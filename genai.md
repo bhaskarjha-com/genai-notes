@@ -116,7 +116,7 @@ Generative AI
 └── 🤖 Agentic AI (2025–2026's defining trend)
     ├── Agents that plan, reason, and act autonomously across multiple steps
     ├── Tool use, function calling, code execution, web browsing, computer use
-    ├── Coding agents: Claude Code, OpenAI Codex, GitHub Copilot, Gemini CLI 
+    ├── Coding agents: Claude Code, OpenAI Codex, GitHub Copilot, Gemini CLI
     └── Multi-agent systems and orchestration frameworks
 ```
 
